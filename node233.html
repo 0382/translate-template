@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Eigenvector Computation with Spectral Transformation</title>
+<meta name="description" content="Eigenvector Computation with Spectral Transformation">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node234.html">
+<link rel="previous" href="node227.html">
+<link rel="up" href="node220.html">
+<link rel="next" href="node234.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4327"
+  href="node234.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4321"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4315"
+  href="node232.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4323"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4325"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4328"
+  href="node234.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4322"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4316"
+  href="node232.html">Locking and Purging in</a>
+ &nbsp <b>  <a name="tex2html4324"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4326"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001668000000000000000"></a>
+<a name="23702"></a>
+<br>
+特征向量计算与谱变换
+</h2>
+SI（谱变换）在
+&#167;<a href="node84.html#spec_trans">3.3</a>节中被引入。具体来说，我们使用矩阵
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">C \equiv (A - \sigma I)^{-1}</div>
+</div>
+<br clear="ALL">
+<p></p>
+代替<span class="math-inline">A</span>，并利用以下事实
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">C x = x \theta \iff A x = x \left(\sigma + \frac{1}{\theta}\right)</div>
+</div>
+<br clear="ALL">
+<p></p>
+来恢复原始矩阵的特征值。
+当与SI结合使用时，Arnoldi方法非常有效。
+收敛到最接近<span class="math-inline">\sigma</span>的<span class="math-inline">A</span>的特征值对应的特征向量通常非常迅速。
+因此，只要能够高效地用<span class="math-inline">A-\sigma I</span>作为系数矩阵求解线性系统，就应该使用这种方法。
+
+<p>
+当使用谱变换时，应考虑额外的停止准则，以利用变换后的算子<span class="math-inline">C</span>的特殊性质。此外，通过少量的后处理，近似特征向量的质量可以显著提高。为了计算接近<span class="math-inline">\sigma</span>的<span class="math-inline">A</span>的特征值，我们将计算<span class="math-inline">C</span>的最大幅值的特征值<span class="math-inline">\theta</span>。实际上，<span class="math-inline">\sigma</span>不必非常接近所需的特征值。然而，在接下来的讨论中，值得注意的是，在实践中，通常取<span class="math-inline">\sigma</span>接近所需的特征值，因此通常<span class="math-inline">\vert\theta\vert \gg 1</span>成立。
+
+<p>
+设<span class="math-inline">x = V_m y</span>且<span class="math-inline">H_m y = y \theta</span>，其中<span class="math-inline">\Vert y \Vert _2=1</span>。由于
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonsymA:eq:res"></a><div class="math-display">(A-\sigma I)^{-1}x - x \theta = CV_my - V_mH_my = f_m \, e^\ast_my,</div></td>
+<td width=10 align="right">
+(129)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+因此，<span class="math-inline">\Vert f_m\Vert\,\vert e^\ast_my\vert</span>是残差<span class="math-inline">\Vert Cx - x \theta \Vert</span>的范数。如果<span class="math-inline">\Vert f_m\Vert\,\vert e^\ast_my\vert \leq \epsilon_U</span>，其中<span class="math-inline">\epsilon_U</span>是用户指定的容差，那么根据(<a href="node224.html#nonsymA:eq:evest">7.17</a>)，<span class="math-inline">x</span>和<span class="math-inline">\theta</span>是接近<span class="math-inline">C</span>的矩阵的精确特征对。然而，我们真正感兴趣的是原始矩阵<span class="math-inline">A</span>的特征值-特征向量近似。
+
+<p>
+简单地重新排列(<a href="node233.html#nonsymA:eq:res">7.23</a>)得到
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonsymA:eq:sires"></a><div class="math-display">Ax - x\left(\sigma + \frac{1}{\theta}\right) =-(A - \sigma I) f_m \frac{e^\ast_my}{\theta},</div></td>
+<td width=10 align="right">
+(130)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这是矩阵<span class="math-inline">A</span>的计算特征对<span class="math-inline">(x , \sigma + \frac{1}{\theta})</span>的残差。然而，通过少量的额外算术运算，特征向量的质量可以显著提高，相应的残差范数也可以显著降低。
+
+<p>
+在(<a href="node233.html#nonsymA:eq:sires">7.24</a>)的右侧加上并减去<span class="math-inline">f_m \frac{e^\ast_my}{\theta^2}</span>，并重新排列项，将得到
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonsymA:eq:siresp"></a><div class="math-display">Az - z \left(\sigma + \frac{1}{\theta}\right) =-f_m \frac{e^\ast_my}{\theta^2} ,</div></td>
+<td width=10 align="right">
+(131)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中<span class="math-inline">z \equiv x + f_m ( e^\ast_m y/\theta)</span>。在<span class="math-inline">\vert\theta\vert \gg 1</span>的情况下，我们看到<span class="math-inline">z</span>将是一个比<span class="math-inline">x</span>好得多的近似特征向量。此外，如果<span class="math-inline">\Vert A\Vert</span>相对于<span class="math-inline">\vert\sigma\vert</span>很大，那么由于项<span class="math-inline">(A - \sigma I) f_m</span>导致的误差放大就可以避免。
+
+<p>
+一个启发式论证进一步支持使用<span class="math-inline">z</span>而不是<span class="math-inline">x</span>。从(<a href="node233.html#nonsymA:eq:res">7.23</a>)可以得出
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><div class="math-display">(A - \sigma I)^{-1}x = x\theta + f_m e^\ast_m y,</div></td>
+<td width=10 align="right">
+(132)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+因此，<span class="math-inline">z = x + f_m ( e^\ast_m y/\theta)</span>是如果我们对<span class="math-inline">A-\sigma I</span>在<span class="math-inline">x</span>上执行一步逆迭代所得到的（归一化）向量。
+
+<p>
+这个向量<span class="math-inline">z</span>尚未被缩放到单位范数。然而，
+
+<span class="math-inline">\Vert z \Vert^2 = 1 + \left(\vert e^\ast_m y \vert\Vert f_m \Vert/\vert\theta\vert\right)^2</span>，
+所以归一化后误差界限将减小。此外，如果<span class="math-inline">{\vert e^\ast_m y \vert\Vert f_m \Vert}/{\vert\theta\vert} < \sqrt{\epsilon_M}</span>，那么浮点计算的范数将已经导致<span class="math-inline">\Vert z\Vert = 1</span>，无需任何重新缩放。
+
+<p>
+从(<a href="node233.html#nonsymA:eq:res">7.23</a>)，残差<span class="math-inline">C x - x \theta</span>与<span class="math-inline">V_m</span>的列所张成的Krylov空间正交。然而，无论我们使用<span class="math-inline">x</span>还是<span class="math-inline">z</span>，在将计算的特征对转换回原始系统时，这种Galerkin条件都会丢失。这是因为<span class="math-inline">\sigma +1/\theta</span>不是<span class="math-inline">x</span>或<span class="math-inline">z</span>的Rayleigh商。然而，从(<a href="node233.html#nonsymA:eq:siresp">7.25</a>)
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonsymA:eq:RQz"></a><div class="math-display">\left\vert \frac{z^\ast A z}{ z^\ast z} - \left(\sigma +\frac{1}{\theta}\right)\right\vert \leq \left(\frac{\vert e_m^* y \vert }{\vert\theta\vert\Vert z \Vert}\right)^2.</div></td>
+<td width=10 align="right">
+(133)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+换句话说，当使用向量<span class="math-inline">z</span>作为近似特征向量时，近似特征值<span class="math-inline">\sigma +1/\theta</span>几乎是<span class="math-inline">A</span>的Rayleigh商。实际上，当<span class="math-inline">\frac{\vert e^\ast_m y \vert\Vert f_m \Vert}{\vert\theta\vert} < \sqrt{\epsilon_M}</span>时，<span class="math-inline">\sigma +1/\theta</span>将在舍入误差水平上接近Rayleigh商。
+
+<p>
+另一方面，从(<a href="node233.html#nonsymA:eq:sires">7.24</a>)我们推断出
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonsymA:eq:RQx"></a><div class="math-display">\left\vert x^\ast A x - \left(\sigma + \frac{1}{\theta}\right)\right\vert \leq \left(\frac{\Vert f_m\Vert\vert e^\ast_my \vert}{\vert\theta\vert} \right)</div></td>
+<td width=10 align="right">
+(134)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+是当使用<span class="math-inline">x</span>时，<span class="math-inline">\sigma +1/\theta</span>作为<span class="math-inline">A</span>的Rayleigh商的误差。
+
+<p>
+方程(<a href="node233.html#nonsymA:eq:siresp">7.25</a>)和(<a href="node233.html#nonsymA:eq:RQz">7.27</a>)表明，只要<span class="math-inline">\vert\theta\vert</span>大于1，向量<span class="math-inline">z</span>就是比<span class="math-inline">x</span>更好的近似特征向量，对应于近似特征值<span class="math-inline">\sigma +1/\theta</span>。此外，当<span class="math-inline">\vert\theta\vert \gg 1</span>时，只需要一个适度的较小的Ritz估计值就能达到可接受的直接残差和Rayleigh商误差。如果<span class="math-inline">\sigma</span>接近所需的特征值，那么这些特征值通过<span class="math-inline">C</span>映射为大特征值，通常<span class="math-inline">\vert\theta\vert \gg 1</span>。
+
+<p>
+上述分析基于Ericsson和Ruhe[<a href="node421.html#erru80">162</a>]给出的关于广义对称正定特征值问题的分析。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4327"
+  href="node234.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4321"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4315"
+  href="node232.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4323"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4325"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4328"
+  href="node234.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4322"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4316"
+  href="node232.html">Locking and Purging in</a>
+ &nbsp <b>  <a name="tex2html4324"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4326"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Matrix Preparation.</title>
+<meta name="description" content="Matrix Preparation.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node90.html">
+<link rel="previous" href="node88.html">
+<link rel="up" href="node86.html">
+<link rel="next" href="node90.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2098"
+  href="node90.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2092"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2086"
+  href="node88.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2094"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2096"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2099"
+  href="node90.html">Orthogonalization.</a>
+<b> Up:</b> <a name="tex2html2093"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2087"
+  href="node88.html">Summary of Choices.</a>
+ &nbsp <b>  <a name="tex2html2095"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2097"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001310030000000000000">
+Matrix Preparation.</a>
+</h4>
+For each algorithm we have 
+distinguished between different ways of preparing the matrix 
+prior to running the algorithm.<dl>
+<dt><strong>``Dir''</strong></dt>
+<dd>is direct application, where we perform a matrix multiply 
+on a vector in each step. It is the simplest variant to apply, 
+since the matrix can be stored in any compact way. On the other hand, 
+most algorithms need many matrix-vector multiplications to converge
+and are restricted to seeking eigenvalues at the ends of the spectrum. 
+</dd>
+<dt><strong>``SI''</strong></dt>
+<dd>is the shift-and-invert which needs a factorization routine 
+to enable solutions of systems 
+<span class="math-inline">(A-\sigma I)x=b</span> for <span class="math-inline">x</span>, but gives 
+the ability to compute a wider choice of eigenvalues in fewer iterations. 
+</dd>
+<dt><strong>``Prec''</strong></dt>
+<dd>means application with a preconditioner, for instance,
+ a sparse approximate factorization. This requires 
+less space than the shift-and-invert, 
+but most often it also needs a larger number of matrix-vector multiplies.
+</dd>
+</dl> 
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

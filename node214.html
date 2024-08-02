@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Software Availability</title>
+<meta name="description" content="Software Availability">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node213.html">
+<link rel="up" href="node210.html">
+<link rel="next" href="node215.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4042"
+  href="node215.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4036"
+  href="node210.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4032"
+  href="node213.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4038"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4040"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4043"
+  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b> Up:</b> <a name="tex2html4037"
+  href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html4033"
+  href="node213.html">Subspace Iteration</a>
+ &nbsp <b>  <a name="tex2html4039"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4041"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001644000000000000000"></a> <a name="subsec_softavail"></a>
+<br>
+软件可用性
+</h2>
+
+<p>
+本节介绍了几种可用于子空间迭代的软件。
+EB12是由Duff和Scott开发的子空间迭代例程[<a href="node421.html#dusc93">143</a>]，属于Harwell子例程库的一部分。给定一个实非对称矩阵，该例程可以计算具有最大正实部、最大（按模）负实部或最大模的<span class="math-inline">r</span>个特征值，并可以选择返回相关的特征向量。它还可以用于计算其他特征值。
+
+<p>
+SRRIT是由Bai和Stewart开发的软件包，用于计算实非对称矩阵的几个最大模特征值[<a href="node421.html#bast98">37</a>]，并计算相关不变子空间的近似正交基。SRRIT是非专有的。第&#167;<a href="node213.html#subsec_prac">7.4.3</a>节的模板紧密模仿了SRRIT。
+<br>
+<br>
+<p>
+LOPSI是由Stewart和Jennings开发的软件包，它结合了子空间迭代和斜投影来计算大型稀疏矩阵的几个最大模特征值及其对应的特征向量[<a href="node421.html#stew81">427</a>]。然而，LOPSI基于特征分解而非Schur形式，因此在LOPSI中可能期望比SRRIT更低的精度，特别是对于病态特征值问题。
+
+<p>
+有关此软件的更多信息，包括如何访问它，请参阅本书的主页ETHOME。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4042"
+  href="node215.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4036"
+  href="node210.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4032"
+  href="node213.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4038"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4040"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4043"
+  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b> Up:</b> <a name="tex2html4037"
+  href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html4033"
+  href="node213.html">Subspace Iteration</a>
+ &nbsp <b>  <a name="tex2html4039"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4041"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

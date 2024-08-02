@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Error Bounds for Computed Eigenvalues.</title>
+<meta name="description" content="Error Bounds for Computed Eigenvalues.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node152.html">
+<link rel="previous" href="node150.html">
+<link rel="up" href="node148.html">
+<link rel="next" href="node152.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3012"
+  href="node152.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3006"
+  href="node148.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3000"
+  href="node150.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3008"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3010"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3013"
+  href="node152.html">Error Bound for Computed</a>
+<b> Up:</b> <a name="tex2html3007"
+  href="node148.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html3001"
+  href="node150.html">Transfer Residual Error to</a>
+ &nbsp <b>  <a name="tex2html3009"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3011"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001380030000000000000"></a>
+<a name="10697"></a>
+<br>
+计算特征值的误差界限
+</h4>
+对于厄米特特征值问题，矩阵 <span class="math-inline">A</span> 的第 <span class="math-inline">i</span> 大特征值与矩阵 <span class="math-inline">A+E</span> 的第 <span class="math-inline">i</span> 大特征值之差最多为 <span class="math-inline">\Vert E\Vert _2</span>。因此，一个小的后向误差意味着计算出的特征值有一个小的（<em>前向</em>）误差，即
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="ineq:err-1-ev"></a><div class="math-display">\vert\widetilde\lambda-\lambda\vert \le \Vert E_2\Vert _2=\Vert r\Vert _2</div></td>
+<td width=10 align="right">
+(63)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+对于矩阵 <span class="math-inline">A</span> 的某个特征值 <span class="math-inline">\lambda</span>。
+
+<p>
+通过更多信息，可以获得更好的误差界限。假设 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 是矩阵 <span class="math-inline">A</span> 的特征对 <span class="math-inline">(\lambda,x)</span> 的一个近似。对应于 <span class="math-inline">\widetilde x</span> 的“最佳” <span class="math-inline">\widetilde\lambda</span> 是瑞利商 <span class="math-inline">\widetilde\lambda = \widetilde x^{\ast} A \widetilde x</span>，因此我们假设 <span class="math-inline">\widetilde\lambda</span> 具有这个值。假设 <span class="math-inline">\widetilde\lambda</span> 比 <span class="math-inline">A</span> 的任何其他特征值更接近 <span class="math-inline">\lambda</span>，并设 <span class="math-inline">\delta</span> 是 <span class="math-inline">\widetilde\lambda</span> 与任何其他特征值之间的<em>间隔</em> <a name="10704"></a>：
+
+<span class="math-inline">\delta = \min_{\lambda_j \neq \lambda} \vert \widetilde\lambda - \lambda_j \vert</span>。
+那么我们有
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="ineq:err-1-ev-wgap"></a><div class="math-display">\vert\widetilde\lambda-\lambda\vert \le \frac {\Vert r\Vert _2^2}{\delta}.</div></td>
+<td width=10 align="right">
+(64)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+如果间隔 <span class="math-inline">\delta</span> 足够大，这将改进 (<a href="node151.html#ineq:err-1-ev">4.54</a>)。在实践中，我们总是可以选择更好的那个。
+
+<p>
+请注意，(<a href="node151.html#ineq:err-1-ev-wgap">4.55</a>) 除了残差误差 <span class="math-inline">r</span> 之外，还需要关于 <span class="math-inline">\delta</span> 的信息。通常，在成功计算后，例如通过带有移位的 Lanczos 算法，通常会提供附近区域的特征值，从而产生关于 <span class="math-inline">\delta</span> 的良好信息。这一评论也适用于下面的 (<a href="node152.html#ineq:err-1-evt">4.56</a>) 中的界限。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3012"
+  href="node152.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3006"
+  href="node148.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3000"
+  href="node150.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3008"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3010"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3013"
+  href="node152.html">Error Bound for Computed</a>
+<b> Up:</b> <a name="tex2html3007"
+  href="node148.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html3001"
+  href="node150.html">Transfer Residual Error to</a>
+ &nbsp <b>  <a name="tex2html3009"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3011"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

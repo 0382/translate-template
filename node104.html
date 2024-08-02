@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Algorithm</title>
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node105.html">
+<link rel="previous" href="node103.html">
+<link rel="up" href="node103.html">
+<link rel="next" href="node105.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2326"
+  href="node105.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2320"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2314"
+  href="node103.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2322"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2324"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2327"
+  href="node105.html">Convergence Properties</a>
+<b> Up:</b> <a name="tex2html2321"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2315"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+ &nbsp <b>  <a name="tex2html2323"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2325"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001341000000000000000">
+算法</a>
+</h2>
+
+<p>
+我们得到以下算法。
+
+<p>
+<br>
+<a name="Symmetric_Lanczos"></a><IMG
+ width="598" height="317" align="bottom" border="0"
+ src="img870.png"
+ alt="\begin{algorithm}{Lanczos Method for HEP
+}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=bbb...
+...}\&gt; \&gt; compute approximate eigenvectors <span class="math-inline">X=V_j\,S</span>\end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+让我们对算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的一些步骤进行评论：
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>如果有一个好的所需特征向量的猜测，可以使用它。例如，对于离散化偏微分方程，如果已知所需的特征向量在网格上是平滑的，可以初始化为全1的向量。在其他情况下，选择一个随机方向，例如，由正态分布的随机数组成。
+
+<p>
+</dd>
+<dt><strong>(5)</strong></dt>
+<dd>这个矩阵-向量运算通常是CPU主导的工作。任何执行矩阵-向量乘法的例程都可以使用。在移位和逆变换的情况下，用分解矩阵求解系统。目前，在逆变换情况下使用迭代方程求解器的经验还不多。
+
+<p>
+</dd>
+<dt><strong>(9)</strong></dt>
+<dd>在有限精度计算中，一旦一个特征值收敛，正交性就会丧失。<a name="7699"></a>  
+重正交化的选择有：
+
+<p>
+
+<ol>
+<li><em>完全：</em> <a name="7702"></a> 
+实现简单；参见下文第<a href="node108.html#select-ort">4.4.4</a>节。随着<span class="math-inline">j</span>的增加，迭代将需要越来越多的工作。在移位和逆变换情况下，当几个特征值在很少的步骤<span class="math-inline">j</span>中收敛时，这是首选选择。
+
+<p>
+</li>
+<li><em>选择性：</em> <a name="7705"></a> 
+最复杂的方案，当收敛缓慢且寻求多个特征值时是必要的。此选项也将在下文第<a href="node108.html#select-ort">4.4.4</a>节中讨论。
+
+<p>
+</li>
+<li><em>局部：</em> <a name="7708"></a> 
+用于巨大矩阵，当难以存储整个基<span class="math-inline">V_j</span>时。我们确保<span class="math-inline">v_{j+1}</span>与<span class="math-inline">v_{j-1}</span>和<span class="math-inline">v_j</span>正交，通过对此两向量进行额外正交化，减去
+<span class="math-inline">r=r-v_{j-1}(v_{j-1}^{\ast} r)</span>和
+  
+<span class="math-inline">r=r-v_j(v_j^{\ast} r)</span>一次在此步骤中。我们仍需使用Cullum装置检测并丢弃虚假的特征值近似；参见第<a href="node108.html#select-ort">4.4.4</a>节。
+</li>
+</ol>
+
+<p>
+</dd>
+<dt><strong>(11)</strong></dt>
+<dd>对于每个步骤<span class="math-inline">j</span>，或在适当的时间间隔，计算三对角矩阵<span class="math-inline">T_{j}</span>的特征值
+<span class="math-inline">\theta_i^{(j)}</span>和特征向量<span class="math-inline">s_i^{(j)}</span>（参见第<a href="node103.html#tridia">4.9</a>节）。
+
+<p>
+如果预期快速收敛，如移位和逆变换问题，<span class="math-inline">j</span>将远小于<span class="math-inline">n</span>；那么这个计算非常快，推荐使用例如LAPACK[<a
+ href="node421.html#lapack">12</a>]的标准软件。
+
+<p>
+如果直接对<span class="math-inline">A</span>应用Lanczos算法并计算大型三对角矩阵，有基于二分法和Givens递归的特殊三对角特征值算法；参见[<a
+ href="node421.html#parl96">356</a>,<a
+ href="node421.html#parldhi97">358</a>,<a
+ href="node421.html#dhil97">128</a>]和第<a href="node93.html#sec:dense">4.2</a>节。
+
+<p>
+</dd>
+<dt><strong>(12)</strong></dt>
+<dd>当找到足够大的基<span class="math-inline">V_j</span>时，算法停止，使得三对角矩阵<span class="math-inline">T_{j}</span>的特征值
+<span class="math-inline">\theta_i^{(j)}</span>（参见第<a href="node103.html#tridia">4.9</a>节）对所寻求的<span class="math-inline">A</span>的所有特征值给出良好近似。
+
+<p>
+如果基<span class="math-inline">V_j</span>不完全正交，残差的估计<span class="math-inline">\beta_{j,i}</span>（参见第<a href="node103.html#estimate_residual">4.13</a>节）可能过于乐观。那么Ritz向量<span class="math-inline">x_i^{(j)}</span>（参见第<a href="node103.html#eigenvector">4.12</a>节）的范数可能小于1，我们必须用
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert r_i^{(j)}\vert=\vert\beta_js_{i,j}^{(j)}\vert/\Vert V_js_i^{(j)}\Vert\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+</dd>
+<dt><strong>(14)</strong></dt>
+<dd>仅当步骤(12)中的测试表明特征向量已收敛时，才计算原始矩阵<span class="math-inline">A</span>的特征向量。然后使用基<span class="math-inline">V_j</span>进行矩阵-向量乘法以获得特征向量（参见第<a href="node103.html#eigenvector">4.12</a>节），
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">x_i^{(j)}=V_js_i^{(j)}\;,</div>
+</div>
+<br clear="ALL">
+<p></p>
+对于每个标记为已收敛的<span class="math-inline">i</span>。
+</dd>
+</dl> 
+
+<p>
+这类算法的一大优点是矩阵<span class="math-inline">A</span>仅在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的步骤(5)中通过矩阵-向量运算访问。任何类型的稀疏性和任何存储方案都可以利用。
+
+<p>
+只需保持三个向量<span class="math-inline">r</span>、<span class="math-inline">v_j</span>和<span class="math-inline">v_{j-1}</span>随时可用；较旧的向量可以留在后备存储中。甚至有一种变体只需要两个向量（参见[<a
+ href="node421.html#parl80">353</a>, 第13.1章]），但编码需要一些技巧。除了矩阵-向量乘法外，只需要向量的标量积和加法。推荐使用Level 1 BLAS例程；参见第<a href="node379.html#sec:blas">10.2</a>节。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2326"
+  href="node105.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2320"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2314"
+  href="node103.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2322"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2324"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2327"
+  href="node105.html">Convergence Properties</a>
+<b> Up:</b> <a name="tex2html2321"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2315"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+ &nbsp <b>  <a name="tex2html2323"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2325"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

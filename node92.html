@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Storage.</title>
+<meta name="description" content="Storage.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node91.html">
+<link rel="up" href="node86.html">
+<link rel="next" href="node93.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2138"
+  href="node93.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2132"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2128"
+  href="node91.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2134"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2136"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2139"
+  href="node93.html">Direct Methods</a>
+<b> Up:</b> <a name="tex2html2133"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2129"
+  href="node91.html">Eigenvalues Sought.</a>
+ &nbsp <b>  <a name="tex2html2135"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2137"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001310060000000000000">
+存储需求</a>
+</h4>
+在表<a href="node88.html#sym_alg_choice">4.1</a>的最后一列中，我们给出了所需的存储空间估计。<dl>
+<dt><strong>“#vec”</strong></dt>
+<dd>表示需要存储多少个向量。2或3的含义显而易见；“中等”意味着所需向量数量是所求特征值数量<span class="math-inline">m</span>的倍数，例如<span class="math-inline">3m</span>到<span class="math-inline">5m</span>。“少量”比中等更少，例如<span class="math-inline">m+10</span>，而“大量”则更多。
+</dd>
+<dt><strong>“Fact”</strong></dt>
+<dd>表示是否需要额外的矩阵存储空间。“LU”代表稀疏LU分解，“ILU”代表不完全分解。这应该比LU分解更紧凑。
+</dd>
+</dl> 
+
+<p>
+为此，<a name="eigcounting"></a>我们注意到，诸如计算矩阵<span class="math-inline">A</span>中小于给定实数<span class="math-inline">\alpha</span>或位于给定区间<span class="math-inline">[\alpha, \beta]</span>内的特征值数量等任务，并不需要计算特征值，因此可以以更低的成本完成。关键工具是矩阵惯性。矩阵<span class="math-inline">A</span>的惯性是由三个整数组成的三元组<span class="math-inline">(\nu(A),\zeta(A),\pi(A))</span>，其中<span class="math-inline">\nu(A)</span>是<span class="math-inline">A</span>的负特征值数量，<span class="math-inline">\zeta(A)</span>是<span class="math-inline">A</span>的零特征值数量，<span class="math-inline">\pi(A)</span>是<span class="math-inline">A</span>的正特征值数量。西尔维斯特惯性定律表明，矩阵的惯性在合同变换下是不变的；也就是说，对于所有非奇异矩阵<span class="math-inline">F</span>，<span class="math-inline">A</span>和<span class="math-inline">F^T A F</span>具有相同的惯性。例如，参见[<a href="node421.html#golo96">198</a>, p. 403]或[<a href="node421.html#demmelbook">114</a>, p. 202]。
+
+<p>
+假设位移矩阵<span class="math-inline">A - \alpha I</span>具有LDL<span class="math-inline">^{T}</span>分解
+<br><p></p>
+<div align="center">
+
+<div class="math-display">A - \alpha I = L D L^T,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">D</span>是一个对角矩阵。根据西尔维斯特惯性定律，<span class="math-inline">\nu(A - \alpha I) = \nu(D)</span>。因此，通过<span class="math-inline">A - \alpha I</span>的LDL<span class="math-inline">^{T}</span>分解得到的<span class="math-inline">D</span>中负对角元素的数量，给出了<span class="math-inline">A</span>中小于<span class="math-inline">\alpha</span>的特征值数量。在工程文献中，<span class="math-inline">\nu(A-\alpha I)</span>通常被称为斯图姆序列数。
+
+<p>
+显然，<span class="math-inline">\nu(A - \beta I) - \nu(A - \alpha I)</span>是区间<span class="math-inline">[\alpha, \beta]</span>内的特征值数量，假设<span class="math-inline">\alpha < \beta</span>且两个位移矩阵<span class="math-inline">A - \alpha I</span>和<span class="math-inline">A - \beta I</span>是非奇异的。因此，计算<span class="math-inline">A</span>在给定区间<span class="math-inline">[\alpha, \beta]</span>内的特征值数量的成本，相当于进行两次<span class="math-inline">A - \alpha I</span>和<span class="math-inline">A - \beta I</span>的LDL<span class="math-inline">^{T}</span>分解。这比在区间<span class="math-inline">[\alpha, \beta]</span>内找到所有特征值要便宜得多。关于LDL<span class="math-inline">^{T}</span>分解的软件可用性，请参阅第<a href="node385.html#sec:directsolvers">10.3</a>节。
+
+<p>
+在实践中，计数技术经常被用作验证所谓数值方法在给定区间<span class="math-inline">[\alpha, \beta]</span>内找到所有特征值的信任区间的工具。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2138"
+  href="node93.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2132"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2128"
+  href="node91.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2134"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2136"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2139"
+  href="node93.html">Direct Methods</a>
+<b> Up:</b> <a name="tex2html2133"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2129"
+  href="node91.html">Eigenvalues Sought.</a>
+ &nbsp <b>  <a name="tex2html2135"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2137"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

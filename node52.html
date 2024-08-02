@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Eigendecompositions</title>
+<meta name="description" content="Eigendecompositions">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node53.html">
+<link rel="previous" href="node51.html">
+<link rel="up" href="node48.html">
+<link rel="next" href="node53.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1481"
+  href="node53.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1475"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1469"
+  href="node51.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1477"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1479"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1482"
+  href="node53.html">Conditioning</a>
+<b> Up:</b> <a name="tex2html1476"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1470"
+  href="node51.html">Equivalences (Similarities)</a>
+ &nbsp <b>  <a name="tex2html1478"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1480"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001154000000000000000"></a>
+<a name="sec_chap2_nHepED"></a>
+<br>
+特征分解
+</h2>
+
+<p>
+<a name="1554"></a> 
+
+<p>
+我们将讨论四种特征分解，或者说四种与矩阵 <span class="math-inline">A</span> 相似且特征问题求解更为简单的矩阵。第一种是<em>对角形式</em>，仅在存在 <span class="math-inline">n</span> 个独立特征向量时存在。第二种是<em>约旦形式</em>，它将对角形式推广到所有矩阵。它可能非常病态（实际上，它可能会不连续变化），因此在数值计算中我们通常使用第三种，即<em>舒尔形式</em>，它在计算上更经济且更稳定。我们简要提及第四种，称之为<em>约旦-舒尔形式</em>，<a name="tex2html6"
+  href="footnode.html#foot1994"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>它与舒尔形式一样稳定，但能计算出约旦形式所提供的关于不变子空间的某些详细信息。
+
+<p>
+定义 
+<span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n )</span>。
+如果存在 <span class="math-inline">n</span> 个独立的右特征向量 
+<span class="math-inline">x_1,\ldots,x_n</span>，
+我们定义 
+<span class="math-inline">X = [x_1,\ldots,x_n]</span>。
+<span class="math-inline">X</span> 被称为 <span class="math-inline">A</span> 的<em>特征向量矩阵</em>。
+<span class="math-inline">n</span> 个等式 
+<span class="math-inline">A x_i = \lambda_i x_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span> 也可以写成
+
+<span class="math-inline">AX = X \Lambda</span> 或 
+<span class="math-inline">A = X \Lambda X^{-1}</span>。这种分解
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = X \Lambda X^{-1}</div>
+</div>
+<br clear="ALL">
+<p></p>
+被称为 <span class="math-inline">A</span> 的<em>对角形式</em>
+<a name="1565"></a>。注意 
+<span class="math-inline">X^{-1}A = \Lambda X^{-1}</span>。
+令 <span class="math-inline">y_i^*</span> 表示 <span class="math-inline">X^{-1}</span> 的第 <span class="math-inline">i</span> 行，
+我们可以看到 
+<span class="math-inline">y_i^*A = \lambda y_i^*</span>。换句话说，
+<span class="math-inline">X^{-1}</span> 的行是 <span class="math-inline">A</span> 的左特征向量。
+因此，如果 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个独立的特征向量，那么它与对角矩阵 <span class="math-inline">\Lambda</span> 相似。在这种情况下，我们称 <span class="math-inline">A</span> 是<em>可对角化的</em>。
+
+<p>
+如果我们取 <span class="math-inline">X</span> 的 <span class="math-inline">k</span> 列（例如 
+<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 
+第 2、3 和 5 列），这些列张成 <span class="math-inline">A</span> 的一个不变子空间。
+如果我们取相应的子矩阵 
+
+<span class="math-inline">\hat{\Lambda}= {\rm diag}(\lambda_2 , \lambda_3 , \lambda_5 )</span>
+和 <span class="math-inline">X^{-1}</span> 的相应三行（例如 
+<span class="math-inline">\hat{Y}^* = X^{-1}([2,3,5],:)</span>），
+我们可以写出相应的<em>部分对角形式</em>为 
+<span class="math-inline">A \hat{X}= \hat{X}\hat{\Lambda}</span> 或
+
+<span class="math-inline">\hat{Y}^* A \hat{X}= \hat{\Lambda}</span>。如果 <span class="math-inline">\hat{X}</span> 中的列被张成相同不变子空间的 <span class="math-inline">k</span> 个不同向量替换，我们会得到一个不同的部分特征分解 
+<span class="math-inline">A \check{X}= \check{X}\check{A}</span>，
+其中 <span class="math-inline">\check{A}</span> 是一个 <span class="math-inline">k</span> 阶矩阵，其特征值与 <span class="math-inline">\hat{\Lambda}</span> 相同，尽管 <span class="math-inline">\check{A}</span> 可能不是对角矩阵。对于下面讨论的其他特征分解，也可以采用类似的步骤来生成部分特征分解。
+
+<p>
+如果所有的 <span class="math-inline">\lambda_i</span> 都是不同的，那么存在 <span class="math-inline">n</span> 个独立的特征向量，
+并且对角形式存在。这是最简单和最常见的情况。
+例如，如果随机选择一个矩阵，<a name="tex2html7"
+  href="footnode.html#foot1575"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>特征值不同的概率是 1。
+
+<p>
+矩阵 <span class="math-inline">A(0)</span> 在 (<a href="node49.html#eqn_chap2_nHep_1">2.3</a>) 中的对角形式不存在，
+因为它只有一个独立的特征向量。相反，我们可以计算它的<em>约旦形式</em>，这是一种分解  <a name="1578"></a>
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = XJX^{-1},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中 <span class="math-inline">J</span> 是一个块对角矩阵，即形式为
+
+<span class="math-inline">J = {\rm diag} (J_1 ,\ldots,J_e)</span>，其中每个 <span class="math-inline">J_i</span> 是一个被称为<em>约旦块</em>的方阵。
+每个 <span class="math-inline">J_i</span> 是上三角矩阵，其单个特征值 <span class="math-inline">\lambda_i</span> 在主对角线上，且第一上对角线为 1。
+<span class="math-inline">J_i</span> 有一个独立的右特征向量和一个独立的左特征向量。
+<span class="math-inline">A(0)</span> 是一个 2 阶约旦块，其单个特征值为 0，
+而 
+<span class="math-inline">A(0) + \lambda_i I</span> 是一个 2 阶约旦块，其单个特征值为 <span class="math-inline">\lambda_i</span>。
+可以证明，约旦形式明确描述了 <span class="math-inline">A</span> 的所有可能不变子空间，这些子空间由 <span class="math-inline">X</span> 的某些列子集张成 [<a
+ href="node421.html#gant59">187</a>]。
+
+<p>
+不幸的是，约旦形式通常不适用于数值计算。这里有两个原因。首先，它可能随着 <span class="math-inline">A</span> 的变化而连续变化。例如，矩阵 <span class="math-inline">J</span> 对于 <span class="math-inline">A(\epsilon)</span> 在
+
+<span class="math-inline">\epsilon \neq 0</span> 时是 
+<span class="math-inline">{\rm diag}(+ \epsilon , - \epsilon)</span>，但对于 <span class="math-inline">A(0)</span>，<span class="math-inline">J=A(0)</span> 本身。其次，特征向量矩阵 <span class="math-inline">X</span>
+可能非常病态，即难以准确求逆。
+在 <span class="math-inline">A(\epsilon)</span> 的情况下，<span class="math-inline">X</span> 的条件数会像 <span class="math-inline">1/\epsilon</span> 那样增长。
+
+<p>
+因此，我们使用形式为 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = QTQ^*,</div>
+</div>
+<br clear="ALL">
+<p></p>
+的特征分解，其中 <span class="math-inline">Q</span> 是一个酉（或正交）相似变换，<span class="math-inline">T</span> 是三角（或拟三角）矩阵。这被称为 <span class="math-inline">A</span> 的<em>舒尔形式</em>。
+<a name="1585"></a> 
+当 <span class="math-inline">A</span> 是复数，或实数且所有特征值都是实数时，
+<span class="math-inline">T</span> 是三角矩阵，其对角线上是 <span class="math-inline">A</span> 的特征值。
+当 <span class="math-inline">A</span> 是实数且有复数特征值，而 <span class="math-inline">Q</span> 是实数且正交时，
+<span class="math-inline">T</span> 不能是实数和三角矩阵。相反，我们允许 <span class="math-inline">T</span> 的对角线上出现具有复数特征值的 2 阶块，我们称之为<em>拟三角形式</em>。
+为了简化表述，我们将考虑复数情况，因此 <span class="math-inline">T</span> 是三角矩阵。令 
+<span class="math-inline">\lambda_1 = T_{11},\ldots,\lambda_n = T_{nn}</span> 为 <span class="math-inline">T</span> 对角线上的特征值顺序；每种顺序都有一个不同的舒尔形式。
+<span class="math-inline">Q</span> 的列被称为<em>舒尔向量</em>。舒尔形式不像对角形式和约旦形式那样明确给出特征向量和所有不变子空间的基础，但它可以相当稳定地计算。
+<span class="math-inline">Q</span> 的前 <span class="math-inline">k</span> 列张成特征值 <span class="math-inline">\lambda_1</span> 到 <span class="math-inline">\lambda_k</span> 的不变子空间，但所有其他特征空间需要计算。例如，特征向量可以通过从 <span class="math-inline">T</span> 中解一个三角方程组并乘以 <span class="math-inline">Q</span> 来计算 [<a
+ href="node421.html#demmelbook">114</a>]。
+
+<p>
+最后，我们考虑<em>约旦-舒尔形式</em>。<a name="1592"></a>
+它相当复杂，因此我们在这里只总结其特性。与舒尔形式一样，它只使用酉（正交）变换，因此可以稳定地计算。
+与约旦形式一样，它明确显示了约旦块的大小，并给出了比舒尔形式更多的不变子空间的明确基础。
+
+<p>
+许多教科书给出了诸如在 <span class="math-inline">A</span> 的约旦形式基础上计算指数矩阵 <span class="math-inline">e^A</span> 等问题的显式解 [<a
+ href="node421.html#demmelbook">114</a>]。
+这些方法在数值上应避免使用，因为计算约旦形式很困难。
+几乎所有这些问题都有基于舒尔形式或某些情况下的约旦-舒尔形式的替代解决方案。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1481"
+  href="node53.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1475"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1469"
+  href="node51.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1477"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1479"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1482"
+  href="node53.html">Conditioning</a>
+<b> Up:</b> <a name="tex2html1476"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1470"
+  href="node51.html">Equivalences (Similarities)</a>
+ &nbsp <b>  <a name="tex2html1478"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1480"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

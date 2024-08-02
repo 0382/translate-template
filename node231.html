@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Stability of .</title>
+<meta name="description" content="Stability of .">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node232.html">
+<link rel="previous" href="node230.html">
+<link rel="up" href="node227.html">
+<link rel="next" href="node232.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4301"
+  href="node232.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4295"
+  href="node227.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4289"
+  href="node230.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4297"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4299"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4302"
+  href="node232.html">Locking and Purging in</a>
+<b> Up:</b> <a name="tex2html4296"
+  href="node227.html">Orthogonal Deflating Transformation</a>
+<b> Previous:</b> <a name="tex2html4290"
+  href="node230.html">Purging .</a>
+ &nbsp <b>  <a name="tex2html4298"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4300"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001667040000000000000">
+稳定性的 <span class="math-inline">Q^{\ast } H Q</span>。</a>
+</h4>
+如算法 <a href="node227.html#fig:orthQ3">7.8</a> 所示的收缩正交变换构造显然是稳定的（即，各分量相对精确地表示了在精确算术中得到的变换）。毫无疑问，相似变换 <span class="math-inline">Q^* H Q</span> 在数值上保持了 <span class="math-inline">H</span> 的特征值。然而，在清除过程中这些变换在保持Hessenberg形式方面的数值表现如何，这是一个严重的问题。需要对基本算法进行修改，以确保如果 <span class="math-inline">y^*H = \theta y^*</span>，那么 <span class="math-inline">H_+ \equiv Q^* H Q</span> 在数值上是Hessenberg的（即，次对角线以下的所有元素相对于 <span class="math-inline">\Vert H \Vert</span> 都是微小的）。
+
+<p>
+<span class="math-inline">H_+ = Q^* H Q</span> 是Hessenberg的这一事实取决于表达式中的项 <span class="math-inline">g y^* H R</span> 消失，即
+<br><p></p>
+<div align="center">
+<div class="math-display">Q^* H Q = L^*HR + g y^*H R + \theta e_1 e_1^*.</div>
+</div>
+<br clear="ALL">
+<p></p>
+然而，仔细检查后我们发现
+<br><p></p>
+<div align="center">
+<div class="math-display">e_1^* Q = e_1^* L + (e_1^* y) g^* = \eta_1 g^*,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中 <span class="math-inline">\eta_1</span> 是 <span class="math-inline">y</span> 的第一个分量。因此，
+<a name="gnorm2"></a>  
+|| g || = 1|  _1 |,
+
+<p>
+所以当 <span class="math-inline">y</span> 的第一个分量很小时，可能会出现数值困难。具体来说，<span class="math-inline">y^*H = \theta y^*</span>，因此在精确算术中 <span class="math-inline"> y^* H R = 0</span>。然而，在有限精度下，计算出的 <span class="math-inline">fl(y^* H) = \theta y^* + z^*</span>。误差 <span class="math-inline">z</span> 相对于 <span class="math-inline">\Vert H \Vert</span> 将在 <span class="math-inline">\epsilon_M</span> 的量级上，但
+<br><p></p>
+<div align="center">
+<div class="math-display">\Vert g y^*H R \Vert = \Vert g\Vert \cdot \Vert z^* R \Vert =\frac{1}{\vert \eta_1 \vert} \Vert z^* R \Vert,</div>
+</div>
+<br clear="ALL">
+<p></p>
+因此这一项可能相当大。如果 <span class="math-inline">\eta_1 = O(\epsilon_M)</span>，它可能达到 <span class="math-inline">O(1)</span> 的量级。这是一个严重的问题，如果不进行我们即将提出的修改，这在实践中会发生。
+
+<p>
+解决办法是引入逐步可接受的扰动和对向量 <span class="math-inline">y</span> 的重缩放，以同时强制满足以下条件
+<br><p></p>
+<div align="center">
+<div class="math-display">Q^* y = e_1 \ \ \mathrm{and}\ \ y^* H Q = \theta e_1^*</div>
+</div>
+<br clear="ALL">
+<p></p>
+在有限精度下具有足够的准确性。为了实现这一点，我们将设计一个方案，以实现
+<br><p></p>
+<div align="center">
+<div class="math-display">y^* H q_j = 0 \ \ \mathrm{for} \ \ j &gt; 1</div>
+</div>
+<br clear="ALL">
+<p></p>
+在数值上。如 [<a href="node421.html#sore98">420</a>] 所示，这一修改足以在数值上建立 <span class="math-inline"> q_i^* H q_j = 0</span>，相对于 <span class="math-inline">\Vert H \Vert</span>，对于 <span class="math-inline"> i &gt; j + 1</span>。
+
+<p>
+基本思想如下：如果在第 <span class="math-inline">j</span> 步，计算出的量 <span class="math-inline">fl(y^* H q_j )</span> 不够小，那么通过用一个数 <span class="math-inline">\phi</span> 缩放向量 <span class="math-inline">y_j</span> 和用一个数 <span class="math-inline">\psi</span> 缩放分量 <span class="math-inline">\eta_{j+1}</span> 来调整它，使其足够小。在计算 <span class="math-inline">q_{j+1}</span> 之前进行这种重缩放，我们有 <span class="math-inline">y_j \leftarrow y_j \phi</span> 和 <span class="math-inline">\hat{y}_j \leftarrow \hat{y}_j \psi</span>，其中 <span class="math-inline">y^* = [ y_j^* , \hat{y}_j^*]</span>。当然，<span class="math-inline">\Vert y \Vert</span> 不应因这种缩放而改变，因此这是必需的。这给出了以下方程组来确定 <span class="math-inline">\phi</span> 和 <span class="math-inline">\psi</span>：如果 <span class="math-inline">\vert y_j^* H_j \hat{q}_j + \rho_j \beta_j \eta_{j+1} \vert &gt;\epsilon_M \tau_{j+1}</span>，
+
+(_j )^2 + (1 - _j^2)^2 &amp;=&amp; 1, 
+<br>
+y_j^* H_j q_j + _j  _j _j+1 &amp;=&amp; 
+    _M _j+1.
+
+如果 <span class="math-inline">\rho_j</span> 在 <span class="math-inline">\sqrt{\epsilon_M}</span> 的量级上，那么这种缩放可以被吸收到 <span class="math-inline">\rho_j</span> 中，而不改变 <span class="math-inline">y</span>，也不会影响 <span class="math-inline">Q</span> 的数值正交性。当 <span class="math-inline">y</span> 被修改时，事实证明，之前计算的 <span class="math-inline">q_i</span>，<span class="math-inline">2 \le i &lt; j</span>，不需要改变。在第 <span class="math-inline">j</span> 步之后，向量 <span class="math-inline">y_j</span> 在后续步骤中仅被重新缩放，定义 <span class="math-inline">q_i , \ \ 2 \le i \le j</span> 的公式在 <span class="math-inline">y_j</span> 的缩放下是不变的。有关完整细节，应参考 [<a href="node421.html#sore98">420</a>]。
+
+<p>
+算法 <a href="node231.html#fig:orthQ4">7.9</a> 中显示的代码实现了这一方案，以计算一个可接受的 <span class="math-inline">Q</span>。<a name="tex2html42" href="footnode.html#foot23623"><sup><IMG  align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>在实践中，这种变换可以就地计算并应用于 <span class="math-inline">H := Q^* H Q</span> 和 <span class="math-inline">V := VQ</span>，而不需要存储 <span class="math-inline">Q</span>。然而，这种实现相当微妙，<span class="math-inline">Q</span> 的构造被避免额外存储的细节所掩盖。该代码与上述描述略有不同，因为向量 <span class="math-inline">y</span> 仅在所有列 <span class="math-inline">2</span> 到 <span class="math-inline">n</span> 确定后才被重新缩放以具有单位范数。
+
+<p>
+<br>
+<a name="fig:orthQ4"></a><IMG
+ width="598" height="699" align="bottom" border="0"
+ src="img2075.png"
+ alt="\begin{algorithm}
+{Stable Orthogonal Deflating Transformation for IRAM
+}
+{
+\beg...
+...for} \\
+{\rm (33)} \&gt; <span class="math-inline">Q(:,1) = y/\Vert y \Vert </span>\end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+有几个实现问题。
+<dl>
+<dt><strong>(3)</strong></dt>
+<dd>这里显示的扰动避免了特征向量 <span class="math-inline">y</span> 中精确零初始条目的问题。理论上，当 <span class="math-inline">H</span> 未减少时，这不应该发生，但在数值上，当 <span class="math-inline">H</span> 的对角线元素很小但非零时，可能会发生。有一种更干净的实现方式可以不修改零条目。这是最简单（也是最粗糙）的修正。
+
+<p>
+</dd>
+<dt><strong>(10)</strong></dt>
+<dd>一旦 <span class="math-inline">\tau_j = \Vert y_j\Vert</span> 足够大，就不需要进一步的修正。删除这个 if-clause 将恢复到算法 <a href="node227.html#fig:orthQ3">7.8</a> 中显示的未修改的 <span class="math-inline">Q</span> 计算。
+
+<p>
+</dd>
+<dt><strong>(16)</strong></dt>
+<dd>这显示了几种可能的方法之一，用于修改 <span class="math-inline">y</span> 以实现 <span class="math-inline">Q^* H Q</span> 的次对角线以下元素在数值上微小的目标。更复杂的策略会尽可能多地吸收缩放到对角元素 <span class="math-inline"> Q(j,j) = \rho</span> 中。这里，设计了不缩放 <span class="math-inline">\rho</span> 而是缩放 <span class="math-inline">y</span> 的分支，使得 <span class="math-inline">\mathrm{fl}(1 + (\rho \psi)^2) = \mathrm{fl}(1 + \rho^2) = 1</span>。
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4301"
+  href="node232.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4295"
+  href="node227.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4289"
+  href="node230.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4297"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4299"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4302"
+  href="node232.html">Locking and Purging in</a>
+<b> Up:</b> <a name="tex2html4296"
+  href="node227.html">Orthogonal Deflating Transformation</a>
+<b> Previous:</b> <a name="tex2html4290"
+  href="node230.html">Purging .</a>
+ &nbsp <b>  <a name="tex2html4298"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4300"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

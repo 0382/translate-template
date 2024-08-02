@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>A Sample Procrustes Problem</title>
+<meta name="description" content="A Sample Procrustes Problem">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node355.html">
+<link rel="previous" href="node353.html">
+<link rel="up" href="node353.html">
+<link rel="next" href="node355.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6207"
+  href="node355.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6201"
+  href="node353.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6195"
+  href="node353.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6203"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6205"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6208"
+  href="node355.html">A Sample Jordan Block</a>
+<b> Up:</b> <a name="tex2html6202"
+  href="node353.html">Numerical Examples</a>
+<b> Previous:</b> <a name="tex2html6196"
+  href="node353.html">Numerical Examples</a>
+ &nbsp <b>  <a name="tex2html6204"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6206"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h3><a name="SECTION001844100000000000000"></a>
+<a name="43538"></a>
+<br>
+A Sample Procrustes Problem
+</h3>
+
+<p>
+In this example, we attempt to find a <span class="math-inline">Y</span> which minimizes
+<span class="math-inline">\vert\vert AY-YB\vert\vert _F</span> for a pair of randomly selected <span class="math-inline">A</span> (<span class="math-inline">12 \times 12</span>)
+and <span class="math-inline">B</span> (<span class="math-inline">4 \times 4</span>).
+
+&gt;&gt; !cp examples/procrustes/*.m .
+&gt;&gt; randn('state',0);
+&gt;&gt; [A,B] = randprob;
+&gt;&gt; parameters(A,B);
+&gt;&gt; Y0 = guess;
+&gt;&gt; [fn,Yn] = sg_min(Y0,'newton','euclidean');
+iter    grad            F(Y)              flops         step type
+0       2.334988e+01    3.071299e+01         4751       none
+  invdgrad: Hessian not positive definite, CG terminating early
+1       1.171339e+01    1.376463e+01       365678       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+2       7.843279e+00    7.616381e+00       677599       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+3       5.131680e+00    4.945824e+00       992823       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+4       5.642834e+00    3.512826e+00      1293761       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+5       5.500553e+00    1.721329e+00      1607969       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+6       4.666307e+00    1.192561e+00      1964675       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+7       3.576069e+00    6.850532e-01      2272355       Newton step
+  invdgrad: max iterations reached inverting the Hessian by CG
+8       1.228119e+00    3.046816e-01      2820625       Newton step
+9       4.673779e-02    2.506848e-01      3345266       Newton step
+10      6.411668e-04    2.505253e-01      3873582       Newton step
+11      1.965463e-06    2.505253e-01      4430245       Newton step
+12      1.620267e-06    2.505253e-01      5022629       Newton step
+ 
+
+<p>
+Figure&nbsp;<a href="node354.html#sgminfig1">9.1</a> shows the convergence curve for this run.
+
+<p>
+
+<p></p>
+<div align="center"><a name="sgminfig1"></a><a name="43545"></a>
+<table>
+<caption align="bottom"><strong>Figure 9.1:</strong>
+Procrustes problem</caption>
+<tr><td><IMG
+ width="346" height="230" border="0"
+ src="img3471.png"
+ alt="\begin{figure}\begin{center}
+\leavevmode
+\epsfxsize =3.0 in
+\epsfysize =2.0 in
+\epsfbox{notes1.eps}\end{center}\vspace*{-12pt}%% help
+\end{figure}"></td></tr>
+</table>
+</div><p></p>
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Basic Algorithm</title>
+<meta name="description" content="Basic Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node252.html">
+<link rel="previous" href="node250.html">
+<link rel="up" href="node250.html">
+<link rel="next" href="node252.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4592"
+  href="node252.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4586"
+  href="node250.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4580"
+  href="node250.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4588"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4590"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4593"
+  href="node252.html">An Adaptively Blocked Lanczos</a>
+<b> Up:</b> <a name="tex2html4587"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4581"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+ &nbsp <b>  <a name="tex2html4589"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4591"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001691000000000000000">
+基本算法</a>
+</h2> 
+给定一个 <span class="math-inline">n</span> 阶矩阵 <span class="math-inline">A</span> 和初始的 <span class="math-inline">n</span> 行 <span class="math-inline">p</span> 列块向量 <span class="math-inline">P_1</span> 和 <span class="math-inline">Q_1</span>，使得  
+<span class="math-inline">P^{\ast}_1 Q_1 = I</span>，块Lanczos方法生成一系列 <span class="math-inline">n \times p</span> 的右和左Lanczos块向量
+<span class="math-inline">\{ Q_i \}</span> 和 <span class="math-inline">\{ P_i \}</span>。
+这些向量是Krylov子空间的双正交基
+
+<span class="math-inline">{\mathcal K}^j(A,Q_1)</span>
+和 
+<span class="math-inline">{\mathcal K}^j(A^{\ast},P_1)</span>。
+具体来说，
+经过 <span class="math-inline">j</span> 步后，Lanczos过程确定一个块三对角矩阵
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_{[j]} = \left[ \begin{array}{cccc}A_1 &amp; B_2 &amp; &amp; \\C_2......ts &amp; \ddots &amp; B_j \\&amp; &amp; C_j &amp; A_j \\\end{array} \right],</div>
+</div>
+<br clear="ALL">
+<p></p>
+以及右和左Lanczos向量矩阵
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Q_{[j]} = \left[\, Q_1, Q_2, \ldots , Q_j \,\right] \quad \m......and} \quadP_{[j]} = \left[\, P_1, P_2, \ldots , P_j \,\right]</div>
+</div>
+<br clear="ALL">
+<p></p>
+满足双正交条件
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="biorth"></a><div class="math-display">P^{\ast}_{[j]} Q_{[j]} = I.</div></td>
+<td width=10 align="right">
+(155)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+块Lanczos方法使用三项递归
+<br>
+<div align="center"><a name="right3term"></a><a name="left3term"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle Q_{j+1} C_{j+1}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle AQ_j - Q_j A_j - Q_{j-1} B_j,</span></td>
+<td width=10 align="right">
+(156)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle P_{j+1} B^{\ast}_{j+1}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle A^{\ast} P_j - P_j A^{\ast}_j - P_{j-1}C^{\ast}_j</span></td>
+<td width=10 align="right">
+(157)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+对于
+<span class="math-inline">j = 1, 2, \ldots</span>，其中 <span class="math-inline">Q_0 = P_0 = 0</span>。
+在矩阵表示法中，这些量满足控制关系
+<br>
+<div align="center"><a name="lancz2"></a><a name="lancz1"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A Q_{[j]}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle Q_{[j]} T_{[j]} + Q_{j+1}C_{j+1}E^{\ast}_j,</span></td>
+<td width=10 align="right">
+(158)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A^{\ast} P_{[j]}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle P_{[j]} T^{\ast}_{[j]} +P_{j+1} B^{\ast}_{j+1}E^{\ast}_j,</span></td>
+<td width=10 align="right">
+(159)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+其中 <span class="math-inline">E_j</span> 是一个 <span class="math-inline">jp</span> 行 <span class="math-inline">p</span> 列的矩阵，其底部方块是单位矩阵，其他地方为零。
+
+<p>
+为了使用Lanczos方法
+近似 <span class="math-inline">A</span> 的特征值和特征向量，我们解决
+<span class="math-inline">jp \times jp</span> 块三对角矩阵 <span class="math-inline">T_{[j]}</span> 的特征值问题。
+每个特征三元组
+<span class="math-inline">( \theta^{(j)}_i, z^{(j)}_i, w^{(j)}_i )</span> 的 <span class="math-inline">T_{[j]}</span>，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_{[j]} z^{(j)}_i = \theta^{(j)}_i z^{(j)}_i\quad {\rm and......w^{(j)}_i)^{\ast} T_{[j]} = \theta^{(j)}_i (w^{(j)}_i)^{\ast}</div>
+</div>
+<br clear="ALL">
+<p></p>
+确定一个Ritz三元组
+<span class="math-inline">( \theta^{(j)}_i, x^{(j)}_i, y^{(j)}_i )</span>，
+其中
+
+<span class="math-inline">x^{(j)}_i = Q_{[j]} z^{(j)}_i</span> 和
+
+<span class="math-inline">y^{(j)}_i = P_{[j]} w^{(j)}_i </span>。
+通常，Ritz三元组首先近似 <span class="math-inline">A</span> 的外部特征三元组。
+
+<p>
+为了评估近似值，
+设 <span class="math-inline">r^{(j)}_i</span> 和 <span class="math-inline">s^{(j)}_i</span> 表示相应的右和左
+残差向量：
+<br>
+<div align="center"><a name="rightres1"></a><a name="leftres1"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle r^{(j)}_i</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle Ax^{(j)}_i - \theta^{(j)}_i x^{(j)}_i,</span></td>
+<td width=10 align="right">
+(160)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle (s^{(j)}_i)^{\ast}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle (y^{(j)}_i)^{\ast} A-\theta^{(j)}_i (y^{(j)}_i)^{\ast}.</span></td>
+<td width=10 align="right">
+(161)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+分别代入（<a href="node251.html#lancz2">7.52</a>）和（<a href="node251.html#lancz1">7.53</a>），出现
+<br>
+<div align="center"><a name="rightres2"></a><a name="leftres2"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle r^{(j)}_i</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle Q_{j+1}C_{j+1} (E^{\ast}_j z^{(j)}_i),</span></td>
+<td width=10 align="right">
+(162)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle (s^{(j)}_i)^{\ast}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle ((w^{(j)}_i)^{\ast} E_j) B_{j+1} P^{\ast}_{j+1}.</span></td>
+<td width=10 align="right">
+(163)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+一个Ritz值
+<span class="math-inline">\theta^{(j)}_i</span> 被认为已经收敛
+如果两个残差范数都足够小。同样，
+残差也可以用来确定三元组的后向误差界限，
+如同标准非Hermitian Lanczos算法的情况（参见第<a href="node244.html#sec:nsymlanczos">7.8</a>节）。
+
+<p>
+一个基本的非Hermitian Lanczos方法的简单块版本在算法<a href="node251.html#bd:blanalg">7.14</a>中提出。
+
+<p>
+<br>
+<a name="bd:blanalg"></a><IMG
+ width="598" height="552" align="bottom" border="0"
+ src="img2290.png"
+ alt="\begin{algorithm}{Block Lanczos Method for NHEP
+}
+{
+\begin{tabbing}
+(nr)ss\=ijk...
+...imate eigenvectors <span class="math-inline">x^{(j)}_i</span>\ and <span class="math-inline">y^{(j)}_i</span>.
+\end{tabbing}
+}
+\end{algorithm}">
+<br> 
+
+<p>
+我们现在对算法<a href="node251.html#bd:blanalg">7.14</a>的一些步骤进行评论。
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>起始向量 <span class="math-inline">Q_1</span> 和 <span class="math-inline">P_1</span> 最好由用户选择，以体现任何关于 <span class="math-inline">A</span> 所需特征向量的可用知识。在没有此类知识的情况下，选择 <span class="math-inline">Q_1</span> 为一个实正交化的随机 <span class="math-inline">n \times p</span> 矩阵，并设 <span class="math-inline">P_1 = Q_1</span>。
+
+<p>
+块大小 <span class="math-inline">p</span> 应选择大于或等于任何所需特征值的多重性。如果多重性未知，典型的 <span class="math-inline">p</span> 值为 <span class="math-inline">2</span>、<span class="math-inline">3</span> 和 <span class="math-inline">6</span>。
+
+<p>
+</dd>
+<dt><strong>(2), (3), (20), (21)</strong></dt>
+<dd>用户需要提供子程序来计算任意 <span class="math-inline">n \times p</span> 矩阵 <span class="math-inline">Z</span> 的乘积 <span class="math-inline">AZ</span> 和 <span class="math-inline">A^{\ast}Z</span>。这给用户一个机会，只需一次遍历定义 <span class="math-inline">A</span> 和 <span class="math-inline">A^{\ast}</span> 的数据结构，就可能提高效率。
+
+<p>
+</dd>
+<dt><strong>(8), (9), (10)</strong></dt>
+<dd>首先，计算 <span class="math-inline">R^{\ast}</span> 和 <span class="math-inline">S</span> 的QR分解。如果 <span class="math-inline">R^{\ast}</span> 和 <span class="math-inline">S</span> 都是满秩的，那么
+<span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">p</span> 列的矩阵，使得
+
+<span class="math-inline">Q^{\ast}_{j+1} Q_{j+1} = P^{\ast}_{j+1} P_{j+1} = I</span>，并且两者
+
+<span class="math-inline">B^{\ast}_{j+1}</span> 和 <span class="math-inline">C_{j+1}</span> 都是 <span class="math-inline">p</span> 行 <span class="math-inline">p</span> 列的右上三角矩阵。如果 <span class="math-inline">R</span> 或 <span class="math-inline">S</span> 不是满秩的，那么已经揭示了一个不变子空间。在秩亏的情况下继续递归在第<a href="node252.html#ABLEsection">7.9.2</a>节中讨论。
+
+<p>
+</dd>
+<dt><strong>(12)</strong></dt>
+<dd>如果 <span class="math-inline">\Sigma_j</span> 是奇异的或接近奇异的，
+即，如果有一个零或非常小的奇异值，那么
+有一个<em>中断</em>。
+必须采取适当的行动继续。参见第<a href="node252.html#ABLEsection">7.9.2</a>节以了解可能的处理方法。
+<a name="24592"></a>
+
+<p>
+</dd>
+<dt><strong>(17), (18)</strong></dt>
+<dd>可以使用第<a href="node209.html#sec:nsymeigdirect">7.3</a>节中讨论的方法计算 <span class="math-inline">T_{[j]}</span> 的特征三元组。
+Ritz值的收敛性可以通过残差的范数测试，如（<a href="node251.html#rightres2">7.56</a>）和（<a href="node251.html#leftres2">7.57</a>）。
+有关访问近似精度的更多详细信息，参见第<a href="node246.html#zbdd:convergence">7.8.2</a>节和第<a href="node275.html#sec:errbds_nsym">7.13</a>节以及[<a href="node421.html#bady99">29</a>]。
+
+<p>
+当 <span class="math-inline">j</span> 变大时，解决 <span class="math-inline">T_{[j]}</span> 的特征问题变得耗时。
+一种简单的降低成本的方法是定期进行，例如每五步一次。
+
+<p>
+</dd>
+<dt><strong>(19)</strong></dt>
+<dd>与非块Lanczos方法一样，在有限精度算术的情况下，块Lanczos向量 <span class="math-inline">\{ Q_i \}</span> 和 <span class="math-inline">\{ P_i \}</span> 的双正交性恶化。TSMGS过程可以用来对 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 进行就地双正交化
+
+<span class="math-inline">Q_{[j]} =\left[\, Q_1, Q_2, \ldots, Q_j\, \right]</span> 和
+
+<span class="math-inline">P_{[j]} =\left[\, P_1, P_2, \ldots, P_j\, \right]</span>。
+
+<p>
+
+		 P<small>ROCEDURE </small>TSMGS 
+<br><b>for</b>  <span class="math-inline">i=1,2,\ldots,j</span> 
+<br><span class="math-inline">Q_{j+1} := Q_{j+1} - Q_i ( P^{\ast}_i Q_{j+1})</span> 
+<br><span class="math-inline">P_{j+1} := P_{j+1} - P_i ( Q^{\ast}_i P_{j+1})</span> 
+<br><b>end</b>
+
+
+<p>
+</dd>
+<dt><strong>(25)</strong></dt>
+<dd>这仅在Lanczos向量的双正交性保持良好的情况下推荐。近似特征向量 <span class="math-inline">x^{(j)}_i</span>
+和 <span class="math-inline">y^{(j)}_i</span> 对应于收敛的Ritz值
+<span class="math-inline">\theta^{(j)}_i</span> 被计算，并且
+残差（<a href="node251.html#rightres1">7.54</a>）和（<a href="node251.html#leftres1">7.55</a>）
+相对于
+<span class="math-inline">\Vert x^{(j)}_i\Vert _2</span> 和
+<span class="math-inline">\Vert y^{(j)}_i\Vert _2</span> 再次检查。
+注意，范数可能大于在步骤（17）中计算的估计值。
+这是Lanczos基向量病态的一个副作用。
+</dd>
+</dl> 
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4592"
+  href="node252.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4586"
+  href="node250.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4580"
+  href="node250.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4588"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4590"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4593"
+  href="node252.html">An Adaptively Blocked Lanczos</a>
+<b> Up:</b> <a name="tex2html4587"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4581"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+ &nbsp <b>  <a name="tex2html4589"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4591"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

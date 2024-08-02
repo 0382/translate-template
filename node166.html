@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Power Method.</title>
+<meta name="description" content="Power Method.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node167.html">
+<link rel="previous" href="node165.html">
+<link rel="up" href="node165.html">
+<link rel="next" href="node167.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3261"
+  href="node167.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3255"
+  href="node165.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3249"
+  href="node165.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3257"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3259"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3262"
+  href="node167.html">Inverse Iteration.</a>
+<b> Up:</b> <a name="tex2html3256"
+  href="node165.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html3250"
+  href="node165.html">Single- and Multiple-Vector Iterations</a>
+ &nbsp <b>  <a name="tex2html3258"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3260"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001440010000000000000">
+Power Method.</a>
+</h4>
+The direct iteration methods for the HEP
+can be generalized to the GHEP (<a href="node156.html#gsymeig">5.1</a>).
+
+<p>
+First we assume that a Cholesky factorization of 
+<span class="math-inline">B = L \, L^{\ast}</span> 
+is easily obtainable. 
+We then reformulate (<a href="node156.html#gsymeig">5.1</a>) as a standard Hermitian eigenvalue
+problem with the matrix <span class="math-inline">C</span> as described 
+in the previous subsection (<a href="node163.html#C_eigenvalues">5.5</a>),
+possibly after making <span class="math-inline">B</span> positive definite as noted
+in the introduction (<a href="node156.html#make_B_pd">5.2</a>).
+The power method of &#167;<a href="node94.html#sec_power_sym">4.3</a> now takes the following form. 
+<a name="17168"></a> 
+
+<p>
+<br>
+<IMG
+ width="598" height="221" align="bottom" border="0"
+ src="img1516.png"
+ alt="\begin{algorithm}{Power Method for GHEP}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=bbb\=...
+... {\bf end if} \\
+{\rm (9)} \&gt; \&gt; {\bf end for}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+In step (3),
+the computation <span class="math-inline"> y := C \, z</span> can be executed into three
+steps as 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">y_1 = L^{-\ast}\, z, \quad y_2 = A \, y_1, \quad\mathrm{and}\quad y = L^{-1} \, y_2. </div>
+</div>
+<br clear="ALL">
+<p></p>
+Hence, no explicit knowledge of the matrix <span class="math-inline">C</span> is needed for
+the power method. The power method converges under
+conditions similar to those for the standard HEP.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

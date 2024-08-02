@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Nearest-Jordan Structure</title>
+<meta name="description" content="Nearest-Jordan Structure">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node349.html">
+<link rel="previous" href="node347.html">
+<link rel="up" href="node346.html">
+<link rel="next" href="node349.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6119"
+  href="node349.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6113"
+  href="node346.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6107"
+  href="node347.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6115"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6117"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6120"
+  href="node349.html">Trace Minimization</a>
+<b> Up:</b> <a name="tex2html6114"
+  href="node346.html">Sample Problems and Their</a>
+<b> Previous:</b> <a name="tex2html6108"
+  href="node347.html">The Procrustes Problem</a>
+ &nbsp <b>  <a name="tex2html6116"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6118"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h3><a name="SECTION001843200000000000000"></a>
+<a name="43410"></a>
+<a name="43411"></a>
+<a name="43412"></a>
+<a name="43413"></a>
+<br>
+最近Jordan结构
+</h3>
+
+<p>
+现在假设Procrustes问题中的<span class="math-inline">B</span>块允许随<span class="math-inline">Y</span>变化。此外，假设<span class="math-inline">B(Y)</span>是<span class="math-inline">Y^*AY</span>的最近阶梯形式；即，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">B(Y) = \left[ \begin{array}{ccc}\lambda_1 I &amp; * &amp; * \cr0 &amp; \lambda_2 I &amp; * \cr0 &amp; 0 &amp; \dots\end{array}\right]</div>
+</div>
+<br clear="ALL">
+<p></p>
+对于固定的块大小，其中*元素是<span class="math-inline">Y^*AY</span>的相应矩阵元素，而<span class="math-inline">\lambda_i I</span>块要么固定，要么由某种启发式方法确定，例如，取它们在<span class="math-inline">Y^*AY</span>中替换的块的平均迹。然后，最小化<span class="math-inline">\vert\vert AY-YB(Y)\vert\vert _F</span>找到最近的矩阵作为一个特定的Jordan结构，其中结构由块大小决定，特征值为<span class="math-inline">\lambda_i</span>。当<span class="math-inline">\lambda_i</span>固定时，我们称之为<em>轨道</em>问题，当<span class="math-inline">\lambda_i</span>由给定的启发式方法选择时，我们称之为<em>束</em>问题。
+
+<p>
+这样的问题在正则化计算病态特征值矩阵的Jordan结构时可能很有用。
+
+<p>
+令人惊讶的是，<span class="math-inline">F(Y)</span>的微分形式与Procrustes问题的<span class="math-inline">F(Y)</span>相同
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">dF(Y) = A^*(AY-YB(Y))-(AY-YB(Y))B(Y)^*.</div>
+</div>
+<br clear="ALL">
+<p></p>
+这是因为
+
+<span class="math-inline">\tr( -(AY-YB(Y))^*Y \dot{B} ) = \tr( (B(Y)-Y^*AY)^* \dot{B}) = 0</span>
+对于上述选择的<span class="math-inline">B</span>，无论是轨道还是束情况，其中
+
+<span class="math-inline">\dot{B} = \frac{d}{dt} B(Y(t)) \vert _{t=0}</span>。
+
+<p>
+相比之下，二阶导数的形式稍微复杂一些，因为<span class="math-inline">B</span>现在依赖于<span class="math-inline">Y</span>：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} =\frac{d}{dt} dF_{Proc}(Y(......rt _{t=0}-A^*Y\dot{B}-AY \dot{B}^*+YB \dot{B}^*+Y \dot{B} B^*,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中
+<span class="math-inline">\dot{Y}(0) = H</span>，
+<span class="math-inline">dF_{\rm Proc}</span>只是Procrustes（<span class="math-inline">B</span>常数）二阶导数部分的简写，以及
+
+<span class="math-inline">\dot{B} = \frac{d}{dt} B(Y(t)) \vert _{t=0}</span>，这是<span class="math-inline">Y^*AH+H^*AY</span>的阶梯部分（根据是束还是轨道，对角线上是迹平均值或零）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6119"
+  href="node349.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6113"
+  href="node346.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6107"
+  href="node347.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6115"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6117"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6120"
+  href="node349.html">Trace Minimization</a>
+<b> Up:</b> <a name="tex2html6114"
+  href="node346.html">Sample Problems and Their</a>
+<b> Previous:</b> <a name="tex2html6108"
+  href="node347.html">The Procrustes Problem</a>
+ &nbsp <b>  <a name="tex2html6116"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6118"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

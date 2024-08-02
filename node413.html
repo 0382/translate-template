@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Preconditioned Shifted Power Method</title>
+<meta name="description" content="Preconditioned Shifted Power Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node414.html">
+<link rel="previous" href="node412.html">
+<link rel="up" href="node410.html">
+<link rel="next" href="node414.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html7107"
+  href="node414.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7101"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7095"
+  href="node412.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7103"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7105"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7108"
+  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
+<b> Up:</b> <a name="tex2html7102"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7096"
+  href="node412.html">General Framework of Preconditioning</a>
+ &nbsp <b>  <a name="tex2html7104"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7106"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002033000000000000000">
+预处理移位幂法</a>
+</h2>
+<em>带移位的预处理幂法</em>是最简单的预处理迭代方法。它只能找到最小的（或最大的，对于不同的移位）特征值及其对应的特征向量。
+
+<p>
+我们在算法<a href="node413.html#fig:prec_powerBA">11.5</a>中展示了针对矩阵束<span class="math-inline">B - \mu A</span>的单向量版本方法。输出时，<span class="math-inline">\mu^{(k)}</span>和<span class="math-inline">x^{(k)}</span>近似于最大特征值<span class="math-inline">\mu_{1}</span>及其对应的特征向量。
+
+<p>
+我们注意到，移位<span class="math-inline">\tau</span>需要知道<span class="math-inline">\mu_{\min}</span>，或者从下方估计它。如果<span class="math-inline">B</span>是非负定矩阵，那么<span class="math-inline">\mu_{\min}</span>可以简单地替换为<span class="math-inline">0</span>。
+
+<p>
+<br>
+<a name="fig:prec_powerBA"></a><IMG
+ width="598" height="224" align="bottom" border="0"
+ src="img3939.png"
+ alt="\begin{algorithm}
+{Preconditioned Power Method for GHEP
+\index{preconditioned!po...
+... (7)} \&gt; \&gt; \&gt; <span class="math-inline">x\sup{i+1} = x / \Vert x\Vert _A </span>\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+基于<span class="math-inline">A^{-1}B</span>的特征分解的标准论据，对于矩阵束<span class="math-inline">B - \mu A</span>，并不能证明幂法会收敛，因为特征分解中的特征向量不一定是迭代算子的特征向量。这使得收敛理论相当棘手。D'yakonov及其同事[<a href="node421.html#do80">150</a>,<a href="node421.html#d83">146</a>,<a href="node421.html#d">147</a>]利用假设(<a href="node412.html#prec_equiv">11.9</a>)对迭代算法<a href="node413.html#fig:prec_powerBA">11.5</a>获得了线性收敛的显式估计。简而言之（参见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>,<a href="node421.html#k98">268</a>]），算法<a href="node413.html#fig:prec_powerBA">11.5</a>的收敛速率估计可以写为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="prec_est_power"></a><div class="math-display">\frac{\mu_1 - \mu^{(n)}}{\mu^{(n)} - \mu_2} \leq (1 - \xi )^......{\delta_0}{\delta_1}\frac{\mu_1 - \mu_2}{\mu_1 - \mu_{\min}},</div></td>
+<td width=10 align="right">
+(283)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在假设<span class="math-inline">\mu^{(0)} > \mu_2</span>下。
+<a name="48710"></a>
+
+<p>
+该估计表明收敛至少是线性的。注意，<span class="math-inline">A</span>和<span class="math-inline">B</span>的条件数并未出现在估计中。
+
+<p>
+如果对于某些<span class="math-inline">p>1</span>，<span class="math-inline">\mu_p \geq \mu^{(0)} > \mu_{p+1}</span>成立[<a href="node421.html#d">147</a>]，也可以得到类似的结果。
+
+<p>
+在数值实验中，算法<a href="node413.html#fig:prec_powerBA">11.5</a>通常对于随机初始猜测会收敛到<span class="math-inline">\mu_1</span>。当<span class="math-inline">\mu_p \geq \mu^{(0)} > \mu_{p+1}</span>时，序列<span class="math-inline">x^{(k)}</span>需要经过<span class="math-inline">p</span>个特征向量，这些特征向量是瑞利商的鞍点，才能达到<span class="math-inline">u_1</span>。原则上，在每个鞍点附近，收敛可能会减慢。对于一般的预处理矩阵<span class="math-inline">T</span>，很难预测对于给定的初始猜测<span class="math-inline">x^{(0)}</span>是否会发生这种情况。
+
+<p>
+我们在以下两个表格中分别收集了算法<a href="node413.html#fig:prec_powerBA">11.5</a>每次迭代的存储和浮点运算的主要成本。
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">项目</td>
+<td align="left">存储</td>
+</tr>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">临时向量</td>
+<td align="left">1-2个<span class="math-inline">n</span>维向量</td>
+</tr>
+</table>
+</div>
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">操作</td>
+<td align="left">主要成本</td>
+</tr>
+<tr><td align="left">瑞利商<span class="math-inline">\mu^{(i)}</span></td>
+<td align="left"><span class="math-inline">2</span>次点积</td>
+</tr>
+<tr><td align="left">残差<span class="math-inline">r</span></td>
+<td align="left"><span class="math-inline">2</span>次矩阵-向量乘积</td>
+</tr>
+<tr><td align="left">预处理残差<span class="math-inline">w</span></td>
+<td align="left">取决于预处理矩阵<span class="math-inline">T</span></td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>次更新</td>
+</tr>
+</table>
+</div>
+
+<p>
+预处理移位幂法的主要优势当然是其算法简单和每次迭代成本低。使用预先选择的移位提供了对迭代方法的全面控制。该方法非常稳定和健壮，存在坚实的收敛理论。
+
+<p>
+计算移位需要<span class="math-inline">\delta_1</span>和<span class="math-inline">\lambda_{\min}</span>的界限，这是一个明显的缺点。此外，我们下面考虑的其他预处理特征求解器通常也以线性方式收敛，但通常具有更好的速率。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html7107"
+  href="node414.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7101"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7095"
+  href="node412.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7103"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7105"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7108"
+  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
+<b> Up:</b> <a name="tex2html7102"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7096"
+  href="node412.html">General Framework of Preconditioning</a>
+ &nbsp <b>  <a name="tex2html7104"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7106"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

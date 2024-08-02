@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Summary of Choices.</title>
+<meta name="description" content="Summary of Choices.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node89.html">
+<link rel="previous" href="node87.html">
+<link rel="up" href="node86.html">
+<link rel="next" href="node89.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2084"
+  href="node89.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2078"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2072"
+  href="node87.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2080"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2082"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2085"
+  href="node89.html">Matrix Preparation.</a>
+<b> Up:</b> <a name="tex2html2079"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2073"
+  href="node87.html">Overview of Available Algorithms.</a>
+ &nbsp <b>  <a name="tex2html2081"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2083"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001310020000000000000">
+选择总结</a>
+</h4>
+在表
+<a href="node88.html#sym_alg_choice">4.1</a>中，我们列出了上述算法，并添加了一些信息，这些信息可能有助于在特定情况下决定使用哪种算法。
+
+<p>
+<br>
+<div align="center">
+ <a name="sym_alg_choice"></a></div>
+<p>
+<br>
+<div align="center"><a name="7314"></a>
+<table cellpadding=3 border="1" align="center">
+<caption><strong>表 4.1：</strong>
+高能物理算法的总结</caption>
+<tr><td align="left">&nbsp;</td>
+<td align="center">应用</td>
+<td align="center">正交</td>
+<td align="center">内积</td>
+<td align="center">计算效率</td>
+<td align="center">内存</td>
+<td align="center">向量数</td>
+<td align="center">分解</td>
+</tr>
+<tr><td align="left">幂法</td>
+<td align="center">直接</td>
+<td align="center">&nbsp;</td>
+<td align="center">是</td>
+<td align="center">非常慢</td>
+<td align="center">否</td>
+<td align="center">2</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">单边</td>
+<td align="center">&nbsp;</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">2</td>
+<td align="center">LU</td>
+</tr>
+<tr><td align="left">子空间迭代</td>
+<td align="center">直接</td>
+<td align="center">前向</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">中等</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">单边</td>
+<td align="center">前向</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">中等</td>
+<td align="center">LU</td>
+</tr>
+<tr><td align="left">Lanczos</td>
+<td align="center">直接</td>
+<td align="center">局部</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">3</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">直接</td>
+<td align="center">二阶</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">多</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">单边</td>
+<td align="center">前向</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">中等</td>
+<td align="center">LU</td>
+</tr>
+<tr><td align="left">IR Lanczos</td>
+<td align="center">直接</td>
+<td align="center">前向</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">少</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">单边</td>
+<td align="center">前向</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">更少</td>
+<td align="center">LU</td>
+</tr>
+<tr><td align="left">带状</td>
+<td align="center">直接</td>
+<td align="center">前向</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">多</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">Lanczos</td>
+<td align="center">单边</td>
+<td align="center">前向</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">中等</td>
+<td align="center">LU</td>
+</tr>
+<tr><td align="left">Jac-Dav</td>
+<td align="center">直接</td>
+<td align="center">前向</td>
+<td align="center">慢</td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">少</td>
+<td align="center">-</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">预处理</td>
+<td align="center">前向</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">少</td>
+<td align="center">ILU</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="center">单边</td>
+<td align="center">前向</td>
+<td align="center">-</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">少</td>
+<td align="center">LU</td>
+</tr>
+</table>
+</div>
+<br>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2084"
+  href="node89.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2078"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2072"
+  href="node87.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2080"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2082"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2085"
+  href="node89.html">Matrix Preparation.</a>
+<b> Up:</b> <a name="tex2html2079"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2073"
+  href="node87.html">Overview of Available Algorithms.</a>
+ &nbsp <b>  <a name="tex2html2081"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2083"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

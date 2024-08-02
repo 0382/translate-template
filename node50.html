@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Invariant Subspaces</title>
+<meta name="description" content="Invariant Subspaces">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node51.html">
+<link rel="previous" href="node49.html">
+<link rel="up" href="node48.html">
+<link rel="next" href="node51.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1453"
+  href="node51.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1447"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1441"
+  href="node49.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1449"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1451"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1454"
+  href="node51.html">Equivalences (Similarities)</a>
+<b> Up:</b> <a name="tex2html1448"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1442"
+  href="node49.html">Eigenvalues and Eigenvectors</a>
+ &nbsp <b>  <a name="tex2html1450"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1452"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h2><a name="SECTION001152000000000000000"></a> 
+<a name="sec_chap2_nHepIS"></a>
+<br>
+Invariant Subspaces
+</h2>
+
+<p>
+A <em>(right) invariant subspace</em> <span class="math-inline">\mathcal X</span> 
+of <span class="math-inline">A</span> satisfies <span class="math-inline">Ax \in \mathcal X</span> for all <span class="math-inline">x \in \mathcal X</span>.
+We also write this as 
+<span class="math-inline">A {\mathcal X} \subset {\mathcal X}</span>.
+The simplest example is when <span class="math-inline">\mathcal X</span> is spanned by a single eigenvector of <span class="math-inline">A</span>.
+More generally an invariant subspace may be spanned by a subset of 
+the eigenvectors of <span class="math-inline">A</span>, but since some matrices do not have <span class="math-inline">n</span> eigenvectors,
+there are invariant subspaces that are not spanned by eigenvectors.
+For example, the space of all possible vectors is clearly invariant, but
+it is not spanned by the single eigenvector of <span class="math-inline">A(0)</span> 
+in (<a href="node49.html#eqn_chap2_nHep_1">2.3</a>). This is discussed further in 
+&#167;<a href="node52.html#sec_chap2_nHepED">2.5.4</a> below.
+
+<p>
+A <em>left invariant subspace</em> <span class="math-inline">\mathcal Y</span>
+of <span class="math-inline">A</span> analogously satisfies 
+<span class="math-inline">A^*y \in {\mathcal Y}</span> for all <span class="math-inline">y \in \mathcal Y</span>,
+and may be spanned by left eigenvectors of <span class="math-inline">A</span>.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

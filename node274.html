@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Example</title>
+<meta name="description" content="Numerical Example">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node273.html">
+<link rel="up" href="node269.html">
+<link rel="next" href="node275.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4921"
+  href="node275.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4915"
+  href="node269.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4911"
+  href="node273.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4917"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4919"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4922"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Up:</b> <a name="tex2html4916"
+  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html4912"
+  href="node273.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html4918"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4920"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION0016125000000000000000">
+数值示例</a>
+</h2> 
+
+<p>
+我们讨论一个小型示例的结果，该示例可以轻松复现。
+非对称矩阵 <span class="math-inline">A</span> 的维度为 <span class="math-inline">n=100</span>，并且它是三对角的。对角线上的元素为 
+<span class="math-inline">a_{i,i}\equiv -2</span>，副对角线上的元素为 
+<span class="math-inline">a_{i,i-1}\equiv 1</span>， 
+<span class="math-inline">a_{i,i+1}\equiv 1.2</span>。
+
+<p>
+
+<p></p>
+<div align="center"><a name="fig:Chap5JD"></a><a name="26946"></a>
+<table>
+<caption align="bottom"><strong>图 7.5：</strong>
+用于外部特征值（左侧）和内部特征值（右侧）的 Jacobi-Davidson 方法。</caption>
+<tr><td><IMG
+ width="340" height="16" border="0"
+ src="img2583.png"
+ alt="\begin{figure}\@ifnextchar1{\Plot@}{\plot@@ }2{Chap5JDa1.eps}{Chap5JDa2.eps}
+\end{figure}"></td></tr>
+</table>
+</div><p></p>
+
+<p>
+我们使用算法 <a href="node271.html#alg:jdqrasym">7.18</a> 和 <a href="node272.html#alg:jdnhqrhar">7.19</a> 来计算最接近目标值 
+<span class="math-inline">\tau=-2+0.1 i</span> 的 <span class="math-inline">k_{\max}=10</span> 个特征值。由于这些特征值位于谱的内部，我们期望从算法 <a href="node272.html#alg:jdnhqrhar">7.19</a> 中获得一些优势，该算法专为内部特征值设计。事实上，正如我们将看到的，使用调和 Ritz 值在这里带来了优势。
+
+<p>
+我们在 MATLAB 中进行了实验。输入参数选择如下。初始向量 <span class="math-inline">v</span> 的元素是随机选择的（在 MATLAB 中设置 <span class="math-inline">\mathrm{seed}=0</span>）。容差为 
+<span class="math-inline">\epsilon = 10^{-8}</span>。子空间维度参数为 <span class="math-inline">{m}_{\min}=10</span>，<span class="math-inline">{m}_{\max}=15</span>。算法 <a href="node271.html#alg:jdqrasym">7.18</a> 中的方程 (27) 和算法 <a href="node272.html#alg:jdnhqrhar">7.19</a> 中的方程 (34) 的修正方程已通过五步 GMRES 方法近似求解。
+
+<p>
+我们在图 <a href="node274.html#fig:Chap5JD">7.5</a> 中以图形方式展示了残差向量的范数随迭代次数的变化。每次当范数小于 <span class="math-inline">\epsilon</span> 时，我们就确定了一个可接受的近似特征值，并通过对下一个特征值进行缩减继续迭代。左侧图片表示使用算法 <a href="node271.html#alg:jdqrasym">7.18</a> 获得的结果，我们发现没有在 500 步 Jacobi-Davidson 迭代内检测到收敛。右侧图片显示了算法 <a href="node272.html#alg:jdnhqrhar">7.19</a> 的结果，现在在 350 次迭代内发现了 10 个特征值。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4921"
+  href="node275.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4915"
+  href="node269.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4911"
+  href="node273.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4917"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4919"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4922"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Up:</b> <a name="tex2html4916"
+  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html4912"
+  href="node273.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html4918"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4920"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Decompositions</title>
+<meta name="description" content="Decompositions">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node44.html">
+<link rel="previous" href="node42.html">
+<link rel="up" href="node39.html">
+<link rel="next" href="node44.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1349"
+  href="node44.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1343"
+  href="node39.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1337"
+  href="node42.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1345"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1347"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1350"
+  href="node44.html">Conditioning</a>
+<b> Up:</b> <a name="tex2html1344"
+  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b> Previous:</b> <a name="tex2html1338"
+  href="node42.html">Equivalences</a>
+ &nbsp <b>  <a name="tex2html1346"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1348"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001144000000000000000"></a>
+<a name="sec_chap2_SVDSVD"></a>
+<br>
+分解
+</h2>
+
+<p>
+定义 <span class="math-inline">\Sigma</span> 为一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵，其前 <span class="math-inline">n</span> 行包含
+
+<span class="math-inline">{\rm diag}(\sigma_1 ,\ldots, \sigma_n )</span>，而其底部 <span class="math-inline">m-n</span> 行均为零。
+定义 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的矩阵 
+<span class="math-inline">U = [u_1,\ldots,u_m]</span> 和 
+<span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的矩阵 
+<span class="math-inline">V = [v_1,\ldots,v_n]</span>。
+<span class="math-inline">U</span> 被称为 <span class="math-inline">A</span> 的 <em>左奇异向量矩阵</em>，
+而 <span class="math-inline">V</span> 被称为 <span class="math-inline">A</span> 的 <em>右奇异向量矩阵</em>。
+由于 <span class="math-inline">u_i</span> 是正交单位向量，我们可以看到 <span class="math-inline">U^*U=I</span>；即，
+<span class="math-inline">U</span> 是一个 <em>酉矩阵</em>。如果 <span class="math-inline">A</span> 是实数矩阵，那么 <span class="math-inline">u_i</span> 是实向量，
+所以 <span class="math-inline">U^TU = I</span>，我们也称 <span class="math-inline">U</span> 是一个 <em>正交矩阵</em>。
+同样的讨论适用于 <span class="math-inline">V</span>。
+这 <span class="math-inline">n+m</span> 个等式 
+<span class="math-inline">Av_i = \sigma_i u_i</span> 和 
+<span class="math-inline">A^* u_i = \sigma_i v_i</span>
+对于 <span class="math-inline">i=1,\ldots,n</span> 以及 <span class="math-inline">A^*u_i = 0</span> 对于 
+<span class="math-inline">i=n+1,\ldots,m</span> 也可以写成
+<span class="math-inline">AV = U \Sigma</span> 和 
+<span class="math-inline">A^* U= V \Sigma^*</span>，或者 
+<span class="math-inline">A = U \Sigma V^*</span>。
+这种分解
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = U \Sigma V^*</div>
+</div>
+<br clear="ALL">
+<p></p>
+被称为 <span class="math-inline">A</span> 的 <em>奇异值分解（SVD）</em>。
+换句话说，<span class="math-inline">A</span> 在酉（正交）等价于对角矩阵 <span class="math-inline">\Sigma</span>。
+
+<p>
+有几种“较小”版本的 SVD 经常被计算。
+设 
+<span class="math-inline">U_t = [u_1,\ldots,u_t]</span> 为一个 <span class="math-inline">m</span> 行 <span class="math-inline">t</span> 列的矩阵
+包含前 <span class="math-inline">t</span> 个左奇异向量，
+
+<span class="math-inline">V_t = [v_1,\ldots,v_t]</span> 为一个 <span class="math-inline">n</span> 行 <span class="math-inline">t</span> 列的矩阵
+包含前 <span class="math-inline">t</span> 个右奇异向量，
+以及
+
+<span class="math-inline">\Sigma_t = {\rm diag}(\sigma_1 ,\ldots, \sigma_t)</span> 为一个
+<span class="math-inline">t</span> 行 <span class="math-inline">t</span> 列的矩阵包含前 <span class="math-inline">t</span> 个奇异值。
+然后我们可以做如下定义。
+<dl>
+<dt><strong><i>瘦SVD。</i></strong></dt>
+<dd>
+<span class="math-inline">A = U_n \Sigma_n V_n^*</span> 是 <span class="math-inline">A</span> 的 <em>瘦（或经济型）SVD</em>。
+当 <span class="math-inline">n \ll m</span> 时，瘦SVD 比全SVD 存储更小且计算更快。
+<a name="1357"></a>
+
+<p>
+</dd>
+<dt><strong><i>紧凑SVD。</i></strong></dt>
+<dd>
+<span class="math-inline">A = U_{r} \Sigma_{r} V_{r}^*</span> 是 <span class="math-inline">A</span> 的 <em>紧凑SVD</em>。
+当 <span class="math-inline">r \ll n</span> 时，紧凑SVD 比瘦SVD 存储更小且计算更快。
+<a name="1362"></a>
+</dd>
+<dt><strong><i>截断SVD。</i></strong></dt>
+<dd>
+<span class="math-inline">A_t = U_{t} \Sigma_{t} V_{t}^*</span>
+是 <span class="math-inline">A</span> 的 <em>秩-<span class="math-inline">t</span> 截断（或部分）SVD</em>，
+其中 <span class="math-inline">t &lt; r</span>。
+在所有秩-<span class="math-inline">t</span> 矩阵 <span class="math-inline">B</span> 中，<span class="math-inline">B=A_t</span> 是唯一的
+最小化
+<span class="math-inline">\Vert A - B \Vert _F</span> 并且也最小化（可能不唯一）
+<span class="math-inline">\Vert A - B \Vert _2</span>。
+当 <span class="math-inline">t \ll r</span> 时，截断SVD 比紧凑SVD 存储更小且计算成本更低，
+并且是应用中最常见的 SVD 形式。
+<a name="1367"></a>
+
+<p>
+</dd>
+</dl>
+
+<p>
+瘦SVD
+也可以写成 
+<span class="math-inline">A = \sum_{i=1}^n \sigma_i u_i v_i^*</span>。
+每一个 
+<span class="math-inline">(\sigma_i, u_i, v_i)</span> 被称为一个 <em>奇异三元组</em>。
+紧凑和截断SVD 也可以类似地写成
+（求和从 <span class="math-inline">i=1</span> 到 <span class="math-inline">r</span>，或 <span class="math-inline">i=1</span> 到 <span class="math-inline">t</span>）。
+
+<p>
+如果 <span class="math-inline">A</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵且 <span class="math-inline">m&lt;n</span>，
+那么它的 SVD 是 
+<span class="math-inline">A = U \Sigma V^*</span>，其中
+<span class="math-inline">U</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列，<span class="math-inline">\Sigma</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列
+包含 
+<span class="math-inline">{\rm diag}(\sigma_1 ,\ldots, \sigma_m)</span> 在其前 <span class="math-inline">m</span> 列并且
+在第 <span class="math-inline">m+1</span> 到第 <span class="math-inline">n</span> 列中为零，<span class="math-inline">V</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列。
+它的瘦SVD 是 
+<span class="math-inline">A= U_m \Sigma_m V_m^*</span>，紧凑SVD 和
+截断SVD 如上所述。
+
+<p>
+更一般地，如果我们取 <span class="math-inline">U</span> 和 <span class="math-inline">V</span> 的 <span class="math-inline">k</span> 列子集 <br>（例如 
+<span class="math-inline">\hat{U}= U(:,[2,3,5])</span> = 
+第2、3和5列，以及 
+<span class="math-inline">\hat{V}= V(:,[2,3,5])</span>），
+那么这些列跨越 <span class="math-inline">A</span> 的一对奇异子空间。
+如果我们取相应的子矩阵 
+
+<span class="math-inline">\hat{\Sigma}= {\rm diag}(\sigma_2 , \sigma_3 , \sigma_5 )</span>
+of <span class="math-inline">\Sigma</span>，那么我们可以写出相应的 
+<em>部分SVD</em> 
+<a name="1374"></a>
+
+<span class="math-inline">\hat{U}^* A \hat{V}= \hat{\Sigma}</span>。如果 <span class="math-inline">\hat{U}</span> 和 <span class="math-inline">\hat{V}</span> 中的列
+被
+<span class="math-inline">k</span> 个不同的正交向量所取代，这些向量跨越相同的不可变子空间，
+那么我们得到一个不同的部分SVD 
+<span class="math-inline">\check{U}^* A \check{V}= \check{A}</span>，
+其中 <span class="math-inline">\check{A}</span> 是
+一个 <span class="math-inline">k</span> 行 <span class="math-inline">k</span> 列的矩阵，其奇异值与 <span class="math-inline">\hat{\Sigma}</span> 相同，尽管
+<span class="math-inline">\check{A}</span> 可能不是对角矩阵。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1349"
+  href="node44.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1343"
+  href="node39.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1337"
+  href="node42.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1345"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1347"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1350"
+  href="node44.html">Conditioning</a>
+<b> Up:</b> <a name="tex2html1344"
+  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b> Previous:</b> <a name="tex2html1338"
+  href="node42.html">Equivalences</a>
+ &nbsp <b>  <a name="tex2html1346"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1348"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

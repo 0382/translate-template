@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Reducing Subspaces.</title>
+<meta name="description" content="Reducing Subspaces.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node69.html">
+<link rel="previous" href="node67.html">
+<link rel="up" href="node66.html">
+<link rel="next" href="node69.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1726"
+  href="node69.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1720"
+  href="node66.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1714"
+  href="node67.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1722"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1724"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1727"
+  href="node69.html">Equivalences.</a>
+<b> Up:</b> <a name="tex2html1721"
+  href="node66.html">Singular Case</a>
+<b> Previous:</b> <a name="tex2html1715"
+  href="node67.html">Eigenvalues and Eigenvectors.</a>
+ &nbsp <b>  <a name="tex2html1723"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1725"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001169020000000000000"></a>
+<a name="1858"></a>
+<br>
+Reducing Subspaces.
+</h4>
+
+<p>
+A <em>pair of right and left reducing subspaces</em> <span class="math-inline">\mathcal X</span> and <span class="math-inline">\mathcal Y</span>
+of <span class="math-inline">A - \lambda B</span> 
+satisfy <span class="math-inline">Ax \in \mathcal Y</span> and <span class="math-inline">Bx \in \mathcal Y</span>
+for all <span class="math-inline">x \in \mathcal X</span>, and furthermore
+
+<span class="math-inline">{\rm span}_{x \in {\mathcal X}} (Ax, Bx) = \mathcal Y</span>.
+Also, the dimension of <span class="math-inline">\mathcal X</span> exceeds the dimension of <span class="math-inline">\mathcal Y</span> by 
+
+<span class="math-inline">{\rm dim}(N_r)</span>, the dimension of the right null space of
+<span class="math-inline">A - \lambda B</span> over the field of all rational functions of <span class="math-inline">\lambda</span>
+[<a
+ href="node421.html#demmelkagstrom87">119</a>].
+It is easy to express 
+<span class="math-inline">{\rm dim}(N_r)</span> in terms of the 
+Kronecker canonical form, described below.
+There is still a correspondence between subsets of eigenvalues
+and reducing subspaces (as there was a correspondence between
+subsets of eigenvalue of invariant subspaces for single matrices), but 
+reducing subspaces are no longer spanned by eigenvectors, which are
+no longer well defined.
+
+<p>
+Consider the singular pencil (<a href="node67.html#eqn_SingPencilReducingSubspace">2.6</a>).
+It has a nontrivial right reducing subspace <span class="math-inline">\mathcal X</span> spanned by the first two
+columns of the 3 by 3 identity matrix and corresponding left reducing subspace
+<span class="math-inline">\mathcal Y</span> spanned by <span class="math-inline">[1,0]^T</span>. Here <span class="math-inline">N_r</span> is spanned by 
+<span class="math-inline">[1,\lambda,0]^T</span>.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

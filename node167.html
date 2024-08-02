@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Inverse Iteration.</title>
+<meta name="description" content="Inverse Iteration.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node168.html">
+<link rel="previous" href="node166.html">
+<link rel="up" href="node165.html">
+<link rel="next" href="node168.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3275"
+  href="node168.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3269"
+  href="node165.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3263"
+  href="node166.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3271"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3273"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3276"
+  href="node168.html">Rayleigh Quotient Iteration.</a>
+<b> Up:</b> <a name="tex2html3270"
+  href="node165.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html3264"
+  href="node166.html">Power Method.</a>
+ &nbsp <b>  <a name="tex2html3272"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3274"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001440020000000000000">
+Inverse Iteration.</a>
+</h4>
+
+<p>
+If we can factor 
+<span class="math-inline">A - \sigma \, B</span> for a shift
+<span class="math-inline">\sigma</span>, we can generalize the inverse iteration to
+compute eigenvalues of the problem&nbsp;(<a href="node156.html#gsymeig">5.1</a>) near
+<span class="math-inline">\sigma</span> as shown in Algorithm&nbsp;<a href="node167.html#invit_gsymeig">5.2</a>. 
+<a name="17197"></a> 
+
+<p>
+<br>
+<a name="invit_gsymeig"></a><IMG
+ width="598" height="221" align="bottom" border="0"
+ src="img1520.png"
+ alt="\begin{algorithm}{Inverse Iteration for GHEP}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=bb...
+...ccept <span class="math-inline">\lambda=\sigma+1/\theta</span>\ and <span class="math-inline">x=y/\theta</span> \end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+Here are some comments on this algorithm. 
+In step (3) we multiply by <span class="math-inline">B</span>, while in step (5) we solve
+a system with the shifted matrix <span class="math-inline">A-\sigma B</span>. In a practical case, we perform
+an initial sparse Gaussian elimination and use
+its <span class="math-inline">L</span> and <span class="math-inline">U</span> factors while operating. 
+Step (4) makes sure that the vector <span class="math-inline">v</span> is of unit 
+<span class="math-inline">B</span> norm. The quantity <span class="math-inline">\theta </span> is a 
+Rayleigh quotient,
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="theta_rq"></a><div class="math-display">\theta=w^{\ast}y=w^{\ast}(A-\sigma B)^{-1}w=v^{\ast}B(A-\sigma B)^{-1}Bv\,.</div></td>
+<td width=10 align="right">
+(71)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+In step (7) we test a residual vector,
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">r=(1/\theta)y-v=(A-\sigma B)^{-1}(\tilde{\lambda}B-A)v\,,</div>
+</div>
+<br clear="ALL">
+<p></p>
+where 
+<span class="math-inline">\tilde{\lambda}=\sigma+1/\theta</span> is the current approximate
+eigenvalue.  
+The inverse iteration converges under conditions similar
+to those for the standard HEP. 
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

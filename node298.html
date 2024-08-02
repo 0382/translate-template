@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Algorithm</title>
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node299.html">
+<link rel="previous" href="node297.html">
+<link rel="up" href="node296.html">
+<link rel="next" href="node299.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5321"
+  href="node299.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5315"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5309"
+  href="node297.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5317"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5319"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5322"
+  href="node299.html">Stopping Criteria and Accuracy</a>
+<b> Up:</b> <a name="tex2html5316"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5310"
+  href="node297.html">Some Properties of Symmetric</a>
+ &nbsp <b>  <a name="tex2html5318"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5320"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001762000000000000000"></a> <a name="syinalg"></a>
+<br>
+算法
+</h2> 
+为了使用Lanczos过程解决广义特征值问题&nbsp;(<a href="node296.html#eq:gsymep">8.21</a>)，我们首先将其转换为等价的标准特征值问题。有几种可能的转换方法；下面列出了最常见的几种。
+
+<p>
+<dl COMPACT>
+<dt>(a)</dt>
+<dd>如果需要求解矩阵对<span class="math-inline">\{A,B\}</span>中一些模最大的特征值，且矩阵<span class="math-inline">B</span>是非奇异的，我们可以通过乘以<span class="math-inline">B^{-1}</span>来得到
+       <br><p></p>
+<div align="center">
+
+
+<div class="math-display">B^{-1} A x = \lambda x.</div>
+</div>
+<br clear="ALL">
+<p></p>
+矩阵<span class="math-inline">B^{-1}A</span>关于<span class="math-inline">A</span>或<span class="math-inline">B</span>是对称的。
+</dd>
+<dt>(b)</dt>
+<dd>如果需要求解接近给定值<span class="math-inline">\sigma</span>的特征值，我们应用SI方法得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\left( (A - \sigma B)^{-1} B \right) x = (\lambda - \sigma)^{-1} x.</div>
+</div>
+<br clear="ALL">
+<p></p>
+特别是，如果需要求解模最小的特征值，可以选择移位值<span class="math-inline">\sigma=0</span>。注意，矩阵<span class="math-inline">(A - \sigma B)^{-1} B</span>关于<span class="math-inline">B</span>或<span class="math-inline">(A-\sigma B)</span>是对称的。
+</dd>
+</dl> 
+
+<p>
+在本节的其余部分，我们将重点讨论情况(b)，并将转换后的问题写为
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">H^{-1} B x = \mu x,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">H = A - \sigma B\quad \mathrm{和} \quad\mu = \frac{1}{\lambda-\sigma}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+注意，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数，矩阵对<span class="math-inline">\{A,B\}</span>的特征值也可能是复数，因此可能需要使用复数的<span class="math-inline">\sigma</span>值。即使使用了复数移位，Lanczos递归仍然可以使用实数算术实现；参见&nbsp;[<a href="node421.html#pasa87">362</a>]。
+
+<p>
+一个对称不定Lanczos算法的模板在算法&nbsp;<a href="node298.html#alg:jsymlan">8.4</a>中呈现。生成的Lanczos向量<span class="math-inline">\{q_j\}</span>和标量<span class="math-inline">\{ \alpha_j, \beta_j, \omega_j\}</span>满足以下控制方程：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="GovEqn"></a><div class="math-display">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j,</div></td>
+<td width=10 align="right">
+(235)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_j = \left[ \begin{array}{cccc}\alpha_1 &amp; \beta_2 &amp; &amp; \\ ......\Omega_j = \mathrm{diag}(\omega_1,\omega_2, \ldots, \omega_j).</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+Lanczos向量
+
+<span class="math-inline">Q_j = \left[ \begin{array}{cccc}q_1 &amp; q_2 &amp; \cdots &amp; q_j \\\end{array} \right]</span>是<span class="math-inline">B</span>正交的，即，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Q^T_j B Q_j = \Omega_j, \quad\quadQ^T_j B q_{j+1} = 0,</div>
+</div>
+<br clear="ALL">
+<p></p>
+并且被归一化为具有单位欧几里得范数，即，<span class="math-inline">\Vert q_j\Vert _2 = 1</span>。
+
+<p>
+简化的特征值问题是
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_j u^{(j)}_i = \theta^{(j)}_i \Omega_j u^{(j)}_i.</div>
+</div>
+<br clear="ALL">
+<p></p>
+它继承了与原始问题相同的数值困难。例如，Ritz值<span class="math-inline">\theta^{(j)}_i</span>可能是复数，甚至是缺陷的。换句话说，它可能属于<span class="math-inline">\Omega^{-1}_j T_j</span>的非对角Jordan块。
+
+<p>
+一旦计算出<span class="math-inline">\{\theta^{(j)}_i,u^{(j)}_i\}</span>，右和左Ritz向量分别定义为
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">{x}^{(j)}_i := Q_j u^{(j)}_i \quad \mathrm{和} \quad{y}^{(j)}_i := B \bar{Q}_j \bar{u}^{(j)}_i = B \bar{x}^{(j)}_i,</div>
+</div>
+<br clear="ALL">
+<p></p>
+相应地。量<span class="math-inline">\{\theta^{(j)}_i, x^{(j)}_i, y^{(j)}_i\}</span>被称为矩阵<span class="math-inline">H^{-1} B</span>的Ritz三元组。
+
+<p>
+与Ritz对<span class="math-inline">\{\theta^{(j)}_i, x^{(j)}_i\}</span>对应的右残差向量<span class="math-inline">r^{(j)}_i</span>是
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="RightResid"></a><div class="math-display">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1},</div></td>
+<td width=10 align="right">
+(236)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\gamma^{(j)}_i = \frac{\beta_{j+1}}{\omega_{j+1}} (e_j^Tu^{(j)}_i).</div>
+</div>
+<br clear="ALL">
+<p></p>
+注意，在&nbsp;(<a href="node298.html#RightResid">8.23</a>)中的最后一个等式是通过将方程&nbsp;(<a href="node298.html#GovEqn">8.22</a>) 右乘以<span class="math-inline">u^{(j)}_i</span>和<span class="math-inline">x^{(j)}_i</span>的定义得到的。左残差向量<span class="math-inline">(s^{(j)}_i)^{\ast}</span>与右残差向量<span class="math-inline">r^{(j)}_i</span>通过<span class="math-inline">(s^{(j)}_i)^{\ast} = (r^{(j)}_i)^T B</span>相关。由此得出
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="normRk"></a><div class="math-display">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert</div></td>
+<td width=10 align="right">
+(237)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+和
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="normSk"></a><div class="math-display">\Vert s^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert\, \Vert B q_{j+1}\Vert _2.</div></td>
+<td width=10 align="right">
+(238)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+注意，向量<span class="math-inline">Bq_{j+1}</span>在对称不定Lanczos算法的每次迭代中都是直接可用的。不需要额外的<span class="math-inline">B</span>调用。因此，Lanczos算法的一个吸引人的特点是残差向量可以在不显式计算Ritz向量<span class="math-inline">{x}^{(j)}_i</span>和<span class="math-inline">{y}^{(j)}_i</span>的情况下计算。
+<br>
+<br>
+<p>
+<br>
+<a name="alg:jsymlan"></a><IMG
+ width="598" height="453" align="bottom" border="0"
+ src="img2928.png"
+ alt="\begin{algorithm}{Symmetric Indefinite Lanczos Method
+}
+{
+\begin{tabbing}
+(nr)ss...
+...&gt; compute approximate eigenvectors <span class="math-inline">{x}^{(j)}_i</span>.
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+我们现在对算法&nbsp;<a href="node298.html#alg:jsymlan">8.4</a>的某些步骤进行评论：
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>理想的初始向量是与所需特征值对应的特征向量的线性组合。如果无法获得此类向量的近似值，则可以使用随机向量。初始向量<span class="math-inline">r</span>通常通过乘以<span class="math-inline">H^{-1} B</span>进行预处理。这一预处理步骤在[<a href="node421.html#eric86">161</a>]中提出，并且在<span class="math-inline">B</span>是奇异矩阵时至关重要；详见&#167;<a href="node300.html#sec:singularb">8.6.4</a>。
+
+<p>
+</dd>
+<dt><strong>(4)和(15)</strong></dt>
+<dd>矩阵向量乘积<span class="math-inline">Bq_j</span>应通过用户提供的子程序执行，该子程序可以利用矩阵<span class="math-inline">B</span>的数据结构。
+
+<p>
+</dd>
+<dt><strong>(7)</strong></dt>
+<dd>线性方程组<span class="math-inline">H r = w</span>必须求解<span class="math-inline">r</span>。设
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">H = {\mathcal L}{\mathcal D}{\mathcal L}^T</div>
+</div>
+<br clear="ALL">
+<p></p>
+为稀疏LDL<span class="math-inline">^{\rm T}</span>分解（参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>）在for循环之前计算。然后向量<span class="math-inline">r</span>可以通过三个步骤高效计算：
+
+<span class="math-inline">(7)^{\prime}</span> 解<span class="math-inline">{\mathcal L} u = w </span>得到<span class="math-inline">u</span>
+<br>
+解<span class="math-inline">{\mathcal D} v = u</span>得到<span class="math-inline">v</span>
+<br>
+解<span class="math-inline">{\mathcal L}^T r = v </span>得到<span class="math-inline">r</span>
+
+
+<p>
+</dd>
+<dt><strong>(12)</strong></dt>
+<dd>当<span class="math-inline">\Vert r\Vert _2 = 0</span>时，表明<span class="math-inline">j\times j</span>矩阵对<span class="math-inline">T_j - \lambda \Omega_j</span>的所有特征值也是<span class="math-inline">H^{-1} B</span>的特征值，并且<span class="math-inline">Q_j</span>的列张成一个不变子空间。可以选择退出算法或继续算法，通过将<span class="math-inline">\beta_j</span>的值设为零并选择<span class="math-inline">r</span>为与<span class="math-inline">Q_j</span>的列<span class="math-inline">B</span>正交的随机向量。
+
+<p>
+</dd>
+<dt><strong>(13)</strong></dt>
+<dd>在有限精度算术中，向量<span class="math-inline">\{q_j\}</span>不再<span class="math-inline">B</span>正交。标准对称Lanczos过程的再正交化方案可以扩展到对称不定算法；详见&#167;<a href="node103.html#sec:lan">4.4</a>。
+
+<p>
+</dd>
+<dt><strong>(14)</strong></dt>
+<dd>在对称Lanczos算法（参见&#167;<a href="node103.html#sec:lan">4.4</a>）中，Lanczos向量被缩放为<span class="math-inline">B</span>正交归一化，<span class="math-inline">q_j^TBq_j = 1</span>。然而，在对称不定算法中，向量被缩放为具有单位欧几里得范数，即，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert q_j\Vert _2 = 1. </div>
+</div>
+<br clear="ALL">
+<p></p>
+这种缩放改变有两个原因，都与<span class="math-inline">B</span>的不定性有关。第一个原因是，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数，将Lanczos向量缩放为<span class="math-inline">q_j^TBq_j = 1</span>可能涉及复数算术。（通过跟踪<span class="math-inline">q_j^TBq_j</span>的符号，可以避免复数算术但仍使用<span class="math-inline">\vert q_j^TBq_j \vert^{1/2}</span>作为范数。然而，这种算法稳定性较差。）第二个原因是，当<span class="math-inline">B</span>不定<!--Navigation Panel-->
+<a name="tex2html5321"
+  href="node299.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5315"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5309"
+  href="node297.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5317"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5319"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5322"
+  href="node299.html">Stopping Criteria and Accuracy</a>
+<b> Up:</b> <a name="tex2html5316"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5310"
+  href="node297.html">Some Properties of Symmetric</a>
+ &nbsp <b>  <a name="tex2html5318"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5320"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

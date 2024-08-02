@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Introduction</title>
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node93.html">
+<link rel="previous" href="node85.html">
+<link rel="up" href="node85.html">
+<link rel="next" href="node87.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2050"
+  href="node87.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2044"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2038"
+  href="node85.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2046"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2048"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2051"
+  href="node87.html">Overview of Available Algorithms.</a>
+<b> Up:</b> <a name="tex2html2045"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2039"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+ &nbsp <b>  <a name="tex2html2047"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2049"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001310000000000000000"></a> <a name="sec:heigintro"></a>
+<br>
+引言
+</h1>
+在本章中，我们将讨论标准的埃尔米特（Hermitian）或最常见的实对称特征值问题（HEP），
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="symeig"></a><div class="math-display">ax=\lambda x\,,</div></td>
+<td width=10 align="right">
+(16)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中 <span class="math-inline">A=A^{\ast}</span>。
+这是最常见的代数特征值问题，我们拥有最可靠的理论和最强大的算法。
+
+<p>
+关于埃尔米特特征值问题的基本理论概述见第&#167;<a href="node21.html#sec_chap2_Hep">2.2</a>节。
+已知问题（<a href="node86.html#symeig">4.1</a>）有 <span class="math-inline">n</span> 个实特征值 <span class="math-inline">\lambda_i</span>，我们可以按递增顺序排列，使得
+
+<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。注意，多个特征值可能重合。在许多应用中，矩阵 <span class="math-inline">A</span> 是正定的，<span class="math-inline">\lambda_1&gt;0</span>（或半正定的，
+
+<span class="math-inline">\lambda_1\geq 0</span>）。
+即使在可以利用正定性的情况下，
+我们选择在本章中处理具有一般特征值分布的埃尔米特矩阵 <span class="math-inline">A</span>。
+
+<p>
+当 <span class="math-inline">A</span> 是埃尔米特矩阵时，总能找到 <span class="math-inline">n</span> 个相互正交的特征向量，
+<span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="symeigdec"></a><div class="math-display">A=X \Lambda X^{\ast},</div></td>
+<td width=10 align="right">
+(17)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<span class="math-inline">\lambda=\diag(\lambda_i)</span>，
+
+<span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>，且
+<span class="math-inline">X^{\ast}X=I</span>。特征向量 <span class="math-inline">x_i</span> 不是唯一的；唯一的是每个不同特征值的<i>不变子空间</i>。
+对于埃尔米特矩阵 <span class="math-inline">A</span>，不变子空间的大小与特征值的重数相同。重要的是要记住，当某些特征值重合时，它们的特征向量失去个性：无法说一组向量是多重特征值的<i>特征向量</i>。
+两种不同的算法，甚至同一算法的两次运行，会在不变子空间中给出不同的代表性特征向量。
+另一方面，用户有权要求算法产生的特征向量近似彼此正交，即使矩阵具有多重特征值。
+<br>
+<br>
+<p>
+<span class="math-inline">A</span> 的特征值总是条件良好的。
+如果对矩阵 <span class="math-inline">A</span> 添加扰动 <span class="math-inline">E</span>，
+那么每个特征值的扰动最多为谱范数 <span class="math-inline">\Vert E\Vert _2</span>，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eigvpert"></a><div class="math-display">\vert\lambda_i(A+E)-\lambda_i(A)\vert\leq \Vert E\Vert _2\,.</div></td>
+<td width=10 align="right">
+(18)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+还有几个更强的结果，如维兰德特-霍夫曼不等式，它表明特征值差的平方和被 <span class="math-inline">E</span> 的元素平方和所控制；详见第&#167;<a href="node148.html#sec:pert-H">4.8</a>节及其参考文献。
+在许多情况下，人们关注相对于范数 <span class="math-inline">\Vert A\Vert</span> 较小的特征值，对于这些特征值，不等式（<a href="node86.html#eigvpert">4.3</a>）并不十分令人满意，因为它允许这些小特征值有较大的<i>相对</i>扰动。在某些附加假设下，可以发展相对扰动的扰动界。
+
+<p>
+没有像（<a href="node86.html#eigvpert">4.3</a>）那样简单的结果来界定<i>特征向量</i>的扰动：必须增加特征值之间的分离假设。
+让我们引用戴维斯和卡恩的著名 <span class="math-inline">\sin \theta</span> 定理，见[<a href="node421.html#daka:70">101</a>]。
+
+<p>
+假设 <span class="math-inline">(\mu,z)</span> 是 <span class="math-inline">A</span> 的特征对 <span class="math-inline">(\lambda_i, x_i)</span> 的近似，
+其中 <span class="math-inline">z</span> 被归一化使得 <span class="math-inline">\Vert z\Vert _2 = 1</span>。
+对应于 <span class="math-inline">z</span> 的“最佳” <span class="math-inline">\mu</span> 是瑞利商
+<span class="math-inline">\mu = z^{\ast} A z</span>，
+所以我们假设 <span class="math-inline">\mu</span> 取这个值。
+假设 <span class="math-inline">\mu</span> 比 <span class="math-inline">A</span> 的任何其他特征值更接近 <span class="math-inline">\lambda_i</span>，
+并设 <span class="math-inline">\delta</span> 是 <span class="math-inline">\mu</span> 与其他特征值之间的<em>间隔</em>：
+
+<span class="math-inline">\delta = \min_{\lambda_j \neq \lambda_i} \vert \mu - \lambda_j \vert</span>。
+定义残差向量 <span class="math-inline">r</span> 为 <span class="math-inline">r=Az-\mu z</span>；那么我们有
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eigvecpert"></a><div class="math-display">\sin\angle(z,x_i)\leq\frac{\Vert r\Vert _2}{\delta}\,.</div></td>
+<td width=10 align="right">
+(19)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在相同的假设下，我们有特征值近似的改进界，
+<a name="eigvecpert_b"></a>|-_i|{||r||_2,||r||_2^2}.
+
+这个最小值中的第一个选项等价于前面的界（<a href="node86.html#eigvpert">4.3</a>），因为 <span class="math-inline">\mu</span> 是扰动矩阵 <span class="math-inline">A+E</span> 的特征值，其中 <span class="math-inline">E=-rz^{\ast}</span> 是范数 <span class="math-inline">\Vert E\Vert _2 = \Vert r\Vert _2</span> 的一阶扰动（在界（<a href="node86.html#eigvpert">4.3</a>）中不需要 <span class="math-inline">E</span> 是埃尔米特矩阵）。
+读者可参考第&#167;<a href="node148.html#sec:pert-H">4.8</a>节了解更多细节。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><a name="tex2html2052"
+  href="node87.html">可用算法概述</a>
+<li><a name="tex2html2053"
+  href="node88.html">选择总结</a>
+<li><a name="tex2html2054"
+  href="node89.html">矩阵准备</a>
+<li><a name="tex2html2055"
+  href="node90.html">正交化</a>
+<li><a name="tex2html2056"
+  href="node91.html">寻求的特征值</a>
+<li><a name="tex2html2057"
+  href="node92.html">存储</a>
+</ul></ul></ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html2050"
+  href="node87.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2044"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2038"
+  href="node85.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2046"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2048"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2051"
+  href="node87.html">Overview of Available Algorithms.</a>
+<b> Up:</b> <a name="tex2html2045"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2039"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+ &nbsp <b>  <a name="tex2html2047"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2049"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

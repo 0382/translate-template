@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>MATLAB Templates</title>
+<meta name="description" content="MATLAB Templates">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node346.html">
+<link rel="previous" href="node344.html">
+<link rel="up" href="node343.html">
+<link rel="next" href="node346.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6071"
+  href="node346.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6065"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6059"
+  href="node344.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6067"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6069"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6072"
+  href="node346.html">Sample Problems and Their</a>
+<b> Up:</b> <a name="tex2html6066"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6060"
+  href="node344.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html6068"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6070"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001842000000000000000"></a> <a name="callingsgmin"></a><a name="43323"></a>
+<a name="43324"></a>
+<br>
+MATLAB模板
+</h2>
+
+<p>
+这些模板即开即用，或作为泛化的起点，<a name="tex2html53"
+  href="footnode.html#foot43325"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>
+例如，处理涉及多个变量且带有正交性约束的问题，或进行代码优化。在最简单的模式下，用户只需在<code>F.m</code>（以及可选的<code>dF.m</code>和<code>ddF.m</code>）中提供一个待最小化的函数<span class="math-inline">F(Y)</span>（及其一阶和二阶导数），并给出一个初始猜测<code>Y0</code>。调用序列则简化为对<code>sg_min</code>的一次调用（此名称是为了纪念Stiefel和Grassmann）：
+
+   [fopt, yopt] =  sg_min(Y0).
+
+
+<p>
+例如，如果函数<code>F.m</code>的形式为
+
+   function f=F(Y)
+   f=trace( Y' * diag(1:10) * Y * diag(1:3) );
+
+我们可以调用<code>sg_min(rand(10,3))</code>，它指定了一个随机起始点。
+
+<p>
+我们强烈建议同时提供一阶导数信息：
+
+   function df=dF(Y)
+   df =  2 * diag(1:10) * Y * diag(1:3);
+
+代码可以进行有限差分计算，但速度非常慢且容易出问题。用户还可以提供二阶导数信息（这对速度的影响远不如提供一阶导数信息重要，但可能提高精度）：
+
+   function ddf=ddF(Y,H)
+   ddf =  2 * diag(1:10) * H * diag(1:3);
+
+一个已知<span class="math-inline">F(Y)</span>最优值为10的测试调用示例如下：
+
+&gt;&gt; rand('state',0);	% 初始化随机数生成器
+&gt;&gt; fmin = sg_min(rand(10,3))
+iter    grad            F(Y)              flops         step type
+0       1.877773e+01    3.132748e+01         2470       none
+  invdgrad: Hessian not positive definite, CG terminating early
+1       1.342879e+01    2.011465e+01       163639       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+2       1.130915e+01    1.368044e+01       344198       Newton step
+  invdgrad: Hessian not positive definite, CG terminating early
+3       5.974819e+00    1.063045e+01       515919       Newton step
+  invdgrad: max iterations reached inverting the Hessian by CG
+4       1.135417e+00    1.006835e+01       789520       Newton step
+5       5.526359e-02    1.000009e+01      1049594       Newton step
+6       5.072118e-05    1.000000e+01      1337540       Newton step
+7       1.276025e-06    1.000000e+01      1762455       Newton step
+ 
+fmin =
+   10.0000
+
+
+<p>
+<code>sg_min</code>的完整调用序列如下：
+ 
+   [fopt, yopt]=sg_min(Y0,rc,mode,metric,motion,verbose,...
+                       gradtol,ftol,partition),
+ 
+其中<code>Y0</code>是必需的，可选参数包括（见表<a href="node345.html#argumentstable">9.1</a>）：
+
+<p>
+<br><p></p>
+<div align="center">
+
+<a name="argumentstable"></a>
+<p>
+<br>
+<div align="center">
+<a name="43340"></a>
+<table cellpadding=3 border="1">
+<caption><strong>表9.1：</strong>
+sg_min的可选参数简表</caption>
+<tr><td align="left">参数</td>
+<td align="left">描述</td>
+</tr>
+<tr><td align="left">rc</td>
+<td align="left">{'real', 'complex' }</td>
+</tr>
+<tr><td align="left">mode</td>
+<td align="left">{'newton', 'dog', 'prcg', 'frcg' }</td>
+</tr>
+<tr><td align="left">metric</td>
+<td align="left">{'flat', 'euclidean',  'canonical' }</td>
+</tr>
+<tr><td align="left">motion</td>
+<td align="left">{'approximate', 'exact' }</td>
+</tr>
+<tr><td align="left">verbose</td>
+<td align="left">{'verbose', 'quiet'}</td>
+</tr>
+<tr><td align="left">ftol</td>
+<td align="left">首次收敛容差</td>
+</tr>
+<tr><td align="left">gradtol</td>
+<td align="left">二次收敛容差</td>
+</tr>
+<tr><td align="left">partition</td>
+<td align="left"><span class="math-inline">p</span>的分区，指示<span class="math-inline">f</span>的对称性</td>
+</tr>
+</table>
+</div>
+</div>
+<br>
+
+<p>
+<dl>
+<dt><strong>rc</strong></dt>
+<dd>指定矩阵是否包含复数项。尽管大部分代码对此不敏感，<code>rc</code>对于正确计算问题的维度至关重要。若省略，<code>sg_min</code>会根据<code>Y0</code>是否具有非零虚部进行猜测。
+
+<p>
+</dd>
+<dt><strong>mode</strong></dt>
+<dd>选择将使用的优化方法。'newton'选择带有共轭梯度法Hessian逆的牛顿法。'dog'选择插值最速下降法和牛顿法步长的狗腿算法。'frcg'选择Fletcher-Reeves共轭梯度法。最后，'prcg'选择Polak-Ribiere共轭梯度法，其优点是不需要非常精确的Hessian（因此，如果使用有限差分近似实现<code>ddF.m</code>，这是这些方法中最安全的选择）。虽然'newton'是默认选项，但这并不意味着我们推荐它优于其他方法，对于某些问题，其他方法可能更准确且成本更低。
+
+<p>
+</dd>
+<dt><strong>metric</strong></dt>
+<dd>选择赋予约束表面的几何类型。这最终影响协变Hessian的定义。'flat'将无约束Hessian的结果投影到切空间上，而'euclidean'和'canonical'则添加了特定于其几何的<em>连接</em>项。'euclidean'是默认选项。
+
+<p>
+</dd>
+<dt><strong>motion</strong></dt>
+<dd>选择沿流形移动时，是采用所选度量的测地运动方程的解析解，还是采用计算成本较低的近似解（默认）。（对于'flat'度量，没有测地方程，因此此参数在该情况下无效。）
+
+<p>
+</dd>
+<dt><strong>verbose</strong></dt>
+<dd>决定函数在执行过程中是否显示每次迭代的报告。当此参数为'verbose'（默认）时，将显示数据并记录在全局变量<code>SGdata</code>中。当此参数为'quiet'时，则不显示或记录收敛数据。
+
+<p>
+</dd>
+<dt><strong>gradtol和ftol</strong></dt>
+<dd>我们声明收敛的条件是以下两个条件同时满足：
+<br><code>grad/gradinit &lt; gradtol</code>（默认<code>1e-7</code>）或<code>(f-fold)/f &lt; ftol</code>（默认<code>1e-10</code>），其中<code>gradinit</code>是初始梯度大小，<code>fold</code>是上一迭代中<span class="math-inline">F(Y)</span>的值。
+
+<p>
+</dd>
+<dt><strong>partition</strong></dt>
+<dd>是一个单元数组，其元素是表示<code>1:p</code>不相交分区的索引向量。
+如果<span class="math-inline">F</span>没有对称性，则分区为<code>num2cell(1:p)</code>。
+如果<span class="math-inline">F(Y)=F(YQ)</span>对所有正交<span class="math-inline">Q</span>成立，则分区为<code>{1:p}</code>。
+如果<span class="math-inline">F</span>的对称性为<span class="math-inline">F(Y)=F(YQ)</span>，其中<span class="math-inline">Q</span>为具有以下稀疏结构的正交矩阵：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\left[\begin{array}{ccccc}\times &amp; \times &amp; &amp; &amp; \\\times &amp; \times &amp; &amp; &amp; \\&amp; &amp; \times &amp; \times &amp; \times \\\end{array} \right] . </div>
+</div>
+<br clear="ALL">
+<p></p>
+用户同样可以指定<code>{3:5,1:2}</code>或<code>{[5 3 4],[2 1]}</code>作为分区；即，分区是一组集合。
+分区的目的是投影掉由<span class="math-inline">F(Y)</span>的块对角正交对称性导致的Hessian的零空间。
+如果省略此参数，我们的代码将通过确定<span class="math-inline">F</span>的对称性（使用其<code>partition.m</code>函数）来选择分区。
+然而，用户应注意，错误分区可能会破坏收敛。
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6071"
+  href="node346.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6065"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6059"
+  href="node344.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6067"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6069"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6072"
+  href="node346.html">Sample Problems and Their</a>
+<b> Up:</b> <a name="tex2html6066"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6060"
+  href="node344.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html6068"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6070"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

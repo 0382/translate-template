@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Introduction</title>
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node205.html">
+<link rel="previous" href="node203.html">
+<link rel="up" href="node203.html">
+<link rel="next" href="node205.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3899"
+  href="node205.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3893"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3887"
+  href="node203.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3895"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3897"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3900"
+  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b> Up:</b> <a name="tex2html3894"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3888"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+ &nbsp <b>  <a name="tex2html3896"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3898"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001610000000000000000">
+引言</a>
+</h1>
+在本章中，我们将讨论非厄米特特征值问题（NHEP）
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:nep1"></a><div class="math-display">Ax = \lambda x,</div></td>
+<td width=10 align="right">
+(117)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中方阵 <span class="math-inline">A \neq A^{\ast}</span>。<span class="math-inline">x \neq 0</span> 被称为右特征向量。一个满足
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:nep2"></a><div class="math-display">y^{\ast} A = \lambda y^{\ast}</div></td>
+<td width=10 align="right">
+(118)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+的向量 <span class="math-inline">y \neq 0</span> 被称为 <span class="math-inline">A</span> 的左特征向量。
+
+<p>
+关于NHEP的相关理论介绍以及文献指针，请参阅第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节。特别指出，这些问题的扰动理论较为复杂。应记住，对于计算出的特征对 <span class="math-inline">\widehat{\lambda}, \widehat{x}</span>，残差 <span class="math-inline">A\widehat{x}-\widehat{\lambda}\widehat{x}</span> 的范数小并不必然意味着计算值的误差小。更多信息请参见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节和第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节。这里我们将简要介绍在算法选择中起作用的一些方面，随后将对本章涉及的不同类方法进行简要描述。
+
+<p>
+与厄米特矩阵不同，非厄米特矩阵不具有正交的特征向量集；换句话说，非厄米特矩阵 <span class="math-inline">A</span> 通常不能通过正交矩阵 <span class="math-inline">Q</span> 变换为对角形式 <span class="math-inline">D=Q^\ast A Q</span>。大多数非厄米特矩阵可以通过非正交矩阵 <span class="math-inline">X</span> 变换为对角形式 <span class="math-inline">D=X^{-1}AX</span>，但存在一些矩阵甚至无法做到这一点。这类矩阵可以视为极限情况，其中 <span class="math-inline">X</span> 趋向于奇异算子，并且这些矩阵不具有完整的特征向量集；它们被称为<em>缺陷矩阵</em>。这揭示了数值不稳定的一个来源：如果 <span class="math-inline">X</span> 在某种意义上接近奇异算子，那么变换可能对 <span class="math-inline">A</span> 的扰动敏感。这种扰动是由计算 <span class="math-inline">X</span> 和 <span class="math-inline">D</span> 的过程引入的。因此，尽可能多地使用正交或接近正交的变换至关重要。众所周知，对于任何非厄米特矩阵 <span class="math-inline">A</span>，存在一个酉矩阵 <span class="math-inline">U</span> 将其变换为上三角形式
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="sec51:eq1"></a><div class="math-display">T=U^\ast A U.</div></td>
+<td width=10 align="right">
+(119)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+矩阵 <span class="math-inline">T</span> 被称为 <span class="math-inline">A</span> 的<em>舒尔形式</em>。<span class="math-inline">A</span> 的特征值出现在 <span class="math-inline">T</span> 的对角线上。此外，矩阵 <span class="math-inline">U</span> 可以通过正交变换，使得 <span class="math-inline">A</span> 的特征值按指定顺序出现在 <span class="math-inline">R</span> 的对角线上。如果 <span class="math-inline">z</span> 是 <span class="math-inline">R</span> 对应于特征值 <span class="math-inline">\lambda</span> 的特征向量，<span class="math-inline">tz=\lambda z</span>，则有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A(Uz)=\lambda (Uz),</div>
+</div>
+<br clear="ALL">
+<p></p>
+因此 <span class="math-inline">Uz</span> 是 <span class="math-inline">A</span> 对应于特征向量 <span class="math-inline">\lambda</span> 的特征向量。
+
+<p>
+舒尔形式的约简可以实现，但代价不小。设 <span class="math-inline">n</span> 是非厄米特矩阵 <span class="math-inline">A</span> 的阶数。对于 <span class="math-inline">n>3</span>，通常没有有限算法将 <span class="math-inline">A</span> 约简为舒尔形式（排除 <span class="math-inline">A</span> 已经是上三角矩阵等平凡情况）。对于中等阶数的矩阵，例如 <span class="math-inline">n\le 1000</span>，通常先将其约简为上赫申伯格形式，这可以在有限步骤内完成。随后通过迭代方式（QR迭代）将此上赫申伯格矩阵约简为舒尔形式。更多细节及软件指针请参见第&#167;<a href="node209.html#sec:nsymeigdirect">7.3</a>节。
+
+<p>
+这种标准方法的主要问题是计算成本与 <span class="math-inline">n^3</span> 成正比（因此限制了矩阵阶数最多为几千），并且需要存储与 <span class="math-inline">n^2</span> 个元素成正比的空间。通常无法利用矩阵 <span class="math-inline">A</span> 的稀疏性来减少存储需求。因此，提出了替代方案。这些替代方案都是完全迭代的，即没有有限的直接约简步骤。它们通常仅适用于计算少数感兴趣的特征对。现在我们将简要总结本章将介绍的迭代方法。
+
+<p>
+<dl>
+<dt><strong><i>单向量和多向量迭代，</strong></dt>
+<dd>&#167;<a href="node210.html#sec:power_nsym">7.4</a>。
+通过<em>幂迭代</em>，可以迭代计算较大矩阵的绝对值最大的特征值及其对应的特征向量。这仅在最大特征值相对于其他特征值的绝对值显著较大时才建议使用。为了创建具有良好分离的最大特征值的矩阵，通常在用户定义的接近所需特征值的 <span class="math-inline">\sigma</span> 处，形式上使用算子 <span class="math-inline">(A - \sigma I)^{-1}</span>。这被称为<em>逆迭代</em>。该方法已推广到针对一组特征值与谱的其余部分良好分离的块方法。这些单向量和多向量迭代方法在所需特征值与不需要的特征值良好分离时表现良好。然而，即使在这种情况下，它们也很难与更现代的子空间方法竞争，唯一的应用场景似乎是当无法承担存储超过两个迭代向量的空间时。
+</i>
+<p>
+<i>
+</dd>
+<dt><strong><i>阿诺尔迪方法，</i></strong></dt>
+<dd>&#167;<a href="node215.html#sec:arnodimethod">7.5</a>，&#167;<a href="node220.html#sec:nsymiram">7.6</a>，
+和&#167;<a href="node235.html#sec:blockarnoldi">7.7</a>。
+现代子空间迭代方法试图构建一个富含对应于所需特征值的特征向量的子空间。事实上，它们可以被解释为保留了在幂方法中生成的一些向量。相对于这个受限维度的子空间的基，它们通常将矩阵约简为更易处理的形式。在阿诺尔迪方法中，从一个初始猜测 <span class="math-inline">v</span> 开始，生成一个维度为 <span class="math-inline">m</span> 的<em>克雷洛夫子空间</em>的正交基：
+</i>
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">{\mathcal K}^m(A;v) \equiv \mathrm{span}\{v, Av, A^2v, \ldots , A^{m-1}v \}.</div>
+</div>
+<br clear="ALL">
+<p></p><i>
+（与幂方法一样，也可以使用移位逆算子 <span class="math-inline">(A - \sigma I)^{-1}</span>。）
+</i>
+<p>
+<i>正交化过程导致一个 <span class="math-inline">m</span> 乘 <span class="math-inline">m</span> 的上赫申伯格矩阵 <span class="math-inline">H_m</span>（这种方法仅在 <span class="math-inline">m\ll n</span> 时实用），这个矩阵可以被解释为矩阵 <span class="math-inline">A</span> 在克雷洛夫子空间上的适当约简形式。<span class="math-inline">H_m</span> 的特征值是 <span class="math-inline">A</span> 的一些特征值的近似，可以通过将 <span class="math-inline">H_m</span> 约简为舒尔形式来计算，使用与上述小稠密矩阵相同的标准方法。阿诺尔迪方法的介绍见第&#167;<a href="node215.html#sec:arnodimethod">7.5</a>节。设计了巧妙的重启技术，以尽可能降低内存需求和计算开销：这些技术被称为<em>隐式重启阿诺尔迪方法</em>（IRAMs），并在第&#167;<a href="node220.html#sec:nsymiram">7.6</a>节中讨论。阿诺尔迪方法的计算开销不太适合并行化，特别是对于某些分布式内存计算机。为了增加计算与内存引用之间的比率，提出了块变体。这些<em>块阿诺尔迪变体</em>在第&#167;<a href="node235.html#sec:blockarnoldi">7.7</a>节中讨论。
+</i>
+<p>
+<i>
+</dd>
+<dt><strong><i>兰索斯方法，</i></strong></dt>
+<dd>&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>，&#167;<a href="node250.html#sec:nsymblocklanczos">7.9</a>，
+&#167;<a href="node256.html#sec:nsymbandlanczos">7.10</a>，和&#167;<a href="node262.html#sec:csymlanczos">7.11</a>。
+阿诺尔迪方法使用子空间，并且必须存储表示当前子空间基的向量。此外，向该基添加新向量涉及将该新向量相对于基中的所有向量进行正交化。对于对称矩阵 <span class="math-inline">A</span>，有一个简单的三项递归生成子空间的基，如果只对特征值感兴趣，则只需存储最后三个基向量。这种<em>兰索斯</em>过程的变体也可用，但必须放弃基向量的正交性。因此，内存和经济计算开销的节省伴随着不稳定的风险。原始的非对称兰索斯方法，或简称为<em>双侧兰索斯</em>，也受到（近）崩溃的影响。尽管存在这些缺点，该方法仍受到广泛关注，并提出了已被证明对相关问题有效且有用的变体。该方法及其几种增强方法已在第&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>节中描述，并附有适当的软件。
+</i>
+<p>
+<i>兰索斯方法的<em>块版本</em>及其名为<em>ABLE</em>的实现见第&#167;<a href="node250.html#sec:nsymblocklanczos">7.9</a>节。ABLE是一种自适应块方法，旨在治愈崩溃，并试图消除导致缓慢收敛的原因（如双正交性的损失和附近特征值的簇）。在克雷洛夫子空间内进行分解的另一种变体，<em>带状兰索斯方法</em>，见第&#167;<a href="node256.html#sec:nsymbandlanczos">7.10</a>节。这是专门为高维多输入多输出线性动态系统的降阶建模设计的。
+</i>
+<p>
+<i>针对<em>复对称</em>系统的双侧兰索斯方法的变体在第&#167;<a href="node262.html#sec:csymlanczos">7.11</a>节中讨论。相对于非对称情况，这种变体将CPU时间和计算机存储减少了2倍。
+</i>
+<p>
+<i>
+</dd>
+<dt><strong><i>雅可比-戴维森方法，</i></strong></dt>
+<dd>&#167;<a href="node269.html#sec:jacdnonh">7.12</a>。
+阿诺尔迪和兰索斯方法在使用移位-逆变换时最为有效；即，必须高效且准确地求解形式为 <span class="math-inline">(A-\sigma I)x=b</span> 的系统。如果这两者都不实用，但如果可以廉价地获得 <span class="math-inline">x=(A-\sigma I)^{-1}b</span> 的合理近似，那么<em>雅可比-戴维森方法</em>可能证明是有用的。这些方法使用正交变换，就像阿诺尔迪方法一样，但在构建涉及子空间的正交基时，没有尝试为约简矩阵创建特殊结构。因此，计算开销大于阿诺尔迪方法。所有可能的增益都必须来自有效且廉价的移位-逆变换步骤的近似。
+</i>
+<p>
+<i>
+</dd>
+</dl></i>
+
+<p>
+在表&nbsp;<a href="node204.html#nepsummary">7.1</a> 中，我们总结了各种类方法。该表并非旨在替代进一步阅读；它仅作为起点，并可能帮助读者在发现哪种方法最适合哪种需求时遵循特定路径。每种方法的实际性能通常取决于许多参数，并且对于一类问题最佳的方法可能在某些特定矩阵上遇到收敛问题。
+
+<p>
+<br><p></p>
+<div align="center">
+
+<a name="nepsummary"></a> 
+
+<p>
+<br>
+<div align="center"><a name="22726"></a>
+<table cellpadding=3 border="1">
+<caption><strong>表 7.1：</strong>
+非厄米特特征值问题算法的总结</caption>
+<tr><td align="center">算法</td>
+<td align="center">模式</td>
+<td align="center">FL-<span class="math-inline">\lambda</span></td>
+<td align="center"><span class="math-inline">\lambda</span>-ext</td>
+<td align="center"><span class="math-inline">\lambda</span>-int</td>
+<td align="center">内存/开销</td>
+</tr>
+<tr><td align="center">幂迭代</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">低</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">低</td>
+</tr>
+<tr><td align="center">子空间</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">阿诺尔迪</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">(IRAM)</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">兰索斯</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">低</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">低</td>
+</tr>
+<tr><td align="center">块兰索斯</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">雅可比-戴维森</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">
+<span class="math-inline">(A - \sigma I)^{-1}</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">预条件</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
+</tr>
+</table></div>
+</div>
+<br>
+
+<p>
+<b>表&nbsp;<a href="node204.html#nepsummary">7.1</a> 的解释</b><dl>
+<dt><strong>FL-<span class="math-inline">\lambda</span>：</strong></dt>
+<dd>少数几个绝对值最大的（良好分离的）特征值。
+</dd>
+<dt><strong><span class="math-inline">\lambda</span>-ext：</strong></dt>
+<dd>（一组）谱外部的特征值。
+</dd>
+<dt><strong><span class="math-inline">\lambda</span>-int：</strong></dt>
+<dd>（一组）谱内部接近指定目标的特征值。
+</dd>
+<dt><strong><span class="math-inline">A</span>：</strong></dt>
+<dd>（移位）<span class="math-inline">A</span> 的操作。
+</dd>
+<dt><strong>
+<span class="math-inline">(A - \sigma I)^{-1}</span>：</strong></dt>
+<dd>使用移位-逆变换操作；即，需要一个高效
+           的求解机制来确定 <span class="math-inline">x</span> 从 <span class="math-inline">(A-\sigma I)x=b</span>
+           （<span class="math-inline">\sigma</span> 和 <span class="math-inline">b</span> 取决于方法）。
+</dd>
+<dt><strong>预条件：</strong></dt>
+<dd>使用 <span class="math-inline">A-\sigma I</span> 的预条件器操作；即，
+           允许不精确求解 <span class="math-inline">(A-\sigma I)x=b</span>，这提供了
+           提高效率的可能性（当然，成功
+           取决于预条件器的质量）。
+</dd>
+</dl> 
+
+<p>
+
+<br><p></p>
+<div align="center">
+
+<div align="center"><a name="22745"></a>
+<table cellpadding=3 border="1">
+<caption><strong>表：</strong>
+<b>非厄米特特征值问题算法的比较 </b></caption>
+<tr><td align="center">算法</td>
+<td align="center">模式</td>
+<td align="center">WIL</td>
+<td align="center">E-ext</td>
+<td align="center">E-int</td>
+<td align="center">内存</td>
+</tr>
+<tr><td align="center">幂迭代</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">--</span></td>
+<td align="center"><span class="math-inline">--</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+</tr>
+<tr><td align="center">多向量</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">-</span></td>
+<td align="center"><span class="math-inline">--</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+</tr>
+<tr><td align="center">阿诺尔迪</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+</tr>
+<tr><td align="center">(IRAM)</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+</tr>
+<tr><td align="center">兰索斯</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">--</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+</tr>
+<tr><td align="center">块兰索斯</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">--</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+</tr>
+<tr><td align="center">雅可比-戴维森</td>
+<td align="center">直接</td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">\square</span></td>
+<td align="center"><span class="math-inline">\square/-</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">移位-逆</td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">\square/-</span></td>
+</tr>
+<tr><td align="center">&nbsp;</td>
+<td align="center">预条件</td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">++</span></td>
+<td align="center"><span class="math-inline">+</span></td>
+<td align="center"><span class="math-inline">\square/-</span></td>
+</tr>
+</table></div>
+</div>
+<br>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3899"
+  href="node205.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3893"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3887"
+  href="node203.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3895"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3897"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3900"
+  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b> Up:</b> <a name="tex2html3894"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3888"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+ &nbsp <b>  <a name="tex2html3896"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3898"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

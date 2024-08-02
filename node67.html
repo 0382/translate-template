@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Eigenvalues and Eigenvectors.</title>
+<meta name="description" content="Eigenvalues and Eigenvectors.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node68.html">
+<link rel="previous" href="node66.html">
+<link rel="up" href="node66.html">
+<link rel="next" href="node68.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1712"
+  href="node68.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1706"
+  href="node66.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1700"
+  href="node66.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1708"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1710"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1713"
+  href="node68.html">Reducing Subspaces.</a>
+<b> Up:</b> <a name="tex2html1707"
+  href="node66.html">Singular Case</a>
+<b> Previous:</b> <a name="tex2html1701"
+  href="node66.html">Singular Case</a>
+ &nbsp <b>  <a name="tex2html1709"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1711"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001169010000000000000"></a>
+<a name="sec_chap2_GnHepEESing"></a>
+<br>
+特征值与特征向量
+</h4>
+
+<p>
+<span class="math-inline">A - \lambda B</span> 的奇异情况对应于以下两种情形之一：
+
+<ul>
+<li><span class="math-inline">A - \lambda B</span> 是方阵且对所有 <span class="math-inline">\lambda</span> 值都奇异，或者</li>
+<li><span class="math-inline">A - \lambda B</span> 是矩形矩阵。</li>
+</ul>
+这两种情况在实践中都会出现，并且比常规情况更具挑战性。我们在这里概述相关理论，详细内容请参见第&#167;<a href="node307.html#sec:singularpencil">8.7</a>节。
+
+<p>
+考虑以下例子：
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_SingularPencil"></a><div class="math-display">A - \lambda B = \bmat{cc} 1 &amp; 0 \\ 0 &amp; 0 \emat -\lambda \bmat{cc} 1 &amp; 0 \\ 0 &amp; 0 \emat.</div></td>
+<td width=10 align="right">
+(4)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+于是，<span class="math-inline">p(\lambda ) = {\rm det} (A - \lambda B) \equiv 0</span> 对所有 <span class="math-inline">\lambda</span> 成立，因此 <span class="math-inline">A - \lambda B</span> 是奇异的。对于任意 <span class="math-inline">\lambda</span>，当 <span class="math-inline">x = [0,1]^T</span> 时，<span class="math-inline">Ax = \lambda Bx = 0</span>。但我们不把所有 <span class="math-inline">\lambda</span> 都称为特征值，而是只称 <span class="math-inline">1</span> 为这个矩阵束的特征值，因为对于 <span class="math-inline">x = [1,0]^T</span>，<span class="math-inline">Ax = 1 \cdot Bx</span>，并且 <span class="math-inline">A-1 \cdot B</span> 的秩为 0，这低于 <span class="math-inline">A - \lambda B</span> 在其他任何 <span class="math-inline">\lambda</span> 值下的秩。一般来说，如果 <span class="math-inline">A - \mu B</span> 的秩低于 <span class="math-inline">A - \lambda B</span> 在几乎所有其他 <span class="math-inline">\lambda</span> 值下的秩，那么 <span class="math-inline">\mu</span> 就是特征值。
+
+<p>
+当矩阵束奇异时，特征值是矩阵元素的不连续函数，这是我们在定义时必须小心谨慎的原因之一。这种不连续性将在下文进一步讨论。
+
+<p>
+特征向量也不再那么简单定义。例如，考虑以下例子：
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_SingPencilReducingSubspace"></a><div class="math-display">A - \lambda B = \bmat{ccc} 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \emat-\lambda \bmat{ccc} 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 \emat.</div></td>
+<td width=10 align="right">
+(5)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+此时，<span class="math-inline">1</span> 是特征值，但对于任意 <span class="math-inline">x = [z,z,1]^T</span> 和任意 <span class="math-inline">z</span> 值，<span class="math-inline">Ax = 1 \cdot Bx</span>。因此我们考虑所谓的“约化子空间”，具体定义如下。
+
+<p>
+
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_SingularPencil"></a><div class="math-display">% latex2html id marker 1839例如，改变 <span class="math-inline">A_{22}</span>\ t......在第~\mathfrak{Re}f{sec_chap2_GnHepCondSing}节中详细讨论。</div></td>
+<td width=10 align="right">
+(6)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1712"
+  href="node68.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1706"
+  href="node66.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1700"
+  href="node66.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1708"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1710"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1713"
+  href="node68.html">Reducing Subspaces.</a>
+<b> Up:</b> <a name="tex2html1707"
+  href="node66.html">Singular Case</a>
+<b> Previous:</b> <a name="tex2html1701"
+  href="node66.html">Singular Case</a>
+ &nbsp <b>  <a name="tex2html1709"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1711"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

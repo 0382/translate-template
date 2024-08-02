@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Examples</title>
+<meta name="description" content="Numerical Examples">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node360.html">
+<link rel="previous" href="node346.html">
+<link rel="up" href="node343.html">
+<link rel="next" href="node354.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6187"
+  href="node354.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6181"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6175"
+  href="node352.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6183"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6185"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6188"
+  href="node354.html">A Sample Procrustes Problem</a>
+<b> Up:</b> <a name="tex2html6182"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6176"
+  href="node352.html">Simultaneous Diagonalization</a>
+ &nbsp <b>  <a name="tex2html6184"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6186"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001844000000000000000"></a>
+<a name="sampleruns"></a>
+<br>
+数值示例
+</h2>
+
+<p>
+我们为描述的示例问题提供了实现。
+
+<p>
+我们展示了这些示例及其详细输出。我们包含这些输出，以便读者可以检查其软件包副本是否正常执行。用户应在以下目录中运行 MATLAB（版本 5 或兼容版本）：
+
+&gt;&gt; !ls
+Fline.m       dgrad.m      grad.m             move.m       sg_min.m
+README        dimension.m  gradline.m         nosym.m      sg_newton.m
+clamp.m       dtangent.m   invdgrad_CG.m      partition.m  sg_prcg.m
+connection.m  examples     invdgrad_MINRES.m  sg_dog.m     tangent.m
+dFline.m      finitediff   ip.m               sg_frcg.m
+
+（注意，可能还会有额外的子目录 <code>docs/</code> 或 <code>@cell/</code>。）
+
+<p>
+每个示例问题在 <code>examples</code> 子目录中都有一个子目录。
+
+&gt;&gt; !ls examples
+jordan      ldatoy      procrustes  simdiag     simschur    tracemin
+
+这些子目录中的每一个都包含 <span class="math-inline">F(Y)</span>（<span class="math-inline">dF(Y)</span> 和 <span class="math-inline">ddF(Y,H)</span>）的实现，它设置了 <span class="math-inline">F(Y)</span> 的全局参数（在调用任何其他函数之前必须调用此函数），一个用于生成初始猜测的 <code>guess</code> 函数，以及可能用于计算 <span class="math-inline">F(Y)</span>、相关量或特定问题实例的一些辅助函数。
+
+&gt;&gt; !ls examples/ldatoy
+F.m           dF.m          guess.m
+Kinetic.m     ddF.m         parameters.m
+&gt;&gt; !ls examples/jordan
+Block.m       dBlock.m      ddF.m         guess.m       post.m
+F.m           dF.m          frank.m       parameters.m
+
+<p>
+我们在支持的优化模式（'newton'、'dog'、'frcg' 和 'prcg'）和 'euclidean' 度量下执行了这些示例。对于同一问题的不同实例，不同的模式可能表现最佳，因此读者不应认为某种特定模式会在所有实例中表现出优越性能。
+
+<p>
+<br><hr>
+<!--子链接表-->
+<a name="CHILD_LINKS"><strong>子部分</strong></a>
+
+<ul>
+<li><a name="tex2html6189"
+  href="node354.html">一个示例 Procrustes 问题</a>
+<li><a name="tex2html6190"
+  href="node355.html">一个示例 Jordan 块问题</a>
+<li><a name="tex2html6191"
+  href="node356.html">一个示例迹最小化问题</a>
+<li><a name="tex2html6192"
+  href="node357.html">一个示例 LDA 玩具问题（带有非线性项的迹最小化）</a>
+<li><a name="tex2html6193"
+  href="node358.html">一个示例同时 Schur 分解问题</a>
+<li><a name="tex2html6194"
+  href="node359.html">一个示例对角化问题</a>
+</ul>
+<!--子链接表结束-->
+<hr><!--Navigation Panel-->
+<a name="tex2html6187"
+  href="node354.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6181"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6175"
+  href="node352.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6183"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6185"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6188"
+  href="node354.html">A Sample Procrustes Problem</a>
+<b> Up:</b> <a name="tex2html6182"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6176"
+  href="node352.html">Simultaneous Diagonalization</a>
+ &nbsp <b>  <a name="tex2html6184"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6186"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

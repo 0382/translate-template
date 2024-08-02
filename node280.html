@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Generalized Non-Hermitian Eigenvalue Problems</title>
+<meta name="description" content="Generalized Non-Hermitian Eigenvalue Problems">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node329.html">
+<link rel="previous" href="node203.html">
+<link rel="up" href="book.html">
+<link rel="next" href="node281.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5005"
+  href="node281.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4999"
+  href="book.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4993"
+  href="node279.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5001"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5003"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5006"
+  href="node281.html">Introduction</a>
+<b> Up:</b> <a name="tex2html5000"
+  href="book.html">book</a>
+<b> Previous:</b> <a name="tex2html4994"
+  href="node279.html">Error Bound for Computed</a>
+ &nbsp <b>  <a name="tex2html5002"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5004"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION001700000000000000000"></a> <a name="chap:gnsym"></a><a name="35594"></a>
+<br>
+Generalized Non-Hermitian Eigenvalue Problems
+</h1>
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+
+<ul>
+<li><a name="tex2html5007"
+  href="node281.html">Introduction</a>
+<li><a name="tex2html5008"
+  href="node282.html">Direct Methods</a>
+<li><a name="tex2html5009"
+  href="node283.html">Transformation to Standard Problems</a>
+<ul>
+<li><a name="tex2html5010"
+  href="node284.html">Invert <span class="math-inline">B</span>.</a>
+<li><a name="tex2html5011"
+  href="node285.html">Split-and-invert <span class="math-inline">B</span>.</a>
+<li><a name="tex2html5012"
+  href="node286.html">Shift-and-Invert.</a>
+</ul>
+<li><a name="tex2html5013"
+  href="node287.html">Jacobi-Davidson Method 
+<br>&nbsp;<em>G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst</em> </a>
+<ul>
+<li><a name="tex2html5014"
+  href="node288.html">Basic Theory</a>
+<li><a name="tex2html5015"
+  href="node289.html">Deflation and Restart</a>
+<ul>
+<li><a name="tex2html5016"
+  href="node290.html">Deflation.</a>
+<li><a name="tex2html5017"
+  href="node291.html">Restart.</a>
+</ul>
+<li><a name="tex2html5018"
+  href="node292.html">Algorithm</a>
+<li><a name="tex2html5019"
+  href="node293.html">Software Availability</a>
+<li><a name="tex2html5020"
+  href="node294.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html5021"
+  href="node295.html">Rational Krylov Subspace Method 
+<br>&nbsp;<em>A.&nbsp;Ruhe</em> </a>
+<li><a name="tex2html5022"
+  href="node296.html">Symmetric Indefinite Lanczos Method 
+<br>&nbsp;<em>Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski </em> </a>
+<ul>
+<li><a name="tex2html5023"
+  href="node297.html">Some Properties of Symmetric Indefinite Matrix Pairs</a>
+<li><a name="tex2html5024"
+  href="node298.html">Algorithm</a>
+<li><a name="tex2html5025"
+  href="node299.html">Stopping Criteria and Accuracy Assessment</a>
+<li><a name="tex2html5026"
+  href="node300.html">Singular <span class="math-inline">B</span></a>
+<li><a name="tex2html5027"
+  href="node301.html">Software Availability</a>
+<li><a name="tex2html5028"
+  href="node302.html">Numerical Examples</a>
+<ul>
+<li><a name="tex2html5029"
+  href="node303.html">Example 8.6.1.</a>
+<li><a name="tex2html5030"
+  href="node304.html">Example 8.6.2.</a>
+<li><a name="tex2html5031"
+  href="node305.html">Example 8.6.3.</a>
+</ul>
+<li><a name="tex2html5032"
+  href="node306.html">Notes and References</a>
+</ul>
+<li><a name="tex2html5033"
+  href="node307.html">Singular Matrix Pencils 
+<br>&nbsp; <em>B.&nbsp;K&#229;gstr&#246;m</em> </a>
+<ul>
+<li><a name="tex2html5034"
+  href="node308.html">Regular Versus Singular Problems</a>
+<li><a name="tex2html5035"
+  href="node309.html">Kronecker Canonical Form</a>
+<li><a name="tex2html5036"
+  href="node310.html">Generic and Nongeneric Kronecker Structures</a>
+<li><a name="tex2html5037"
+  href="node311.html">Ill-Conditioning</a>
+<li><a name="tex2html5038"
+  href="node312.html">Generalized Schur-Staircase Form</a>
+<li><a name="tex2html5039"
+  href="node313.html">GUPTRI Algorithm</a>
+<ul>
+<li><a name="tex2html5040"
+  href="node314.html">A <span class="math-inline">24 \times 21</span> Singular Pencil in GUPTRI Form.</a>
+<li><a name="tex2html5041"
+  href="node315.html">Criterion for Determining the Numerical Rank.</a>
+<li><a name="tex2html5042"
+  href="node316.html">The GUPTRI Form of a Regularized Problem.</a>
+</ul>
+<li><a name="tex2html5043"
+  href="node317.html">Software Availability</a>
+<li><a name="tex2html5044"
+  href="node318.html">More on GUPTRI and Numerical Examples</a>
+<ul>
+<li><a name="tex2html5045"
+  href="node319.html">Robustness of Computed GUPTRI Form and Error Bounds.</a>
+<li><a name="tex2html5046"
+  href="node320.html">Arithmetic and Space Complexity.</a>
+<li><a name="tex2html5047"
+  href="node321.html">MATLAB Interface to GUPTRI.</a>
+<li><a name="tex2html5048"
+  href="node322.html">Example in MATLAB.</a>
+</ul>
+<li><a name="tex2html5049"
+  href="node323.html">Notes and References</a>
+</ul>
+<li><a name="tex2html5050"
+  href="node324.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+<ul>
+<li><a name="tex2html5051"
+  href="node325.html">Residual Vectors.</a>
+<li><a name="tex2html5052"
+  href="node326.html">Transfer Residual Errors to Backward Errors.</a>
+<li><a name="tex2html5053"
+  href="node327.html">Error Bound for Computed Eigenvalues.</a>
+<li><a name="tex2html5054"
+  href="node328.html">Error Bound for Computed Eigenvectors.</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

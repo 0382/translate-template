@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Iterative Algorithms &nbsp; J. Demmel </title>
+<meta name="description" content="Iterative Algorithms &nbsp; J. Demmel ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node202.html">
+<link rel="previous" href="node193.html">
+<link rel="up" href="node190.html">
+<link rel="next" href="node195.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3680"
+  href="node195.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3674"
+  href="node190.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3668"
+  href="node193.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3676"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3678"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3681"
+  href="node195.html">What Operations Can One</a>
+<b> Up:</b> <a name="tex2html3675"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Previous:</b> <a name="tex2html3669"
+  href="node193.html">Direct Methods</a>
+ &nbsp <b>  <a name="tex2html3677"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3679"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001530000000000000000">
+迭代算法
+<br>&nbsp; <em>J. Demmel</em> </a>
+</h1> 
+
+<p>
+现在我们来讨论第四章<a href="node85.html#chap:heig">4</a>中针对Hermitian特征值问题的方法应用于<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>时的优缺点。我们注意到，<span class="math-inline">H(A)</span>的特殊结构可能会被利用以提高Lanczos方法的效率，如第<a href="node197.html#sec_chap4_GolubKahanLanczos">6.3.3</a>节所述。
+
+<p>
+为简化讨论，我们用<span class="math-inline">B</span>表示上述三个Hermitian矩阵中的任意一个。表<a href="node88.html#sym_alg_choice">4.1</a>中的基本权衡仍然适用；方法的选择取决于以下因素：
+
+<p>
+
+<ul>
+<li>我们可以负担哪些矩阵和向量的运算？我们以时间和空间来衡量成本。我们可以负担求解<span class="math-inline">(B - \sigma I)x=y</span>中的<span class="math-inline">x</span>吗，其中<span class="math-inline">\sigma</span>是接近<span class="math-inline">B</span>的特征值的位移（在表<a href="node88.html#sym_alg_choice">4.1</a>中称为SI，即位移-反转变换）？或者只能用预处理的迭代方法近似求解（称为Prec）？或者只能负担向量与<span class="math-inline">A</span>和<span class="math-inline">A^*</span>的乘法（称为Dir）？关于向量的存储和操作，最便宜且最不准确的选择是局部正交化（称为local）；其次是选择性正交化（称为SO），最昂贵且最准确的选择是全正交化（称为FO）。
+
+<p>
+</li>
+<li>我们希望得到哪些奇异值和向量？我们想要几个最大或最小的奇异值，它们远离其他奇异值（称为IE）；还是更多最大或最小的奇异值，即使它们紧密聚集在一起（称为CE）；还是一些中间的奇异值，位于谱的中间（称为M）？
+
+<p>
+</li>
+</ul>
+
+<p>
+与第四章<a href="node85.html#chap:heig">4</a>不同的是，上述决策如何依赖于<span class="math-inline">B</span>的选择。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><a name="tex2html3682"
+  href="node195.html">我们可以负担哪些运算？</a>
+<li><a name="tex2html3683"
+  href="node196.html">我们希望得到哪些奇异值和向量？</a>
+<li><a name="tex2html3684"
+  href="node197.html">Golub-Kahan-Lanczos方法</a>
+<ul>
+<li><a name="tex2html3685"
+  href="node198.html">Golub-Kahan-Lanczos双对角化过程。</a>
+<li><a name="tex2html3686"
+  href="node199.html">与对称Lanczos的关系。</a>
+</ul>
+<li><a name="tex2html3687"
+  href="node200.html">软件可用性</a>
+<li><a name="tex2html3688"
+  href="node201.html">数值示例</a>
+</ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html3680"
+  href="node195.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3674"
+  href="node190.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3668"
+  href="node193.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3676"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3678"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3681"
+  href="node195.html">What Operations Can One</a>
+<b> Up:</b> <a name="tex2html3675"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Previous:</b> <a name="tex2html3669"
+  href="node193.html">Direct Methods</a>
+ &nbsp <b>  <a name="tex2html3677"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3679"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Variants </title>
+<meta name="description" content="Variants ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node218.html">
+<link rel="previous" href="node216.html">
+<link rel="up" href="node215.html">
+<link rel="next" href="node218.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4088"
+  href="node218.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4082"
+  href="node215.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4076"
+  href="node216.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4084"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4086"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4089"
+  href="node218.html">Explicit Restarts</a>
+<b> Up:</b> <a name="tex2html4083"
+  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b> Previous:</b> <a name="tex2html4077"
+  href="node216.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html4085"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4087"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001652000000000000000"></a><a name="sec:Hous"></a> 
+<a name="23156"></a>
+<br>
+变体 
+</h2>
+
+<p>
+前文对Arnoldi过程的描述基于修正的Gram-Schmidt过程。当然，也可以采用其他正交化算法。一个改进措施是必要时进行再正交化。每当上述算法中第二个循环结束时得到最终向量时，会进行一项测试，将其范数与初始向量<span class="math-inline">w</span>（即<span class="math-inline">\Vert A v_j \Vert _2</span>）的范数进行比较。如果范数缩减低于某个阈值（表明可能发生了严重的数值抵消），则会进行第二次正交化。根据Kahan的一个结果已知，超过两次正交化是多余的（参见，例如，Parlett[<a href="node421.html#parl80">353</a>]）。
+
+<p>
+从数值角度来看，最可靠的正交化技术之一是Householder算法[<a href="node421.html#golo96">198</a>]。Walker[<a href="node421.html#walk88">455</a>]已将其应用于Arnoldi过程。Householder算法在数值上比Gram-Schmidt或修正的Gram-Schmidt版本更可靠，但代价也更高，所需存储量与修正的Gram-Schmidt大致相同，但操作次数大约是其两倍。在开发通用、可靠的软件包时，当鲁棒性是一个关键标准时，Householder正交化是一个合理的选择。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4088"
+  href="node218.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4082"
+  href="node215.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4076"
+  href="node216.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4084"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4086"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4089"
+  href="node218.html">Explicit Restarts</a>
+<b> Up:</b> <a name="tex2html4083"
+  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b> Previous:</b> <a name="tex2html4077"
+  href="node216.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html4085"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4087"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

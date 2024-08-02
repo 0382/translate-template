@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Software Availability</title>
+<meta name="description" content="Software Availability">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node129.html">
+<link rel="up" href="node117.html">
+<link rel="next" href="node131.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2702"
+  href="node131.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2696"
+  href="node117.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2692"
+  href="node129.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2698"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2700"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2703"
+  href="node131.html">Band Lanczos Method &nbsp;</a>
+<b> Up:</b> <a name="tex2html2697"
+  href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html2693"
+  href="node129.html">Implementation of Locking and</a>
+ &nbsp <b>  <a name="tex2html2699"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2701"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h2><a name="SECTION001359000000000000000"></a> <a name="sec1"></a>
+<br>
+Software Availability
+</h2>
+While we have presented the IRLM as much as possible in template form,
+we do not recommend implementation from this description for production 
+purposes. High-quality software is freely available in ARPACK.
+<a name="8287"></a>
+This software is based upon the implicitly 
+restarted Arnoldi method (IRAM) that is presented here in
+&#167;<a href="node220.html#sec:nsymiram">7.6</a>.
+When the matrix <span class="math-inline">A</span> is symmetric (Hermitian) this reduces to the 
+IRLM described in this section.
+
+<p>
+ARPACK provides various drivers in template form for direct application to
+<span class="math-inline">A</span>, SI, and for computing a partial
+SVD of a general rectangular matrix.
+For complete information, one should consult the <i>ARPACK
+Users' Guide</i>&nbsp;[<a
+ href="node421.html#lesy98">295</a>].
+
+<p>
+The thick restart variant of Wu and Simon&nbsp;[<a
+ href="node421.html#wusi99">463</a>] is implemented in
+the code TRLAN.
+
+<p>
+For more information about this software, including how to access it,  
+see the book's homepage ETHOME. <a name="endofirlm"></a> 
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

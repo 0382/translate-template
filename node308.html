@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Regular Versus Singular Problems</title>
+<meta name="description" content="Regular Versus Singular Problems">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node309.html">
+<link rel="previous" href="node307.html">
+<link rel="up" href="node307.html">
+<link rel="next" href="node309.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5476"
+  href="node309.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5470"
+  href="node307.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5464"
+  href="node307.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5472"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5474"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5477"
+  href="node309.html">Kronecker Canonical Form</a>
+<b> Up:</b> <a name="tex2html5471"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Previous:</b> <a name="tex2html5465"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+ &nbsp <b>  <a name="tex2html5473"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5475"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001771000000000000000">
+常规问题与奇异问题</a>
+</h2>
+
+<p>
+让我们从考虑 <span class="math-inline">2 \times 2</span> 广义特征值问题 <span class="math-inline">Ax = \lambda Bx</span> 开始，其中
+<br><p></p>
+<div align="center">
+
+<div class="math-display">A = \left[ \begin{array}{cc}\alpha_1 &amp; 0 \\0 &amp; \alpha_2 \\\end{array} \right], \quad B = \left[ \begin{array}{cc}\beta_1 &amp; 0 \\0 &amp; \beta_2 \\\end{array} \right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+<span class="math-inline">A - \lambda B</span> 的特征值是 <span class="math-inline">(\alpha_1, \beta_1)</span> 和 <span class="math-inline">(\alpha_2, \beta_2)</span> 这对值，相应的特征向量分别是 <span class="math-inline">x_1 = [1 \quad 0]^T</span> 和 <span class="math-inline">x_2 = [0 \quad 1]^T</span>。如果 <span class="math-inline">\beta_i</span> 不为零，则 <span class="math-inline">\lambda_i = \alpha_i/\beta_i</span> 是一个有限特征值。否则，如果 <span class="math-inline">\beta_i</span> 为零，则 <span class="math-inline">\lambda_i = \infty</span> 是矩阵对 <span class="math-inline">\{A,B\}</span> 的一个特征值。但如果例如 <span class="math-inline">\alpha_2 = \beta_2 = 0</span> 呢？那么 <span class="math-inline">{\rm det}(A - \lambda B)</span> 对所有 <span class="math-inline">\lambda</span> 都为零，这意味着我们有一个奇异特征值问题。在这种情况下，我们有 <span class="math-inline">Ax_2 = Bx_2 = 0</span>，即 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 有一个共同的零空间。我们称 <span class="math-inline">x_2</span> 是一个不确定特征值 <span class="math-inline">0/0</span> 的特征向量。注意，共同的零空间是具有奇异特征值问题的充分条件，但不是必要条件。
+
+<p>
+最常见的广义特征值问题 <span class="math-inline">Ax = \lambda Bx</span> 是 <em>常规的</em>；即，<span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是方阵，并且特征多项式 <span class="math-inline">p_m(\lambda) = {\rm det}(A - \lambda B)</span> 仅在有限个值处消失，其中 <span class="math-inline">m</span> 表示多项式的次数。相应的 <span class="math-inline">A - \lambda B</span> 被称为常规矩阵束。常规束的 <span class="math-inline">n</span> 个特征值是扩展复平面 <span class="math-inline">{\mathcal C} \cup \infty</span> 上的点。特征值 <span class="math-inline">\lambda_i</span> 定义为 <span class="math-inline">p_m(\lambda)</span> 的零点，以及 <span class="math-inline">n - m</span> 个额外的 <span class="math-inline">\infty</span> 特征值。
+
+<p>
+矩阵束的另一种表示形式是 <em>叉积形式</em>：即矩阵集 <span class="math-inline">\beta A-\alpha B</span>，其中 <span class="math-inline">(\alpha,\beta) \in {\mathcal C}^2</span>。映射 <span class="math-inline">(\alpha,\beta) \mapsto \alpha/\beta</span> 显示了 <span class="math-inline">\beta A-\alpha B</span> 和 <span class="math-inline">A - \lambda B</span> 的特征值之间的关系。例如，零和无限特征值分别表示为 <span class="math-inline">(0, \beta)</span> 和 <span class="math-inline">(\alpha, 0)</span>，并且可以像 <span class="math-inline">{\mathcal C}^2</span> 中的其他点一样处理。
+
+<p>
+如果 <span class="math-inline">{\rm det}(A - \lambda B)</span>（以及 <span class="math-inline">{\rm det}(\beta A - \alpha B)</span>）对所有 <span class="math-inline">\lambda</span>（以及对 <span class="math-inline">(\alpha, \beta)</span> 对）恒为零，那么 <span class="math-inline">A - \lambda B</span> 被称为 <em>奇异的</em>，并且 <span class="math-inline">\{A,B\}</span> 是一个奇异矩阵对。奇异性 <span class="math-inline">\{A,B\}</span> 的标志是某些 <span class="math-inline">\alpha = \beta = 0</span>。在存在舍入误差的情况下，<span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span> 可能非常小。在这些情况下，特征值问题是病态的，并且其他一些计算出的非零 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span> 值可能是不确定的。这类问题在第 &#167;<a href="node311.html#sing_examples">8.7.4</a> 节中进一步讨论并通过示例说明。此外，矩形矩阵对是奇异的，相应的 <span class="math-inline">A - \lambda B</span> 是一个奇异束。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5476"
+  href="node309.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5470"
+  href="node307.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5464"
+  href="node307.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5472"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5474"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5477"
+  href="node309.html">Kronecker Canonical Form</a>
+<b> Up:</b> <a name="tex2html5471"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Previous:</b> <a name="tex2html5465"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+ &nbsp <b>  <a name="tex2html5473"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5475"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

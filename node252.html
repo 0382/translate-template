@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>An Adaptively Blocked Lanczos Method</title>
+<meta name="description" content="An Adaptively Blocked Lanczos Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node254.html">
+<link rel="previous" href="node251.html">
+<link rel="up" href="node250.html">
+<link rel="next" href="node253.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4606"
+  href="node253.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4600"
+  href="node250.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4594"
+  href="node251.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4602"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4604"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4607"
+  href="node253.html">Storage Requirements and Floating</a>
+<b> Up:</b> <a name="tex2html4601"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4595"
+  href="node251.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html4603"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4605"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001692000000000000000"></a>
+<a name="ABLEsection"></a>
+<br>
+自适应分块Lanczos方法
+</h2>
+
+<p>
+算法&nbsp;<a href="node251.html#bd:blanalg">7.14</a> 在 <span class="math-inline">P^{\ast}_{j+1} Q_{j+1}</span> 奇异时会失效。
+此外，由于计算的Lanczos向量 <span class="math-inline">Q_{[j]}</span> 和 <span class="math-inline">P_{[j]}</span> 之间的双正交性丧失，或者块大小小于所需特征值群集的大小，计算的Ritz三元组可能收敛缓慢。
+ABLE试图通过自适应地改变块大小并保持Lanczos向量的<em>完全双正交性</em>，即 <span class="math-inline">\Vert P^{\ast}_{[j]} Q_{[j]} - I \Vert \approx \epsilon_M</span>，或者<em>半双正交性</em>，即 <span class="math-inline">\Vert P^{\ast}_{[j]} Q_{[j]} - I \Vert \approx \sqrt{\epsilon_M}</span>，来避免失效并消除这些导致慢收敛的原因。
+
+<p>
+算法&nbsp;<a href="node252.html#bd:ablealg">7.15</a> 是ABLE的伪代码。该方法可以通过以下逻辑参数指示的不同复杂程度级别执行：
+<dl>
+<dt><strong><i>fullbo</i></strong></dt>
+<dd>在每个Lanczos步骤中使用双侧Gram-Schmidt过程来维持完全双正交性。
+
+<p>
+</dd>
+<dt><strong><i>semibo</i></strong></dt>
+<dd>监控双正交性的丧失并在某些步骤中纠正这种丧失。
+
+<p>
+</dd>
+<dt><strong><i>treatbd</i></strong></dt>
+<dd>通过增加块大小来治愈失效。
+
+<p>
+</dd>
+<dt><strong><i>group</i></strong></dt>
+<dd>将块大小适应于收敛的Ritz值群集的阶数。
+</dd>
+</dl>
+ABLE有四个实现级别：
+<dl>
+<dt><strong><i>Level 1:</i></strong></dt>
+<dd>所有逻辑标志均为假（F）。
+
+<p>
+这是最简单的块Lanczos算法，如算法&nbsp;<a href="node251.html#bd:blanalg">7.14</a> 所示。本质上，使用三项递归关系（<a href="node251.html#right3term">7.50</a>）和（<a href="node251.html#left3term">7.51</a>），并且不存储计算的Lanczos向量。仅计算特征值。用户指定用于检测失效的参数tolbd。tolbd的默认值为 <span class="math-inline">10n\epsilon_M</span>，其中 <span class="math-inline">\epsilon_M</span> 表示机器精度。
+
+<p>
+</dd>
+<dt><strong><i>Level 2:</i></strong></dt>
+<dd><em>fullbo</em> = true（T），其他逻辑标志为假（F）。
+
+<p>
+此版本维持完全双正交性。通过TSMGS对每个新计算的Lanczos向量对与所有先前的Lanczos向量进行重新双正交化。对于级别 <span class="math-inline">\geq 2</span>，计算特征三元组。
+
+<p>
+</dd>
+<dt><strong><i>Level 3:</i></strong></dt>
+<dd><em>semibo</em> = true（T），其他逻辑标志为假（F）。
+
+<p>
+此级别试图维持半双正交性。与完全双正交性相比，它在浮点运算和内存引用方面成本较低。
+
+<p>
+</dd>
+<dt><strong><i>Level 4:</i></strong></dt>
+<dd><em>fullbo</em> = true（T）或 <em>semibo</em> = true（T），且 <em>treatbd</em> = true（T）和/或 <em>group</em> = true（T）。
+
+<p>
+此版本试图通过增加块大小和/或使块大小至少适应于检测到的任何收敛Ritz值群集的阶数来治愈失效。用户指定参数tolbd和tolcl用于声明失效和/或群集Ritz值。tolcl和tolbd的默认值为 <span class="math-inline">\epsilon^{1/2}_M</span>。
+</dd>
+</dl>
+
+<p>
+用户可以选择具有完全双正交性（Level 2）或半双正交性（Level 3）的ABLE实现，但不能同时选择两者。Level 4在Level 2或Level 3（完全或半双正交性）之上实现。逻辑标志的默认值均为true，除了<em>fullbo</em> = false。
+
+<p>
+在Level 1，当一个Ritz值收敛到 <span class="math-inline">A</span> 的特征值后，该Ritz值会在后续的Lanczos步骤中出现。例如，缩减的三对角矩阵 <span class="math-inline">T_{[j]}</span> 的Ritz值群集可能近似于原始矩阵 <span class="math-inline">A</span> 的单个特征值。在[<a href="node421.html#cuwi86">93</a>]中提出了一种启发式方法来检测虚假的Ritz值，并在&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>中进行了讨论。在ABLE的更高级别中不预期这种现象。
+
+<p>
+<br>
+<a name="bd:ablealg"></a><IMG
+ width="598" height="838" align="bottom" border="0"
+ src="img2317.png"
+ alt="\begin{algorithm}{ABLE for NHEP
+}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=bbb\=ccc\=ddd\...
+...oximate eigenvectors <span class="math-inline">x^{(j)}_i</span>\ and <span class="math-inline">y^{(j)}_i</span>\end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+我们现在对算法&nbsp;<a href="node252.html#bd:ablealg">7.15</a> 的一些步骤进行评论：
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>算法&nbsp;<a href="node251.html#bd:blanalg">7.14</a> 的步骤(1)的评论也适用于此处。
+
+<p>
+</dd>
+<dt><strong>(2), (3), (35), (36)</strong></dt>
+<dd>算法&nbsp;<a href="node251.html#bd:blanalg">7.14</a> 的步骤(2), (3) 和 (20), (21) 的评论在此同样适用。
+<br>
+<p>
+</dd>
+<dt><strong>(6), (7)</strong></dt>
+<dd>在步骤(7)之后，可以插入以下步骤以维持块向量 <span class="math-inline">Q_{j}</span> 和 <span class="math-inline">P_{j}</span> 的局部双正交性：
+
+ 		 		 <span class="math-inline">R:=R-Q_j(P^{\ast}_jR)</span> 
+<br><span class="math-inline">S:=S-P_j(Q^{\ast}_jS)</span>
+
+<p>
+</dd>
+<dt><strong>(10)</strong></dt>
+<dd>如果 <span class="math-inline">R</span> 或 <span class="math-inline">S</span> 秩亏，则 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 在原地与先前的Lanczos向量 <span class="math-inline">Q_{[j]}</span> 和 <span class="math-inline">P_{[j]}</span> 进行双正交化，使用TSMGS。
+
+<p>
+</dd>
+<dt><strong>(14)</strong></dt>
+<dd>如果 <span class="math-inline">P^{\ast}_{j+1} Q_{j+1}</span> 的最小奇异值小于规定的容差值tolbd，则<em>失效</em>标志被切换。<span class="math-inline">\delta_d</span> 表示小于tolbd的奇异值的数量。如果发生失效且用户未指定处理方法（即 <em>treatbd</em> = false），则该方法失败。
+
+<p>
+</dd>
+<dt><strong>(18)</strong></dt>
+<dd>在此步骤中确定从收敛的Ritz值 <span class="math-inline">\{ \theta^{(j)}_i \}</span> 中最大群集值的阶数 <span class="math-inline">\delta_c</span>。如果两个Ritz值 <span class="math-inline">\theta^{(j)}_i</span> 和 <span class="math-inline">\theta^{(j)}_k</span> 满足 <span class="math-inline">\vert\theta^{(j)}_i - \theta^{(j)}_k\vert \leq {\tt tolcl} \cdot \vert\theta^{(j)}_i\vert</span>，则被视为群集，其中tolcl是用户规定的容差。
+
+<p>
+</dd>
+<dt><strong>(21)</strong></dt>
+<dd>如果发生失效或收敛的Ritz值群集的阶数超过当前块大小 <span class="math-inline">\delta_c > p_j</span>，则可以增加 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span>：
+<br><p></p>
+<div align="center">
+
+<div class="math-display">Q_{j+1} := \onebytwo{Q_{j+1}}{\widehat{Q}}, \quadP_{j+1} := \onebytwo{P_{j+1}}{\widehat{P}},</div>
+</div>
+<br clear="ALL">
+<p></p>
+使得 <span class="math-inline">P^{\ast}_{j+1} Q_{j+1}</span> 在数值上非奇异，其中 <span class="math-inline">\widehat{Q}</span> 和 <span class="math-inline">\widehat{P}</span> 是 <span class="math-inline">n \times \delta</span>，<span class="math-inline">\delta</span> 由 <span class="math-inline">\delta = \min ( \max( \delta_c, \delta_d ), p_{\max} - p_j )</span> 确定，其中 <span class="math-inline">p_j</span> 是调整前的块大小，<span class="math-inline">p_{\max}</span> 是规定的最大块大小。新的块大小为 <span class="math-inline">p_j+\delta</span>。然后调用TSMGS对 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 与存储在 <span class="math-inline">Q_{[j]}</span> 和 <span class="math-inline">P_{[j]}</span> 中的先前Lanczos向量进行双正交化。这就是所谓的自适应分块方案。<a name="24872"></a>
+
+<p>
+没有已知的方法可以选择 <span class="math-inline">\widehat{Q}</span> 和 <span class="math-inline">\widehat{P}</span> 以保证将 <span class="math-inline">P^{\ast}_{j+1} Q_{j+1}</span> 的最小奇异值提升到tolbd以上，除非在tolbd = 0的情况下，即精确失效。可以选择 <span class="math-inline">\widehat{Q}</span> 和 <span class="math-inline">\widehat{P}</span> 为随机向量。
+
+<p>
+</dd>
+<dt><strong>(28), (29)</strong></dt>
+<dd>如果维持半双正交性，我们在每次重新双正交化后求解 <span class="math-inline">T_{[j]}</span> 的特征问题。
+
+<p>
+公式（<a href="node251.html#rightres2">7.56</a>）和（<a href="node251.html#leftres2">7.57</a>）可用于检测收敛。由于我们预期在Level 1的Lanczos迭代中步骤过多，我们使用以下收敛测试：
+<br><p></p>
+<div align="center">
+
+<div class="math-display">\min\{ \Vert r^{(j)}_i\Vert, \Vert(s^{(j)}_i)^{\ast}\Vert \} \leq\mathrm{\tt tolconv} \cdot \Vert A\Vert _1,</div>
+</div>
+<br clear="ALL">
+<p></p>
+在更高级别中，我们可以使用半二次收敛测试：
+<br><p></p>
+<div align="center">
+
+<div class="math-display">\min\left\{ \Vert r^{(j)}_i\Vert, \Vert(s^{(j)}_i)^{\ast}\Ve......j)}_i \right\}\leq \mathrm{\tt tolconv} \cdot \Vert A\Vert _1,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中
+<br><p></p>
+<div align="center">
+
+<div class="math-display">\eta^{(j)}_i = \frac{ \Vert r^{(j)}_i\Vert\; \Vert(s^{(j)}_i)^{\ast}\Vert _2}{{\rm gap}(\theta^{(j)}_i,T_{[j]})};</div>
+</div>
+<br clear="ALL">
+<p></p> 
+
+<span class="math-inline">\mathrm{gap}(\theta^{(j)}_i, T_{[j]})</span> 定义 <span class="math-inline">\theta^{(j)}_i</span> 与其他Ritz值之间的间隙。具体地，<span class="math-inline">{\rm gap}(\theta^{(j)}_i,T_{[j]})=\min_{k \ne i} \vert \theta^{(j)}_i - \theta^{(j)}_k\vert</span>。在分块情况下，间隙定义在群集之间。
+
+<p>
+在[<a href="node421.html#bady99">29</a>]中表明，在温和条件下，对于Ritz值 <span class="math-inline">\theta^{(j)}_i</span>，存在 <span class="math-inline">A</span> 的特征值，使得 <span class="math-inline">\vert \lambda - \theta^{(j)}_i \vert</span> 与条件数和量 <span class="math-inline">\eta^{(j)}_i</span> 的乘积成正比。然而，对于病态问题（即大条件数），小的残差（后向误差）并不意味着高的特征值精度（小的前向误差）。在这种情况下，上述半二次收敛准则过于乐观。无论如何，可以使用右和左特征向量来近似特征值条件数。这检测了特征值问题的病态性（见&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>）。
+
+<p>
+</dd>
+<dt><strong>(30)</strong></dt>
+<dd>如果需要完全双正交性（Level 2），只需使用TSMGS过程（见(10)）对 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 与存储在 <span class="math-inline">Q_{[j]}</span> 和 <span class="math-inline">P_{[j]}</span> 中的所有先前Lanczos向量进行双正交化。如果需要半双正交性（Level 3），则监控双正交性的丧失，并在必要时调用TSMGS以维持半双正交性。
+
+<p>
+<span class="math-inline">(j+1)</span> 阶Lanczos向量 <span class="math-inline">Q_{j+1}</span> 和 <span class="math-inline">P_{j+1}</span> 与先前Lanczos向量的双正交性由量 <span class="math-inline">d_{j+1} = \max \left\{ \frac{\Vert P_{[j]}^{\ast}Q_{j+1} \Vert _1}{\Vert Q_{[j]}\Vert _1 \Vert P_{j+1}\Vert _1 } \right\}</span> 测量。在[<a href="node421.html#bady99">29</a>]中开发了一种有效的过程，以 <span class="math-inline">O(n)</span> 成本高效地模拟此量。
+
+<p>
+</dd>
+<dt><strong>(40)</strong></dt>
+<dd>算法&nbsp;<a href="node251.html#bd:blanalg">7.14</a> 的步骤(25)的评论也适用于此处。
+
+<p>
+</dd>
+</dl>
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html4608"
+  href="node253.html">存储需求和浮点运算。</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+</p><!--Navigation Panel-->
+<a name="tex2html4606"
+  href="node253.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4600"
+  href="node250.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4594"
+  href="node251.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4602"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4604"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4607"
+  href="node253.html">Storage Requirements and Floating</a>
+<b> Up:</b> <a name="tex2html4601"
+  href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4595"
+  href="node251.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html4603"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4605"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

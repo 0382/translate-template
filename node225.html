@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Computational Costs and Tradeoffs</title>
+<meta name="description" content="Computational Costs and Tradeoffs">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node226.html">
+<link rel="previous" href="node224.html">
+<link rel="up" href="node220.html">
+<link rel="next" href="node226.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4212"
+  href="node226.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4206"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4200"
+  href="node224.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4208"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4210"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4213"
+  href="node226.html">Deflation and Stopping Rules</a>
+<b> Up:</b> <a name="tex2html4207"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4201"
+  href="node224.html">Numerical Stability</a>
+ &nbsp <b>  <a name="tex2html4209"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4211"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001665000000000000000">
+计算成本与权衡</a>
+</h2>
+
+<p>
+这种隐式方案需要 <span class="math-inline">p</span> 次矩阵-向量乘积，而不是显式方案所需的 <span class="math-inline">k+p</span> 次，以应用相同的 <span class="math-inline">p</span> 次多项式并重建 <span class="math-inline">k</span> 步的 Arnoldi 分解。当操作 <span class="math-inline">w \leftarrow Av</span> 相对昂贵时，这种节省可能相当可观。然而，存在一些权衡。通常无法预测 <span class="math-inline">k</span> 和 <span class="math-inline">p</span> 的最佳值。矩阵 <span class="math-inline">A</span> 的谱分布对收敛行为有很大影响。两个具有完全相同稀疏模式的矩阵，对于给定的 <span class="math-inline">k</span> 和 <span class="math-inline">p</span> 选择，可能表现出截然不同的收敛特性。因此，仅根据每次迭代的操作计数得出结论可能会产生误导。尽管如此，了解一次迭代的主要成本对于指导初始选择还是有用的。
+
+<p>
+在下文中，我们假设矩阵-向量乘积 <span class="math-inline">w \leftarrow Av</span> 的成本为 <span class="math-inline">\gamma n</span>。对于稀疏矩阵，可以将 <span class="math-inline">\gamma</span> 视为 <span class="math-inline">A</span> 每行非零元素平均数量的两倍。对于稠密矩阵，<span class="math-inline">\gamma = 2 n</span>，而对于 FFT 矩阵，<span class="math-inline">\gamma \approx \log(n)</span>。参见第&#167;<a href="node379.html#sec:blas">10.2</a>节。对于固定的 <span class="math-inline">k</span> 和 <span class="math-inline">p</span> 值，IRAM 一次迭代的成本（以浮点运算次数计）为：
+
+<ol>
+<li>矩阵-向量乘积 <span class="math-inline">w \leftarrow Av</span>：<span class="math-inline">\gamma p n</span>；
+
+<p>
+</li>
+<li>Arnoldi 步（从 <span class="math-inline">k</span> 扩展到 <span class="math-inline">k+p</span>）：<span class="math-inline">[(4k-2)p + 2p^2]n</span>；
+
+<p>
+</li>
+<li>正交化校正：每次校正大约 <span class="math-inline">4(k+p)n</span>。最坏情况估计为 <span class="math-inline">[(4k-2)p + 2p^2]n</span>（假设每个新的 Arnoldi 向量都需要一次校正）；
+
+<p>
+</li>
+<li>隐式重启：<span class="math-inline">2 n(k^2 + kp) + O( (k+p)^3)</span>；
+
+<p>
+</li>
+<li>总成本：<span class="math-inline">\gamma p n + 2[(5k-2)p + 2p^2]n + 2k^2n + O( (k+p)^3)</span>。
+</li>
+</ol>
+
+<p>
+注意，第二项中的系数 2 是由于正交化校正的最坏情况场景。在实践中，这个系数通常约为 1.5。如果矩阵-向量乘积 <span class="math-inline">Av</span> 很廉价（即 <span class="math-inline">\gamma</span> 很小），那么隐式重启的成本就变得显著，应考虑其他替代方案。其中之一可能是使用多项式谱变换。这将涉及用 <span class="math-inline">\psi(A)</span> 的适当构造的多项式函数代替 <span class="math-inline">A</span> 进行操作。例如，可以使用旨在抑制不必要谱部分的 Chebyshev 多项式。当然，操作 <span class="math-inline">w \leftarrow \psi(A)</span> 将作为涉及 <span class="math-inline">A</span> 的一系列矩阵-向量乘积来应用。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4212"
+  href="node226.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4206"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4200"
+  href="node224.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4208"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4210"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4213"
+  href="node226.html">Deflation and Stopping Rules</a>
+<b> Up:</b> <a name="tex2html4207"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4201"
+  href="node224.html">Numerical Stability</a>
+ &nbsp <b>  <a name="tex2html4209"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4211"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

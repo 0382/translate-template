@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>An Algorithm Template.</title>
+<meta name="description" content="An Algorithm Template.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node143.html">
+<link rel="up" href="node140.html">
+<link rel="next" href="node145.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2912"
+  href="node145.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2906"
+  href="node140.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2902"
+  href="node143.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2908"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2910"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2913"
+  href="node145.html">Computing Interior Eigenvalues</a>
+<b> Up:</b> <a name="tex2html2907"
+  href="node140.html">Restart and Deflation</a>
+<b> Previous:</b> <a name="tex2html2903"
+  href="node143.html">Preconditioning.</a>
+ &nbsp <b>  <a name="tex2html2909"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2911"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001373040000000000000">
+雅可比-戴维森方法的算法模板</a>
+</h4> 
+包含重启和缩减步骤的完整雅可比-戴维森方法算法，用于计算多个特征对，被称为JDQR [<a href="node421.html#fosv98">172</a>]，因为它可以被解释为QR算法的迭代方法。该算法的模板在算法<a href="node144.html#alg:jdqr">4.17</a>中给出。
+
+<p>
+<br>
+<a name="alg:jdqr"></a><IMG
+ width="598" height="728" align="bottom" border="0"
+ src="img1365.png"
+ alt="\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">{k}_{\max}</span>\ Exterior
+Eigenvalues...
+...st}){t} = -r$\ \\
+{\rm (32)} \&gt; {\bf end while}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+要应用此算法，我们需要指定一个初始向量<span class="math-inline">{v}_0</span>，一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个指定应计算多少个接近<span class="math-inline">\tau</span>的特征对的数目<span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span>表示搜索子空间的最大维度。如果超过此值，将使用指定维度<span class="math-inline">{m}_{\min}</span>的子空间进行重启。
+
+<p>
+完成时，通常当<span class="math-inline">\tau</span>选择大于<span class="math-inline">\lambda_{\max}(A)</span>时，会得到<span class="math-inline">{k}_{\max}</span>个最大特征值；当<span class="math-inline">\tau</span>选择小于<span class="math-inline">\lambda_{\min}(A)</span>时，会得到<span class="math-inline">{k}_{\max}</span>个最小特征值。计算得到的特征对<span class="math-inline">(\widetilde\lambda_j,\widetilde{x}_{j})</span>，满足<span class="math-inline">\Vert\widetilde{x}_{j}\Vert _2=1</span>，满足<span class="math-inline">\Vert A \widetilde{x}_{j}-\widetilde\lambda_j\widetilde{x}_{j}\Vert _2\leq j\epsilon</span>，其中<span class="math-inline">\widetilde{x}_j</span>表示<span class="math-inline">\widetilde{X}</span>的第<span class="math-inline">j</span>列。
+
+<p>
+原则上，该算法计算最接近指定目标值<span class="math-inline">\tau</span>的<span class="math-inline">{k}_{\max}</span>个特征值。这仅在需要<span class="math-inline">{k}_{\max}</span>个最大或最小特征值时可靠。对于内部特征值集，我们将在第<a href="node145.html#sec:jdhar">4.7.4</a>节中描述更安全的技术。现在，我们将根据前几节的讨论，对算法的一些部分进行评论。
+
+<p>
+<dl>
+<dt><strong>(2)</strong></dt>
+<dd>初始化阶段。搜索子空间用<span class="math-inline">t=v_0</span>初始化。
+
+<p>
+</dd>
+<dt><strong>(4)-(6)</strong></dt>
+<dd>搜索子空间的新扩展向量通过修正的Gram-Schmidt方法与当前搜索子空间正交化。为了提高数值稳定性，可以使用算法<a href="node138.html#alg:rgs">4.14</a>中给出的模板进行替换。
+
+<p>
+如果<span class="math-inline">{m}=0</span>，这是一个空循环。
+
+<p>
+</dd>
+<dt><strong>(8)-(10)</strong></dt>
+<dd>我们只计算Hermitian矩阵<span class="math-inline">{M}\equiv V^\ast AV</span>（阶数为<span class="math-inline">{m}</span>）的上三角部分。
+
+<p>
+</dd>
+<dt><strong>(11)</strong></dt>
+<dd>对于<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵<span class="math-inline">{M}</span>的特征问题，可以使用LAPACK中的密集Hermitian特征问题的标准特征求解器来解决。我们选择计算标准Ritz值，这使得该算法适合于计算<span class="math-inline">A</span>的最大或最小<span class="math-inline">{k}_{\max}</span>个特征值。如果希望计算谱内部某处的<span class="math-inline">{k}_{\max}</span>个特征值，建议使用谐波Ritz值；参见第<a href="node145.html#sec:jdhar">4.7.4</a>节。
+
+<p>
+矩阵<span class="math-inline">{V}</span>表示列向量为<span class="math-inline">{v}_j</span>的<span class="math-inline">n</span>乘<span class="math-inline">{m}</span>矩阵，<span class="math-inline">{V^A}\equiv AV</span>同样；<span class="math-inline">S</span>是列向量为<span class="math-inline">s_j</span>的<span class="math-inline">m</span>乘<span class="math-inline">m</span>矩阵，<span class="math-inline">\Theta = \diag(\theta_1,\ldots,\theta_m)</span>。
+
+<p>
+</dd>
+<dt><strong>(13)</strong></dt>
+<dd>停止准则是在归一化特征向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受一个特征向量近似。这意味着我们接受计算特征值的误差在<span class="math-inline">\epsilon^2</span>量级，特征向量的角度误差在<span class="math-inline">\epsilon</span>量级，前提是相关特征值是简单且与其他特征值充分分离的；参见(<a href="node86.html#eigvecpert">4.4</a>)。
+
+<p>
+偶尔，<span class="math-inline">A</span>的某个所需特征向量可能未被检测到，例如，如果<span class="math-inline">v_0</span>在相应特征向量方向上没有分量。对于随机初始向量，这种情况不太可能发生。（参见算法<a href="node138.html#alg:jd">4.13</a>的注释(14)。）
+
+<p>
+</dd>
+<dt><strong>(16)</strong></dt>
+<dd>在接受一个Ritz对后，我们继续搜索下一个特征对，剩余的Ritz向量作为初始搜索空间的基础。这些向量在(17)-(20)中计算。
+
+<p>
+</dd>
+<dt><strong>(23)</strong></dt>
+<dd>一旦当前特征向量的搜索空间的维度超过<span class="math-inline">{m}_{\max}</span>，我们就重启。重启过程使用由最接近目标值<span class="math-inline">\tau</span>的<span class="math-inline">{m}_{\min}</span>个Ritz向量张成的子空间（并在(25)-(27)行中计算）。
+
+<p>
+</dd>
+<dt><strong>(30)-(31)</strong></dt>
+<dd>我们将已锁定的（计算的）特征向量收集在<span class="math-inline">\widetilde{X}</span>中，矩阵<span class="math-inline">\widetilde{Q}</span>是<span class="math-inline">\widetilde{X}</span>扩展了当前特征向量近似<span class="math-inline">{u}</span>。这样做是为了获得更紧凑的公式；修正方程等价于(<a href="node142.html#eq:jddefl">4.50</a>)中的方程。新的修正<span class="math-inline">{t}</span>必须与<span class="math-inline">\widetilde{X}</span>的列以及<span class="math-inline">{u}</span>正交。
+
+<p>
+当然，修正方程可以通过任何合适的迭代过程近似求解，例如预处理的Krylov子空间方法。由于<span class="math-inline">\widetilde{Q}</span>的出现，在使用预处理器<span class="math-inline">A-\theta I</span>时必须小心。预处理器的包含可以遵循单向量雅可比-戴维森算法的相同原则；参见算法<a href="node144.html#alg:corrit2">4.18</a>的模板。确保迭代求解器的初始向量<span class="math-inline">{t}_0</span>满足正交性约束<span class="math-inline">\widetilde{Q}^\ast {t}_0=0</span>。请注意，如果在几次雅可比-戴维森迭代中保持<span class="math-inline">{K}</span>不变，算法<a href="node144.html#alg:corrit2">4.18</a>每步可以节省显著的计算量。在这种情况下，可以从先前步骤中保存<span class="math-inline">{\widehat{Q}}</span>的列。同样，算法<a href="node144.html#alg:corrit2">4.18</a>中的矩阵<span class="math-inline">{\mathcal M}</span>及其<span class="math-inline">{\mathcal L}{\mathcal U}</span>分解也可以从先前步骤中更新。
+
+<p>
+</dd>
+</dl>
+
+<p>
+<br>
+<a name="alg:corrit2"></a><IMG
+ width="598" height="470" align="bottom" border="0"
+ src="img1385.png"
+ alt="\begin{algorithm}{Approximate Solution of the
+Deflated Jacobi--Davidson HEP Corr...
+...(d)} <span class="math-inline">{z}={\widehat{y}}-{\widehat{Q}}\vec{\alpha}</span>\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2912"
+  href="node145.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2906"
+  href="node140.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2902"
+  href="node143.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2908"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2910"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2913"
+  href="node145.html">Computing Interior Eigenvalues</a>
+<b> Up:</b> <a name="tex2html2907"
+  href="node140.html">Restart and Deflation</a>
+<b> Previous:</b> <a name="tex2html2903"
+  href="node143.html">Preconditioning.</a>
+ &nbsp <b>  <a name="tex2html2909"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2911"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

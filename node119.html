@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Shift Selection</title>
+<meta name="description" content="Shift Selection">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node120.html">
+<link rel="previous" href="node118.html">
+<link rel="up" href="node117.html">
+<link rel="next" href="node120.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2548"
+  href="node120.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2542"
+  href="node117.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2536"
+  href="node118.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2544"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2546"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2549"
+  href="node120.html">Lanczos Method in GEMV</a>
+<b> Up:</b> <a name="tex2html2543"
+  href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html2537"
+  href="node118.html">Implicit Restart</a>
+ &nbsp <b>  <a name="tex2html2545"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2547"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001352000000000000000"></a><a name="irlm_shiftsel"></a>
+<br>
+位移选择
+</h2>
+选择应用于QR步骤的位移 <span class="math-inline">\{ \mu_j \}</span> 有许多方法。几乎任何显式的多项式重启方案都可以通过这种隐式机制来应用。通过选择<em>精确位移</em>，已经取得了相当大的成功。这种选择是通过将 <span class="math-inline">T_m</span> 的特征值分成两个不相交的集合，即 <span class="math-inline">k</span> 个“想要的”和 <span class="math-inline">p</span> 个“不想要的”特征值，并使用这 <span class="math-inline">p</span> 个不想要的特征值作为位移来实现的。通过这种选择，<span class="math-inline">p</span> 次位移应用后，<span class="math-inline">T_k^+</span> 将具有 <span class="math-inline">k</span> 个想要的特征值作为其谱。随着收敛的进行，<span class="math-inline">T_k</span> 的次对角线趋于零，最期望的特征值近似值作为 <span class="math-inline">T_m</span> 的前 <span class="math-inline">k \times k</span> 块的对角线上的特征值出现。基向量 <span class="math-inline"> V_k </span> 倾向于成为 <span class="math-inline">A</span> 的正交特征向量。
+<a name="8037"></a>
+
+<p>
+“想要的集合”的示例规范包括：
+<dl COMPACT>
+<dt></dt>
+<dd>代数上最小的 <span class="math-inline">k</span> 个特征值，
+ 
+</dd>
+<dt></dt>
+<dd>代数上最大的 <span class="math-inline">k</span> 个特征值，
+ 
+</dd>
+<dt></dt>
+<dd>模最大的 <span class="math-inline">k</span> 个特征值，
+ 
+</dd>
+<dt></dt>
+<dd>模最小的 <span class="math-inline">k</span> 个特征值。
+</dd>
+</dl>
+在选择这些替代方案时，请记住，谱两端的特征值首先收敛，因此任何避免这些特征值的选择都可能导致收敛缓慢。当寻求内部特征值时，建议使用SI。
+
+<p>
+其他有趣的位移选择 <span class="math-inline">\{ \mu_j \}</span> 包括切比雪夫多项式的根[<a href="node421.html#saad84">383</a>]、调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]、Leja多项式的根[<a href="node421.html#bacr98">23</a>]、最小二乘多项式的根[<a href="node421.html#saad87">384</a>]以及精炼位移[<a href="node421.html#jia98c">244</a>]。特别是，Leja多项式和调和Ritz值已被用于估计 <span class="math-inline">A</span> 的内部特征值。
+
+<p>
+另一种解释源于以下事实：这些位移循环中的每一个都会导致对起始向量隐式应用一个 <span class="math-inline">A</span> 的多项式，其度数为 <span class="math-inline">p</span>：
+
+ v_1 (A) v_1  其中 () = _j=1^p (- _j )。<a name="filtpoly"></a>
+这个多项式的根是QR过程中使用的位移，可以选择这些位移来增强起始向量在所需特征值对应的特征向量方向上的分量，并抑制不需要方向上的分量。当然，这是可取的，因为它迫使起始向量进入与所需特征值相关的不变子空间。这反过来又迫使 <span class="math-inline">r_k</span> 变小，从而实现收敛。详细信息可以在[<a href="node421.html#sore92">419</a>]中找到。
+
+<p>
+还有一种应用隐式重启的方法，即<i>厚重启</i>，由Wu和Simon[<a href="node421.html#wusi99">463</a>]描述。在那里，计算 <span class="math-inline">T_m</span> 的特征值分解（<a href="node118.html#lanc_fact">4.20</a>），并保留对应于<i>想要的</i>特征值的部分作为箭头矩阵，其余部分被丢弃。如果选择相同的想要和不想要的特征值，厚重启在数学上等价于精确位移IRLM。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2548"
+  href="node120.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2542"
+  href="node117.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2536"
+  href="node118.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2544"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2546"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2549"
+  href="node120.html">Lanczos Method in GEMV</a>
+<b> Up:</b> <a name="tex2html2543"
+  href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html2537"
+  href="node118.html">Implicit Restart</a>
+ &nbsp <b>  <a name="tex2html2545"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2547"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

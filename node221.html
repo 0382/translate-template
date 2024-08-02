@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Arnoldi Procedure in GEMV Form</title>
+<meta name="description" content="Arnoldi Procedure in GEMV Form">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node222.html">
+<link rel="previous" href="node220.html">
+<link rel="up" href="node220.html">
+<link rel="next" href="node222.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4156"
+  href="node222.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4150"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4144"
+  href="node220.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4152"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4154"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4157"
+  href="node222.html">Implicit Restart</a>
+<b> Up:</b> <a name="tex2html4151"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4145"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+ &nbsp <b>  <a name="tex2html4153"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4155"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001661000000000000000">
+阿诺尔迪过程的GEMV形式</a>
+</h2>
+首先，我们将从稍有不同的角度审视阿诺尔迪过程。阿诺尔迪过程在第&#167;<a href="node215.html#sec:arnodimethod">7.5</a>节中已有推导，并以修正的格拉姆-施密特算法形式在算法<a href="node216.html#alg:arn0">7.3</a>中呈现。本节中，我们将采用经典的格拉姆-施密特过程结合正交化细化[<a href="node421.html#dgks76">96</a>]，以矩阵-向量（或GEMV）形式描述该过程。阿诺尔迪关系涉及矩阵<span class="math-inline">A</span>、基矩阵<span class="math-inline">V_k</span>以及残差向量<span class="math-inline">f_k</span>，其形式为
+<br><p></p>
+<div align="center">
+<div class="math-display">A V_k = V_k H_k + f_k e_k^{\ast},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中，<span class="math-inline">V_k \in {\mathcal C}^{n \times k}</span>的列向量是正交归一化的，<span class="math-inline">V_k^{\ast} f_k = 0</span>，且<span class="math-inline">H_k \in {\mathcal C}^{k\times k}</span>为上Hessenberg矩阵，其次对角线元素非负。我们称此为<span class="math-inline">A</span>的<em>k步阿诺尔迪分解</em>。从构造过程可轻易看出，<span class="math-inline">H_k = V_k^{\ast} A V_k</span>为上Hessenberg矩阵。当<span class="math-inline">A</span>为厄米特矩阵时，这意味着<span class="math-inline">H_k</span>为实对称三对角矩阵。<span class="math-inline">V_k</span>的列向量被称为<em>阿诺尔迪向量</em>。
+<a name="23296"></a><a name="23297"></a>
+<a name="23298"></a> 
+
+<p>
+算法<a href="node221.html#fig:ksteparn">7.6</a>给出了计算<span class="math-inline">k</span>步阿诺尔迪分解的模板。
+
+<p>
+<br>
+<a name="fig:ksteparn"></a><IMG
+ width="598" height="415" align="bottom" border="0"
+ src="img1966.png"
+ alt="\begin{algorithm}{<span class="math-inline">k</span>-Step Arnoldi Factorization
+}
+{
+\begin{tabbing}
+(nr)ss\=i...
+...t{H}_{j}, h]$\ \\
+{\rm (18)} \&gt; \&gt;{\bf end for}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+接下来，我们将详细描述一些实现细节，参考算法<a href="node221.html#fig:ksteparn">7.6</a>中的相应阶段。
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>选择初始起始向量<span class="math-inline">v</span>并归一化。理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的<span class="math-inline">v</span>。在缺乏其他考虑时，随机向量是一个合理的选择。
+
+<p>
+</dd>
+<dt><strong>(2)</strong></dt>
+<dd>初始化阿诺尔迪过程。在后续步骤中，<span class="math-inline">f_1</span>将成为新的阿诺尔迪基向量。此步骤应包括与其他步骤相同的重新正交化。
+
+<p>
+</dd>
+<dt><strong>(7)</strong></dt>
+<dd>归一化<span class="math-inline">f_j</span>以获得新的基向量<span class="math-inline">v_{j+1}</span>，部分更新<span class="math-inline">H_j</span>以得到<span class="math-inline">(j+1) \times j</span>矩阵<span class="math-inline">\hat{H}_{j}</span>，并计算新信息<span class="math-inline">w \leftarrow Av_{j+1}</span>。范数计算<span class="math-inline">\beta_j = \Vert f_j \Vert</span>在此处无需重新计算，已在步骤(12)中计算并可在此处重用。
+
+<p>
+</dd>
+<dt><strong>(10)</strong></dt>
+<dd>这是经典的格拉姆-施密特步骤，用于将<span class="math-inline">w</span>相对于<span class="math-inline">V_{j+1}</span>的列向量进行正交化。<a name="23358"></a> 此形式允许使用2级矩阵-向量运算。下文将进行更详细的讨论。
+
+<p>
+</dd>
+<dt><strong>(12)</strong></dt>
+<dd>此if语句中的语句序列确保新方向<span class="math-inline">f_{j+1}</span>在数值上与先前计算的方向（即<span class="math-inline">V_{j+1}</span>的列向量）正交。参数<span class="math-inline">\eta</span>必须指定（<span class="math-inline">0 \le \eta &lt; \infty</span>）。此测试询问“<span class="math-inline">w = Av_{j+1}</span>是否接近已构建的空间？”比率<span class="math-inline">\frac{\Vert f_{j+1}\Vert}{ \Vert h \Vert} =\frac{\sin(\theta)}{\cos(\theta)}</span>，其中<span class="math-inline">\theta</span>是向量<span class="math-inline">w</span>与<span class="math-inline">\mathrm{span}(V_{j+1})</span>之间的角度（即<span class="math-inline">w</span>与其投影<span class="math-inline">V_{j+1} h</span>之间的角度<span class="math-inline">\theta</span>）。<span class="math-inline">\eta</span>值越大，正交性要求越严格。<span class="math-inline">\eta = 0</span>时，算法退化为经典的格拉姆-施密特（CGS）。还需额外细节以完全指定此过程。如果在更新<span class="math-inline">f_{j+1}</span>和<span class="math-inline">h</span>后，关系<span class="math-inline">\Vert f_{j+1} \Vert &lt; \eta \Vert h \Vert</span>仍然成立，则数值上我们有<span class="math-inline">w \in \mathrm{span}(V_{j+1})</span>。此时，阿诺尔迪过程应终止或随机生成一个向量，相对于<span class="math-inline">V_{j+1}</span>的列向量进行正交化以替换<span class="math-inline">f_{j+1}</span>，并将<span class="math-inline">\beta_{j+1}</span>设为零以继续分解。ARPACK实现中使用的<span class="math-inline">\eta</span>值为<span class="math-inline">1/\sqrt{2}</span>（见第&#167;<a href="node234.html#sec:arpack1">7.6.9</a>节）。下文将对此正交化方法进行更多讨论。
+
+<p>
+</dd>
+<dt><strong>(17)</strong></dt>
+<dd><span class="math-inline">H_{j+1}</span>现在是一个<span class="math-inline">(j+1) \times (j+1)</span>的上Hessenberg矩阵。
+</dd>
+</dl>
+密集矩阵-向量乘积<span class="math-inline">V_{j+1}^{\ast} w</span>和<span class="math-inline">V_{j+1} h</span>可以用2级BLAS操作GEMV表示。这为从工作站到超级计算机的几乎所有平台上提供了显著的性能优势。此外，ScaLAPACK项目[<a href="node421.html#scalapack">52</a>]以及多家高性能计算机供应商已为多种并行机优化了这些内核。
+
+<p>
+用于将新信息<span class="math-inline">Av_k</span>相对于现有基<span class="math-inline">V_k</span>进行正交化的机制是CGS。它以不稳定性著称，在此设置中若不加修改将彻底失败。一种补救方法是使用算法<a href="node216.html#alg:arn0">7.3</a>中采用的修正格拉姆-施密特过程。不幸的是，这也将在我们即将讨论的重启情况下无法产生正交向量，并且在此设置中无法用2级BLAS表示。在步骤(5)中，我们采用了Daniel、Gragg、Kaufman和Stewart（DGKS）在[<a href="node421.html#dgks76">96</a>]中提出的迭代细化技术。该方案提供了一种极佳的方法来构建数值上与<span class="math-inline">V_{j+1}</span>正交的向量<span class="math-inline">f_{j+1}</span>。步骤(5)中指定的简单测试用于避免在不需要时进行此DGKS校正。
+<a name="23388"></a>
+
+<p>
+此机制以非常合理的成本保持了全工作精度的正交性。我们即将讨论的重启方案所施加的特殊情况使得这一修改对于获得准确的特征值和数值上正交的Schur向量（在厄米特情况下为特征向量）至关重要。基于MGS的方案通常足以求解线性系统，因为它们确实构建了一个线性独立的基集，尽管可能不是数值上正交的。MGS正交性的质量取决于原始向量集的条件数（线性独立性）。我们即将介绍的隐式重启机制在未保持数值正交性时效果较差，甚至可能失败。
+
+<p>
+已有充分文献证明，未能保持正交性会导致Lanczos或Arnoldi过程中出现多种数值困难。在厄米特情况下，Paige[<a href="node421.html#paig71">347</a>]表明，正交性的丧失恰好发生在<span class="math-inline">H_j</span>的特征值接近<span class="math-inline">A</span>的特征值时。实际上，阿诺尔迪向量在相关近似特征向量的方向上失去正交性。此外，未能保持正交性会导致Arnoldi方法产生近似特征值的虚假副本。在厄米特情况下，除了完全重新正交化外，还提出了几种补救措施。这些在第&#167;<a href="node103.html#sec:lan">4.4</a>节（第<a href="node103.html#sec:lan"><IMG  align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中进行了讨论。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4156"
+  href="node222.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4150"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4144"
+  href="node220.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4152"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4154"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4157"
+  href="node222.html">Implicit Restart</a>
+<b> Up:</b> <a name="tex2html4151"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4145"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+ &nbsp <b>  <a name="tex2html4153"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4155"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

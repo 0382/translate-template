@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li </title>
+<meta name="description" content="Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node307.html">
+<link rel="up" href="node280.html">
+<link rel="next" href="node325.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5699"
+  href="node325.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5693"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5689"
+  href="node323.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5695"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5697"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5700"
+  href="node325.html">Residual Vectors.</a>
+<b> Up:</b> <a name="tex2html5694"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5690"
+  href="node323.html">Notes and References</a>
+ &nbsp <b>  <a name="tex2html5696"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5698"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001780000000000000000"></a> <a name="sec:errbds_gnsym"></a><a name="37823"></a> 
+<a name="37824"></a>
+<br>
+稳定性与精度评估
+<br>&nbsp; <em>Z. Bai 和 R. Li</em> 
+</h1>
+
+<p>
+在本节中，我们将讨论评估计算特征值及其对应特征向量精度的工具，这些特征值和特征向量来自于正则矩阵对 <span class="math-inline">\{A,B\}</span> 的广义非对称特征值问题（GNHEP）。我们仅假设在成功计算结束后，通常可以获得残差向量，或者随后计算这些残差向量的成本较低。关于稠密GNHEP计算特征值、特征向量和降解子空间的误差估计处理方法，请参阅《LAPACK用户指南》第四章[<a href="node421.html#lapack">12</a>]。
+
+<p>
+对于一般的正则矩阵对 <span class="math-inline">\{A,B\}</span>，其情况比标准非对称特征值问题（NHEP）更为复杂，后者在第<a href="node275.html#sec:errbds_nsym">7.13</a>节（第<a href="node275.html#sec:errbds_nsym"><IMG align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中讨论过，尤其是当 <span class="math-inline">B</span> 为奇异矩阵时，特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 的次数不再等于矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的维度 <span class="math-inline">n</span>。即使 <span class="math-inline">B</span> 在数学上是非奇异的，但接近奇异时，尝试将其转换为标准特征值问题 <span class="math-inline">B^{-1}A</span> 也会遇到问题，因为此时可能产生巨大的特征值，从而导致数值不稳定。为了涵盖所有可能性，我们提出了一种通过非零数对 <span class="math-inline">(\alpha,\beta)</span> 来表示特征值 <span class="math-inline">\lambda</span> 的齐次表示法：
+<br><p></p>
+<div align="center">
+<div class="math-display">\lambda\equiv\alpha/\beta, \quad\quad \vert\alpha\vert^2+\vert\beta\vert^2&gt;0.</div>
+</div>
+<br clear="ALL">
+<p></p>
+当 <span class="math-inline">\beta = 0</span> 时，这样的数对表示<em>无穷大</em>特征值，这种情况发生在 <span class="math-inline">B</span> 为奇异矩阵时。这种表示显然不是唯一的，因为对于任意 <span class="math-inline">\xi\ne 0</span>，<span class="math-inline">(\xi\alpha,\xi\beta)</span> 表示相同的比值，因此对应相同的特征值。实际上，数对 <span class="math-inline">(\alpha,\beta)</span> 是从一组给出相同比值的数对类中选出的代表。
+<br>
+<br>
+<p>
+在这种新的特征值表示法下，特征多项式变为 <span class="math-inline">\det(\beta A-\alpha B)</span>，它在 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span> 中的总次数确实是 <span class="math-inline">n</span>。（实际上，其展开式中的第 <span class="math-inline">i</span> 项是 <span class="math-inline">\alpha^i\beta^{n-i}</span> 的倍数。）
+
+<p>
+但是，在特征值表示非唯一性的情况下，我们如何衡量两个特征值之间的差异呢？我们采用弦长度量[<a name="37834"></a>]来衡量 <span class="math-inline">\lambda = \alpha/\beta</span> 和 <span class="math-inline">\widetilde\lambda=\widetilde\alpha/\widetilde\beta</span> 之间的距离，其弦长距离定义为：
+<br><p></p>
+<div align="center">
+<div class="math-display">\chi(\lambda,\widetilde\lambda) = \chi((\alpha, \beta),(\widetilde\alpha......1 + \vert\lambda\vert^2} \sqrt{1 + \vert\widetilde\lambda\vert^2}}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+现在，我们已经准备好讨论评估计算近似值精度的相关问题。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><a name="tex2html5701" href="node325.html">残差向量</a>
+<li><a name="tex2html5702" href="node326.html">将残差误差转化为后向误差</a>
+<li><a name="tex2html5703" href="node327.html">计算特征值的误差界限</a>
+<li><a name="tex2html5704" href="node328.html">计算特征向量的误差界限</a>
+</ul></ul></ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html5699"
+  href="node325.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5693"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5689"
+  href="node323.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5695"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5697"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5700"
+  href="node325.html">Residual Vectors.</a>
+<b> Up:</b> <a name="tex2html5694"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5690"
+  href="node323.html">Notes and References</a>
+ &nbsp <b>  <a name="tex2html5696"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5698"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Introduction</title>
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node193.html">
+<link rel="previous" href="node190.html">
+<link rel="up" href="node190.html">
+<link rel="next" href="node192.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3639"
+  href="node192.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3633"
+  href="node190.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3627"
+  href="node190.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3635"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3637"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3640"
+  href="node192.html">Overview of Available Algorithms.</a>
+<b> Up:</b> <a name="tex2html3634"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Previous:</b> <a name="tex2html3628"
+  href="node190.html">Singular Value Decomposition</a>
+ &nbsp <b>  <a name="tex2html3636"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3638"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001510000000000000000"></a> <a name="sec:svdintro"></a>
+<br>
+引言
+</h1> 
+
+<p>
+在本章中，我们将探讨<span class="math-inline">m</span>行<span class="math-inline">n</span>列矩阵<span class="math-inline">A</span>的奇异值分解（SVD）。我们假设<span class="math-inline">m \geq n</span>，如果不满足，则考虑<span class="math-inline">A^*</span>。如第&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>节所述，这种分解可以写成<a name="20676"></a>
+<br>
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_chapSVD_SVD1"></a><div class="math-display">A = U \Sigma V^*,\vspace*{-2pt}%% help</div></td>
+<td width=10 align="right">
+(108)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中 
+<span class="math-inline">U = [u_1,\ldots,u_m]</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的酉矩阵，
+
+<span class="math-inline">V = [v_1,\ldots,v_n]</span> 是一个 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的酉矩阵，
+而 <span class="math-inline">\Sigma</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的对角矩阵，其对角线元素为
+<span class="math-inline">\Sigma_{ii} = \sigma_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span>。
+<span class="math-inline">u_i</span> 是 <em>左奇异向量</em>，
+<span class="math-inline">v_i</span> 是 <em>右奇异向量</em>，
+<span class="math-inline">\sigma_i</span> 是 <em>奇异值</em>。
+奇异值是非负的，并且按降序排列，即
+
+<span class="math-inline">\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0</span>。
+非零奇异值的数量 <span class="math-inline">r</span> 是 <span class="math-inline">A</span> 的秩。
+如果 <span class="math-inline">A</span> 是实数矩阵，那么 <span class="math-inline">U</span> 和 <span class="math-inline">V</span> 也是实数且正交的。
+
+<p>
+
+<span class="math-inline">A = U \Sigma V^*</span> 也可以写成 <span class="math-inline">AV = U \Sigma</span> 或
+
+<span class="math-inline">Av_i = u_i \sigma_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span>。
+
+<span class="math-inline">A = U \Sigma V^*</span> 也可以写成 
+<span class="math-inline">A^* U= V \Sigma^*</span> 或
+
+<span class="math-inline">A^*u_i = v_i \sigma_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span>
+以及 <span class="math-inline">A^*u_i = 0</span> 对于 
+<span class="math-inline">i=n+1,\ldots,m</span>。 
+
+<p>
+有几种“较小”版本的SVD经常被计算。
+设 
+<span class="math-inline">U_t = [u_1,\ldots,u_t]</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个左奇异向量，
+
+<span class="math-inline">V_t = [v_1,\ldots,v_t]</span> 是一个 <span class="math-inline">n</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个右奇异向量，
+以及
+
+<span class="math-inline">\Sigma_t = {\rm diag}(\sigma_1 ,\ldots, \sigma_t)</span> 是一个 <span class="math-inline">t</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个奇异值。
+那么我们有以下几种SVD类型。
+
+<p>
+<dl>
+<dt><strong><i>瘦SVD。</i></strong></dt>
+<dd><a name="20688"></a>
+
+<span class="math-inline">A = U_n \Sigma_n V_n^*</span> 是 <span class="math-inline">A</span> 的 <em>瘦（或经济型）SVD</em>。
+当 <span class="math-inline">n \ll m</span> 时，瘦SVD比完全SVD存储更小且计算更快。
+
+<p>
+</dd>
+<dt><strong><i>紧凑SVD。</i></strong></dt>
+<dd><a name="20690"></a>
+
+<span class="math-inline">A = U_{r} \Sigma_{r} V_{r}^*</span> 是 <span class="math-inline">A</span> 的 <em>紧凑SVD</em>。
+当 <span class="math-inline">r \ll n</span> 时，紧凑SVD比瘦SVD存储更小且计算更快。
+
+<p>
+</dd>
+<dt><strong><i>截断SVD。</i></strong></dt>
+<dd><a name="20695"></a>
+
+<span class="math-inline">A_t = U_{t} \Sigma_{t} V_{t}^*</span>
+是 <span class="math-inline">A</span> 的 <em>秩-<span class="math-inline">t</span> 截断（或部分）SVD</em>，
+其中 <span class="math-inline">t &lt; r</span>。
+在所有秩-<span class="math-inline">t</span> 矩阵 <span class="math-inline">B</span> 中，<span class="math-inline">B=A_t</span> 是唯一的最小化
+<span class="math-inline">\Vert A - B \Vert _F</span> 的矩阵，并且也最小化（可能不唯一）
+<span class="math-inline">\Vert A - B \Vert _2</span>。
+当 <span class="math-inline">t \ll r</span> 时，截断SVD比紧凑SVD存储更小且计算成本更低，是应用中最常见的SVD形式。
+
+<p>
+</dd>
+</dl>
+
+<p>
+瘦SVD也可以写成 
+<span class="math-inline">A = \sum_{i=1}^n \sigma_i u_i v_i^*</span>。
+每个 
+<span class="math-inline">(\sigma_i, u_i, v_i)</span> 被称为 <em>奇异三元组</em>。
+紧凑和截断SVD也可以类似地写成（求和从 <span class="math-inline">i=1</span> 到 <span class="math-inline">r</span> 或 <span class="math-inline">i=1</span> 到 <span class="math-inline">t</span>）。
+<br>
+<p>
+<span class="math-inline">A</span> 的SVD与三个相关厄米矩阵 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 和 
+
+<span class="math-inline">H(A) \equiv [{0 \atop A^*} \; {A \atop 0}]</span> 的特征分解密切相关，
+这些在第&#167;<a href="node46.html#sec_chap2_SVDRE">2.4.7</a>节中描述。
+大多数SVD的迭代算法相当于应用第<a href="node85.html#chap:heig">4</a>章中的算法到这些厄米矩阵之一，因此我们在这里回顾并扩展了这些材料。
+选择 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 或 <span class="math-inline">H(A)</span> 取决于我们感兴趣计算的奇异值和向量。
+一些算法（如移位-反转，见下文）的成本对于 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 和 <span class="math-inline">H(A)</span> 可能会有显著差异。
+
+<p>
+
+<ol>
+<li>考虑 <span class="math-inline">A^* A</span>，这是一个 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的厄米矩阵。
+那么 <span class="math-inline">A^*A = V (\Sigma^*\Sigma) V^*</span> 的特征分解，
+其中 
+<span class="math-inline">A = U \Sigma V^*</span> 是 <span class="math-inline">A</span> 的SVD。
+注意 
+<span class="math-inline">\Sigma^*\Sigma = {\rm diag}(\sigma_1^2 , \ldots , \sigma_n^2)</span>。
+换句话说，<span class="math-inline">A^* A</span> 的特征向量是 <span class="math-inline">A</span> 的右奇异向量，
+<span class="math-inline">A^* A</span> 的特征值是 <span class="math-inline">A</span> 的奇异值的平方。
+
+<p>
+因此，如果我们找到 <span class="math-inline">AA^*</span> 的特征值 <span class="math-inline">\lambda_i</span> 和特征向量 <span class="math-inline">v_i</span>，
+那么我们可以通过取 
+<span class="math-inline">\sigma_i = \lambda_i^{1/2}</span> 对于 <span class="math-inline">i=1,\ldots,n</span>，
+右奇异向量为 <span class="math-inline">v_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span>， 
+以及前 <span class="math-inline">r</span> 个左奇异向量为 
+<span class="math-inline">u_i = Av_i / \sigma_i</span> 来恢复 <span class="math-inline">A</span> 的紧凑SVD。
+左奇异向量
+<span class="math-inline">u_{r+1}</span> 到 <span class="math-inline">u_m</span> 不是直接确定的，但可以是任何与 <span class="math-inline">u_1</span> 到 <span class="math-inline">u_r</span> 正交的 <span class="math-inline">m-r</span> 个正交向量。
+当 
+<span class="math-inline">\sigma_i \neq 0</span> 非常小时，即 
+<span class="math-inline">0 &lt; \sigma_i \ll \sigma_1</span>，
+那么 <span class="math-inline">u_i</span> 将不会被非常准确地确定。
+
+<p>
+</li>
+<li>考虑 <span class="math-inline">AA^*</span>，这是一个 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的厄米矩阵。
+那么 <span class="math-inline">AA^* = U (\Sigma \Sigma^*) U^*</span> 的特征分解。
+注意 
+
+<span class="math-inline">\Sigma \Sigma^* = {\rm diag} ( \sigma_1^2,\ldots,\sigma_n^2 , 0,\ldots,0)</span>，
+其中 <span class="math-inline">m-n</span> 个零在 <span class="math-inline">\sigma_n^2</span> 之后。
+换句话说，
+<span class="math-inline">AA^*</span> 的特征向量是 <span class="math-inline">A</span> 的左奇异向量，
+<span class="math-inline">AA^*</span> 的特征值是 <span class="math-inline">A</span> 的奇异值的平方，
+再加上 <span class="math-inline">0</span> 且重数为 <span class="math-inline">m-n</span>。
+
+<p>
+因此，如果我们找到 <span class="math-inline">AA^*</span> 的特征值 <span class="math-inline">\lambda_i</span> 和特征向量 <span class="math-inline">u_i</span>，
+那么我们可以通过取 
+
+<span class="math-inline">\sigma_i = \lambda_i^{1/2}</span> 对于 <span class="math-inline">i=1,\ldots,n</span>，左奇异向量为 <span class="math-inline">u_i</span> 对于 <span class="math-inline">i=1,\ldots,m</span>，以及 
+前 <span class="math-inline">r</span> 个右奇异向量为 
+<span class="math-inline">v_i = A^*u_i / \sigma_i</span> 来恢复 <span class="math-inline">A</span> 的紧凑SVD。
+右奇异向量 <span class="math-inline">v_{r+1}</span> 到 <span class="math-inline">v_n</span> 不是直接确定的，但可以是任何与 <span class="math-inline">v_1</span> 到 <span class="math-inline">v_r</span> 正交的 <span class="math-inline">n-r</span> 个正交向量。
+当 
+<span class="math-inline">\sigma_i \neq 0</span> 非常小时，即 
+<span class="math-inline">0 &lt; \sigma_i \ll \sigma_1</span>，
+那么 <span class="math-inline">v_i</span> 将不会被非常准确地确定。
+
+<p>
+</li>
+<li>考虑 
+<span class="math-inline">H(A) = [{0^{m \times m} \atop A^*} \; {A \atop 0^{n \times n}}]</span>，
+这是一个 <span class="math-inline">(m+n)</span> 行 <span class="math-inline">(m+n)</span> 列的厄米矩阵。
+写 
+<span class="math-inline">U = [U_n^{m \times n}, \tilde{U}_n^{m \times (m-n)}]</span>
+和
+
+<span class="math-inline">\Sigma = [{\Sigma_{n}^{n \times n} \atop 0^{(m-n) \times n}}]</span>。
+那么 <span class="math-inline">H(A) = Q \Lambda Q^*</span> 的特征分解，其中
+
+<span class="math-inline">\Lambda = {\rm diag}( \Sigma_n , -\Sigma_n , O^{(m-n) \times (m-n)})</span>
+和
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_chap6_QforH_A_"></a><div class="math-display">Q=\bmat{ccc} \frac{1}{\sqrt{2}} U_n &amp; - \frac{1}{\sqrt{2}} U...... + \frac{1}{\sqrt{2}} V &amp;O^{n \times (m-n)} \emat\; \; \; .</div></td>
+<td width=10 align="right">
+(109)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+换句话说，<span class="math-inline">\pm \sigma_i</span> 是一个单位特征向量的特征值
+
+<span class="math-inline">\frac{1}{\sqrt{2}} [{\pm u_i \atop v_i}]</span> 对于 <span class="math-inline">i=1</span> 到 <span class="math-inline">n</span>，
+而 0 是一个特征向量的特征值 
+<span class="math-inline">[{u_i \atop 0^{n \times 1}}]</span>
+对于 <span class="math-inline">i&gt;n</span>。因此我们可以直接从 <span class="math-inline">H(A)</span> 的特征值和特征向量中提取 <span class="math-inline">A</span> 的奇异值、左奇异向量和右奇异向量。更确切地说，我们可以直接从 <span class="math-inline">H(A)</span> 的特征值和特征向量中提取紧凑SVD。但如果 0 是 <span class="math-inline">A</span> 的奇异值，那么 0 至少是 <span class="math-inline">H(A)</span> 的双重特征值，因此
+<span class="math-inline">Q</span> 不一定具有形式（<a href="node191.html#eqn_chap6_QforH_A_">6.2</a>）。（例如，如果 <span class="math-inline">A=0</span> 使得 <span class="math-inline">H(A)=0</span>，那么 <span class="math-inline">Q</span> 可以是任意正交矩阵，不一定具有形式（<a href="node191.html#eqn_chap6_QforH_A_">6.2</a>）。）在这种情况下，假设 
+
+<span class="math-inline">[{\hat{U}^{m \times z} \atop \hat{V}^{n \times z}}]</span> 
+的列形成 <span class="math-inline">H(A)</span> 的零特征值的特征空间的正交基；
+那么右奇异向量可以是任何正交向量，其张成 
+<span class="math-inline">{\rm span} \hat{V}</span>，
+左奇异向量可以是任何正交向量，其张成 
+<span class="math-inline">{\rm span} \hat{U}</span>。
+
+<p>
+</li>
+</ol>
+
+<p>
+我们注意到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">H(A)^2 = \bmat{cc} AA^* &amp; 0 \\ 0 &amp; A^*A \emat =\bmat{cc} H_2 &amp; 0 \\ 0 &amp; H_1 \emat</div>
+</div>
+<br clear="ALL">
+<p></p>
+因此，两次乘以 <span class="math-inline">H(A)</span> 相当于乘以 <span class="math-inline">AA^*</span> 和 <span class="math-inline">A^* A</span>。
+
+
+<p>
+<span class="math-inline">A</span> 的SVD与 <span class="math-inline">H(A)</span> 的特征分解之间的对应关系表明，第&#167;<a href="node86.html#sec:heigintro">4.1</a>节和 
+第&#167;<a href="node148.html#sec:pert-H">4.8</a>节中关于厄米矩阵特征值和特征向量的扰动理论讨论直接适用于SVD，我们现在描述如下。
+
+<p>
+将 <span class="math-inline">A</span> 扰动为 <span class="math-inline">A+E</span> 可以使奇异值改变最多 <span class="math-inline">\Vert E\Vert _2</span>：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eqn_chap6_SValuePert"></a><div class="math-display">\vert \sigma_i (A+E) - \sigma_i(A) \vert \leq \Vert E\Vert _2.</div></td>
+<td width=10 align="right">
+(110)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+
+<p>
+现在假设 
+<span class="math-inline">(\hat{\sigma}, \hat{u}, \hat{v})</span> 是奇异三元组 
+<span class="math-inline">(\sigma_i, u_i, v_i)</span> 的近似，其中
+<span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 是单位向量。与 <span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 对应的“最佳” <span class="math-inline">\hat{\sigma}</span> 是瑞利商
+
+<span class="math-inline">\hat{\sigma} = {\rm Re}(\hat{u}^* A \hat{v})</span>，因此我们假设
+<span class="math-inline">\hat{\sigma}</span> 具有此值。假设 <span class="math-inline">\hat{\sigma}</span> 比任何其他 <span class="math-inline">\sigma_j</span> 更接近 <span class="math-inline">\sigma_i</span>，并且让 <span class="math-inline">\delta</span> 是 
+<em>间隔</em> <a name="20776"></a>
+在 <span class="math-inline">\hat{\sigma}</span> 和任何其他奇异值之间：
+
+<span class="math-inline">\delta = \min_{j \neq i} \vert \hat{\sigma} - \sigma_j \vert</span>。 
+
+<p>
+定义 <em>残差向量</em> <a name="20781"></a>
+<span class="math-inline">r</span> 为
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">r = \frac{1}{\sqrt{2}} \bmat{c} A\hat{v} - \hat{\sigma} \hat{u} \\A^*\hat{u} - \hat{\sigma} \hat{v} \emat.</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果 <span class="math-inline">r=0</span> 那么 
+<span class="math-inline">(\hat{\sigma}, \hat{u}, \hat{v})</span> 是一个精确的奇异三元组，并且当 
+<span class="math-inline">\Vert r\Vert _2</span> 很小时，我们的误差界限将很小。
+<a name="20794"></a>
+
+<p>
+<span class="math-inline">\hat{\sigma}</span> 和 <span class="math-inline">\sigma_i</span> 之间的差异
+被 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\vert \hat{\sigma} - \sigma_i \vert \leq \min \left\{ \Vert r\Vert _2 ,\frac{\Vert r\Vert _2^2}{\delta} \right\}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+此外，角度 
+<span class="math-inline">\angle (\hat{v}, v_i)</span> 和
+
+<span class="math-inline">\angle (\hat{u}, u_i)</span> 在近似和真实奇异向量之间被 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\max \{ \sin \angle (\hat{v}, v_i) , \sin \angle (\hat{u}, u_i) \}\leq \frac{\sqrt{2} \Vert r\Vert _2}{\delta}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+换句话说，近似奇异值 <span class="math-inline">\hat{\sigma}</span> 与其他 <span class="math-inline">\sigma_j</span> 之间的间隔 <span class="math-inline">\delta</span> 越大，残差 <span class="math-inline">r</span> 越小，那么
+我们可以更紧密地界定 <span class="math-inline">\hat{\sigma}</span>、<span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 的误差。
+
+<p>
+给定 <span class="math-inline">A</span>、<span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span>，<span class="math-inline">\Vert r\Vert _2</span> 很容易计算，但 <span class="math-inline">\delta</span> 需要更多关于奇异值的信息来近似它。通常使用计算的奇异值接近 <span class="math-inline">\hat{\sigma}</span> 来近似 <span class="math-inline">\delta</span>：
+
+<span class="math-inline">\delta \approx \min \{ \hat{\sigma} - \hat{\sigma}_- ,\hat{\sigma}_+ - \hat{\sigma} \}</span>，
+其中 
+<span class="math-inline">\hat{\sigma}_-</span> 是下一个比 <span class="math-inline">\hat{\sigma}</span> 小的计算奇异值，
+<span class="math-inline">\hat{\sigma}_+</span> 是下一个比 <span class="math-inline">\hat{\sigma}</span> 大的计算奇异值。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><a name="tex2html3641"
+  href="node192.html">可用算法概述。</a>
+</ul></ul></ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+<!--Navigation Panel-->
+<a name="tex2html3639"
+  href="node192.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3633"
+  href="node190.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3627"
+  href="node190.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3635"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3637"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3640"
+  href="node192.html">Overview of Available Algorithms.</a>
+<b> Up:</b> <a name="tex2html3634"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Previous:</b> <a name="tex2html3628"
+  href="node190.html">Singular Value Decomposition</a>
+ &nbsp <b>  <a name="tex2html3636"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3638"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

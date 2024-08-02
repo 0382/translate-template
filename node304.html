@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Example 8.6.2.</title>
+<meta name="description" content="Example 8.6.2.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node305.html">
+<link rel="previous" href="node303.html">
+<link rel="up" href="node302.html">
+<link rel="next" href="node305.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5408"
+  href="node305.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5402"
+  href="node302.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5396"
+  href="node303.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5404"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5406"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5409"
+  href="node305.html">Example 8.6.3.</a>
+<b> Up:</b> <a name="tex2html5403"
+  href="node302.html">Numerical Examples</a>
+<b> Previous:</b> <a name="tex2html5397"
+  href="node303.html">Example 8.6.1.</a>
+ &nbsp <b>  <a name="tex2html5405"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5407"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001766020000000000000">
+Example 8.6.2.</a>
+</h4>
+Even when the initial vector is premultiplied by <span class="math-inline">H^{-1} B</span>, the
+Ritz vectors may be further improved by implementing the postprocessing step
+shown in&nbsp;(<a href="node300.html#ercorrection">8.27</a>).  The following example represents the
+same shaft as in Example 8.6.1, but with a coarser grid so that the order of
+<span class="math-inline">\{A,B\}</span> is 160.  A shift of <span class="math-inline">\sigma =1.e5i</span> was used and full 
+orthogonality was
+maintained.  The following table shows that the postprocessing step improves
+the direct residuals by up to four orders of magnitude.
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="center">&nbsp;</td>
+<td align="center">&nbsp;</td>
+<td align="center">&nbsp;</td>
+</tr>
+<tr><td align="center">Ritz value</td>
+<td align="center">
+<span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
+<td align="center">
+<span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">\tilde{\lambda}</span></td>
+<td align="center">(with postprocessing)</td>
+<td align="center">(no postprocessing)</td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">-1.96e\!-\!04 + 1.03e\!+\!05i</span></td>
+<td align="center"><span class="math-inline">5.04e\!-\!08</span></td>
+<td align="center"><span class="math-inline">5.04e\!-\!08</span></td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">-1.30e\!-\!02 + 1.06e\!+\!05i</span></td>
+<td align="center"><span class="math-inline">4.11e\!-\!08</span></td>
+<td align="center"><span class="math-inline">4.11e\!-\!08</span></td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">-7.16e\!-\!03 + 9.28e\!+\!04i</span></td>
+<td align="center"><span class="math-inline">4.15e\!-\!08</span></td>
+<td align="center"><span class="math-inline">4.18e\!-\!08 </span></td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">-7.60e\!-\!02 + 1.11e\!+\!05i</span></td>
+<td align="center"><span class="math-inline">8.41e\!-\!08</span></td>
+<td align="center"><span class="math-inline">8.51e\!-\!05 </span></td>
+</tr>
+<tr><td align="center">
+<span class="math-inline">-1.01e\!-\!01 + 8.66e\!+\!04i</span></td>
+<td align="center"><span class="math-inline">1.09e\!-\!07</span></td>
+<td align="center"><span class="math-inline">5.06e\!-\!03 </span></td>
+</tr>
+</table>
+</div> 
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

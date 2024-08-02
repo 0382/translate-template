@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Application to Reduced-Order Modeling</title>
+<meta name="description" content="Application to Reduced-Order Modeling">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node261.html">
+<link rel="previous" href="node259.html">
+<link rel="up" href="node256.html">
+<link rel="next" href="node261.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4720"
+  href="node261.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4714"
+  href="node256.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4708"
+  href="node259.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4716"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4718"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4721"
+  href="node261.html">Variants</a>
+<b> Up:</b> <a name="tex2html4715"
+  href="node256.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4709"
+  href="node259.html">Algorithm</a>
+ &nbsp <b>  <a name="tex2html4717"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4719"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION0016104000000000000000"></a> 
+<a name="rwf:reduced_order"></a><a name="25792"></a>
+<br>
+降阶模型的应用
+</h2>
+
+<p>
+在特征值计算中，通常可以自由选择带状Lanczos方法的右起始向量和左起始向量。然而，在其他重要应用中，起始向量是作为问题的一部分给出的。一个这样的应用是具有多输入和多输出的时不变线性动力系统的降阶建模；例如，参见最近的调查[<a href="node421.html#freu98">176</a>]。这类系统的特点是形式为
+<a name="25794"></a>
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:TAA"></a><div class="math-display">H(s) = C^T \left(I - s A\right)^{-1} B, \quad s\in {\mathcal C}.</div></td>
+<td width=10 align="right">
+(189)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+的矩阵值传递函数。这里，<span class="math-inline">A</span> 是一个一般非厄米矩阵的方阵，而
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:TAZ"></a><div class="math-display">B = \left[ \begin{array}{cccc}b_1 &amp; b_2 &amp; \cdots &amp; b_m\e......in{array}{cccc}c_1 &amp; c_2 &amp; \cdots &amp; c_p\end{array} \right]</div></td>
+<td width=10 align="right">
+(190)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+是分别具有 <span class="math-inline">m</span> 和 <span class="math-inline">p</span> 列的矩形矩阵。此外，<span class="math-inline">m</span> 是输入的数量，<span class="math-inline">p</span> 是输出的数量，并且 <span class="math-inline">m</span> 和 <span class="math-inline">p</span> 通常是不同的。带状Lanczos方法（应用于 <span class="math-inline">A</span> 并以矩阵(<a href="node260.html#rwf:TAZ">7.84</a>)的列，<span class="math-inline">B</span> 和 <span class="math-inline">C</span>，作为右起始向量和左起始向量）可以用来生成由(<a href="node260.html#rwf:TAA">7.83</a>)描述的线性动力系统的降阶模型。
+
+<p>
+对于降阶建模，还使用了具有负索引 <span class="math-inline">k\leq 0</span> 的条目 <span class="math-inline">t_{jk}</span> 和 <span class="math-inline">\tilde{t}_{jk}</span>。更确切地说，在这种情况下，算法<a href="node259.html#rwf:alg2">7.16</a>中的步骤(16)增加了以下六行：
+
+ 		 		 		 if <span class="math-inline">j\leq m_c</span>,
+<br>
+set <span class="math-inline">\rho_{jk}=t_{j,k-m}</span> for all <span class="math-inline">k</span> with <span class="math-inline">j-m_c+m \leq k \leq m</span>,
+<br>
+and set <span class="math-inline">\rho = \left[\, \rho_{ik} \, \right]_{i=1,2,\ldots,j,\, k=1,2,\ldots,m}</span>
+<br>
+if <span class="math-inline">j\leq p_c</span>, 
+<br>
+set <span class="math-inline">\eta_{jk}=\tilde{t}_{j,k-p}</span> for all <span class="math-inline">k</span> with <span class="math-inline">j-p_c+p \leq k \leq p</span>,
+<br>
+and set <span class="math-inline">\eta = \left[\, \eta_{ik} \, \right]_{i=1,2,\ldots,j,\, k=1,2,\ldots,p}</span>
+
+
+这里我们再次使用约定，算法<a href="node259.html#rwf:alg2">7.16</a>中未明确定义的条目 <span class="math-inline">\rho_{ik}</span> 和 <span class="math-inline">\eta_{ik}</span> 被设置为零。
+
+<p>
+矩阵 <span class="math-inline">\rho</span> 是上三角形且大小为 <span class="math-inline">m_1 \times m</span>。这里，<span class="math-inline">m_1</span> 定义为在算法<a href="node259.html#rwf:alg2">7.16</a>的迭代 <span class="math-inline">j</span> 中 <span class="math-inline">m_c=m_c(j)</span> 的值，其中 <span class="math-inline">j=m_c</span> 达到。事实证明，<span class="math-inline">m_1</span> 只是 <span class="math-inline">m</span> 减去已经被收缩的右初始向量 <span class="math-inline">b_1,b_2,\ldots,b_m</span> 的数量。特别是，<span class="math-inline">m_1\leq m</span>，并且 <span class="math-inline">m_1 = m</span> 当且仅当没有右起始向量被收缩。矩阵 <span class="math-inline">\eta</span> 是上三角形且大小为 <span class="math-inline">p_1 \times p</span>。这里，<span class="math-inline">p_1</span> 定义为在算法<a href="node259.html#rwf:alg2">7.16</a>的迭代 <span class="math-inline">j</span> 中 <span class="math-inline">p_c=p_c(j)</span> 的值，其中 <span class="math-inline">j=p_c</span> 达到。数 <span class="math-inline">p_1</span> 是 <span class="math-inline">p</span> 减去已经被收缩的左初始向量 <span class="math-inline">c_1,c_2,\ldots,c_p</span> 的数量。特别是，<span class="math-inline">p_1\leq p</span>，并且 <span class="math-inline">p_1 = p</span> 当且仅当没有左起始向量被收缩。<span class="math-inline">\rho</span> 的条目是用来将右起始向量转换为前 <span class="math-inline">m_1</span> 个右Lanczos向量的系数，<span class="math-inline">\eta</span> 的条目是用来将左起始向量转换为前 <span class="math-inline">p_1</span> 个左Lanczos向量的系数。
+
+<p>
+现在设 <span class="math-inline">j\geq \max\{m_1,p_1\}</span>，并设 <span class="math-inline">T_j^{\rm (pr)}</span>，<span class="math-inline">\rho</span>，和 <span class="math-inline">\eta</span> 是在算法<a href="node259.html#rwf:alg2">7.16</a>的 <span class="math-inline">j</span> 次迭代后生成的矩阵。这三个矩阵然后定义了原始传递函数(<a href="node260.html#rwf:TAA">7.83</a>)的 <span class="math-inline">j</span> 阶降阶模型，如下所示：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:TBB"></a><div class="math-display">H_j(s) = \eta_j^T D_j \left(I_j - s T_j^{\rm (pr)}\right)^{-1} \rho_j,\quad s\in {\mathcal C}.</div></td>
+<td width=10 align="right">
+(191)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\rho_j = \left[ \begin{array}{c}\rho\\0\end{array} \......{c}\eta\\0\end{array} \right] \in {\mathcal C}^{j\times p}</div>
+</div>
+<br clear="ALL">
+<p></p>
+是矩阵 <span class="math-inline">\rho</span> 和 <span class="math-inline">\eta</span>，分别添加了 <span class="math-inline">j-m_1</span> 和 <span class="math-inline">j-p_1</span> 行零。降阶模型(<a href="node260.html#rwf:TBB">7.85</a>)可以被证明是原始传递函数(<a href="node260.html#rwf:TAA">7.83</a>)的某种矩阵-Padé逼近；参见[<a href="node421.html#freu98">176</a>]及其中的参考文献。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4720"
+  href="node261.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4714"
+  href="node256.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4708"
+  href="node259.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4716"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4718"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4721"
+  href="node261.html">Variants</a>
+<b> Up:</b> <a name="tex2html4715"
+  href="node256.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4709"
+  href="node259.html">Algorithm</a>
+ &nbsp <b>  <a name="tex2html4717"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4719"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

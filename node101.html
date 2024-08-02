@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Acceleration.</title>
+<meta name="description" content="Acceleration.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node100.html">
+<link rel="up" href="node98.html">
+<link rel="next" href="node102.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2273"
+  href="node102.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2267"
+  href="node98.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2263"
+  href="node100.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2269"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2271"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2274"
+  href="node102.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html2268"
+  href="node98.html">Subspace Iteration</a>
+<b> Previous:</b> <a name="tex2html2264"
+  href="node100.html">Locking.</a>
+ &nbsp <b>  <a name="tex2html2270"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2272"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001334030000000000000">
+加速度</a>
+</h4>
+如果需要求解接近某个<i>位移</i> <span class="math-inline">\sigma</span> 的特征值，并且可以轻松获得分解  
+<span class="math-inline">A - \sigma \, I=LU</span>（参见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节），  
+那么可以将上述算法应用于  
+
+<span class="math-inline">\left(A - \sigma \, I\right)^{-1}</span>。接近 <span class="math-inline">\sigma</span> 的特征值将快速收敛。
+
+<p>
+还可以通过使用<i>多项式加速</i>  
+<a name="7575"></a>
+来加快计算速度，用多项式  
+<span class="math-inline">T_m [ (A - \sigma I) / \rho ] </span> 替换幂 <span class="math-inline">A^{m} </span>，其中 <span class="math-inline">T_m</span>  
+是第一类切比雪夫多项式，次数为 <span class="math-inline">m</span>，而 <span class="math-inline">\sigma</span> 和 <span class="math-inline">\rho</span> 提供了对感兴趣频谱部分的平移和缩放。理想情况下，应取  
+<span class="math-inline">\sigma=(\lambda_{p+1}+\lambda_n)/2</span> 作为中心，  
+
+<span class="math-inline">\rho=(\lambda_{p+1}-\lambda_n)/2</span> 作为包含不感兴趣特征值区间的半宽度，这些特征值的合理估计值。我们假设特征值沿实轴排序，并且我们希望在一端得到 <span class="math-inline">p</span> 个特征值。
+
+<p>
+通过这些增强，子空间迭代可能是一种相当高效的方法，其优点是易于编码和理解。然而，后面讨论的一些方法通常更受欢迎，因为它们往往更快地找到特征值/特征向量。
+
+<p>
+本节中的许多内容来自  
+Demmel [<a href="node421.html#demmelbook">114</a>]，Golub 和 Van Loan [<a href="node421.html#golo96">198</a>]，  
+以及 Saad [<a href="node421.html#saad92">387</a>]。关于子空间迭代的进一步讨论，建议读者参考 Chatelin [<a href="node421.html#chat93">79</a>]，  
+Lehoucq 和 Scott [<a href="node421.html#lesc95">292</a>]，Stewart [<a href="node421.html#stew76">422</a>]，以及  
+Wilkinson [<a href="node421.html#wilk65">457</a>]。另请参见 Bathe 和 Wilson [<a href="node421.html#bawi76">42</a>] 以及  
+Jennings [<a href="node421.html#jenn77">242</a>] 的结构工程方法。   
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2273"
+  href="node102.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2267"
+  href="node98.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2263"
+  href="node100.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2269"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2271"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2274"
+  href="node102.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html2268"
+  href="node98.html">Subspace Iteration</a>
+<b> Previous:</b> <a name="tex2html2264"
+  href="node100.html">Locking.</a>
+ &nbsp <b>  <a name="tex2html2270"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2272"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

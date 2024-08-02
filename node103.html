@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Lanczos Method &nbsp; A. Ruhe </title>
+<meta name="description" content="Lanczos Method &nbsp; A. Ruhe ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node117.html">
+<link rel="previous" href="node94.html">
+<link rel="up" href="node85.html">
+<link rel="next" href="node104.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2299"
+  href="node104.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2293"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2287"
+  href="node102.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2295"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2297"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2300"
+  href="node104.html">Algorithm</a>
+<b> Up:</b> <a name="tex2html2294"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2288"
+  href="node102.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html2296"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2298"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001340000000000000000"></a><a name="sec:lan"></a><a name="7598"></a>
+<br>
+Lanczos方法 
+<br>&nbsp; <em>A. Ruhe</em> 
+</h1>
+
+<p>
+Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要通过矩阵-向量运算的形式访问矩阵。不同的是，它更好地利用了通过记忆所有计算方向并始终让矩阵作用于一个与之前所有尝试方向正交的向量所获得的信息。
+
+<p>
+本节我们描述适用于特征值问题的Hermitian Lanczos算法，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="evp"></a><div class="math-display">ax=\lambda x\;,</div></td>
+<td width=10 align="right">
+(20)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中<span class="math-inline">A</span>是一个Hermitian矩阵，或者在实数情况下是对称矩阵。
+
+<p>
+算法从一个适当选择的初始向量<span class="math-inline">v</span>开始，构建Krylov子空间的正交基<span class="math-inline">V_j</span>，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="Krylov"></a><div class="math-display">{\mathcal K}^j(A,v)=\mathrm{span}\{v,VA,A^2v,\dots,A^{j-1}v\}\;,</div></td>
+<td width=10 align="right">
+(21)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+一次一列。每一步只需一次矩阵-向量乘法
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="Ax_op"></a><div class="math-display">y=Ax</div></td>
+<td width=10 align="right">
+(22)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在新正交基<span class="math-inline">V_j</span>中，算子<span class="math-inline">A</span>由一个实对称三对角矩阵表示，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="tridia"></a><div class="math-display">T_{j}=\left[\begin{array}{cccc}\alpha_1 &amp; \beta_1 &amp;&amp;\\\be......beta_{j-1}\\&amp;&amp;\beta_{j-1}&amp;\alpha_j\\\end{array} \right]\;,</div></td>
+<td width=10 align="right">
+(23)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+该矩阵也是一次一行一列地构建，使用基本递归公式，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="herm-recursion"></a><div class="math-display">av_j=V_{j}T_{j}+re_j^{\ast} \quad \mathrm{with} \quad V^{\ast}_j r = 0.</div></td>
+<td width=10 align="right">
+(24)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_{j}</span>的特征解，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="T-eigenvalues"></a><div class="math-display">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)}\;,</div></td>
+<td width=10 align="right">
+(25)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中上标<span class="math-inline">(j)</span>用于表示这些量在每次迭代<span class="math-inline">j</span>中变化。Ritz值<span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eigenvector"></a><div class="math-display">x_i^{(j)}=V_js_i^{(j)}\;,</div></td>
+<td width=10 align="right">
+(26)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+如果残差的范数很小，将是<span class="math-inline">A</span>的一个特征对的好近似；参见&#167;<a href="node148.html#sec:pert-H">4.8</a>。
+
+<p>
+让我们计算这个Ritz对的残差，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">r_i^{(j)}=Ax_i^{(j)}-x_i^{(j)}\theta_i^{(j)}=AV_js_i^{(j)}-V......^{(j)}=(AV_j-V_jT_{j})s_i^{(j)}=v_{j+1}\beta_js_{j,i}^{(j)}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们看到其范数满足
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="estimate_residual"></a><div class="math-display">\Vert r_i^{(j)}\Vert _2=\vert\beta_js_{i,j}^{(j)}\vert=\beta_{j,i}\;,</div></td>
+<td width=10 align="right">
+(27)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+因此我们只需要监控<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{i,j}^{(j)}</span>，就可以估计残差的范数。一旦这个估计值变小，我们就可以将Ritz值<span class="math-inline">\theta_i^{(j)}</span>标记为收敛到特征值<span class="math-inline">\lambda_i</span>。注意，计算Ritz值不需要矩阵-向量乘法&nbsp;(<a href="node103.html#eigenvector">4.12</a>)。我们可以节省这个耗时的操作，直到步骤<span class="math-inline">j</span>，当估计值&nbsp;(<a href="#estimate___residual"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>) 指示收敛时。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><a name="tex2html2301"
+  href="node104.html">算法</a>
+<li><a name="tex2html2302"
+  href="node105.html">收敛性质</a>
+<ul>
+<li><a name="tex2html2303"
+  href="node106.html">多重特征值</a>
+</ul>
+<li><a name="tex2html2304"
+  href="node107.html">谱变换</a>
+<li><a name="tex2html2305"
+  href="node108.html">再正交化</a>
+<ul>
+<li><a name="tex2html2306"
+  href="node109.html">完全再正交化</a>
+<li><a name="tex2html2307"
+  href="node110.html">选择性再正交化</a>
+<li><a name="tex2html2308"
+  href="node111.html">局部再正交化和检测虚假Ritz值</a>
+</ul>
+<li><a name="tex2html2309"
+  href="node112.html">软件可用性</a>
+<li><a name="tex2html2310"
+  href="node113.html">数值示例</a>
+<ul>
+<li><a name="tex2html2311"
+  href="node114.html">L形膜片结果</a>
+<li><a name="tex2html2312"
+  href="node115.html">Medline SVD结果</a>
+<li><a name="tex2html2313"
+  href="node116.html">L形膜片与移位反演结果</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+<!--Navigation Panel-->
+<a name="tex2html2299"
+  href="node104.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2293"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2287"
+  href="node102.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2295"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2297"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2300"
+  href="node104.html">Algorithm</a>
+<b> Up:</b> <a name="tex2html2294"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2288"
+  href="node102.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html2296"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2298"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

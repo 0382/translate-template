@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Sparse Matrix Storage Formats &nbsp; J.&nbsp;Dongarra
+</title>
+<METa name="description" content="Sparse Matrix Storage Formats &nbsp; J.&nbsp;Dongarra
+">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node379.html">
+<link rel="previous" href="node371.html">
+<link rel="up" href="node371.html">
+<link rel="next" href="node373.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6484"
+  href="node373.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6478"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6472"
+  href="node371.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6480"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6482"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6485"
+  href="node373.html">Compressed Row Storage</a>
+<b> Up:</b> <a name="tex2html6479"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6473"
+  href="node371.html">Common Issues</a>
+ &nbsp <b>  <a name="tex2html6481"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6483"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001910000000000000000"></a>
+<a name="sec:data-structures"></a><a name="45980"></a>
+<br>
+稀疏矩阵存储格式
+<br>&nbsp; <em>J.&nbsp;Dongarra</em>
+
+</h1>
+
+<p>
+本书中考虑的大多数迭代方法的效率主要取决于矩阵向量乘积的性能，因此也取决于所采用的矩阵存储方案。通常，所使用的存储方案自然源于特定的应用问题。
+
+<p>
+在本节中，我们将回顾一些在数值软件包中使用较为流行的稀疏矩阵格式，如ITPACK[<a href="node421.html#itpack:toms:82">263</a>]、NSPCG[<a href="node421.html#nspcg">345</a>]和SPARSPAK[<a href="node421.html#georgeliu81">191</a>]，其中一些最近已被BLAS技术论坛采纳为新的软件标准的一部分（更多信息请参见ETHOME）。在第&#167;<a href="node381.html#sec:sparse_blas">10.2.2</a>节中，我们将展示如何使用两种稀疏矩阵格式来构建矩阵向量乘积。
+
+<p>
+如果系数矩阵<span class="math-inline">A</span>是稀疏的，那么大规模特征值问题如果不对<span class="math-inline">A</span>的零元素进行操作或存储，可以最有效地解决。稀疏存储方案在内存中为矩阵的非零元素分配连续的存储空间，可能还包括有限数量的零元素。当然，这需要一个方案来确定这些元素在完整矩阵中的位置。
+
+<p>
+有许多方法可以存储数据（例如，参见Saad[<a href="node421.html#Saad:sprskit">386</a>]和Eijkhout[<a href="node421.html#Eij:lawn50">156</a>]）。在这里，我们将讨论压缩行和列存储、块压缩行存储、对角存储、锯齿对角存储和天际线存储。
+
+<p>
+<br><hr>
+<!--子节链接表-->
+<a name="CHILD_LINKS"><strong>子节</strong></a>
+
+<ul>
+<li><a name="tex2html6486" href="node373.html">压缩行存储</a>
+<li><a name="tex2html6487" href="node374.html">压缩列存储</a>
+<li><a name="tex2html6488" href="node375.html">块压缩行存储</a>
+<li><a name="tex2html6489" href="node376.html">压缩对角存储</a>
+<li><a name="tex2html6490" href="node377.html">锯齿对角存储</a>
+<li><a name="tex2html6491" href="node378.html">天际线存储</a>
+</ul>
+<!--子节链接表结束-->
+<hr>
+
+</p><!--Navigation Panel-->
+<a name="tex2html6484"
+  href="node373.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6478"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6472"
+  href="node371.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6480"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6482"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6485"
+  href="node373.html">Compressed Row Storage</a>
+<b> Up:</b> <a name="tex2html6479"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6473"
+  href="node371.html">Common Issues</a>
+ &nbsp <b>  <a name="tex2html6481"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6483"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

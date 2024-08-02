@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Relationship to Symmetric Lanczos.</title>
+<meta name="description" content="Relationship to Symmetric Lanczos.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node198.html">
+<link rel="up" href="node197.html">
+<link rel="next" href="node200.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3757"
+  href="node200.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3751"
+  href="node197.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3747"
+  href="node198.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3753"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3755"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3758"
+  href="node200.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html3752"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html3748"
+  href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
+ &nbsp <b>  <a name="tex2html3754"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3756"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001533020000000000000">
+与对称Lanczos方法的关系</a>
+</h4>
+从方程 (<a href="node198.html#lansvdeq1">6.7</a>), (<a href="node198.html#lansvdeq2">6.8</a>), 和
+(<a href="node198.html#uvorth">6.9</a>) 中，我们有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A^{\ast} A V_k = V_k B^*_k B_k + \alpha_k \beta_{k}v_{k+1}e^*_k.</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们注意到 <span class="math-inline">B^*_k B_k</span> 是对称且三对角的，因为 <span class="math-inline">B_k</span> 是双对角的。
+与方程 (<a href="node103.html#herm-recursion">4.10</a>) 比较，我们可以看到
+算法 <a href="node198.html#gklmethod">6.1</a> 
+计算的信息与
+Lanczos 方法（算法 <a href="node104.html#Symmetric_Lanczos">4.6</a>）
+应用于 Hermitian 矩阵 <span class="math-inline">A^{\ast} A</span> 时相同。
+相反，如果我们对 <span class="math-inline">A^* A</span> 应用 Lanczos 方法得到一个三对角矩阵
+<span class="math-inline">T_k = B^*_k B_k</span>，那么 <span class="math-inline">B_k</span> 可以通过取 <span class="math-inline">T_k</span> 的上三角 Cholesky 因子得到。
+
+<p>
+类似地，我们可以得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">AA^* U_k = U_k B_k B_k^* + \beta_k (A v_{k+1}) e_k^*.</div>
+</div>
+<br clear="ALL">
+<p></p>
+同样，<span class="math-inline">B_k B_k^*</span> 是对称且三对角的。
+再次与方程 (<a href="node103.html#herm-recursion">4.10</a>) 比较，我们可以看到
+算法 <a href="node198.html#gklmethod">6.1</a> 
+计算的信息与
+Lanczos 方法（算法 <a href="node104.html#Symmetric_Lanczos">4.6</a>）
+应用于 Hermitian 矩阵 <span class="math-inline">AA^*</span> 时相同。
+相反，如果我们对 <span class="math-inline">AA^*</span> 应用 Lanczos 方法得到一个三对角矩阵
+<span class="math-inline">T_k = B_k B_k^*</span>，那么 <span class="math-inline">B_k</span> 可以通过取 <span class="math-inline">JT_kJ</span> 的上三角 Cholesky 因子 <span class="math-inline">B'</span> 得到，其中 <span class="math-inline">J</span> 是
+将单位矩阵的列按反序排列的矩阵（使得 <span class="math-inline">JT_kJ</span> 是通过反转 <span class="math-inline">T_k</span> 的行和列的顺序得到的），然后 <span class="math-inline">B_k = JB'J</span>。
+
+<p>
+最后，假设我们对 <span class="math-inline">H(A)</span> 应用 Lanczos 方法（算法 <a href="node104.html#Symmetric_Lanczos">4.6</a>）
+并使用特殊的起始向量
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">z_1 = \bmat{c} 0 \\ v_1 \emat</div>
+</div>
+<br clear="ALL">
+<p></p>
+来生成 Lanczos 向量 <span class="math-inline">z_2, z_3,\ldots.</span>
+算法 <a href="node104.html#Symmetric_Lanczos">4.6</a> 的第一步产生
+<p></p>
+<div align="center">
+
+<IMG
+ width="474" height="206" border="0"
+ src="img1793.png"
+ alt="\begin{eqnarray*}
+% latex2html id marker 21028r &amp; = &amp; H(A) z_1 = \bmat{c} Av_1...
+... \ as\ computed\ in\ line\ (5) \ of\ Algorithm~\ref{gklmethod}.}
+\end{eqnarray*}">
+<br clear="ALL"></div><p></p>
+<br clear="ALL"><p></p>
+<br clear="ALL"><p></p>
+
+<p>
+算法 <a href="node104.html#Symmetric_Lanczos">4.6</a> 的下一步产生
+<p></p>
+<div align="center">
+
+<IMG
+ width="471" height="230" border="0"
+ src="img1794.png"
+ alt="\begin{eqnarray*}
+% latex2html id marker 21038r &amp; = &amp; H(A) z_2 = \bmat{c} 0 \\...
+...s \ as\ computed\ in\ line\ (8)\ of\ Algorithm~\ref{gklmethod}.}
+\end{eqnarray*}">
+<br clear="ALL"></div><p></p>
+<br clear="ALL"><p></p>
+<br clear="ALL"><p></p>
+继续这种方式，我们可以看到算法 <a href="node104.html#Symmetric_Lanczos">4.6</a> 的两步计算的信息
+与算法 <a href="node198.html#gklmethod">6.1</a> 的一步相同：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">z_{2i-1} = \bmat{c} 0 \\ v_i \emat\; \; {\rm and} \; \;z_{2i} = \bmat{c} u_i \\ 0 \emat.</div>
+</div>
+<br clear="ALL">
+<p></p>
+然而，算法 <a href="node104.html#Symmetric_Lanczos">4.6</a> 比算法 <a href="node198.html#gklmethod">6.1</a> 多做一倍的矩阵-向量乘法
+（其中一半是通过零向量），因此
+算法 <a href="node198.html#gklmethod">6.1</a> 通常会使用一半的时间和空间。
+相反，如果对 <span class="math-inline">H(A)</span> 应用 Lanczos 方法得到一个三对角矩阵 <span class="math-inline">T_k</span>，那么 <span class="math-inline">T_k</span> 的对角线上将有零，
+非对角线元素将与 <span class="math-inline">B_k</span> 的非零元素相同（来自方程 (<a href="node198.html#uav">6.4</a>) 的符号）：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_{2k} = \bmat{ccccccc}0 &amp; \alpha_1 &amp; &amp; &amp; &amp; &amp; \\\alpha_1...... \ddots &amp; \ddots &amp; \alpha_k \\&amp; &amp; &amp; &amp; &amp; \alpha_k &amp; 0 \emat.</div>
+</div>
+<br clear="ALL">
+<p></p>
+由于这些等价性，来自第 <a href="node103.html#sec:lan">4.4</a> 节的所有 Lanczos 方法的算法变体
+和收敛性质都适用于
+算法 <a href="node198.html#gklmethod">6.1</a>。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3757"
+  href="node200.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3751"
+  href="node197.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3747"
+  href="node198.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3753"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3755"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3758"
+  href="node200.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html3752"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html3748"
+  href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
+ &nbsp <b>  <a name="tex2html3754"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3756"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

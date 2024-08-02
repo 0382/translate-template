@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Preconditioned Steepest Ascent/Descent Methods</title>
+<meta name="description" content="Preconditioned Steepest Ascent/Descent Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node415.html">
+<link rel="previous" href="node413.html">
+<link rel="up" href="node410.html">
+<link rel="next" href="node415.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html7121"
+  href="node415.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7115"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7109"
+  href="node413.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7117"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7119"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7122"
+  href="node415.html">Preconditioned Lanczos Methods</a>
+<b> Up:</b> <a name="tex2html7116"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7110"
+  href="node413.html">Preconditioned Shifted Power Method</a>
+ &nbsp <b>  <a name="tex2html7118"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7120"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002034000000000000000">
+预处理最速上升/下降法</a>
+</h2>
+
+<p>
+这些方法与上一小节中的算法<a href="node413.html#fig:prec_powerBA">11.5</a>类似，但在迭代过程中选择移位，不需要任何界限知识。历史上，特征问题的预处理最速下降/上升法比上一小节中带有先验选择的幂方法更早被提出（参见[<a href="node421.html#MR14:236b">225</a>,<a href="node421.html#s58">393</a>,<a href="node421.html#p68">365</a>]）。
+
+<p>
+这里，我们展示了针对矩阵束<span class="math-inline">B - \mu A</span>的单向量版本的预处理最速上升法，见算法<a href="node414.html#fig:prec_steepBA">11.6</a>。对于<span class="math-inline">B=I</span>，<span class="math-inline">\lambda = 1 / \mu</span>，该方法变为<span class="math-inline">A - \lambda I</span>的最速下降法。
+
+<p>
+
+<p></p>
+<div align="center">
+
+<p><a name="fig:prec_steepBA"></a></p><IMG
+ width="598" height="185" border="0"
+ src="img3944.png"
+ alt="\begin{figure}\begin{algorithm}
+{预处理最速上升法用于广义特征问题\...
+...ert x\Vert _A $\end{tabbing}}
+\vspace*{-12pt}%% help
+\end{algorithm}\end{figure}">
+</div>
+<p></p>
+
+<p>
+我们注意到，移位可以通过在试验子空间<span class="math-inline">{\rm span}\{ x^{(i)}, w \}</span>上对矩阵束<span class="math-inline">B - \mu A</span>应用Rayleigh-Ritz方法来确定。由于试验空间是二维的，投影问题可以作为一个二次方程来求解。因此，可以推导出<span class="math-inline">\tau</span>作为二次多项式根的显式公式。
+
+<p>
+通过构造，最速上升（下降）方法在每次迭代中提供了Rayleigh商的最大化（最小化），相比于相应的迭代算法<a href="node413.html#fig:prec_powerBA">11.5</a>。因此，前一节的收敛结果可以不加改变地应用，并且可以做出类似的观察。
+
+<p>
+我们在以下两个表格中分别收集了算法<a href="node414.html#fig:prec_steepBA">11.6</a>每次迭代的主要成本，包括存储和浮点运算：
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">项目</td>
+<td align="left">存储</td>
+</tr>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">1</span> <span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span> <span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">临时向量</td>
+<td align="left">3-5 <span class="math-inline">n</span>维向量</td>
+</tr>
+</table>
+</div>
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">操作</td>
+<td align="left">主要成本</td>
+</tr>
+<tr><td align="left">Rayleigh-Ritz方法</td>
+<td align="left"><span class="math-inline">6</span>点积和
+<span class="math-inline">2</span>矩阵-向量乘积</td>
+</tr>
+<tr><td align="left">残差 <span class="math-inline">r</span></td>
+<td align="left"><span class="math-inline">2</span>矩阵-向量乘积，<span class="math-inline">1</span>更新</td>
+</tr>
+<tr><td align="left">预处理残差 <span class="math-inline">w </span></td>
+<td align="left">取决于预条件子 <span class="math-inline">T</span></td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>更新</td>
+</tr>
+</table>
+</div>
+
+<p>
+预处理最速下降/上升法的主要优点是相对简单和每次迭代的成本较低，相比于下面考虑的其他预处理特征求解器。使用Rayleigh-Ritz方法而不是先验选择的移位不需要任何界限知识。在负面方面，每次迭代的成本可能是算法<a href="node413.html#fig:prec_powerBA">11.5</a>的两倍左右。尽管收敛通常比算法<a href="node413.html#fig:prec_powerBA">11.5</a>好，但仍然不如我们下面考虑的其他预处理特征求解器的线性收敛。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html7121"
+  href="node415.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7115"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7109"
+  href="node413.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7117"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7119"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7122"
+  href="node415.html">Preconditioned Lanczos Methods</a>
+<b> Up:</b> <a name="tex2html7116"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7110"
+  href="node413.html">Preconditioned Shifted Power Method</a>
+ &nbsp <b>  <a name="tex2html7118"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7120"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

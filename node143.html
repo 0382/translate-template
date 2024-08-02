@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Preconditioning.</title>
+<meta name="description" content="Preconditioning.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node144.html">
+<link rel="previous" href="node142.html">
+<link rel="up" href="node140.html">
+<link rel="next" href="node144.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2900"
+  href="node144.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2894"
+  href="node140.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2888"
+  href="node142.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2896"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2898"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2901"
+  href="node144.html">An Algorithm Template.</a>
+<b> Up:</b> <a name="tex2html2895"
+  href="node140.html">Restart and Deflation</a>
+<b> Previous:</b> <a name="tex2html2889"
+  href="node142.html">Deflation.</a>
+ &nbsp <b>  <a name="tex2html2897"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2899"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001373030000000000000">
+预处理。</a>
+</h4>
+对于GMRES或CGS等迭代求解器，应用方程（<a href="node142.html#eq:jddefl">4.50</a>）进行预处理，其复杂度仅略高于单向量情况（参见第<a href="node137.html#sec:jdsym">4.7.1</a>节）。假设我们有一个可用的左预条件器<span class="math-inline">{K}</span>，用于操作符<span class="math-inline">A-\theta_j^{(m)}I</span>。设<span class="math-inline">\widetilde{Q}</span>表示矩阵<span class="math-inline">\widetilde{X}_{k-1}</span>扩展了<span class="math-inline">{u}_j^{(m)}</span>作为其第<span class="math-inline">k</span>列。在这种情况下，预条件器<span class="math-inline">{K}</span>也必须限制在与<span class="math-inline">\widetilde{Q}</span>正交的子空间内，这意味着我们必须有效地使用
+<br><p></p>
+<div align="center">
+<div class="math-display">\widetilde{K} \equiv (I-\widetilde{Q}\widetilde{Q}^\ast){K}(I-\widetilde{Q}\widetilde{Q}^\ast) .</div>
+</div>
+<br clear="ALL">
+<p></p>
+类似于单向量情况，这可以通过一种出乎意料的高效方式实现。
+
+<p>
+假设我们使用初始猜测<span class="math-inline">{t}_0=0</span>的Krylov求解器，并进行左预处理，以近似求解校正方程（<a href="node142.html#eq:jddefl">4.50</a>）。由于起始向量位于与<span class="math-inline">\widetilde{Q}</span>正交的子空间内，Krylov求解器的所有迭代向量都将位于该空间内。在该子空间中，我们必须计算向量<span class="math-inline">{z} \equiv\widetilde{K}^{-1}\widetilde{A}{v}</span>，其中向量<span class="math-inline">{v}</span>由Krylov求解器提供，并且
+<br><p></p>
+<div align="center">
+<div class="math-display">\widetilde{A}\equiv(I-\widetilde{Q}\widetilde{Q}^\ast)(A-\theta_j^{(m)} I)(I-\widetilde{Q}\widetilde{Q}^\ast).</div>
+</div>
+<br clear="ALL">
+<p></p>
+这分两步完成。首先我们计算
+<br><p></p>
+<div align="center">
+<div class="math-display">\widetilde{A}{v} =(I-\widetilde{Q}\widetilde{Q}^\ast) (A-\theta_j^{(m)} I)(I-\widetilde{Q}\widetilde{Q}^\ast){v} =(I-\widetilde{Q}\widetilde{Q}^\ast){y}</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">y \equiv (A-\theta_j^{(m)} I){v}</span>，因为<span class="math-inline">\widetilde{Q}^\ast {v}=0</span>。然后，通过左预处理，我们解出<span class="math-inline">{z}\perp \widetilde{Q}</span>，从
+<br><p></p>
+<div align="center">
+<div class="math-display">\widetilde{K} {z}=(I-\widetilde{Q}\widetilde{Q}^\ast){y} .</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+由于<span class="math-inline">\widetilde{Q}^\ast {z}=0</span>，因此<span class="math-inline">{z}</span>满足
+<span class="math-inline">{K}{z}={y}-\widetilde{Q}\vec{\alpha}</span>或
+<span class="math-inline">{z}={K}^{-1}{y} - {K}^{-1}\widetilde{Q}\vec{\alpha}</span>。条件<span class="math-inline">\widetilde{Q}^\ast {z}=0</span>导致
+<br><p></p>
+<div align="center">
+<div class="math-display">\vec{\alpha}=(\widetilde{Q}^\ast {K}^{-1}\widetilde{Q})^{-1}\widetilde{Q}^\ast {K}^{-1}{y} .</div>
+</div>
+<br clear="ALL">
+<p></p>
+向量<span class="math-inline">\widehat{y}\equiv {K}^{-1}{y}</span>从<span class="math-inline">{K}\widehat{y}={y}</span>解出，同样地，<span class="math-inline">{\widehat{Q}}\equiv{K}^{-1}\widetilde{Q}</span>从<span class="math-inline">{K}{\widehat{Q}}=\widetilde{Q}</span>解出。注意，最后一组方程在方程（<a href="node142.html#eq:jddefl">4.50</a>）的迭代过程中只需解一次，因此对于线性求解器的<span class="math-inline">{i}_S</span>次迭代，实际上需要<span class="math-inline">{i}_S+{k}</span>次预条件器操作。还应注意，在Krylov求解器的迭代中，与左预处理操作符的矩阵向量乘法只需要一次<span class="math-inline">\widetilde{Q}^\ast</span>和<span class="math-inline">{K}^{-1}\widetilde{Q}</span>操作，而不是投影操作符<span class="math-inline">(I-\widetilde{Q}\widetilde{Q}^\ast)</span>的四次操作。这在算法<a href="node144.html#alg:corrit2">4.18</a>给出的解决方案模板中已经详细说明。如果操作符<span class="math-inline">{K}</span>在多次连续的特征值计算中保持不变，可以实现明显的节省（详情参见[<a href="node421.html#slvm98">412</a>]）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2900"
+  href="node144.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2894"
+  href="node140.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2888"
+  href="node142.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2896"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2898"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2901"
+  href="node144.html">An Algorithm Template.</a>
+<b> Up:</b> <a name="tex2html2895"
+  href="node140.html">Restart and Deflation</a>
+<b> Previous:</b> <a name="tex2html2889"
+  href="node142.html">Deflation.</a>
+ &nbsp <b>  <a name="tex2html2897"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2899"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

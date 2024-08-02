@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Introduction</title>
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node345.html">
+<link rel="previous" href="node343.html">
+<link rel="up" href="node343.html">
+<link rel="next" href="node345.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6057"
+  href="node345.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6051"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6045"
+  href="node343.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6053"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6055"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6058"
+  href="node345.html">MATLAB Templates</a>
+<b> Up:</b> <a name="tex2html6052"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6046"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+ &nbsp <b>  <a name="tex2html6054"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6056"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001841000000000000000">
+引言</a>
+</h2> 
+   本节通过聚焦于特征空间的的几何性质，扩展了代数特征值问题的研究范围。我们讨论了一个模板，该模板解决了定义在子空间集合上的变分问题。这类问题出现的领域包括电子结构计算、特征值正则化、控制理论、信号处理以及图形相机校准。基础的几何学也为数值分析师提供了理论洞察，深入理解了特征值算法背后共同的数学结构（参见[<a href="node421.html#edas99">151</a>,<a href="node421.html#edelman96a">155</a>,<a href="node421.html#smith94a">416</a>]）。
+
+<p>
+假设我们希望在满足<span class="math-inline">Y^*Y=I</span>的条件下优化实值函数<span class="math-inline">F(Y)</span>，其中<span class="math-inline">Y^*</span>根据需要可以是转置或Hermitian转置。我们的模板设计用于优化这类<span class="math-inline">F</span>。
+
+<p>
+一个简单的例子是优化正交（或酉）矩阵，例如对称矩阵的最小二乘同时对角化问题（也称为INDSCAL [<a href="node421.html#DeleeuwHeiser.collection:82">107</a>]），将在后文描述。另一个简单的情况是单位球面上的优化，如对称Rayleigh商的最小化。在这两者之间，我们有矩形<span class="math-inline">n \times p</span>（<span class="math-inline">n \ge p</span>）矩阵<span class="math-inline">Y</span>，其列是正交的，例如正交Procrustes问题。
+
+<p>
+此外，某些函数<span class="math-inline">F</span>可能具有对称性性质<span class="math-inline">F(Y)=F(YQ)</span>，对于所有具有指定块对角结构的正交（酉）<span class="math-inline">Q</span>，这导致某些搜索方向对<span class="math-inline">F</span>的值没有影响。例如，如果<span class="math-inline">A</span>是一个对称矩阵，<span class="math-inline">n \ge p</span>，且<span class="math-inline">F(Y)=\tr(Y^*AY)</span>，那么对于所有<span class="math-inline">p \times p</span>正交<span class="math-inline">Q</span>，<span class="math-inline">F(Y)=F(YQ)</span>。更一般地，某些函数<span class="math-inline">F</span>具有性质<span class="math-inline">F(Y)=F(YQ)</span>，其中<span class="math-inline">Q</span>是具有块对角形式的正交（酉）矩阵
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Q =\left[\begin{array}{cccc}Q_1 &amp; 0 &amp; \cdots &amp; 0 \cr0 &amp; ......dotfill &amp; \dotfill \cr0 &amp; 0 &amp; \cdots &amp; Q_p\end{array}\right],</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">Q_i</span>是正交（酉）矩阵。在特征值正则化问题中可能出现更复杂的具有块对角正交（酉）对称性的问题（例如，样本最近的Jordan块问题在示例中得到解决）。
+
+<p>
+本章的组织如下。§<a href="node345.html#callingsgmin">9.4.2</a>讨论了调用模板代码的基础知识。§<a href="node346.html#objectivefunctions">9.4.3</a>讨论了本章探索的示例问题的目标函数及其导数。§<a href="node353.html#sampleruns">9.4.4</a>包含了示例问题的实例的样本运行。§<a href="node360.html#codestructure">9.4.5</a>解释了代码结构以及用户可能希望进行修改的地方。§<a href="node364.html#basicmanifolds">9.4.6</a>将涵盖关于Stiefel流形几何的一些基本数学知识。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6057"
+  href="node345.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6051"
+  href="node343.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6045"
+  href="node343.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6053"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6055"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6058"
+  href="node345.html">MATLAB Templates</a>
+<b> Up:</b> <a name="tex2html6052"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b> Previous:</b> <a name="tex2html6046"
+  href="node343.html">Nonlinear Eigenvalue Problems with</a>
+ &nbsp <b>  <a name="tex2html6054"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6056"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

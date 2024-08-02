@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Convergence Properties.</title>
+<meta name="description" content="Convergence Properties.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node173.html">
+<link rel="previous" href="node171.html">
+<link rel="up" href="node169.html">
+<link rel="next" href="node173.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3349"
+  href="node173.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3343"
+  href="node169.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3337"
+  href="node171.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3345"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3347"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3350"
+  href="node173.html">Multiple Eigenvalues.</a>
+<b> Up:</b> <a name="tex2html3344"
+  href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html3338"
+  href="node171.html">Lanczos Algorithm with SI.</a>
+ &nbsp <b>  <a name="tex2html3346"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3348"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001450030000000000000"></a> 
+<a name="17600"></a>
+<br>
+收敛性质
+</h4>
+收敛性受标准情况下的正交多项式理论支配，例如，参见[<a href="node421.html#parl80">353</a>]。
+
+<p>
+该理论表明，我们能够收敛到初始向量所表示的那些特征值，并且对于谱线两端的特征值，收敛速度更快。这些特征值与剩余特征值的分离程度越高，它们收敛得就越快。
+
+<p>
+在实际应用中，我们通常只对最低的特征值感兴趣，而直接迭代算法[<a href="node170.html#Gen_Herm_Lanczos">5.4</a>]中，这些最低特征值往往是首批收敛的。另一方面，最低特征值之间的相对分离通常较差——记住，分离是相对于整个谱的分布，而非与原点的距离。
+
+<p>
+在这些情况下，当我们希望得到某个特定范围内的特征值，例如
+
+<span class="math-inline">\alpha \le \lambda \le \beta</span>，使用适当选择的位移<span class="math-inline">\sigma</span>的位移-反演算法[<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>]，例如在区间
+
+<span class="math-inline">\alpha \le \sigma \le \beta</span>内，具有极大的优势。
+
+<p>
+在广义情况下，位移-反演策略比标准情况下更具动机，因为我们无论如何都需要解一个系统，无论是在步骤4还是步骤9。位移-反演算子<span class="math-inline">C</span>（[<a href="node171.html#gen_shift_invert">5.16</a>]），通常具有更好分离的特征值，仅需<span class="math-inline">j=50</span>而非数百次迭代就能得到10个特征值。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3349"
+  href="node173.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3343"
+  href="node169.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3337"
+  href="node171.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3345"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3347"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3350"
+  href="node173.html">Multiple Eigenvalues.</a>
+<b> Up:</b> <a name="tex2html3344"
+  href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html3338"
+  href="node171.html">Lanczos Algorithm with SI.</a>
+ &nbsp <b>  <a name="tex2html3346"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3348"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

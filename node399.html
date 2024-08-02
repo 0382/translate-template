@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Matrix Transformations</title>
+<meta name="description" content="Matrix Transformations">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node400.html">
+<link rel="previous" href="node398.html">
+<link rel="up" href="node398.html">
+<link rel="next" href="node400.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6906"
+  href="node400.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6900"
+  href="node398.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6894"
+  href="node398.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6902"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6904"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6907"
+  href="node400.html">Inexact Matrix Transformations</a>
+<b> Up:</b> <a name="tex2html6901"
+  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b> Previous:</b> <a name="tex2html6895"
+  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+ &nbsp <b>  <a name="tex2html6903"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6905"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h2><a name="SECTION002021000000000000000"></a>
+<a name="sec:matrixtransformations"></a>
+<br>
+Matrix Transformations
+</h2>
+
+<p>
+Consider the eigenvalue problem <span class="math-inline">Ax = \lambda Bx</span>.
+The spectral transformation or shift-and-invert transformation (SI)
+<a name="47970"></a> 
+is defined by
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_{\rm SI} = (A - \mu B)^{-1} B,</div>
+</div>
+<br clear="ALL">
+<p></p>
+where <span class="math-inline">\mu</span> is the shift or pole.
+If 
+<span class="math-inline">Ax = \lambda Bx</span> then 
+<span class="math-inline">T_{\rm SI} x = \gamma x</span> with
+
+<span class="math-inline">\gamma=(\lambda-\mu)^{-1}</span>.
+An alternative is the Cayley transform
+<a name="47975"></a> 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_{\mathrm{C}} = (A-\mu B)^{-1} (A - \nu B),</div>
+</div>
+<br clear="ALL">
+<p></p>
+where <span class="math-inline">\mu</span> is the pole and <span class="math-inline">\nu</span> the zero.
+If <span class="math-inline">Ax = \lambda Bx</span> then 
+<span class="math-inline">T_{\mathrm{C}} x=\zeta x</span> with
+
+<span class="math-inline">\zeta = (\lambda-\mu)^{-1}(\lambda-\nu)</span>.
+Since 
+<span class="math-inline">T_{\mathrm{C}} = I + (\mu-\nu) T_{\rm SI}</span> and Krylov spaces are
+shift-invariant
+with respect to the matrix, we have that
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\mathcal{K}^k(T_{\mathrm{C}},v_1) = \mathcal{K}^k(T_{\rm SI},v_1) \ ,</div>
+</div>
+<br clear="ALL">
+<p></p>
+so, the Arnoldi method applied to <span class="math-inline">T_{\rm SI}</span> or 
+<span class="math-inline">T_{\mathrm{C}}</span> delivers the same
+Ritz vectors and after back transformation of <span class="math-inline">\gamma</span>'s and <span class="math-inline">\zeta</span>'s,
+respectively, leads to the same <span class="math-inline">\lambda</span>'s.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

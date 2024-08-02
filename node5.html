@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Contents</title>
+<meta name="description" content="Contents">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node6.html">
+<link rel="previous" href="node4.html">
+<link rel="up" href="book.html">
+<link rel="next" href="node6.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html453"
+  href="node6.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html449"
+  href="book.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html443"
+  href="node4.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a>  
+<a name="tex2html451"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html454"
+  href="node6.html">List of Symbols and</a>
+<b> Up:</b> <a name="tex2html450"
+  href="book.html">book</a>
+<b> Previous:</b> <a name="tex2html444"
+  href="node4.html">Acknowledgments</a>
+ &nbsp <b>  <a name="tex2html452"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+<br>
+
+<h2><a name="SECTION00500000000000000000">
+Contents</a>
+</h2>
+<!--Table of Contents-->
+
+<ul>
+<li><a name="tex2html455"
+  href="node1.html">List  of Contributors</a>
+<li><a name="tex2html456"
+  href="node2.html">How to Use This Book</a>
+<li><a name="tex2html457"
+  href="node3.html">How to Cite This Book</a>
+<li><a name="tex2html458"
+  href="node4.html">Acknowledgments</a>
+<li><a name="tex2html459"
+  href="node5.html">Contents</a>
+<li><a name="tex2html460"
+  href="node6.html">List of Symbols and Acronyms</a>
+<ul>
+<li><a name="tex2html461"
+  href="node7.html">Symbols</a>
+<li><a name="tex2html462"
+  href="node8.html">Acronyms</a>
+</ul>
+<li><a name="tex2html463"
+  href="node9.html">List of Direct Algorithms</a>
+<li><a name="tex2html464"
+  href="node10.html">List of Figures</a>
+<li><a name="tex2html465"
+  href="node11.html">List of Tables</a>
+<li><a name="tex2html466"
+  href="node12.html">Introduction</a>
+<ul>
+<li><a name="tex2html467"
+  href="node13.html">Why Eigenvalue Templates?</a>
+<li><a name="tex2html468"
+  href="node14.html">Intended Readership</a>
+<li><a name="tex2html469"
+  href="node15.html">Using the Decision Tree to Choose a Template</a>
+<li><a name="tex2html470"
+  href="node16.html">What Is a Template?</a>
+<li><a name="tex2html471"
+  href="node17.html">Organization of the Book</a>
+</ul>
+<li><a name="tex2html472"
+  href="node18.html">A Brief Tour of Eigenproblems</a>
+<ul>
+<li><a name="tex2html473"
+  href="node19.html">Introduction</a>
+<ul>
+<li><a name="tex2html474"
+  href="node20.html">Numerical Stability and Conditioning</a>
+</ul>
+<li><a name="tex2html475"
+  href="node21.html">Hermitian Eigenproblems 
+<br>&nbsp; <i>J. Demmel</i> </a>
+<ul>
+<li><a name="tex2html476"
+  href="node22.html">Eigenvalues and Eigenvectors</a>
+<li><a name="tex2html477"
+  href="node23.html">Invariant Subspaces</a>
+<li><a name="tex2html478"
+  href="node24.html">Equivalences (Similarities)</a>
+<li><a name="tex2html479"
+  href="node25.html">Eigendecompositions</a>
+<li><a name="tex2html480"
+  href="node26.html">Conditioning</a>
+<li><a name="tex2html481"
+  href="node27.html">Specifying an Eigenproblem</a>
+<li><a name="tex2html482"
+  href="node28.html">Related Eigenproblems</a>
+<li><a name="tex2html483"
+  href="node29.html">Example</a>
+</ul>
+<li><a name="tex2html484"
+  href="node30.html">Generalized Hermitian Eigenproblems 
+<br>&nbsp; <i>J. Demmel</i> </a>
+<ul>
+<li><a name="tex2html485"
+  href="node31.html">Eigenvalues and Eigenvectors</a>
+<li><a name="tex2html486"
+  href="node32.html">Eigenspaces</a>
+<li><a name="tex2html487"
+  href="node33.html">Equivalences (Congruences)</a>
+<li><a name="tex2html488"
+  href="node34.html">Eigendecompositions</a>
+<li><a name="tex2html489"
+  href="node35.html">Conditioning</a>
+<li><a name="tex2html490"
+  href="node36.html">Specifying an Eigenproblem</a>
+<li><a name="tex2html491"
+  href="node37.html">Related Eigenproblems</a>
+<li><a name="tex2html492"
+  href="node38.html">Example</a>
+</ul>
+<li><a name="tex2html493"
+  href="node39.html">Singular Value Decomposition 
+<br>&nbsp;<i>J. Demmel</i> </a>
+<ul>
+<li><a name="tex2html494"
+  href="node40.html">Singular Values and Singular Vectors</a>
+<li><a name="tex2html495"
+  href="node41.html">Singular Subspaces</a>
+<li><a name="tex2html496"
+  href="node42.html">Equivalences</a>
+<li><a name="tex2html497"
+  href="node43.html">Decompositions</a>
+<li><a name="tex2html498"
+  href="node44.html">Conditioning</a>
+<li><a name="tex2html499"
+  href="node45.html">Specifying a Singular Value Problem</a>
+<li><a name="tex2html500"
+  href="node46.html">Related Singular Value Problems</a>
+<li><a name="tex2html501"
+  href="node47.html">Example</a>
+</ul>
+<li><a name="tex2html502"
+  href="node48.html">Non-Hermitian Eigenproblems 
+<br>&nbsp;<i>J. Demmel</i> </a>
+<ul>
+<li><a name="tex2html503"
+  href="node49.html">Eigenvalues and Eigenvectors</a>
+<li><a name="tex2html504"
+  href="node50.html">Invariant Subspaces</a>
+<li><a name="tex2html505"
+  href="node51.html">Equivalences (Similarities)</a>
+<li><a name="tex2html506"
+  href="node52.html">Eigendecompositions</a>
+<li><a name="tex2html507"
+  href="node53.html">Conditioning</a>
+<li><a name="tex2html508"
+  href="node54.html">Specifying an Eigenproblem</a>
+<li><a name="tex2html509"
+  href="node55.html">Related Eigenproblems</a>
+<li><a name="tex2html510"
+  href="node56.html">Example</a>
+</ul>
+<li><a name="tex2html511"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems 
+<br>&nbsp; <i>J. Demmel</i> </a>
+<ul>
+<li><a name="tex2html512"
+  href="node58.html">Eigenvalues and Eigenvectors</a>
+<li><a name="tex2html513"
+  href="node59.html">Deflating Subspaces</a>
+<li><a name="tex2html514"
+  href="node60.html">Equivalences</a>
+<li><a name="tex2html515"
+  href="node61.html">Eigendecompositions</a>
+<li><a name="tex2html516"
+  href="node62.html">Conditioning</a>
+<li><a name="tex2html517"
+  href="node63.html">Specifying an Eigenproblem</a>
+<li><a name="tex2html518"
+  href="node64.html">Related Eigenproblems</a>
+<li><a name="tex2html519"
+  href="node65.html">Example</a>
+<li><a name="tex2html520"
+  href="node66.html">Singular Case</a>
+</ul>
+<li><a name="tex2html521"
+  href="node75.html">More Generalized Eigenproblems</a>
+<li><a name="tex2html522"
+  href="node76.html">Nonlinear Eigenproblems 
+<br>&nbsp; <i>J. Demmel</i> </a>
+</ul>
+<li><a name="tex2html523"
+  href="node77.html">An Introduction to Iterative Projection Methods</a>
+<ul>
+<li><a name="tex2html524"
+  href="node78.html">Introduction</a>
+<li><a name="tex2html525"
+  href="node79.html">Basic Ideas 
+<br><i>Y. Saad</i> </a>
+<li><a name="tex2html526"
+  href="node84.html">Spectral Transformations 
+<br>&nbsp; <i>R. Lehoucq and D. Sorensen</i> </a>
+</ul>
+<li><a name="tex2html527"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<ul>
+<li><a name="tex2html528"
+  href="node86.html">Introduction</a>
+<li><a name="tex2html529"
+  href="node93.html">Direct Methods</a>
+<li><a name="tex2html530"
+  href="node94.html">Single- and Multiple-Vector Iterations 
+<br>&nbsp; <em>M. Gu</em></a>
+<ul>
+<li><a name="tex2html531"
+  href="node95.html">Power Method</a>
+<li><a name="tex2html532"
+  href="node96.html">Inverse Iteration</a>
+<li><a name="tex2html533"
+  href="node97.html">Rayleigh Quotient Iteration</a>
+<li><a name="tex2html534"
+  href="node98.html">Subspace Iteration</a>
+<li><a name="tex2html535"
+  href="node102.html">Software Availability</a>
+</ul>
+<li><a name="tex2html536"
+  href="node103.html">Lanczos Method 
+<br>&nbsp; <em>A. Ruhe</em> </a>
+<ul>
+<li><a name="tex2html537"
+  href="node104.html">Algorithm</a>
+<li><a name="tex2html538"
+  href="node105.html">Convergence Properties</a>
+<li><a name="tex2html539"
+  href="node107.html">Spectral Transformation</a>
+<li><a name="tex2html540"
+  href="node108.html">Reorthogonalization</a>
+<li><a name="tex2html541"
+  href="node112.html">Software Availability</a>
+<li><a name="tex2html542"
+  href="node113.html">Numerical Examples</a>
+</ul>
+<li><a name="tex2html543"
+  href="node117.html">Implicitly Restarted Lanczos Method 
+<br>&nbsp; <em>R.&nbsp;Lehoucq and D.&nbsp;Sorensen</em></a>
+<ul>
+<li><a name="tex2html544"
+  href="node118.html">Implicit Restart</a>
+<li><a name="tex2html545"
+  href="node119.html">Shift Selection</a>
+<li><a name="tex2html546"
+  href="node120.html">Lanczos Method in GEMV Form</a>
+<li><a name="tex2html547"
+  href="node121.html">Convergence Properties</a>
+<li><a name="tex2html548"
+  href="node122.html">Computational Costs and Tradeoffs</a>
+<li><a name="tex2html549"
+  href="node123.html">Deflation and Stopping Rules</a>
+<li><a name="tex2html550"
+  href="node124.html">Orthogonal Deflating Transformation</a>
+<li><a name="tex2html551"
+  href="node129.html">Implementation of Locking and Purging</a>
+<li><a name="tex2html552"
+  href="node130.html">Software Availability</a>
+</ul>
+<li><a name="tex2html553"
+  href="node131.html">Band Lanczos Method 
+<br>&nbsp; <em>R. Freund</em> </a>
+<ul>
+<li><a name="tex2html554"
+  href="node132.html">The Need for Deflation</a>
+<li><a name="tex2html555"
+  href="node133.html">Basic Properties</a>
+<li><a name="tex2html556"
+  href="node134.html">Algorithm</a>
+<li><a name="tex2html557"
+  href="node135.html">Variants</a>
+</ul>
+<li><a name="tex2html558"
+  href="node136.html">Jacobi-Davidson Methods 
+<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em> </a>
+<ul>
+<li><a name="tex2html559"
+  href="node137.html">Basic Theory</a>
+<li><a name="tex2html560"
+  href="node138.html">Basic Algorithm</a>
+<li><a name="tex2html561"
+  href="node140.html">Restart and Deflation</a>
+<li><a name="tex2html562"
+  href="node145.html">Computing Interior Eigenvalues</a>
+<li><a name="tex2html563"
+  href="node146.html">Software Availability</a>
+<li><a name="tex2html564"
+  href="node147.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html565"
+  href="node148.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+</ul>
+<li><a name="tex2html566"
+  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
+<ul>
+<li><a name="tex2html567"
+  href="node156.html">Introduction</a>
+<li><a name="tex2html568"
+  href="node163.html">Transformation to Standard Problem</a>
+<li><a name="tex2html569"
+  href="node164.html">Direct Methods</a>
+<li><a name="tex2html570"
+  href="node165.html">Single- and Multiple-Vector Iterations  
+<br>&nbsp;&nbsp;&nbsp;&nbsp; <em>M. Gu</em> </a>
+<li><a name="tex2html571"
+  href="node169.html">Lanczos Methods 
+<br>&nbsp; <em>A. Ruhe</em></a>
+<li><a name="tex2html572"
+  href="node176.html">Jacobi-Davidson Methods 
+<br>&nbsp;<em>G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst</em> </a>
+<li><a name="tex2html573"
+  href="node177.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+<ul>
+<li><a name="tex2html574"
+  href="node178.html">Positive Definite <span class="math-inline">B</span></a>
+<li><a name="tex2html575"
+  href="node184.html">Some Combination of <span class="math-inline">A</span> and <span class="math-inline">B</span> is Positive Definite</a>
+</ul>
+</ul>
+<li><a name="tex2html576"
+  href="node190.html">Singular Value Decomposition</a>
+<ul>
+<li><a name="tex2html577"
+  href="node191.html">Introduction</a>
+<li><a name="tex2html578"
+  href="node193.html">Direct Methods</a>
+<li><a name="tex2html579"
+  href="node194.html">Iterative Algorithms 
+<br>&nbsp; <em>J. Demmel</em> </a>
+<ul>
+<li><a name="tex2html580"
+  href="node195.html">What Operations Can One Afford to Perform?</a>
+<li><a name="tex2html581"
+  href="node196.html">Which Singular Values and Vectors Are Desired?</a>
+<li><a name="tex2html582"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+<li><a name="tex2html583"
+  href="node200.html">Software Availability</a>
+<li><a name="tex2html584"
+  href="node201.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html585"
+  href="node202.html">Related Problems 
+<br>&nbsp; <em>J. Demmel</em> </a>
+</ul>
+<li><a name="tex2html586"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<ul>
+<li><a name="tex2html587"
+  href="node204.html">Introduction</a>
+<li><a name="tex2html588"
+  href="node205.html">Balancing Matrices 
+<br>&nbsp; <em>T.&nbsp;Chen and J.&nbsp;Demmel</em> </a>
+<ul>
+<li><a name="tex2html589"
+  href="node206.html">Direct Balancing</a>
+<li><a name="tex2html590"
+  href="node207.html">Krylov Balancing Algorithms</a>
+<li><a name="tex2html591"
+  href="node208.html">Accuracy of Eigenvalues Computed after Balancing</a>
+</ul>
+<li><a name="tex2html592"
+  href="node209.html">Direct Methods</a>
+<li><a name="tex2html593"
+  href="node210.html">Single- and Multiple-Vector Iterations 
+<br>&nbsp; <em>M.&nbsp;Gu</em> </a>
+<ul>
+<li><a name="tex2html594"
+  href="node211.html">Power Method</a>
+<li><a name="tex2html595"
+  href="node212.html">Inverse Iteration</a>
+<li><a name="tex2html596"
+  href="node213.html">Subspace Iteration</a>
+<li><a name="tex2html597"
+  href="node214.html">Software Availability</a>
+</ul>
+<li><a name="tex2html598"
+  href="node215.html">Arnoldi Method 
+<br>&nbsp; <em>Y.&nbsp;Saad</em> </a>
+<ul>
+<li><a name="tex2html599"
+  href="node216.html">Basic Algorithm</a>
+<li><a name="tex2html600"
+  href="node217.html">Variants </a>
+<li><a name="tex2html601"
+  href="node218.html">Explicit Restarts</a>
+<li><a name="tex2html602"
+  href="node219.html">Deflation</a>
+</ul>
+<li><a name="tex2html603"
+  href="node220.html">Implicitly Restarted Arnoldi Method 
+<br>&nbsp; <em>R.&nbsp;Lehoucq and D.&nbsp;Sorensen</em></a>
+<ul>
+<li><a name="tex2html604"
+  href="node221.html">Arnoldi Procedure in GEMV Form</a>
+<li><a name="tex2html605"
+  href="node222.html">Implicit Restart</a>
+<li><a name="tex2html606"
+  href="node223.html">Convergence Properties</a>
+<li><a name="tex2html607"
+  href="node224.html">Numerical Stability</a>
+<li><a name="tex2html608"
+  href="node225.html">Computational Costs and Tradeoffs</a>
+<li><a name="tex2html609"
+  href="node226.html">Deflation and Stopping Rules</a>
+<li><a name="tex2html610"
+  href="node227.html">Orthogonal Deflating Transformation</a>
+<li><a name="tex2html611"
+  href="node233.html">Eigenvector Computation with Spectral Transformation</a>
+<li><a name="tex2html612"
+  href="node234.html">Software Availability</a>
+</ul>
+<li><a name="tex2html613"
+  href="node235.html">Block Arnoldi Method 
+<br>&nbsp; <em>R.&nbsp;Lehoucq and K.&nbsp;Maschhoff</em> </a>
+<ul>
+<li><a name="tex2html614"
+  href="node236.html">Block Arnoldi Reductions</a>
+<li><a name="tex2html615"
+  href="node237.html">Practical Algorithm</a>
+<li><a name="tex2html616"
+  href="node242.html">Software Availability</a>
+<li><a name="tex2html617"
+  href="node243.html">Notes and References</a>
+</ul>
+<li><a name="tex2html618"
+  href="node244.html">Lanczos Method 
+<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em> </a>
+<ul>
+<li><a name="tex2html619"
+  href="node245.html">Algorithm</a>
+<li><a name="tex2html620"
+  href="node246.html">Convergence Properties</a>
+<li><a name="tex2html621"
+  href="node248.html">Software Availability</a>
+<li><a name="tex2html622"
+  href="node249.html">Notes and References</a>
+</ul>
+<li><a name="tex2html623"
+  href="node250.html">Block Lanczos Methods 
+<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em></a>
+<ul>
+<li><a name="tex2html624"
+  href="node251.html">Basic Algorithm</a>
+<li><a name="tex2html625"
+  href="node252.html">An Adaptively Blocked Lanczos Method</a>
+<li><a name="tex2html626"
+  href="node254.html">Software Availability</a>
+<li><a name="tex2html627"
+  href="node255.html">Notes and References</a>
+</ul>
+<li><a name="tex2html628"
+  href="node256.html">Band Lanczos Method 
+<br>&nbsp; <em>R.&nbsp;Freund</em></a>
+<ul>
+<li><a name="tex2html629"
+  href="node257.html">Deflation</a>
+<li><a name="tex2html630"
+  href="node258.html">Basic Properties</a>
+<li><a name="tex2html631"
+  href="node259.html">Algorithm</a>
+<li><a name="tex2html632"
+  href="node260.html">Application to Reduced-Order Modeling</a>
+<li><a name="tex2html633"
+  href="node261.html">Variants</a>
+</ul>
+<li><a name="tex2html634"
+  href="node262.html">Lanczos Method for Complex Symmetric Eigenproblems 
+<br>&nbsp; <em>R.&nbsp;Freund</em> </a>
+<ul>
+<li><a name="tex2html635"
+  href="node263.html">Properties of Complex Symmetric Matrices</a>
+<li><a name="tex2html636"
+  href="node264.html">Properties of the Algorithm</a>
+<li><a name="tex2html637"
+  href="node265.html">Algorithm</a>
+<li><a name="tex2html638"
+  href="node266.html">Solving the Reduced Eigenvalue Problems</a>
+<li><a name="tex2html639"
+  href="node267.html">Software Availability</a>
+<li><a name="tex2html640"
+  href="node268.html">Notes and References</a>
+</ul>
+<li><a name="tex2html641"
+  href="node269.html">Jacobi-Davidson Methods 
+<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em></a>
+<ul>
+<li><a name="tex2html642"
+  href="node270.html">Generalization of Hermitian Case</a>
+<li><a name="tex2html643"
+  href="node271.html">Schur Form and Restart</a>
+<li><a name="tex2html644"
+  href="node272.html">Computing Interior Eigenvalues</a>
+<li><a name="tex2html645"
+  href="node273.html">Software Availability</a>
+<li><a name="tex2html646"
+  href="node274.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html647"
+  href="node275.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+</ul>
+<li><a name="tex2html648"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<ul>
+<li><a name="tex2html649"
+  href="node281.html">Introduction</a>
+<li><a name="tex2html650"
+  href="node282.html">Direct Methods</a>
+<li><a name="tex2html651"
+  href="node283.html">Transformation to Standard Problems</a>
+<li><a name="tex2html652"
+  href="node287.html">Jacobi-Davidson Method 
+<br>&nbsp;<em>G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst</em> </a>
+<ul>
+<li><a name="tex2html653"
+  href="node288.html">Basic Theory</a>
+<li><a name="tex2html654"
+  href="node289.html">Deflation and Restart</a>
+<li><a name="tex2html655"
+  href="node292.html">Algorithm</a>
+<li><a name="tex2html656"
+  href="node293.html">Software Availability</a>
+<li><a name="tex2html657"
+  href="node294.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html658"
+  href="node295.html">Rational Krylov Subspace Method 
+<br>&nbsp;<em>A.&nbsp;Ruhe</em> </a>
+<li><a name="tex2html659"
+  href="node296.html">Symmetric Indefinite Lanczos Method 
+<br>&nbsp;<em>Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski </em> </a>
+<ul>
+<li><a name="tex2html660"
+  href="node297.html">Some Properties of Symmetric Indefinite Matrix Pairs</a>
+<li><a name="tex2html661"
+  href="node298.html">Algorithm</a>
+<li><a name="tex2html662"
+  href="node299.html">Stopping Criteria and Accuracy Assessment</a>
+<li><a name="tex2html663"
+  href="node300.html">Singular <span class="math-inline">B</span></a>
+<li><a name="tex2html664"
+  href="node301.html">Software Availability</a>
+<li><a name="tex2html665"
+  href="node302.html">Numerical Examples</a>
+<li><a name="tex2html666"
+  href="node306.html">Notes and References</a>
+</ul>
+<li><a name="tex2html667"
+  href="node307.html">Singular Matrix Pencils 
+<br>&nbsp; <em>B.&nbsp;K&#229;gstr&#246;m</em> </a>
+<ul>
+<li><a name="tex2html668"
+  href="node308.html">Regular Versus Singular Problems</a>
+<li><a name="tex2html669"
+  href="node309.html">Kronecker Canonical Form</a>
+<li><a name="tex2html670"
+  href="node310.html">Generic and Nongeneric Kronecker Structures</a>
+<li><a name="tex2html671"
+  href="node311.html">Ill-Conditioning</a>
+<li><a name="tex2html672"
+  href="node312.html">Generalized Schur-Staircase Form</a>
+<li><a name="tex2html673"
+  href="node313.html">GUPTRI Algorithm</a>
+<li><a name="tex2html674"
+  href="node317.html">Software Availability</a>
+<li><a name="tex2html675"
+  href="node318.html">More on GUPTRI and Numerical Examples</a>
+<li><a name="tex2html676"
+  href="node323.html">Notes and References</a>
+</ul>
+<li><a name="tex2html677"
+  href="node324.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+</ul>
+<li><a name="tex2html678"
+  href="node329.html">Nonlinear Eigenvalue Problems</a>
+<ul>
+<li><a name="tex2html679"
+  href="node330.html">Introduction</a>
+<li><a name="tex2html680"
+  href="node331.html">Quadratic Eigenvalue Problems 
+<br><em>Z.&nbsp;Bai, G.&nbsp;Sleijpen, and H.&nbsp;van der Vorst</em> </a>
+<ul>
+<li><a name="tex2html681"
+  href="node332.html">Introduction</a>
+<li><a name="tex2html682"
+  href="node333.html">Transformation to Linear Form</a>
+<li><a name="tex2html683"
+  href="node334.html">Spectral Transformations for QEP</a>
+<li><a name="tex2html684"
+  href="node339.html">Numerical Methods for Solving Linearized Problems</a>
+<li><a name="tex2html685"
+  href="node340.html">Jacobi-Davidson Method</a>
+<li><a name="tex2html686"
+  href="node341.html">Notes and References</a>
+</ul>
+<li><a name="tex2html687"
+  href="node342.html">Higher Order Polynomial Eigenvalue  Problems</a>
+<li><a name="tex2html688"
+  href="node343.html">Nonlinear Eigenvalue Problems with Orthogonality Constraints 
+<br>&nbsp; <em>R.&nbsp;Lippert and A.&nbsp;Edelman</em> </a>
+<ul>
+<li><a name="tex2html689"
+  href="node344.html">Introduction</a>
+<li><a name="tex2html690"
+  href="node345.html">MATLAB Templates</a>
+<li><a name="tex2html691"
+  href="node346.html">Sample Problems and Their Differentials</a>
+<li><a name="tex2html692"
+  href="node353.html">Numerical Examples</a>
+<li><a name="tex2html693"
+  href="node360.html">Modifying the Templates</a>
+<li><a name="tex2html694"
+  href="node364.html">Geometric Technicalities</a>
+</ul>
+</ul>
+<li><a name="tex2html695"
+  href="node371.html">Common Issues</a>
+<ul>
+<li><a name="tex2html696"
+  href="node372.html">Sparse Matrix Storage Formats 
+<br>&nbsp; <em>J.&nbsp;Dongarra</em>
+</a>
+<ul>
+<li><a name="tex2html697"
+  href="node373.html">Compressed Row Storage</a>
+<li><a name="tex2html698"
+  href="node374.html">Compressed Column Storage</a>
+<li><a name="tex2html699"
+  href="node375.html">Block Compressed Row Storage</a>
+<li><a name="tex2html700"
+  href="node376.html">Compressed Diagonal Storage</a>
+<li><a name="tex2html701"
+  href="node377.html">Jagged Diagonal Storage</a>
+<li><a name="tex2html702"
+  href="node378.html">Skyline Storage</a>
+</ul>
+<li><a name="tex2html703"
+  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications
+<br>&nbsp; <em>J.&nbsp;Dongarra, P. Koev, and X. Li</em> </a>
+<ul>
+<li><a name="tex2html704"
+  href="node380.html">BLAS</a>
+<li><a name="tex2html705"
+  href="node381.html">Sparse BLAS</a>
+<li><a name="tex2html706"
+  href="node384.html">Fast Matrix-Vector Multiplication for Structured Matrices</a>
+</ul>
+<li><a name="tex2html707"
+  href="node385.html">A Brief Survey of Direct Linear Solvers 
+<br>&nbsp; <em>J.&nbsp;Demmel, P.&nbsp;Koev, and X.&nbsp;Li</em> </a>
+<ul>
+<li><a name="tex2html708"
+  href="node386.html">Direct Solvers for Dense Matrices</a>
+<li><a name="tex2html709"
+  href="node387.html">Direct Solvers for Band Matrices</a>
+<li><a name="tex2html710"
+  href="node388.html">Direct Solvers for Sparse Matrices</a>
+<li><a name="tex2html711"
+  href="node389.html">Direct Solvers for Structured Matrices</a>
+</ul>
+<li><a name="tex2html712"
+  href="node390.html">A Brief Survey of Iterative Linear Solvers 
+<br>&nbsp; <em>H.&nbsp;van&nbsp;der&nbsp;Vorst </em> </a>
+<li><a name="tex2html713"
+  href="node391.html">Parallelism 
+<br>&nbsp; <em>J.&nbsp;Dongarra and X. Li</em> </a>
+</ul>
+<li><a name="tex2html714"
+  href="node396.html">Preconditioning Techniques</a>
+<ul>
+<li><a name="tex2html715"
+  href="node397.html">Introduction</a>
+<li><a name="tex2html716"
+  href="node398.html">Inexact Methods 
+<br>&nbsp; <em>K.&nbsp;Meerbergen and R.&nbsp;Morgan</em> </a>
+<ul>
+<li><a name="tex2html717"
+  href="node399.html">Matrix Transformations</a>
+<li><a name="tex2html718"
+  href="node400.html">Inexact Matrix Transformations</a>
+<li><a name="tex2html719"
+  href="node401.html">Arnoldi Method with Inexact Cayley Transform</a>
+<li><a name="tex2html720"
+  href="node402.html">Davidson Method</a>
+<li><a name="tex2html721"
+  href="node405.html">Jacobi-Davidson Method with Cayley Transform</a>
+<li><a name="tex2html722"
+  href="node406.html">Preconditioned Lanczos Method</a>
+<li><a name="tex2html723"
+  href="node407.html">Inexact Rational Krylov Method</a>
+<li><a name="tex2html724"
+  href="node409.html">Inexact Shift-and-Invert</a>
+</ul>
+<li><a name="tex2html725"
+  href="node410.html">Preconditioned Eigensolvers 
+<br>&nbsp; <em>A.&nbsp;Knyazev</em> </a>
+<ul>
+<li><a name="tex2html726"
+  href="node411.html">Introduction</a>
+<li><a name="tex2html727"
+  href="node412.html">General Framework of Preconditioning</a>
+<li><a name="tex2html728"
+  href="node413.html">Preconditioned Shifted Power Method</a>
+<li><a name="tex2html729"
+  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
+<li><a name="tex2html730"
+  href="node415.html">Preconditioned Lanczos Methods</a>
+<li><a name="tex2html731"
+  href="node416.html">Davidson Method</a>
+<li><a name="tex2html732"
+  href="node417.html">Methods with Preconditioned Inner Iterations</a>
+<li><a name="tex2html733"
+  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
+<li><a name="tex2html734"
+  href="node419.html">Preconditioned Simultaneous Iterations</a>
+<li><a name="tex2html735"
+  href="node420.html">Software Availability</a>
+</ul>
+</ul>
+<li><a name="tex2html736"
+  href="node421.html">Bibliography</a>
+<li><a name="tex2html737"
+  href="node422.html">Index</a>
+<li><a name="tex2html738"
+  href="node423.html">About this document ...</a>
+</ul>
+<!--End of Table of Contents-->
+
+<p>
+
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

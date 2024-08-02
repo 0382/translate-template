@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Block Lanczos Methods &nbsp; Z.&nbsp;Bai and D.&nbsp;Day</title>
+<meta name="description" content="Block Lanczos Methods &nbsp; Z.&nbsp;Bai and D.&nbsp;Day">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node256.html">
+<link rel="previous" href="node244.html">
+<link rel="up" href="node203.html">
+<link rel="next" href="node251.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4573"
+  href="node251.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4567"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4561"
+  href="node249.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4569"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4571"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4574"
+  href="node251.html">Basic Algorithm</a>
+<b> Up:</b> <a name="tex2html4568"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html4562"
+  href="node249.html">Notes and References</a>
+ &nbsp <b>  <a name="tex2html4570"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4572"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001690000000000000000"></a> <a name="sec:nsymblocklanczos"></a>
+<br>
+块Lanczos方法
+<br>&nbsp; <em>Z. Bai和D. Day</em>
+</h1>
+
+<p>
+<a name="24373"></a>
+
+<p>
+本节将介绍的块Lanczos方法，是Lanczos过程的一种变体，如第&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>节所述。它采用了三项递归的块版本，即公式(<a href="node245.html#left_recursion">7.34</a>)和(<a href="node245.html#right_recursion">7.33</a>)。块算法通常用矩阵块乘法和块求解器替代非块算法中的矩阵向量乘积和简单求解器。换言之，块算法在内循环中使用了更高级别的BLAS，从而将I/O成本实质上降低了块大小的倍数。此外，对于具有多个或紧密聚集特征值的矩阵，块算法通常更稳健且高效。本节介绍的自适应块方法，称为ABLE，旨在克服可能的崩溃并消除导致收敛缓慢的原因，如计算的Lanczos向量的双正交性丧失或块大小小于所需特征值簇的大小。ABLE方法由Bai、Day和Ye首次在[<a href="node421.html#bady99">29</a>]中提出。
+
+<p>
+在第&#167;<a href="node256.html#sec:nsymbandlanczos">7.10</a>节中，介绍了带状Lanczos方法。它是块Lanczos方法的另一种表述形式。与本节描述的方法不同，在这种变体中，右和左Lanczos向量块的大小不一定相同。特别是，当右和左起始块大小不同时，这种方法可以应用，这种情况在矩阵特征值问题密切相关的线性动力系统降阶建模中经常出现。
+
+<p>
+<br><hr>
+<!--子节列表-->
+<a name="CHILD_LINKS"><strong>子节</strong></a>
+
+<ul>
+<li><a name="tex2html4575" href="node251.html">基本算法</a>
+<li><a name="tex2html4576" href="node252.html">自适应块Lanczos方法</a>
+<ul>
+<li><a name="tex2html4577" href="node253.html">存储需求和浮点运算。</a>
+</ul>
+<li><a name="tex2html4578" href="node254.html">软件可用性</a>
+<li><a name="tex2html4579" href="node255.html">注释和参考文献</a>
+</ul>
+<!--子节列表结束-->
+<hr><!--Navigation Panel-->
+<a name="tex2html4573"
+  href="node251.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4567"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4561"
+  href="node249.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4569"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4571"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4574"
+  href="node251.html">Basic Algorithm</a>
+<b> Up:</b> <a name="tex2html4568"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html4562"
+  href="node249.html">Notes and References</a>
+ &nbsp <b>  <a name="tex2html4570"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4572"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

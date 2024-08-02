@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Computing Interior Eigenvalues</title>
+<meta name="description" content="Computing Interior Eigenvalues">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node273.html">
+<link rel="previous" href="node271.html">
+<link rel="up" href="node269.html">
+<link rel="next" href="node273.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4895"
+  href="node273.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4889"
+  href="node269.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4883"
+  href="node271.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4891"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4893"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4896"
+  href="node273.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4890"
+  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html4884"
+  href="node271.html">Schur Form and Restart</a>
+ &nbsp <b>  <a name="tex2html4892"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4894"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION0016123000000000000000"></a>
+<a name="sec:unsymhar"></a>
+<br>
+计算内部特征值
+</h2>
+
+<p>
+为了重启目的，特别是当目标是内部特征值时，谐波 Ritz 向量已被推荐用于对称矩阵[<a href="node421.html#morg91">331</a>]；参见第&#167;<a href="node145.html#sec:jdhar">4.7.4</a>节。
+
+<p>
+谐波 Ritz 值的概念[<a href="node421.html#papv95">349</a>]很容易推广到非对称矩阵[<a href="node421.html#slvo96">411</a>]。如我们所见，Jacobi-Davidson 方法生成子空间<span class="math-inline">{\mathcal V}_{m}</span>的基向量<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>。为了将<span class="math-inline">A</span>投影到这个子空间，我们需要计算向量<span class="math-inline">{w}_j\equiv A{v}_j</span>。相对于由<span class="math-inline">{w}_j</span>张成的子空间的<span class="math-inline">A^{-1}</span>的 Ritz 值的逆被称为<em>谐波 Ritz 值</em>。谐波 Ritz 值可以在不反转<span class="math-inline">A</span>的情况下计算，因为谐波 Ritz 对<span class="math-inline">(\widetilde{\theta}_j^{({m})},\widetilde{u}_j^{({m})})</span>满足
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:harm5"></a><div class="math-display">A\widetilde{u}_j^{({m})} -\widetilde\theta_j^{({m})}\widetilde{u}_j^{({m})}\perp{\mathcal W}_{m}\equiv \mathrm{span}\{{w}_1,\ldots , {w}_{m}\}</div></td>
+<td width=10 align="right">
+(209)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+对于<span class="math-inline">\widetilde{u}_j^{({m})} \in {V}_{m}</span>且<span class="math-inline">\widetilde{u}_j^{({m})}\neq 0</span>。这意味着谐波 Ritz 值是矩阵束<span class="math-inline">(W_{m}^\ast AV_{m}, W_{m}^\ast V_{m})</span>的特征值：
+<br><p></p>
+<div align="center">
+<div class="math-display">W_{m}^\ast AV_{m} s_j^{({m})} -\widetilde\theta_j^{({m})} W_{m}^\ast V_{m} s_j^{({m})} =0 .</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+外部标准 Ritz 值通常收敛到<span class="math-inline">A</span>的外部特征值。同样，移位矩阵<span class="math-inline">A-\tau I</span>的内部谐波 Ritz 值通常收敛到最接近移位<span class="math-inline">\tau</span>的特征值<span class="math-inline">\lambda\neq \tau</span>。幸运的是，移位矩阵和未移位矩阵的搜索子空间<span class="math-inline">{\mathcal V}_{m}</span>一致，这有助于计算谐波 Ritz 对。为了稳定性，我们构造<span class="math-inline">{V}_{m}</span>和<span class="math-inline">{W}_{m}</span>为正交的：<span class="math-inline">{W}_{m}</span>使得<span class="math-inline">(A-\tau I){V}_{m}={W}_{m} M^A_{m}</span>，其中<span class="math-inline">M^A_{m}</span>是<span class="math-inline">{m}</span>阶上三角矩阵。
+
+<p>
+在生成的方案中，我们计算部分 Schur 分解而不是部分特征分解。也就是说，我们希望计算向量<span class="math-inline">{q}_1,\ldots, {q}_{k}</span>，使得<span class="math-inline">A{Q}_k={Q}_k{R}_k</span>，其中<span class="math-inline">{Q}_{k}^\ast {Q}_{k}=I_{k}</span>，且<span class="math-inline">{R}_{k}</span>是<span class="math-inline">{k}</span>阶上三角矩阵。<span class="math-inline">{R}_{k}</span>的对角元素代表<span class="math-inline">A</span>的特征值，相应的特征向量可以从<span class="math-inline">{Q}_k</span>和<span class="math-inline">{R}_k</span>计算。
+<a name="26544"></a>
+
+<p>
+基于谐波 Ritz 值和向量的 Jacobi-Davidson 算法，以及部分 Schur 形式的归约，在算法<a href="node272.html#alg:jdnhqrhar">7.19</a>中给出。该算法包括重启和缩减技术。它可以用于计算接近<span class="math-inline">\tau</span>的多个特征值。
+
+<p>
+
+<p></p>
+<div align="center">
+
+<p><a name="alg:jdnhqrhar"></a></p><IMG
+ width="598" height="817" border="0"
+ src="img2551.png"
+ alt="\begin{figure}\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">k_{\max}</span>Interior E...
+...bf end while}
+\end{tabbing}}
+\end{algorithm}\vspace*{-12pt}%% help
+\end{figure}">
+</div>
+<p></p>
+
+<p>
+要应用此算法，我们需要指定一个起始向量<span class="math-inline">{v}_0</span>，一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个指定应计算多少个接近<span class="math-inline">\tau</span>的特征对的数<span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span>的值表示搜索子空间的最大维度。如果超过这个值，则重启并使用指定维度<span class="math-inline">{m}_{\min}</span>的子空间。
+
+<p>
+完成后，将提供接近<span class="math-inline">\tau</span>的<span class="math-inline">k_{\max}</span>个特征值，以及相应的缩减 Schur 形式<span class="math-inline">aq=QR</span>，其中<span class="math-inline">Q</span>是<span class="math-inline">n</span>阶正交矩阵，<span class="math-inline">R</span>是<span class="math-inline">k_{\max}</span>阶上三角矩阵。特征值位于<span class="math-inline">R</span>的对角线上。计算的 Schur 形式满足<span class="math-inline">\Vert A q_{j}- {Q} R e_{j}\Vert _2\leq j \epsilon</span>，其中<span class="math-inline">q_j</span>是<span class="math-inline">Q</span>的第<span class="math-inline">j</span>列。
+
+<p>
+我们将根据前几节讨论的内容对算法的某些部分进行评论。
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd><p>
+初始化阶段。
+
+<p>
+</dd>
+<dt><strong>(3)-(4)</strong></dt>
+<dd><p>
+新计算的修正通过改进的 Gram-Schmidt 方法与当前搜索子空间正交。我们选择存储矩阵<span class="math-inline">V^A\equiv A{V}-\tau {V}</span>；<span class="math-inline">{v}_{m}^A</span>是该矩阵的展开向量。<span class="math-inline">{W}</span>的展开向量通过使<span class="math-inline">{v}_{m}^A</span>与检测到的 Schur 向量空间和当前测试子空间正交来获得，使用改进的 Gram-Schmidt 方法。Gram-Schmidt 步骤可以用算法<a href="node138.html#alg:rgs">4.14</a>中给出的模板替换，以提高数值稳定性。
+
+<p>
+<span class="math-inline">{V}</span>表示列向量为<span class="math-inline">{v}_j</span>的<span class="math-inline">n</span>阶矩阵；同样，<span class="math-inline">W</span>和<span class="math-inline">V^A</span>。
+
+<p>
+</dd>
+<dt><strong>(8)-(9) </strong></dt>
+<dd><p>
+<span class="math-inline">{M}_{i,j}</span>表示<span class="math-inline">{m}</span>阶方阵<span class="math-inline">{M}\equiv {W}^\ast {V}</span>的元素。<span class="math-inline">{M^A}_{i,j}</span>表示<span class="math-inline">{m}</span>阶上三角矩阵<span class="math-inline">{M^A}\equiv W^\ast V^A</span>的元素。
+
+<p>
+（注意，如果<span class="math-inline">{F}\equiv{Q}^\ast V^A</span>，则<span class="math-inline">V^A={W} {M^A}+{Q}{F}</span>。因此，<span class="math-inline">V^A</span>可以从<span class="math-inline">{W}</span>，<span class="math-inline">{M^A}</span>，<span class="math-inline">{Q}</span>和<span class="math-inline">{F}</span>重建。特别是，<span class="math-inline">r</span>可以从这些量计算。存储<span class="math-inline">{n}</span>阶矩阵<span class="math-inline">V^A</span>可以简化为存储<span class="math-inline">{k}</span>阶矩阵<span class="math-inline">{F}</span>（在(3)-(4)中计算的元素<span class="math-inline">{q}_i^\ast {w}</span>）。这种方法节省内存空间。然而，为了避免不稳定性，缩减过程需要特别注意。）
+
+<p>
+</dd>
+<dt><strong>(14)</strong></dt>
+<dd><p>
+此时需要计算矩阵束<span class="math-inline">({M^A},{M})</span>的 QZ 分解（广义 Schur 形式）：<span class="math-inline">{M^A} {S}^R={S}^L{T^A}</span>和<span class="math-inline">{M}{S}^R={S}^L {T}</span>，其中<span class="math-inline">{S}^R</span>和<span class="math-inline">{S}^L</span>是酉矩阵，<span class="math-inline">{T^A}</span>和<span class="math-inline">{T}</span>是上三角矩阵。这可以通过 LAPACK 中的适当密集矩阵束例程完成。
+
+<p>
+在每一步中，Schur 形式必须排序，使得<span class="math-inline">\vert T^A_{1,1}/{T}_{1,1}\vert</span>最小。只有当<span class="math-inline">{m}\geq {m}_{\max}</span>时，Schur 形式的排序才必须使得<span class="math-inline">{T^A}</span>和<span class="math-inline">{T}</span>的前<span class="math-inline">{m}_{\max}</span>个对角元素代表最接近<span class="math-inline">0</span>的<span class="math-inline">{m}_{\max}</span>个谐波 Ritz 值。为了便于说明，我们在这里对所有对角元素进行了排序。
+<br>
+<p>
+有关广义 Schur 形式排序的算法，请参见[<a href="node421.html#BDe93b">33</a>,<a href="node421.html#vand81">448</a>,<a href="node421.html#vand82">449</a>]和[<a href="node421.html#fokk96">171</a>, Chap.&nbsp;6B]。
+
+<p>
+<span class="math-inline">{S^R}</span>是<span class="math-inline">m</span>阶矩阵，列向量为<span class="math-inline">{s}_j^R</span>；同样，<span class="math-inline">{S^L}</span>。
+
+<p>
+</dd>
+<dt><strong>(15)</strong></dt>
+<dd><p>
+<span class="math-inline">\theta</span>的值需要一些注意。我们选择计算谐波 Ritz 向量<span class="math-inline">{u}</span>对应的 Rayleigh 商<span class="math-inline">\vartheta</span>（而不是谐波 Ritz 值）（参见[<a href="node421.html#slvm98">412</a>]）。Rayleigh 商遵循<span class="math-inline">(A-\tau I){u}-\vartheta {u}\perp {u}</span>而不是<span class="math-inline">\perp {W}</span>的要求；然后<span class="math-inline">r\perp {u}</span>。
+
+<span class="math-inline">\overline{{T}_{1,1}}</span>表示<span class="math-inline">{{T}_{1,1}}</span>的复共轭。
+
+<p>
+</dd>
+<dt><strong>(17)</strong></dt>
+<dd><p>
+停止准则是在归一化 Schur 向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受该近似。这意味着我们接受计算的特征值中的<span class="math-inline">\epsilon</span>量级的误差，以及特征向量中的<span class="math-inline">O(\epsilon)</span>量级的误差（前提是相关特征值是简单且与其他特征值很好地分离，且左右特征向量之间的角度很小）。
+
+<p>
+不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>的注释(13)（第<a href="node144.html#alg:jdqr"><IMG align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）。
+
+<p>
+</dd>
+<dt><strong>(20)</strong></dt>
+<dd><p>
+这是一个在近似特征对接受后的重启。
+
+<p>
+</dd>
+<dt><strong>(27)</strong></dt>
+<dd><p>
+此时，当子空间维度超过<span class="math-inline">{m}_{\max}</span>时进行重启。重启后，Jacobi-Davidson 迭代在维度为<span class="math-inline">{m}_{\min}</span>的子空间上继续进行。
+
+<p>
+</dd>
+<dt><strong>(33)</strong></dt>
+<dd><p>
+通过<span class="math-inline">{Q}</span>的因子表示计算的特征向量的缩减。矩阵<span class="math-inline">{Q}</span>的列是收敛的特征向量。如果对于算子<span class="math-inline">A-\theta I</span>有可用的左预条件器<span class="math-inline">{K}</span>，则与外部特征值情况类似，可以使用 Krylov 求解器实现类似的缩减。处理左预条件算子的有效模板在算法<a href="node144.html#alg:corrit2">4.18</a>中给出。
+
+<p>
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4895"
+  href="node273.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4889"
+  href="node269.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4883"
+  href="node271.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4891"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4893"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4896"
+  href="node273.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4890"
+  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html4884"
+  href="node271.html">Schur Form and Restart</a>
+ &nbsp <b>  <a name="tex2html4892"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4894"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

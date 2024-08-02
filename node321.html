@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>MATLAB Interface to GUPTRI.</title>
+<meta name="description" content="MATLAB Interface to GUPTRI.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node322.html">
+<link rel="previous" href="node320.html">
+<link rel="up" href="node318.html">
+<link rel="next" href="node322.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5663"
+  href="node322.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5657"
+  href="node318.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5651"
+  href="node320.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5659"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5661"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5664"
+  href="node322.html">Example in MATLAB.</a>
+<b> Up:</b> <a name="tex2html5658"
+  href="node318.html">More on GUPTRI and</a>
+<b> Previous:</b> <a name="tex2html5652"
+  href="node320.html">Arithmetic and Space Complexity.</a>
+ &nbsp <b>  <a name="tex2html5660"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5662"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001778030000000000000"></a><a name="matlab_guptri"></a>
+<br>
+MATLAB 接口到 GUPTRI
+</h4>
+
+<p>
+对于 GUPTRI 例程，可以通过 MEX 文件形式提供一个 MATLAB 接口。下面我们将简要描述 guptri 函数的参数和输出，并通过一个小型数值示例展示其用法。
+
+<p>
+最一般的调用形式如下：
+<br><p></p>
+<div align="center">
+
+<div class="math-display">{\tt [S, T, P, Q, kstr] = guptri(A, B, EPSU, GAP, ZERO)},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中，变换矩阵存储在 P 和 Q 中，而 <span class="math-inline">P^{\ast}AQ</span> 和 <span class="math-inline">P^{\ast}BQ</span> 分别存储在 S 和 T 中。计算得到的 Kronecker 结构由 kstr 揭示，具体描述见本节后续的示例讨论。
+
+<p>
+guptri 函数将一个 <span class="math-inline">m \times n</span> 的矩阵束 <span class="math-inline">A - \lambda B</span> 化为广义上三角形式
+
+<span class="math-inline">S - \lambda T = P^{\ast}(A - \lambda B)Q</span>，如公式（<a href="node312.html#eq.guptri1">8.34</a>）-（<a href="node312.html#eq.guptri_reg">8.35</a>）所示：
+<a name="eq.guptri_m"></a>S=
+ccccc   
+A_r &amp; *  &amp; *  &amp; * &amp;  * 
+<br>
+0  &amp;A_z &amp; *  &amp; * &amp;  * 
+<br>
+0  &amp; 0  &amp;A_f &amp; * &amp;  * 
+<br>
+0  &amp; 0  &amp; 0  &amp;A_i&amp;  * 
+<br>
+0  &amp; 0  &amp; 0  &amp; 0 &amp; A_l
+, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+T=
+ccccc 
+B_r &amp; *  &amp; * &amp; *  &amp; * 
+<br>
+0   &amp;B_z &amp; * &amp;  * &amp;  * 
+<br>
+0   &amp;0   &amp;B_f&amp;  * &amp;  * 
+<br>
+0   &amp;0   &amp;0  &amp;B_i &amp;  * 
+<br>
+0   &amp;0   &amp;0  &amp; 0  &amp;B_l
+,
+
+其中，<span class="math-inline">S</span> 和 <span class="math-inline">T</span> 的对角块以阶梯形式描述了 <span class="math-inline">A - \lambda B</span> 的 Kronecker 结构（参见第<a href="node313.html#guptri_algorithm">8.7.6</a>节）。
+
+<p>
+除了 <span class="math-inline">\{A,B\}</span> 之外，用户还可以选择提供三个输入参数（EPSU、GAP 和 ZERO）来控制 GUPTRI 形式的计算。EPSU（数据相对不确定性）和 GAP（应至少为 1，名义上为 1000）用于在确定输入矩阵束的 Kronecker 结构时进行秩判定（参见第<a href="node315.html#num_rank"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>页）。默认值为
+
+<span class="math-inline">{\tt GAP} = 1000</span>，但对于某些示例可能需要其他值。ZERO 用作逻辑变量，当设置为真（ZERO = 非零值）时，强制 guptri 在化简过程中将小奇异值置零，从而返回的矩阵束真正具有计算得到的 GUPTRI 形式（参见第<a href="node316.html#regularized_prob"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>页）。否则，返回的矩阵束是输入矩阵束的真实等价变换，且 GUPTRI 形式中的所有零块将包含小元素（通常最大为 EPSU 大小）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5663"
+  href="node322.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5657"
+  href="node318.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5651"
+  href="node320.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5659"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5661"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5664"
+  href="node322.html">Example in MATLAB.</a>
+<b> Up:</b> <a name="tex2html5658"
+  href="node318.html">More on GUPTRI and</a>
+<b> Previous:</b> <a name="tex2html5652"
+  href="node320.html">Arithmetic and Space Complexity.</a>
+ &nbsp <b>  <a name="tex2html5660"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5662"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

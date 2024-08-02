@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Notes and References</title>
+<meta name="description" content="Notes and References">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node302.html">
+<link rel="up" href="node296.html">
+<link rel="next" href="node307.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5432"
+  href="node307.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5426"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5422"
+  href="node305.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5428"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5430"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5433"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Up:</b> <a name="tex2html5427"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5423"
+  href="node305.html">Example 8.6.3.</a>
+ &nbsp <b>  <a name="tex2html5429"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5431"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001767000000000000000">
+注释与参考文献</a>
+</h2>
+
+<p>
+对称不定兰索斯过程首次在文献
+[<a
+ href="node421.html#pach90">357</a>]中提出。
+
+<p>
+对称不定兰索斯过程与非厄米兰索斯过程有许多共同特征，这两种算法密切相关。对称不定兰索斯算法可视为非厄米兰索斯过程的一个特例，其中起始向量经过适当选择，以利用基础问题的对称性[,<a
+ href="node421.html#freu92">173</a>,<a
+ href="node421.html#cuwi85a">91</a>,<a
+ href="node421.html#cuwi85b">92</a>,<a
+ href="node421.html#pach90">357</a>,,]。另一方面，当<span class="math-inline">H^{-1} B</span>可对角化时，非厄米兰索斯过程可视为不定对称兰索斯过程的修正版本。
+
+<p>
+许多与对称不定兰索斯算法相关的挑战，特别是中断现象，可以在度量几何的背景下解释。此处的“度量”指的是由对称矩阵<span class="math-inline">B</span>确定的非定内积
+
+<span class="math-inline">\langle\cdot,\cdot\rangle_B</span>。关于配备非定内积的向量空间的数学性质的详细描述，可参见文献[<a
+ href="node421.html#arti57">20</a>,<a
+ href="node421.html#snap71">417</a>]。
+
+<p>
+其他迭代方法，例如子空间迭代法，已适应于利用对称不定矩阵的对称性[].
+
+<p>
+对于涉及大量数据传输到辅助存储和从辅助存储传输的非常大型问题，实施对称不定兰索斯过程的块版本可能是有利的。块版本还允许使用自适应分块来处理中断[<a
+ href="node421.html#bady99">29</a>,<a
+ href="node421.html#liaw98">298</a>]。
+
+<p>
+
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5432"
+  href="node307.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5426"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5422"
+  href="node305.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5428"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5430"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5433"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Up:</b> <a name="tex2html5427"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5423"
+  href="node305.html">Example 8.6.3.</a>
+ &nbsp <b>  <a name="tex2html5429"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5431"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

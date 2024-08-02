@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Nonlinear Eigenvalue Problems with Orthogonality Constraints &nbsp; R.&nbsp;Lippert and A.&nbsp;Edelman </title>
+<meta name="description" content="Nonlinear Eigenvalue Problems with Orthogonality Constraints &nbsp; R.&nbsp;Lippert and A.&nbsp;Edelman ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node342.html">
+<link rel="up" href="node329.html">
+<link rel="next" href="node344.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6016"
+  href="node344.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6010"
+  href="node329.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6006"
+  href="node342.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6012"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6014"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6017"
+  href="node344.html">Introduction</a>
+<b> Up:</b> <a name="tex2html6011"
+  href="node329.html">Nonlinear Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html6007"
+  href="node342.html">Higher Order Polynomial Eigenvalue</a>
+ &nbsp <b>  <a name="tex2html6013"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6015"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION001840000000000000000"></a> <a name="sec:sgmin"></a><a name="43304"></a>
+<a name="43305"></a>
+<br>
+Nonlinear Eigenvalue Problems with Orthogonality Constraints 
+<br>&nbsp; <em>R.&nbsp;Lippert and A.&nbsp;Edelman</em> 
+</h1>
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+
+<ul>
+<li><a name="tex2html6018"
+  href="node344.html">Introduction</a>
+<li><a name="tex2html6019"
+  href="node345.html">MATLAB Templates</a>
+<li><a name="tex2html6020"
+  href="node346.html">Sample Problems and Their Differentials</a>
+<ul>
+<li><a name="tex2html6021"
+  href="node347.html">The Procrustes Problem</a>
+<li><a name="tex2html6022"
+  href="node348.html">Nearest-Jordan Structure</a>
+<li><a name="tex2html6023"
+  href="node349.html">Trace Minimization</a>
+<li><a name="tex2html6024"
+  href="node350.html">Trace Minimization with a Nonlinear Term</a>
+<li><a name="tex2html6025"
+  href="node351.html">Simultaneous Schur Decomposition Problem</a>
+<li><a name="tex2html6026"
+  href="node352.html">Simultaneous Diagonalization</a>
+</ul>
+<li><a name="tex2html6027"
+  href="node353.html">Numerical Examples</a>
+<ul>
+<li><a name="tex2html6028"
+  href="node354.html">A Sample Procrustes Problem</a>
+<li><a name="tex2html6029"
+  href="node355.html">A Sample Jordan Block Problem</a>
+<li><a name="tex2html6030"
+  href="node356.html">A Sample Trace Minimization Problem</a>
+<li><a name="tex2html6031"
+  href="node357.html">A Sample LDA Toy Problem 
+(Trace Minimization with Nonlinear Term)</a>
+<li><a name="tex2html6032"
+  href="node358.html">A Sample Simultaneous Schur Decomposition Problem</a>
+<li><a name="tex2html6033"
+  href="node359.html">A Sample Diagonalization Problem</a>
+</ul>
+<li><a name="tex2html6034"
+  href="node360.html">Modifying the Templates</a>
+<ul>
+<li><a name="tex2html6035"
+  href="node361.html">Subroutine Dependencies</a>
+<li><a name="tex2html6036"
+  href="node362.html">Under the Hood</a>
+<li><a name="tex2html6037"
+  href="node363.html">What to Modify</a>
+</ul>
+<li><a name="tex2html6038"
+  href="node364.html">Geometric Technicalities</a>
+<ul>
+<li><a name="tex2html6039"
+  href="node365.html">Manifolds</a>
+<li><a name="tex2html6040"
+  href="node366.html">The Difference Between a Tangent and a Differential</a>
+<li><a name="tex2html6041"
+  href="node367.html">Inner Products, Gradients, and Differentials</a>
+<li><a name="tex2html6042"
+  href="node368.html">Getting Around 
+<span class="math-inline">\mathrm{Stief}(n,k)</span></a>
+<li><a name="tex2html6043"
+  href="node369.html">Covariant Differentiation</a>
+<li><a name="tex2html6044"
+  href="node370.html">Inverting the Covariant Hessian (Technical Considerations)</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Balancing Matrices &nbsp; T.&nbsp;Chen and J.&nbsp;Demmel </title>
+<meta name="description" content="Balancing Matrices &nbsp; T.&nbsp;Chen and J.&nbsp;Demmel ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node209.html">
+<link rel="previous" href="node204.html">
+<link rel="up" href="node203.html">
+<link rel="next" href="node206.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3913"
+  href="node206.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3907"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3901"
+  href="node204.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3909"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3911"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3914"
+  href="node206.html">Direct Balancing</a>
+<b> Up:</b> <a name="tex2html3908"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3902"
+  href="node204.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3910"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3912"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001620000000000000000">
+矩阵平衡
+<br>&nbsp; <em>T. 陈和 J. 德梅尔</em> </a>
+</h1>
+
+<p>
+
+<p>
+计算非对称矩阵 <span class="math-inline">A</span> 的特征值的数值算法通常会产生大小约为
+
+<span class="math-inline">\epsilon_M\Vert A\Vert</span> 的舍入误差，其中 <span class="math-inline">\epsilon_M</span> 是机器精度。因此，应用一个简单且精确的相似变换
+<br><span class="math-inline">DAD^{-1}</span> 来减小矩阵 <span class="math-inline">A</span> 的范数，或者减小 <span class="math-inline">A</span> 的某些特征值的条件数，可以使计算出的 <span class="math-inline">A</span> 的特征值更加精确。
+
+<p>
+例如，考虑矩阵
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = \left[ \begin{array}{ccc}1&amp;0&amp;10^{-4}\\ 1&amp;1&amp;10^{-2}\\ 10^4&amp;10^2&amp;1 \end{array} \right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+选择
+<span class="math-inline">D = \mathrm{diag}(100, 1, .01)</span> 得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">B=DAD^{-1}=\left[\begin{array}{ccc}1&amp;0&amp;1\\ 10^{-2}&amp;1&amp;1\\ 1&amp;1&amp;1\end{array}\right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+而 <span class="math-inline">\vert\vert A\vert\vert _F</span> 大约是 <span class="math-inline">10^4</span>，<span class="math-inline">\vert\vert B\vert\vert _F</span> 大约是
+<span class="math-inline">2.6</span>。此外，<span class="math-inline">B</span> 的特征值的条件数都大约是 <span class="math-inline">1</span>，而 <span class="math-inline">A</span> 的特征值的条件数在数量级上从 <span class="math-inline">10^1</span> 到 <span class="math-inline">10^3</span> 不等。
+
+<p>
+奥斯本 [346] 首先注意到，矩阵 <span class="math-inline">A</span> 的范数通常可以通过形式为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><div class="math-display">B=DAD^{-1},</div></td>
+<td width=10 align="right">
+(120)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中 <span class="math-inline">D</span> 是对角矩阵的相似变换来减小。奥斯本还证明了，对于不可约矩阵并忽略其对角元素，使 <span class="math-inline">\vert\vert B\vert\vert _F</span> 最小的 <span class="math-inline">D</span> 也在 <span class="math-inline">2</span>-范数下平衡 <span class="math-inline">B</span>：如果对于任何 <span class="math-inline">i</span>，行 <span class="math-inline">i</span> 的 <span class="math-inline">\alpha</span>-范数与列 <span class="math-inline">i</span> 的 <span class="math-inline">\alpha</span>-范数相同，则矩阵在 <span class="math-inline">\alpha</span>-范数下是平衡的。他引入了第一个平衡算法，该算法通过反复遍历 <span class="math-inline">D</span> 的对角线元素，更新 <span class="math-inline">D_{ii}</span> 以平衡行和列 <span class="math-inline">i</span>。
+
+<p>
+尽管在 <span class="math-inline">2</span>-范数下平衡等同于最小化 Frobenius 范数，但在任意范数下平衡矩阵对矩阵范数的影响可能并不那么简单。其他工作讨论了使用对角缩放来平衡矩阵和最小化矩阵范数的数学性质 [81,82]。我们在这里关注实践而非理论，介绍了两种平衡稀疏矩阵的算法风格。这些算法在 [81] 和 [82] 中有更彻底的分析；软件可以通过本书的主页 ETHOME 访问。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><a name="tex2html3915"
+  href="node206.html">直接平衡</a>
+<li><a name="tex2html3916"
+  href="node207.html">Krylov 平衡算法</a>
+<li><a name="tex2html3917"
+  href="node208.html">平衡后计算的特征值的精度</a>
+</ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html3913"
+  href="node206.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3907"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3901"
+  href="node204.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3909"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3911"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3914"
+  href="node206.html">Direct Balancing</a>
+<b> Up:</b> <a name="tex2html3908"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3902"
+  href="node204.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3910"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3912"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

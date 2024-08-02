@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Compressed Row Storage</title>
+<meta name="description" content="Compressed Row Storage">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node374.html">
+<link rel="previous" href="node372.html">
+<link rel="up" href="node372.html">
+<link rel="next" href="node374.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6504"
+  href="node374.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6498"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6492"
+  href="node372.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6500"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6502"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6505"
+  href="node374.html">Compressed Column Storage</a>
+<b> Up:</b> <a name="tex2html6499"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6493"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+ &nbsp <b>  <a name="tex2html6501"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6503"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001911000000000000000"></a>
+<a name="sec:data-structures:crs"></a><a name="45989"></a>
+<br>
+压缩行存储
+</h2>
+
+<p>
+压缩行和列（下一节介绍）存储格式是最通用的：它们对矩阵的稀疏结构不做任何假设，也不存储任何不必要的元素。另一方面，它们的效率并不高，在矩阵-向量乘积或预处理求解中，每进行一次标量运算都需要进行一次间接寻址。
+
+<p>
+压缩行存储（CRS）格式将矩阵行的后续非零元素存储在连续的内存位置中。假设我们有一个非对称稀疏矩阵 \( A \)，我们创建三个向量：一个用于浮点数（val），另外两个用于整数（col_ind, row_ptr）。val 向量存储矩阵 \( A \) 的非零元素的值，这些元素按行遍历。col_ind 向量存储 val 向量中元素的列索引。也就是说，如果 \({\tt val(k)}=a_{i,j}\)，那么 \({\tt col\_ind(k)}=j\)。row_ptr 向量存储 val 向量中每一行的起始位置；也就是说，如果 \({\tt val(k)}=a_{i,j}\)，那么 \({\tt row\_ptr(i)}\leq k<{\tt row\_ptr(i+1)}\)。按照惯例，我们定义 \({\tt row\_ptr(n+1)} = nnz+1\)，其中 \( nnz \) 是矩阵 \( A \) 的非零元素数量。这种存储方式节省了大量空间。我们不需要存储 \( n^2 \) 个元素，而只需要 \( 2nnz+n+1 \) 个存储位置。
+
+<p>
+举个例子，考虑由以下定义的非对称矩阵 \( A \)：
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="sparseA"></a><div class="math-display">A =\left[\begin{array}{rrrrrr}10 & 0 & 0 & 0 & -2 & 0 \\...... 9 & 9 & 13 \\0 & 4 & 0 & 0 & 2 & -1\end{array}\right] ~.</div></td>
+<td width=10 align="right">
+(269)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+
+<p>
+该矩阵的 CRS 格式由以下数组 {val, col_ind, row_ptr} 指定：
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="right">val</td>
+<td align="right">10</td>
+<td align="right">-2</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">3 <span class="math-inline">\cdots</span> 9</td>
+<td align="right">13</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">-1</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+<tr><td align="right">col_ind</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">1 <span class="math-inline">\cdots</span> 5</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+</table> 
+<br>
+<br>
+<table cellpadding=3 border="1">
+<tr><td align="right">row_ptr</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">13</td>
+<td align="right">17</td>
+<td align="right">20</td>
+</tr>
+</table>
+</div>
+<br>
+如果矩阵 \( A \) 是对称的，我们只需要存储矩阵的上三角（或下三角）部分。这样做的权衡是算法更复杂，数据访问模式也略有不同。
+<a name="46028"></a>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6504"
+  href="node374.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6498"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6492"
+  href="node372.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6500"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6502"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6505"
+  href="node374.html">Compressed Column Storage</a>
+<b> Up:</b> <a name="tex2html6499"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6493"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+ &nbsp <b>  <a name="tex2html6501"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6503"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

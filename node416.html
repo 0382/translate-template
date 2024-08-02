@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Davidson Method</title>
+<meta name="description" content="Davidson Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node417.html">
+<link rel="previous" href="node415.html">
+<link rel="up" href="node410.html">
+<link rel="next" href="node417.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html7149"
+  href="node417.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7143"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7137"
+  href="node415.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7145"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7147"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7150"
+  href="node417.html">Methods with Preconditioned Inner</a>
+<b> Up:</b> <a name="tex2html7144"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7138"
+  href="node415.html">Preconditioned Lanczos Methods</a>
+ &nbsp <b>  <a name="tex2html7146"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7148"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002036000000000000000"></a>
+<a name="sec:prec_Dav"></a>
+<br>
+Davidson方法
+</h2>
+
+<p>
+在Davidson方法中，我们尝试通过在每次内迭代步骤中改变Rayleigh商来加速预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>的收敛。
+
+<p>
+为了简化说明，这里仅描述Davidson方法的最朴素版本，不涉及重启，针对矩阵束<span class="math-inline">B - \mu A</span>（参见[<a href="node421.html#davi75">99</a>,<a href="node421.html#dav83">100</a>,<a href="node421.html#mosc86">335</a>,<a href="node421.html#m90">329</a>,<a href="node421.html#saad92">387</a>]）：
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="prec_dm"></a><div class="math-display">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......u^{(i)} A)x^{(i)} \}</span>.\end{tabular}\vspace{\belowdisplayskip}</div></td>
+<td width=10 align="right">
+(286)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+由于子空间<span class="math-inline">{\mathcal D}_i</span>的维度随着每一步增长，且所有基向量都需要存储，因此通常需要像预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>那样进行重启。一个简单的重启过程是在一定步数（内迭代）后停止方法，然后使用最后一个迭代向量作为下一步（外迭代）的初始近似值重新开始。
+
+<p>
+该方法在理论研究上相当复杂；参见[<a href="node421.html#crps94">88</a>,<a href="node421.html#sadk93-ad">390</a>]。通常会结合一个不定预条件子（常为<span class="math-inline">B-\mu^{(0)}A</span>的对角线）使用Davidson方法，这进一步增加了理论分析的复杂性。
+
+<p>
+Davidson方法在化学领域尤其受欢迎（参见[<a href="node421.html#hn82">232</a>,<a href="node421.html#ko84">275</a>]），其中涉及的矩阵通常具有对角优势。对于这类问题，即使使用简单的对角预条件子，该方法也常常能快速收敛。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html7149"
+  href="node417.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7143"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7137"
+  href="node415.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7145"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7147"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7150"
+  href="node417.html">Methods with Preconditioned Inner</a>
+<b> Up:</b> <a name="tex2html7144"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7138"
+  href="node415.html">Preconditioned Lanczos Methods</a>
+ &nbsp <b>  <a name="tex2html7146"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7148"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

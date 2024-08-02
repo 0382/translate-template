@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Non-Hermitian Eigenvalue Problems</title>
+<meta name="description" content="Non-Hermitian Eigenvalue Problems">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node280.html">
+<link rel="previous" href="node190.html">
+<link rel="up" href="book.html">
+<link rel="next" href="node204.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3809"
+  href="node204.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3803"
+  href="book.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3797"
+  href="node202.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3805"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3807"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3810"
+  href="node204.html">Introduction</a>
+<b> Up:</b> <a name="tex2html3804"
+  href="book.html">book</a>
+<b> Previous:</b> <a name="tex2html3798"
+  href="node202.html">Related Problems &nbsp; J.</a>
+ &nbsp <b>  <a name="tex2html3806"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3808"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION001600000000000000000"></a> <a name="chap:nep"></a>
+<br>
+Non-Hermitian Eigenvalue Problems
+</h1>
+
+<p>
+<a name="22662"></a> 
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+
+<ul>
+<li><a name="tex2html3811"
+  href="node204.html">Introduction</a>
+<li><a name="tex2html3812"
+  href="node205.html">Balancing Matrices 
+<br>&nbsp; <em>T.&nbsp;Chen and J.&nbsp;Demmel</em> </a>
+<ul>
+<li><a name="tex2html3813"
+  href="node206.html">Direct Balancing</a>
+<li><a name="tex2html3814"
+  href="node207.html">Krylov Balancing Algorithms</a>
+<li><a name="tex2html3815"
+  href="node208.html">Accuracy of Eigenvalues Computed after Balancing</a>
+</ul>
+<li><a name="tex2html3816"
+  href="node209.html">Direct Methods</a>
+<li><a name="tex2html3817"
+  href="node210.html">Single- and Multiple-Vector Iterations 
+<br>&nbsp; <em>M.&nbsp;Gu</em> </a>
+<ul>
+<li><a name="tex2html3818"
+  href="node211.html">Power Method</a>
+<li><a name="tex2html3819"
+  href="node212.html">Inverse Iteration</a>
+<li><a name="tex2html3820"
+  href="node213.html">Subspace Iteration</a>
+<li><a name="tex2html3821"
+  href="node214.html">Software Availability</a>
+</ul>
+<li><a name="tex2html3822"
+  href="node215.html">Arnoldi Method 
+<br>&nbsp; <em>Y.&nbsp;Saad</em> </a>
+<ul>
+<li><a name="tex2html3823"
+  href="node216.html">Basic Algorithm</a>
+<li><a name="tex2html3824"
+  href="node217.html">Variants </a>
+<li><a name="tex2html3825"
+  href="node218.html">Explicit Restarts</a>
+<li><a name="tex2html3826"
+  href="node219.html">Deflation</a>
+</ul>
+<li><a name="tex2html3827"
+  href="node220.html">Implicitly Restarted Arnoldi Method 
+<br>&nbsp; <em>R.&nbsp;Lehoucq and D.&nbsp;Sorensen</em></a>
+<ul>
+<li><a name="tex2html3828"
+  href="node221.html">Arnoldi Procedure in GEMV Form</a>
+<li><a name="tex2html3829"
+  href="node222.html">Implicit Restart</a>
+<li><a name="tex2html3830"
+  href="node223.html">Convergence Properties</a>
+<li><a name="tex2html3831"
+  href="node224.html">Numerical Stability</a>
+<li><a name="tex2html3832"
+  href="node225.html">Computational Costs and Tradeoffs</a>
+<li><a name="tex2html3833"
+  href="node226.html">Deflation and Stopping Rules</a>
+<li><a name="tex2html3834"
+  href="node227.html">Orthogonal Deflating Transformation</a>
+<ul>
+<li><a name="tex2html3835"
+  href="node228.html">Locking or Purging a Single Eigenvalue.</a>
+<li><a name="tex2html3836"
+  href="node229.html">Locking <span class="math-inline">\theta </span>.</a>
+<li><a name="tex2html3837"
+  href="node230.html">Purging <span class="math-inline">\theta </span>.</a>
+<li><a name="tex2html3838"
+  href="node231.html">Stability of <span class="math-inline">Q^{\ast } H Q</span>.</a>
+<li><a name="tex2html3839"
+  href="node232.html">Locking and Purging in IRAM.</a>
+</ul>
+<li><a name="tex2html3840"
+  href="node233.html">Eigenvector Computation with Spectral Transformation</a>
+<li><a name="tex2html3841"
+  href="node234.html">Software Availability</a>
+</ul>
+<li><a name="tex2html3842"
+  href="node235.html">Block Arnoldi Method 
+<br>&nbsp; <em>R.&nbsp;Lehoucq and K.&nbsp;Maschhoff</em> </a>
+<ul>
+<li><a name="tex2html3843"
+  href="node236.html">Block Arnoldi Reductions</a>
+<li><a name="tex2html3844"
+  href="node237.html">Practical Algorithm</a>
+<ul>
+<li><a name="tex2html3845"
+  href="node238.html">Block Size.</a>
+<li><a name="tex2html3846"
+  href="node239.html">Stopping Criterion.</a>
+<li><a name="tex2html3847"
+  href="node240.html">Deflation.</a>
+<li><a name="tex2html3848"
+  href="node241.html">Restarting a Block Arnoldi Reduction.</a>
+</ul>
+<li><a name="tex2html3849"
+  href="node242.html">Software Availability</a>
+<li><a name="tex2html3850"
+  href="node243.html">Notes and References</a>
+</ul>
+<li><a name="tex2html3851"
+  href="node244.html">Lanczos Method 
+<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em> </a>
+<ul>
+<li><a name="tex2html3852"
+  href="node245.html">Algorithm</a>
+<li><a name="tex2html3853"
+  href="node246.html">Convergence Properties</a>
+<ul>
+<li><a name="tex2html3854"
+  href="node247.html">Multiple Eigenvalues.</a>
+</ul>
+<li><a name="tex2html3855"
+  href="node248.html">Software Availability</a>
+<li><a name="tex2html3856"
+  href="node249.html">Notes and References</a>
+</ul>
+<li><a name="tex2html3857"
+  href="node250.html">Block Lanczos Methods 
+<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em></a>
+<ul>
+<li><a name="tex2html3858"
+  href="node251.html">Basic Algorithm</a>
+<li><a name="tex2html3859"
+  href="node252.html">An Adaptively Blocked Lanczos Method</a>
+<ul>
+<li><a name="tex2html3860"
+  href="node253.html">Storage Requirements and Floating Point Operations.</a>
+</ul>
+<li><a name="tex2html3861"
+  href="node254.html">Software Availability</a>
+<li><a name="tex2html3862"
+  href="node255.html">Notes and References</a>
+</ul>
+<li><a name="tex2html3863"
+  href="node256.html">Band Lanczos Method 
+<br>&nbsp; <em>R.&nbsp;Freund</em></a>
+<ul>
+<li><a name="tex2html3864"
+  href="node257.html">Deflation</a>
+<li><a name="tex2html3865"
+  href="node258.html">Basic Properties</a>
+<li><a name="tex2html3866"
+  href="node259.html">Algorithm</a>
+<li><a name="tex2html3867"
+  href="node260.html">Application to Reduced-Order Modeling</a>
+<li><a name="tex2html3868"
+  href="node261.html">Variants</a>
+</ul>
+<li><a name="tex2html3869"
+  href="node262.html">Lanczos Method for Complex Symmetric Eigenproblems 
+<br>&nbsp; <em>R.&nbsp;Freund</em> </a>
+<ul>
+<li><a name="tex2html3870"
+  href="node263.html">Properties of Complex Symmetric Matrices</a>
+<li><a name="tex2html3871"
+  href="node264.html">Properties of the Algorithm</a>
+<li><a name="tex2html3872"
+  href="node265.html">Algorithm</a>
+<li><a name="tex2html3873"
+  href="node266.html">Solving the Reduced Eigenvalue Problems</a>
+<li><a name="tex2html3874"
+  href="node267.html">Software Availability</a>
+<li><a name="tex2html3875"
+  href="node268.html">Notes and References</a>
+</ul>
+<li><a name="tex2html3876"
+  href="node269.html">Jacobi-Davidson Methods 
+<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em></a>
+<ul>
+<li><a name="tex2html3877"
+  href="node270.html">Generalization of Hermitian Case</a>
+<li><a name="tex2html3878"
+  href="node271.html">Schur Form and Restart</a>
+<li><a name="tex2html3879"
+  href="node272.html">Computing Interior Eigenvalues</a>
+<li><a name="tex2html3880"
+  href="node273.html">Software Availability</a>
+<li><a name="tex2html3881"
+  href="node274.html">Numerical Example</a>
+</ul>
+<li><a name="tex2html3882"
+  href="node275.html">Stability and Accuracy Assessments 
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+<ul>
+<li><a name="tex2html3883"
+  href="node276.html">Residual Vectors.</a>
+<li><a name="tex2html3884"
+  href="node277.html">Transfer Residual Errors to Backward Errors.</a>
+<li><a name="tex2html3885"
+  href="node278.html">Error Bound for Computed Eigenvalues.</a>
+<li><a name="tex2html3886"
+  href="node279.html">Error Bound for Computed Eigenvectors.</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

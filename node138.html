@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Basic Algorithm</title>
+<meta name="description" content="Basic Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node140.html">
+<link rel="previous" href="node137.html">
+<link rel="up" href="node136.html">
+<link rel="next" href="node139.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2827"
+  href="node139.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2821"
+  href="node136.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2815"
+  href="node137.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2823"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2825"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2828"
+  href="node139.html">Storage and Computational Costs.</a>
+<b> Up:</b> <a name="tex2html2822"
+  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html2816"
+  href="node137.html">Basic Theory</a>
+ &nbsp <b>  <a name="tex2html2824"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2826"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001372000000000000000">
+基本算法</a>
+</h2>
+
+<p>
+Jacobi-Davidson算法的基本形式在
+算法&nbsp;<a href="node138.html#alg:jd">4.13</a>中给出。稍后，我们将描述带有重启和其他策略的更复杂的变体。
+
+<p>
+在该算法的每一次迭代中，计算与厄米矩阵<span class="math-inline">A</span>的最大特征值相对应的近似特征对<span class="math-inline">(\theta, {u})</span>。一旦残差
+
+<span class="math-inline">A{u}-\theta {u}</span>的范数低于给定的阈值<span class="math-inline">\epsilon</span>，迭代过程即终止。
+
+<p>
+<br>
+<a name="alg:jd"></a><IMG
+ width="598" height="377" align="bottom" border="0"
+ src="img1300.png"
+ alt="\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">\lambda_{\max}(A)</span>\ for HEP
+}
+{
+\...
+...^\ast){t}=-r$\ \\
+{\rm (16)} \&gt; \&gt; {\bf end for}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+要应用此算法，我们需要指定一个初始向量<span class="math-inline">{v}_0</span>和一个容差<span class="math-inline">\epsilon</span>。完成后，将提供最大特征值
+
+<span class="math-inline">\lambda=\lambda_{\max}(A)</span>及其对应的特征向量
+
+<span class="math-inline">{x}={x}_{\max}</span>的近似值。计算得到的特征对
+<span class="math-inline">(\widetilde\lambda, \widetilde{x})</span>
+满足
+<span class="math-inline">\Vert A\widetilde{x} - \widetilde\lambda\widetilde{x} \Vert\leq \epsilon</span>。
+<br>
+<p>
+现在我们将描述一些实现细节，参考算法&nbsp;<a href="node138.html#alg:jd">4.13</a>中的相应阶段。
+
+<p>
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>这是过程的初始化阶段。搜索子空间在每次迭代中通过向量<span class="math-inline">{t}</span>扩展，我们从给定的向量<span class="math-inline">t=v_0</span>开始这一过程。理想情况下，该向量应在所需特征向量的方向上有显著分量。除非对所需特征向量有所了解，否则从随机向量开始可能是个好主意。这有助于确保所需特征向量在初始向量中具有非零分量，这对于检测特征向量是必要的。
+
+<p>
+</dd>
+<dt><strong>(3)-(5)</strong></dt>
+<dd>这代表了用于新向量<span class="math-inline">t</span>相对于集合<span class="math-inline">{v}_1,\ldots, {v}_{{m}-1}</span>的正交化的修正Gram-Schmidt过程。如果<span class="math-inline">{m}=1</span>，这是一个空循环。设<span class="math-inline">{t}_{in}</span>表示正交化开始前的向量，<span class="math-inline">{t}_{out}</span>表示完成阶段(3)-(5)后的向量。建议（参见[<a href="node421.html#dgks76">96</a>]）如果<span class="math-inline">\Vert{t}_{out}\Vert _2/\Vert{t}_{in}\Vert _2\leq \kappa</span>，其中<span class="math-inline">\kappa</span>是一个适度的常数，例如<span class="math-inline">\kappa=.25</span>，则重复Gram-Schmidt过程一次。这保证了在相对意义上，正交性的损失被限制在<span class="math-inline">1/\kappa</span>倍机器精度内。修正Gram-Schmidt正交化与迭代改进的模板在算法&nbsp;<a href="node138.html#alg:rgs">4.14</a>中给出。
+
+<p>
+</dd>
+<dt><strong>(7)-(9)</strong></dt>
+<dd>在此阶段，计算矩阵<span class="math-inline">{M}\equiv {V}^\ast A{V}</span>的上三角部分的第<span class="math-inline">{m}</span>列。矩阵<span class="math-inline">{V}</span>表示列向量为<span class="math-inline">{v}_j</span>的<span class="math-inline">n</span>乘<span class="math-inline">{m}</span>矩阵，<span class="math-inline">{V^A}</span>同样。
+
+<p>
+</dd>
+<dt><strong>(10)</strong></dt>
+<dd>计算具有上三角部分元素<span class="math-inline">{M}_{i,j}</span>的<span class="math-inline">{m}\times {m}</span>厄米矩阵<span class="math-inline">{M}</span>的最大特征对，可以使用LAPACK中的适当例程（参见&#167;<a href="node93.html#sec:dense">4.2</a>）。
+
+<p>
+</dd>
+<dt><strong>(12)</strong></dt>
+<dd>向量<span class="math-inline">{u^A}</span>可以按照此处描述的方式更新，或者重新计算为<span class="math-inline">{u^A}=A{u}</span>，取决于哪种方式成本更低。选择是在<span class="math-inline">{m}</span>倍更新和另一次与<span class="math-inline">A</span>的乘法之间；如果<span class="math-inline">A</span>每行平均少于<span class="math-inline">{m}</span>个非零元素，通过<span class="math-inline">A{u}</span>计算更可取。如果<span class="math-inline">{u^A}</span>计算为<span class="math-inline">A{u}</span>，则不必存储向量<span class="math-inline">v^A_j</span>。
+
+<p>
+</dd>
+<dt><strong>(14)</strong></dt>
+<dd>如果<span class="math-inline">\Vert A{u}-\theta {u}\Vert _2\leq \epsilon</span>，则算法终止。在这种情况下，<span class="math-inline">A</span>有一个特征值<span class="math-inline">\lambda</span>，满足<span class="math-inline">\vert\lambda -\theta\vert\leq \epsilon</span>。对于相应的归一化特征向量，如果<span class="math-inline">\lambda</span>是简单的且与其他特征值很好地分离，则存在类似的角边界。这种情况也会导致<span class="math-inline">\lambda</span>的更严格边界；参见（<a href="node86.html#eigvecpert_b">4.5</a>）或&#167;<a href="node148.html#sec:pert-H">4.8</a>。
+
+<p>
+收敛到<span class="math-inline">\lambda\neq\lambda_{\max}(A)</span>可能发生，但通常不太可能。例如，如果<span class="math-inline">v_0\perp {x}_{\max}</span>，或者选择的<span class="math-inline">\theta</span>非常接近另一个特征值<span class="math-inline">\lambda\neq\lambda_{\max}(A)</span>，就可能发生这种情况。对于任何迭代求解器，特别是如果<span class="math-inline">\epsilon</span>取值不够小（例如，大于机器精度的平方根），这种情况都可能发生。
+
+<p>
+</dd>
+<dt><strong>(15)</strong></dt>
+<dd>扩展向量<span class="math-inline">{t}</span>的近似解可以通过Krylov求解器计算，例如MINRES或SYMMLQ。使用左或右预处理时，由于预处理后的算子通常不对称，必须选择适用于非对称系统的Krylov求解器（如GMRES、CGS或Bi-CGSTAB）。近似解的模板，使用选择的左预处理Krylov子空间方法，在算法&nbsp;<a href="node138.html#alg:corrit">4.15</a>中给出。右预处理的情况，稍微更昂贵，在算法&nbsp;<a href="node138.html#alg:corrita">4.16</a>中涵盖。对于迭代Krylov子空间求解器，参见[<a href="node421.html#temp94">41</a>]。近似解必须与<span class="math-inline">{u}</span>正交，但如果从初始猜测<span class="math-inline">{t}_0=0</span>开始，这是Krylov求解器的自动情况。在大多数情况下，不需要将校正方程求解到高精度；在第<span class="math-inline">{m}</span>次迭代中，相对精度<span class="math-inline">2^{-m}</span>似乎足够。建议对迭代求解器的迭代步数设置限制。
+
+<p>
+Davidson[<a href="node421.html#davi75">99</a>]建议取<span class="math-inline">{t}=(\mathrm{\rm diag}(A)-\theta I)^{-1}r</span>，但在此情况下<span class="math-inline">{t}</span>与<span class="math-inline">{u}</span>不正交。此外，对于对角矩阵，这种选择会导致停滞，这是这种方法存在问题的例证。
+</dd>
+</dl>
+
+<p>
+为了限制存储，算法可以在某个适当值<span class="math-inline">{m}={m}_{\max}</span>处终止，并使用<span class="math-inline">{u}</span>的最新值作为<span class="math-inline">v_0</span>重新启动。我们将在&#167;<a href="node140.html#sec:JDresdef">4.7.3</a>中描述一种具有更复杂重启策略的Jacobi-Davidson算法变体。
+
+<p>
+注意，大多数计算密集型操作，即那些成本与<span class="math-inline">n</span>成比例的操作，可以很容易地并行化。此外，多向量更新可以通过适当的Level 2 BLAS例程执行（参见&#167;<a href="node379.html#sec:blas">10.2</a>）。
+
+<p>
+在接下来的小节中，我们将描述更复杂的Jacobi-Davidson算法变体。在&#167;<a href="node140.html#sec:JDresdef">4.7.3</a>中，我们将介绍一种允许重启的变体，如果希望保持所涉及子空间的维度有限，这将很方便。这种变体也适用于在发现特征对后重启，以定位下一个特征对。该技术基于收缩。生成的算法设计用于计算给定矩阵的几个最大或最小特征值。
+
+<p>
+在&#167;<a href="node145.html#sec:jdhar">4.7.4</a>中，我们将描述一种适用于计算<span class="math-inline">A</span>内部特征值的Jacobi-Davidson方法变体。
+
+<p>
+<br>
+<a name="alg:rgs"></a><IMG
+ width="598" height="259" align="bottom" border="0"
+ src="img1334.png"
+ alt="\begin{algorithm}{Modified Gram--Schmidt Orthogonalization
+with Refinement
+%%
+\i...
+...&gt; \&gt; {\bf end for} \\
+{\rm (10)} \&gt; {\bf end if}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+<br>
+<br>
+<p>
+<br>
+<a name="alg:corrit"></a><IMG
+ width="598" height="309" align="bottom" border="0"
+ src="img1335.png"
+ alt="\begin{algorithm}{Approximate Solution of the Jacobi--Davidson
+HEP Correction Eq...
+...rac{{{u}^\ast} {\widehat{y}}}{\mu} \; \widehat{u}$\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+<br>
+<a name="alg:corrita"></a><IMG
+ width="598" height="307" align="bottom" border="0"
+ src="img1336.png"
+ alt="\begin{algorithm}{Approximate Solution of the Jacobi--Davidson
+HEP Correction Eq...
+...ac {{u}^\ast {\widehat{t}}}{\mu} \; {\widehat{u}}$\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html2829"
+  href="node139.html">存储和计算成本</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html2827"
+  href="node139.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2821"
+  href="node136.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2815"
+  href="node137.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2823"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2825"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2828"
+  href="node139.html">Storage and Computational Costs.</a>
+<b> Up:</b> <a name="tex2html2822"
+  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b> Previous:</b> <a name="tex2html2816"
+  href="node137.html">Basic Theory</a>
+ &nbsp <b>  <a name="tex2html2824"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2826"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

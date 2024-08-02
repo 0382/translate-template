@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Algorithm</title>
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node266.html">
+<link rel="previous" href="node264.html">
+<link rel="up" href="node262.html">
+<link rel="next" href="node266.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4794"
+  href="node266.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4788"
+  href="node262.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4782"
+  href="node264.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4790"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4792"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4795"
+  href="node266.html">Solving the Reduced Eigenvalue</a>
+<b> Up:</b> <a name="tex2html4789"
+  href="node262.html">Lanczos Method for Complex</a>
+<b> Previous:</b> <a name="tex2html4783"
+  href="node264.html">Properties of the Algorithm</a>
+ &nbsp <b>  <a name="tex2html4791"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4793"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION0016113000000000000000">
+算法</a>
+</h2> 
+
+<p>
+复杂对称Lanczos算法的完整陈述（无前瞻）如下所示。
+
+<p>
+<br>
+<a name="rwf:alg3"></a><IMG
+ width="598" height="289" align="bottom" border="0"
+ src="img2515.png"
+ alt="\begin{algorithm}{Complex Symmetric Lanczos Method
+}
+{
+\begin{tabbing}
+(nr)ss\...
+...rgence \\
+\textup{(12)} \&gt; \&gt;
+{\bf end for}
+\end{tabbing}
+}
+\end{algorithm}">
+<br>
+
+<p>
+接下来，我们对算法<a href="node265.html#rwf:alg3">7.17</a>的几个步骤进行评论。
+
+<p>
+<dl>
+<dt><strong>(3)</strong></dt>
+<dd>如果<span class="math-inline">\hat{v}_j=0</span>发生，则算法已完全耗尽了由<span class="math-inline">A</span>和<span class="math-inline">b</span>生成的Krylov序列，因此终止是自然的。
+实际上，在这种情况下，到目前为止生成的Lanczos向量跨越了一个<span class="math-inline">A</span>-不变子空间，并且Lanczos三对角矩阵的所有特征值也是<span class="math-inline">A</span>的特征值。
+
+<p>
+</dd>
+<dt><strong>(5)</strong></dt>
+<dd>在实践中，如果发生所谓的<i>近崩溃</i>，即<span class="math-inline">\beta_j\approx 0</span>，也需要停止。
+算法的前瞻版本可以修正精确崩溃（即<span class="math-inline">\beta_j = 0</span>）和近崩溃；参见，例如[<a
+ href="node421.html#frgn93">178</a>,<a
+ href="node421.html#fren96">180</a>]。
+
+<p>
+</dd>
+<dt><strong>(11)</strong></dt>
+<dd>为了测试收敛性，计算复对称三对角矩阵<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>，<span class="math-inline">i=1,2,\ldots,j</span>，如果某些<span class="math-inline">\theta_i^{(j)}</span>足够接近<span class="math-inline">A</span>的期望特征值，则停止算法。
+
+<p>
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4794"
+  href="node266.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4788"
+  href="node262.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4782"
+  href="node264.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4790"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4792"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4795"
+  href="node266.html">Solving the Reduced Eigenvalue</a>
+<b> Up:</b> <a name="tex2html4789"
+  href="node262.html">Lanczos Method for Complex</a>
+<b> Previous:</b> <a name="tex2html4783"
+  href="node264.html">Properties of the Algorithm</a>
+ &nbsp <b>  <a name="tex2html4791"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4793"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

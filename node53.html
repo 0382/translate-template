@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Conditioning</title>
+<meta name="description" content="Conditioning">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node54.html">
+<link rel="previous" href="node52.html">
+<link rel="up" href="node48.html">
+<link rel="next" href="node54.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1495"
+  href="node54.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1489"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1483"
+  href="node52.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1491"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1493"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1496"
+  href="node54.html">Specifying an Eigenproblem</a>
+<b> Up:</b> <a name="tex2html1490"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1484"
+  href="node52.html">Eigendecompositions</a>
+ &nbsp <b>  <a name="tex2html1492"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1494"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001155000000000000000"></a> 
+<a name="sec_chap2_nHepCond"></a><a name="1596"></a>
+<br>
+条件性
+</h2>
+
+<p>
+一个一般矩阵 <span class="math-inline">A</span> 的特征值可以是良态的，也可以是病态的。
+例如，如果 <span class="math-inline">A</span> 实际上是 Hermitian 矩阵（或接近 Hermitian 矩阵），那么其特征值是良态的，如第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节所述。
+另一方面，如果 <span class="math-inline">A</span> “远离 Hermitian 矩阵”，那么其特征值可能是非常病态的。
+例如，矩阵 <span class="math-inline">A(\epsilon)</span> 在式(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)中表明，将矩阵的一个元素改变 <span class="math-inline">\epsilon^2</span> 可以导致特征值改变 <span class="math-inline">\epsilon</span>，这在 <span class="math-inline">\vert\epsilon\vert \ll 1</span> 时远大于 <span class="math-inline">\epsilon^2</span>。
+例如，<span class="math-inline">\epsilon = 10^{-8}</span> 比扰动 <span class="math-inline">\epsilon^2 = 10^{-16}</span> 大 <span class="math-inline">10^8</span> 倍，后者可能是由舍入误差引入的。换句话说，特征值可能比矩阵的扰动受到更大的影响。正如这个例子所示，这种病态性往往在两个或多个特征值非常接近时出现。
+
+<p>
+特征向量同样可能是良态的或病态的。
+从第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节我们知道，即使对于 Hermitian 矩阵，接近的特征值也可能有病态的特征向量。在非 Hermitian 矩阵的情况下，它们甚至可能更敏感，如矩阵 <span class="math-inline">A(\epsilon)</span> 在式(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)中再次表明：对一个特征值间隔为 <span class="math-inline">2 \epsilon</span> 的矩阵进行 <span class="math-inline">\epsilon^2</span> 的扰动，可以导致特征向量旋转 <span class="math-inline">\epsilon \gg \epsilon^2</span>，甚至使其中一个完全消失。
+
+<p>
+我们参考第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节以获取更多细节。
+
+<p>
+<hr>
+
+这段内容讨论了矩阵特征值和特征向量的条件性问题，即它们对扰动的敏感程度。良态表示对扰动不敏感，而病态则意味着对扰动非常敏感。这种情况在特征值接近时尤为明显。<!--Navigation Panel-->
+<a name="tex2html1495"
+  href="node54.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1489"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1483"
+  href="node52.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1491"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1493"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1496"
+  href="node54.html">Specifying an Eigenproblem</a>
+<b> Up:</b> <a name="tex2html1490"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1484"
+  href="node52.html">Eigendecompositions</a>
+ &nbsp <b>  <a name="tex2html1492"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1494"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

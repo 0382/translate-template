@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Direct Methods</title>
+<meta name="description" content="Direct Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node165.html">
+<link rel="previous" href="node163.html">
+<link rel="up" href="node155.html">
+<link rel="next" href="node165.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3230"
+  href="node165.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3224"
+  href="node155.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3218"
+  href="node163.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3226"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3228"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3231"
+  href="node165.html">Single- and Multiple-Vector Iterations</a>
+<b> Up:</b> <a name="tex2html3225"
+  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3219"
+  href="node163.html">Transformation to Standard Problem</a>
+ &nbsp <b>  <a name="tex2html3227"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3229"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001430000000000000000"></a>  <a name="sec:ghepdirect"></a>  
+<a name="17137"></a>
+<a name="17138"></a>
+<a name="17139"></a>
+<br>
+直接方法
+</h1>
+
+<p>
+在本节中，我们将简要讨论计算稠密矩阵的特征值和特征向量的方法。通过分解<span class="math-inline">B</span>（参见<a href="node163.html#B_chol">5.4</a>），广义厄米特征值问题（GHEP，参见<a href="node156.html#gsymeig">5.1</a>）被转化为标准厄米特征值问题（参见<a href="node163.html#C_eigenvalues">5.5</a>）。随后，可以使用第&#167;<a href="node93.html#sec:dense">4.2</a>节中讨论的直接方法。
+
+<p>
+具体来说，在LAPACK[<a href="node421.html#lapack">12</a>]中，提供了以下驱动程序来解决<span class="math-inline">B</span>为正定矩阵的广义厄米特征值问题（GHEP，参见<a href="node156.html#gsymeig">5.1</a>）：
+
+<ul>
+<li>简单驱动程序xSYGV计算所有特征值和（可选）特征向量。其底层算法是QR算法；参见第&#167;<a href="node93.html#sec:dense">4.2</a>节。
+<a name="17149"></a>
+</li>
+<li>专家驱动程序xSYGVX计算所有或选定的特征值子集和（可选）特征向量。如果所需的特征值或特征向量数量较少，专家驱动程序比简单驱动程序更快。该驱动程序使用QR算法、二分法和逆迭代中更高效的方法。
+<a name="17151"></a>
+</li>
+<li>分治驱动程序xSYGVD解决与简单驱动程序相同的问题。对于大型矩阵，它比简单驱动程序快得多，但需要更多的工作空间。分治名称指的是其底层的分治算法；参见第&#167;<a href="node93.html#sec:dense">4.2</a>节。
+<a name="17154"></a>
+</li>
+</ul>
+对这些方法的数值分析表明，如果<span class="math-inline">B</span>相对于逆变换的条件数<span class="math-inline">\kappa_2(B) = \Vert B\Vert _2\Vert B^{-1}\Vert _2</span>很大，即<span class="math-inline">B</span>病态，这些方法可能会在数值上不稳定，并且在计算的特征值和特征向量中产生较大误差。目前还没有直接适用于保持<span class="math-inline">A</span>和<span class="math-inline">B</span>对称性的<span class="math-inline">A</span>和<span class="math-inline">B</span>的直接方法实现。另一种方法是应用QZ算法（参见第&#167;<a href="node282.html#sec:qzalg">8.2</a>节），但这将失去对称性。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3230"
+  href="node165.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3224"
+  href="node155.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3218"
+  href="node163.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3226"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3228"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3231"
+  href="node165.html">Single- and Multiple-Vector Iterations</a>
+<b> Up:</b> <a name="tex2html3225"
+  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3219"
+  href="node163.html">Transformation to Standard Problem</a>
+ &nbsp <b>  <a name="tex2html3227"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3229"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

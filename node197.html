@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Golub-Kahan-Lanczos Method</title>
+<meta name="description" content="Golub-Kahan-Lanczos Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node200.html">
+<link rel="previous" href="node196.html">
+<link rel="up" href="node194.html">
+<link rel="next" href="node198.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3729"
+  href="node198.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3723"
+  href="node194.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3717"
+  href="node196.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3725"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3727"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3730"
+  href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
+<b> Up:</b> <a name="tex2html3724"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html3718"
+  href="node196.html">Which Singular Values and</a>
+ &nbsp <b>  <a name="tex2html3726"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3728"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001533000000000000000"></a> 
+<a name="sec_chap4_GolubKahanLanczos"></a><a name="20899"></a>
+<a name="20900"></a>
+<br>
+Golub-Kahan-Lanczos 方法
+</h2>
+
+我们已经了解到，Hermitian 特征值问题与奇异值分解密切相关。矩阵 <span class="math-inline">A</span> 的奇异值是 Hermitian 矩阵 <span class="math-inline">A^{\ast} A</span> 的特征值的平方根。因此，我们可以通过对 <span class="math-inline">A^{\ast} A</span> 应用 Hermitian Lanczos 方法来计算奇异值。算法所需的矩阵向量乘积可以计算为 <span class="math-inline">A^{\ast} (A q)</span> 的形式。
+
+<p>
+在本节中，我们考虑将第 <a href="node103.html#sec:lan">4.4</a> 节所述的 Lanczos 方法应用于 <span class="math-inline">H(A)</span>。<span class="math-inline">H(A)</span> 的特殊结构使我们能够选择一个特殊的起始向量，从而得到一个更经济的算法，该算法生成两个向量序列，一个用于覆盖左奇异向量，另一个用于右奇异向量。此外，它将 <span class="math-inline">A</span> 简化为双对角形式 <span class="math-inline">B</span>；即，<span class="math-inline">B</span> 仅在主对角线和第一上对角线上非零。我们从基本原理出发推导该方法，然后展示它与第 <a href="node103.html#sec:lan">4.4</a> 节所述的 Lanczos 方法的关系。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html3731"
+  href="node198.html">Golub-Kahan-Lanczos 双对角化过程。</a>
+<li><a name="tex2html3732"
+  href="node199.html">与对称 Lanczos 的关系。</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+这段内容介绍了 Golub-Kahan-Lanczos 方法，这是一种用于计算矩阵奇异值的技术。该方法利用了 Hermitian 矩阵的特征值与奇异值之间的紧密联系，并通过特殊的起始向量选择和结构简化，实现了更高效的计算过程。此外，该方法还能将矩阵简化为双对角形式，这在数值计算中具有重要意义。<!--Navigation Panel-->
+<a name="tex2html3729"
+  href="node198.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3723"
+  href="node194.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3717"
+  href="node196.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3725"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3727"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3730"
+  href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
+<b> Up:</b> <a name="tex2html3724"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html3718"
+  href="node196.html">Which Singular Values and</a>
+ &nbsp <b>  <a name="tex2html3726"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3728"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

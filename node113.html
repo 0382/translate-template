@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Examples</title>
+<meta name="description" content="Numerical Examples">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node112.html">
+<link rel="up" href="node103.html">
+<link rel="next" href="node114.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2450"
+  href="node114.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2444"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2440"
+  href="node112.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2446"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2448"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2451"
+  href="node114.html">Results for L-Shaped Membrane.</a>
+<b> Up:</b> <a name="tex2html2445"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2441"
+  href="node112.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html2447"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2449"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001346000000000000000"></a>  <a name="sec:laneg"></a>
+<br>
+数值示例
+</h2> 
+我们考虑将Lanczos算法应用于两个简单但典型的例子，使用LANSO软件进行计算。
+
+<p>
+第一个例子是计算L形薄膜的一些特征模态。采用标准五点有限差分近似法，网格间距<span class="math-inline">h=1/64</span>，得到一个阶数为<span class="math-inline">n=2945</span>的稀疏对称正定矩阵。该矩阵具有非常规则的稀疏带状结构，每行最多有五个非零元素。其特征值将位于区间<span class="math-inline">0<\lambda_i<8</span>内，对称分布在<span class="math-inline">\lambda=4</span>周围，且越接近谱的两端分布越密集。
+
+<p>
+第二个测试例子来自信息检索应用，涉及一个术语-文档矩阵，其中每列代表一个文档，每行代表一个术语。元素<span class="math-inline">x_{i,j}</span>为1，表示术语<span class="math-inline">i</span>出现在文档<span class="math-inline">j</span>中，否则为零。一组主要奇异值的空间可用于发现某些文档之间的联系。具体矩阵M<small>EDLINE</small>是大小为<span class="math-inline">7014\times 1033</span>的矩形矩阵，中等稀疏，包含53,287个填充元素，即每行约8个元素。直接形成乘积<span class="math-inline">A=X^TX</span>并不明智，因为该矩阵将几乎全满，包含910,755个非零元素（占85%）。我们通过先计算<span class="math-inline">z=Xx</span>，再计算<span class="math-inline">y=X^Tz</span>来实现乘积<span class="math-inline">y=Ax</span>。
+
+<p>
+<br><hr>
+<!--子链接表-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html2452"
+  href="node114.html">L形薄膜的结果。</a>
+<li><a name="tex2html2453"
+  href="node115.html">Medline SVD的结果。</a>
+<li><a name="tex2html2454"
+  href="node116.html">L形薄膜与移位-逆变换的结果。</a>
+</ul></ul>
+<!--子链接表结束-->
+<hr><!--Navigation Panel-->
+<a name="tex2html2450"
+  href="node114.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2444"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2440"
+  href="node112.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2446"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2448"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2451"
+  href="node114.html">Results for L-Shaped Membrane.</a>
+<b> Up:</b> <a name="tex2html2445"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2441"
+  href="node112.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html2447"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2449"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

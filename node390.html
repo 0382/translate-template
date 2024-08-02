@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>A Brief Survey of Iterative Linear Solvers &nbsp; H.&nbsp;van&nbsp;der&nbsp;Vorst </title>
+<meta name="description" content="A Brief Survey of Iterative Linear Solvers &nbsp; H.&nbsp;van&nbsp;der&nbsp;Vorst ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node391.html">
+<link rel="previous" href="node385.html">
+<link rel="up" href="node371.html">
+<link rel="next" href="node391.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6745"
+  href="node391.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6739"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6733"
+  href="node389.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6741"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6743"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6746"
+  href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
+<b> Up:</b> <a name="tex2html6740"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6734"
+  href="node389.html">Direct Solvers for Structured</a>
+ &nbsp <b>  <a name="tex2html6742"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6744"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001940000000000000000"></a> <a name="sec:IterativeSolver"></a><a name="46488"></a>
+<br>
+迭代线性求解器简述
+<br>&nbsp; <em>H. van der Vorst </em> 
+</h1> 
+
+<p>
+在特征问题的背景下，可能需要求解一个线性系统，例如，在以下情况下：
+
+<p>
+
+<ul>
+<li>Jacobi-Davidson方法需要求解一个线性校正方程的（近似）解。
+</li>
+<li>不精确方法，如第<a href="node396.html#chap:precond">11</a>章所讨论的，基于近似的移位-逆变换步骤，需要近似求解一个线性系统。
+</li>
+<li>给定一个良好的特征值近似，相应的左或右特征向量可以通过移位矩阵的线性系统计算得到。
+</li>
+</ul>
+在所有这些情况下，必须求解一个移位矩阵 <span class="math-inline">A-\theta I</span> 的线性系统，有时嵌入在投影中，如Jacobi-Davidson方法。如果这些系统需要精确求解，那么首先可以考虑直接（稀疏）求解器。通常需要求解多个具有相同移位矩阵的系统，这有助于分摊进行稀疏LU分解的大量成本。如果系统不需要精确求解，或者直接求解方法成本过高，那么可以考虑迭代方法。一组流行的迭代方法已在<em>线性系统求解模板</em>[<a href="node421.html#temp94">41</a>]中描述。在我们提供简要概述之前，我们提醒读者，与特征问题相关的线性系统通常具有不定矩阵，这是由于涉及的移位。如果移位接近外部特征值，那么在所有情况下这不一定是一个障碍，但对于内部移位肯定会有收敛问题。此外，当移位非常接近某个特征值时，例如，如果希望确定一个左或右特征向量，那么应该意识到迭代方法在求解几乎奇异的系统时会遇到很大困难。这在感兴趣的情况下尤其如此，即人们关注（几乎）奇异方向的情况，如同在左和右特征向量的逆迭代中那样。通常认为迭代方法需要有效的预处理器才能具有吸引力。这对于移位矩阵尤其如此。不幸的是，为不定矩阵构建有效的预处理器是一个难以处理的问题。更多内容请参见第<a href="node396.html#chap:precond">11</a>章。
+
+<p>
+目前最流行的迭代方法属于Krylov子空间方法类。这些方法从所谓的Krylov子空间构建解的近似。Krylov子空间 <span class="math-inline">{\mathcal K}^i(A;r_0)</span> 的维度为 <span class="math-inline">i</span>，与线性系统 <span class="math-inline">ax=b</span>（其中 <span class="math-inline">A</span> 和 <span class="math-inline">b</span> 可能是预处理后的值，如果包含预处理）相关，对于起始向量 <span class="math-inline">x_0</span> 和残差向量 <span class="math-inline">r_0=b-Ax_0</span>，定义为由向量 {<span class="math-inline">r_0</span>, <span class="math-inline">Ar_0</span>, <span class="math-inline">A^2r_0, \ldots, A^{i-1}r_0</span>} 张成的子空间。
+
+<p>
+不同的方法可以分类如下：
+<dl COMPACT>
+<dt>(a)</dt>
+<dd>如果 <span class="math-inline">A</span> 是对称正定的，那么<em>共轭梯度</em>方法[<a href="node421.html#hest54">226</a>]使用二项递归生成 <span class="math-inline">x_i</span>，使得 <span class="math-inline">(x-x_i,A(x-x_i))</span>（所谓的 <span class="math-inline">A</span>-范数或能量范数）在当前Krylov子空间 <span class="math-inline">{\mathcal K}^i(A;r_0)</span> 中所有向量上最小化。
+</dd>
+<dt>(b)</dt>
+<dd>如果 <span class="math-inline">A</span> 仅是对称的但不是正定的，那么可以考虑<em>Lanczos</em>[<a href="node421.html#lanc52">286</a>]和<em>MINRES</em>方法[<a href="node421.html#pasa75">350</a>]。在MINRES中，确定 <span class="math-inline">x_i \in {\mathcal K}^i(A;r_0)</span>，使得残差的2-范数（<span class="math-inline">\Vert b-Ax_i\Vert _2</span>）最小化，而Lanczos方法导致 <span class="math-inline">x_i</span>，使得 <span class="math-inline">b-Ax_i</span> 垂直于Krylov子空间。
+</dd>
+<dt>(c)</dt>
+<dd>如果 <span class="math-inline">A</span> 是非对称的，通常不可能用短递归确定最优的 <span class="math-inline">x_i\in K^i(A,r_0)</span>。这在[<a href="node421.html#fama84">163</a>]中得到了证明。然而，使用类似于共轭梯度（和MINRES）的短递归，我们可以计算 <span class="math-inline">x_i \in {\mathcal K}^i(A;r_0)</span>，使得 <span class="math-inline">b-Ax_i\perp {\mathcal K}^i(A^T;s_0)</span>（通常选择 <span class="math-inline">s_0=r_0</span>）。这导致了<em>双共轭梯度</em>方法[<a href="node421.html#flet76">169</a>]。一个聪明的变体是准最小残差（QMR）[<a href="node421.html#frna91">179</a>]，它具有更平滑的收敛行为，并且比双共轭梯度更健壮。
+</dd>
+<dt>(d)</dt>
+<dd>如果 <span class="math-inline">A</span> 是非对称的，那么我们可以计算 <span class="math-inline">x_i\in {\mathcal K}^i(A,r_0)</span>，使得残差在欧几里得范数中最小化。这是通过GMRES方法[<a href="node421.html#sasc86">389</a>]完成的。这需要在第 <span class="math-inline">i</span> 次迭代步骤中进行 <span class="math-inline">i</span> 次内积运算，以及 <span class="math-inline">i</span> 次向量更新，这意味着除了与 <span class="math-inline">A</span> 相关的运算外，迭代成本随 <span class="math-inline">i</span> 线性增长。
+</dd>
+<dt>(e)</dt>
+<dd>在双共轭梯度方法中，<span class="math-inline">A^T</span> 的运算可以被 <span class="math-inline">A</span> 本身的运算所取代，通过观察到 <span class="math-inline">\langle x,A^Ty \rangle</span> 等于 <span class="math-inline">\langle Ax,y \rangle</span>，其中 <span class="math-inline">\langle\ldots\rangle</span> 表示内积计算。由于在双共轭梯度中通过 <span class="math-inline">A^T</span> 的乘法仅用于维护残差正交化的对偶空间，用 <span class="math-inline">A</span> 替换此运算符允许我们扩展Krylov子空间，并以与双共轭梯度相同的每次迭代成本找到更好的近似。这导致了所谓的混合方法，如共轭梯度平方[<a href="node421.html#sonn">418</a>]，Bi-CGSTAB[<a href="node421.html#vorstbicg">445</a>]，Bi-<span class="math-inline">\mathrm{CGSTAB}(\ell)</span>[<a href="node421.html#slfo93">409</a>]，TFQMR[<a href="node421.html#freu93b">174</a>]，以及QMR的混合[<a href="node421.html#cgss94">78</a>]。
+</dd>
+<dt>(f)</dt>
+<dd>对于不定系统，应用正规方程 <span class="math-inline">A^tax=A^Tb</span> 的共轭梯度方法也可能有效。直接进行可能会导致数值不稳定，因为 <span class="math-inline">A^TA</span> 的条件数是平方的。一个聪明且健壮的实现是在最小二乘QR[<a href="node421.html#pasa82">351</a>]中提供的。
+</dd>
+</dl>
+这些方法中的许多已在[<a href="node421.html#temp94">41</a>]中描述，并且有相应的软件可用。有关如何获取软件的指南，请参见本书的主页ETHOME。对于某些方法，模板风格的描述已在[<a href="node421.html#ddsv98">135</a>]中给出。该书还包含各种预处理方法的概述。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6745"
+  href="node391.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6739"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6733"
+  href="node389.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6741"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6743"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6746"
+  href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
+<b> Up:</b> <a name="tex2html6740"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6734"
+  href="node389.html">Direct Solvers for Structured</a>
+ &nbsp <b>  <a name="tex2html6742"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6744"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

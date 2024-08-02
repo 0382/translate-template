@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Arnoldi Method with Inexact Cayley Transform</title>
+<meta name="description" content="Arnoldi Method with Inexact Cayley Transform">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node402.html">
+<link rel="previous" href="node400.html">
+<link rel="up" href="node398.html">
+<link rel="next" href="node402.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6934"
+  href="node402.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6928"
+  href="node398.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6922"
+  href="node400.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6930"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6932"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6935"
+  href="node402.html">Davidson Method</a>
+<b> Up:</b> <a name="tex2html6929"
+  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b> Previous:</b> <a name="tex2html6923"
+  href="node400.html">Inexact Matrix Transformations</a>
+ &nbsp <b>  <a name="tex2html6931"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6933"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002023000000000000000"></a>
+<a name="sec:inexact-Arnoldi"></a>
+<br>
+不精确Cayley变换的Arnoldi方法
+</h2>
+
+<p>
+在本段中，我们讨论在Galerkin投影框架内使用不精确Cayley变换的情况。在每次迭代中，选择一个Ritz值<span class="math-inline">\theta</span>作为零。我们限定于线性系统（<a href="node400.html#eq:system">11.2</a>）通过预处理器<span class="math-inline">M</span>或静态线性系统求解器求解的情况，使得
+
+<span class="math-inline">w_j = M^{-1} (A-\theta B) y_j</span> 对于 <span class="math-inline">j=1, \ldots,k-1</span>。因此，我们可以使用Arnoldi方法来构建
+
+<span class="math-inline">T_{\mathrm{IC}} \equiv M^{-1}(A-\theta B)</span>的Krylov空间。
+
+<p>
+<br>
+<a name="alg:Inexact-Cayley-Arnoldi"></a><IMG
+ width="598" height="259" align="bottom" border="0"
+ src="img3741.png"
+ alt="\begin{algorithm}{不精确Cayley变换的Arnoldi方法用于GNHEP
+\index...
+...<span class="math-inline">v_1 = x</span>, <span class="math-inline">\nu=\theta</span>并在步骤<span class="math-inline">(2)</span>重新启动\end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+该方法的一个缺点是，更新<span class="math-inline">\theta</span>需要完全重新启动Arnoldi过程。
+
+<p>
+例如，向<span class="math-inline">\lambda_1</span>的渐近收敛由
+
+<span class="math-inline">T_{\mathrm{IC}} = M^{-1} (A - \lambda_1 B) \approx (A - \mu B)^{-1} (A-\lambda_1 B)</span>的特征值分离决定。至于SI，当极点<span class="math-inline">\mu</span>更接近<span class="math-inline">\lambda_1</span>时，分离效果更好。
+<a name="48104"></a>
+
+<p>
+当<span class="math-inline">\mu</span>非常接近Ritz值<span class="math-inline">\theta</span>时，精确变换的特征值分离效果更好，但相应的线性系统比<span class="math-inline">\mu</span>稍微远离谱的情况更难求解。在[<a
+ href="node421.html#mero97">323</a>]中，线性系统通过预处理器求解，如不完全分解和多重网格。数值例子显示，当<span class="math-inline">\mu</span>稍微远离谱时，算法<a href="node401.html#alg:Inexact-Cayley-Arnoldi">11.1</a>的收敛速度更快。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6934"
+  href="node402.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6928"
+  href="node398.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6922"
+  href="node400.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6930"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6932"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6935"
+  href="node402.html">Davidson Method</a>
+<b> Up:</b> <a name="tex2html6929"
+  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b> Previous:</b> <a name="tex2html6923"
+  href="node400.html">Inexact Matrix Transformations</a>
+ &nbsp <b>  <a name="tex2html6931"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6933"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Overview of Available Algorithms.</title>
+<meta name="description" content="Overview of Available Algorithms.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node158.html">
+<link rel="previous" href="node156.html">
+<link rel="up" href="node156.html">
+<link rel="next" href="node158.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3134"
+  href="node158.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3128"
+  href="node156.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3122"
+  href="node156.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3130"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3132"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3135"
+  href="node158.html">Summary of Choices.</a>
+<b> Up:</b> <a name="tex2html3129"
+  href="node156.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html3123"
+  href="node156.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3131"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3133"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001410010000000000000">
+可用算法概览</a>
+</h4>
+
+<p>
+在许多情况下，我们可以将铅笔（<a href="node156.html#gsymeig">5.1</a>）
+转换为第<a href="node85.html#chap:heig">4</a>章讨论的标准HEP，或者在某些情况下转换为第<a href="node203.html#chap:nep">7</a>章讨论的标准NHEP，并使用这两章中描述的任何算法。我们在§<a href="node163.html#sec:dense_gsym">5.2</a>中简要回顾了此类转换。
+
+<p>
+本章的主体部分致力于针对广义Hermitian铅笔（<a href="node156.html#gsymeig">5.1</a>）的特殊形式的算法：
+<dl>
+<dt><strong><i>幂法与逆迭代</i></strong></dt>
+<dd>§<a href="node165.html#sec_power_gsym">5.4</a>，是基本的迭代方法。它从一个适当的初始向量开始，在每次迭代中进行一次矩阵-向量乘法和一次线性系统求解。由于需要这两种操作，它不如标准情况吸引人，但出于其简单性以及阐明其与后续描述的更复杂方案的关系，我们在此包含它。
+
+<p>
+</dd>
+<dt><strong><i>Lanczos方法</i></strong></dt>
+<dd>§<a href="node169.html#sec:lan_gsym">5.5</a>，构建了一个<span class="math-inline">B</span>正交基，该基由矩阵算子表示为三对角矩阵<span class="math-inline">T</span>的Krylov向量序列组成，<span class="math-inline">T</span>的特征值产生原始矩阵铅笔（<a href="node156.html#gsymeig">5.1</a>）的几个特征值的Ritz近似。我们将在§<a href="node169.html#sec:lan_gsym">5.5</a>中描述两种变体，一种直接迭代需要<span class="math-inline">A</span>的乘法和<span class="math-inline">B</span>的系统求解，另一种位移-逆迭代需要<span class="math-inline">(A-\sigma B)</span>的系统求解和<span class="math-inline">B</span>的乘法。
+
+<p>
+</dd>
+<dt><strong><i>Jacobi-Davidson方法</i></strong></dt>
+<dd>§<a href="node176.html#sec:jacdav_gsym">5.6</a>，更新一系列子空间，操作预处理位移矩阵。它使用<span class="math-inline">B</span>正交性，不需要线性系统求解。这使得它在矩阵太大以至于无法进行线性系统求解的情况下适用，正如本章描述的其他算法所需的那样。
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3134"
+  href="node158.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3128"
+  href="node156.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3122"
+  href="node156.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3130"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3132"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3135"
+  href="node158.html">Summary of Choices.</a>
+<b> Up:</b> <a name="tex2html3129"
+  href="node156.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html3123"
+  href="node156.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3131"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3133"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Jacobi-Davidson Method</title>
+<meta name="description" content="Jacobi-Davidson Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node341.html">
+<link rel="previous" href="node339.html">
+<link rel="up" href="node331.html">
+<link rel="next" href="node341.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5978"
+  href="node341.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5972"
+  href="node331.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5966"
+  href="node339.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5974"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5976"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5979"
+  href="node341.html">Notes and References</a>
+<b> Up:</b> <a name="tex2html5973"
+  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b> Previous:</b> <a name="tex2html5967"
+  href="node339.html">Numerical Methods for Solving</a>
+ &nbsp <b>  <a name="tex2html5975"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5977"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001825000000000000000"></a><a name="sec:9jdpol"></a><a name="43114"></a>
+<br>
+雅可比-戴维森方法
+</h2>
+
+<p>
+线性化方法可能的缺点是问题的维度翻倍；也就是说，一个包含 <span class="math-inline">n</span> 维矩阵 <span class="math-inline">M</span>、<span class="math-inline">C</span> 和 <span class="math-inline">K</span> 的问题被转化为一个包含 <span class="math-inline">2n</span> 维矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的广义问题。在本节将要讨论的雅可比-戴维森方法中，这一问题得到了避免。在该方法中，QEP（二次特征值问题）首先被投影到一个低维子空间上，从而得到一个维度适中的QEP。这个低维投影QEP可以用任何选定的方法求解。子空间的扩展通过雅可比-戴维森修正方程实现。对于多项式特征值问题，这一技术最早由 [<a href="node421.html#sbfv96">408</a>, sec. 8] 提出并讨论。
+
+<p>
+如下所示，该方法也可以直接应用于多项式特征值问题
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD8-pol"></a><div class="math-display">(\lambda^\ell C_\ell+\cdots +\lambda C_1 +C_0 ) x=0,</div></td>
+<td width=10 align="right">
+(263)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+并且无需转化为广义的“线性”特征值问题，其中 <span class="math-inline">C_i</span> 对于 <span class="math-inline">i = 0, 1, \ldots, \ell</span> 是给定的 <span class="math-inline">n \times n</span> 矩阵。为简单起见，我们仅介绍 <span class="math-inline">\ell = 2</span> 的情况。
+
+<p>
+在雅可比-戴维森迭代步骤的第一部分，用于求解多项式特征值问题
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD8-POL"></a><div class="math-display">\Psi(\lambda)x =0</div></td>
+<td width=10 align="right">
+(264)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><div class="math-display">\Psi(\lambda)\equiv \lambda^2 C_2+\lambda C_1+C_0,</div></td>
+<td width=10 align="right">
+(265)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+求解投影多项式问题
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD8-ppol"></a><div class="math-display">(\theta^2 V^\ast C_2 V +\theta V^\ast C_1 V + V^\ast C_0V){s}=0</div></td>
+<td width=10 align="right">
+(266)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+矩阵 <span class="math-inline">{V}</span> 的列 <span class="math-inline">{v}_i</span> 构成了搜索子空间的基。为了稳定性，这些列被构造为正交归一的。投影问题与原问题具有相同的阶数，但维度要小得多，通常 <span class="math-inline">{m}\ll n</span>。我们假设解向量 <span class="math-inline">{s}</span> 是归一化的，<span class="math-inline">\Vert{s}\Vert _2 = 1</span>。首先，选择具有所需特性的里兹值 <span class="math-inline">\theta</span>，例如实部最大或最接近某个目标 <span class="math-inline">\tau</span>，并计算相关的特征向量 <span class="math-inline">{s}</span>。然后计算里兹向量 <span class="math-inline">{u}\equiv V {s}</span> 和残差 <span class="math-inline">r\equiv \Psi(\theta){u}</span>。为了扩展搜索空间，计算向量 <span class="math-inline">{p}</span>，
+<br><p></p>
+<div align="center">
+
+<div class="math-display">{p} \equiv \Psi'(\theta){u},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中
+<br><p></p>
+<div align="center">
+
+<div class="math-display">\Psi'(\theta)= 2 \theta C_2+C_1</div>
+</div>
+<br clear="ALL">
+<p></p>
+在雅可比-戴维森迭代步骤的第二部分，搜索子空间 <span class="math-inline">\mathrm{span}({V})</span> 通过一个与 <span class="math-inline">{u}</span> 正交的向量 <span class="math-inline">{t}</span> 进行扩展，该向量近似地满足修正方程
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD8-ce"></a><div class="math-display">\left(I-\frac{{p}\, {u}^\ast}{{u}^\ast {p}}\right)\Psi(\theta) \left(I-{u}\, {u}^\ast\right){t}=-r.</div></td>
+<td width=10 align="right">
+(267)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+下一列 <span class="math-inline">{V}</span> 通过将近似解与先前计算的列 <span class="math-inline">{v}_1, \ldots, {v}_{m}</span> 正交归一化得到。
+
+<p>
+这一过程重复进行，直到检测到特征对 <span class="math-inline">(\lambda,x)</span>，即直到残差向量 <span class="math-inline">r</span> 足够小。算法的基本形式在算法 <a href="node340.html#JD8-1">9.1</a> 中呈现。我们参考 [<a href="node421.html#slvg96">413</a>] 中的一个例子，这是一个来自声学问题的二次特征值问题，通过这种简化技术求解，<span class="math-inline">n</span> 最大可达 250,000。
+
+<p>
+<br>
+<a name="JD8-1"></a><IMG
+ width="598" height="412" align="bottom" border="0"
+ src="img3382.png"
+ alt="\begin{algorithm}{Jacobi--Davidson Method for QEP
+}
+{
+\begin{tabbing}
+(nr)ss\=ij...
+...for} \\
+{\rm (16)}\&gt; \&gt; \&gt; expand <span class="math-inline">{V}=[{V},{v}]</span>\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+如果搜索子空间的维度变得过大，例如，<span class="math-inline">V</span> 的列数达到 <span class="math-inline">{m}={m}_{\max}</span>，则可以继续使用维度较小的搜索子空间。选择由最后一步中最佳的 <span class="math-inline">{m}_{\min}</span> 个里兹对张成的空间作为新的搜索子空间；即选择 <span class="math-inline">V=[u_1,\ldots,u_{{m}_{\min}}]</span>，其中 <span class="math-inline">u_1,\ldots, u_{{m}_{\min}}</span> 是与最佳的 <span class="math-inline">{m}_{\min}</span> 个里兹值 <span class="math-inline">\theta_1,\ldots,\theta_{{m}_{\min}}</span> 相关的里兹向量。然后对 <span class="math-inline">V</span> 应用修正的格拉姆-施密特正交化，并以此矩阵重新开始。注意，新的搜索矩阵 <span class="math-inline">V=V_{{m}_{\min}}</span> 可以用旧的搜索矩阵 <span class="math-inline">V=V_{{m}_{\max}}</span> 表示为 <span class="math-inline">V_{{m}_{\min}}=V_{{m}_{\max}} T</span>，其中 <span class="math-inline">T</span> 是一个 <span class="math-inline">{m}_{\max}\times {m}_{\min}</span> 的矩阵。变换矩阵 <span class="math-inline">T</span> 可以显式计算，并用于更新辅助矩阵 <span class="math-inline">W_i</span>（<span class="math-inline">=W_i T</span>）和 <span class="math-inline">M_i</span>（<span class="math-inline">=T^\ast M_i T</span>）。
+
+<p>
+已经检测到的特征向量可以保留在搜索子空间中（显式降阶），如果需要更多特征向量的话。保留特征向量在搜索子空间中可以防止过程重建已知的特征向量。
+
+<p>
+在 §<a href="node140.html#sec:JDresdef">4.7.3</a> 和 §<a href="node289.html#sec:jd_gnsym_defl">8.4.2</a> 中，我们建议使用“隐式”降阶，因为该方法基于舒尔形式，具有更稳定的修正方程。然而，在这个一般的多项式设置中，如何结合隐式降阶并不清楚：舒尔形式和广义舒尔形式不容易推广。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5978"
+  href="node341.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5972"
+  href="node331.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5966"
+  href="node339.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5974"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5976"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5979"
+  href="node341.html">Notes and References</a>
+<b> Up:</b> <a name="tex2html5973"
+  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b> Previous:</b> <a name="tex2html5967"
+  href="node339.html">Numerical Methods for Solving</a>
+ &nbsp <b>  <a name="tex2html5975"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5977"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

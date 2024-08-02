@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Eigenvalues and Eigenvectors</title>
+<meta name="description" content="Eigenvalues and Eigenvectors">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node59.html">
+<link rel="previous" href="node57.html">
+<link rel="up" href="node57.html">
+<link rel="next" href="node59.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1580"
+  href="node59.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1574"
+  href="node57.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1568"
+  href="node57.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1576"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1578"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1581"
+  href="node59.html">Deflating Subspaces</a>
+<b> Up:</b> <a name="tex2html1575"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Previous:</b> <a name="tex2html1569"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+ &nbsp <b>  <a name="tex2html1577"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1579"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001161000000000000000"></a>
+<a name="sec_chap2_GnHepEE"></a>
+<br>
+特征值与特征向量
+</h2>
+
+<p>
+多项式 
+<span class="math-inline">p(\lambda) = {\rm det}(\lambda B-A)</span> 是 <span class="math-inline">A - \lambda B</span> 的特征多项式。
+<span class="math-inline">p(\lambda)</span> 的次数最多为 <span class="math-inline">n</span>。
+<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A - \lambda B</span> 的 <em>有限特征值</em>。
+如果 <span class="math-inline">p(\lambda)</span> 的次数是 <span class="math-inline">d<n</span>，我们称 <span class="math-inline">A - \lambda B</span> 也有 <span class="math-inline">n-d</span> 个 <em>无限特征值</em>。
+例如，
+<br><p></p>
+<div align="center">
+
+<div class="math-display">A - \lambda B = \bmat{ccc} 1 &amp; &amp; \\ &amp; 1 &amp; \\ &amp; &amp; 0 \emat - \lambda\bmat{ccc} 2 &amp; &amp; \\ &amp; 0 &amp; \\ &amp; &amp; 1 \emat</div>
+</div>
+<br clear="ALL">
+<p></p>
+的特征多项式为 
+
+<span class="math-inline">p( \lambda ) = (1 - 2 \cdot \lambda)(1 - 0 \cdot \lambda)(0 - 1 \cdot \lambda)= 2 \lambda^2 - \lambda</span>，
+因此其特征值为 <span class="math-inline">.5</span>、<span class="math-inline">\infty</span> 和 <span class="math-inline">0</span>。
+
+<p>
+如果 <span class="math-inline">\lambda</span> 是有限特征值，
+满足 <span class="math-inline">Ax = \lambda Bx</span> 的非零向量 <span class="math-inline">x</span> 是特征值 <span class="math-inline">\lambda</span> 的 <em>(右)特征向量</em>。
+满足 <span class="math-inline">y^* A = \lambda ^* B</span> 的非零向量 <span class="math-inline">y</span> 是 <em>左特征向量</em>。
+
+<p>
+如果 <span class="math-inline">\infty</span> 是特征值，满足 <span class="math-inline">bx=0</span> 和 <span class="math-inline">y^*B = 0</span> 的非零向量 <span class="math-inline">x</span> 和 <span class="math-inline">y</span> 分别被称为右特征向量和左特征向量。
+
+<p>
+一个 <span class="math-inline">n</span> 阶矩阵束 <span class="math-inline">A - \lambda B</span> 不一定有 <span class="math-inline">n</span> 个独立的特征向量。
+最简单的例子是 <span class="math-inline">A( \epsilon ) - \lambda I</span>，定义见方程 (<a href="node49.html#eqn_chap2_nHep_1">2.3</a>) 并在 &#167;<a href="node49.html#sec_chap2_nHepEE">2.5.1</a> 中讨论。
+<span class="math-inline">n</span> 个独立的特征向量可能不存在（尽管每个不同的特征值至少有一个特征向量）这一事实必然会使 GNHEP 的理论和算法变得复杂。
+
+<p>
+由于特征值可能是复数或无穷大，因此没有固定的排序方式。
+尽管如此，为了方便，我们通常将它们编号为 
+<span class="math-inline">\lambda_1 ,\ldots,\lambda_n</span>，
+相应的右特征向量为 
+<span class="math-inline">x_1,\ldots,x_n</span>，
+左特征向量为 
+<span class="math-inline">y_1,\ldots,y_n</span>（如果存在）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1580"
+  href="node59.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1574"
+  href="node57.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1568"
+  href="node57.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1576"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1578"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1581"
+  href="node59.html">Deflating Subspaces</a>
+<b> Up:</b> <a name="tex2html1575"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Previous:</b> <a name="tex2html1569"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+ &nbsp <b>  <a name="tex2html1577"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1579"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

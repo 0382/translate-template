@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Eigenvalues and Eigenvectors</title>
+<meta name="description" content="Eigenvalues and Eigenvectors">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node23.html">
+<link rel="previous" href="node21.html">
+<link rel="up" href="node21.html">
+<link rel="next" href="node23.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1043"
+  href="node23.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1037"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1031"
+  href="node21.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1039"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1041"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1044"
+  href="node23.html">Invariant Subspaces</a>
+<b> Up:</b> <a name="tex2html1038"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1032"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+ &nbsp <b>  <a name="tex2html1040"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1042"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001121000000000000000"></a>
+<a name="sec_chap2_HepEE"></a>
+<br>
+特征值与特征向量
+</h2>
+
+<p>
+多项式 
+<span class="math-inline">p(\lambda) = {\rm det}(\lambda I-A)</span> 被称为矩阵 <span class="math-inline">A</span> 的
+<em>特征多项式</em> 
+<a name="1105"></a>。<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A</span> 的 <em>特征值</em>。
+由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个特征值。
+
+<p>
+满足 <span class="math-inline">Ax = \lambda x</span> 的非零向量 <span class="math-inline">x</span> 是特征值 <span class="math-inline">\lambda</span> 的 <em>（右）特征向量</em>。
+因为 <span class="math-inline">x^{\ast} A = \lambda x^{\ast}</span>，左特征向量和右特征向量是相同的。
+
+<p>
+厄米特矩阵 <span class="math-inline">A</span> 的所有特征值都是实数。这使得我们可以按排序顺序表示它们，
+<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。
+如果所有 <span class="math-inline">\lambda_i > 0</span>，那么 <span class="math-inline">A</span> 被称为 <em>正定</em>，
+如果所有 <span class="math-inline">\lambda_i \geq 0</span>，那么 <span class="math-inline">A</span> 被称为 <em>半正定</em>。
+<em>负定</em> 和 <em>半负定</em> 的定义类似。如果既有正特征值又有负特征值，
+<span class="math-inline">A</span> 被称为 <em>不定</em>。
+
+<p>
+每个特征值 <span class="math-inline">\lambda_i</span> 都有一个特征向量 <span class="math-inline">x_i</span>。
+我们可以不失一般性地假设 <span class="math-inline">\Vert x_i\Vert _2=1</span>。
+如果 <span class="math-inline">A</span> 是实矩阵，每个 <span class="math-inline">x_i</span> 也是实数。
+尽管 <span class="math-inline">x_i</span> 可能不是唯一的（例如，任何向量都是单位矩阵的特征向量），
+但可以选择它们彼此正交：<span class="math-inline">x_i^*x_j=0</span> 如果 <span class="math-inline">i \neq j</span>。
+当一个特征值与其他所有特征值都不同时，其特征向量是唯一的（直到乘以标量）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1043"
+  href="node23.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1037"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1031"
+  href="node21.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1039"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1041"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1044"
+  href="node23.html">Invariant Subspaces</a>
+<b> Up:</b> <a name="tex2html1038"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1032"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+ &nbsp <b>  <a name="tex2html1040"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1042"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

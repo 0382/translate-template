@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Stability</title>
+<meta name="description" content="Numerical Stability">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node225.html">
+<link rel="previous" href="node223.html">
+<link rel="up" href="node220.html">
+<link rel="next" href="node225.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4198"
+  href="node225.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4192"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4186"
+  href="node223.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4194"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4196"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4199"
+  href="node225.html">Computational Costs and Tradeoffs</a>
+<b> Up:</b> <a name="tex2html4193"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4187"
+  href="node223.html">Convergence Properties</a>
+ &nbsp <b>  <a name="tex2html4195"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4197"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001664000000000000000"></a>
+<a name="23480"></a>
+<br>
+数值稳定性
+</h2>
+
+<p>
+在LAPACK&nbsp;[<a href="node421.html#lapack">12</a>]中可获得的稳健的QR算法实现，计算矩阵<span class="math-inline">A</span>的近似Schur形式，满足
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="backqr"></a><div class="math-display">(A+E)\hat{V} = \hat{V} \hat{R},</div></td>
+<td width=10 align="right">
+(128)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中<span class="math-inline">\hat{R}</span>是上三角矩阵，<span class="math-inline">\Vert \hat{V}^\ast \hat{V} - I\Vert \approx \epsilon_M </span>，并且<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>，<span class="math-inline">\epsilon_M</span>是机器精度（单位舍入误差）。由于在迭代过程中仅使用酉变换，<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>这一事实直接导致了QR算法的后向稳定性。换句话说，QR方法计算的是接近<span class="math-inline">A</span>的矩阵<span class="math-inline">A+E</span>的Schur形式。
+
+<p>
+后向稳定性对于任何数值算法都是一个非常令人安心的特性，但重要的是要记住，后向稳定性本身并不意味着准确的答案。计算出的特征值和特征向量的准确性取决于<span class="math-inline">A</span>的特征系统的敏感性（条件数）。后向稳定的算法对于良态问题会产生准确的答案。读者可参考&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>以获得关于此问题的更详细讨论。
+
+<p>
+如上一节所述，IRAM是截断的QR迭代。在大多数QR方法的实现中，使用Householder变换来获得初始的Hessenberg形式简化。Arnoldi过程，如果扩展到<span class="math-inline">n</span>步，则是获得这种简化的另一种方式。通过引入正交校正&nbsp;[<a href="node421.html#dgks76">96</a>]，Arnoldi过程可以产生与Householder简化相同数值质量的简化，但它更适合于大规模设置。通过这种校正，计算出的Arnoldi向量在机器精度范围内是酉的<span class="math-inline">(\Vert V_k^*V_k - I_k \Vert \approx \epsilon_M)</span>，并且由于重启机制涉及QR机制中使用的相同酉变换，IRAM也是后向稳定的。
+
+<p>
+在IRAM迭代的任何阶段，我们有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A + E_o) V_k = V_k H_k + f_k e_k^*,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">\Vert E_o\Vert \approx \Vert A\Vert\epsilon_M</span>。如果我们成功地使<span class="math-inline">\Vert f_k\Vert &lt; \Vert A\Vert\epsilon_M</span>，那么
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A + E) V_k = V_k H_k,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">E = E_o + f_k (V_k e_k)^*</span>。如果<span class="math-inline">H_k Z_k = Z_k R_k</span>是<span class="math-inline">H_k</span>的Schur分解，那么
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A + E) \hat{V}_k = \hat{V}_k R_k \ \ \mathrm{with} \ \ \hat{V}_k = V_k Z_k</div>
+</div>
+<br clear="ALL">
+<p></p>
+是附近矩阵<span class="math-inline">A+E</span>的精确部分Schur分解。
+
+<p>
+更有可能的是，在某个阶段，<span class="math-inline">H_m</span>（<span class="math-inline">m = k+p</span>）的特征向量的最后一个分量很小，收敛将被实现。我们仍然有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A + E_1) V_m = V_m H_m + f_m e_m^*,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">E_1</span>相对于<span class="math-inline">\Vert A\Vert</span>很小。如果<span class="math-inline">H_m y = y \theta</span>，其中<span class="math-inline">\eta = e_m^*y</span>很小（例如<span class="math-inline">\Vert f_m\Vert \vert\eta\vert &lt; \epsilon_U \Vert H_m \Vert </span>），那么
+
+<a name="nonsymA:eq:evest"></a> (A + E) x = x ,
+
+其中<span class="math-inline">x = V_m y</span>，<span class="math-inline">E = E_1 + f_m (e_m^*y) x^*</span>（假设<span class="math-inline">\Vert y\Vert = 1</span>）。因此，在任何情况下，收敛的近似特征对<span class="math-inline">(x, \theta)</span>对于附近矩阵<span class="math-inline">A+E</span>是精确的。
+
+<p>
+通过使用我们将在&#167;<a href="node226.html#sec:deflation">7.6.6</a>中介绍的收缩技术，可以利用酉变换来获得关于一组<span class="math-inline">k</span>个收敛特征值的部分Schur分解的后向稳定性声明。如果有<span class="math-inline">k</span>个<span class="math-inline">H_m</span>的特征值已经收敛，可以构造一个酉矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q^* H_m Q</span>的领先<span class="math-inline">k \times k</span>子矩阵<span class="math-inline">R_k</span>是上三角的，并且
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">( A + \hat{E}) \hat{V}_k = \hat{V}_k R_k , \ \\mathrm{with} \ \ \hat{V}_k = V_m Q,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">\hat{E}</span>相对于<span class="math-inline">\Vert A\Vert</span>很小。关于这一点的讨论见&#167;<a href="node226.html#sec:deflation">7.6.6</a>，更多细节可参见&nbsp;[<a href="node421.html#sore98">420</a>]。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4198"
+  href="node225.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4192"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4186"
+  href="node223.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4194"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4196"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4199"
+  href="node225.html">Computational Costs and Tradeoffs</a>
+<b> Up:</b> <a name="tex2html4193"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4187"
+  href="node223.html">Convergence Properties</a>
+ &nbsp <b>  <a name="tex2html4195"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4197"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

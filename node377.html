@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Jagged Diagonal Storage</title>
+<meta name="description" content="Jagged Diagonal Storage">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node378.html">
+<link rel="previous" href="node376.html">
+<link rel="up" href="node372.html">
+<link rel="next" href="node378.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6560"
+  href="node378.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6554"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6548"
+  href="node376.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6556"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6558"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6561"
+  href="node378.html">Skyline Storage</a>
+<b> Up:</b> <a name="tex2html6555"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6549"
+  href="node376.html">Compressed Diagonal Storage</a>
+ &nbsp <b>  <a name="tex2html6557"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6559"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001915000000000000000"></a>
+<a name="sec:data-structures:jds"></a><a name="46099"></a>
+<br>
+锯齿对角存储
+</h2>
+
+<p>
+锯齿对角存储（JDS）格式在并行和向量处理器上实现迭代方法时非常有用（参见 Saad [<a href="node421.html#saad89">385</a>]）。与 CDS 格式类似，它提供的向量长度基本上与矩阵相同。与 CDS 相比，它在牺牲收集/分散操作的情况下，空间效率更高。
+
+<p>
+JDS 的一种简化形式称为 ITPACK 存储或普渡存储，可以描述如下。对于以下非对称矩阵，所有元素向左移动：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\left[\begin{array}{rrrrrr}10 & -3 & 0 & 1 & 0 & 0 \\0 ......\\6 & 7 & 5 & 4 \\9 & 13 \\5 & -1\end{array}\right]</div>
+</div>
+<br clear="ALL">
+<p></p>
+之后，列被连续存储。所有行都在右侧用零填充，以使它们具有相同的长度。对应于矩阵元素数组 val(:,:)，还存储了一个列索引数组 col_ind(:,:)：
+
+<p>
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\ver......{\tt val}(:,4) & 0 & 0 & 0 & 4 & 0 & 0 \\ \hline\end{array},</div>
+</div>
+<br clear="ALL">
+<p></p>
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\ver...... col\_ind}(:,4) & 0 & 0 & 0 & 6 & 0 & 0 \\ \hline\end{array}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+显然，这种结构中的填充零可能是一个缺点，特别是当矩阵的带宽变化很大时。因此，在 CRS 格式中，我们根据每行的非零元素数量按降序重新排列矩阵的行。然后将压缩和置换的对角线存储在一个线性数组中。这种新的数据结构称为<em>锯齿对角线</em>。
+
+<p>
+具体来说，我们存储每个行的 val 和 col_ind 中的第一个（密集）向量，以及包含相应元素列索引的整数向量。接下来是第二条锯齿对角线，由从左侧开始的第二个位置的元素组成。我们继续构建越来越多的这些锯齿对角线（其长度逐渐减少）。
+
+<p>
+锯齿对角线的数量等于第一行中的非零元素数量，即矩阵 <span class="math-inline">A</span> 中任何行中的最大非零元素数量。因此，表示 <span class="math-inline">n \times n</span> 矩阵 <span class="math-inline">A</span> 的数据结构包括一个置换数组（perm(1:n)），用于重新排列行，一个包含锯齿对角线连续排列的浮点数组（jdiag(:)），一个包含相应列索引的整数数组（col_ind(:)），最后是一个指针数组（jd_ptr(:)），其元素指向每个锯齿对角线的开始。Saad 在 [<a href="node421.html#saad89">385</a>] 中讨论了 JDS 在矩阵乘法中的优势。
+
+<p>
+上述矩阵 <span class="math-inline">A</span> 使用线性数组 {perm, jdiag, col_ind, jd_ptr} 的 JDS 格式如下（锯齿对角线由分号分隔）：
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="right">jdiag</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">2;</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">8 <span class="math-inline">\cdots</span> -1;</td>
+<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">5;</td>
+<td align="right">13</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+<tr><td align="right">col_ind</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">5;</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">3 <span class="math-inline">\cdots</span> 6;</td>
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">5;</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+</table> 
+<br>
+<br>
+<table cellpadding=3 border="1">
+<tr><td align="right">perm</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">6</td>
+</tr>
+</table> 
+<table cellpadding=3 border="1">
+<tr><td align="right">jd_ptr</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">13</td>
+<td align="right">17</td>
+</tr>
+</table> &nbsp;.
+
+</div>
+<br>
+<a name="46158"></a>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6560"
+  href="node378.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6554"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6548"
+  href="node376.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6556"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6558"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6561"
+  href="node378.html">Skyline Storage</a>
+<b> Up:</b> <a name="tex2html6555"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6549"
+  href="node376.html">Compressed Diagonal Storage</a>
+ &nbsp <b>  <a name="tex2html6557"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6559"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

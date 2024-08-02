@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Restarting a Block Arnoldi Reduction.</title>
+<meta name="description" content="Restarting a Block Arnoldi Reduction.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node240.html">
+<link rel="up" href="node237.html">
+<link rel="next" href="node242.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4447"
+  href="node242.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4441"
+  href="node237.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4437"
+  href="node240.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4443"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4445"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4448"
+  href="node242.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4442"
+  href="node237.html">Practical Algorithm</a>
+<b> Previous:</b> <a name="tex2html4438"
+  href="node240.html">Deflation.</a>
+ &nbsp <b>  <a name="tex2html4444"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4446"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001672040000000000000"></a>
+<a name="23926"></a>
+<br>
+重启块Arnoldi约简法
+</h4>
+在&#167;<a href="node220.html#sec:nsymiram">7.6</a>节中，我们阐述并解释了如何隐式地重启Arnoldi方法。实验结果[<a href="node421.html#lesc95">292</a>,<a href="node421.html#lema97">290</a>,<a href="node421.html#bcrr98">24</a>]表明，隐式重启方案优于文献中出现的其他块方法[<a href="node421.html#sadk93a">391</a>,<a href="node421.html#scot95">398</a>]。这些显式重启技术根据某种准则选择后续的起始块，然后从头开始重启。BIRAM不仅大幅减少了矩阵-向量乘积的使用，还显著减少了需要存储的Arnoldi向量数量。关于显式重启Arnoldi方法的更多信息，读者可参考[<a href="node421.html#sadk93a">391</a>,<a href="node421.html#hesa97">227</a>,<a href="node421.html#jia98a">245</a>,<a href="node421.html#scot95">398</a>]。
+
+<p>
+将&#167;<a href="node220.html#sec:nsymiram">7.6</a>节中的方案扩展到块Arnoldi方法中是直接的。主要区别在于需要一个保留带状Hessenberg形式的隐式移位QR算法。与标准的隐式移位QR算法一样，通过构造并应用一系列酉矩阵，得到更新后的带状Hessenberg矩阵。
+
+<p>
+在QR算法中，可以选择多种方式来确定使用的<span class="math-inline">p</span>个移位，包括具体的<span class="math-inline">p</span>值选择。如果移位成复共轭对，可以使用隐式双移位[<a href="node421.html#golo96">198</a>，pp. 355-358]来避免复数运算。
+
+<p>
+通常，<span class="math-inline">p</span>个移位是通过利用<span class="math-inline">H_{[r+p]}</span>中包含的谱信息来选择的。将<span class="math-inline">{H}_{[m]}</span>的特征值进行划分，使得
+<br>
+<div align="right">
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:wanted"></a><div class="math-display">\{ \underbrace{\theta_1,\ldots,\theta_r}_{\mathrm{wanted}}\}......ce{\theta_{r+1},\ldots,\theta_{m\cdot b}}_{\mathrm{unwanted}}\}.</div></td>
+<td width=10 align="right">
+(137)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+对于非块状约简，<span class="math-inline">p</span>个移位从<span class="math-inline">H_{[m]}</span>的不需要的特征值中选择，其中<span class="math-inline">r=k</span>。Sorensen[<a href="node421.html#sore92">419</a>]提出了这种精确移位策略。这种策略相当于用与<span class="math-inline">k</span>个所需特征值相关的近似Schur向量的线性组合来重启后续的约简。其他有趣的策略包括Chebyshev多项式的根[<a href="node421.html#saad84">383</a>]、调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]、Leja多项式的根[<a href="node421.html#bacr98">23</a>]、最小二乘多项式的根[<a href="node421.html#saad87">384</a>]以及精炼移位[<a href="node421.html#jia98c">244</a>]。特别是，Leja值和谐和Ritz值已被用于估计<span class="math-inline">A</span>的内部特征值。
+
+<p>
+在算法<a href="node237.html#imp_blk_arn_alg">7.12</a>中，整数<span class="math-inline">r</span>通常在输入步骤中设置为所需特征值的数量<span class="math-inline">k</span>。一旦进入迭代循环，<span class="math-inline">r</span>、<span class="math-inline">p</span>以及<span class="math-inline">m=r+p</span>的值可能会随<span class="math-inline">i</span>的每个值而变化。当<span class="math-inline">b > 1</span>时，我们不能将所有<span class="math-inline">p=m \cdot b - k</span>个不需要的特征值作为移位应用。这时，我们需要决定选择哪些<span class="math-inline">p</span>个移位应用，以及是否应该考虑应用超过<span class="math-inline">p</span>个移位。
+
+<p>
+例如，可以应用<span class="math-inline">m</span>个移位，直到一个Ritz对满足收敛容差。然后可以将Ritz对进行收缩（或锁定）。（这相当于Saad[<a href="node421.html#saad92">387</a>，p. 181]给出的收缩迭代Arnoldi算法，并在[<a href="node421.html#bcrr98">24</a>,<a href="node421.html#scot95">398</a>]的实现中使用。）这种方法允许我们隐式地应用最大程度的多项式滤波器。（应用超过<span class="math-inline">r+p</span>个移位将需要对<span class="math-inline">A</span>应用显式多项式。）然而，随着应用更多移位，计算后续Arnoldi约简的成本增加。
+
+<p>
+在每次迭代中改变<span class="math-inline">r</span>、<span class="math-inline">p</span>（相对于<span class="math-inline">k</span>）以及使用的移位策略，将获得最佳结果。这是当前研究的主题。最近的报告[<a href="node421.html#stsw98">421</a>]讨论了对称特征值问题的自适应策略。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4447"
+  href="node242.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4441"
+  href="node237.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4437"
+  href="node240.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4443"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4445"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4448"
+  href="node242.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4442"
+  href="node237.html">Practical Algorithm</a>
+<b> Previous:</b> <a name="tex2html4438"
+  href="node240.html">Deflation.</a>
+ &nbsp <b>  <a name="tex2html4444"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4446"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Related Eigenproblems</title>
+<meta name="description" content="Related Eigenproblems">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node29.html">
+<link rel="previous" href="node27.html">
+<link rel="up" href="node21.html">
+<link rel="next" href="node29.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1127"
+  href="node29.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1121"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1115"
+  href="node27.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1123"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1125"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1128"
+  href="node29.html">Example</a>
+<b> Up:</b> <a name="tex2html1122"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1116"
+  href="node27.html">Specifying an Eigenproblem</a>
+ &nbsp <b>  <a name="tex2html1124"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1126"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001127000000000000000"></a>
+<a name="sec_chap2_HepRE"></a>
+<br>
+相关特征问题
+</h2>
+
+<p>
+由于HEP是理解最为透彻的特征问题之一，因此识别其他特征问题何时可以转换为HEP是非常有帮助的。
+
+<p>
+
+<ol>
+<li>如果<span class="math-inline">A</span>是非厄米矩阵，但<span class="math-inline">\hat{A}= \alpha SAS^{-1}</span>对于容易确定的<span class="math-inline">\alpha</span>和<span class="math-inline">S</span>是厄米矩阵，那么计算<span class="math-inline">\hat{A}</span>的特征值<span class="math-inline">\hat{\lambda}</span>和特征向量<span class="math-inline">\hat{x}</span>可能是明智的。通过以下转换可以将这些特征值和特征向量转换为<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>和特征向量<span class="math-inline">x</span>：
+
+<span class="math-inline">\lambda = \hat{\lambda}/ \alpha</span> 和 
+<span class="math-inline">x = S^{-1} \hat{x}</span>。
+例如，将一个斜厄米矩阵<span class="math-inline">A</span>（即，<span class="math-inline">A^* = -A</span>）乘以常数<span class="math-inline">\sqrt{-1}</span>会使其变为厄米矩阵。进一步讨论见&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>。
+
+<p>
+</li>
+<li>如果<span class="math-inline">A = B^*B</span>对于某个矩形矩阵<span class="math-inline">B</span>，那么<span class="math-inline">A</span>的特征问题等价于<span class="math-inline">B</span>的奇异值分解（SVD），讨论见&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>。假设<span class="math-inline">B</span>是<span class="math-inline">m</span>乘<span class="math-inline">n</span>的，因此<span class="math-inline">A</span>是<span class="math-inline">n</span>乘<span class="math-inline">n</span>的。一般来说，如果<span class="math-inline">A</span>的大小与<span class="math-inline">B</span>相当或更小（即<span class="math-inline">n \leq m</span>，或稍大一些），那么<span class="math-inline">A</span>的特征问题通常比<span class="math-inline">B</span>的SVD更经济。但计算<span class="math-inline">A</span>的小特征值可能不如计算<span class="math-inline">B</span>的小奇异值准确。进一步讨论见&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>。
+
+<p>
+</li>
+<li>如果有一个广义HEP <span class="math-inline">Ax = \lambda Bx</span>，其中<span class="math-inline">A</span>和<span class="math-inline">B</span>是厄米矩阵且<span class="math-inline">B</span>是正定的，那么它可以转换为厄米特征问题，如下所示。首先，分解<span class="math-inline">B = LL^*</span>，其中<span class="math-inline">L</span>是任意非奇异矩阵（这通常使用Cholesky分解完成）。然后求解<span class="math-inline">\hat{A}= L^{-1}A L^{-\ast}</span>的HEP。<span class="math-inline">\hat{A}</span>和<span class="math-inline">A - \lambda B</span>的特征值相同，并且如果<span class="math-inline">\hat{x}</span>是<span class="math-inline">\hat{A}</span>的特征向量，那么<span class="math-inline">x = L^{-\ast}\hat{x}</span>满足<span class="math-inline">Ax = \lambda Bx</span>。进一步讨论见&#167;<a href="node30.html#sec_chap2_GHep">2.3</a>。
+</li>
+</ol>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1127"
+  href="node29.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1121"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1115"
+  href="node27.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1123"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1125"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1128"
+  href="node29.html">Example</a>
+<b> Up:</b> <a name="tex2html1122"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1116"
+  href="node27.html">Specifying an Eigenproblem</a>
+ &nbsp <b>  <a name="tex2html1124"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1126"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

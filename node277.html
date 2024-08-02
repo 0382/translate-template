@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Transfer Residual Errors to Backward Errors.</title>
+<meta name="description" content="Transfer Residual Errors to Backward Errors.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node278.html">
+<link rel="previous" href="node276.html">
+<link rel="up" href="node275.html">
+<link rel="next" href="node278.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4965"
+  href="node278.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4959"
+  href="node275.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4953"
+  href="node276.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4961"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4963"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4966"
+  href="node278.html">Error Bound for Computed</a>
+<b> Up:</b> <a name="tex2html4960"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html4954"
+  href="node276.html">Residual Vectors.</a>
+ &nbsp <b>  <a name="tex2html4962"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4964"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION0016130020000000000000"></a> 
+<a name="26979"></a>
+<br>
+将残余误差转化为向后误差
+</h4> 
+事实证明，计算出的特征值和特征向量总是可以解释为邻近矩阵的精确特征值和特征向量，即
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A+E)\widetilde x=\widetilde\lambda\widetilde x,</div>
+</div>
+<br clear="ALL">
+<p></p>
+以及
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\widetilde y^{\ast} (A+E)=\widetilde\lambda\widetilde y^{\ast}</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果 <span class="math-inline">\widetilde y</span> 可用，其中误差矩阵 <span class="math-inline">E</span> 相对于 <span class="math-inline">\Vert A\Vert</span> 通常在范数上很小。这种解释有两个目的：首先，它间接反映了特征问题的解决精度；其次，它可以用来推导计算出的特征值和特征向量的误差界限，这些将在下面讨论。理想情况下，我们希望 <span class="math-inline">E</span> 是零矩阵，但实际上这几乎从未发生过。有无限多个误差矩阵 <span class="math-inline">E</span> 满足上述方程，我们只想知道最优或接近最优的误差矩阵，即某些范数（通常是2-范数 <span class="math-inline">\Vert\cdot\Vert _2</span> 或 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>）在所有可行误差矩阵中被最小化。事实上，如果我们能确定这些（接近）最优矩阵范数的上界，就能满足实际需求。以下结果集确实表明，<em>如果 <span class="math-inline">r</span>（以及可用的 <span class="math-inline">s^{\ast}</span>）很小，误差矩阵 <span class="math-inline">E</span> 也很小</em> [<a href="node421.html#stsu90">425</a>]。
+
+<p>
+我们区分两种情况。
+
+<ol>
+<li>只有 <span class="math-inline">\widetilde x</span> 可用，但 <span class="math-inline">\widetilde y</span> 不可用。那么最优误差矩阵 <span class="math-inline">E</span>（在2-范数和 Frobenius 范数中）使得 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 成为 <span class="math-inline">A+E</span> 的精确特征值及其对应的特征向量，即
+         <br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:std-NH-b1"></a><div class="math-display">(A+E)\widetilde x=\widetilde\lambda\widetilde x,</div></td>
+<td width=10 align="right">
+(210)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+满足
+         <br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert E\Vert _2=\Vert E\Vert _{F}=\Vert r\Vert _2.</div>
+</div>
+<br clear="ALL">
+<p></p> 
+         
+<p>
+</li>
+<li><span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 都可用。那么最优误差矩阵 <span class="math-inline">E_2</span>（在2-范数中）和 <span class="math-inline">E_{\F}</span>（在 Frobenius 范数中）使得 <span class="math-inline">\widetilde\lambda</span>、<span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 成为 <span class="math-inline">A+E</span> 的精确特征值及其对应的特征向量，即
+         <br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:std-NHx-b1"></a><div class="math-display">(A+E)\widetilde x=\widetilde\lambda\widetilde x\quad\mathrm{and}\quad\widetilde y^{\ast} (A+E)=\widetilde\lambda\widetilde y^{\ast}</div></td>
+<td width=10 align="right">
+(211)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+对于 <span class="math-inline">E=E_2, E_{F}</span>，满足
+         <br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert E_2\Vert _2=\max\{\Vert r\Vert _2,\Vert s^{\ast}\Vert _2\}</div>
+</div>
+<br clear="ALL">
+<p></p> 
+以及
+         <br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert E_{F}\Vert _{F}=\sqrt{\Vert r\Vert^2_2 +\Vert s^{\ast...... - (\widetilde y^{\ast} A\widetilde x-\widetilde\lambda\widetilde y^{\ast}\widetilde x)^2}.</div>
+</div>
+<br clear="ALL">
+<p></p> 
+         </li>
+</ol>
+参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>]。
+<br>
+<p>
+我们称提供近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 的算法是 <em><span class="math-inline">\tau </span>-向后稳定</em> 的，相对于范数 <span class="math-inline">\Vert\cdot\Vert</span>，如果它是 <span class="math-inline">A+E</span> 的精确特征对且 <span class="math-inline">\Vert E\Vert\le\tau</span>；类似地，提供特征三元组 <span class="math-inline">(\widetilde\lambda,\widetilde x,\widetilde y)</span> 的算法是 <em><span class="math-inline">\tau </span>-向后稳定</em> 的，相对于范数 <span class="math-inline">\Vert\cdot\Vert</span>，如果它是 <span class="math-inline">A+E</span> 的精确特征三元组且 <span class="math-inline">\Vert E\Vert\le\tau</span>。考虑到这些，可以对计算特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 或特征三元组 <span class="math-inline">(\widetilde\lambda,\widetilde x,\widetilde y)</span> 的算法的向后稳定性做出陈述。传统上，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert A\Vert)</span>，算法被称为 <em>向后稳定</em>。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4965"
+  href="node278.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4959"
+  href="node275.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4953"
+  href="node276.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4961"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4963"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4966"
+  href="node278.html">Error Bound for Computed</a>
+<b> Up:</b> <a name="tex2html4960"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html4954"
+  href="node276.html">Residual Vectors.</a>
+ &nbsp <b>  <a name="tex2html4962"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4964"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

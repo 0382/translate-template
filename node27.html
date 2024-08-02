@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Specifying an Eigenproblem</title>
+<meta name="description" content="Specifying an Eigenproblem">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node28.html">
+<link rel="previous" href="node26.html">
+<link rel="up" href="node21.html">
+<link rel="next" href="node28.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1113"
+  href="node28.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1107"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1101"
+  href="node26.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1109"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1111"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1114"
+  href="node28.html">Related Eigenproblems</a>
+<b> Up:</b> <a name="tex2html1108"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1102"
+  href="node26.html">Conditioning</a>
+ &nbsp <b>  <a name="tex2html1110"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1112"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001126000000000000000"></a> 
+<a name="sec_chap2_HepSpec"></a>
+<br>
+特征问题的指定
+</h2>
+
+<p>
+以下特征问题具有典型性，既因为它们在应用中自然出现，也因为我们对它们有良好的算法：
+
+<p>
+
+<ol>
+<li>计算所有特征值到指定精度。
+</li>
+<li>计算某些指定下标集合的特征值 <span class="math-inline">\lambda_i</span>，
+
+<span class="math-inline">i \in {\mathcal I} = \{1,2,\ldots,n\}</span>，
+包括最大 <span class="math-inline">m</span> 个特征值
+
+<span class="math-inline">\lambda_{n-m+1}</span> 到
+<span class="math-inline">\lambda_n</span>，以及最小 <span class="math-inline">m</span> 个特征值 <span class="math-inline">\lambda_1</span> 到 <span class="math-inline">\lambda_m</span>。
+同样，可以指定所需的精度。
+</li>
+<li>计算给定实轴子集内的所有特征值，
+例如
+区间
+<span class="math-inline">[\alpha, \beta]</span>。同样，可以指定所需的精度。
+</li>
+<li>统计区间
+<span class="math-inline">[\alpha, \beta]</span> 内的所有特征值数量。
+这不需要计算区间
+<span class="math-inline">[\alpha, \beta]</span> 内的特征值，
+因此可以成本低得多。
+</li>
+<li>计算最接近给定值 <span class="math-inline">\mu</span> 的若干个特征值。
+</li>
+</ol>
+
+<p>
+对于上述每种可能性（第4项除外），用户还可以计算相应的特征向量。
+对于聚集在一起的特征值，
+用户可以选择计算相关的不可约子空间，
+因为在这种情况下，单个特征向量可能非常病态，
+而不可约子空间可能不会。
+最后，对于这些量中的任何一个，用户可能还希望
+计算其条件数。
+
+<p>
+尽管我们对这些问题有有效的算法，
+但我们不一定能在所有用户可接受的时间和空间内解决所有大规模问题。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1113"
+  href="node28.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1107"
+  href="node21.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1101"
+  href="node26.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1109"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1111"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1114"
+  href="node28.html">Related Eigenproblems</a>
+<b> Up:</b> <a name="tex2html1108"
+  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html1102"
+  href="node26.html">Conditioning</a>
+ &nbsp <b>  <a name="tex2html1110"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1112"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

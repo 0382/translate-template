@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Compressed Column Storage</title>
+<meta name="description" content="Compressed Column Storage">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node375.html">
+<link rel="previous" href="node373.html">
+<link rel="up" href="node372.html">
+<link rel="next" href="node375.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6518"
+  href="node375.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6512"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6506"
+  href="node373.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6514"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6516"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6519"
+  href="node375.html">Block Compressed Row Storage</a>
+<b> Up:</b> <a name="tex2html6513"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6507"
+  href="node373.html">Compressed Row Storage</a>
+ &nbsp <b>  <a name="tex2html6515"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6517"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001912000000000000000"></a>
+<a name="sec:data-structures:ccs"></a><a name="46031"></a>
+<br>
+压缩列存储
+</h2>
+
+<p>
+类似于CRS（压缩行存储），存在一种压缩列存储（CCS），也被称为<em>Harwell-Boeing</em>稀疏矩阵格式[<a href="node421.html#DuGrLe:harwell">139</a>]。CCS格式与CRS格式相同，只是存储（遍历）的是矩阵<span class="math-inline">A</span>的列而非行。换句话说，CCS格式就是矩阵<span class="math-inline">A^T</span>的CRS格式。
+
+<p>
+CCS格式由三个数组{val, row_ind, col_ptr}指定，其中row_ind存储每个非零元素的行索引，而col_ptr存储val数组中每个列起始元素的索引。矩阵<span class="math-inline">A</span>在(<a href="node373.html#sparseA">10.1</a>)中的CCS格式如下所示：
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="right">val</td>
+<td align="right">10</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">8 <span class="math-inline">\cdots</span> 9</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">13</td>
+<td align="right">-1</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+<tr><td align="right">row_ind</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">3</td>
+<td align="right">4 <span class="math-inline">\cdots</span> 5</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">&nbsp;</td>
+<td align="right">&nbsp;</td>
+</tr>
+</table> 
+<br>
+<br>
+<table cellpadding=3 border="1">
+<tr><td align="right">col_ptr</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">13</td>
+<td align="right">17</td>
+<td align="right">20</td>
+</tr>
+</table>
+</div>
+<a name="46053"></a>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6518"
+  href="node375.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6512"
+  href="node372.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6506"
+  href="node373.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6514"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6516"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6519"
+  href="node375.html">Block Compressed Row Storage</a>
+<b> Up:</b> <a name="tex2html6513"
+  href="node372.html">Sparse Matrix Storage Formats</a>
+<b> Previous:</b> <a name="tex2html6507"
+  href="node373.html">Compressed Row Storage</a>
+ &nbsp <b>  <a name="tex2html6515"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6517"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

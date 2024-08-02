@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen and H.&nbsp;van der Vorst </title>
+<meta name="description" content="Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen and H.&nbsp;van der Vorst ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node148.html">
+<link rel="previous" href="node131.html">
+<link rel="up" href="node85.html">
+<link rel="next" href="node137.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2788"
+  href="node137.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2782"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2776"
+  href="node135.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2784"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2786"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2789"
+  href="node137.html">Basic Theory</a>
+<b> Up:</b> <a name="tex2html2783"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2777"
+  href="node135.html">Variants</a>
+ &nbsp <b>  <a name="tex2html2785"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2787"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION001370000000000000000"></a><a name="sec:jacdavsym"></a><a name="9111"></a>
+<br>
+Jacobi-Davidson Methods 
+<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em> 
+</h1>
+
+<p>
+The Lanczos method (see &#167;<a href="node103.html#sec:lan">4.4</a>) is quite effective 
+in computing eigenvalues in the ends of the spectrum of <span class="math-inline">A</span> if these
+eigenvalues are well separated from the remaining spectrum, or 
+if it is applied to a shifted and inverted matrix operator 
+
+<span class="math-inline">(A - \sigma I)^{-1}</span>, for some reasonable shift
+<span class="math-inline">\sigma</span> close to the interesting eigenvalues.
+
+<p>
+If none of these conditions is fulfilled, for instance, if the computation
+of a vector 
+<span class="math-inline">(A-\sigma I)^{-1}y</span> for given <span class="math-inline">y</span> is not feasible with
+a direct solver, then variants of the Jacobi-Davidson method [<a
+ href="node421.html#slvo96">411</a>]
+offer an attractive alternative.
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+
+<ul>
+<li><a name="tex2html2790"
+  href="node137.html">Basic Theory</a>
+<li><a name="tex2html2791"
+  href="node138.html">Basic Algorithm</a>
+<ul>
+<li><a name="tex2html2792"
+  href="node139.html">Storage and Computational Costs.</a>
+</ul>
+<li><a name="tex2html2793"
+  href="node140.html">Restart and Deflation</a>
+<ul>
+<li><a name="tex2html2794"
+  href="node141.html">Restart Strategy.</a>
+<li><a name="tex2html2795"
+  href="node142.html">Deflation.</a>
+<li><a name="tex2html2796"
+  href="node143.html">Preconditioning.</a>
+<li><a name="tex2html2797"
+  href="node144.html">An Algorithm Template.</a>
+</ul>
+<li><a name="tex2html2798"
+  href="node145.html">Computing Interior Eigenvalues</a>
+<li><a name="tex2html2799"
+  href="node146.html">Software Availability</a>
+<li><a name="tex2html2800"
+  href="node147.html">Numerical Example</a>
+</ul>
+<!--End of Table of Child-Links-->
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

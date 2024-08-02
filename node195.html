@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>What Operations Can One Afford to Perform?</title>
+<meta name="description" content="What Operations Can One Afford to Perform?">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node196.html">
+<link rel="previous" href="node194.html">
+<link rel="up" href="node194.html">
+<link rel="next" href="node196.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3701"
+  href="node196.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3695"
+  href="node194.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3689"
+  href="node194.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3697"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3699"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3702"
+  href="node196.html">Which Singular Values and</a>
+<b> Up:</b> <a name="tex2html3696"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html3690"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+ &nbsp <b>  <a name="tex2html3698"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3700"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001531000000000000000">
+我们可以进行哪些运算？</a>
+</h2>
+
+<p>
+最经济的矩阵运算是乘法，例如通过 <span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span> 或 <span class="math-inline">H(A)</span> 进行。注意，<span class="math-inline">y=A^*Ax</span> 的计算方式是 <span class="math-inline">y=A^*(Ax)</span>，即先进行一次 <span class="math-inline">A</span> 的乘法，然后进行一次 <span class="math-inline">A^*</span> 的乘法。不直接形成 <span class="math-inline">A^* A</span> 本身有两个原因：首先，<span class="math-inline">A^* A</span> 可能比 <span class="math-inline">A</span> 密集得多，因此乘法成本更高。实际上，即使 <span class="math-inline">A</span> 只有一行非零元素，<span class="math-inline">A^* A</span> 也可能非常密集。其次，形成 <span class="math-inline">A^* A</span> 的成本可能与计算 <span class="math-inline">n/4</span> 个 <span class="math-inline">A^*(Ax)</span> 乘积相当，这通常足以计算所需的奇异三元组。
+
+<p>
+类似的评论也适用于 <span class="math-inline">AA^*</span>，只是由于 <span class="math-inline">AA^*</span> 是 <span class="math-inline">m</span>-by-<span class="math-inline">m</span>，而 <span class="math-inline">m \geq n</span>，<span class="math-inline">AA^*</span> 可能（任意地）比 <span class="math-inline">A^* A</span> 大。此外，存储和操作 <span class="math-inline">n</span> 个向量的成本可能（任意地）低于 <span class="math-inline">m</span> 个向量。因此，通常最好使用 <span class="math-inline">A^* A</span> 而不是 <span class="math-inline">AA^*</span>，并通过 <span class="math-inline">u_i = Av_i / \sigma_i</span> 从 <span class="math-inline">A^* A</span>（<span class="math-inline">A</span> 的右奇异向量）的特征向量 <span class="math-inline">v_i</span> 中恢复左奇异向量 <span class="math-inline">u_i</span>。（但请参阅下面的移位-反转变换注释，了解 <span class="math-inline">AA^*</span> 远优于 <span class="math-inline">A^* A</span> 的情况。）
+
+<p>
+一次通过 <span class="math-inline">H(A)</span> 的乘法成本与一次通过 <span class="math-inline">A^* A</span> 或 <span class="math-inline">AA^*</span> 的乘法成本相同。
+
+<p>
+现在考虑移位-反转变换，这需要计算以下之一的 <span class="math-inline">LU</span> 或 <span class="math-inline">LDL^*</span> 分解：
+
+<span class="math-inline">A^*A - \sigma I</span>、
+<span class="math-inline">AA^* - \sigma I</span> 或
+<span class="math-inline">H(A) - \sigma I</span>。
+这里的 <span class="math-inline">\sigma</span> 是一个<em>移位</em>，或从其减去的矩阵的近似特征值。这些分解的成本强烈依赖于矩阵的稀疏结构。根据 <span class="math-inline">A</span> 的维度和稀疏结构，分解以下之一可能<em>便宜得多</em>：
+
+<span class="math-inline">A^*A - \sigma I</span>、
+<span class="math-inline">AA^* - \sigma I</span> 或
+<span class="math-inline">H(A) - \sigma I</span>，
+而不是其他。以下是一些例子：
+
+<p>
+
+<ol>
+<li>如果 <span class="math-inline">A</span> 在第一列和主对角线上非零，那么 <span class="math-inline">A^* A</span> 和 <span class="math-inline">H(A)</span> 几乎与 <span class="math-inline">A</span> 一样稀疏，但 <span class="math-inline">AA^*</span> 是密集的。因此，形成和分解 <span class="math-inline">A^*A - \sigma I</span> 的成本是时间 <span class="math-inline">O(m+n)</span> 和空间 <span class="math-inline">O(n)</span>，而 <span class="math-inline">AA^* - \sigma I</span> 的成本是时间 <span class="math-inline">O(m^3)</span> 和空间 <span class="math-inline">O(m^2)</span>，两者都大得多。形成和分解 <span class="math-inline">H(A) - \sigma I</span> 的成本也是时间和空间 <span class="math-inline">O(m+n)</span>，但常数比 <span class="math-inline">A^*A - \sigma I</span> 大。
+
+<p>
+</li>
+<li>如果 <span class="math-inline">m \approx n</span>，且 <span class="math-inline">A</span> 在第一行和主对角线上非零，那么 <span class="math-inline">AA^*</span> 和 <span class="math-inline">H(A)</span> 几乎与 <span class="math-inline">A</span> 一样稀疏，但 <span class="math-inline">A^* A</span> 是密集的。因此，<span class="math-inline">AA^* - \sigma I</span> 的形成和分解成本是时间 <span class="math-inline">O(n)</span> 和空间 <span class="math-inline">O(n)</span>，而 <span class="math-inline">A^*A - \sigma I</span> 的成本是时间 <span class="math-inline">O(n^3)</span> 和空间 <span class="math-inline">O(n^2)</span>，两者都大得多。形成和分解 <span class="math-inline">H(A) - \sigma I</span> 的成本也是时间和空间 <span class="math-inline">O(n)</span>，但常数比 <span class="math-inline">AA^* - \sigma I</span> 大。
+
+<p>
+</li>
+<li>如果 <span class="math-inline">m \approx n</span>，且 <span class="math-inline">A</span> 在第一行、第一列和主对角线上非零，那么 <span class="math-inline">H(A)</span> 几乎与 <span class="math-inline">A</span> 一样稀疏，但 <span class="math-inline">AA^*</span> 和 <span class="math-inline">A^* A</span> 都是密集的。因此，形成和分解 <span class="math-inline">H(A) - \sigma I</span> 的成本是时间和空间 <span class="math-inline">O(n)</span>，但 <span class="math-inline">AA^* - \sigma I</span> 或 <span class="math-inline">A^*A - \sigma I</span> 的成本是时间 <span class="math-inline">O(n^3)</span> 和空间 <span class="math-inline">O(n^2)</span>，两者都大得多。
+
+<p>
+</li>
+</ol>
+
+<p>
+上述例子是为了代表极端情况，其中 <span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span> 和 <span class="math-inline">H(A)</span> 的行为都尽可能不同。它还假设正在分解的矩阵是<em>有序良好的</em>；即，行和列的顺序是为了在分解过程中最小化填充和操作。对于上述例子，使用了对称最小度排序。一般来说，可以通过<em>符号分解</em>以远低于实际执行分解的成本来计算排序并估计形成和分解 <span class="math-inline">AA^* - \sigma I</span>、<span class="math-inline">A^*A - \sigma I</span> 和 <span class="math-inline">H(A) - \sigma I</span> 所需的工作和空间。详见第10.3节。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3701"
+  href="node196.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3695"
+  href="node194.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3689"
+  href="node194.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3697"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3699"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3702"
+  href="node196.html">Which Singular Values and</a>
+<b> Up:</b> <a name="tex2html3696"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b> Previous:</b> <a name="tex2html3690"
+  href="node194.html">Iterative Algorithms &nbsp; J.</a>
+ &nbsp <b>  <a name="tex2html3698"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3700"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

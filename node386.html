@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Direct Solvers for Dense Matrices</title>
+<meta name="description" content="Direct Solvers for Dense Matrices">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node387.html">
+<link rel="previous" href="node385.html">
+<link rel="up" href="node385.html">
+<link rel="next" href="node387.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6691"
+  href="node387.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6685"
+  href="node385.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6679"
+  href="node385.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6687"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6689"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6692"
+  href="node387.html">Direct Solvers for Band</a>
+<b> Up:</b> <a name="tex2html6686"
+  href="node385.html">A Brief Survey of</a>
+<b> Previous:</b> <a name="tex2html6680"
+  href="node385.html">A Brief Survey of</a>
+ &nbsp <b>  <a name="tex2html6688"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6690"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001931000000000000000"></a>
+<a name="sec_chap10_DirectSolvers_Dense"></a><a name="46346"></a>
+<br>
+稠密矩阵的直接求解器
+</h2> 
+
+<p>
+考虑对稠密矩阵使用迭代方法而非变换方法的原因有二：
+
+<ol>
+<li>如果只需要几个接近某个或某些位移 <span class="math-inline">\sigma</span> 的特征值和/或特征向量，使用带有迭代方案的位移-反演方法可能比变换方法更经济。对于非厄米矩阵而言，这种情况更为常见，因为对于厄米矩阵，变换方法速度更快。
+</li>
+<li>当矩阵不是很稀疏或不是很大时，稠密求解器可能比稀疏求解器更快。
+</li>
+</ol>
+
+<p>
+稠密求解器的选择取决于 <span class="math-inline">A-\sigma I</span> 的数学结构，具体如下：
+
+<p>
+<dl>
+<dt><strong><i><span class="math-inline">A-\sigma I</span> 是厄米正定矩阵。</i></strong></dt>
+<dd>在这种情况下，首选算法是 Cholesky 分解。它在 LAPACK 计算例程中实现，用于计算分解的 xPOTRF 和使用分解求解的 xPOTRS（两者在 LAPACK 驱动例程 xPOSVX 中结合）。针对压缩数据存储的版本也已提供（将 PO 替换为 PP）。Cholesky 分解在类似的 ScaLAPACK 例程 PxPOTRF、PxPOTRS 和 PxPOSVX 中实现。MATLAB 中的分解方法为 chol。
+
+<p>
+</dd>
+<dt><strong><i><span class="math-inline">A-\sigma I</span> 是厄米不定矩阵。</i></strong></dt>
+<dd>在这种情况下，首选算法是 Bunch-Kaufman 分解。它在实数（复数）LAPACK 计算例程中实现，用于计算分解的 xSYTRF(xHETRF) 和使用分解求解的 xSYTRS(xHETRS)（两者在 LAPACK 驱动例程 xSYSVX(xHESVX) 中结合）。针对压缩数据存储的版本也已提供（将 SY(HE) 替换为 SP(HP)）。它在 ScaLAPACK 或 MATLAB 中不可用。
+
+<p>
+</dd>
+<dt><strong><i><span class="math-inline">A-\sigma I</span> 是非厄米矩阵。</i></strong></dt>
+<dd>在这种情况下，首选算法是高斯消去法。它在 LAPACK 计算例程中实现，用于计算分解的 xGETRF 和使用分解求解的 xGETRS（两者在 LAPACK 驱动例程 xGESVX 中结合）。它在类似的 ScaLAPACK 例程 PxGETRF、PxGETRS 和 PxGESVX 中实现。MATLAB 中的分解方法为 lu。
+
+<p>
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6691"
+  href="node387.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6685"
+  href="node385.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6679"
+  href="node385.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6687"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6689"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6692"
+  href="node387.html">Direct Solvers for Band</a>
+<b> Up:</b> <a name="tex2html6686"
+  href="node385.html">A Brief Survey of</a>
+<b> Previous:</b> <a name="tex2html6680"
+  href="node385.html">A Brief Survey of</a>
+ &nbsp <b>  <a name="tex2html6688"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6690"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Invert QEP.</title>
+<meta name="description" content="Invert QEP.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node336.html">
+<link rel="previous" href="node334.html">
+<link rel="up" href="node334.html">
+<link rel="next" href="node336.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5910"
+  href="node336.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5904"
+  href="node334.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5898"
+  href="node334.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5906"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5908"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5911"
+  href="node336.html">Shifted QEP.</a>
+<b> Up:</b> <a name="tex2html5905"
+  href="node334.html">Spectral Transformations for QEP</a>
+<b> Previous:</b> <a name="tex2html5899"
+  href="node334.html">Spectral Transformations for QEP</a>
+ &nbsp <b>  <a name="tex2html5907"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5909"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001823010000000000000">
+逆QEP问题</a>
+</h4>
+对于求解广义特征值问题的大多数迭代方法，
+公式&nbsp;(<a href="node333.html#gep1">9.4</a>)，无论是与(<a href="node333.html#matrixpencil1">9.5</a>)还是与
+(<a href="node333.html#matrixpencil2">9.10</a>)结合，都适合于确定少数
+外部特征值和特征向量。如果需要计算
+一些模最小的特征值和特征向量，那么
+显然的变换是 <span class="math-inline">\mu=1/\lambda</span>，并且在将
+QEP (<a href="node332.html#qep">9.1</a>) 乘以 <span class="math-inline">\mu^2</span> 后，我们得到 <em>逆QEP</em>：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="inverqep"></a><div class="math-display">\left( M + \mu C + \mu^2 K \right) x = 0 .</div></td>
+<td width=10 align="right">
+(256)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里假设 <span class="math-inline">0</span> 不是原QEP&nbsp;(<a href="node332.html#qep">9.1</a>) 的特征值，即 <span class="math-inline">K</span> 是非奇异的。
+
+<p>
+三元组 <span class="math-inline">\{K,C,M\}</span> 的QEP可以线性化，如
+在&#167;<a href="node333.html#sec-qred">9.2.2</a> 中讨论的那样，
+例如，如 (<a href="node333.html#gep1">9.4</a>) 与 (<a href="node333.html#matrixpencil1">9.5</a>) 所示，其中 <span class="math-inline">M</span>
+与 <span class="math-inline">K</span> 互换。我们可以用 <span class="math-inline">\lambda</span> 而不是 <span class="math-inline">\mu</span> 来重新表述这个广义线性化特征值问题，
+这导致
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="gep2"></a><div class="math-display">A z = \frac{1}{\lambda} B z,</div></td>
+<td width=10 align="right">
+(257)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil3"></a><div class="math-display">A = \twobytwo{-C}{-M}{I}{0}, \quadB = \twobytwo{K}{0}{0}{I}, \quadz = \twobyone{x}{\lambda x}.</div></td>
+<td width=10 align="right">
+(258)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+注意，从因式分解
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">B - \lambda A =\twobytwo{I}{\lambda M}{0}{I}\twobytwo{\lambda^2 M + \lambda C + K}{0}{0}{I}\twobytwo{I}{0}{-\lambda I}{I}</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们知道矩阵束 <span class="math-inline">B - \lambda A</span> 等价于
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\twobytwo{\lambda^2 M + \lambda C + K}{0}{0}{I} .</div>
+</div>
+<br clear="ALL">
+<p></p>
+由于 
+<span class="math-inline">\det(B - \lambda A) = \det( \lambda^2 M + \lambda C + K )</span>，
+我们得出结论：矩阵束 <span class="math-inline">B - \lambda A</span> 是正则的当且仅当
+二次矩阵多项式 
+<span class="math-inline">\lambda^2 M + \lambda C + K</span>
+是正则的，并且原QEP&nbsp;(<a href="node332.html#qep">9.1</a>) 的特征值
+与矩阵束 <span class="math-inline">B - \lambda A</span> 的特征值一致。
+
+<p>
+对于特殊情况&nbsp;(<a href="node332.html#scase">9.2</a>)，我们可以表述
+广义特征值问题 
+<span class="math-inline">Az = \frac{1}{\lambda}Bz</span>，其中
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil4"></a><div class="math-display">A = \twobytwo{C}{M}{M}{0}, \quadB = \twobytwo{-K}{0}{0}{M}.</div></td>
+<td width=10 align="right">
+(259)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在这种情况下，两个矩阵都是Hermitian的，但不确定的。
+用 (<a href="node335.html#matrixpencil4">9.15</a>) 进行线性化，在左乘
+(<a href="node335.html#matrixpencil3">9.14</a>) 后，结果是与块对角矩阵 
+<span class="math-inline">\mathrm{diag}(-I,-M)</span> 相乘。因此，如果
+
+<span class="math-inline">\mathrm{det}(M) \neq 0</span>，那么矩阵束 <span class="math-inline">B - \lambda A</span> 是正则的当且仅当
+二次矩阵多项式 
+<span class="math-inline">\lambda^2 M + \lambda C + K</span> 是正则的。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5910"
+  href="node336.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5904"
+  href="node334.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5898"
+  href="node334.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5906"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5908"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5911"
+  href="node336.html">Shifted QEP.</a>
+<b> Up:</b> <a name="tex2html5905"
+  href="node334.html">Spectral Transformations for QEP</a>
+<b> Previous:</b> <a name="tex2html5899"
+  href="node334.html">Spectral Transformations for QEP</a>
+ &nbsp <b>  <a name="tex2html5907"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5909"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

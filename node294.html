@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Example</title>
+<meta name="description" content="Numerical Example">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node293.html">
+<link rel="up" href="node287.html">
+<link rel="next" href="node295.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5255"
+  href="node295.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5249"
+  href="node287.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5245"
+  href="node293.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5251"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5253"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5256"
+  href="node295.html">Rational Krylov Subspace Method</a>
+<b> Up:</b> <a name="tex2html5250"
+  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b> Previous:</b> <a name="tex2html5246"
+  href="node293.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html5252"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5254"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001745000000000000000">
+数值示例</a>
+</h2>
+
+<p>
+我们展示一个易于复现的小型示例的结果。该示例取自[<a
+ href="node421.html#bddd97">28</a>]中的测试矩阵集合。
+
+<p>
+我们考虑BFW782&nbsp;[<a
+ href="node421.html#bddd97">28</a>]这个阶数为782的有界细线介质波导广义特征问题。此问题源于对充满介质和PEC结构的矩形波导的麦克斯韦方程进行有限元离散化，以求解传播模式和磁场分布。由此产生的矩阵<span class="math-inline">A</span>是非对称的，而矩阵<span class="math-inline">B</span>是正定的。特别关注的是具有正实部的广义特征值
+
+<span class="math-inline">(\alpha,\beta)</span>（即，
+<span class="math-inline">\mathfrak{Re}(\alpha/\beta)\geq 0</span>）及其对应的特征向量。
+
+<p>
+对于此问题，参数设置为<span class="math-inline">\tau=2750.0</span>，
+<span class="math-inline">k_{\max}=5</span>，以及
+<span class="math-inline">\epsilon=10^{-9}</span>。在前几步中，直到第一个残差的大小小于
+<span class="math-inline">10^{-6}</span>，我们在校正方程中用<span class="math-inline">(1,\tau)</span>替换<span class="math-inline">(\zeta,\eta)</span>（如注释(36)所述）。
+
+<p>
+计算得到的广义特征值，表示为<span class="math-inline">\alpha/\beta</span>，
+列于表&nbsp;<a href="node294.html#tab:bfw-ev">8.1</a>中。通过算法&nbsp;<a href="node292.html#alg:jdqzhar">8.1</a>
+我们发现了所有四个正广义特征值。
+
+<p>
+<br><p></p>
+<div align="center">
+<a name="tab:bfw-ev"></a>
+<p>
+<br>
+  <div align="center">
+<a name="36410"></a>
+<table cellpadding=3 border="1">
+<caption><strong>表 8.1:</strong>
+BFW<span class="math-inline">782</span>的五个广义特征值，由Jacobi-Davidson QZ计算</caption>
+<tr><td align="right"><span class="math-inline">-1.1373e+03</span></td>
+</tr>
+<tr><td align="right"><span class="math-inline">5.6467e+02</span></td>
+</tr>
+<tr><td align="right"><span class="math-inline">1.2634e+03</span></td>
+</tr>
+<tr><td align="right"><span class="math-inline">2.4843e+03</span></td>
+</tr>
+<tr><td align="right"><span class="math-inline">2.5233e+03</span></td>
+</tr>
+</table>
+</div>
+</div>
+<br>
+
+<p>
+
+<p></p>
+<div align="center"><a name="fig:bfw-floating_point_operations"></a><a name="36421"></a>
+<table>
+<caption align="bottom"><strong>图 8.1:</strong>
+BFW<span class="math-inline">782</span>的收敛历史。</caption>
+<tr><td><IMG
+ width="431" height="403" border="0"
+ src="img2810.png"
+ alt="\begin{figure}\centerline{\psfig{file=Chap6JDabc.eps}}\end{figure}"></td></tr>
+</table>
+</div><p></p>
+
+<p>
+<br><p></p>
+<div align="center">
+<a name="tab:bfw"></a>
+<p>
+<br>
+  <div align="center">
+<a name="36425"></a>
+<table cellpadding=3 border="1">
+<caption><strong>表 8.2:</strong>
+BFW<span class="math-inline">782</span>结果汇总。</caption>
+<tr><td align="left"><table cellpadding=3>
+<tr><td align="left">&nbsp;</td><td align="left" valign="top" width=85>校正方程方法</td>
+<td align="left">&nbsp;</td></tr>
+</table></td>
+<td align="center">JD迭代次数</td>
+<td align="center">矩阵向量乘积次数</td>
+<td align="center">
+<span class="math-inline">\mathrm{flops}\times 10^6</span></td>
+</tr>
+<tr><td align="left">GMRES<span class="math-inline">_{1}</span></td>
+<td align="center">143</td>
+<td align="center">143</td>
+<td align="center"><span class="math-inline">67</span></td>
+</tr>
+<tr><td align="left">GMRES<span class="math-inline">_{10}</span></td>
+<td align="center">37</td>
+<td align="center">233</td>
+<td align="center"><span class="math-inline">31.7</span></td>
+</tr>
+<tr><td align="left">Bi-CGSTAB(2)</td>
+<td align="center">32</td>
+<td align="center">429</td>
+<td align="center"><span class="math-inline">38.8</span></td>
+</tr>
+</table>
+</div>
+</div>
+<br>
+
+<p>
+收敛历史绘制在
+图&nbsp;<a href="node294.html#fig:bfw-floating_point_operations">8.1</a>中。我们通过以下方法求解校正方程：
+(1) 简单地将<span class="math-inline">t</span>设为<span class="math-inline">-\hat r</span>，记为GMRES<span class="math-inline">_{1}</span>；
+(2) 使用最多10步的完整GMRES [<a
+ href="node421.html#sasc86">389</a>]，记为GMRES<span class="math-inline">_{10}</span>，以及 (3) 使用最多100次矩阵乘法的Bi-CGSTAB(2) [<a
+ href="node421.html#slfo93">409</a>]（Bi-CGSTAB指双共轭梯度稳定法）。我们未使用预条件（<span class="math-inline">K=I</span>）。
+作为校正方程迭代方法的停止准则，我们使用了在第<span class="math-inline">\ell</span>次Jacobi-Davidson迭代中的残差减少<span class="math-inline">2^{-\ell}</span>，或在允许的最大迭代次数内。
+结果汇总见表&nbsp;<a href="node294.html#tab:bfw">8.2</a>。我们看到，对于GMRES<span class="math-inline">_{10}</span>和Bi-CGSTAB(2)，Jacobi-Davidson QZ方法收敛得相当好。需要注意的是，尽管看起来只计算了四个广义特征值，实际上计算了五个广义特征值：两个相对接近的最右边广义特征值在同一Jacobi-Davidson迭代中被发现。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5255"
+  href="node295.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5249"
+  href="node287.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5245"
+  href="node293.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5251"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5253"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5256"
+  href="node295.html">Rational Krylov Subspace Method</a>
+<b> Up:</b> <a name="tex2html5250"
+  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b> Previous:</b> <a name="tex2html5246"
+  href="node293.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html5252"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5254"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

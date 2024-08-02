@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Example</title>
+<meta name="description" content="Example">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node55.html">
+<link rel="up" href="node48.html">
+<link rel="next" href="node57.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1535"
+  href="node57.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1529"
+  href="node48.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1525"
+  href="node55.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1531"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1533"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1536"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Up:</b> <a name="tex2html1530"
+  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b> Previous:</b> <a name="tex2html1526"
+  href="node55.html">Related Eigenproblems</a>
+ &nbsp <b>  <a name="tex2html1532"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1534"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h2><a name="SECTION001158000000000000000"></a>
+<a name="sec_chap2_nHepEx"></a>
+<br>
+Example
+</h2>
+
+<p>
+We continue to use the example introduced in
+&#167;<a href="node19.html#sec:introchap2">2.1</a> and
+Figure&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>.
+We now consider the case of unit masses <span class="math-inline">m_i=1</span>
+but nonzero damping constants <span class="math-inline">b_i</span>. 
+(The case of nonunit masses is handled in &#167;<a href="node65.html#sec_chap2_GnHepEx">2.6.8</a>.)
+This simplifies the equations
+of motion to 
+<span class="math-inline">\ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>. 
+We solve them by changing variables to 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">y(t) = \bmat{c} \dot{x}(t) \\ x(t) \emat,</div>
+</div>
+<br clear="ALL">
+<p></p>
+yielding
+<br>
+<div align="center"><a name="eqn_EigenVibration3"></a>
+
+</div>
+<br clear="ALL"><p></p>
+We again solve by substituting 
+<span class="math-inline">y(t) = e^{\lambda t} y</span>, where <span class="math-inline">y</span> is
+a constant vector and <span class="math-inline">\lambda</span> is a constant scalar to be determined.
+This yields 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Ay = \lambda y.</div>
+</div>
+<br clear="ALL">
+<p></p>
+Thus <span class="math-inline">y</span> is an eigenvector
+and <span class="math-inline">\lambda</span> is an eigenvalue of the non-Hermitian matrix <span class="math-inline">A</span>.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Direct Methods</title>
+<meta name="description" content="Direct Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node94.html">
+<link rel="previous" href="node86.html">
+<link rel="up" href="node85.html">
+<link rel="next" href="node94.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2152"
+  href="node94.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2146"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2140"
+  href="node92.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2148"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2150"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2153"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Up:</b> <a name="tex2html2147"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2141"
+  href="node92.html">Storage.</a>
+ &nbsp <b>  <a name="tex2html2149"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2151"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001320000000000000000"></a> <a name="sec:dense"></a> 
+<a name="7348"></a>
+<a name="7349"></a>
+<a name="7350"></a>
+<a name="7351"></a>
+<br>
+直接方法
+</h1>
+
+<p>
+在本节中，我们将简要讨论用于计算对称矩阵特征值的直接方法，这些矩阵可以作为满矩阵存储在计算机中。这些直接方法有时被称为变换方法，并且围绕相似变换构建。
+
+<p>
+它们在LAPACK[<a href="node421.html#lapack">12</a>]、ScaLAPACK[<a href="node421.html#scalapack">52</a>]以及MATLAB的eig命令中实现。<a name="tex2html17" href="footnode.html#foot10741"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>
+
+<p>
+我们将在本章后面讨论的所有基于子空间算法都需要使用密集、三对角或带状矩阵例程作为内迭代，以获得子空间特征值的Ritz近似。
+
+<p>
+最常见的直接方法分为两个阶段：
+
+<ol>
+<li>找到一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q^{\ast} A Q = T</span>是一个三对角矩阵。
+</li>
+<li>计算三对角矩阵<span class="math-inline">T</span>的特征分解。
+</li>
+</ol>
+
+<p>
+初始归约到三对角形式是通过一系列<span class="math-inline">n-2</span>个正交Householder反射实现的，需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，或者如果也想要特征向量，则需要<span class="math-inline">\frac{8}{3}n^3</span>次。LAPACK的对称或Hermitian驱动例程从这个归约开始：它由实数情况的计算例程xSYTRD和复数情况的xHETRD计算（在ScaLAPACK中是PxSYTRD和PxHETRD）。还有针对压缩和带状存储的实现。
+
+<p>
+有多种方法可以找到三对角矩阵的特征分解：
+
+<p>
+<dl>
+<dd><a name="7369"></a>
+</dd>
+<dt><strong><i>QR算法：</i></strong></dt>
+<dd>该算法找到所有特征值，并可选地找到所有特征向量。它找到三对角矩阵的所有特征值需要<span class="math-inline">O(n^2)</span>次浮点运算。由于将密集矩阵归约到三对角形式需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，对于足够大的<span class="math-inline">n</span>，<span class="math-inline">O(n^2)</span>可以忽略不计。对于找到所有特征向量，QR迭代平均需要略多于<span class="math-inline">6n^3</span>次浮点运算。它在LAPACK中实现为xSTEQR和xSTERF。
+
+<p>
+这是MATLAB命令eig背后的算法。<a name="tex2html18" href="footnode.html#foot10742"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>
+<p>
+</dd>
+<dt><strong><i>分治法：</i></strong></dt>
+<dd><a name="7376"></a>
+它将三对角矩阵分成两半，分别解决每一半的特征问题，并通过求解一个特殊的有理方程将解粘合在一起。它在LAPACK中实现为xSTEVD。对于大型矩阵，xSTEVD可以比xSTEQR快很多倍，但需要更多的工作空间（<span class="math-inline">2n^2</span>或<span class="math-inline">3n^2</span>）。
+
+<p>
+</dd>
+<dt><strong><i>二分法和逆迭代：</i></strong></dt>
+<dd><a name="7380"></a>
+<a name="7381"></a>
+二分法可以用来找到特征值的一个子集，例如区间<span class="math-inline">[a,b]</span>内的那些。它只需要<span class="math-inline">O(nk)</span>次浮点运算，其中<span class="math-inline">k</span>是所需的特征值数量。因此，当<span class="math-inline">k \ll n</span>时，二分法可能比QR方法快得多。它可以非常精确，但如果接受较低的精度，也可以调整以运行得更快。
+
+<p>
+然后可以使用逆迭代来找到相应的特征向量。在最优情况下，当特征值很好地分开时，逆迭代也只需要<span class="math-inline">O(nk)</span>次浮点运算。这比QR或分治法少得多，即使所有特征值和特征向量都需要（<span class="math-inline">k=n</span>）。另一方面，当许多特征值紧密聚集在一起时，将需要Gram-Schmidt正交化以确保我们不会得到多个相同的特征向量。在最坏情况下，这将增加<span class="math-inline">O(nk^2)</span>次浮点运算到操作计数中。
+
+<p>
+二分法和逆迭代在LAPACK例程xSTEBZ和xSTEIN中实现，并且它们作为选项在xSYEVX中可用。在ScaLAPACK中，它们是子例程PxSTEBZ和PxSTEIN。
+
+<p>
+</dd>
+<dt><strong><i>相对稳健表示算法：</i></strong></dt>
+<dd><a name="7387"></a>
+该算法使用多个平移<span class="math-inline">T-s I</span>的LDL<span class="math-inline">^T</span>分解，对于每个平移，算法计算非常精确的微小特征值的特征对。它在LAPACK中实现为xSTEGR。xSTEGR比所有例程都快，除了少数情况，并且使用最少的工作空间。参见[<a href="node421.html#parldhi97">358</a>,<a href="node421.html#dhil97">128</a>,<a href="node421.html#pama:99">360</a>]。
+
+<p>
+</dd>
+</dl>
+
+<p>
+最后，解决Hermitian特征值问题的一个经典方法是<i>Jacobi方法</i>。<a name="7393"></a>
+该方法构造一个正交变换到对角形式，
+<br><p></p>
+<div align="center">
+<div class="math-display">A=X\Lambda X^{\ast}</div>
+</div>
+<br clear="ALL">
+<p></p>
+通过应用一系列基本正交旋转，每次减少矩阵非对角元素平方和，直到矩阵达到工作精度的对角形式。
+
+<p>
+Jacobi算法非常流行，因为它由一个非常简单的程序实现，并且给出的特征向量在工作精度上是正交的。然而，在操作计数方面，它无法与QR方法竞争：Jacobi需要<span class="math-inline">2sn^3</span>次乘法用于<span class="math-inline">s</span>次扫描（通常<span class="math-inline">s=3</span>到5），这比三对角归约所需的<span class="math-inline">4/3n^3</span>次要多。
+
+<p>
+Jacobi算法有一个重要的优势。正确实现它可以提供相对误差小的特征值近似，而基于三对角化的算法只能保证误差相对于矩阵范数是有界的（<a href="node86.html#eigvpert">4.3</a>）。参见[<a href="node421.html#deve92">124</a>]。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2152"
+  href="node94.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2146"
+  href="node85.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2140"
+  href="node92.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2148"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2150"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2153"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Up:</b> <a name="tex2html2147"
+  href="node85.html">Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html2141"
+  href="node92.html">Storage.</a>
+ &nbsp <b>  <a name="tex2html2149"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2151"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Golub-Kahan-Lanczos Bidiagonalization Procedure.</title>
+<meta name="description" content="Golub-Kahan-Lanczos Bidiagonalization Procedure.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node199.html">
+<link rel="previous" href="node197.html">
+<link rel="up" href="node197.html">
+<link rel="next" href="node199.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3745"
+  href="node199.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3739"
+  href="node197.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3733"
+  href="node197.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3741"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3743"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3746"
+  href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b> Up:</b> <a name="tex2html3740"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html3734"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+ &nbsp <b>  <a name="tex2html3742"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3744"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001533010000000000000"></a> 
+<a name="20907"></a>
+<br>
+Golub-Kahan-Lanczos双对角化过程
+</h4> 
+如第&#167;<a href="node193.html#sec:svdtm">6.2</a>节所述，
+SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</span>和<span class="math-inline">V</span>，使得
+<span class="math-inline">U^*AV</span>呈双对角形式。实际上，<span class="math-inline">V</span>的第一列<span class="math-inline">v_1</span>
+可以选择为任意单位向量，之后<span class="math-inline">U</span>和<span class="math-inline">V</span>的其他列通常是唯一确定的。
+我们将其表示为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="uav"></a><div class="math-display">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp; \alpha_{n} \\\end{array} \right].</div></td>
+<td width=10 align="right">
+(111)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+即使<span class="math-inline">A</span>是复数，所有的<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>也都是实数。
+
+<p>
+常数<span class="math-inline">\alpha_k</span>和<span class="math-inline">\beta_k</span>由以下公式给出：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\alpha_k = u^{\ast}_k A v_k \quad\mathrm{and}\quad\beta_k = u^{\ast}_k A v_{k+1}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归关系。乘以<span class="math-inline">U</span>，我们有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A\left[\begin{array}{cccc}v_1 &amp; v_2 &amp; \ldots &amp; v_n\end{array} \right] = U\left[ \begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp; \alpha_{n} \\\end{array} \right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+两边第<span class="math-inline">k</span>列相等，我们得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Av_k = \beta_{k-1}u_{k-1} + \alpha_k u_k</div>
+</div>
+<br clear="ALL">
+<p></p>
+或者
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><div class="math-display">\alpha_k u_k = Av_k - \beta_{k-1}u_{k-1}, \quad\quad \beta_0 = 0.</div></td>
+<td width=10 align="right">
+(112)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+另一方面，从关系式
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A^{\ast} \left[\begin{array}{cccc}u_1 &amp; u_2 &amp; \ldots &amp; u_n\end{array} \right] = V\left[ \begin{array}{cccccc}\alpha_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_1 &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; \beta_{n-1} &amp; \alpha_n \\\end{array} \right],</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A^{\ast} u_k = {\alpha}_k v_k + {\beta}_k v_{k+1}</div>
+</div>
+<br clear="ALL">
+<p></p>
+或者
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><div class="math-display">{\beta}_k v_{k+1} = A^{\ast} u_k - {\alpha}_k v_k.</div></td>
+<td width=10 align="right">
+(113)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+
+<p>
+由于<span class="math-inline">U</span>和<span class="math-inline">V</span>的列是归一化的，我们必须有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\alpha_k = \Vert Av_k - \beta_{k-1}u_{k-1}\Vert _2</div>
+</div>
+<br clear="ALL">
+<p></p>
+和
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\beta_k = \Vert A^* u_k - \alpha_k v_k\Vert _2.</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们将递归关系总结在以下算法中。
+
+<p>
+<br>
+<a name="gklmethod"></a><IMG
+ width="598" height="221" align="bottom" border="0"
+ src="img1774.png"
+ alt="\begin{algorithm}{Golub--Kahan--Lanczos Bidiagonalization Procedure
+}
+{
+\begin{t...
+...} = v_{k+1}/ \beta_k$\ \\
+{\rm (9)}\&gt; {\bf end}
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+收集算法前<span class="math-inline">k</span>步计算的量，我们有以下重要关系：
+<br>
+<div align="center"><a name="lansvdeq1"></a><a name="lansvdeq2"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A V_k</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle U_k B_k,</span></td>
+<td width=10 align="right">
+(114)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A^{\ast} U_{k}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle V_k B^*_k + \beta_{k}v_{k+1}e^*_k,</span></td>
+<td width=10 align="right">
+(115)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+以及
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="uvorth"></a><div class="math-display">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0,</div></td>
+<td width=10 align="right">
+(116)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中<span class="math-inline">B_k</span>是<span class="math-inline">B</span>的<span class="math-inline">k</span>阶主子矩阵，定义见&nbsp;(<a href="node198.html#uav">6.4</a>)。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3745"
+  href="node199.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3739"
+  href="node197.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3733"
+  href="node197.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3741"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3743"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3746"
+  href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b> Up:</b> <a name="tex2html3740"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html3734"
+  href="node197.html">Golub-Kahan-Lanczos Method</a>
+ &nbsp <b>  <a name="tex2html3742"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3744"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

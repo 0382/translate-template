@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Block Size.</title>
+<meta name="description" content="Block Size.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node239.html">
+<link rel="previous" href="node237.html">
+<link rel="up" href="node237.html">
+<link rel="next" href="node239.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4407"
+  href="node239.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4401"
+  href="node237.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4395"
+  href="node237.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4403"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4405"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4408"
+  href="node239.html">Stopping Criterion.</a>
+<b> Up:</b> <a name="tex2html4402"
+  href="node237.html">Practical Algorithm</a>
+<b> Previous:</b> <a name="tex2html4396"
+  href="node237.html">Practical Algorithm</a>
+ &nbsp <b>  <a name="tex2html4404"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4406"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001672010000000000000">
+块大小。</a>
+</h4>
+
+<p>
+在选择块大小时，我们需要考虑一些问题和权衡。为了进行讨论，我们假设比较是基于子空间的最大固定维度进行的。
+
+<p>
+随着块大小的增加，Arnoldi 约简的长度 <span class="math-inline">m=r+p</span> 会减小。由于相应的 Krylov 空间中 <span class="math-inline">A</span> 的最大幂次的度数为 <span class="math-inline">m-1</span>，较小的块大小允许应用更高次的多项式。然而，非块方法的缺点在于，除非约简已经很好地近似了某些相关特征向量，否则它无法计算 <span class="math-inline">A</span> 的多个特征值的副本。例如，在第二个副本出现之前，第一个 Ritz 对应的残差相对于 <span class="math-inline">A</span> 的范数应为 <span class="math-inline">O(\epsilon_M)</span> 或更小。
+
+<p>
+块方法的优点之一是，它们在使用相对较大的收敛准则时，更可靠地计算聚类和/或多个特征值的近似值。请注意，在每次重启期间，使用的块大小可以变化。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4407"
+  href="node239.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4401"
+  href="node237.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4395"
+  href="node237.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4403"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4405"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4408"
+  href="node239.html">Stopping Criterion.</a>
+<b> Up:</b> <a name="tex2html4402"
+  href="node237.html">Practical Algorithm</a>
+<b> Previous:</b> <a name="tex2html4396"
+  href="node237.html">Practical Algorithm</a>
+ &nbsp <b>  <a name="tex2html4404"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4406"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

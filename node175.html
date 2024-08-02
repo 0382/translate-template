@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Example.</title>
+<meta name="description" content="Numerical Example.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node174.html">
+<link rel="up" href="node169.html">
+<link rel="next" href="node176.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3389"
+  href="node176.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3383"
+  href="node169.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3379"
+  href="node174.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3385"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3387"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3390"
+  href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
+<b> Up:</b> <a name="tex2html3384"
+  href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html3380"
+  href="node174.html">Software Availability.</a>
+ &nbsp <b>  <a name="tex2html3386"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3388"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001450060000000000000">
+Numerical Example.</a>
+</h4>
+We report results on the generalized Hermitian shift-and-invert Lanczos algorithm
+for one of the examples in &#167;<a href="node113.html#sec:laneg">4.4.6</a>, the L-shaped membrane,
+but now with a 9-point finite difference approximation.
+
+<p>
+We use the same grid spacing <span class="math-inline">h=1/64</span> and
+get two  sparse symmetric positive definite
+matrices <span class="math-inline">A</span> and <span class="math-inline">B</span> of order <span class="math-inline">n=2945</span>. They  have a very regular sparse band
+structure, now with at most 9 nonzero elements filled in each row.
+We used the shift <span class="math-inline">\sigma=0</span> to seek the 8 smallest eigenvalues.
+The residual estimates (<a href="node171.html#si-gen_estimate_residual">5.21</a>) 
+at each step <span class="math-inline">j</span> are plotted in Figure&nbsp;<a href="node174.html#Lmemb9SIres">5.1</a>.
+
+<p>
+When we compare the results on this generalized problem
+to those for the standard Hermitian
+eigenproblem of the same order in Figure&nbsp;<a href="node114.html#Lmemb5SIres">4.4</a> 
+(p.&nbsp;<a href="node114.html#Lmemb5SIres"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>) in &#167;<a href="node113.html#sec:laneg">4.4.6</a>, we have 
+to bear in mind that this 9-point
+approximation is a more accurate one to the partial
+differential equation than the 5-point approximation used there.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Krylov Balancing Algorithms</title>
+<meta name="description" content="Krylov Balancing Algorithms">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node208.html">
+<link rel="previous" href="node206.html">
+<link rel="up" href="node205.html">
+<link rel="next" href="node208.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3944"
+  href="node208.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3938"
+  href="node205.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3932"
+  href="node206.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3940"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3942"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3945"
+  href="node208.html">Accuracy of Eigenvalues Computed</a>
+<b> Up:</b> <a name="tex2html3939"
+  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b> Previous:</b> <a name="tex2html3933"
+  href="node206.html">Direct Balancing</a>
+ &nbsp <b>  <a name="tex2html3941"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3943"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001622000000000000000">
+Krylov 平衡算法</a>
+</h2>
+
+<p>
+直接平衡算法如 GEBAL 和 SPBALANCE 计算精确的行和列范数，这使得它们不适用于条目未明确给出的稀疏矩阵。在 [<a href="node421.html#Chen98">81</a>] 和 [<a href="node421.html#ChenDe">82</a>] 中，我们描述了三种仅使用 Krylov 信息的平衡算法，即矩阵-向量和/或矩阵转置-向量乘积，来访问原始矩阵。K<small>RYLOV</small>C<small>UTOFF</small> 算法，即算法 <a href="node207.html#alg:krylovbalance">7.1</a>，在我们测试的矩阵上表现最佳。
+
+<p>
+由于 <span class="math-inline">A</span> 未明确给出，我们假设可以计算 <span class="math-inline">Az</span> 和 <span class="math-inline">A^Tz</span> 的函数是可用的。（参见 [<a href="node421.html#ChenDe">82</a>] 中描述的仅使用 <span class="math-inline">Az</span> 而不使用 <span class="math-inline">A^Tz</span> 的 Krylov 算法 K<small>RYLOV</small>A<small>Z</small>。）在步骤 (1) 中，<span class="math-inline">\vert\vert A\vert\vert _{\infty}</span> 可以通过将 <span class="math-inline">A</span> 与一个随机 <span class="math-inline">\pm 1</span> 向量相乘并取结果绝对值的最大分量来近似。
+
+<p>
+迭代次数 <span class="math-inline">t</span> 和 <em>cutoff</em> 值由用户决定，因为最佳停止准则和 cutoff 值可能取决于矩阵 <span class="math-inline">A</span>。基于实验证据，我们选择了 <span class="math-inline">t</span> 的默认值为 <span class="math-inline">5</span>，<em>cutoff</em> 的默认值为 <span class="math-inline">10^{-8}</span>。这意味着平衡最多需要 10 次矩阵-向量乘法，因此与后续的特征值计算相比，成本可能非常低。
+
+<p>
+<br>
+<a name="alg:krylovbalance"></a><IMG
+ width="598" height="299" align="bottom" border="0"
+ src="img1860.png"
+ alt="\begin{algorithm}{Krylov 平衡算法 for NHEP ({\sc KrylovCutoff})
+}
+{
+\...
+...bf end for}
+\end{tabbing}}
+\vspace*{-12pt}%% long page
+\pagebreak\end{algorithm}">
+<br>
+
+<p>
+<hr>
+
+这段内容介绍了 Krylov 平衡算法的基本原理和实现细节，强调了其在稀疏矩阵处理中的优势和应用场景。<!--Navigation Panel-->
+<a name="tex2html3944"
+  href="node208.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3938"
+  href="node205.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3932"
+  href="node206.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3940"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3942"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3945"
+  href="node208.html">Accuracy of Eigenvalues Computed</a>
+<b> Up:</b> <a name="tex2html3939"
+  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b> Previous:</b> <a name="tex2html3933"
+  href="node206.html">Direct Balancing</a>
+ &nbsp <b>  <a name="tex2html3941"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3943"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

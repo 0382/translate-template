@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Robustness of Computed GUPTRI Form and Error Bounds.</title>
+<meta name="description" content="Robustness of Computed GUPTRI Form and Error Bounds.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node320.html">
+<link rel="previous" href="node318.html">
+<link rel="up" href="node318.html">
+<link rel="next" href="node320.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5635"
+  href="node320.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5629"
+  href="node318.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5623"
+  href="node318.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5631"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5633"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5636"
+  href="node320.html">Arithmetic and Space Complexity.</a>
+<b> Up:</b> <a name="tex2html5630"
+  href="node318.html">More on GUPTRI and</a>
+<b> Previous:</b> <a name="tex2html5624"
+  href="node318.html">More on GUPTRI and</a>
+ &nbsp <b>  <a name="tex2html5632"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5634"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h4><a name="SECTION001778010000000000000">
+Robustness of Computed GUPTRI Form and Error Bounds.</a>
+</h4>
+
+<p>
+The GUPTRI algorithm and software is numerically stable in the sense that 
+it computes the exact Kronecker structure (generalized Schur-staircase form) 
+of a  nearby pencil 
+<span class="math-inline">A' - \lambda B'</span>. 
+
+<span class="math-inline">\delta \equiv {\Vert(A - A', B - B')\Vert}_E</span> is an upper bound on the distance
+to the closest 
+<span class="math-inline">\{A + \delta A, B + \delta B\}</span> with the KCF of 
+<span class="math-inline">\{A', B'\}</span>.
+An accurate estimate of <span class="math-inline">\delta</span> is the square root of the sum of 
+the squares of all singular values interpreted 
+as zeros during the reduction to GUPTRI form.
+
+<p>
+We refer to sections 5 and 6 in [<a
+ href="node421.html#demmelkagstrom93b">122</a>] for a more detailed
+discussion of the computed GUPTRI form and the associated error bounds
+for reducing subspaces and generalized eigenvalues.
+For example, section 6 presents a sample usage of all four routines 
+for an application in control theory (computing the controllable subspace and
+uncontrollable modes).  
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst </title>
+<meta name="description" content="Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node177.html">
+<link rel="previous" href="node169.html">
+<link rel="up" href="node155.html">
+<link rel="next" href="node177.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3403"
+  href="node177.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3397"
+  href="node155.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3391"
+  href="node175.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3399"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3401"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3404"
+  href="node177.html">Stability and Accuracy Assessments</a>
+<b> Up:</b> <a name="tex2html3398"
+  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3392"
+  href="node175.html">Numerical Example.</a>
+ &nbsp <b>  <a name="tex2html3400"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3402"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001460000000000000000"></a>
+<a name="sec:jacdav_gsym"></a><a name="17637"></a>
+<br>
+Jacobi-Davidson方法
+<br>&nbsp;<em>G. Sleijpen和H. van der Vorst</em>
+</h1>
+
+<p>
+我们考虑将Jacobi-Davidson方法应用于广义特征值问题（GHEP，参见<a href="node156.html#gsymeig">5.1</a>）。类似于上一节中讨论的Lanczos方法（参见[<a href="node421.html#vors82a">444</a>]），我们可以将Jacobi-Davidson方法应用于（<a href="node156.html#gsymeig">5.1</a>），其中搜索子空间的基是<span class="math-inline">B</span>-正交的，即
+<br><p></p>
+<div align="center">
+<div class="math-display">{V}_{m}^\ast B{V}_{m}=I_{m},</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果我们用<span class="math-inline">{V}_{m}</span>表示列向量为<span class="math-inline">{v}_j</span>的矩阵。
+
+<p>
+在这个子空间中的向量<span class="math-inline">{u}\equiv {V}_{m}{s}</span>的Ritz-Galerkin条件导致
+<br>
+<div align="right">
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:jdgensyga"></a><div class="math-display">({V}_{m}^\ast A {V}_{m}) {s} - \theta ({V}_{m}^\ast B {V}_{m}) {s} = 0 ,</div></td>
+<td width=10 align="right">
+(88)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+或者，由于<span class="math-inline">{V}_{m}</span>的<span class="math-inline">B</span>-正交性：
+<br><p></p>
+<div align="center">
+<div class="math-display">({V}_{m}^\ast A {V}_{m}) {s} - \theta {s} = 0 .</div>
+</div>
+<br clear="ALL">
+<p></p>
+这导致Ritz向量<span class="math-inline">{u}_j^{(m)}\equiv V_{m}{s}_j</span>和Ritz值<span class="math-inline">\theta_j^{(m)}</span>。我们假设这些Ritz向量是关于<span class="math-inline">B</span>-内积归一化的。
+
+<p>
+对于广义特征问题的特征向量分量<span class="math-inline">t_j^{({m})}\perpB{u}_j^{(m)}</span>的校正方程可以写为
+<br>
+<div align="right">
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:ghcorr"></a><div class="math-display">\begin{array}{r}\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast......j^{({m})}\equiv - (A-\theta_j^{(m)} B){u}_j^{(m)} .\end{array}</div></td>
+<td width=10 align="right">
+(89)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+如果矩阵<span class="math-inline">A-\theta_j^{(m)} B</span>的线性系统能有效求解，那么我们可以计算精确解<span class="math-inline">t_j^{({m})}</span>。在其他情况下，我们可以像通常对Jacobi-Davidson方法所做的那样，使用Krylov求解器对（<a href="node176.html#eq:ghcorr">5.25</a>）计算<span class="math-inline">t_j^{({m})}</span>的近似解。注意，算子
+<br><p></p>
+<div align="center">
+<div class="math-display">\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast \right)(A-\theta_j^{(m)} B)\left( I - {u}_j^{(m)} {{u}_j^{(m)}}^\ast B \right)</div>
+</div>
+<br clear="ALL">
+<p></p>
+将空间<span class="math-inline">(B{u}_j^{(m)})^\perp</span>映射到空间<span class="math-inline">({u}_j^{(m)})^\perp</span>，因此如果我们在<span class="math-inline">(B{u}_j^{(m)})^\perp</span>和<span class="math-inline">(B{u}_j^{(m)})^\perp</span>之间使用Krylov求解器，总是需要预处理（参见算法<a href="node176.html#alg:jdqrgens">5.6</a>中的第(31)项）。
+
+<p>
+对于标准Hermitian情况，所得到的方案可以与重启和消减相结合。如果我们希望在消减中使用正交算子，那么我们必须使用<span class="math-inline">B</span>-正交矩阵，将给定的广义系统化简为Schur形式：
+<br><p></p>
+<div align="center">
+<div class="math-display">A{Q}_{k}={Z}_{k}{D}_{k},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">{Z}_{k}=B{Q}_{k}</span>，<span class="math-inline">{Q}_{k}</span>是<span class="math-inline">B</span>-正交的。矩阵<span class="math-inline">{D}_{k}</span>是一个对角矩阵，其对角线上是计算得到的<span class="math-inline">{k}</span>个特征值；<span class="math-inline">{Q}_{k}</span>的列是<span class="math-inline">A</span>的特征向量。这导致对消减的斜投影，使用前<span class="math-inline">{k}</span>个特征向量：
+<br><p></p>
+<div align="center">
+<div class="math-display">\left( I - {Z}_{k} {Q}_{k}^\ast \right)(A-\lambda B)\left( I - {Q}_{k} {Z}_{k}^\ast \right) \, .</div>
+</div>
+<br clear="ALL">
+<p></p>
+很容易验证，消减后的算子<span class="math-inline">B</span>在空间<span class="math-inline">(B{u}_j^{(m)})^\perp</span>上仍然是关于对称正定的。我们可以简单地在该空间中使用<span class="math-inline">B</span>-内积，因为<span class="math-inline">B</span>和消减后的<span class="math-inline">B</span>在该空间上是一致的。
+
+<p>
+如果<span class="math-inline">B</span>不是条件良好的，即如果<span class="math-inline">x^\ast By</span>导致高度扭曲的内积，那么我们建议使用Jacobi-Davidson方法与QZ方法（参见第<a href="node287.html#sec:jd_gnsym">8.4</a>节）。QZ方法不利用所涉及矩阵的对称性。
+
+<p>
+算法<a href="node176.html#alg:jdqrgens">5.6</a>表示一个带有重启和消减的Jacobi-Davidson模板，用于外部特征值。左预处理的Krylov求解器的模板在算法<a href="node176.html#alg:corritgh">5.7</a>中给出。
+
+<p>
+要应用此算法，我们需要指定一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个指定应计算多少个接近<span class="math-inline">\tau</span>的特征对的数量<span class="math-inline">{k}_{\max}</span>。值<span class="math-inline">{m}_{\max}</span>表示搜索子空间的最大维度。如果超过此值，则以指定维度<span class="math-inline">{m}_{\min}</span>的子空间进行重启。我们还需要给出一个初始向量<span class="math-inline">{v}_0</span>。
+
+<p>
+完成后，当<span class="math-inline">\tau</span>选择大于<span class="math-inline">\lambda_{\max}(A)</span>时，将提供<span class="math-inline">{k}_{\max}</span>个最大特征值；如果<span class="math-inline">\tau</span>选择小于<span class="math-inline">\lambda_{\min}</span>，则提供<span class="math-inline">{k}_{\max}</span>个最小特征值。计算得到的特征对<span class="math-inline">(\widetilde\lambda_j,\widetilde{x}_{j})</span>，<span class="math-inline">\Vert\widetilde{x}_{j}\Vert _b=1</span>，满足<span class="math-inline">\Vert A \widetilde{x}_{j}- \widetilde\lambda_jB\widetilde{x}_{j}\Vert _2\leq j\epsilon</span>，其中<span class="math-inline">\widetilde{x}_j</span>表示<span class="math-inline">\widetilde{X}</span>的第<span class="math-inline">j</span>列。特征向量是<span class="math-inline">B</span>-正交的：<span class="math-inline">\widetilde{x}_i^\ast B\widetilde{x}_j=0</span>对于<span class="math-inline">i \neq j</span>。
+
+<p>
+现在让我们讨论算法<a href="node176.html#alg:jdqrgens">5.6</a>的不同步骤。
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>初始化阶段。
+<p>
+</dd>
+<dt><strong>(3)-(5)</strong></dt>
+<dd>新向量<span class="math-inline">{t}</span>通过修正的Gram-Schmidt方法相对于当前搜索子空间进行<span class="math-inline">B</span>-正交化。为了提高数值稳定性，可以用算法<a href="node138.html#alg:rgs">4.14</a>中的模板替换，其中所有内积和范数应理解为<span class="math-inline">B</span>-内积，<span class="math-inline">B</span>-范数。
+<p>
+如果<span class="math-inline">{m}=0</span>，则这是一个空循环。
+<p>
+</dd>
+<dt><strong>(7)</strong></dt>
+<dd>我们扩展<span class="math-inline">n</span>乘<span class="math-inline">m</span>矩阵<span class="math-inline">{V}</span>，<span class="math-inline">{V}^A\equiv A{V}</span>，和<span class="math-inline">{V}^B\equiv B{V}</span>，<span class="math-inline">{V}</span>表示当前搜索子空间的基向量<span class="math-inline">{v}_i</span>作为其列的矩阵；同样<span class="math-inline">{V}^A</span>和<span class="math-inline">{V}^B</span>。
+<p>
+</dd>
+<dt><strong>(8)-(10)</strong></dt>
+<dd>对称矩阵<span class="math-inline">{M}\equiv {V}^\ast A {V}={V}^\ast V^A</span>（阶数<span class="math-inline">{m}</span>）的第<span class="math-inline">{m}</span>列被计算。
+<p>
+</dd>
+<dt><strong>(11)</strong></dt>
+<dd>对于<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵<span class="math-inline">{M}</span>的特征问题可以用LAPACK中的适当例程求解Hermitian密集矩阵。我们选择计算标准Ritz值，这使得算法适合计算接近指定<span class="math-inline">\tau</span>的<span class="math-inline">A - \lambda B</span>的<span class="math-inline">{k}_{\max}</span>个外部特征值。如果要计算谱内部部分的特征值，则建议计算<em>调和Petrov值</em>；参见第<a href="node287.html#sec:jd_gnsym">8.4</a>节。
+<p>
+</dd>
+<dt><strong>(13)</strong></dt>
+<dd>停止准则是当归一化向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受特征向量近似。这意味着我们接受计算特征值中的<span class="math-inline">\epsilon^2</span>级的不准确性和特征向量中的<span class="math-inline">O({\epsilon})</span>级的不准确性（角度）（前提是所关注的特征值是简单且与其他特征值很好地分离，并且<span class="math-inline">B</span>不是病态的；参见第<a href="node177.html#sec:gsym_pert">5.7</a>节中的（<a href="node182.html#ineq:pdpBdef-err-1-evt">5.33</a>）和（<a href="node182.html#ineq:evt-pdpBdef-theta">5.34</a>））。
+<p>
+不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>（第<a href="node144.html#alg:jdqr"><IMG  align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中的第(13)项。
+<p>
+</dd>
+<dt><strong>(17)-(20)</strong></dt>
+<dd>在接受一个Ritz对之后，我们继续搜索下一个对，剩余的Ritz向量作为初始搜索空间的基。
+<p>
+</dd>
+<dt><strong>(23)-(29)</strong></dt>
+<dd>一旦当前特征向量的搜索空间的维度超过<span class="math-inline">{m}_{\max}</span>，我们就重启。该过程以由最接近目标值<span class="math-inline">\tau</span>的<span class="math-inline">{m}_{\min}</span>个Ritz向量张成的子空间重启。该子空间的构建在(25)-(27)中完成。
+<p>
+</dd>
+<dt><strong>(31)</strong></dt>
+<dd>我们已经将在<span class="math-inline">{Q}</span>中锁定的（计算得到的）特征向量收集起来，并且矩阵<span class="math-inline">\tilde{Q}</span>是<span class="math-inline">Q</span>扩展了当前特征向量近似<span class="math-inline">u</span>。这是为了获得更紧凑的公式；算法<a href="node176.html#alg:jdqrgens">5.6</a>中的步骤(31)的校正方程等价于方程（<a href="node176.html#eq:ghcorr">5.25</a>）。新的校正<span class="math-inline">{t}</span>必须与<span class="math-inline">{Z}=B{Q}</span>的列以及<span class="math-inline">{p}=B{u}</span>正交。
+<p>
+当然，校正方程可以通过任何合适的进程求解，例如，设计用于求解非对称系统的预处理Krylov子空间方法。然而，由于斜投影的存在，我们总是需要一个预处理（如果没有任何其他可用，则可能是恒等算子），它被相同的斜投影消减，以便我们在<span class="math-inline">\widetilde{Z}^\perp</span>和自身之间获得映射。由于<span class="math-inline">\widetilde{Q}</span>和<span class="math-inline">\widetilde{Z}</span>的出现，在使用矩阵<span class="math-inline">A-\theta B</span>的预处理时必须小心。预处理的包含可以按照算法<a href="node176.html#alg:corritgh">5.7</a>完成。确保迭代求解器的初始向量<span class="math-inline">{t}_0</span>满足正交约束<span class="math-inline">\widetilde{Z}^\ast {t}_0=0</span>。注意，如果在几次Jacobi-Davidson迭代中保持<span class="math-inline">{K}</span>不变，算法<a href="node176.html#alg:corritgh">5.7</a>每步可以节省大量计算。在这种情况下，可以从前几步保存<span class="math-inline">{\widehat Z}</span>的列。矩阵<span class="math-inline">{\mathcal M}</span>及其<span class="math-inline">{\mathcal L}{\mathcal U}</span>分解也可以从前几步更新。
+<p>
+不需要非常精确地求解校正方程。一种常用于不精确Newton方法[<a href="node421.html#dees83">113</a>]的策略在这里也适用：随着Jacobi-Davidson迭代步骤增加精度；例如，在校正方程中使用残差减少<span class="math-inline">2^{-\ell}</span>在第<span class="math-inline">\ell</span>次Jacobi-Davidson迭代中求解（当检测到特征向量时，<span class="math-inline">\ell</span>重置为0）。
+<p>
+</dd>
+</dl>
+
+<p>
+有关该方法的完整理论背景，请参见[<a href="node421.html#fosv98">172</a>]。有关使用特征向量的消减技术的详细信息，请参见第<a href="node140.html#sec:JDresdef">4.7.3</a>节。
+
+<p>
+<br>
+<a name="alg:corritgh"></a><IMG width="598" height="473" align="bottom" border="0" src="img1615.png" alt="\begin{algorithm}{Approximate Solution of the Deflated Jacobi--Davidson GHEP Cor...
+...\rm (d)} <span class="math-inline">{z}=\widehat{y}-\widehat{Z}\vec{\alpha}</span>\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3403"
+  href="node177.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3397"
+  href="node155.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3391"
+  href="node175.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3399"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3401"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3404"
+  href="node177.html">Stability and Accuracy Assessments</a>
+<b> Up:</b> <a name="tex2html3398"
+  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html3392"
+  href="node175.html">Numerical Example.</a>
+ &nbsp <b>  <a name="tex2html3400"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3402"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

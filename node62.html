@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Conditioning</title>
+<meta name="description" content="Conditioning">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node63.html">
+<link rel="previous" href="node61.html">
+<link rel="up" href="node57.html">
+<link rel="next" href="node63.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1636"
+  href="node63.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1630"
+  href="node57.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1624"
+  href="node61.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1632"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1634"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1637"
+  href="node63.html">Specifying an Eigenproblem</a>
+<b> Up:</b> <a name="tex2html1631"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Previous:</b> <a name="tex2html1625"
+  href="node61.html">Eigendecompositions</a>
+ &nbsp <b>  <a name="tex2html1633"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1635"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001165000000000000000"></a>
+<a name="sec_chap2_GnHepCond"></a>
+<br>
+条件化
+</h2>
+
+<p>
+<a name="1753"></a>
+
+<p>
+由于一般矩阵 <span class="math-inline">A</span> 的特征问题也可以写成广义特征问题 <span class="math-inline">A - \lambda I</span>，关于条件化的所有评论在第&#167;<a href="node53.html#sec_chap2_nHepCond">2.5.5</a>节中都适用：特征值可以是良态的或病态的，小的扰动甚至可能使特征向量完全消失。
+
+<p>
+当 <span class="math-inline">B</span> 是奇异矩阵时，<span class="math-inline">A - \lambda B</span> 至少有一个无穷大的特征值。为了讨论 <span class="math-inline">B</span> 的小扰动对无穷大特征值的“小扰动”，我们需要一个适当的定义。这由<em>弦长度量</em>提供，我们在下面以几种等价的方式描述它。首先，任何特征值 <span class="math-inline">\lambda_i</span>，无论是有限的还是无限的，总可以写成比率 <span class="math-inline">\alpha_i / \beta_i</span>，其中 <span class="math-inline">\vert\alpha_i\vert^2 + \vert\beta_i\vert^2=1</span>。例如，如果 <span class="math-inline">\vert\lambda_i\vert = \tan \theta</span> 对于某个 <span class="math-inline">\theta</span>，那么
+
+<span class="math-inline">\vert\alpha_i\vert = \sin \theta</span> 和 <span class="math-inline">\vert\beta_i\vert = \cos \theta</span>。<em>弦长度量</em>
+
+<span class="math-inline">\chi ( \lambda_1 , \lambda_2 ) = \sin \tau</span>，
+其中 <span class="math-inline">\tau</span> 是两个向量 <span class="math-inline">(\alpha_1 , \beta_1)</span> 和 <span class="math-inline">(\alpha_2 , \beta_2)</span> 之间的锐角。我们可以这样计算：
+
+<span class="math-inline">\chi ( \lambda_1 , \lambda_2 ) = \vert \alpha_1 \beta_2 - \alpha_2 \beta_1 \vert</span>
+或者
+
+<span class="math-inline">\chi ( \lambda_1 , \lambda_2 ) =\frac{\vert \lambda_1 - \lambda_2 \vert}{\sqrt{1 + \vert\lambda_1\vert^2} \sqrt{1 + \vert\lambda_2\vert^2}}</span>
+如果 <span class="math-inline">\lambda_1</span> 和 <span class="math-inline">\lambda_2</span> 都不是无穷大。例如，如果 <span class="math-inline">\lambda_1 = 1/0</span> 是无穷大，
+
+<span class="math-inline">\lambda_2 = \sqrt{1-10^{-16}}/10^{-8} \approx 10^8</span> 非常大，那么
+
+<span class="math-inline">\chi ( \lambda_1 , \lambda_2 ) = 10^{-8}</span> 很小，
+因此 <span class="math-inline">\lambda_1</span> 和 <span class="math-inline">\lambda_2</span> 很接近。
+
+<p>
+另一种理解弦长度量的几何方法是使用<em>黎曼球面</em>[<a href="node421.html#ahlfors">4</a>]：想象一个半径为1、中心在复平面原点的三维球体；球体的表面就是黎曼球面。对于复平面中的任何 <span class="math-inline">\lambda</span>，画一条连接 <span class="math-inline">\lambda</span> 和黎曼球面北极的直线，并设 <span class="math-inline">\hat{\lambda}</span> 是这条直线与黎曼球面相交的点。那么
+
+<span class="math-inline">\chi ( \lambda_1 , \lambda_2 )</span> 就是黎曼球面上两个点 <span class="math-inline">\hat{\lambda}_1</span> 和 <span class="math-inline">\hat{\lambda}_2</span> 之间的欧几里得距离。
+
+<p>
+弦长度量用于在第&#167;<a href="node324.html#sec:errbds_gnsym">8.8</a>节中测量特征值的变化。例如，<span class="math-inline">1 - \lambda \cdot 0</span> 的单个无穷大特征值是良态的，因为将 <span class="math-inline">0</span> 改为 <span class="math-inline">10^{-8}</span> 可以将无穷大特征值变为 <span class="math-inline">10^8</span>，
+并且 <span class="math-inline">\chi ( 10^8 , \infty ) \approx 10^{-8}</span>。
+
+<p>
+我们参考第&#167;<a href="node324.html#sec:errbds_gnsym">8.8</a>节以获取更多细节。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1636"
+  href="node63.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1630"
+  href="node57.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1624"
+  href="node61.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1632"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1634"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1637"
+  href="node63.html">Specifying an Eigenproblem</a>
+<b> Up:</b> <a name="tex2html1631"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Previous:</b> <a name="tex2html1625"
+  href="node61.html">Eigendecompositions</a>
+ &nbsp <b>  <a name="tex2html1633"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1635"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

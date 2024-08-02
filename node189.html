@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Remarks on Clustered Eigenvalues.</title>
+<meta name="description" content="Remarks on Clustered Eigenvalues.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node188.html">
+<link rel="up" href="node184.html">
+<link rel="next" href="node190.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3599"
+  href="node190.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3593"
+  href="node184.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3589"
+  href="node188.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3595"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3597"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3600"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Up:</b> <a name="tex2html3594"
+  href="node184.html">Some Combination of and</a>
+<b> Previous:</b> <a name="tex2html3590"
+  href="node188.html">Error Bound for Computed</a>
+ &nbsp <b>  <a name="tex2html3596"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3598"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001472050000000000000">
+关于聚类特征值的评述</a>
+</h4>
+正如在<span class="math-inline">B</span>为正定且条件良好时的情况一样，当特征值
+<span class="math-inline">(\alpha,\beta)</span>
+与<span class="math-inline">\{A,B\}</span>的其他一个或多个特征值接近时，换句话说，当
+
+<span class="math-inline">(\alpha,\beta)</span>属于一个特征值聚类时，
+根据(<a href="node187.html#ineq:pdp-err-1-ev">5.42</a>)，只要
+
+<span class="math-inline">\Vert r\Vert _2/\gamma(A,B)</span>很小，计算得到的
+
+<span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span>
+仍然准确，但由于分母中出现了间隙<span class="math-inline">\eta</span>，计算得到的特征向量<span class="math-inline">\widetilde x</span>可能不准确，如(<a href="node188.html#ineq:pdp-err-1-evt">5.43</a>)所示。事实证明，与聚类特征值相关的每个单独特征向量对扰动非常敏感，但由所有这些特征向量张成的特征空间则不然。因此，对于聚类特征值，我们应该计算整个特征空间。可以证明[<a href="node421.html#li:94a">299</a>,<a href="node421.html#sun:83a">430</a>]，计算得到的特征空间与聚类相关的特征空间之间的差异与定义为聚类中任意特征值与聚类外任意特征值之间最小弦距离的间隙成反比。由于其定义方式，这个间隙预计会很大。
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<p>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3599"
+  href="node190.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3593"
+  href="node184.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3589"
+  href="node188.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3595"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3597"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3600"
+  href="node190.html">Singular Value Decomposition</a>
+<b> Up:</b> <a name="tex2html3594"
+  href="node184.html">Some Combination of and</a>
+<b> Previous:</b> <a name="tex2html3590"
+  href="node188.html">Error Bound for Computed</a>
+ &nbsp <b>  <a name="tex2html3596"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3598"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

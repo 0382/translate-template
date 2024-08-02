@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Transformation to Linear Form</title>
+<meta name="description" content="Transformation to Linear Form">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node334.html">
+<link rel="previous" href="node332.html">
+<link rel="up" href="node331.html">
+<link rel="next" href="node334.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5878"
+  href="node334.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5872"
+  href="node331.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5866"
+  href="node332.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5874"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5876"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5879"
+  href="node334.html">Spectral Transformations for QEP</a>
+<b> Up:</b> <a name="tex2html5873"
+  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b> Previous:</b> <a name="tex2html5867"
+  href="node332.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html5875"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5877"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001822000000000000000"></a><a name="sec-qred"></a><a name="42826"></a>
+<br>
+线性形式的转换
+</h2>
+不难看出，QEP（二次特征值问题）在<a href="node332.html#qep">9.1</a>中与以下广义的“线性”特征值问题是等价的：<a name="tex2html51"
+  href="footnode.html#foot42828"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="gep1"></a><div class="math-display">A z = \lambda B z \quad \mathrm{and} \quad w^{\ast} A = \lambda w^{\ast} B ,</div></td>
+<td width=10 align="right">
+(248)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil1"></a><div class="math-display">A = \twobytwo{0}{I}{-K}{-C}, \quad B = \twobytwo{I}{0}{0}{M}</div></td>
+<td width=10 align="right">
+(249)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+以及
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil11"></a><div class="math-display">z = \twobyone{x}{\lambda x}, \quad w = \twobyone{(\lambda M + C)^{\ast} y }{y}.</div></td>
+<td width=10 align="right">
+(250)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+广义特征值问题<a href="node333.html#gep1">9.4</a>通常被称为QEP<a href="node332.html#qep">9.1</a>的线性化。可以证明，对于任何上述形式的矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>，右特征向量<span class="math-inline">z</span>和左特征向量<span class="math-inline">w</span>具有<a href="node333.html#matrixpencil11">9.6</a>中所描述的结构。
+
+<p>
+注意，从因式分解
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:4a"></a><div class="math-display">A - \lambda B = \twobytwo{0}{I}{-I}{-\lambda M - C}\twobytwo{\lambda^2 M + \lambda C + K}{0}{0}{I}\twobytwo{I}{0}{-\lambda I }{I},</div></td>
+<td width=10 align="right">
+(251)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+我们可以得出结论，矩阵束<span class="math-inline">A - \lambda B</span>与矩阵<a name="tex2html52"
+  href="footnode.html#foot42872"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>是等价的，即
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="exmatrixpol"></a><div class="math-display">\twobytwo{\lambda^2 M + \lambda C + K }{0}{0}{I}</div></td>
+<td width=10 align="right">
+(252)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+并且
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">{\rm det}(A - \lambda B ) = {\rm det}(\lambda^2 M + \lambda C + K).</div>
+</div>
+<br clear="ALL">
+<p></p>
+这意味着原始QEP<a href="node332.html#qep">9.1</a>的特征值与广义特征值问题<a href="node333.html#gep1">9.4</a>的特征值一致。此外，我们有：
+
+<ul>
+<li><span class="math-inline">L(\lambda)</span>是正则的当且仅当<span class="math-inline">A - \lambda B</span>是正则的；</li>
+<li>如果<span class="math-inline">M</span>（从而<span class="math-inline">B</span>）是非奇异的，则<span class="math-inline">L(\lambda)</span>是正则的；</li>
+<li>如果<span class="math-inline">K</span>（从而<span class="math-inline">A</span>）是非奇异的，则<span class="math-inline">L(\lambda)</span>是正则的。</li>
+</ul>
+关于正则矩阵束<span class="math-inline">(A,B)</span>的理论，参见例如[<a
+ href="node421.html#stsu90">425</a>, Chap.&nbsp;VI]。我们将在本节中假设至少<span class="math-inline">M</span>是非奇异的。
+
+<p>
+上述转换为线性形式的一个缺点是，如果矩阵<span class="math-inline">M</span>、<span class="math-inline">C</span>和<span class="math-inline">K</span>都是埃尔米特矩阵，那么在简化形式<a href="node333.html#matrixpencil1">9.5</a>中，<span class="math-inline">A</span>并不是埃尔米特矩阵。这可以通过以下方式修复。
+
+<p>
+实际上，<a href="node333.html#gep1">9.4</a>中的矩阵对<span class="math-inline">(A,B)</span>可以选择更一般的形式
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">A = \twobytwo{0}{W}{- K}{ - C}, \quad B = \twobytwo{W}{0}{0}{ M},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">W</span>可以是任意非奇异矩阵。注意，现在矩阵束<span class="math-inline">A - \lambda B</span>与矩阵多项式<a href="node333.html#exmatrixpol">9.8</a>等价当且仅当<span class="math-inline">W</span>是非奇异的，并且由于<a href="node333.html#eq:4a">9.7</a>，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\det( A - \lambda B ) = \det(W)\cdot \det( \lambda^2 M + \lambda C + K ).</div>
+</div>
+<br clear="ALL">
+<p></p>
+例如，如果矩阵<span class="math-inline">M</span>、<span class="math-inline">K</span>和<span class="math-inline">C</span>都是对称的，如特殊情况<a href="node332.html#scase">9.2</a>所示，且<span class="math-inline">K</span>是非奇异的，那么我们可以选择<span class="math-inline">W = - K</span>，这将导致以下对称广义“线性”特征值问题
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="gep1K"></a><div class="math-display">A z = \lambda B z \quad \mathrm{and} \quad w^{\ast} A = \lambda w^{\ast} B ,</div></td>
+<td width=10 align="right">
+(253)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil2"></a><div class="math-display">A = \twobytwo{0}{-K}{-K}{ -C}, \quad B = \twobytwo{-K}{0}{0}{M}, \quad</div></td>
+<td width=10 align="right">
+(254)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+以及
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="matrixpencil22"></a><div class="math-display">z = \twobyone{x}{\lambda x}, \quad w = \twobyone{y}{\bar\lambda y}.</div></td>
+<td width=10 align="right">
+(255)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+<span class="math-inline">A</span>和<span class="math-inline">B</span>都是对称的，但可能是非定的。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5878"
+  href="node334.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5872"
+  href="node331.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5866"
+  href="node332.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5874"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5876"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5879"
+  href="node334.html">Spectral Transformations for QEP</a>
+<b> Up:</b> <a name="tex2html5873"
+  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b> Previous:</b> <a name="tex2html5867"
+  href="node332.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html5875"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5877"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

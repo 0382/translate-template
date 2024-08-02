@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>BLAS</title>
+<meta name="description" content="BLAS">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node381.html">
+<link rel="previous" href="node379.html">
+<link rel="up" href="node379.html">
+<link rel="next" href="node381.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6605"
+  href="node381.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6599"
+  href="node379.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6593"
+  href="node379.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6601"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6603"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6606"
+  href="node381.html">Sparse BLAS</a>
+<b> Up:</b> <a name="tex2html6600"
+  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b> Previous:</b> <a name="tex2html6594"
+  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+ &nbsp <b>  <a name="tex2html6602"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6604"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001921000000000000000"></a> <a name="sec:dense_blas"></a><a name="46184"></a>
+<br>
+BLAS
+</h2> 
+
+<p>
+在过去大约15年的时间里，算法和软件领域在解决线性代数问题方面取得了大量的进展。线性代数社区早已认识到将算法开发成软件库的需求，几年前，作为社区共同努力的结果，制定了一个识别线性代数算法和软件所需基本操作的事实标准。这个标准由一系列被称为基本线性代数子程序（BLAS）的例程组成，希望这些例程能在先进架构的计算机上被多家制造商高效实现，从而使得在广泛机器上高效实现它们成为可能，这一目标已基本实现。
+
+<p>
+我们为先进架构计算机设计线性代数算法的关键洞察是，为了达到高性能，必须最小化数据在内存层次结构不同级别之间移动的频率。因此，我们在实现中利用向量化和并行化的主要算法方法是使用分块算法，特别是在执行矩阵-向量和矩阵-矩阵操作（即第二级和第三级BLAS）时结合高度优化的核心。通常，使用分块算法需要数据以块的形式移动，而不是以向量或标量的形式，这样虽然移动的数据总量不变，但由于移动数据所需的消息减少，启动成本（或延迟）大大降低。
+
+<p>
+第二个关键思想是，用户可以通过改变指定数据布局的参数来调整算法的性能。在共享内存机器上，这由块大小控制，而在分布式内存机器上，它由块大小和逻辑进程网格的配置控制。
+
+<p>
+问题出现了，“我们如何才能对影响性能的这些不同因素进行足够控制，以获得机器所能提供的性能水平？”答案是通过使用BLAS。
+
+<p>
+现在有三个级别的BLAS：
+
+<p>
+<dl COMPACT>
+<dt> </dt>
+<dd>第一级BLAS [<a href="node421.html#blas1">288</a>]：用于向量操作，例如
+
+<span class="math-inline">y \leftarrow \alpha x + y</span>；
+
+<p>
+</dd>
+<dt> </dt>
+<dd>第二级BLAS [<a href="node421.html#blas2">133</a>]：用于矩阵-向量操作，例如
+
+<span class="math-inline">y \leftarrow \alpha A x + \beta y</span>；
+
+<p>
+</dd>
+<dt> </dt>
+<dd>第三级BLAS [<a href="node421.html#blas3">134</a>]：用于矩阵-矩阵操作，例如
+
+<span class="math-inline">C \leftarrow \alpha A B + \beta C</span>。
+
+<p>
+</dd>
+</dl>
+这里，<span class="math-inline">A</span>、<span class="math-inline">B</span> 和 <span class="math-inline">C</span> 是矩阵；<span class="math-inline">x</span> 和 <span class="math-inline">y</span> 是向量；<span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span> 是标量。
+
+<p>
+第一级BLAS在LAPACK等软件包中使用，主要是为了方便而非性能：它们执行的计算量微不足道，并且在大多数现代超级计算机上无法实现高效率。
+
+<p>
+第二级BLAS可以在许多向量处理器上实现接近峰值性能，例如CRAY X-MP或Y-MP的单个处理器，或Convex C-2机器。然而，在其他向量处理器如CRAY-2或IBM 3090 VF上，第二级BLAS的性能受限于不同内存层次之间数据移动的速率。
+
+<p>
+第三级BLAS克服了这一限制。这第三级BLAS在<span class="math-inline">O(n^2)</span>数据上执行<span class="math-inline">O(n^3)</span>浮点运算，而第二级BLAS仅在<span class="math-inline">O(n^2)</span>数据上执行<span class="math-inline">O(n^2)</span>操作。第三级BLAS还允许我们在调用它们的软件中透明地利用并行性。虽然第二级BLAS提供了一些利用并行性的空间，但第三级BLAS提供了更大的空间。
+
+<p>
+用户社区很大程度上接受了BLAS，不仅因为性能原因，还因为围绕BLAS这样的核心例程开发软件是良好的软件工程实践。大多数现代高性能计算机都有高效的具体实现。BLAS使得软件能够用可移植的代码实现高性能。
+
+<p>
+本着早期BLAS会议和消息传递接口（MPI）及高性能Fortran（HPF）论坛标准化努力的精神，成立了一个技术论坛，以考虑在现代软件、语言和硬件发展的背景下扩展BLAS。BLAS技术论坛会议始于1995年11月在田纳西大学举行的一个研讨会。会议由大学和软件及硬件供应商主办。
+
+<p>
+成立了各种工作组来考虑诸如整体功能、语言接口、稀疏BLAS、分布式内存密集型BLAS、扩展和混合精度BLAS、区间BLAS以及对现有BLAS的扩展等问题。论坛的规则采用了MPI和HPF论坛使用的规则。
+
+<p>
+本文件中定义的标准的主要目标是使线性代数库（无论是公共领域还是商业）能够高效、可靠且容易地互操作。我们相信，硬件和软件供应商、更高级别库的编写者以及应用程序程序员都从该论坛的努力中受益，并且是这些标准的预期最终用户。
+
+<p>
+有关BLAS和BLAS技术论坛的更多信息可以在本书的主页上获得，BLAS技术论坛网页的URL是：
+<div align="center">
+http://www.netlib.org/blas/blast-forum/blast-forum.html 
+
+</div>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6605"
+  href="node381.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6599"
+  href="node379.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6593"
+  href="node379.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6601"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6603"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6606"
+  href="node381.html">Sparse BLAS</a>
+<b> Up:</b> <a name="tex2html6600"
+  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b> Previous:</b> <a name="tex2html6594"
+  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+ &nbsp <b>  <a name="tex2html6602"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6604"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

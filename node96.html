@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Inverse Iteration</title>
+<meta name="description" content="Inverse Iteration">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node97.html">
+<link rel="previous" href="node95.html">
+<link rel="up" href="node94.html">
+<link rel="next" href="node97.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2202"
+  href="node97.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2196"
+  href="node94.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2190"
+  href="node95.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2198"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2200"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2203"
+  href="node97.html">Rayleigh Quotient Iteration</a>
+<b> Up:</b> <a name="tex2html2197"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html2191"
+  href="node95.html">Power Method</a>
+ &nbsp <b>  <a name="tex2html2199"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2201"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001332000000000000000"></a> <a name="sec_InversePowerMethod"></a><a name="7431"></a>
+<br>
+逆迭代法
+</h2>
+
+<p>
+通过将幂法应用于<span class="math-inline">(A - \sigma I)^{-1}</span>而非<span class="math-inline">A</span>，可以部分克服幂法的缺点，其中<span class="math-inline">\sigma</span>被称为<em>位移</em>。这将使方法收敛到最接近<span class="math-inline">\sigma</span>的特征值，而不是仅仅收敛到<span class="math-inline">\lambda_{\max}</span>。这种方法被称为<em>逆迭代</em>或<em>逆幂法</em>。
+
+<p>
+<br>
+<a name="inverseiteration"></a><IMG
+ width="598" height="203" align="bottom" border="0"
+ src="img820.png"
+ alt="\begin{algorithm}{HEP的逆迭代}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=b...
+...接受<span class="math-inline">\lambda=\sigma+1/\theta</span>和<span class="math-inline">x=y/\theta</span> \end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+需要注意的是，在步骤(4)中无需显式计算逆矩阵<span class="math-inline">\left(A-\sigma I\right)^{-1}</span>。我们只需高效地解一个形如<span class="math-inline">\left(A-\sigma I\right) y = v</span>的系统，从而形式上得到<span class="math-inline">y = \left(A-\sigma I\right)^{-1} \, v</span>。
+
+<p>
+与幂法类似，我们预期由逆幂法生成的<span class="math-inline">v</span>向量序列会越来越平行于<span class="math-inline">(A - \sigma I)^{-1}</span>的最大特征值对应的特征向量。更具体地说，假设<span class="math-inline">\lambda_j</span>和<span class="math-inline">x_j</span>是<span class="math-inline">A</span>的一个特征值和特征向量对，使得<span class="math-inline">\vert\lambda_j - \sigma \vert^{-1}</span>是<span class="math-inline">(A - \sigma I)^{-1}</span>的最大特征值。如果<span class="math-inline">z</span>不垂直于<span class="math-inline">x_j</span>，逆幂法将收敛。收敛速度为<span class="math-inline">\left\vert(\lambda_j - \sigma )/(\lambda_k- \sigma )\right\vert</span>，其中<span class="math-inline">\lambda_k</span>是<span class="math-inline">A</span>的一个特征值，使得<span class="math-inline">\vert\lambda_k - \sigma \vert^{-1}</span>是<span class="math-inline">(A - \sigma I)^{-1}</span>的第二大特征值。
+<a name="7463"></a>
+
+<p>
+逆迭代相对于幂法的一个优势是能够收敛到任意期望的特征值（最接近<span class="math-inline">\sigma</span>的那个）。通过选择非常接近某个期望特征值的<span class="math-inline">\sigma</span>，逆迭代可以非常快速地收敛。当我们对某个特征值有一个很好的近似并且只想计算该特征值及其对应的特征向量时，这种方法特别有效。然而，逆迭代确实需要对矩阵<span class="math-inline">A-\sigma I</span>进行分解，这使得在分解成本高昂时不太有吸引力。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2202"
+  href="node97.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2196"
+  href="node94.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2190"
+  href="node95.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2198"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2200"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2203"
+  href="node97.html">Rayleigh Quotient Iteration</a>
+<b> Up:</b> <a name="tex2html2197"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html2191"
+  href="node95.html">Power Method</a>
+ &nbsp <b>  <a name="tex2html2199"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2201"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

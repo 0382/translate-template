@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Error Bound for Computed Eigenvectors.</title>
+<meta name="description" content="Error Bound for Computed Eigenvectors.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node278.html">
+<link rel="up" href="node275.html">
+<link rel="next" href="node280.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4991"
+  href="node280.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4985"
+  href="node275.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4981"
+  href="node278.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4987"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4989"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4992"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Up:</b> <a name="tex2html4986"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html4982"
+  href="node278.html">Error Bound for Computed</a>
+ &nbsp <b>  <a name="tex2html4988"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4990"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION0016130040000000000000"></a> 
+<a name="27032"></a>
+<br>
+计算特征向量的误差界限
+</h4>
+我们不提供现有详细的计算特征向量误差界限，这些对于大型稀疏特征问题可能复杂且难以理解，而是将进行简要的实际分析，揭示影响特征向量敏感性的关键因素。
+
+<p>
+考虑一个近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 对应于精确特征对 <span class="math-inline">(\lambda,x)</span>。设 <span class="math-inline">A=QTQ^{\ast}</span> 是 <span class="math-inline">A</span> 的 Schur 分解（见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节，页码<a href="node48.html#sec_chap2_nHep"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>），其中 <span class="math-inline">Q=[x,Q_2]</span> 是酉矩阵，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T=\left[\begin{array}{cc}\lambda &amp; a^{\ast} \\ 0 &amp; T_{22}\end{array}\right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+从残差向量
+
+<span class="math-inline">r=A \widetilde x-\widetilde\lambda\widetilde x = Q T Q^{\ast}\widetilde x-\widetilde\lambda\widetilde x</span>，我们有
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Q^{\ast} r=T Q^{\ast} \widetilde x-\widetilde\lambda Q^{\ast} \widetilde x=(T-\widetilde\lambda I)Q^{\ast} \widetilde x.</div>
+</div>
+<br clear="ALL">
+<p></p>
+因此，上述方程的倒数第二项意味着
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert r\Vert _2=\Vert Q^{\ast} r\Vert _2\ge\Vert(T_{22}-\w......d\lambda I)^{-1}\Vert _2^{-1} \Vert Q_2^{\ast} \widetilde x\Vert _2,</div>
+</div>
+<br clear="ALL">
+<p></p>
+这表明
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="eq:std-nH-vt"></a><div class="math-display">\sin\theta(x,\widetilde x)\equiv\Vert Q_2^{\ast} \widetilde x\Vert _2\...... \frac{\Vert r\Vert _2}{\sigma_{\min}(T_{22}-\widetilde\lambda I)}.</div></td>
+<td width=10 align="right">
+(213)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这一不等式揭示了另一个可能使 <span class="math-inline">\sin\theta(x,\widetilde x)</span> 变大的潜在因素。当 <span class="math-inline">T_{22}</span> 远离正规矩阵集合时，这种情况发生，此时 <span class="math-inline">\Vert(T_{22}-\widetilde\lambda I)^{-1}\Vert _2</span>，即 <span class="math-inline">T_{22}-\widetilde\lambda I</span> 的最小奇异值的倒数，可能变得巨大，尽管 <span class="math-inline">A</span> 的其他特征值并未接近 <span class="math-inline">\widetilde\lambda</span>。
+
+<p>
+对于小型密集特征问题，<span class="math-inline">\sigma_{\min}(T_{22}-\widetilde\lambda I)</span> 可以有效估计。这在 LAPACK[<a
+ href="node421.html#lapack">12</a>] 中可用。然而，对于大型稀疏特征问题，由于 <span class="math-inline">T_{22}</span> 通常不可用，<span class="math-inline">\sigma_{\min}(T_{22}-\widetilde\lambda I)</span> 的估计无从谈起。我们只能大致了解计算特征向量的质量。
+
+<p>
+注意，<span class="math-inline">\sigma_{\min}(T_{22}-\widetilde\lambda I)</span> 大致衡量了 <span class="math-inline">\lambda</span> 与 <span class="math-inline">T_{22}</span> 的特征值之间的分离程度。我们必须说“大致”，因为
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\sigma_{\min}(T_{22}-\widetilde\lambda I) \leq \min_{\mu \in \lambda(T_{22})}\vert \mu -\widetilde\lambda \vert</div>
+</div>
+<br clear="ALL">
+<p></p>
+而上界可能是一个严重的过高估计。
+
+<p>
+如[<a
+ href="node421.html#golo96">198</a>] 总结，特征值的分离与特征向量的敏感性有关。实际上，如果 <span class="math-inline">\lambda</span> 是一个非缺陷的重复特征值，那么与之相关的不变子空间有无限多个可能的特征向量基。前面的分析仅表明，当特征值合并时，这种不确定性开始被感受到。众所周知，与特征值群相关的每个单独特征向量对扰动非常敏感，因此通常无法准确计算。幸运的是，对于特征值群的情况，通常是整个相关的特征空间具有实际重要性，并且该特征空间可以以令人满意的精度计算。详细处理超出了本书的范围，感兴趣的读者可参考文献，例如[<a
+ href="node421.html#stsu90">425</a>]。
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<p>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4991"
+  href="node280.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4985"
+  href="node275.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4981"
+  href="node278.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4987"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4989"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4992"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Up:</b> <a name="tex2html4986"
+  href="node275.html">Stability and Accuracy Assessments</a>
+<b> Previous:</b> <a name="tex2html4982"
+  href="node278.html">Error Bound for Computed</a>
+ &nbsp <b>  <a name="tex2html4988"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4990"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

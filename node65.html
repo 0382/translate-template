@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Example</title>
+<meta name="description" content="Example">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node66.html">
+<link rel="previous" href="node64.html">
+<link rel="up" href="node57.html">
+<link rel="next" href="node66.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1678"
+  href="node66.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1672"
+  href="node57.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1666"
+  href="node64.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1674"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1676"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1679"
+  href="node66.html">Singular Case</a>
+<b> Up:</b> <a name="tex2html1673"
+  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b> Previous:</b> <a name="tex2html1667"
+  href="node64.html">Related Eigenproblems</a>
+ &nbsp <b>  <a name="tex2html1675"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1677"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h2><a name="SECTION001168000000000000000"></a>
+<a name="sec_chap2_GnHepEx"></a>
+<br>
+Example
+</h2>
+
+<p>
+We continue to use the example introduced in
+&#167;<a href="node19.html#sec:introchap2">2.1</a> and
+Figure&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>.
+We now consider the fully general case of nonzero masses <span class="math-inline">m_i</span>
+and damping constants <span class="math-inline">b_i</span>. 
+This leads to the  equations
+of motion 
+<span class="math-inline">M \ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>. 
+We solve them by changing variables to 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">y(t) = \bmat{c} \dot{x}(t) \\ x(t) \emat,</div>
+</div>
+<br clear="ALL">
+<p></p>
+yielding
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\bmat{cc} M &amp; 0 \\ 0 &amp; I \emat \dot{y}(t)= \bmat{c} M \dd......ot{x}(t) \emat= \bmat{cc} -B &amp; -K \\ I &amp; 0 \emat \cdot y(t)</div>
+</div>
+<br clear="ALL">
+<p></p>
+or 
+<span class="math-inline">A \dot{y}(t) = C y(t)</span>.
+We solve this by substituting 
+<span class="math-inline">y(t) = e^{\lambda t} y</span>, where <span class="math-inline">y</span> is
+a constant vector and <span class="math-inline">\lambda</span> is a constant scalar to be determined.
+This yields 
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Cy = \lambda Ay.</div>
+</div>
+<br clear="ALL">
+<p></p>
+Thus <span class="math-inline">y</span> is an eigenvector
+and <span class="math-inline">\lambda</span> is an eigenvalue of the generalized nonsymmetric
+eigenvalue problem.
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Storage and Computational Costs.</title>
+<meta name="description" content="Storage and Computational Costs.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node138.html">
+<link rel="up" href="node138.html">
+<link rel="next" href="node140.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2840"
+  href="node140.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2834"
+  href="node138.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2830"
+  href="node138.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2836"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2838"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2841"
+  href="node140.html">Restart and Deflation</a>
+<b> Up:</b> <a name="tex2html2835"
+  href="node138.html">Basic Algorithm</a>
+<b> Previous:</b> <a name="tex2html2831"
+  href="node138.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html2837"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2839"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001372010000000000000">
+存储与计算成本</a>
+</h4>
+我们已经整理了简单Jacobi-Davidson方法的主要成本，包括存储需求和浮点运算，并将其汇总在两张表格中。这些成本是针对算法的第<span class="math-inline">{m}</span>次迭代给出的：
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">项目</td>
+<td align="left">存储需求</td>
+</tr>
+<tr><td align="left">搜索空间</td>
+<td align="left"><span class="math-inline">2{m}</span>个<span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">2</span>个<span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
+</tr>
+<tr><td align="left">投影系统</td>
+<td align="left"><span class="math-inline">0.5</span>个<span class="math-inline">{m}</span>阶矩阵</td>
+</tr>
+<tr><td align="left">投影系统的特征向量</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">{m}</span>阶矩阵</td>
+</tr>
+<tr><td align="left">校正方程</td>
+<td align="left">取决于所选求解器</td>
+</tr>
+</table>
+</div>
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">操作</td>
+<td align="left">工作量</td>
+</tr>
+<tr><td align="left">搜索基</td>
+<td align="left"><span class="math-inline">{m}+1</span>次点积，<span class="math-inline">{m}</span>次迭代中的<span class="math-inline">{m}</span>次更新</td>
+</tr>
+<tr><td align="left">投影系统</td>
+<td align="left"><span class="math-inline">{m}</span>次点积</td>
+</tr>
+<tr><td align="left">投影系统的特征系统</td>
+<td align="left"><span class="math-inline">O({m}^3)</span></td>
+</tr>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">1</span>次矩阵向量乘积，<span class="math-inline">1</span>次更新</td>
+</tr>
+<tr><td align="left">&nbsp;</td>
+<td align="left">或<span class="math-inline">{m}</span>次更新</td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">{m}</span>次更新</td>
+</tr>
+<tr><td align="left">校正方程</td>
+<td align="left">取决于求解器的选择</td>
+</tr>
+</table>
+</div>
+
+<p>
+<br><hr><!--Navigation Panel-->
+<a name="tex2html2840"
+  href="node140.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2834"
+  href="node138.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2830"
+  href="node138.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2836"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2838"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2841"
+  href="node140.html">Restart and Deflation</a>
+<b> Up:</b> <a name="tex2html2835"
+  href="node138.html">Basic Algorithm</a>
+<b> Previous:</b> <a name="tex2html2831"
+  href="node138.html">Basic Algorithm</a>
+ &nbsp <b>  <a name="tex2html2837"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2839"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Subspace Iteration</title>
+<meta name="description" content="Subspace Iteration">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node214.html">
+<link rel="previous" href="node212.html">
+<link rel="up" href="node210.html">
+<link rel="next" href="node214.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4030"
+  href="node214.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4024"
+  href="node210.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4018"
+  href="node212.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4026"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4028"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4031"
+  href="node214.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4025"
+  href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html4019"
+  href="node212.html">Inverse Iteration</a>
+ &nbsp <b>  <a name="tex2html4027"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4029"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001643000000000000000"></a> <a name="subsec_prac"></a><a name="22998"></a>
+<br>
+子空间迭代法
+</h2> 
+
+<p>
+子空间迭代法，也称为同时迭代法，最初是为处理特征值问题（HEP）设计的，但同样可以推广到非线性特征值问题（NHEP）。算法<a href="node213.html#alg7.2">7.2</a>是对第<a href="node98.html#sec:4.pract">4.3.4</a>节中针对HEP的子空间迭代法的一种改进，它通过引入缩减（锁定）机制来计算<span class="math-inline">n_{\mathrm{ev}}</span>个主特征值。由于NHEP的特征值可能条件极差，因此我们采用了更为严格的收敛准则。
+<a name="23001"></a> 
+
+<p>
+
+<p></p>
+<div align="center">
+
+<p><a name="alg7.2"></a></p><IMG
+ width="598" height="416" border="0"
+ src="img1886.png"
+ alt="\begin{figure}\begin{algorithm}{Subspace Iteration with Projection and Deflation...
+...\ \\
+{\rm (16)}\&gt; \&gt; {\bf end while}
+\end{tabbing}}
+\end{algorithm}\end{figure}">
+</div>
+<p></p>
+
+<p>
+下面我们介绍一些实现细节。
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>初始矩阵<span class="math-inline">V</span>的构建应使其在感兴趣的特征向量方向上占优，以加速收敛。如果事先没有相关信息，随机矩阵也是一个合理的选择。
+
+<p>
+</dd>
+<dt><strong>(3)</strong></dt>
+<dd>迭代参数<span class="math-inline">\iter</span>的引入是为了尽可能减少正交化计算的开销。然而，<span class="math-inline">\iter</span>不能过大，以免在计算矩阵<span class="math-inline">\widehat{Y}</span>时损失数值精度，导致部分特征值计算不准确。典型值为3到5。
+
+<p>
+</dd>
+<dt><strong>(6)-(13)</strong></dt>
+<dd>上述算法中的收敛准则仅针对模近似相同的特征值组进行检查。步骤(6)中的对角块从上到下排序，块1位于<span class="math-inline">\Lambda</span>的顶部。在步骤(12)中，一旦<span class="math-inline">\Lambda</span>中的第一个特征值块未能收敛，就停止测试。
+</dd>
+<dt><strong>(16)</strong></dt>
+<dd>迭代参数<span class="math-inline">\iter</span>的选择应平衡正交化成本与数值精度。
+</dd>
+</dl>
+
+<p>
+如果需要计算接近某个位移<span class="math-inline">\sigma</span>的特征值，并且<span class="math-inline">A - \sigma \, I</span>的分解容易获得，则可以将上述算法应用于<span class="math-inline">\left(A - \sigma \, I\right)^{-1}</span>。接近<span class="math-inline">\sigma</span>的特征值将更快收敛。
+
+<p>
+此外，可以通过用多项式<span class="math-inline">T_{iter} [ (A - \sigma I) / \rho ]</span>替换幂<span class="math-inline">A^{iter}</span>来加速计算，其中<span class="math-inline">T_{iter}</span>是第一类切比雪夫多项式，<span class="math-inline">\rho</span>是<span class="math-inline">A</span>的谱半径的估计值。
+
+<p>
+本节内容主要基于Bai和Stewart[<a href="node421.html#bast98">37</a>]以及Saad[<a href="node421.html#saad92">387</a>]的研究。关于子空间迭代的进一步讨论，读者可参考Wilkinson[<a href="node421.html#wilk65">457</a>]和Stewart[<a href="node421.html#stew76">422</a>]。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4030"
+  href="node214.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4024"
+  href="node210.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4018"
+  href="node212.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4026"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4028"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4031"
+  href="node214.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html4025"
+  href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html4019"
+  href="node212.html">Inverse Iteration</a>
+ &nbsp <b>  <a name="tex2html4027"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4029"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Direct Methods</title>
+<meta name="description" content="Direct Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node283.html">
+<link rel="previous" href="node281.html">
+<link rel="up" href="node280.html">
+<link rel="next" href="node283.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5081"
+  href="node283.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5075"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5069"
+  href="node281.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5077"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5079"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5082"
+  href="node283.html">Transformation to Standard Problems</a>
+<b> Up:</b> <a name="tex2html5076"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5070"
+  href="node281.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html5078"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5080"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001720000000000000000"></a> <a name="sec:qzalg"></a><a name="35630"></a> 
+<a name="35631"></a> 
+<a name="35632"></a>
+<br>
+直接方法
+</h1> 
+
+<p>
+QZ算法<a name="35633"></a>
+是计算广义非对称特征值问题（GNHEP）<a href="node281.html#eq:gnsym">8.1</a>的首选方法。
+该算法类似于针对广义特征值问题的QR算法（参见第<a href="node209.html#sec:nsymeigdirect">7.3</a>节）。
+它遵循QR算法所描述的模式：
+
+<ol>
+<li>首先，通过酉等价变换将<span class="math-inline">A</span>和<span class="math-inline">B</span>同时简化为浓缩形式。
+      更具体地说，<span class="math-inline">A</span>被简化为上Hessenberg形式，而<span class="math-inline">B</span>被简化为上三角形式（Schur形式）。
+      关键在于现在将<span class="math-inline">A</span>也简化为上Schur形式，同时保持<span class="math-inline">B</span>为该形式。
+      这一步骤将在下一步中完成。
+</li>
+<li>通过矩阵对<span class="math-inline">A</span>和<span class="math-inline">B</span>上的酉等价变换<span class="math-inline">Q</span>和<span class="math-inline">Z</span>，模拟对<span class="math-inline">AB^{-1}</span>（不形成该矩阵乘积）进行一次移位QR步骤的效果；这是QZ迭代的核心。
+      如果迭代应用，它将<span class="math-inline">A</span>简化为三角形或拟三角形（即，对角线上有<span class="math-inline">2 \times 2</span>块，以避免复数运算），同时保持<span class="math-inline">B</span>的三角结构。
+      收敛时，我们得到<span class="math-inline">A</span>和<span class="math-inline">B</span>的广义Schur形式（参见第<a href="node57.html#sec_chap2_GnHep">2.6</a>节）；也就是说，我们计算出了正交的<span class="math-inline">Q</span>和<span class="math-inline">Z</span>，使得<span class="math-inline">QAZ</span>和<span class="math-inline">QBZ</span>为上三角形。
+</li>
+<li>可以从三角形式的对角线计算特征值。
+      特征向量可以作为三角问题的特征向量计算，然后通过<span class="math-inline">Z</span>变换回原始问题的特征向量。
+</li>
+</ol> 
+这个简要概述必然忽略了许多重要问题。
+更多细节，读者应参考文献：关于QZ算法的原始论文是Moler和Stewart<a href="node421.html#most73">328</a>；QZ算法也在Golub和Van Loan<a href="node421.html#golo96">198</a>或Demmel<a href="node421.html#demmelbook">114</a>等人的教科书中有所描述。
+
+<p>
+QZ算法可以得到所有特征值，并可选地得到右和左特征向量。
+它需要<span class="math-inline">O(n^3)</span>次浮点运算和<span class="math-inline">O(n^2)</span>个内存位置，其中<span class="math-inline">n</span>是<span class="math-inline">A</span>和<span class="math-inline">B</span>的阶数。
+更具体地说，仅计算特征值大约需要<span class="math-inline">30 n^3</span>次浮点运算。
+如果需要右特征向量，则还需额外<span class="math-inline">16n^3</span>次运算，左特征向量亦然。
+这些工作量的估计基于经验，即每个特征值大约需要两次QZ迭代（QZ的收敛特性与QR大致相同）。
+
+<p>
+大多数与线性代数相关的软件包都包含了实现QZ算法的子程序。
+在MATLAB中，它被用作eig(A,B)命令<a name="tex2html46" href="footnode.html#foot37896"><sup><IMG  align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>。
+在LAPACK<a href="node421.html#lapack">12</a>中，提供了以下驱动程序例程来执行各种任务：
+<dl>
+<dt></dt>
+<dd>xGGES：计算广义特征值、广义Schur形式，并可选地计算左和/或右Schur向量矩阵。
+</dd>
+<dt></dt>
+<dd>xGGESX：xGGES加上特征值和退化子空间的条件估计。
+</dd>
+<dt></dt>
+<dd>xGGEV：广义特征值，并可选地计算左和/或右广义特征向量。
+</dd>
+<dt></dt>
+<dd>xGGEVX：xGGEV加上特征值和特征向量的条件估计。
+</dd>
+</dl> 
+字母<span class="math-inline">{\tt x}</span>代表实数单精度或双精度数据类型（S或D），或复数单精度或双精度数据类型（C或Z）。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5081"
+  href="node283.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5075"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5069"
+  href="node281.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5077"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5079"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5082"
+  href="node283.html">Transformation to Standard Problems</a>
+<b> Up:</b> <a name="tex2html5076"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5070"
+  href="node281.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html5078"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5080"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

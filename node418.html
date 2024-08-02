@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Preconditioned Conjugate Gradient Methods</title>
+<meta name="description" content="Preconditioned Conjugate Gradient Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node419.html">
+<link rel="previous" href="node417.html">
+<link rel="up" href="node410.html">
+<link rel="next" href="node419.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html7177"
+  href="node419.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7171"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7165"
+  href="node417.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7173"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7175"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7178"
+  href="node419.html">Preconditioned Simultaneous Iterations</a>
+<b> Up:</b> <a name="tex2html7172"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7166"
+  href="node417.html">Methods with Preconditioned Inner</a>
+ &nbsp <b>  <a name="tex2html7174"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7176"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002038000000000000000"></a> <a name="sec:prec_pcg"></a>
+<br>
+预处理共轭梯度法
+</h2>
+在这一小节中，我们将介绍我们最喜欢的方法，从实际效率的角度来看：<em>局部最优PCG方法</em> [<a href="node421.html#k90">266</a>]。它结合了算法<a href="node414.html#fig:prec_steepBA">11.6</a>的鲁棒性和简洁性，预处理Lanczos算法的<a href="node415.html#fig:prec_scottBA">11.7</a>三项递归，以及可能的预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>和Davidson方法的快速收敛性。
+
+<p>
+一个简单的PCG方法变体，用于铅笔<span class="math-inline">B - \mu A</span>，可以写成
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="prec_cgmBA"></a><div class="math-display">\begin{array}{l}x^{(i+1)} = w^{(i)} + \tau^{(i)} x^{(i)} + ......mu^{(i)} A x^{(i)}), \\\mu^{(i)} = \mu (x^{(i)}),\end{array}</div></td>
+<td width=10 align="right">
+(287)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中，适当选择的标量迭代参数<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>。参数的最简单和最有效的选择基于<em>局部最优性</em>的思想[<a href="node421.html#k90">266</a>]；即，选择<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>，通过Rayleigh-Ritz方法最大化Rayleigh商<span class="math-inline">\mu(x^{(i+1)})</span>；参见算法<a href="node418.html#fig:prec_cgmBA">11.10</a>。
+
+<p>
+<br>
+<a name="fig:prec_cgmBA"></a><IMG
+ width="598" height="224" align="bottom" border="0"
+ src="img3972.png"
+ alt="\begin{algorithm}
+{PCG Method for GHEP
+\index{conjugate gradient method!precondi...
+...z vector corresponding to
+the maximal Ritz value
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+对于局部最优版本的PCG方法，我们可以简单地应用收敛率估计（<a href="node413.html#prec_est_power">11.13</a>），因为该方法在最大化Rayleigh商方面不慢于预处理的陡峭上升。
+
+<p>
+我们已经收集了算法<a href="node418.html#fig:prec_cgmBA">11.10</a>每次迭代的存储和浮点运算的主要成本，分别在以下表格中。
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">项目</td>
+<td align="left">存储</td>
+</tr>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">1</span> <span class="math-inline">n</span>-向量</td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">2</span> <span class="math-inline">n</span>-向量</td>
+</tr>
+<tr><td align="left">临时向量</td>
+<td align="left">3-5 <span class="math-inline">n</span>-向量</td>
+</tr>
+</table>
+</div>
+
+<p>
+<div align="center">
+<table cellpadding=3 border="1">
+<tr><td align="left">操作</td>
+<td align="left">主要成本</td>
+</tr>
+<tr><td align="left">Rayleigh-Ritz方法</td>
+<td align="left"><span class="math-inline">9</span>点积和<span class="math-inline">2</span>矩阵-向量乘积，</td>
+</tr>
+<tr><td align="left">残差<span class="math-inline">r</span></td>
+<td align="left"><span class="math-inline">2</span>矩阵-向量乘积，<span class="math-inline">1</span>更新</td>
+</tr>
+<tr><td align="left">预处理残差<span class="math-inline">w</span></td>
+<td align="left">取决于预处理器<span class="math-inline">T</span></td>
+</tr>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>更新</td>
+</tr>
+</table>
+</div>
+
+<p>
+特征值问题的共轭梯度法由Bradbury和Fletcher[<a href="node421.html#MR36:2313">61</a>]提出，并最近引起了关注；已经提出了不同的版本，例如[<a href="node421.html#MR82b:65026">433</a>,<a href="node421.html#MR82h:65030">394</a>,<a href="node421.html#ss91">429</a>,<a href="node421.html#MR92i:65072">186</a>,<a href="node421.html#MR94h:65040">464</a>,<a href="node421.html#MR95k:65039">185</a>,<a href="node421.html#MR97c:65070">167</a>,<a href="node421.html#MR98b:65040">48</a>]。它们通常被构造为应用于Rayleigh商最小化的通用共轭梯度法，并且不利用Rayleigh商的特定性质，即局部最小化问题可以通过Rayleigh-Ritz方法轻松解决。它们通常基于（现在对于线性系统是标准的）两个链接的两项递归，其中一个标量参数被选择为在某种意义上使方向共轭。算法<a href="node418.html#fig:prec_cgmBA">11.10</a>的特殊之处在于它使用了一个三项递归，这使我们既可以通过解决局部最小化问题来选择标量参数，又不必担心找到共轭方向。
+
+<p>
+我们最后注意到，算法<a href="node418.html#fig:prec_cgmBA">11.10</a>在某种程度上是不稳定的，因为试验子空间的基几乎线性相关。这可以通过在应用Rayleigh-Ritz方法之前进行正交化来解决。
+
+<p>
+我们在下一小节中介绍算法<a href="node418.html#fig:prec_cgmBA">11.10</a>的块版本。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html7177"
+  href="node419.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7171"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7165"
+  href="node417.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7173"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7175"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7178"
+  href="node419.html">Preconditioned Simultaneous Iterations</a>
+<b> Up:</b> <a name="tex2html7172"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7166"
+  href="node417.html">Methods with Preconditioned Inner</a>
+ &nbsp <b>  <a name="tex2html7174"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7176"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

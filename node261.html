@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Variants</title>
+<meta name="description" content="Variants">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node260.html">
+<link rel="up" href="node256.html">
+<link rel="next" href="node262.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4732"
+  href="node262.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4726"
+  href="node256.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4722"
+  href="node260.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4728"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4730"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4733"
+  href="node262.html">Lanczos Method for Complex</a>
+<b> Up:</b> <a name="tex2html4727"
+  href="node256.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4723"
+  href="node260.html">Application to Reduced-Order Modeling</a>
+ &nbsp <b>  <a name="tex2html4729"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4731"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION0016105000000000000000"></a> <a name="rwf:bandnsym_var"></a>
+<br>
+变体
+</h2>
+
+<p>
+将Krylov子空间技术从单一起始向量扩展到多起始向量的传统方法，是设计Krylov子空间算法的块版本。非Hermitian Lanczos过程的块版本最初在[<a href="node421.html#kimc88">260</a>,<a href="node421.html#kimc90">261</a>]中提出。然而，这个块Lanczos算法假设右和左起始块具有相同的大小，即<span class="math-inline">m=p</span>，并且它没有消减或前瞻功能。显然，任何非Hermitian Lanczos过程的块版本都要求所有右和左块具有相同的大小。特别是，任何块版本都局限于特殊情况，即<span class="math-inline">m=p</span>，并且在右和左块Krylov序列中可能的消减同时发生，因此在整个算法中<span class="math-inline">m_c=p_c</span>。
+
+<p>
+然而，本节描述的非Hermitian带状Lanczos算法不受这些限制。特别是，它可以用于任意大小的起始块<span class="math-inline">m,\, p\geq 1</span>，并且它允许在右和左块Krylov序列中独立发生的消减。
+
+<p>
+算法<a href="node259.html#rwf:alg2">7.16</a>中陈述的带状Lanczos方法的版本首次以这种形式出现在[<a href="node421.html#freu97">175</a>]中。一个略有不同的版本，还包括一个前瞻过程来修复可能的崩溃，在[<a href="node421.html#abfh98">5</a>]中描述。
+
+<p>
+算法<a href="node259.html#rwf:alg2">7.16</a>中陈述的带状Lanczos方法的版本执行所有与<span class="math-inline">A</span>和<span class="math-inline">A^T</span>的乘法作为单个向量的矩阵-向量乘积。然而，在算法的任何阶段，也可以预计算下一个<span class="math-inline">m_c</span>矩阵-向量乘积与<span class="math-inline">A</span>，这将在下一个<span class="math-inline">m_c</span>迭代中需要，作为一个单个矩阵-矩阵乘积<span class="math-inline">AV</span>，其中<span class="math-inline">V</span>是一个包含<span class="math-inline">m_c</span>向量的块。实际上，不是执行算法<a href="node259.html#rwf:alg2">7.16</a>中的步骤(9)，而是计算矩阵-矩阵乘积
+<br><p></p>
+<div align="center">
+<div class="math-display">A \left[ \begin{array}{ccccc}v_j & \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{v}_{j+m_c-1}\end{array} \right].</div>
+</div>
+<br clear="ALL">
+<p></p>
+这给了我们向量<span class="math-inline">\hat{v}_{j+m_c} = A v_j</span>，它用于迭代<span class="math-inline">j</span>的剩余步骤，以及向量
+<br>
+<div align="right">
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:TAD"></a><div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+m_c-1}.</div></td>
+<td width=10 align="right">
+(192)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+在接下来的<span class="math-inline">m_c-1</span>迭代中，我们将需要向量
+<br>
+<div align="right">
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:TAE"></a><div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+m_c^{\prime}-1}.</div></td>
+<td width=10 align="right">
+(193)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，<span class="math-inline">m_c^{\prime}</span>定义为<span class="math-inline">m_c</span>减去在这些接下来的<span class="math-inline">m_c-1</span>迭代中将发生的<span class="math-inline">\hat{v}_k</span>向量的消减次数。使用第<a href="node135.html#rwf:bandsym_var">4.6.4</a>节中概述的过程，可以轻松地获得向量(<a href="node261.html#rwf:TAE">7.87</a>)作为预计算向量(<a href="node261.html#rwf:TAD">7.86</a>)的适当线性组合。类似地，在算法的任何阶段，也可以预计算下一个<span class="math-inline">p_c</span>矩阵-向量乘积与<span class="math-inline">A^T</span>，这将在下一个<span class="math-inline">p_c</span>迭代中需要，作为一个单个矩阵-矩阵乘积<span class="math-inline">A^T W</span>，其中<span class="math-inline">W</span>是一个包含<span class="math-inline">p_c</span>向量的块。实际上，不是执行算法<a href="node259.html#rwf:alg2">7.16</a>中的步骤(11)，而是计算矩阵-矩阵乘积
+<br><p></p>
+<div align="center">
+<div class="math-display">A^T \left[ \begin{array}{ccccc}w_j & \hat{w}_{j+1} & \hat{w}_{j+2} & \cdots & \hat{w}_{j+p_c-1}\end{array} \right]</div>
+</div>
+<br clear="ALL">
+<p></p>
+然后以类似于向量(<a href="node261.html#rwf:TAD">7.86</a>)的方式进行。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4732"
+  href="node262.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4726"
+  href="node256.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4722"
+  href="node260.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4728"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4730"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4733"
+  href="node262.html">Lanczos Method for Complex</a>
+<b> Up:</b> <a name="tex2html4727"
+  href="node256.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html4723"
+  href="node260.html">Application to Reduced-Order Modeling</a>
+ &nbsp <b>  <a name="tex2html4729"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4731"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

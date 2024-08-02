@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Why Eigenvalue Templates?</title>
+<meta name="description" content="Why Eigenvalue Templates?">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node14.html">
+<link rel="previous" href="node12.html">
+<link rel="up" href="node12.html">
+<link rel="next" href="node14.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html854"
+  href="node14.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html848"
+  href="node12.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html842"
+  href="node12.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html850"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html852"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html855"
+  href="node14.html">Intended Readership</a>
+<b> Up:</b> <a name="tex2html849"
+  href="node12.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html843"
+  href="node12.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html851"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html853"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001010000000000000000"></a>
+<a name="sec:whyeigtemp"></a>
+<br>
+为何选择特征值模板？
+</h1>
+
+<p>
+在众多大规模科学或工程计算中，从计算电路的频率响应到建筑的地震响应，再到分子的能级，都需要求解矩阵的特征值和特征向量。特征值问题有多种数学表述方式，更有众多数值求解方法被提出。本书旨在指导读者为特定特征值问题找到最佳数值方法。
+
+<p>
+目前，对于许多特征值问题，尤其是中小规模的密集矩阵，已存在优秀的方法。这些算法已在MATLAB[<a href="node421.html#matlab">319</a>]、LAPACK[<a href="node421.html#lapack">12</a>]等编程环境和库中得以实现。然而，对于超大规模且通常稀疏的特征值问题，尚无单一最佳方法。众多方法及其依赖矩阵数学特性的复杂性，以及效率与精度的权衡，使得专家乃至普通用户都难以找到最适合特定问题的方法。尽管存在如GAMS（可用数学软件指南）[<a href="footnode.html#foot786">*</a>]和NETLIB[<a href="footnode.html#foot734">*</a>]等优秀的在线搜索工具和软件仓库，它们允许基于库名、子程序名、关键词及数值计算主题分类进行搜索，但无法提供针对特定问题的最佳方法建议。因此，本书作者和其他专家常被咨询算法选择建议。这一现状促使我们将知识提炼成书，尽可能广泛传播。
+
+<p>
+本书结构如下：首先，我们构建了一个<em>决策树</em>，引导用户找到最佳方法。树的每个节点针对问题的数学结构、待计算量及矩阵操作成本提出问题。其次，在决策树的叶节点，我们展示了推荐的算法<em>模板</em>，并指向可用软件。模板是对算法的高层次描述，便于理解其工作原理、用户可调参数以控制效率和精度，以及如何解读输出。我们将在下文详细讨论这一结构。
+
+<p>
+本书原型是《线性系统求解模板：迭代方法构建块》[<a href="node421.html#temp94">41</a>]。该早期书籍（部分作者与本书相同）为线性系统这一更简单问题提供了决策树和迭代方法模板。特征值问题本质上比线性系统更复杂，这意味着我们的理解程度因具体问题而异。此外，算法也更为复杂。因此，与早期的《模板》书不同，我们未尝试以通用风格和编程语言提供每个模板的完整实现，而是提供高层次模板，并指向各种语言中的优秀公共域实现。所有这些实现可通过我们称为ETHOME的网站访问，网址为http://www.netlib.org/etemplates/，该网站将随新算法的发展而更新。
+
+<p>
+本书涵盖的特征值问题种类繁多。一些算法广为人知且经过充分研究，而其他领域仍处于密集研究阶段。这导致了呈现风格的差异。对于理解透彻、有良好“黑盒”解决方案的领域，我们保持简短，主要面向非专业读者；而在另一极端，则有综述当前研究的章节。
+
+<p>
+在大多数章节中，我们明确列出了贡献作者。这不仅是为了表彰，也反映了作者对文本的个人责任。所有章节都提供了充足的参考文献，作为通往特征值问题更丰富细节和专业知识的窗口。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html854"
+  href="node14.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html848"
+  href="node12.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html842"
+  href="node12.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html850"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html852"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html855"
+  href="node14.html">Intended Readership</a>
+<b> Up:</b> <a name="tex2html849"
+  href="node12.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html843"
+  href="node12.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html851"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html853"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

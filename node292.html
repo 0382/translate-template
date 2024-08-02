@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Algorithm</title>
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node293.html">
+<link rel="previous" href="node289.html">
+<link rel="up" href="node287.html">
+<link rel="next" href="node293.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5229"
+  href="node293.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5223"
+  href="node287.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5217"
+  href="node291.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5225"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5227"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5230"
+  href="node293.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html5224"
+  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b> Previous:</b> <a name="tex2html5218"
+  href="node291.html">Restart.</a>
+ &nbsp <b>  <a name="tex2html5226"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5228"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001743000000000000000"></a><a name="ss:JD7-template"></a>
+<br>
+算法
+</h2>
+
+<p>
+Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给出。该算法试图计算广义Schur对
+
+<span class="math-inline">((\alpha,\beta),q)</span>，使得比值<span class="math-inline">\beta/\alpha</span>在复平面上最接近指定的目标值<span class="math-inline">\tau</span>。
+算法包括重启机制以限制搜索空间的维度，以及对已收敛的左右Schur向量进行收缩处理。
+
+<p>
+
+<p></p>
+<div align="center">
+
+<p><a name="alg:jdqzhar"></a></p><IMG
+ width="598" height="871" border="0"
+ src="img2762.png"
+ alt="\begin{figure}\begin{algorithm}{Jacobi--Davidson QZ Method for <span class="math-inline">k_{\max}</span>\ Inter...
+...}$\ \\
+{\rm (38)}\&gt; {\bf end while}
+\end{tabbing}}
+\end{algorithm}\end{figure}">
+</div>
+<p></p>
+
+<p>
+要应用此算法，我们需要指定一个初始向量<span class="math-inline">v_0</span>，一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个数字<span class="math-inline">k_{\max}</span>，它指定了应计算多少个接近<span class="math-inline">\tau</span>的特征对。<span class="math-inline">{m}_{\max}</span>的值指定了搜索子空间的最大维度。如果超过此值，则以维度为<span class="math-inline">{m}_{\min}</span>的子空间进行重启。
+
+<p>
+完成后，将提供接近<span class="math-inline">\tau</span>的<span class="math-inline">k_{\max}</span>个广义特征值，以及相应的缩减Schur形式<span class="math-inline">aq=ZR^A</span>，<span class="math-inline">bq={Z}R^B</span>，其中<span class="math-inline">Q</span>和<span class="math-inline">Z</span>是<span class="math-inline">n</span>乘<span class="math-inline">k_{\max}</span>的正交矩阵，<span class="math-inline">R^A</span>，<span class="math-inline">R^B</span>是<span class="math-inline">k_{\max}</span>乘<span class="math-inline">k_{\max}</span>的上三角矩阵。广义特征值是<span class="math-inline">R^A</span>和<span class="math-inline">R^B</span>的对角线元素。计算形式满足
+<span class="math-inline">\Vert A q_{j}- {Z} R^Ae_{j}\Vert _2=O(\epsilon)</span>，
+
+<span class="math-inline">\Vert B q_{j}- {Z} R^Be_{j}\Vert _2=O(\epsilon)</span>，
+其中<span class="math-inline">q_j</span>是<span class="math-inline">Q</span>的第<span class="math-inline">j</span>列。
+
+<p>
+计算的缩减Schur形式的精度取决于目标值<span class="math-inline">\tau</span>与特征值
+
+<span class="math-inline">(\alpha_j,\beta_j)\equiv(R^A_{j,j},R^B_{j,j})</span>之间的距离。
+如果我们忽略机器精度和<span class="math-inline">\epsilon^2</span>阶的项，那么我们有
+<span class="math-inline">\Vert A q_j- {Z} R^Ae_j\Vert _2\leq j\gamma_A \epsilon</span>，
+       
+<span class="math-inline">\Vert B q_j- {Z} R^Be_j\Vert _2\leq j\gamma_B \epsilon</span>，
+其中常数
+<span class="math-inline">\gamma_A</span>和<span class="math-inline">\gamma_B</span>由
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\gamma_A\equiv\frac{\vert\mu_0\vert}{\vert\nu_0\alpha_j+\mu_0......frac{\vert\nu_0\vert}{\vert\nu_0\alpha_j+\mu_0\beta_j\vert}.</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果
+<span class="math-inline">\mu_0/\nu_0=-\tau</span>，如算法步骤(1)中所示，那么
+       
+<span class="math-inline">\gamma_a=\vert\tau\vert/\vert\alpha_j-\tau\beta_j\vert</span>，
+       
+<span class="math-inline">\gamma_b=1/\vert\alpha_j-\tau\beta_j\vert</span>。这些值可能在
+<span class="math-inline">\tau\approx \alpha_j/\beta_j</span>时变得很大。实际上，如果<span class="math-inline">\tau</span>接近检测到的特征值，也能达到<span class="math-inline">\epsilon</span>阶的精度。当使用值
+<span class="math-inline">(\mu_0,\nu_0)=(1,\bar\tau)</span>进行额外的细化步骤时，可以保证<span class="math-inline">\epsilon</span>精度。
+
+<p>
+现在我们将解释算法的主要连续阶段。
+<dl>
+<dt><strong>(1)</strong></dt>
+<dd>初始化阶段。
+标量<span class="math-inline">\nu_0</span>和<span class="math-inline">\mu_0</span>的选择特别有效
+如果<span class="math-inline">\tau</span>位于谱的内部。
+如果<span class="math-inline">\tau</span>是一个特征值（这可以很容易地测试），该选择会导致分解。
+
+<p>
+</dd>
+<dt><strong>(4)-(5)</strong></dt>
+<dd>新向量<span class="math-inline">t</span>通过修正的Gram-Schmidt方法相对于当前搜索子空间<span class="math-inline">V</span>进行正交化。
+同样，向量
+<span class="math-inline">w=(\nu_0A+\mu_0B)t</span>相对于当前测试子空间<span class="math-inline">W</span>进行正交化。这两个正交化过程可以通过算法<a href="node138.html#alg:rgs">4.14</a>（第<a href="node138.html#alg:rgs"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>页）中的模板来替换，以提高数值稳定性。
+
+<p>
+我们扩展子空间<span class="math-inline">V</span>，<span class="math-inline">V^A\equiv AV</span>，<span class="math-inline">V^B\equiv BV</span>，以及<span class="math-inline">W</span>。
+<span class="math-inline">V</span>表示包含当前搜索子空间的基向量<span class="math-inline">v_i</span>作为其列的矩阵。其他矩阵以类似明显的方式定义。
+
+<p>
+</dd>
+<dt><strong>(12)-(13)</strong></dt>
+<dd>计算矩阵
+<span class="math-inline">M^A\equiv W^\ast A V</span>
+和
+<span class="math-inline">M^B\equiv W^\ast B V</span>的第<span class="math-inline">{m}</span>行和列。
+
+<p>
+注意，标量<span class="math-inline">M_{i,{m}}^B</span>也可以从标量<span class="math-inline">M_{i,{m}}^A</span>以及步骤(10)中的<span class="math-inline">w_i^\ast w</span>的正交化常数计算得到。
+
+<p>
+</dd>
+<dt><strong>(15)</strong></dt>
+<dd><p>
+可以通过LAPACK中适用于密集矩阵束的适当例程计算<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵对<span class="math-inline">(M^A, M^B)</span>的QZ分解。
+
+<p>
+我们选择计算广义Petrov对，这使得算法适合于计算
+
+<span class="math-inline">\beta A-\alpha B</span>的<span class="math-inline">k_{\max}</span>个内部广义特征值，其中<span class="math-inline">\alpha/\beta</span>接近指定的<span class="math-inline">\tau</span>。
+
+<p>
+有关重新排序广义Schur形式的算法，请参见[<a
+ href="node421.html#vand81">448</a>,<a
+ href="node421.html#vand82">449</a>,<a
+ href="node421.html#fokk96">171</a>]。
+
+<p>
+</dd>
+<dt><strong>(18)</strong></dt>
+<dd>停止准则是在归一化右Schur向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受广义特征对近似。这意味着我们接受计算的广义特征值中的<span class="math-inline">\epsilon</span>阶不精确性，以及Schur向量中的<span class="math-inline">O({\epsilon})</span>（角度）不精确性（前提是所关注的特征值是简单且与其他特征值充分分离的）。
+
+<p>
+不能保证检测到所有需要的特征值；请参见算法<a href="node144.html#alg:jdqr">4.17</a>（第<a href="node144.html#alg:jdqr"><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/crossref.png"></a>页）的注释(13)。
+
+<p>
+</dd>
+<dt><strong>(22)</strong></dt>
+<dd>在接受一个Petrov对后，我们继续搜索下一个对，以剩余的Petrov向量作为初始搜索空间的基。
+
+<p>
+</dd>
+<dt><strong>(30)</strong></dt>
+<dd>当当前特征向量的搜索空间的维度超过<span class="math-inline">{m}_{\max}</span>时，我们进行重启。该过程以由最接近目标值<span class="math-inline">\tau</span>的广义Ritz对对应的<span class="math-inline">{m}_{\min}</span>个左右Ritz向量所张成的子空间重新开始。
+
+<p>
+</dd>
+<dt><strong>(36)</strong></dt>
+<dd>我们将已锁定的（计算的）右Schur向量收集在<span class="math-inline">{Q}</span>中，矩阵<span class="math-inline">\tilde{Q}</span>是<span class="math-inline">{Q}</span>扩展了当前右Schur特征向量近似<span class="math-inline">{u}</span>。同样，收敛的左Schur向量已收集在<span class="math-inline">{Z}</span>中，该矩阵扩展了<span class="math-inline">{p}</span>。这样做是为了获得更紧凑的表述；算法<a href="node292.html#alg:jdqzhar">8.1</a>的步骤(37)中的修正方程等价于方程(<a href="node288.html#eq:JD7-CE">8.13</a>)中对于收缩对(<a href="node290.html#eq:JD7-defl">8.15</a>)的修正方程。新修正<span class="math-inline">{t}</span>必须与<span class="math-inline">{Q}</span>的列以及<span class="math-inline">{u}</span>正交。
+
+<p>
+当然，修正方程可以通过任何适当的求解过程来解决，例如，设计用于求解非对称系统的预处理Krylov子空间方法。然而，由于不同的投影，我们总是需要一个预处理器（如果没有其他可用，则可能是恒等算子），该预处理器通过相同的斜投影进行收缩，以便我们在
+
+<span class="math-inline">\widetilde{Q}^\perp</span>和自身之间获得映射。
+由于<span class="math-inline">\widetilde{Q}</span>和<span class="math-inline">\widetilde{Z}</span>的出现，必须谨慎使用矩阵
+
+<span class="math-inline">\eta A -\zeta B</span>的预处理器。
+预处理器的包含可以按照算法<a href="node292.html#alg:corritgen">8.2</a>进行。确保迭代求解器的初始向量<span class="math-inline">t_0</span>满足正交约束
+
+<span class="math-inline">\widetilde Q^\ast t_0=0</span>。注意，如果在几次Jacobi-Davidson迭代中保持<span class="math-inline">{K}</span>不变，算法<a href="node292.html#alg:corritgen">8.2</a>每步可以节省显著的计算量。在这种情况下，可以从先前步骤中保存<span class="math-inline">\widehat{Z}</span>的列。矩阵<span class="math-inline">{\mathcal M}</span>及其
+
+<span class="math-inline">{\mathcal L}{\mathcal U}</span>分解也可以从先前步骤中更新。
+
+<p>
+不需要非常精确地求解修正方程。一种常用于不精确Newton方法[<a
+ href="node421.html#dees83">113</a>]的策略在这里也工作得很好：
+随着Jacobi-Davidson迭代步骤增加精度，例如，在第<span class="math-inline">\ell</span>次Jacobi-Davidson迭代中以<span class="math-inline">2^{-\ell}</span>的残差减少求解修正方程（当检测到Schur向量时，<span class="math-inline">\ell</span>重置为0）。
+
+<p>
+特别是在最初的几个初始步骤中，近似特征值<span class="math-inline">\theta</span>可能非常不准确，此时精确求解修正方程没有意义。在这个阶段，暂时将<span class="math-inline">\theta</span>替换为<span class="math-inline">\tau</span>或取<span class="math-inline">{t}=-r</span>来扩展搜索子空间可能更有效[<a
+ href="node421.html#mosc86">335</a>,<a
+ href="node421.html#fosv98">172</a>]。
+</dd>
+</dl>
+
+<p>
+有关此方法的完整理论背景以及Schur向量的收缩技术细节，请参见[<a
+ href="node421.html#fosv98">172</a>]。
+
+<p>
+
+<p></p>
+<div align="center">
+
+<p><a name="alg:corritgen"></a></p><IMG
+ width="598" height="470" border="0"
+ src="img2798.png"
+ alt="\begin{figure}\begin{algorithm}{Approximate Solution of the
+Deflated Jacobi--Dav...
+...{Z}\vec{\alpha}$\end{tabbing}}
+\end{algorithm}\vspace*{-9pt}%% help
+\end{figure}">
+</div>
+<p></p>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5229"
+  href="node293.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5223"
+  href="node287.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5217"
+  href="node291.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5225"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5227"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5230"
+  href="node293.html">Software Availability</a>
+<b> Up:</b> <a name="tex2html5224"
+  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b> Previous:</b> <a name="tex2html5218"
+  href="node291.html">Restart.</a>
+ &nbsp <b>  <a name="tex2html5226"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5228"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

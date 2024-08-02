@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Overview of Available Algorithms.</title>
+<meta name="description" content="Overview of Available Algorithms.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node191.html">
+<link rel="up" href="node191.html">
+<link rel="next" href="node193.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html3652"
+  href="node193.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3646"
+  href="node191.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3642"
+  href="node191.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3648"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3650"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3653"
+  href="node193.html">Direct Methods</a>
+<b> Up:</b> <a name="tex2html3647"
+  href="node191.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html3643"
+  href="node191.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3649"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3651"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001510010000000000000">
+可用算法概览</a>
+</h4>
+当矩阵 <span class="math-inline">A</span> 的规模不是太大，以至于可以作为稠密的 <span class="math-inline">m</span> 乘 <span class="math-inline">n</span> 矩阵存储和操作时，存在一些<em>变换方法</em>来计算 <span class="math-inline">A</span> 的奇异值分解（SVD）。这些算法在 LAPACK [<a href="node421.html#lapack">12</a>]、ScaLAPACK [<a href="node421.html#scalapack">52</a>] 和 MATLAB 中都有提供，并在第 &#167;<a href="node193.html#sec:svdtm">6.2</a> 节中进行了讨论。
+
+<p>
+本书的重点在于<em>迭代方法</em>，其中矩阵 <span class="math-inline">A</span> 以稀疏形式存储和操作。第四章 <a href="node85.html#chap:heig">4</a> 中讨论的针对厄米特特征值问题的迭代方法可以应用于上述三个厄米特矩阵之一：<span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 或 <span class="math-inline">H(A)</span>。我们不会重复这些内容，而是根据需要计算的奇异值和向量、选择 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 还是 <span class="math-inline">H(A)</span>、<span class="math-inline">A</span> 的奇异值分布、<span class="math-inline">A</span> 的稀疏结构、是否使用移位-反演等，来讨论第四章 <a href="node85.html#chap:heig">4</a> 中不同方法的优缺点。
+
+<p>
+为此，我们注意到，对于诸如计算 <span class="math-inline">A</span> 在给定区间 <span class="math-inline">[\alpha, \beta]</span> 内的奇异值数量这样的任务，并不需要计算奇异值本身，因此可以大大降低成本。关键工具是矩阵惯性，如第 &#167;<a href="node86.html#sec:heigintro">4.1</a> 节（第 <a href="node92.html#eigcounting"><IMG align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a> 页）所述。它可以轻松扩展，应用于 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 或 <span class="math-inline">H(A)</span> 中的任意一个厄米特矩阵。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html3652"
+  href="node193.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html3646"
+  href="node191.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html3642"
+  href="node191.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html3648"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html3650"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html3653"
+  href="node193.html">Direct Methods</a>
+<b> Up:</b> <a name="tex2html3647"
+  href="node191.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html3643"
+  href="node191.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html3649"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html3651"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

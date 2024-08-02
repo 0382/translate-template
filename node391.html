@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Parallelism &nbsp; J.&nbsp;Dongarra and X. Li </title>
+<meta name="description" content="Parallelism &nbsp; J.&nbsp;Dongarra and X. Li ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node390.html">
+<link rel="up" href="node371.html">
+<link rel="next" href="node392.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6757"
+  href="node392.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6751"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6747"
+  href="node390.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6753"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6755"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6758"
+  href="node392.html">Inner Products.</a>
+<b> Up:</b> <a name="tex2html6752"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6748"
+  href="node390.html">A Brief Survey of</a>
+ &nbsp <b>  <a name="tex2html6754"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6756"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001950000000000000000"></a>
+<a name="sec:parallelism"></a><a name="46525"></a>
+<br>
+并行性 
+<br>&nbsp; <em>J. 董贾拉和X. 李</em> 
+</h1>
+
+<p>
+
+<b>这部分内容需要大幅更新，可能需要融入到关于数据结构和矩阵向量乘法的早期章节中。欢迎提出建议！</b>
+
+<p>
+这部分内容确实不完整。当我想到并行向量和矩阵布局以及相关的内积、向量更新和矩阵向量算法（例如在PETSc中），或者仅是我的CS267笔记时，我不禁思考我们能真正说多少关于这方面的内容。鉴于现有材料的庞大数量，我们最多只能进行总结，并指向参考文献（比Jack的更好）。我邀请大家提出建议。
+
+
+<p>
+在本节中，我们将讨论本书中讨论的迭代方法中的并行性方面。由于迭代方法共享大部分计算内核，我们将独立于具体方法来讨论这些内核。迭代方案中基本的时间消耗内核包括：
+
+<ul>
+<li>内积；
+</li>
+<li>向量更新；
+</li>
+<li>矩阵向量乘积，例如，<span class="math-inline">Ap^{(i)}</span>（对于某些方法还包括<span class="math-inline">A^T p^{(i)}</span>）；
+</li>
+<li>求解<span class="math-inline">(A-\sigma B)x=b</span>。
+</li>
+</ul>
+
+<p>
+<br><hr>
+<!--子章节链接表-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><ul>
+<li><a name="tex2html6759"
+  href="node392.html">内积。</a>
+<li><a name="tex2html6760"
+  href="node393.html">向量更新。</a>
+<li><a name="tex2html6761"
+  href="node394.html">矩阵向量乘积。</a>
+<li><a name="tex2html6762"
+  href="node395.html">求解器。</a>
+</ul></ul></ul>
+<!--子章节链接表结束-->
+<hr>
+
+这段文字主要介绍了并行计算在迭代方法中的应用，并列出了迭代方案中的基本计算内核。同时，作者邀请读者对内容更新提出建议，并指出了现有材料的庞大数量，暗示了内容的复杂性和深度。<!--Navigation Panel-->
+<a name="tex2html6757"
+  href="node392.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6751"
+  href="node371.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6747"
+  href="node390.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6753"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6755"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6758"
+  href="node392.html">Inner Products.</a>
+<b> Up:</b> <a name="tex2html6752"
+  href="node371.html">Common Issues</a>
+<b> Previous:</b> <a name="tex2html6748"
+  href="node390.html">A Brief Survey of</a>
+ &nbsp <b>  <a name="tex2html6754"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6756"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

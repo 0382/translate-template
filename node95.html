@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Power Method</title>
+<meta name="description" content="Power Method">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node96.html">
+<link rel="previous" href="node94.html">
+<link rel="up" href="node94.html">
+<link rel="next" href="node96.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2188"
+  href="node96.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2182"
+  href="node94.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2176"
+  href="node94.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2184"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2186"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2189"
+  href="node96.html">Inverse Iteration</a>
+<b> Up:</b> <a name="tex2html2183"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html2177"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+ &nbsp <b>  <a name="tex2html2185"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2187"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001331000000000000000">
+幂法</a>
+</h2>
+最简单的特征值问题是计算占优特征值及其特征向量。
+<em>幂法</em>，在算法<a href="node95.html#sympower">4.1</a>中介绍，
+是解决这一任务的最简单迭代方法。在温和的假设条件下，它能够找到矩阵<span class="math-inline">A</span>中具有最大绝对值的特征值及其对应的特征向量。<a name="7402"></a>
+
+<p>
+<br>
+<a name="sympower"></a><IMG
+ width="598" height="202" align="bottom" border="0"
+ src="img810.png"
+ alt="\begin{algorithm}{Power Method for HEP
+}
+{
+\begin{tabbing}
+(nr)ss\=ijkl\=bbb\=c...
+...\rm (8)} \&gt; \&gt; accept <span class="math-inline">\lambda=\theta</span>\ and <span class="math-inline">x=v</span> \end{tabbing}}
+\end{algorithm}">
+<br> 
+
+<p>
+设<span class="math-inline">x_1</span>是与
+
+<span class="math-inline">\lambda_1=\lambda_{\max}(A)</span>对应的特征向量。<span class="math-inline">x_1</span>与<span class="math-inline">z</span>之间的<em>夹角</em> <span class="math-inline">\angle(z,x_1)</span> 
+由以下关系定义：
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\cos \angle(z,x_1)= \frac{z^{\ast} \, x_1}{\left\Vert z\right\Vert _2 \, \Vert x_1\Vert _2} .</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果初始向量<span class="math-inline">z</span>与特征向量<span class="math-inline">x_1</span>相互垂直，那么
+
+<span class="math-inline">\cos\angle(z,x_1) = 0</span>。在这种情况下，幂法在精确算术中不收敛。
+另一方面，如果
+<span class="math-inline">\cos \angle(z,x_1)\not=0</span>，幂法
+生成一系列向量，这些向量越来越与<span class="math-inline">x_1</span>平行。如果<span class="math-inline">z</span>是随机选择的，这种关于<span class="math-inline">\angle(z,x_1)</span>的条件成立的概率非常高。
+
+<p>
+幂法的收敛速度取决于
+
+<span class="math-inline">\vert \lambda_2 / \lambda_1\vert</span>，其中<span class="math-inline">\lambda_2</span>是<span class="math-inline">A</span>的第二大特征值（按绝对值）。
+<a name="7425"></a>
+这个比率通常
+小于<span class="math-inline">1</span>，从而实现适当的收敛。但也有情况是这个比率非常接近<span class="math-inline">1</span>，导致收敛非常缓慢。关于幂法的详细讨论，请参见Demmel [<a
+ href="node421.html#demmelbook">114</a>, Chap. 4]，Golub和Van Loan [<a
+ href="node421.html#golo96">198</a>]，以及Parlett [<a
+ href="node421.html#parl80">353</a>]。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2188"
+  href="node96.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2182"
+  href="node94.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2176"
+  href="node94.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2184"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2186"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2189"
+  href="node96.html">Inverse Iteration</a>
+<b> Up:</b> <a name="tex2html2183"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b> Previous:</b> <a name="tex2html2177"
+  href="node94.html">Single- and Multiple-Vector Iterations</a>
+ &nbsp <b>  <a name="tex2html2185"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2187"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

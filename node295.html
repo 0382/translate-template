@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Rational Krylov Subspace Method &nbsp;A.&nbsp;Ruhe </title>
+<meta name="description" content="Rational Krylov Subspace Method &nbsp;A.&nbsp;Ruhe ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node296.html">
+<link rel="previous" href="node287.html">
+<link rel="up" href="node280.html">
+<link rel="next" href="node296.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5269"
+  href="node296.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5263"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5257"
+  href="node294.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5265"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5267"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5270"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Up:</b> <a name="tex2html5264"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5258"
+  href="node294.html">Numerical Example</a>
+ &nbsp <b>  <a name="tex2html5266"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5268"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001750000000000000000"></a> <a name="sec:rks"></a><a name="36451"></a> 
+<a name="36452"></a>
+<br>
+有理Krylov子空间方法 
+<br>&nbsp;<em>A.&nbsp;鲁赫</em> 
+</h1> 
+
+<p>
+有理Krylov子空间方法用于计算正则束的特征值和特征向量，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="albx"></a><div class="math-display">(A-\lambda B)x=0\;.\vspace*{-12pt}%% long page\pagebreak</div></td>
+<td width=10 align="right">
+(230)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+它是位移-反演Arnoldi算法的推广，
+在一次运行中使用多个不同位移的因式分解。这样，
+我们可以很好地逼近所有选定位移周围的区域内的特征值；
+参见[<a
+ href="node421.html#MR1618804">378</a>]。
+一个典型的应用是线性动态系统的模型降阶，其中希望得到预定频率范围内的响应；例如，
+参见[<a
+ href="node421.html#ruhsko98">379</a>]或[<a
+ href="node421.html#galgrivd96">184</a>]。
+
+<p>
+有理Krylov从位移为<span class="math-inline">\sigma_1</span>和初始向量为<span class="math-inline">v_1</span>的位移-反演Arnoldi迭代开始。它使用基本递归计算正交基<span class="math-inline">V_j</span>，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="SI-Arnoldi"></a><div class="math-display">(A-\sigma_1B)^{-1}bv_j=V_{j+1}H_{j+1,j}\;.</div></td>
+<td width=10 align="right">
+(231)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+（下标表示矩阵的大小，<span class="math-inline">H_{j+1,j}</span>是<span class="math-inline">(j+1) \times j</span>，而<span class="math-inline">V_j</span>是一个每列长度为<span class="math-inline">n</span>的<span class="math-inline">j</span>列矩阵。）
+我们可以从<span class="math-inline">H_{j,j}</span>计算Ritz值，并以通常的方式从<span class="math-inline">V_j</span>计算Ritz近似特征向量。解小规模的特征值问题
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="H-eig"></a><div class="math-display">H_{j,j}Z^{(j)}=Z^{(j)}\Theta^{(j)}</div></td>
+<td width=10 align="right">
+(232)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+并得到Ritz值<span class="math-inline">\lambda^{(j)}_i=\sigma_1+1/\theta_i^{(j)}</span>和Ritz向量
+
+<span class="math-inline">y^{(j)}_i=V_jz_{.,i}^{(j)}</span>，其中<span class="math-inline">i=1,\dots,j</span>。
+经过中等数量的步骤<span class="math-inline">j</span>后，我们可以很好地逼近最接近位移<span class="math-inline">\sigma_1</span>的那些特征值<span class="math-inline">\lambda_i</span>。
+
+<p>
+有理Krylov算法背后的思想是，当我们想要逼近新位移<span class="math-inline">\sigma_2</span>附近的特征值时，继续使用<i>新</i>位移<span class="math-inline">\sigma_2</span>。棘手的是避免丢弃在旧位移<span class="math-inline">\sigma_1</span>下计算的基<span class="math-inline">V_j</span>中收集的所有信息。如果我们将基<span class="math-inline">V_{j+1}</span>替换为新的基<span class="math-inline">W_{j+1}</span>，它跨越与<span class="math-inline">V_{j+1}</span>相同的子空间，但可以解释为新位移<span class="math-inline">\sigma_2</span>下Arnoldi递归的正交基（参见<a href="node295.html#SI-Arnoldi">8.18</a>），这是确实可能的。同时，梯形（Hessenberg）矩阵<span class="math-inline">H_{j+1,j}</span>被替换为相同形式的新矩阵<span class="math-inline">\tilde{H}_{j+1,j}</span>。
+
+<p>
+将递归（参见<a href="node295.html#SI-Arnoldi">8.18</a>）重写为
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">bv_j=(A-\sigma_1B)V_{j+1}H_{j+1,j}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+在左侧添加一个矩阵，使得右侧的<span class="math-inline">\sigma_1</span>被新位移<span class="math-inline">\sigma_2</span>替换，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(\sigma_1-\sigma_2)BV_{j+1}H_{j+1,j}+bv_j=(A-\sigma_2B)V_{j+1}H_{j+1,j}\;,</div>
+</div>
+<br clear="ALL">
+<p></p>
+并注意<span class="math-inline">B</span>是左侧唯一的大矩阵，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">BV_{j+1}(I_{j+1,j}+(\sigma_1-\sigma_2)H_{j+1,j})=(A-\sigma_2B)V_{j+1}H_{j+1,j}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+左侧的矩阵<span class="math-inline">K_{j+1,j}=I_{j+1,j}+(\sigma_1-\sigma_2)H_{j+1,j}</span>是梯形的，与<span class="math-inline">H_{j+1,j}</span>具有相同的非零模式，我们可以通过预乘<span class="math-inline">(A-\sigma_2B)^{-1}</span>回到类似于递归（参见<a href="node295.html#SI-Arnoldi">8.18</a>）的表达式，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}K_{j+1,j}=V_{j+1}H_{j+1,j}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+
+<p>
+剩下的就是去掉左侧的因子<span class="math-inline">K_{j+1,j}</span>，这是通过以下方式完成的。对<span class="math-inline">K_{j+1,j}</span>进行QR分解，得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j+1}\left[\begin{array}{c}{R_{j,j}}\\ 0\end{array}\right]=V_{j+1}H_{j+1,j}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+从右侧乘以三角矩阵<span class="math-inline">R_{j,j}</span>的逆，我们知道如果Hessenberg矩阵未约化，它是非奇异的，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="VQ-rec"></a><div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}=V_{j+1}H_{j+1,j}R_{j,j}^{-1}\;.</div></td>
+<td width=10 align="right">
+(233)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+引入新的正交基<span class="math-inline">V_{j+1}Q_{j+1,j+1}</span>，并注意束（参见<a href="node295.html#albx">8.17</a>）在新的基下由满矩阵表示，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">L_{j+1,j}=Q_{j+1,j+1}^{\ast}H_{j+1,j}R_{j,j}^{-1},</div>
+</div>
+<br clear="ALL">
+<p></p>
+我们可以通过从底部向上应用Householder算法（参见[<a
+ href="node421.html#ru98e">377</a>]）将这个<span class="math-inline">L_{j+1,j}</span>转换为梯形（上Hessenberg）形式，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">L_{j+1,j}= \left[\begin{array}{cc}P_j &amp; 0 \\ 0&amp;1\end{array}\right]\tilde{H}_{j+1,j}P_j^{\ast}\;.</div>
+</div>
+<br clear="ALL">
+<p></p>
+将递归（参见<a href="node295.html#VQ-rec">8.20</a>）从右侧乘以正交的<span class="math-inline">P_j</span>，得到
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}p_j=V_{j+1}Q_{j+1}\left[\begin{array}{cc}P_j &amp; 0 \\ 0&amp; 1\end{array}\right]\tilde{H}_{j+1,j}</div>
+</div>
+<br clear="ALL">
+<p></p>
+或
+ <br><p></p>
+<div align="center">
+
+
+<div class="math-display">(A-\sigma_2B)^{-1}BW_{j}=W_{j+1}\tilde{H}_{j+1,j},</div>
+</div>
+<br clear="ALL">
+<p></p>
+一个新位移<span class="math-inline">\sigma_2</span>下的Arnoldi递归（参见<a href="node295.html#SI-Arnoldi">8.18</a>），新的正交基，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">W_{j+1}=V_{j+1}Q_{j+1,j+1}\left[\begin{array}{cc}P_j &amp; 0 \\ 0&amp; 1\end{array}\right]\;,</div>
+</div>
+<br clear="ALL">
+<p></p>
+和新的梯形（上Hessenberg）矩阵<span class="math-inline">\tilde{H}_{j+1,j}</span>。
+
+<p>
+我们再次强调，所有这些变换都是在不实际对大<span class="math-inline">n \times n</span>矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>进行任何操作的情况下实现的。我们甚至可以累积所有的<span class="math-inline">Q</span>和<span class="math-inline">P</span>因子，避免显式形成<span class="math-inline">W</span>，从而避免对长向量进行额外的工作。还要注意，即使我们得到一个Arnoldi递归，它也不从原始的初始向量<span class="math-inline">v_1</span>开始，而是从<span class="math-inline">w_1</span>开始，<span class="math-inline">w_1</span>是整个有理Krylov算法中计算的所有向量的线性组合。
+
+<p>
+在实际实现中，这结合了锁定、清除和隐式重启。首先用第一个位移<span class="math-inline">\sigma_1</span>运行位移-反演Arnoldi。当<span class="math-inline">\sigma_1</span>周围适当数量的特征值收敛时，例如在<span class="math-inline">m</span>步后，锁定这些收敛的特征值并清除完全不在感兴趣区域内的那些特征值，留下一个<span class="math-inline">(j \leq m)</span>步的Arnoldi递归（参见<a href="node295.html#SI-Arnoldi">8.18</a>）。然后引入新位移<span class="math-inline">\sigma_2</span>，并按照本节的描述获取新的基<span class="math-inline">W_{j+1}</span>，替换<span class="math-inline">V_{j+1}</span>。从新位移开始，对这个新基的最后一个向量进行操作
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">r:=(A-\sigma_2B)^{-1}Bv_{j+1}</div>
+</div>
+<br clear="ALL">
+<p></p>
+并得到新位移<span class="math-inline">\sigma_2</span>下Arnoldi递归（参见<a href="node295.html#SI-Arnoldi">8.18</a>）中的下一个基向量<span class="math-inline">v_{j+2}</span>。继续直到我们在<span class="math-inline">\sigma_2</span>周围的一组特征值收敛，并使用新位移重复相同的过程，直到所有感兴趣的特征值都收敛或预定的频率范围内的所有位移都已使用。
+
+<p>
+<br>
+<a name="alg:rksm"></a><IMG
+ width="598" height="259" align="bottom" border="0"
+ src="img2851.png"
+ alt="\begin{algorithm}{Rational Krylov Subspace Method for GNHEP
+}
+{
+\begin{tabbing}
+...
+...begin{array}{cc}P_j &amp; 0 \\ 0&amp; 1\end{array}\right]$\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+注意，在步骤（3）中，我们只对位移-反演矩阵进行<span class="math-inline">m-j</span>次操作，前<span class="math-inline">j</span>个基向量是从前一个位移<span class="math-inline">\sigma_{i-1}</span>保存的。步骤（4）中的锁定、清除和缩减操作与隐式重启Arnoldi中描述的非常相似（参见第<a href="node220.html#sec:nsymiram">7.6</a>节）；我们实际上使用了一个非厄米版本的厚重启[<a
+ href="node421.html#wusi99">463</a>]。在步骤（5）中，我们选择新位移<span class="math-inline">\sigma_{i+1}</span>作为复平面上我们感兴趣的值，以研究矩阵束（参见<a href="node295.html#albx">8.17</a>）的行为。然而，选择太接近特征值的位移将导致近奇异矩阵<span class="math-inline">A-\sigma_{i+1} B</span>。此外，在近似收敛的Ritz值处的新位移将使步骤（6）中的上三角因子<span class="math-inline">R_{j,j}</span>接近奇异。
+
+<p>
+当原始束（参见<a href="node295.html#albx">8.17</a>）中的第二个矩阵<span class="math-inline">B</span>是正定矩阵时，我们可以选择使基<span class="math-inline">V_j</span>对<span class="math-inline">B</span>正交。如果<span class="math-inline">A</span>也是厄米的，那么<span class="math-inline">H_{j,j}</span>也是厄米的，我们可以使用三对角矩阵；参见[<a
+ href="node421.html#meer99">322</a>]。
+
+<p>
+这种有理Krylov的表述与早期使用的表述不同[<a
+ href="node421.html#MR1618804">378</a>]，在那里整个过程中使用了相同的基向量集<span class="math-inline">V_j</span>，并且束（参见<a href="node295.html#albx">8.17</a>）被转换为两个Hessenberg矩阵。我们发现这种新表述提供了一种更自然的方式来继续使用新位移，并在我们因线性依赖而面临失去精度的风险时发出信号。
+
+<p>
+参见报告[<a
+ href="node421.html#ruhsko98">379</a>]中的模型降阶数值示例。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html5269"
+  href="node296.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5263"
+  href="node280.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5257"
+  href="node294.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5265"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5267"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5270"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Up:</b> <a name="tex2html5264"
+  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html5258"
+  href="node294.html">Numerical Example</a>
+ &nbsp <b>  <a name="tex2html5266"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5268"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

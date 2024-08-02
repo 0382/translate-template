@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Related Singular Value Problems</title>
+<meta name="description" content="Related Singular Value Problems">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node47.html">
+<link rel="previous" href="node45.html">
+<link rel="up" href="node39.html">
+<link rel="next" href="node47.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html1391"
+  href="node47.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1385"
+  href="node39.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1379"
+  href="node45.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1387"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1389"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1392"
+  href="node47.html">Example</a>
+<b> Up:</b> <a name="tex2html1386"
+  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b> Previous:</b> <a name="tex2html1380"
+  href="node45.html">Specifying a Singular Value</a>
+ &nbsp <b>  <a name="tex2html1388"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1390"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001147000000000000000"></a> <a name="sec_chap2_SVDRE"></a>
+<br>
+相关奇异值问题
+</h2>
+
+<p>
+
+<ol>
+<li>如果 <span class="math-inline">B = A^*</span>，且 <span class="math-inline">A</span> 的奇异值分解（SVD）为 <span class="math-inline">A = U \Sigma V^*</span>，那么 <span class="math-inline">B</span> 的 SVD 为 <span class="math-inline">B = V \Sigma^* U^*</span>。
+
+<p>
+</li>
+<li>假设 <span class="math-inline">B = A^*A</span>，其中 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列且 <span class="math-inline">m \geq n</span>。那么 <span class="math-inline">B</span> 是一个 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的埃尔米特矩阵。设 <span class="math-inline">A</span> 的 SVD 为 <span class="math-inline">A = U \Sigma V^*</span>，那么 <span class="math-inline">B</span> 的特征分解为 <span class="math-inline">B = V (\Sigma^*\Sigma) V^*</span>。注意 <span class="math-inline">\Sigma^*\Sigma = {\rm diag}(\sigma_1^2 , \ldots , \sigma_n^2)</span>。换句话说，<span class="math-inline">B</span> 的特征向量是 <span class="math-inline">A</span> 的右奇异向量，而 <span class="math-inline">B</span> 的特征值是 <span class="math-inline">A</span> 的奇异值的平方。如果 <span class="math-inline">B = AA^*</span>，其中 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列且 <span class="math-inline">m \geq n</span>，那么 <span class="math-inline">B</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列，其特征分解为 <span class="math-inline">B = U (\Sigma \Sigma^*) U^*</span>。换句话说，<span class="math-inline">B</span> 的特征向量是 <span class="math-inline">A</span> 的右奇异向量，而 <span class="math-inline">B</span> 的特征值是 <span class="math-inline">A</span> 的奇异值的平方，再加上 <span class="math-inline">0</span> 和额外的重数 <span class="math-inline">m-n</span>。
+
+<p>
+</li>
+<li>假设 <span class="math-inline">B = [{0^{m \times m} \atop A^*} \; {A \atop 0^{n \times n}}]</span>，其中 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列且 <span class="math-inline">m \geq n</span>。那么 <span class="math-inline">B</span> 是一个 <span class="math-inline">(m+n)</span> 行 <span class="math-inline">(m+n)</span> 列的埃尔米特矩阵。设 <span class="math-inline">A</span> 的 SVD 为 <span class="math-inline">A = U \Sigma V^*</span>。记 <span class="math-inline">U = [U_1^{m \times n}, U_2^{m \times (m-n)}]</span> 和 <span class="math-inline">\Sigma = [{\hat{\Sigma}^{n \times n} \atop 0^{(m-n) \times n}}]</span>。那么 <span class="math-inline">B</span> 的特征分解为 <span class="math-inline">B = Q \Lambda Q^*</span>，其中 <span class="math-inline">\Lambda = {\rm diag}( \hat{\Sigma} , -\hat{\Sigma} , O^{(m-n) \times (m-n)})</span> 和
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">Q = \bmat{ccc}\frac{1}{\sqrt{2}} U_1 &amp; - \frac{1}{\sqrt{2......{2}} V &amp; + \frac{1}{\sqrt{2}} V &amp; O^{n \times (m-n)}\emat.</div>
+</div>
+<br clear="ALL">
+<p></p>
+换句话说，<span class="math-inline">\pm \sigma_i</span> 是一个特征值，其单位特征向量为 <span class="math-inline">\frac{1}{\sqrt{2}} [{\pm u_i \atop v_i}]</span>，对于 <span class="math-inline">i=1</span> 到 <span class="math-inline">n</span>，而 <span class="math-inline">0</span> 是一个特征值，其特征向量为 <span class="math-inline">[{u_i \atop 0^{n \times 1}}]</span>，对于 <span class="math-inline">i>n</span>。
+
+<p>
+</li>
+<li>定义 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的 <em>QSVD 或广义 SVD（GSVD）</em> 如下。假设 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列，<span class="math-inline">B</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列且非奇异。设 <span class="math-inline">r = \min(m,n)</span>。设 <span class="math-inline">AB^{-1}</span> 的 SVD 为 <span class="math-inline">AB^{-1} = U \Sigma V^*</span>。我们也可以写出 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的两个等价分解为 <span class="math-inline">A = U \Sigma_A X</span> 和 <span class="math-inline">B = V \Sigma_B X</span>，其中 <span class="math-inline">X</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列且非奇异，<span class="math-inline">\Sigma_A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列，包含 <span class="math-inline">{\rm diag}( \sigma_{A,1},\ldots,\sigma_{A,r} )</span> 在其前 <span class="math-inline">r</span> 行和列，其他地方为零，<span class="math-inline">\Sigma_B</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列，包含 <span class="math-inline">{\rm diag}( \sigma_{B,1},\ldots,\sigma_{B,n} )</span>。<span class="math-inline">\Sigma_A</span> 和 <span class="math-inline">\Sigma_B</span> 可以选择使得 <span class="math-inline">\Sigma_A^T \Sigma_A + \Sigma_B ^T \Sigma_B = I^{n \times n}</span>。因此 <span class="math-inline">\Sigma = \Sigma_A \Sigma_B^{-1}</span>。对角线元素 <span class="math-inline">\sigma_i = \sigma_{A,i} / \sigma_{B,i}</span> 称为 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的 <em>广义奇异值</em>。
+
+<p>
+这种分解可以推广到 <span class="math-inline">B</span> 奇异或 <span class="math-inline">p</span> 行 <span class="math-inline">n</span> 列的情况，到一个等价于 <span class="math-inline">AB</span> 的 SVD（<em>乘积 SVD</em>）的分解，实际上到任意形式的乘积的分解 <span class="math-inline">A_1^{\pm 1} A_2^{\pm 1} \cdots A_k^{\pm 1}</span> [<a href="node421.html#demoor94">108</a>]。
+
+<p>
+</li>
+<li>定义 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的 <em>CS（余弦/正弦）分解</em> 如下。假设 <span class="math-inline">Z = [{A^{m \times n} \atop B^{p \times n}}]</span> 的列是正交的。那么 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的 QSVD 等价于分解 <span class="math-inline">A = U \Sigma_A X</span> 和 <span class="math-inline">B = V \Sigma_B X</span>，其中 <span class="math-inline">X</span> 是酉矩阵。<span class="math-inline">\Sigma_A</span>（<span class="math-inline">\Sigma_B</span>）的对角线元素是 <span class="math-inline">Z</span> 的列所张成的子空间与 <span class="math-inline">I^{(m+p) \times (m+p)}</span> 的前 <span class="math-inline">m</span> 列所张成的子空间之间的 <em>主角度</em> 的余弦（正弦）[<a href="node421.html#stew82">424</a>,<a href="node421.html#bai92">25</a>]。这用于计算子空间之间的“距离”（或角度）。
+
+<p>
+</li>
+<li>假设 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列，<span class="math-inline">B</span> 是 <span class="math-inline">p</span> 行 <span class="math-inline">n</span> 列且列满秩；那么 GHEP <span class="math-inline">A^*A - \lambda B^*B</span> 可以用 QSVD 求解如下。写出 QSVD 为 <span class="math-inline">A = U \Sigma_A X</span> 和 <span class="math-inline">B = V \Sigma_B X</span>。<span class="math-inline">A^*A - \lambda B^*B</span> 的特征分解可以写为 <span class="math-inline">X^*A^*AX = \Sigma_A^* \Sigma_A</span> 和 <span class="math-inline">X^*B^*BX = \Sigma_B^* \Sigma_B</span>。这可以推广到 <span class="math-inline">B</span> 没有列满秩的情况。
+
+<p>
+</li>
+<li>寻找使 <span class="math-inline">\Vert Ax - b \Vert _2</span> 最小的 <span class="math-inline">x</span> 是 <em>线性最小二乘问题</em>。假设 <span class="math-inline">A</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列且 <span class="math-inline">m>n</span>；我们称最小二乘问题为 <em>超定</em>。设 <span class="math-inline">A</span> 的紧凑 SVD 为 <span class="math-inline">A = \tilde{U} \tilde{\Sigma} V^*</span>。如果 <span class="math-inline">A</span> 满秩，最小二乘问题的唯一解是 <span class="math-inline">x= V {\tilde{\Sigma}}^{-1} {\tilde{U}}^* b</span>，尽管基于 QR 分解或正规方程的解更常用且更便宜 [<a href="node421.html#bjorck">50</a>,<a href="node421.html#lapack">12</a>]。如果 <span class="math-inline">A</span> 的秩小于 <span class="math-inline">n</span>，那么 SVD 通常用于求解最小二乘问题。在这种情况下，解不是唯一的，但其唯一的 <em>最小范数</em> 解是
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">x= V {\hat{\Sigma}}^{\dag } {\hat{U}}^* b, \quad\mathrm{where......a_i &gt; 0, \\0 &amp; {\rm if\ } \sigma_i = 0. \end{array} \right.</div>
+</div>
+<br clear="ALL">
+<p></p>
+如果 <span class="math-inline">m<n</span>，我们称最小二乘问题为 <em>欠定</em>。在这种情况下，解不是唯一的，但其唯一的 <em>最小范数</em> 解是 <span class="math-inline">x= \hat{V} {\hat{\Sigma}}^{\dag } {U}^* b</span>，其中 <span class="math-inline">A = U \hat{\Sigma} \hat{V}^*</span> 是 <span class="math-inline">A</span> 的紧凑 SVD。
+
+<p>
+</li>
+</ol> 
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html1391"
+  href="node47.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html1385"
+  href="node39.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html1379"
+  href="node45.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html1387"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html1389"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html1392"
+  href="node47.html">Example</a>
+<b> Up:</b> <a name="tex2html1386"
+  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b> Previous:</b> <a name="tex2html1380"
+  href="node45.html">Specifying a Singular Value</a>
+ &nbsp <b>  <a name="tex2html1388"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html1390"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>GUPTRI Algorithm</title>
+<meta name="description" content="GUPTRI Algorithm">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node317.html">
+<link rel="previous" href="node312.html">
+<link rel="up" href="node307.html">
+<link rel="next" href="node314.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5546"
+  href="node314.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5540"
+  href="node307.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5534"
+  href="node312.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5542"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5544"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5547"
+  href="node314.html">A Singular Pencil in</a>
+<b> Up:</b> <a name="tex2html5541"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Previous:</b> <a name="tex2html5535"
+  href="node312.html">Generalized Schur-Staircase Form</a>
+ &nbsp <b>  <a name="tex2html5543"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5545"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001776000000000000000"></a>
+<a name="guptri_algorithm"></a>
+<br>
+GUPTRI算法
+</h2>
+
+<p>
+计算GUPTRI形式的算法基于两种简化（<em>阶梯形式</em>）[<a href="node421.html#demmelkagstrom93a">121</a>]。第一种是<span class="math-inline">RZ</span>-阶梯形式，揭示了右奇异结构和<span class="math-inline">A - \lambda B</span>的零特征值的Jordan结构。
+
+<p>
+<span class="math-inline">RZ</span>-算法使用有限数量的酉等价变换，其中在第<span class="math-inline">k~(= 1, 2, \ldots)</span>步，<span class="math-inline">n_k =</span> <span class="math-inline">A^{(k)}</span>的列零空间的维数，<span class="math-inline">n_k - r_k =</span> <span class="math-inline">A^{(k)}</span>和<span class="math-inline">B^{(k)}</span>的交集列零空间的维数被确定。这里，<span class="math-inline">A^{(1)} = A</span>和<span class="math-inline">B^{(1)} = B</span>，对于<span class="math-inline">k > 1</span>，<span class="math-inline">\{A^{(k)}, B^{(k)}\}</span>对应于第<span class="math-inline">k-1</span>步等价变换后的降维矩阵对。结构指标（<span class="math-inline">RZ</span>-指标）显示Kronecker结构如下：
+<p></p>
+<div align="center">
+<IMG width="284" height="52" border="0" src="img3149.png" alt="\begin{eqnarray*} n_k - r_k &=& {\rm ~ number~of~} L_{k-1} {\rm ~blocks}, \\ r_k - n_{k+1} &=& {\rm ~ number~of~} J_{k}(0) {\rm ~blocks}. \end{eqnarray*}">
+<br clear="ALL"></div><p></p>
+<br clear="ALL"><p></p>
+<br clear="ALL"><p></p>
+在我们陈述一般情况之前，我们考虑一个<span class="math-inline">6\times 8</span>的矩阵束在<span class="math-inline">RZ</span>-阶梯形式中：
+
+<p></p>
+<div align="center">
+<IMG width="584" height="196" border="0" src="img3151.png" alt="\begin{eqnarray*} A_{rz} - \lambda B_{rz} \!\! &\!\! = \!\! & \!\! \left[ \begin{array}{cc} \cdots \end{array} \right]. \end{eqnarray*}">
+<br clear="ALL"></div><p></p>
+<br clear="ALL"><p></p>
+<br clear="ALL"><p></p>
+
+<p>
+每次降维后的非零元素用唯一的字母标记（第一步用x，第二步用y，等等），并以粗体或斜体显示。<span class="math-inline">A_{rz}</span>的超对角块具有满列秩，<span class="math-inline">B_{rz}</span>的对角块具有满行秩。满秩块的非零元素以粗体标记。我们在后续示例中也使用这种表示法。
+<br>
+<br>
+<p>
+<span class="math-inline">A_{rz} - \lambda B_{rz}</span>中的对角块（定义“楼梯”）的大小为<span class="math-inline">r_i \times n_i</span>，并显示以下信息：
+<p></p>
+<div align="center">
+<IMG width="420" height="127" border="0" src="img3156.png" alt="\begin{eqnarray*} &\!\!&\!\!\! n_1 = 4 = {\rm dim}~{\cal N}(A^{(1)}), \quad r_1 = 3 \cdots \end{eqnarray*}">
+<br clear="ALL"></div><p></p>
+<br clear="ALL"><p></p>
+<br clear="ALL"><p></p>
+现在，我们可以得出<span class="math-inline">A_{rz} - \lambda B_{rz}</span>的KCF是<span class="math-inline">{\rm diag}(L_0, L_2, J_1(0), J_3(0))</span>。
+
+<p>
+一般来说，设<span class="math-inline">A</span>和<span class="math-inline">B</span>是复数<span class="math-inline">m \times n</span>矩阵。那么可以证明存在酉矩阵<span class="math-inline">U \: \in {\mathcal C}^{m \times m}</span>和<span class="math-inline">V \: \in {\mathcal C}^{n \times n}</span>，使得矩阵束<span class="math-inline">A - \lambda B</span>被变换为所谓的<em>RZ-阶梯形式</em>[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：
+<a name="eq.RZform1"></a>U^*(A - B)V = 
+[ <br>
+<IMG width="75" height="35" align="bottom" border="0" src="img3160.png" alt="\begin{array}{cc} A_{rz} & A_{12} \\ 0 & A_{rest} \end{array}">
+<br> ] - 
+[ <br>
+<IMG width="75" height="34" align="bottom" border="0" src="img3161.png" alt="\begin{array}{cc} B_{rz} & B_{12} \\ 0 & B_{rest} \end{array}">
+<br> ],
+
+其中<span class="math-inline">A_{rz}</span>和<span class="math-inline">B_{rz}</span>的阶梯块结构揭示了<span class="math-inline">A - \lambda B</span>的零特征值的右奇异结构和Jordan结构：
+<a name="eq.RZform2"></a>
+<br>
+<IMG width="371" height="246" align="bottom" border="0" src="img3162.png" alt="\begin{array}{c} A_{rz}= \left[ \begin{array}{cccccc} \cdots \end{array} \right]. \end{array}">
+<br>
+(<a href="node313.html#eq.RZform1">8.37</a>)和(<a href="node313.html#eq.RZform2">8.38</a>)中的子块具有以下属性：
+
+<ul>
+<li><span class="math-inline">B_{ii}</span>是<span class="math-inline">r_i \times n_i</span>，<span class="math-inline">A_{i-1,i}, B_{i-1,i}</span>是<span class="math-inline">r_{i-1} \times n_i</span>，其中<span class="math-inline">n_i \geq r_i \geq n_{i+1} \geq r_{i+1}</span>。</li>
+<li><span class="math-inline">B_{ii} = [ 0, R_{ii}]</span>，其中<span class="math-inline">R_{ii}</span>是<span class="math-inline">r_i \times r_i</span>且上三角。</li>
+<li><span class="math-inline">B_{ii}</span>具有满行秩<span class="math-inline">r_i</span>，对于<span class="math-inline">i = 1, \ldots, j-1</span>。</li>
+<li><span class="math-inline">A_{i-1,i}</span>具有满列秩<span class="math-inline">n_i</span>，对于<span class="math-inline">i = 2, \ldots, j</span>。</li>
+<li><span class="math-inline">A_{rest}</span>和<span class="math-inline">B_{rest}</span>是<span class="math-inline">r_{rest} \geq 0</span>乘<span class="math-inline">n_{rest} \geq 0</span>，其中<span class="math-inline">A_{rest}</span>如果出现则具有满列秩。</li>
+</ul>
+
+<p>
+<span class="math-inline">RZ</span>-阶梯形式中可能出现三种情况，取决于<span class="math-inline">r_{rest}</span>和<span class="math-inline">n_{rest}</span>：
+
+<ol>
+<li><span class="math-inline">r_{rest} > 0</span>且<span class="math-inline">n_{rest} > 0</span>，此时<span class="math-inline">A_{rest}</span>具有满列秩。</li>
+<li><span class="math-inline">r_{rest} > 0</span>且<span class="math-inline">n_{rest} = 0</span>。</li>
+<li><span class="math-inline">r_{rest} = n_{rest} = 0</span>。<br></li>
+</ol>
+在情况1和2中，块如(<a href="node313.html#eq.RZform1">8.37</a>)中所示，剩余的Kronecker结构在<span class="math-inline">A_{rest} - \lambda B_{rest}</span>中。在情况3中，<span class="math-inline">A_{rest} - \lambda B_{rest}</span>在(<a href="node313.html#eq.RZform1">8.37</a>)中不存在。在所有三种情况下，可能不存在<span class="math-inline">A_{rz} - \lambda B_{rz}</span>的第<span class="math-inline">j</span>块列（<a href="node313.html#eq.RZform2">8.38</a>）；如果存在，<span class="math-inline">A_{j-1,j}</span>也具有满列秩。为方便起见，设<span class="math-inline">r_j = 0</span>。
+
+<p>
+我们看到上面的<span class="math-inline">6\times 8</span>示例对应于情况3，并且<span class="math-inline">A_{rz} - \lambda B_{rz}</span>没有第<span class="math-inline">j</span>块列。
+
+<p>
+第二种简化是<span class="math-inline">LI</span>（左无穷）-阶梯形式，揭示了左奇异结构和<span class="math-inline">A - \lambda B</span>的无穷特征值的Jordan结构。这种对偶阶梯形式是通过从<span class="math-inline">B - \mu A</span>的东南角开始工作，并在<span class="math-inline">RZ</span>-算法中用行压缩替换列压缩来获得的。块指标<span class="math-inline">n_i</span>和<span class="math-inline">r_i</span>是相应行零空间的维数，并定义<span class="math-inline">LI</span>-指标。此外，<span class="math-inline">n_k - r_k</span>和<span class="math-inline">r_k - n_{k+1}</span>分别是<span class="math-inline">L_{k-1}^T</span>和<span class="math-inline">N_{k}</span>块的数量。
+
+<p>
+<span class="math-inline">RZ</span>-阶梯和<span class="math-inline">LI</span>-阶梯简化都为我们提供了两种类型的结构元素，必须分离它们以获得GUPTRI形式。例如，零特征值的右奇异结构和Jordan结构通过首先对<span class="math-inline">B_{rz} - \mu A_{rz}</span>应用<span class="math-inline">RZ</span>-阶梯简化并坚持相同的右最小指标来分离。然后我们得到<span class="math-inline">\{A_r, B_r\}</span>，并剩下一个对应于零特征值的矩阵束，例如<span class="math-inline">A_2 - \lambda B_2</span>。最后，<span class="math-inline">\{A_z, B_z\}</span>通过对<span class="math-inline">A_2 - \lambda B_2</span>应用<span class="math-inline">RZ</span>-阶梯形式获得。
+
+<p>
+我们回到<span class="math-inline">6\times 8</span>示例，并展示分离的<span class="math-inline">R</span>-阶梯和<span class="math-inline">Z</span>-阶梯形式：
+<br><p></p>
+<div align="center">
+<div class="math-display">A_{r} - \lambda B_{r} =\bmat{cc\vert c\vert c}0 & 0 & {\bf x} & x \\ 0 & 0 & {\bf y} & {\bf z}\emat</div>
+</div>
+<br clear="ALL">
+<p></p>
+和
+<br><p></p>
+<div align="center">
+<div class="math-display">A_{z} - \lambda B_{z} =\bmat{cc\vert c\vert c}0 & 0 & {\bf x} & x \\ 0 & 0 & {\bf y} & y \\ 0 & 0 & 0 & {\bf z}\emat .</div>
+</div>
+<br clear="ALL">
+<p></p>
+至于<span class="math-inline">A_{rz} - \lambda B_{rz}</span>，<span class="math-inline">A_r</span>和<span class="math-inline">A_z</span>的超对角块具有满列秩，<span class="math-inline">B_r</span>和<span class="math-inline">B_z</span>的对角块具有满行秩。下表总结了<span class="math-inline">6\times 8</span>示例的<span class="math-inline">RZ</span>-、<span class="math-inline">R</span>-和<span class="math-inline">Z</span>-阶梯形式的结构指标。我们看到<span class="math-inline">RZ</span>-阶梯指标分别是<span class="math-inline">R</span>-和<span class="math-inline">Z</span>-阶梯指标的总和。
+
+<p>
+<div align="center">
+<table cellpadding=3>
+<tr><td align="center"><table cellpadding=3 border="1">
+<tr><td align="left"><span class="math-inline">i</span></td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr><td align="left"><span class="math-inline">n_i</span></td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr><td align="left"><span class="math-inline">r_i</span></td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</table></td>
+<td align="center"><table cellpadding=3 border="1">
+<tr><td align="left"><span class="math-inline">i</span></td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr><td align="left"><span class="math-inline">n_i</span></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr><td align="left"><span class="math-inline">r_i</span></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</table></td>
+<td align="center"><table cellpadding=3 border="1">
+<tr><td align="left"><span class="math-inline">i</span></td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr><td align="left"><span class="math-inline">n_i</span></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr><td align="left"><span class="math-inline">r_i</span></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</table></td>
+</tr>
+</table>
+</div>
+
+<p>
+总之，计算(<a href="node312.html#eq.guptri1">8.34</a>)和(<a href="node312.html#eq.guptri_reg">8.35</a>)的GUPTRI算法包括七个简化步骤。前三个步骤对<span class="math-inline">A - \lambda B</span>的不同块应用<span class="math-inline">RZ</span>-阶梯简化，给出右奇异结构(<span class="math-inline">A_r - \lambda B_r</span>)和零Jordan结构(<span class="math-inline">A_z - \lambda B_z</span>)在<span class="math-inline">A</span>和<span class="math-inline">B</span>的左上角。类似地，接下来的三个步骤对剩余的矩阵束应用<span class="math-inline">LI</span>-阶梯简化，给出无穷Jordan结构(<span class="math-inline">A_i - \lambda B_i</span>)和左奇异结构(<span class="math-inline">A_l - \lambda B_l</span>)在<span class="math-inline">A</span>和<span class="math-inline">B</span>的右下角。然后，在变换后的矩阵束中间留下一个正方形的正则矩阵束，对应于<span class="math-inline">A - \lambda B</span>的有限和非零特征值。通过对这个矩阵束应用QZ算法，得到上三角块<span class="math-inline">A_f - \lambda B_f</span>。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html5548" href="node314.html">一个<span class="math-inline">24 \times 21</span>奇异矩阵束在GUPTRI形式中。</a>
+<li><a name="tex2html5549" href="node315.html">确定数值秩的标准。</a>
+<li><a name="tex2html5550" href="node316.html">正则化问题的GUPTRI形式。</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr><!--Navigation Panel-->
+<a name="tex2html5546"
+  href="node314.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5540"
+  href="node307.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5534"
+  href="node312.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5542"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5544"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5547"
+  href="node314.html">A Singular Pencil in</a>
+<b> Up:</b> <a name="tex2html5541"
+  href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b> Previous:</b> <a name="tex2html5535"
+  href="node312.html">Generalized Schur-Staircase Form</a>
+ &nbsp <b>  <a name="tex2html5543"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5545"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

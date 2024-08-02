@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Convergence Properties</title>
+<meta name="description" content="Convergence Properties">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node248.html">
+<link rel="previous" href="node245.html">
+<link rel="up" href="node244.html">
+<link rel="next" href="node247.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4520"
+  href="node247.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4514"
+  href="node244.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4508"
+  href="node245.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4516"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4518"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4521"
+  href="node247.html">Multiple Eigenvalues.</a>
+<b> Up:</b> <a name="tex2html4515"
+  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b> Previous:</b> <a name="tex2html4509"
+  href="node245.html">Algorithm</a>
+ &nbsp <b>  <a name="tex2html4517"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4519"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001682000000000000000"></a> <a name="zbdd:convergence"></a><a name="24239"></a>
+<a name="24240"></a>
+<br>
+收敛特性
+</h2>
+
+<p>
+本节详细讨论收敛特性。首先回顾了Lanczos算法中的SI（对称迭代）。接着，概述了针对非对称特征值问题的双侧算法的收敛理论，并参考了本文其他部分的内容。最后，回顾了应对无法获得标准化残差的技术。
+
+<p>
+Ritz值倾向于首先收敛到谱的凸包边界上的特征值。为了计算内部特征值，通常值得对<span class="math-inline">A</span>应用谱变换。策略是通过将复平面中所需的特征值映射到变换谱的外部来加速收敛速率。标准方法是将对Lanczos算法应用于移位和逆矩阵
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonherm_shift_invert"></a><div class="math-display">C=(A-\sigma I)^{-1}</div></td>
+<td width=10 align="right">
+(150)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+复平面中距离移位<span class="math-inline">\sigma</span>最近的特征值首先收敛。注意，LU分解，
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="nonherm_shift_invert_factor"></a><div class="math-display">A-\sigma I = LU,</div></td>
+<td width=10 align="right">
+(151)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+可以用于计算Lanczos算法中所需的<span class="math-inline">C q_j = U^{-1}(L^{-1}q)</span>和<span class="math-inline">C^{\ast} p_j =L^{-\ast}(U^{-\ast}p)</span>。参见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节。
+
+<p>
+非对称特征值问题（NHEP）的一个内在困难是，已知的<span class="math-inline">\theta_i^{(j)}</span>到<span class="math-inline">A</span>的特征值的距离界限不实用[<a href="node421.html#stsu90">425</a>,<a href="node421.html#kapj82">256</a>]。另一个复杂之处是，为了有用，双侧算法的收敛理论必须考虑左右Krylov子空间同时近似<span class="math-inline">A</span>的特征值的事实。这两个问题通过限定距离<span class="math-inline">\Vert F\Vert</span>到具有特征三元组<span class="math-inline">(\theta_i^{(j)},x_i^{(j)},y_i^{(j)})</span>的最近矩阵<span class="math-inline">A-F</span>来解决。特征值敏感度（条件数）也可用。回顾残差向量<span class="math-inline">r_i^{(j)}</span>和<span class="math-inline">s_i^{(j)}</span>，如(<a href="node245.html#bnhlrr">7.40</a>)和(<a href="node245.html#bnhllr">7.41</a>)所定义。接下来观察到双正交条件(<a href="node245.html#biorthogonal">7.37</a>)意味着<span class="math-inline">(s_i^{(j)})^{\ast} x_i^{(j)} = (y_i^{(j)})^{\ast} r_i^{(j)} = 0</span>。这些关系共同意味着
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="residerr"></a><div class="math-display">F = \frac{ r_i^{(j)} (x_i^{(j)})^{\ast} }{ \Vert x_i^{(j)}\Vert^2_2 } + \frac{ y_i^{(j)} (s_i^{(j)})^{\ast}}{ \Vert y_i^{(j)}\Vert^2_2 }</div></td>
+<td width=10 align="right">
+(152)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+是所需的扰动，使得
+<br>
+<div align="center"><a name="backwd1"></a><a name="backwd2"></a>
+
+<table align="center" cellpadding="0" width="100%">
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle (A-F) x_i^{(j)}</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle x_i^{(j)} \theta_i^{(j)},</span></td>
+<td width=10 align="right">
+(153)</td></tr>
+<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle (y_i^{(j)})^{\ast} (A-F)</span></td>
+<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="left" NOWRAP><span class="math-inline">\displaystyle \theta_i^{(j)} (y_i^{(j)})^{\ast},</span></td>
+<td width=10 align="right">
+(154)</td></tr>
+</table></div>
+<br clear="ALL"><p></p>
+并且<span class="math-inline">\Vert F\Vert^2_{\rm F} = \Vert r_i^{(j)}\Vert^2_2/ \Vert x_i^{(j)}\Vert^2_2 +\Vert s_i^{(j)}\Vert^2_2 / \Vert y_i^{(j)}\Vert^2_2</span>。参见第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节，进一步讨论如何推导近似特征值和特征向量的准确性估计误差界限。
+
+<p>
+关于测试Ritz向量收敛性存在一个微妙但关键的复杂问题。原始矩阵<span class="math-inline">A</span>的近似特征向量仅在步骤(16)的测试表明Ritz值<span class="math-inline">\theta^{(j)}_i</span>收敛到<span class="math-inline">A</span>的所需特征值后计算。如果存储了Lanczos向量，则使用基<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>来获取近似特征向量。如果未存储Lanczos向量，则有两种可能性[<a href="node421.html#cuwi86">93</a>]：要么重新运行三项递归来生成请求的特征向量，要么应用逆迭代（参见第&#167;<a href="node210.html#sec:power_nsym">7.4</a>节）。复杂之处在于，决定是否接受Ritz向量作为近似特征向量不能基于这些未标准化的残差。在计算了<span class="math-inline">x_i^{(j)}=Q_jz_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}=P_j w_i^{(j)}</span>之后，需要比较标准化残差
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\frac{ \Vert r_i^{(j)}\Vert _2 }{ \Vert x_i^{(j)} \Vert _2 } + \frac{ \Vert s_i^{(j)}\Vert _2 }{ \Vert y_i^{(j)} \Vert _2 }</div>
+</div>
+<br clear="ALL">
+<p></p>
+到用户指定的容差。标准化残差的范数可能比未标准化残差大。可能需要拒绝计算的Ritz向量，继续Lanczos算法，然后重新计算Ritz向量。如果<span class="math-inline">\Vert Q_j z_i^{(j)}\Vert _2</span>显著小于<span class="math-inline">\Vert z_i^{(j)}\Vert _2</span>，则拒绝Ritz向量<span class="math-inline">x_i^{(j)}</span>。这种缩小的两个常见原因是由于双正交性的损失，<span class="math-inline">\theta_i^{(j)}</span>是一个虚假特征值[<a href="node421.html#cuwi86">93</a>]。这种情况可以通过重新双正交化[<a href="node421.html#day97">105</a>]或不计算对应于虚假模式的Ritz向量[<a href="node421.html#cuwi86">93</a>]来解决。
+
+<p>
+缩小的第二个常见原因最好在Lanczos算法的实现中解释，其中<span class="math-inline">q_j</span>和<span class="math-inline">p_j</span>被缩放为具有单位欧几里得长度[<a href="node421.html#frna91">179</a>,<a href="node421.html#parl92">354</a>,<a href="node421.html#day97">105</a>]。内积
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\omega_i = \frac{p_j^* q_j}{ \Vert p_j\Vert _2 \Vert q_j\Vert _2}</div>
+</div>
+<br clear="ALL">
+<p></p>
+限定Lanczos向量矩阵的条件数[<a href="node421.html#parl92">354</a>]。在[<a href="node421.html#bady99">29</a>]中表明
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\mathrm{cond}(Q_j) = \Vert Q_j\Vert _2 \Vert Q^{\dagger}_j\Vert _2\leq \sum^j_{i=1} \vert \omega_i \vert ^{-1},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">Q^{\dagger}_j</span>表示<span class="math-inline">Q_j</span>的广义逆，该界限也适用于<span class="math-inline">\mathrm{cond}(P_j)</span>。如果<span class="math-inline">\Vert r_j\Vert _2</span>相对于三对角矩阵范数（容易估计）和<span class="math-inline">\Vert Q_j\Vert _2</span>的乘积很小，则右Krylov子空间近似不变。在这种缩放下，界限<span class="math-inline">\Vert Q_j\Vert _2 \leq \sqrt{j}</span>简化了不变子空间的检测。
+
+<p>
+通常，<span class="math-inline">\{\vert \omega_i \vert\}</span>几乎单调地减少，并且在数百个Lanczos步骤中减少许多数量级[<a href="node421.html#frna91">179</a>,<a href="node421.html#day97">105</a>]。在这种情况下，未标准化的残差对于在<span class="math-inline">\vert\omega_i\vert</span>减少几个数量级之后才出现的Ritz值是poor estimates。更准确地说，对于具有特殊性质的特征向量<span class="math-inline">z_i^{(j)}</span>，即<span class="math-inline">z_i^{(j)}(1:k)</span>可以忽略不计，下界
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\Vert Q_jz_i^{(j)} \Vert _2 \geq \max_{i &gt;k} \vert \omega_i \vert \Vert z_i^{(j)}\Vert _2/\sqrt{j-(k+1)}</div>
+</div>
+<br clear="ALL">
+<p></p>
+很可能是近似相等的，如果<span class="math-inline">\max_{i &gt;k} \vert \omega_i \vert</span>非常小，则不鼓励形成<span class="math-inline">Q_jz_i^{(j)}</span>。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html4522"
+  href="node247.html">多重特征值</a>
+</ul></ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+<!--Navigation Panel-->
+<a name="tex2html4520"
+  href="node247.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4514"
+  href="node244.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4508"
+  href="node245.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4516"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4518"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4521"
+  href="node247.html">Multiple Eigenvalues.</a>
+<b> Up:</b> <a name="tex2html4515"
+  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b> Previous:</b> <a name="tex2html4509"
+  href="node245.html">Algorithm</a>
+ &nbsp <b>  <a name="tex2html4517"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4519"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

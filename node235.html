@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Block Arnoldi Method &nbsp; R.&nbsp;Lehoucq and K.&nbsp;Maschhoff </title>
+<meta name="description" content="Block Arnoldi Method &nbsp; R.&nbsp;Lehoucq and K.&nbsp;Maschhoff ">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node244.html">
+<link rel="previous" href="node220.html">
+<link rel="up" href="node203.html">
+<link rel="next" href="node236.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4353"
+  href="node236.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4347"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4341"
+  href="node234.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4349"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4351"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4354"
+  href="node236.html">Block Arnoldi Reductions</a>
+<b> Up:</b> <a name="tex2html4348"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html4342"
+  href="node234.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html4350"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4352"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h1><a name="SECTION001670000000000000000"></a> <a name="sec:blockarnoldi"></a>
+<br>
+块Arnoldi方法
+<br>&nbsp; <em>R. Lehoucq 和 K. Maschhoff</em>
+</h1>
+
+<p>
+<a name="23777"></a>  
+
+<p>
+块方法主要出于两个原因被使用。第一个原因是可靠地确定多个和/或聚集的特征值。第二个原因与计算效率的问题有关。在许多情况下，计算几个矩阵-向量乘积的成本与计算一个矩阵-向量乘积的成本相当。另一方面，块方法的两个主要缺点是软件实现的额外复杂性（不可忽视）以及理论理解相对不足。此外，还存在块大小的选择问题。
+
+<p>
+尽管结合了缩减策略（如在第<a href="node220.html#sec:nsymiram">7.6</a>节中）的非块方法可以用于计算多个和/或聚集的特征值，但对于某些特征值问题，非块方法可能由于计算基础子空间的成本而显得效率低下。此外，为了可靠地计算邻近的特征值，需要相对较小的收敛容差。许多问题并不需要如此高的精度，这样的标准可能导致不必要的计算。
+
+<p>
+最简单的块方法——子空间迭代法，已在第<a href="node210.html#sec:power_nsym">7.4</a>节中讨论过。这里块大小仅等于子空间大小。正如Arnoldi方法是为一系列幂迭代（Krylov空间的成员）计算基的过程一样，块Arnoldi方法将一系列子空间迭代串联起来。
+
+<p>
+<br><hr>
+<!--子链接表-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><a name="tex2html4355"
+  href="node236.html">块Arnoldi约简</a>
+<li><a name="tex2html4356"
+  href="node237.html">实用算法</a>
+<ul>
+<li><a name="tex2html4357"
+  href="node238.html">块大小。</a>
+<li><a name="tex2html4358"
+  href="node239.html">停止准则。</a>
+<li><a name="tex2html4359"
+  href="node240.html">缩减。</a>
+<li><a name="tex2html4360"
+  href="node241.html">重启块Arnoldi约简。</a>
+</ul>
+<li><a name="tex2html4361"
+  href="node242.html">软件可用性</a>
+<li><a name="tex2html4362"
+  href="node243.html">注释和参考文献</a>
+</ul>
+<!--子链接表结束-->
+<hr><!--Navigation Panel-->
+<a name="tex2html4353"
+  href="node236.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4347"
+  href="node203.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4341"
+  href="node234.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4349"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4351"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4354"
+  href="node236.html">Block Arnoldi Reductions</a>
+<b> Up:</b> <a name="tex2html4348"
+  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<b> Previous:</b> <a name="tex2html4342"
+  href="node234.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html4350"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4352"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

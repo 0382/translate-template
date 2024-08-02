@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Numerical Examples</title>
+<meta name="description" content="Numerical Examples">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node306.html">
+<link rel="previous" href="node301.html">
+<link rel="up" href="node296.html">
+<link rel="next" href="node303.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html5377"
+  href="node303.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5371"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5365"
+  href="node301.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5373"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5375"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5378"
+  href="node303.html">Example 8.6.1.</a>
+<b> Up:</b> <a name="tex2html5372"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5366"
+  href="node301.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html5374"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5376"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001766000000000000000">
+数值示例</a>
+</h2>
+
+<p>
+我们提供了几个示例，以展示上述对称不定兰索斯过程的一些特点。
+特别是，以下示例说明了三点：
+
+<ul>
+<li>当 <span class="math-inline">B</span> 奇异时，将初始向量预乘以 <span class="math-inline">H^{-1} B</span> 可以显著提高计算出的 Ritz 对的品质。
+</li>
+<li>当 <span class="math-inline">B</span> 奇异时，方程（<a href="node300.html#ercorrection">8.27</a>）中描述的后处理步骤可能进一步改善 Ritz 对。
+</li>
+<li>部分再正交化比完全再正交化节省了大量计算资源。
+</li>
+</ul>
+在我们每个示例问题中，对称不定特征值问题源自结构动力学中的二次特征值问题的线性化。
+这些矩阵来自结构工程软件包 MSC/NASTRAN [<a href="node421.html#nastran">274</a>] 生成的两种有限元模型之一。
+所有示例均在一台配备 336 MHz 处理器的 Sun UltraSPARC 计算机上运行，使用基于算法 <a href="node298.html#alg:jsymlan">8.4</a> 的简单 MATLAB 实现。
+Ritz 值根据在第 <a href="node299.html#subsec:accuracy">8.6.3</a> 节中导出的误差界限被接受为“收敛”。在大多数情况下，该界限显得过于保守，而一个可靠且更严格的界限仍是一个开放的研究课题。
+
+<p>
+第一个模型是一个代表扬声器箱的声学问题。
+从该模型生成了两组矩阵。在第一组中，线性化问题 <span class="math-inline">\{A,B\}</span> 的阶数为 1076。
+在较小的第二组矩阵中，采用了模态缩减，相关矩阵 <span class="math-inline">\{A,B\}</span> 的阶数为 668。
+
+<p>
+第二个模型代表一个带有轴承支撑和在轴中点附加平移粘性阻尼器的轴。
+通过控制网格尺寸，为该模型生成了两组矩阵。采用更细的网格时，<span class="math-inline">\{A,B\}</span> 的阶数为 800，而较粗的网格则生成阶数为 160 的矩阵 <span class="math-inline">\{A,B\}</span>。在每种情况下，由此模型得到的 <span class="math-inline">B</span> 矩阵都是奇异的。
+
+<p>
+<br><hr>
+<!--子章节链接表-->
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
+
+<ul>
+<li><ul>
+<li><a name="tex2html5379"
+  href="node303.html">示例 8.6.1</a>
+<li><a name="tex2html5380"
+  href="node304.html">示例 8.6.2</a>
+<li><a name="tex2html5381"
+  href="node305.html">示例 8.6.3</a>
+</ul></ul>
+<!--子章节链接表结束-->
+<hr><!--Navigation Panel-->
+<a name="tex2html5377"
+  href="node303.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html5371"
+  href="node296.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html5365"
+  href="node301.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html5373"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html5375"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html5378"
+  href="node303.html">Example 8.6.1.</a>
+<b> Up:</b> <a name="tex2html5372"
+  href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b> Previous:</b> <a name="tex2html5366"
+  href="node301.html">Software Availability</a>
+ &nbsp <b>  <a name="tex2html5374"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html5376"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

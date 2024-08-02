@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Example 11.2.2.</title>
+<meta name="description" content="Example 11.2.2.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node403.html">
+<link rel="up" href="node402.html">
+<link rel="next" href="node405.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6976"
+  href="node405.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6970"
+  href="node402.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6966"
+  href="node403.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6972"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6974"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6977"
+  href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b> Up:</b> <a name="tex2html6971"
+  href="node402.html">Davidson Method</a>
+<b> Previous:</b> <a name="tex2html6967"
+  href="node403.html">Example 11.2.1.</a>
+ &nbsp <b>  <a name="tex2html6973"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6975"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION002024020000000000000">
+例 11.2.2.</a>
+</h4>  
+考虑一个有限差分离散化泊松方程在单位正方形上的模型问题。主对角线是常数（全为4），因此对角线预处理无效。它仅改变特征值的相对分离，而不改变谱的相对分离。然而，不完全分解技术[<a href="node421.html#mevo77">326</a>]已被证明对预处理相应的线性方程有效，并且已证明了一些理论结果。在没有预处理的情况下，共轭梯度法在<span class="math-inline">O(n^{1/2})</span>次迭代中收敛。采用不完全分解IC(0)，收敛速度更快，但仍约为<span class="math-inline">O(n^{1/2})</span>。然而，采用改进的不完全分解MIC(0)[<a href="node421.html#gust78">212</a>]，收敛速度为<span class="math-inline">O(n^{1/4})</span>。在[<a href="node421.html#morg90">330</a>]中表明，计算最小特征值时情况相同。改进的不完全分解是针对<span class="math-inline">A</span>，而不是<span class="math-inline">A-\theta I</span>。这一理论结果可通过计算得到验证。
+
+<p>
+表<a href="node404.html#tab:iemethods:model-problem">11.1</a>给出了随着问题规模增加的迭代次数。使用了Lanczos算法（对应于无预处理和对角线预处理）以及IC(0)和MIC(0)预处理。初始向量包含区间(-1,1)内的随机值，收敛测试为残差范数小于<span class="math-inline">10^{-8}</span>。未使用重启。对于大规模问题，MIC(0)预处理效果更好。在双对数图中，Lanczos的斜率约为0.56，IC(0)的斜率约为0.43。两者都接近预期的0.5，尽管IC(0)明显更好。采用MIC(0)预处理时，斜率约为0.23，接近<span class="math-inline">O(n^{1/4})</span>收敛结果预测的0.25值。
+
+<p>
+在计算多个特征值时，MIC的效果不如预期。我们来看计算<span class="math-inline">n=1600</span>时的最小五个特征值。预处理器来自<span class="math-inline">A</span>的不完全分解，未针对特定特征值进行调整。这次我们重启Davidson方法，最大子空间维度为20，但不重启Lanczos（如果需要特征向量，Lanczos也可能需要重启）。相对而言，Lanczos在计算多个特征值时表现更好，因为Davidson方法一次只针对一个特征值。IC(0)需要159次迭代，MIC(0)需要158次，而Lanczos需要172次。但需要注意的是，Lanczos未发现其中一个小的特征值是双重的，而Davidson方法则计算出了两个特征值。
+
+<p>
+<br>
+<div align="center">
+<a name="tab:iemethods:model-problem"></a></div>
+<p>
+<br>
+<div align="center"><a name="48156"></a>
+<table cellpadding=3 border="1" align="center">
+<caption><strong>表 11.1:</strong>
+模型问题的预处理</caption>
+<tr><td align="left"><span class="math-inline">n</span></td>
+<td align="center">Lanczos</td>
+<td align="center">IC(0)</td>
+<td align="center">MIC(0)</td>
+</tr>
+<tr><td align="left">25</td>
+<td align="center">13</td>
+<td align="center">11</td>
+<td align="center">12</td>
+</tr>
+<tr><td align="left">49</td>
+<td align="center">25</td>
+<td align="center">14</td>
+<td align="center">15</td>
+</tr>
+<tr><td align="left">100</td>
+<td align="center">36</td>
+<td align="center">17</td>
+<td align="center">17</td>
+</tr>
+<tr><td align="left">196</td>
+<td align="center">51</td>
+<td align="center">24</td>
+<td align="center">20</td>
+</tr>
+<tr><td align="left">400</td>
+<td align="center">69</td>
+<td align="center">27</td>
+<td align="center">22</td>
+</tr>
+<tr><td align="left">784</td>
+<td align="center">99</td>
+<td align="center">40</td>
+<td align="center">26</td>
+</tr>
+<tr><td align="left">1600</td>
+<td align="center">137</td>
+<td align="center">49</td>
+<td align="center">30</td>
+</tr>
+<tr><td align="left">3136</td>
+<td align="center">182</td>
+<td align="center">64</td>
+<td align="center">34</td>
+</tr>
+<tr><td align="left">6400</td>
+<td align="center">287</td>
+<td align="center">101</td>
+<td align="center">40</td>
+</tr>
+</table>
+</div>
+<br> 
+
+<p>
+对于例11.2.2中的稀疏矩阵，除了迭代次数外，还需考虑其他因素。Lanczos算法每次迭代的成本可能远低于Davidson方法。这促使开发了利用预处理的Lanczos方法，同时保留了Lanczos方法的高效性。这将在§<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>中讨论。效率问题还导致了与Jacobi-Davidson方法的联系。减少Davidson方法所需迭代次数的一种方法是开发一个极好的预处理器。迭代方法可用于近似求解算法<a href="node402.html#alg:gdavidson">11.2</a>中步骤(3)的<span class="math-inline">(A-\theta B)w_j = r</span>。该解可以尽可能精确。在对称情况下，共轭梯度法可用于迭代方法，并可进行预处理。与预处理的Lanczos方法一样，我们在计算上具有高效的内循环。但在存储需求上也是高效的。然而，开发过于精确的预处理器存在风险。精确求解<span class="math-inline">(A-\theta B)w_j = r</span>会得到<span class="math-inline">w_j=y</span>，即已经在子空间中的近似特征向量。这可以通过求解<span class="math-inline">(A-\mu B)w = r</span>（<span class="math-inline">\mu \ne\theta</span>）来处理，如不完全Cayley变换。然而，在Jacobi-Davidson方法中采用了不同的方法；近似特征向量从<span class="math-inline">(A-\theta B)w_j = r</span>的解中被降解。下一小节将继续讨论与Jacobi-Davidson的联系。
+
+<br>
+<p>
+当起始向量或起始子空间不够准确时，Davidson方法可能会遇到困难。在[<a href="node421.html#mosc86">335</a>]和[<a href="node421.html#fosv98">172</a>]中，建议最初将<span class="math-inline">M</span>设置为<span class="math-inline">P - \mu I</span>，其中<span class="math-inline">P</span>是<span class="math-inline">A</span>的近似，<span class="math-inline">\mu</span>接近所需特征值。如§<a href="node397.html#sec:introduction">11.1</a>所述，另一种可能性是在初始阶段使用Krylov子空间方法为Davidson方法生成起始向量。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html6976"
+  href="node405.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6970"
+  href="node402.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6966"
+  href="node403.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6972"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6974"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6977"
+  href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b> Up:</b> <a name="tex2html6971"
+  href="node402.html">Davidson Method</a>
+<b> Previous:</b> <a name="tex2html6967"
+  href="node403.html">Example 11.2.1.</a>
+ &nbsp <b>  <a name="tex2html6973"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6975"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

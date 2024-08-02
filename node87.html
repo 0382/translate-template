@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Overview of Available Algorithms.</title>
+<meta name="description" content="Overview of Available Algorithms.">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node88.html">
+<link rel="previous" href="node86.html">
+<link rel="up" href="node86.html">
+<link rel="next" href="node88.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2070"
+  href="node88.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2064"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2058"
+  href="node86.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2066"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2068"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2071"
+  href="node88.html">Summary of Choices.</a>
+<b> Up:</b> <a name="tex2html2065"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2059"
+  href="node86.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html2067"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2069"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h4><a name="SECTION001310010000000000000">
+可用算法概览</a>
+</h4>
+
+<p>
+读者或许记得，中等规模的本征值问题，即在此情况下可以方便地存储一个完整的 <span class="math-inline">n \times n</span> 矩阵，通常采用<i>直接法</i>来解决，有时也称为<i>变换法</i>，通过相似变换直至本征值能够轻易读出。<a name="tex2html15"
+  href="footnode.html#foot10740"><sup><IMG  align="bottom" border="1" alt="[*]"
+ src="icons/footnote.png"></sup></a>我们在第<a href="node93.html#sec:dense">4.2</a>节对一些当前的直接法进行了简要回顾。
+
+<p>
+本书的重点在于<i>迭代法</i>，其中稀疏矩阵存储可以发挥优势。在此方法中，矩阵算子作用于一个或几个初始向量，从低维子空间计算本征值近似，迭代继续直至收敛到部分本征值。
+
+<p>
+本章将介绍六种基本的迭代算法：
+<dl>
+<dt><strong><i>幂法</i></strong></dt>
+<dd>在第<a href="node94.html#sec_power_sym">4.3</a>节中描述，是最基本的迭代方法。它取一个初始向量，让矩阵对其作用，直至得到与主本征向量平行的向量。当存在一个唯一最大幅值的本征值时，该方法收敛，但在这些有利情况下，其速度仍慢于本章讨论的其他算法。
+
+<p>
+</dd>
+<dt><strong><i>子空间迭代法</i></strong></dt>
+<dd>有时也称为<em>同时迭代</em>，在第<a href="node94.html#sec_power_sym">4.3</a>节中描述，让矩阵同时作用于一组向量，直至迭代向量张成主本征值的不变子空间。它是多个结构工程软件包的基础，具有简单的实现和收敛理论。然而，其收敛速度慢于基于Lanczos正交化的算法。
+
+<p>
+</dd>
+<dt><strong><i>Lanczos方法</i></strong></dt>
+<dd>在第<a href="node103.html#sec:lan">4.4</a>节中描述，构建由矩阵<span class="math-inline">A</span>重复作用于初始向量产生的Krylov向量序列的正交基。在此正交基中，矩阵算子由一个三对角矩阵<span class="math-inline">T</span>表示，其本征值产生原矩阵<span class="math-inline">A</span>的若干本征值的Ritz近似。与幂法相比，其主要优势在于从一个向量序列中得到多个本征值近似，且收敛所需的矩阵-向量乘法次数大大减少。另一方面，存在潜在的复杂性：即使简单的三项递归足以给出数学上的正交基，舍入误差会在第一个本征值收敛时破坏正交性，需要进行某种形式的再正交化。如果仅需本征值，Lanczos算法在存储空间上较为经济。我们将在第<a href="node103.html#sec:lan">4.4</a>节描述一些变体。
+
+<p>
+</dd>
+<dt><strong><i>隐式重启Lanczos方法</i></strong></dt>
+<dd>在第<a href="node117.html#sec:irlm">4.5</a>节中描述，是一种变体，其中正交基的大小保持有界并持续更新，直至其子空间包含一组预定的本征向量。在许多情况下，它可以用仅略多的矩阵-向量乘法次数，显著减少存储空间，获得与原始Lanczos变体相同数量的本征值收敛。如果需要本征向量，此变体特别有用。
+
+<p>
+</dd>
+<dt><strong><i>带状Lanczos方法</i></strong></dt>
+<dd>在第<a href="node131.html#rwf:bandsym">4.6</a>节中描述，是同时幂法的Lanczos对应方法。对于存储在后备存储或内存层次结构中的矩阵，同时作用于多个向量比逐个作用更高效。这就是为什么多个<i>最先进的</i>结构工程软件包使用此类算法[<a
+ href="node421.html#grls94">206</a>]。在多输入多输出控制问题中，人们实际上对基于给定初始向量的降阶模型感兴趣，这是开发此处描述的变体的主要原因。
+
+<p>
+</dd>
+<dt><strong><i>Jacobi-Davidson方法</i></strong></dt>
+<dd>在第<a href="node136.html#sec:jacdavsym">4.7</a>节中描述，是量子化学计算中流行算法的发展。它通过预处理矩阵作用于一系列子空间进行更新。如果只能使用预处理迭代来求解与底层矩阵相关的线性系统，这是获取内部本征值或本征值簇的方法。
+</dd>
+</dl>
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2070"
+  href="node88.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2064"
+  href="node86.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2058"
+  href="node86.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2066"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2068"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2071"
+  href="node88.html">Summary of Choices.</a>
+<b> Up:</b> <a name="tex2html2065"
+  href="node86.html">Introduction</a>
+<b> Previous:</b> <a name="tex2html2059"
+  href="node86.html">Introduction</a>
+ &nbsp <b>  <a name="tex2html2067"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2069"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Preconditioned Lanczos Methods</title>
+<meta name="description" content="Preconditioned Lanczos Methods">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node416.html">
+<link rel="previous" href="node414.html">
+<link rel="up" href="node410.html">
+<link rel="next" href="node416.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html7135"
+  href="node416.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7129"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7123"
+  href="node414.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7131"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7133"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7136"
+  href="node416.html">Davidson Method</a>
+<b> Up:</b> <a name="tex2html7130"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7124"
+  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
+ &nbsp <b>  <a name="tex2html7132"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7134"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION002035000000000000000">
+预处理Lanczos方法</a>
+</h2>
+
+<p>
+预处理Lanczos方法由Scott提出[<a href="node421.html#scot81">397</a>]，当时使用的是<span class="math-inline">T=I</span>，并由Knyazev进行了分析[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]。该方法基于内外迭代的基本思想，我们在这里针对矩阵束<span class="math-inline">B - \mu A</span>进行描述。
+
+<p>
+设参数<span class="math-inline">\mu</span>固定，我们考虑以下辅助特征值问题：
+
+<p>
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="prec_aux"></a><div class="math-display">T (B- \mu A)v= \nu v.</div></td>
+<td width=10 align="right">
+(284)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+
+<p>
+如果<span class="math-inline">\mu = \mu_1</span>，则存在一个零特征值<span class="math-inline">\nu</span>，对应的特征向量也是原矩阵束<span class="math-inline">B - \mu A</span>对应于<span class="math-inline">\mu_1</span>的特征向量。这个零特征值是矩阵<span class="math-inline">T (B- \mu A)</span>的最大特征值，并且与矩阵的其他特征值（均为负）分离。因此，可以使用标准的多项式方法（特别是Lanczos方法）来计算这个特征值。我们注意到，决定收敛速度的分离程度取决于预处理矩阵<span class="math-inline">T</span>的质量；详见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]。
+
+<p>
+在方法中，我们选择参数<span class="math-inline">\mu= \mu^{(0)}</span>的初始值，然后使用若干Lanczos内迭代来求解辅助特征值问题（<a href="node415.html#prec_aux">11.14</a>）的最大特征值。假设预处理矩阵<span class="math-inline">T</span>是对称正定的，则矩阵<span class="math-inline">T (B- \mu A)</span>关于<span class="math-inline">T^{-1}</span>基的标量积是对称的，因此可以使用经典的Lanczos方法；参见第4.4节。新的参数值<span class="math-inline">\mu = \mu^{(1)}</span>通过计算原矩阵束的Rayleigh商来更新，使用内迭代中最新的向量迭代。这个向量也作为下一轮内迭代的初始猜测。这种内外迭代方法显然符合我们定义的预处理特征求解器。
+
+<p>
+我们在算法<a href="node415.html#fig:prec_scottBA">11.7</a>中展示了针对矩阵束<span class="math-inline">B - \mu A</span>的单向量版本的预处理Lanczos方法。
+
+<p>
+<br>
+<a name="fig:prec_scottBA"></a><IMG
+ width="598" height="243" align="bottom" border="0"
+ src="img3954.png"
+ alt="\begin{algorithm}
+{预处理Lanczos方法用于广义特征值问题
+\index{preconditioned!...
+...\ the latest vector iterate of the Lanczos
+method
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+Scott证明了对于完全收敛的内迭代过程，外迭代的渐近二次收敛性[<a href="node421.html#scot81">397</a>]。当然，这并不保证在有限次内迭代情况下的方法收敛性。对于任意次数的内迭代，明确的收敛率估计在[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]中建立。它表明，首先，对于任何固定的内迭代次数，例如仅一次，方法至少线性收敛；其次，内迭代次数的缓慢但无限制的增加会改善收敛率估计，平均考虑内迭代次数。
+
+<p>
+预处理Lanczos方法可能比预处理的梯度下降/上升方法收敛更快。此外，如果在Lanczos方法的内迭代中使用标准的三项递归而不进行再正交化，则每次迭代的计算成本不会比预处理的梯度下降/上升方法高太多。
+
+<p>
+主要缺点是Lanczos过程中需要<span class="math-inline">T^{-1}</span>基的标量积，因此需要容易计算向量<span class="math-inline">T^{-1}x</span>。对于某些预处理矩阵，例如基于域分解的预处理矩阵，可能只能高效计算<span class="math-inline">Tx</span>（这也是必要的），而不能计算<span class="math-inline">T^{-1}x</span>。
+
+<p>
+在这种情况下，我们仍然可以为算子<span class="math-inline">T(B - \mu^{(i)}A)</span>构造一个Krylov子空间，并使用Rayleigh-Ritz过程将算子<span class="math-inline">B - \mu A</span>投影到这个子空间上。示意如下：
+<br>
+<div align="right">
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="prec_ppm"></a><div class="math-display">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......, \\ldots, [T(B- \mu^{(i)} A)]^{l_i}x^{(i)} \}</span>,\end{tabular}</div></td>
+<td width=10 align="right">
+(285)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中<span class="math-inline">l_i</span>是第<span class="math-inline">i</span>次外迭代步骤的内迭代步数。
+
+<p>
+这导致了算法<a href="node415.html#fig:prec_projBA">11.8</a>的方法，可以通过修改算法<a href="node415.html#fig:prec_scottBA">11.7</a>的第(4)和第(5)行得到：
+
+<p>
+<br>
+<a name="fig:prec_projBA"></a><IMG
+ width="598" height="185" align="bottom" border="0"
+ src="img3959.png"
+ alt="\begin{algorithm}
+{预处理投影方法用于广义特征值问题
+}
+{
+\begin{tabbing}...
+...vector, corresponding to the smallest
+Ritz value
+\end{tabbing}}
+\end{algorithm}">
+<br>
+
+<p>
+该方法在[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]中提出，随后在[<a href="node421.html#mosc93">336</a>]中重新发现。如果仅使用一次内迭代，该方法与预处理的梯度下降/上升算法<a href="node414.html#fig:prec_steepBA">11.6</a>相同。
+
+<p>
+由于与预处理Lanczos过程的相似性，大部分收敛理论及其主要结论也适用于此过程；详细内容参见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]。预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>比具有相同内迭代次数的预处理Lanczos算法<a href="node415.html#fig:prec_scottBA">11.7</a>收敛得稍快。然而，现在只能使用标准的三项递归来计算Krylov子空间的基。为了实现Rayleigh-Ritz方法，我们需要存储基中的所有向量并显式计算所有标量积。这使得Rayleigh-Ritz方法中计算投影矩阵的成本更高，并且显著增加了存储需求，除非使用重启。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html7135"
+  href="node416.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html7129"
+  href="node410.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html7123"
+  href="node414.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html7131"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html7133"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html7136"
+  href="node416.html">Davidson Method</a>
+<b> Up:</b> <a name="tex2html7130"
+  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b> Previous:</b> <a name="tex2html7124"
+  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
+ &nbsp <b>  <a name="tex2html7132"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html7134"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

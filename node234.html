@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Software Availability</title>
+<meta name="description" content="Software Availability">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="previous" href="node233.html">
+<link rel="up" href="node220.html">
+<link rel="next" href="node235.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html4339"
+  href="node235.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4333"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4329"
+  href="node233.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4335"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4337"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4340"
+  href="node235.html">Block Arnoldi Method &nbsp;</a>
+<b> Up:</b> <a name="tex2html4334"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4330"
+  href="node233.html">Eigenvector Computation with Spectral</a>
+ &nbsp <b>  <a name="tex2html4336"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4338"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001669000000000000000"></a> <a name="sec:arpack1"></a><a name="23770"></a>
+<br>
+软件可用性
+</h2>
+尽管我们尽可能以模板形式介绍了IRAM，但我们不建议仅根据此描述进行实现。高质量的软件ARPACK是免费提供的。实现细节的精细程度对这种方法的稳健性和最终成功至关重要。虽然可以从这里给出的描述中获得一种可行的方法，但它几乎肯定在某些方面存在缺陷。我们应将此描述视为详细但仍具概念性的处理。
+
+<p>
+ARPACK是一组用于解决大规模特征值问题的FORTRAN子程序集合，全称为ARnoldi PACKage。ARPACK软件能够解决大规模的厄米特或非厄米特（标准和广义）特征值问题，并已广泛应用于各种领域。并行ARPACK（P_ARPACK）作为当前ARPACK库的扩展，针对分布式内存消息传递系统设计，目前支持的消息传递层包括BLACS和MPI。
+
+<p>
+ARPACK软件基于我们在第&#167;<a href="node222.html#sec:imprest">7.6.2</a>节中介绍的IRAM。当矩阵<span class="math-inline">A</span>对称（厄米特）时，这简化为第&#167;<a href="node117.html#sec:irlm">4.5</a>节描述的隐式重启Lanczos方法（IRLM）。
+
+<p>
+ARPACK提供了多种模板形式的驱动程序，适用于SI。对于带状矩阵，有专门的驱动程序。此外，还提供了一个用于计算一般矩形矩阵部分SVD的驱动程序。欲获取完整信息，请参阅《ARPACK用户指南》[<a href="node421.html#lesy98">295</a>]。
+
+<p>
+有关ARPACK的更多信息，包括如何访问它，请参阅本书的主页ETHOME。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html4339"
+  href="node235.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html4333"
+  href="node220.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html4329"
+  href="node233.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html4335"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html4337"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html4340"
+  href="node235.html">Block Arnoldi Method &nbsp;</a>
+<b> Up:</b> <a name="tex2html4334"
+  href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b> Previous:</b> <a name="tex2html4330"
+  href="node233.html">Eigenvector Computation with Spectral</a>
+ &nbsp <b>  <a name="tex2html4336"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html4338"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

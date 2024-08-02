@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Spectral Transformation</title>
+<meta name="description" content="Spectral Transformation">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node108.html">
+<link rel="previous" href="node105.html">
+<link rel="up" href="node103.html">
+<link rel="next" href="node108.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2367"
+  href="node108.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2361"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2355"
+  href="node106.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2363"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2365"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2368"
+  href="node108.html">Reorthogonalization</a>
+<b> Up:</b> <a name="tex2html2362"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2356"
+  href="node106.html">Multiple Eigenvalues.</a>
+ &nbsp <b>  <a name="tex2html2364"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2366"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001343000000000000000"></a><a name="subsec_stlm"></a><a name="7760"></a>
+<a name="7761"></a>
+<br>
+谱变换
+</h2>
+
+<p>
+如果极值特征值没有很好地分离，并且当我们需要内部特征值时，用移位-逆变换算子替换<span class="math-inline">A</span>会非常有利。
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert"></a><div class="math-display">C=(A-\sigma I)^{-1}\,</div></td>
+<td width=10 align="right">
+(28)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+对于适当选择的移位<span class="math-inline">\sigma</span>，例如在区间<span class="math-inline">\alpha \le \sigma \le \beta</span>内，我们感兴趣的是了解特征值。移位-逆变换算子<span class="math-inline">C</span>具有特征值
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert_eigenvalues"></a><div class="math-display">\theta_i=\frac{1}{\lambda_i-\sigma}\quad\mathrm{or}\quad\lambda_i=\sigma+\frac{1}{\theta_i}\;,</div></td>
+<td width=10 align="right">
+(29)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+现在，对应于接近移位<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda_i</span>的特征值<span class="math-inline">\theta_i</span>将位于谱的两端，并且与其他特征值很好地分离；参见[<a href="node421.html#erru80">162</a>]。
+
+<p>
+如果我们使用移位-逆变换算子，我们从分解开始算法
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma I)P\,,</div></td>
+<td width=10 align="right">
+(30)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+使用某种适当的稀疏高斯消去法。这里，<span class="math-inline">P</span>是置换矩阵，<span class="math-inline">L</span>是单位下三角矩阵。如果特征值<span class="math-inline">\lambda</span>在移位<span class="math-inline">\sigma</span>的两侧，我们不能使用标量对角矩阵<span class="math-inline">D</span>，而是必须进行对称不定分解，如Duff和Reid在MA47中的做法[<a href="node421.html#dure95">141</a>]。这里<span class="math-inline">D</span>是块对角矩阵，包含一阶和二阶块，并且我们作为副产品得到了<span class="math-inline">A-\sigma I</span>的惯性。通过记录区间两端两个值<span class="math-inline">\sigma</span>的<span class="math-inline">(A-\sigma I)</span>的惯性，我们可以得到区间内特征值的数量。获取这个计数是为了确保不会遗漏多重特征值。关于稀疏矩阵分解的更多信息，请参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>。
+
+<p>
+在实际迭代过程中，我们使用因子<span class="math-inline">P</span>、<span class="math-inline">L</span>和<span class="math-inline">D</span>，计算
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))\;,</div></td>
+<td width=10 align="right">
+(31)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+按照括号中指示的顺序，在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的步骤(5)中进行。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2367"
+  href="node108.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2361"
+  href="node103.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2355"
+  href="node106.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2363"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2365"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2368"
+  href="node108.html">Reorthogonalization</a>
+<b> Up:</b> <a name="tex2html2362"
+  href="node103.html">Lanczos Method &nbsp; A.</a>
+<b> Previous:</b> <a name="tex2html2356"
+  href="node106.html">Multiple Eigenvalues.</a>
+ &nbsp <b>  <a name="tex2html2364"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2366"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

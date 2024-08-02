@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>Basic Properties</title>
+<meta name="description" content="Basic Properties">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node134.html">
+<link rel="previous" href="node132.html">
+<link rel="up" href="node131.html">
+<link rel="next" href="node134.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html2748"
+  href="node134.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2742"
+  href="node131.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2736"
+  href="node132.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2744"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2746"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2749"
+  href="node134.html">Algorithm</a>
+<b> Up:</b> <a name="tex2html2743"
+  href="node131.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html2737"
+  href="node132.html">The Need for Deflation</a>
+ &nbsp <b>  <a name="tex2html2745"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2747"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel--><h2><a name="SECTION001362000000000000000"></a> <a name="rwf:bandsym_prop"></a>
+<br>
+基本性质
+</h2>
+
+<p>
+经过最初的<span class="math-inline">j</span>次迭代后，带状Lanczos算法已经生成了前<span class="math-inline">j</span>个Lanczos向量（参见<a href="node131.html#rwf:ABB">4.28</a>）。这些向量被构造为正交归一的：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABC"></a><div class="math-display">V_j^{\ast} V_j = I_j,\quad \mathrm{其中}\quadV_j = \left[ \begin{array}{cccc}v_1 &amp; v_2 &amp; \cdots &amp; v_j\end{array} \right].</div></td>
+<td width=10 align="right">
+(38)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，<span class="math-inline">I_j</span>表示<span class="math-inline">j \times j</span>的单位矩阵。
+除了（参见<a href="node131.html#rwf:ABB">4.28</a>），算法还构造了向量
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABY"></a><div class="math-display">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+p_c},</div></td>
+<td width=10 align="right">
+(39)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这些向量是接下来<span class="math-inline">p_c</span>个Lanczos向量的候选，
+
+<span class="math-inline">v_{j+1},v_{j+2},\ldots,v_{j+p_c}</span>。
+这里，<span class="math-inline">p_c</span>是初始向量数<span class="math-inline">p</span>减去在前<span class="math-inline">j</span>次迭代中发生的缩减次数。
+向量（参见<a href="node133.html#rwf:ABY">4.30</a>）被构造为满足正交关系
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABE"></a><div class="math-display">V_j^{\ast} \hat{v}_{k} = 0 \quad \mathrm{对于所有}\quadk=j+1,j+2,\ldots,j+p_c.</div></td>
+<td width=10 align="right">
+(40)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+带状Lanczos算法有一个基于向量（参见<a href="node133.html#rwf:ABY">4.30</a>）的非常简单的内置缩减过程。
+实际上，在迭代<span class="math-inline">j+1</span>处的精确缩减等价于
+<span class="math-inline">\hat{v}_{j+1}=0</span>。
+因此，在算法中，检查
+
+<span class="math-inline">\left\Vert\hat{v}_{j+1}\right\Vert _2</span>
+是否小于某个合适的缩减容差。
+如果是，向量<span class="math-inline">\hat{v}_{j+1}</span>被缩减，<span class="math-inline">p_c</span>减少1。
+否则，<span class="math-inline">\hat{v}_{j+1}</span>被归一化成为下一个Lanczos向量<span class="math-inline">v_{j+1}</span>。
+
+<p>
+在算法中用于生成向量（参见<a href="node131.html#rwf:ABB">4.28</a>）和（参见<a href="node133.html#rwf:ABY">4.30</a>）的递推关系可以紧凑地总结如下：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABD"></a><div class="math-display">A V_j = V_j T_j + \left[ \begin{array}{ccccccc}0 &amp; \cdots ......hat{v}_{j+p_c}\end{array} \right]+ \hat{V}_j^{\rm {(dl)}}.</div></td>
+<td width=10 align="right">
+(41)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，<span class="math-inline">T_j</span>是一个<span class="math-inline">j \times j</span>矩阵，其元素被选择以满足正交条件（参见<a href="node133.html#rwf:ABC">4.29</a>）和（参见<a href="node133.html#rwf:ABE">4.31</a>）。
+矩阵
+<span class="math-inline">\hat{V}_j^{\rm {(dl)}}</span>在（参见<a href="node133.html#rwf:ABD">4.32</a>）中包含大多数零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的未归一化向量。
+回想一下，<span class="math-inline">p-p_c</span>是被缩减向量的数量。
+
+<p>
+事实证明，正交性只需在<span class="math-inline">2p_c+1</span>个连续的Lanczos向量之间显式强制执行，并且一旦发生缩减，就针对<span class="math-inline">p-p_c</span>个固定的早期向量。
+因此，矩阵<span class="math-inline">T_j</span>“基本上”是带状的，带宽为<span class="math-inline">2p_c+1</span>，每次缩减发生时，带宽减少2。
+此外，每次不精确的缩减导致<span class="math-inline">T_j</span>在带状部分之外和右侧的固定行中具有非零元素。
+更确切地说，由缩减引起的每一行的行索引由<span class="math-inline">k - p_c(k)</span>给出，其中<span class="math-inline">k</span>是缩减发生的迭代次数，<span class="math-inline">p_c(k)</span>是该迭代时的相应<span class="math-inline">p_c</span>值。
+因此，矩阵<span class="math-inline">T_j</span>可以写成
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABW"></a><div class="math-display">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}},</div></td>
+<td width=10 align="right">
+(42)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+其中
+<span class="math-inline">T_j^{\rm {(b)}}</span>是一个带状矩阵，
+<span class="math-inline">T_j^{\rm {(d)}}</span>
+包含由于缩减而在<span class="math-inline">T_j</span>的带状部分之外的水平“尖峰”。
+特别是，如果没有发生不精确的缩减，那么
+<span class="math-inline">T_j^{\rm {(d)}}</span>
+是零矩阵。
+最后，我们注意到，带状部分
+<span class="math-inline">T_j^{\rm {(b)}}</span> 是
+<span class="math-inline">T_j</span>的
+一个Hermitian矩阵。
+
+<p>
+例如，考虑有<span class="math-inline">p=5</span>个初始向量的情况，并假设在前<span class="math-inline">j=15</span>次迭代中，在步骤<span class="math-inline">k=8</span>、<span class="math-inline">k=11</span>和<span class="math-inline">k=13</span>处发生了缩减。
+这三个缩减对应于从块Krylov序列（参见<a href="node131.html#rwf:ABA">4.27</a>）中删除向量<span class="math-inline">A b_3</span>、<span class="math-inline">A^2 b_2</span>和<span class="math-inline">A^3 b_1</span>，以及这些向量的以下<span class="math-inline">A</span>倍数。
+在这种情况下，矩阵
+<span class="math-inline">T_{15}=T_{15}^{\rm {(b)}} + T_{15}^{\rm {(d)}}</span>
+具有以下稀疏结构：
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ACA"></a><div class="math-display">T_{15} = %%\footnotesize{\left[ \begin{array}{ccccccccccccc...... \\&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp;{*}&amp;{*}&amp;{*}\end{array} \right].</div></td>
+<td width=10 align="right">
+(43)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，<span class="math-inline">{*}</span>表示带状部分
+<span class="math-inline">T_{15}^{\rm {(b)}}</span>中的潜在非零条目，
+<span class="math-inline">{\tt d}</span>表示由于在迭代<span class="math-inline">k=8</span>、<span class="math-inline">k=11</span>和<span class="math-inline">k=13</span>处的缩减而在
+<span class="math-inline">T_{15}^{\rm {(d)}}</span>中的潜在非零条目。
+注意，这三个缩减已将初始带宽<span class="math-inline">2p+1=11</span>在迭代<span class="math-inline">j=15</span>时减少到<span class="math-inline">2p_c+1=5</span>。
+
+<p>
+经过带状Lanczos算法的<span class="math-inline">j</span>次迭代后，通过计算
+<span class="math-inline">T_j^{\rm {(pr)}}</span>的特征解，可以得到Hermitian特征值问题（参见<a href="node131.html#rwf:AAA">4.25</a>）的近似特征解，
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">T_j^{\rm {(pr)}} z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quadi=1,2,\ldots,j.</div>
+</div>
+<br clear="ALL">
+<p></p>
+这里，
+<span class="math-inline">T_j^{\rm {(pr)}}</span>是<span class="math-inline">A</span>在Lanczos基矩阵<span class="math-inline">V_j</span>所张成的空间上的投影，即
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABG"></a><div class="math-display">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j.</div></td>
+<td width=10 align="right">
+(44)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+每个值
+<span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量，
+
+<span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>，产生<span class="math-inline">A</span>的一个近似特征对。
+当然，矩阵
+<span class="math-inline">T_j^{\rm {(pr)}}</span>不是通过其定义（参见<a href="node133.html#rwf:ABG">4.35</a>）计算的。
+相反，我们使用公式
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABP"></a><div class="math-display">T_j^{\rm {(pr)}} = T_j + \left(T_j^{\rm {(d)}}\right)^{\ast}.</div></td>
+<td width=10 align="right">
+(45)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+通过（参见<a href="node133.html#rwf:ABP">4.36</a>），我们只需共轭和转置<span class="math-inline">T_j</span>的带状部分之外的部分，并将其添加到<span class="math-inline">T_j</span>中，以获得
+<span class="math-inline">T_j^{\rm {(pr)}}</span>。
+为了证明（参见<a href="node133.html#rwf:ABP">4.36</a>）确实成立，注意通过从左边乘以<span class="math-inline">V_j^{\ast}</span>并使用正交关系（参见<a href="node133.html#rwf:ABC">4.29</a>）和（参见<a href="node133.html#rwf:ABE">4.31</a>），我们得到
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABF"></a><div class="math-display">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j = T_j + S_j, \quad \mathrm{其中} \quadS_j = V_j^{\ast} \hat{V}_j^{\rm {(dl)}}.</div></td>
+<td width=10 align="right">
+(46)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+由于矩阵
+<span class="math-inline">T_j^{\rm {(pr)}}</span>和
+<span class="math-inline">T_j^{\rm {(b)}}</span>都是
+Hermitian的，因此从（参见<a href="node133.html#rwf:ABW">4.33</a>）可以得出
+
+<span class="math-inline">S_j = (T_j^{\rm {(d)}})^{\ast}</span>在（参见<a href="node133.html#rwf:ABF">4.37</a>）中。
+因此（参见<a href="node133.html#rwf:ABF">4.37</a>）简化为（参见<a href="node133.html#rwf:ABP">4.36</a>）。
+
+<p>
+例如，对于（参见<a href="node133.html#rwf:ACA">4.34</a>）中的<span class="math-inline">T_{15}</span>，相关的矩阵
+<span class="math-inline">T_{15}^{(\rm pr)} = T_{15} + (T_{15}^{\rm {(d)}})^{\ast}</span>
+具有以下形式
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ACB"></a><div class="math-display">T_{15}^{\rm {(pr)}} = %%\footnotesize{\left[ \begin{array}{...... &amp;&amp;\overline{{\tt d}}&amp; &amp; &amp;{*}&amp;{*}&amp;{*}\end{array} \right].</div></td>
+<td width=10 align="right">
+(47)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+这里，
+<span class="math-inline">\overline{{\tt d}}</span>在带状部分下方是通过共轭和转置（参见<a href="node133.html#rwf:ACA">4.34</a>）中带状部分上方的相应条目获得的。
+我们注意到，在（参见<a href="node133.html#rwf:ACB">4.38</a>）中，带状部分之外的条目<span class="math-inline">{\tt d}</span>和
+
+<span class="math-inline">\overline{{\tt d}}</span>通常很小。
+更确切地说，如果使用下面的缩减准则（参见<a href="node134.html#rwf:AGA">4.42</a>），那么所有<span class="math-inline">{\tt d}</span>和
+
+<span class="math-inline">\overline{{\tt d}}</span>的绝对值被缩减容差<span class="math-inline">{\tt dtol}</span>所限制。
+尽管这些条目很小，但将它们设置为零会引入不必要的误差。
+实际上，投影性质（参见<a href="node133.html#rwf:ABG">4.35</a>）对于
+<span class="math-inline">T_{j}^{\rm {(pr)}}</span>
+仅当带状部分之外的所有条目<span class="math-inline">{\tt d}</span>和
+<span class="math-inline">\overline{{\tt d}}</span>都包含在
+<span class="math-inline">T_{j}^{\rm {(pr)}}</span>中时才成立。
+
+<p>
+最后，我们注意到，带状Lanczos算法在达到<span class="math-inline">p_c=0</span>时终止。
+这意味着发生了<span class="math-inline">p</span>次缩减，因此块Krylov序列被耗尽。
+由于<span class="math-inline">p_c=0</span>导致的终止，Lanczos向量的关系（参见<a href="node133.html#rwf:ABD">4.32</a>）简化为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:RED"></a><div class="math-display">A V_j = V_j T_j + \hat{V}_j^{\rm {(dl)}}.</div></td>
+<td width=10 align="right">
+(48)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+使用（参见<a href="node133.html#rwf:ABF">4.37</a>），我们可以将（参见<a href="node133.html#rwf:RED">4.39</a>）重写为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:REE"></a><div class="math-display">A V_j - V_j T_j^{\rm {(pr)}} =\left(I - V_j V_j^{\ast} \right) \hat{V}_j^{\rm {(dl)}}.</div></td>
+<td width=10 align="right">
+(49)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+现在让
+<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">z_i^{(j)}</span>是
+<span class="math-inline">T_j^{\rm {(pr)}}</span>的任意特征对，并假设<span class="math-inline">z_i^{(j)}</span>被归一化
+使得
+<span class="math-inline">\Vert z_i^{(j)}\Vert _2 = 1</span>。
+回想一下，对
+<span class="math-inline">\theta_i^{(j)}</span>和
+<span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>
+被用作<span class="math-inline">A</span>的近似特征解。
+通过从右边乘以<span class="math-inline">z_i^{(j)}</span>并取范数，可以得出近似特征解
+<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">x_i^{(j)}</span>的残差可以被限制为
+<br>
+<div align="right">
+
+
+<table width="100%" align="center">
+<tr valign="middle"><td align="center" NOWRAP><a name="rwf:REF"></a><div class="math-display">\left\Vert A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)} \right\Ver......ert _2\leq \left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert _2.</div></td>
+<td width=10 align="right">
+(50)</td></tr>
+</table>
+<br clear="ALL"></div><p></p>
+特别是，如果只执行精确缩减，那么
+
+<span class="math-inline">\hat{V}_j^{\rm {(dl)}} = 0</span>并且（参见<a href="node133.html#rwf:REF">4.41</a>）表明
+<span class="math-inline">T_j^{\rm {(pr)}}</span>的每个特征值
+<span class="math-inline">\theta_i^{(j)}</span>确实是<span class="math-inline">A</span>的特征值。
+对于一般的缩减，
+<span class="math-inline">\hat{V}_j^{\rm {(dl)}}\not=0</span>，然而，
+
+<span class="math-inline">\Vert \hat{V}_j^{\rm {(dl)}} \Vert _2</span>是缩减容差的数量级。
+更确切地说，如果使用下面的缩减检查（参见<a href="node134.html#rwf:AGA">4.42</a>），那么
+<br><p></p>
+<div align="center">
+
+
+<div class="math-display">\left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert _2 \leq\sqrt{p} \; {\tt dtol},</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">{\tt dtol}</span>表示缩减容差。
+
+<p>
+<hr><!--Navigation Panel-->
+<a name="tex2html2748"
+  href="node134.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html2742"
+  href="node131.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html2736"
+  href="node132.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html2744"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html2746"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html2749"
+  href="node134.html">Algorithm</a>
+<b> Up:</b> <a name="tex2html2743"
+  href="node131.html">Band Lanczos Method &nbsp;</a>
+<b> Previous:</b> <a name="tex2html2737"
+  href="node132.html">The Need for Deflation</a>
+ &nbsp <b>  <a name="tex2html2745"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html2747"
+  href="node422.html">Index</a></b> 
+<!--End of Navigation Panel-->
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>

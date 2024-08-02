@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+<title>A Sample Jordan Block Problem</title>
+<meta name="description" content="A Sample Jordan Block Problem">
+<meta name="keywords" content="book">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var math_displays = document.getElementsByClassName("math-display");
+        for (var i = 0; i < math_displays.length; i++) {
+            katex.render(math_displays[i].textContent, math_displays[i], { displayMode: true, throwOnError: false });
+        }
+        var math_inlines = document.getElementsByClassName("math-inline");
+        for (var i = 0; i < math_inlines.length; i++) {
+            katex.render(math_inlines[i].textContent, math_inlines[i], { displayMode: false, throwOnError: false });
+        }
+    });
+</script>
+<link rel="next" href="node356.html">
+<link rel="previous" href="node354.html">
+<link rel="up" href="node353.html">
+<link rel="next" href="node356.html">
+</head>
+
+<body>
+<!--Navigation Panel-->
+<a name="tex2html6221"
+  href="node356.html">
+<img width="37" height="24" align="bottom" border="0" alt="next"
+ src="icons/next.png"></a> 
+<a name="tex2html6215"
+  href="node353.html">
+<img width="26" height="24" align="bottom" border="0" alt="up"
+ src="icons/up.png"></a> 
+<a name="tex2html6209"
+  href="node354.html">
+<img width="63" height="24" align="bottom" border="0" alt="previous"
+ src="icons/prev.png"></a> 
+<a name="tex2html6217"
+  href="node5.html">
+<img width="65" height="24" align="bottom" border="0" alt="contents"
+ src="icons/contents.png"></a> 
+<a name="tex2html6219"
+  href="node422.html">
+<img width="43" height="24" align="bottom" border="0" alt="index"
+ src="icons/index.png"></a> 
+<br>
+<b> Next:</b> <a name="tex2html6222"
+  href="node356.html">A Sample Trace Minimization</a>
+<b> Up:</b> <a name="tex2html6216"
+  href="node353.html">Numerical Examples</a>
+<b> Previous:</b> <a name="tex2html6210"
+  href="node354.html">A Sample Procrustes Problem</a>
+ &nbsp <b>  <a name="tex2html6218"
+  href="node5.html">Contents</a></b> 
+ &nbsp <b>  <a name="tex2html6220"
+  href="node422.html">Index</a></b> 
+<br>
+<br>
+<!--End of Navigation Panel-->
+
+<h3><a name="SECTION001844200000000000000"></a>
+<a name="43551"></a>
+<a name="43552"></a>
+<br>
+A Sample Jordan Block Problem
+</h3>
+
+<p>
+We now look for a nearby matrix with a Jordan 
+structure 
+<span class="math-inline">J_4(\alpha) \oplus J_2(\beta) \oplus \mathrm{(anything)}</span>
+to the <span class="math-inline">12 \times 12</span> Frank matrix, a matrix whose Jordan structure
+is known to be very difficult.
+
+&gt;&gt; !cp examples/jordan/*.m .
+&gt;&gt; A = frank(12);
+&gt;&gt; evs = sort(eig(A)); eigvs = [mean(evs(1:4)) mean(evs(5:6))];
+&gt;&gt; parameters(A,eigvs,[4; 2],'bundle')    
+   1 Jordan block  of order 4 of eigenvalue 0.076352
+   1 Jordan block  of order 2 of eigenvalue 0.464128
+&gt;&gt; Y0 = guess;          
+&gt;&gt; [fn,Yn] = sg_min(Y0,'dog','euclidean');
+iter    grad            F(Y)              flops         step type
+0       1.775900e-02    9.122159e-06        16257       none
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+1       1.011261e-03    4.121994e-07      4638811       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+2       4.250874e-04    3.523843e-07      9274101       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+3       2.146629e-03    1.696542e-07     13936305       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+4       5.260491e-04    5.326314e-08     18553494       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+5       4.861126e-04    7.545415e-09     23231554       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+6       4.228777e-05    3.014858e-09     27846197       good dog
+  invdgrad: max iterations reached inverting the Hessian by MINRES
+7       2.954536e-06    2.924391e-09     32508118       good dog
+8       2.868836e-08    2.924238e-09     37207124       good dog
+9       2.093780e-09    2.924238e-09     38384200       good dog
+10      2.479121e-09    2.924238e-09     39163025       good dog
+11      1.713240e-09    2.924238e-09     39921924       bad dog
+ 
+
+<p>
+Figure&nbsp;<a href="node355.html#sgminfig2">9.2</a> shows the convergence curve for this run.
+
+<p>
+
+<p></p>
+<div align="center"><a name="sgminfig2"></a><a name="43560"></a>
+<table>
+<caption align="bottom"><strong>Figure 9.2:</strong>
+Jordan problem</caption>
+<tr><td><IMG
+ width="346" height="230" border="0"
+ src="img3473.png"
+ alt="\begin{figure}\begin{center}
+\leavevmode
+\epsfxsize =3.0 in
+\epsfysize =2.0 in
+\epsfbox{notes2.eps}\end{center}\vspace*{-12pt}%% help
+\end{figure}"></td></tr>
+</table>
+</div><p></p>
+
+<p>
+<br><hr>
+<address>
+Susan Blackford
+2000-11-20
+</address>
+</body>
+</html>
