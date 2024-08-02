@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node273.html">
 <link rel="previous" href="node271.html">
@@ -196,7 +209,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 停止准则是在归一化 Schur 向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受该近似。这意味着我们接受计算的特征值中的<span class="math-inline">\epsilon</span>量级的误差，以及特征向量中的<span class="math-inline">O(\epsilon)</span>量级的误差（前提是相关特征值是简单且与其他特征值很好地分离，且左右特征向量之间的角度很小）。
 
 <p>
-不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>的注释(13)（第<a href="node144.html#alg:jdqr"><IMG align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）。
+不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>的注释(13)（第<a href="node144.html#alg:jdqr"><button class="crossref"></button></a>页）。
 
 <p>
 </dd>

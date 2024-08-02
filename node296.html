@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node307.html">
 <link rel="previous" href="node295.html">
@@ -104,7 +117,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 这类特征值问题源自各种应用，例如某些二次特征值问题的线性化，这在阻尼结构系统的建模中经常出现；参见第&#167;<a href="node331.html#sec:qep">9.2</a>节。  
 
 <p>
-形式上，对称兰索斯算法可以用来计算一些特征对，因为矩阵 <span class="math-inline">B^{-1}A</span> 关于 <span class="math-inline">B</span> 内积是对称的。<a name="tex2html50" href="footnode.html#foot37933"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>在这种更普遍的情况下，三项递归关系仍然关于 <span class="math-inline">B</span> 内积成立。该算法被称为<em>对称不定兰索斯方法</em>。这种方法的主要问题是基向量关于不定内积是正交的，因此无法保证它们是线性独立的。算法可能会因分解失败而偶尔失效。尽管如此，由于可能显著节省内存需求和浮点运算，这种方法仍然是解决问题的有吸引力途径。 
+形式上，对称兰索斯算法可以用来计算一些特征对，因为矩阵 <span class="math-inline">B^{-1}A</span> 关于 <span class="math-inline">B</span> 内积是对称的。<a name="tex2html50" href="footnode.html#foot37933"><sup><button class="footnote"></button></sup></a>在这种更普遍的情况下，三项递归关系仍然关于 <span class="math-inline">B</span> 内积成立。该算法被称为<em>对称不定兰索斯方法</em>。这种方法的主要问题是基向量关于不定内积是正交的，因此无法保证它们是线性独立的。算法可能会因分解失败而偶尔失效。尽管如此，由于可能显著节省内存需求和浮点运算，这种方法仍然是解决问题的有吸引力途径。 
 
 <p>
 <br><hr>

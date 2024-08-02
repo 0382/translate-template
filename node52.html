@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node53.html">
 <link rel="previous" href="node51.html">
@@ -90,8 +103,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们将讨论四种特征分解，或者说四种与矩阵 <span class="math-inline">A</span> 相似且特征问题求解更为简单的矩阵。第一种是<em>对角形式</em>，仅在存在 <span class="math-inline">n</span> 个独立特征向量时存在。第二种是<em>约旦形式</em>，它将对角形式推广到所有矩阵。它可能非常病态（实际上，它可能会不连续变化），因此在数值计算中我们通常使用第三种，即<em>舒尔形式</em>，它在计算上更经济且更稳定。我们简要提及第四种，称之为<em>约旦-舒尔形式</em>，<a name="tex2html6"
-  href="footnode.html#foot1994"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>它与舒尔形式一样稳定，但能计算出约旦形式所提供的关于不变子空间的某些详细信息。
+  href="footnode.html#foot1994"><sup><button class="footnote"></button></sup></a>它与舒尔形式一样稳定，但能计算出约旦形式所提供的关于不变子空间的某些详细信息。
 
 <p>
 定义 
@@ -143,8 +155,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果所有的 <span class="math-inline">\lambda_i</span> 都是不同的，那么存在 <span class="math-inline">n</span> 个独立的特征向量，
 并且对角形式存在。这是最简单和最常见的情况。
 例如，如果随机选择一个矩阵，<a name="tex2html7"
-  href="footnode.html#foot1575"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>特征值不同的概率是 1。
+  href="footnode.html#foot1575"><sup><button class="footnote"></button></sup></a>特征值不同的概率是 1。
 
 <p>
 矩阵 <span class="math-inline">A(0)</span> 在 (<a href="node49.html#eqn_chap2_nHep_1">2.3</a>) 中的对角形式不存在，

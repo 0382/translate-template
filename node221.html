@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node222.html">
 <link rel="previous" href="node220.html">
@@ -156,7 +169,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 此机制以非常合理的成本保持了全工作精度的正交性。我们即将讨论的重启方案所施加的特殊情况使得这一修改对于获得准确的特征值和数值上正交的Schur向量（在厄米特情况下为特征向量）至关重要。基于MGS的方案通常足以求解线性系统，因为它们确实构建了一个线性独立的基集，尽管可能不是数值上正交的。MGS正交性的质量取决于原始向量集的条件数（线性独立性）。我们即将介绍的隐式重启机制在未保持数值正交性时效果较差，甚至可能失败。
 
 <p>
-已有充分文献证明，未能保持正交性会导致Lanczos或Arnoldi过程中出现多种数值困难。在厄米特情况下，Paige[<a href="node421.html#paig71">347</a>]表明，正交性的丧失恰好发生在<span class="math-inline">H_j</span>的特征值接近<span class="math-inline">A</span>的特征值时。实际上，阿诺尔迪向量在相关近似特征向量的方向上失去正交性。此外，未能保持正交性会导致Arnoldi方法产生近似特征值的虚假副本。在厄米特情况下，除了完全重新正交化外，还提出了几种补救措施。这些在第&#167;<a href="node103.html#sec:lan">4.4</a>节（第<a href="node103.html#sec:lan"><IMG  align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中进行了讨论。
+已有充分文献证明，未能保持正交性会导致Lanczos或Arnoldi过程中出现多种数值困难。在厄米特情况下，Paige[<a href="node421.html#paig71">347</a>]表明，正交性的丧失恰好发生在<span class="math-inline">H_j</span>的特征值接近<span class="math-inline">A</span>的特征值时。实际上，阿诺尔迪向量在相关近似特征向量的方向上失去正交性。此外，未能保持正交性会导致Arnoldi方法产生近似特征值的虚假副本。在厄米特情况下，除了完全重新正交化外，还提出了几种补救措施。这些在第&#167;<a href="node103.html#sec:lan">4.4</a>节（第<a href="node103.html#sec:lan"><button class="crossref"></button></a>页）中进行了讨论。
 
 <p>
 <hr><!--Navigation Panel-->

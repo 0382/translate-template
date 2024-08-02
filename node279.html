@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="previous" href="node278.html">
 <link rel="up" href="node275.html">
@@ -86,8 +99,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们不提供现有详细的计算特征向量误差界限，这些对于大型稀疏特征问题可能复杂且难以理解，而是将进行简要的实际分析，揭示影响特征向量敏感性的关键因素。
 
 <p>
-考虑一个近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 对应于精确特征对 <span class="math-inline">(\lambda,x)</span>。设 <span class="math-inline">A=QTQ^{\ast}</span> 是 <span class="math-inline">A</span> 的 Schur 分解（见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节，页码<a href="node48.html#sec_chap2_nHep"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>），其中 <span class="math-inline">Q=[x,Q_2]</span> 是酉矩阵，
+考虑一个近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 对应于精确特征对 <span class="math-inline">(\lambda,x)</span>。设 <span class="math-inline">A=QTQ^{\ast}</span> 是 <span class="math-inline">A</span> 的 Schur 分解（见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节，页码<a href="node48.html#sec_chap2_nHep"><button class="crossref"></button></a>），其中 <span class="math-inline">Q=[x,Q_2]</span> 是酉矩阵，
 <br><p></p>
 <div align="center">
 

@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node194.html">
 <link rel="previous" href="node191.html">
@@ -90,8 +103,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在本节中，我们将简要讨论用于计算稠密矩阵的奇异值和奇异向量的方法。这些方法有时被称为变换方法。其中一些或全部方法已在LAPACK、ScaLAPACK以及MATLAB的svd命令中实现。<a name="tex2html32"
-  href="footnode.html#foot21142"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>
+  href="footnode.html#foot21142"><sup><button class="footnote"></button></sup></a>
 <p>
 虽然可以将第<a href="node93.html#sec:dense">4.2</a>节中的变换方法应用于Hermitian矩阵<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>之一，但实际使用的专门针对SVD的方法更为高效和准确。
 
@@ -145,8 +157,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 这是目前LAPACK中用于找到大于约25×25的双对角矩阵的所有奇异值和向量的最快方法[<a
  href="node421.html#gudemmeldhillon94">208</a>,<a
  href="node421.html#lapack">12</a>]。它将矩阵分成两半，计算每半的SVD，并通过求解一个特殊的有理方程将解拼接在一起。对于大型双对角矩阵，这会递归重复，直到部分小于25，此时调用QR算法。<a name="tex2html33"
-  href="footnode.html#foot20863"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>它可能比DQDS或QR略不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
+  href="footnode.html#foot20863"><sup><button class="footnote"></button></sup></a>它可能比DQDS或QR略不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
 
 <p>
 分治法由LAPACK计算例程xBDSDC实现，该例程被LAPACK驱动例程xGESDD用于计算稠密矩阵的SVD。xGESDD目前是LAPACK中稠密矩阵SVD的首选算法。

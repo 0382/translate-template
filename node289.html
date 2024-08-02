@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node292.html">
 <link rel="previous" href="node288.html">
@@ -89,10 +102,8 @@ Deflation and Restart
 
 <p>
 Similar to the situation for the standard eigenproblem 
-(see &#167;<a href="node140.html#sec:JDresdef">4.7.3</a> (p.&nbsp;<a href="node140.html#sec:JDresdef"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>) 
-and&nbsp;&#167;<a href="node271.html#sec:jdrsf">7.12.2</a> (p.&nbsp;<a href="node271.html#sec:jdrsf"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>)),
+(see &#167;<a href="node140.html#sec:JDresdef">4.7.3</a> (p.&nbsp;<a href="node140.html#sec:JDresdef"><button class="crossref"></button></a>) 
+and&nbsp;&#167;<a href="node271.html#sec:jdrsf">7.12.2</a> (p.&nbsp;<a href="node271.html#sec:jdrsf"><button class="crossref"></button></a>)),
 the Jacobi-Davidson process can be enhanced
 with restart possibilities in order to restrict the dimension of the
 search subspace. The process can also

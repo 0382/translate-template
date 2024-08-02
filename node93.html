@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node94.html">
 <link rel="previous" href="node86.html">
@@ -92,7 +105,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在本节中，我们将简要讨论用于计算对称矩阵特征值的直接方法，这些矩阵可以作为满矩阵存储在计算机中。这些直接方法有时被称为变换方法，并且围绕相似变换构建。
 
 <p>
-它们在LAPACK[<a href="node421.html#lapack">12</a>]、ScaLAPACK[<a href="node421.html#scalapack">52</a>]以及MATLAB的eig命令中实现。<a name="tex2html17" href="footnode.html#foot10741"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>
+它们在LAPACK[<a href="node421.html#lapack">12</a>]、ScaLAPACK[<a href="node421.html#scalapack">52</a>]以及MATLAB的eig命令中实现。<a name="tex2html17" href="footnode.html#foot10741"><sup><button class="footnote"></button></sup></a>
 
 <p>
 我们将在本章后面讨论的所有基于子空间算法都需要使用密集、三对角或带状矩阵例程作为内迭代，以获得子空间特征值的Ritz近似。
@@ -121,7 +134,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>该算法找到所有特征值，并可选地找到所有特征向量。它找到三对角矩阵的所有特征值需要<span class="math-inline">O(n^2)</span>次浮点运算。由于将密集矩阵归约到三对角形式需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，对于足够大的<span class="math-inline">n</span>，<span class="math-inline">O(n^2)</span>可以忽略不计。对于找到所有特征向量，QR迭代平均需要略多于<span class="math-inline">6n^3</span>次浮点运算。它在LAPACK中实现为xSTEQR和xSTERF。
 
 <p>
-这是MATLAB命令eig背后的算法。<a name="tex2html18" href="footnode.html#foot10742"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>
+这是MATLAB命令eig背后的算法。<a name="tex2html18" href="footnode.html#foot10742"><sup><button class="footnote"></button></sup></a>
 <p>
 </dd>
 <dt><strong><i>分治法：</i></strong></dt>

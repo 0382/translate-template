@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node117.html">
 <link rel="previous" href="node94.html">
@@ -192,8 +205,7 @@ Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要�
 (27)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-因此我们只需要监控<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{i,j}^{(j)}</span>，就可以估计残差的范数。一旦这个估计值变小，我们就可以将Ritz值<span class="math-inline">\theta_i^{(j)}</span>标记为收敛到特征值<span class="math-inline">\lambda_i</span>。注意，计算Ritz值不需要矩阵-向量乘法&nbsp;(<a href="node103.html#eigenvector">4.12</a>)。我们可以节省这个耗时的操作，直到步骤<span class="math-inline">j</span>，当估计值&nbsp;(<a href="#estimate___residual"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>) 指示收敛时。
+因此我们只需要监控<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{i,j}^{(j)}</span>，就可以估计残差的范数。一旦这个估计值变小，我们就可以将Ritz值<span class="math-inline">\theta_i^{(j)}</span>标记为收敛到特征值<span class="math-inline">\lambda_i</span>。注意，计算Ritz值不需要矩阵-向量乘法&nbsp;(<a href="node103.html#eigenvector">4.12</a>)。我们可以节省这个耗时的操作，直到步骤<span class="math-inline">j</span>，当估计值&nbsp;(<a href="#estimate___residual"><button class="crossref"></button></a>) 指示收敛时。
 
 <p>
 <br><hr>

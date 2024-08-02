@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node322.html">
 <link rel="previous" href="node320.html">
@@ -130,11 +143,9 @@ B_r &amp; *  &amp; * &amp; *  &amp; *
 其中，<span class="math-inline">S</span> 和 <span class="math-inline">T</span> 的对角块以阶梯形式描述了 <span class="math-inline">A - \lambda B</span> 的 Kronecker 结构（参见第<a href="node313.html#guptri_algorithm">8.7.6</a>节）。
 
 <p>
-除了 <span class="math-inline">\{A,B\}</span> 之外，用户还可以选择提供三个输入参数（EPSU、GAP 和 ZERO）来控制 GUPTRI 形式的计算。EPSU（数据相对不确定性）和 GAP（应至少为 1，名义上为 1000）用于在确定输入矩阵束的 Kronecker 结构时进行秩判定（参见第<a href="node315.html#num_rank"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>页）。默认值为
+除了 <span class="math-inline">\{A,B\}</span> 之外，用户还可以选择提供三个输入参数（EPSU、GAP 和 ZERO）来控制 GUPTRI 形式的计算。EPSU（数据相对不确定性）和 GAP（应至少为 1，名义上为 1000）用于在确定输入矩阵束的 Kronecker 结构时进行秩判定（参见第<a href="node315.html#num_rank"><button class="crossref"></button></a>页）。默认值为
 
-<span class="math-inline">{\tt GAP} = 1000</span>，但对于某些示例可能需要其他值。ZERO 用作逻辑变量，当设置为真（ZERO = 非零值）时，强制 guptri 在化简过程中将小奇异值置零，从而返回的矩阵束真正具有计算得到的 GUPTRI 形式（参见第<a href="node316.html#regularized_prob"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>页）。否则，返回的矩阵束是输入矩阵束的真实等价变换，且 GUPTRI 形式中的所有零块将包含小元素（通常最大为 EPSU 大小）。
+<span class="math-inline">{\tt GAP} = 1000</span>，但对于某些示例可能需要其他值。ZERO 用作逻辑变量，当设置为真（ZERO = 非零值）时，强制 guptri 在化简过程中将小奇异值置零，从而返回的矩阵束真正具有计算得到的 GUPTRI 形式（参见第<a href="node316.html#regularized_prob"><button class="crossref"></button></a>页）。否则，返回的矩阵束是输入矩阵束的真实等价变换，且 GUPTRI 形式中的所有零块将包含小元素（通常最大为 EPSU 大小）。
 
 <p>
 <hr><!--Navigation Panel-->

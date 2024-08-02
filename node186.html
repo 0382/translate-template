@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node187.html">
 <link rel="previous" href="node185.html">
@@ -106,7 +119,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 (105)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<a name="tex2html31" href="footnode.html#foot18417"><sup><IMG align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a> 实际上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是附近矩阵的精确特征值和特征向量。这种类型的误差分析称为<em>后向误差分析</em>，矩阵 <span class="math-inline">(E,F)</span> 是<em>后向误差</em>。
+参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<a name="tex2html31" href="footnode.html#foot18417"><sup><button class="footnote"></button></sup></a> 实际上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是附近矩阵的精确特征值和特征向量。这种类型的误差分析称为<em>后向误差分析</em>，矩阵 <span class="math-inline">(E,F)</span> 是<em>后向误差</em>。
 
 <p>
 我们称一个算法在范数 <span class="math-inline">\Vert\cdot\Vert</span> 下对于特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 是<em><span class="math-inline">\tau</span>-后向稳定</em>的，如果它是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征对，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>。考虑到这些，可以对计算特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 的算法的后向稳定性做出陈述。按照惯例，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，则称该算法是<em>后向稳定</em>的。

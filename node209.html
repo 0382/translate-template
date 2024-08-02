@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node210.html">
 <link rel="previous" href="node205.html">
@@ -89,8 +102,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 实践中用于解决NHEP（非厄米特征值问题）的主要直接方法是QR算法<a name="tex2html40"
-  href="footnode.html#foot27092"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>。该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
+  href="footnode.html#foot27092"><sup><button class="footnote"></button></sup></a>。该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
 <br>
 <div align="right">
 
@@ -137,8 +149,7 @@ QR算法具有后向稳定性<a name="22925"></a>，即对于计算得到的酉�
 
 <p>
 实现QR算法的子程序几乎在每个与线性代数相关的软件包中都可用。在MATLAB中，它作为eig命令使用<a name="tex2html41"
-  href="footnode.html#foot27093"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>。在LAPACK[<a
+  href="footnode.html#foot27093"><sup><button class="footnote"></button></sup></a>。在LAPACK[<a
  href="node421.html#lapack">12</a>]中，以下驱动程序可用于执行计算Schur分解、特征值、特征向量及计算结果精度估计等任务的变体：
 <div align="center">
 <table cellpadding=3>

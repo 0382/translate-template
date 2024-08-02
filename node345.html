@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node346.html">
 <link rel="previous" href="node344.html">
@@ -87,8 +100,7 @@ MATLAB模板
 
 <p>
 这些模板即开即用，或作为泛化的起点，<a name="tex2html53"
-  href="footnode.html#foot43325"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>
+  href="footnode.html#foot43325"><sup><button class="footnote"></button></sup></a>
 例如，处理涉及多个变量且带有正交性约束的问题，或进行代码优化。在最简单的模式下，用户只需在<code>F.m</code>（以及可选的<code>dF.m</code>和<code>ddF.m</code>）中提供一个待最小化的函数<span class="math-inline">F(Y)</span>（及其一阶和二阶导数），并给出一个初始猜测<code>Y0</code>。调用序列则简化为对<code>sg_min</code>的一次调用（此名称是为了纪念Stiefel和Grassmann）：
 
    [fopt, yopt] =  sg_min(Y0).

@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node177.html">
 <link rel="previous" href="node169.html">
@@ -191,7 +204,7 @@ Jacobi-Davidson方法
 <dt><strong>(13)</strong></dt>
 <dd>停止准则是当归一化向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受特征向量近似。这意味着我们接受计算特征值中的<span class="math-inline">\epsilon^2</span>级的不准确性和特征向量中的<span class="math-inline">O({\epsilon})</span>级的不准确性（角度）（前提是所关注的特征值是简单且与其他特征值很好地分离，并且<span class="math-inline">B</span>不是病态的；参见第<a href="node177.html#sec:gsym_pert">5.7</a>节中的（<a href="node182.html#ineq:pdpBdef-err-1-evt">5.33</a>）和（<a href="node182.html#ineq:evt-pdpBdef-theta">5.34</a>））。
 <p>
-不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>（第<a href="node144.html#alg:jdqr"><IMG  align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中的第(13)项。
+不能保证检测到所有想要的特征值；参见算法<a href="node144.html#alg:jdqr">4.17</a>（第<a href="node144.html#alg:jdqr"><button class="crossref"></button></a>页）中的第(13)项。
 <p>
 </dd>
 <dt><strong>(17)-(20)</strong></dt>

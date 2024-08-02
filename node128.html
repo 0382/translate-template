@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="previous" href="node127.html">
 <link rel="up" href="node124.html">
@@ -138,7 +151,7 @@ y_j^* T_j q_j + _j  _j _j+1 &=&
 如果<span class="math-inline">\rho_j</span>的量级为<span class="math-inline">\sqrt{\epsilon_M}</span>，这种缩放可以被吸收到<span class="math-inline">\rho_j</span>中，而不改变<span class="math-inline">y</span>，也不影响<span class="math-inline">Q</span>的数值正交性。当<span class="math-inline">y</span>被修改时，之前计算的<span class="math-inline">q_i, 2 \le i < j,</span>不需要改变。在第<span class="math-inline">j</span>步之后，向量<span class="math-inline">y_j</span>仅在后续步骤中进行重缩放，定义<span class="math-inline">q_i, 2 \le i \le j,</span>的公式对<span class="math-inline">y_j</span>的缩放是不变的。有关详细信息，请参阅[<a href="node421.html#sore98">420</a>]。
 
 <p>
-算法<a href="node128.html#fig:orthQ2">4.10</a>实现了这一方案来计算一个可接受的<span class="math-inline">Q</span>。<a name="tex2html23" href="footnode.html#foot8206"><sup><IMG  align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>在实践中，这种变换可以在不存储<span class="math-inline">Q</span>的情况下就地计算和应用，以得到<span class="math-inline">T \leftarrow Q^* T Q</span>和<span class="math-inline">V \leftarrow VQ</span>。然而，这种实现相当微妙，构造<span class="math-inline">Q</span>的过程被避免额外存储的细节所掩盖。该代码与上述描述略有不同，因为向量<span class="math-inline">y</span>仅在所有列<span class="math-inline">2</span>到<span class="math-inline">m</span>确定后才被重缩放以具有单位范数。
+算法<a href="node128.html#fig:orthQ2">4.10</a>实现了这一方案来计算一个可接受的<span class="math-inline">Q</span>。<a name="tex2html23" href="footnode.html#foot8206"><sup><button class="footnote"></button></sup></a>在实践中，这种变换可以在不存储<span class="math-inline">Q</span>的情况下就地计算和应用，以得到<span class="math-inline">T \leftarrow Q^* T Q</span>和<span class="math-inline">V \leftarrow VQ</span>。然而，这种实现相当微妙，构造<span class="math-inline">Q</span>的过程被避免额外存储的细节所掩盖。该代码与上述描述略有不同，因为向量<span class="math-inline">y</span>仅在所有列<span class="math-inline">2</span>到<span class="math-inline">m</span>确定后才被重缩放以具有单位范数。
 
 <p>
 <br>

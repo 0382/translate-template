@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node323.html">
 <link rel="previous" href="node317.html">
@@ -85,8 +98,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 典型用户会调用四个程序，即GUPTRI、REORDR、BOUND和EVALBD。
-下面我们将简要描述这些程序的功能。我们相信，了解奇异或接近奇异问题以及GUPTRI形式的最佳方式是从使用GUPTRI程序的MATLAB接口开始（参见第&nbsp;<a href="node321.html#matlab_guptri"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>页）。
+下面我们将简要描述这些程序的功能。我们相信，了解奇异或接近奇异问题以及GUPTRI形式的最佳方式是从使用GUPTRI程序的MATLAB接口开始（参见第&nbsp;<a href="node321.html#matlab_guptri"><button class="crossref"></button></a>页）。
 
 <p>
 <dl>
@@ -94,8 +106,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>将<span class="math-inline">A - \lambda B</span>通过酉等价变换转化为GUPTRI形式（参见公式<a href="node312.html#eq.guptri1">8.34</a>至<a href="node312.html#eq.guptri_reg">8.35</a>）。
 <span class="math-inline">A_{reg} - \lambda B_{reg}</span>的有限非零特征值（对角元素）可以按任意顺序出现。
 除了<span class="math-inline">\{A,B\}</span>，用户还需提供三个输入参数（EPSU、GAP和ZERO）来控制GUPTRI形式的计算。
-这三个参数也是MATLAB函数的参数（参见第&nbsp;<a href="node321.html#matlab_guptri"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>页）。
+这三个参数也是MATLAB函数的参数（参见第&nbsp;<a href="node321.html#matlab_guptri"><button class="crossref"></button></a>页）。
 
 <p>
 </dd>

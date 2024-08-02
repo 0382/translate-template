@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node232.html">
 <link rel="previous" href="node230.html">
@@ -141,7 +154,7 @@ y_j^* H_j q_j + _j  _j _j+1 &amp;=&amp;
 如果 <span class="math-inline">\rho_j</span> 在 <span class="math-inline">\sqrt{\epsilon_M}</span> 的量级上，那么这种缩放可以被吸收到 <span class="math-inline">\rho_j</span> 中，而不改变 <span class="math-inline">y</span>，也不会影响 <span class="math-inline">Q</span> 的数值正交性。当 <span class="math-inline">y</span> 被修改时，事实证明，之前计算的 <span class="math-inline">q_i</span>，<span class="math-inline">2 \le i &lt; j</span>，不需要改变。在第 <span class="math-inline">j</span> 步之后，向量 <span class="math-inline">y_j</span> 在后续步骤中仅被重新缩放，定义 <span class="math-inline">q_i , \ \ 2 \le i \le j</span> 的公式在 <span class="math-inline">y_j</span> 的缩放下是不变的。有关完整细节，应参考 [<a href="node421.html#sore98">420</a>]。
 
 <p>
-算法 <a href="node231.html#fig:orthQ4">7.9</a> 中显示的代码实现了这一方案，以计算一个可接受的 <span class="math-inline">Q</span>。<a name="tex2html42" href="footnode.html#foot23623"><sup><IMG  align="bottom" border="1" alt="[*]" src="icons/footnote.png"></sup></a>在实践中，这种变换可以就地计算并应用于 <span class="math-inline">H := Q^* H Q</span> 和 <span class="math-inline">V := VQ</span>，而不需要存储 <span class="math-inline">Q</span>。然而，这种实现相当微妙，<span class="math-inline">Q</span> 的构造被避免额外存储的细节所掩盖。该代码与上述描述略有不同，因为向量 <span class="math-inline">y</span> 仅在所有列 <span class="math-inline">2</span> 到 <span class="math-inline">n</span> 确定后才被重新缩放以具有单位范数。
+算法 <a href="node231.html#fig:orthQ4">7.9</a> 中显示的代码实现了这一方案，以计算一个可接受的 <span class="math-inline">Q</span>。<a name="tex2html42" href="footnode.html#foot23623"><sup><button class="footnote"></button></sup></a>在实践中，这种变换可以就地计算并应用于 <span class="math-inline">H := Q^* H Q</span> 和 <span class="math-inline">V := VQ</span>，而不需要存储 <span class="math-inline">Q</span>。然而，这种实现相当微妙，<span class="math-inline">Q</span> 的构造被避免额外存储的细节所掩盖。该代码与上述描述略有不同，因为向量 <span class="math-inline">y</span> 仅在所有列 <span class="math-inline">2</span> 到 <span class="math-inline">n</span> 确定后才被重新缩放以具有单位范数。
 
 <p>
 <br>

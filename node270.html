@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node271.html">
 <link rel="previous" href="node269.html">
@@ -93,8 +106,7 @@ eigenproblem is projected. The subspace is constructed with approximate
 shift-and-invert steps, instead of forming a Krylov subspace. In
 &#167;<a href="node136.html#sec:jacdavsym">4.7</a> we have explained the method in detail, and the
 generalization to the non-Hermitian case for the basic algorithm,
-described in Algorithm&nbsp;<a href="node138.html#alg:jd">4.13</a> (p.&nbsp;<a href="node138.html#alg:jd"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>), 
+described in Algorithm&nbsp;<a href="node138.html#alg:jd">4.13</a> (p.&nbsp;<a href="node138.html#alg:jd"><button class="crossref"></button></a>), 
 is quite straightforward. In fact, the changes are:
 
 <ol>

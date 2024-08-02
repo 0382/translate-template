@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node88.html">
 <link rel="previous" href="node86.html">
@@ -85,8 +98,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 读者或许记得，中等规模的本征值问题，即在此情况下可以方便地存储一个完整的 <span class="math-inline">n \times n</span> 矩阵，通常采用<i>直接法</i>来解决，有时也称为<i>变换法</i>，通过相似变换直至本征值能够轻易读出。<a name="tex2html15"
-  href="footnode.html#foot10740"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>我们在第<a href="node93.html#sec:dense">4.2</a>节对一些当前的直接法进行了简要回顾。
+  href="footnode.html#foot10740"><sup><button class="footnote"></button></sup></a>我们在第<a href="node93.html#sec:dense">4.2</a>节对一些当前的直接法进行了简要回顾。
 
 <p>
 本书的重点在于<i>迭代法</i>，其中稀疏矩阵存储可以发挥优势。在此方法中，矩阵算子作用于一个或几个初始向量，从低维子空间计算本征值近似，迭代继续直至收敛到部分本征值。

@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="previous" href="node307.html">
 <link rel="up" href="node280.html">
@@ -89,7 +102,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在本节中，我们将讨论评估计算特征值及其对应特征向量精度的工具，这些特征值和特征向量来自于正则矩阵对 <span class="math-inline">\{A,B\}</span> 的广义非对称特征值问题（GNHEP）。我们仅假设在成功计算结束后，通常可以获得残差向量，或者随后计算这些残差向量的成本较低。关于稠密GNHEP计算特征值、特征向量和降解子空间的误差估计处理方法，请参阅《LAPACK用户指南》第四章[<a href="node421.html#lapack">12</a>]。
 
 <p>
-对于一般的正则矩阵对 <span class="math-inline">\{A,B\}</span>，其情况比标准非对称特征值问题（NHEP）更为复杂，后者在第<a href="node275.html#sec:errbds_nsym">7.13</a>节（第<a href="node275.html#sec:errbds_nsym"><IMG align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a>页）中讨论过，尤其是当 <span class="math-inline">B</span> 为奇异矩阵时，特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 的次数不再等于矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的维度 <span class="math-inline">n</span>。即使 <span class="math-inline">B</span> 在数学上是非奇异的，但接近奇异时，尝试将其转换为标准特征值问题 <span class="math-inline">B^{-1}A</span> 也会遇到问题，因为此时可能产生巨大的特征值，从而导致数值不稳定。为了涵盖所有可能性，我们提出了一种通过非零数对 <span class="math-inline">(\alpha,\beta)</span> 来表示特征值 <span class="math-inline">\lambda</span> 的齐次表示法：
+对于一般的正则矩阵对 <span class="math-inline">\{A,B\}</span>，其情况比标准非对称特征值问题（NHEP）更为复杂，后者在第<a href="node275.html#sec:errbds_nsym">7.13</a>节（第<a href="node275.html#sec:errbds_nsym"><button class="crossref"></button></a>页）中讨论过，尤其是当 <span class="math-inline">B</span> 为奇异矩阵时，特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 的次数不再等于矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的维度 <span class="math-inline">n</span>。即使 <span class="math-inline">B</span> 在数学上是非奇异的，但接近奇异时，尝试将其转换为标准特征值问题 <span class="math-inline">B^{-1}A</span> 也会遇到问题，因为此时可能产生巨大的特征值，从而导致数值不稳定。为了涵盖所有可能性，我们提出了一种通过非零数对 <span class="math-inline">(\alpha,\beta)</span> 来表示特征值 <span class="math-inline">\lambda</span> 的齐次表示法：
 <br><p></p>
 <div align="center">
 <div class="math-display">\lambda\equiv\alpha/\beta, \quad\quad \vert\alpha\vert^2+\vert\beta\vert^2&gt;0.</div>

@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node272.html">
 <link rel="previous" href="node270.html">
@@ -159,7 +172,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>停止准则是在归一化舒尔向量近似的残差范数低于 <span class="math-inline">\epsilon</span> 时接受舒尔向量近似。这意味着我们接受计算特征值中的 <span class="math-inline">\epsilon</span> 量级的误差，以及舒尔向量中 <span class="math-inline">O(\epsilon)</span> 量级的角度误差（前提是所涉及的特征值是简单的且与其他特征值充分分离）。有关更定量的分析和比例常数，请参见&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>。
 
 <p>
-无法保证检测到所有所需的特征值；参见算法&nbsp;<a href="node144.html#alg:jdqr">4.17</a> 的注释 (13)（第&nbsp;<a href="node144.html#alg:jdqr"><IMG  align="bottom" border="1" alt="[*]" src="icons/crossref.png"></a> 页）。
+无法保证检测到所有所需的特征值；参见算法&nbsp;<a href="node144.html#alg:jdqr">4.17</a> 的注释 (13)（第&nbsp;<a href="node144.html#alg:jdqr"><button class="crossref"></button></a> 页）。
 
 <p>
 如果矩阵是实的，那么所有特征对要么是实的，要么以复共轭对出现。如果检测到复共轭特征对，那么其共轭对也是已知的，并且可以一起进行缩减，这使得算法更加高效。

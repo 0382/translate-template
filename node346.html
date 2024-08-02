@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node353.html">
 <link rel="previous" href="node345.html">
@@ -90,8 +103,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一旦有了目标函数 <span class="math-inline">F(Y)</span> 的公式，我们通过 <span class="math-inline">\tr(V^*dF(Y)) =\frac{d}{dt} F(Y(t)) \vert _{t=0}</span> 隐式定义 <span class="math-inline">dF(Y)</span> 的公式，其中 <span class="math-inline">Y(t) = Y+tV</span>（或任何满足 <span class="math-inline">\dot{Y}(0)=V</span> 的曲线 <span class="math-inline">Y(t)</span>）。读者可能记得 <span class="math-inline">\tr(A^* B)= \sum_{i,j} A_{ij} B_{ij}</span>，因此它就像向量的实内积一样<a name="tex2html55"
-  href="footnode.html#foot43372"><sup><IMG  align="bottom" border="1" alt="[*]"
- src="icons/footnote.png"></sup></a>，<span class="math-inline">dF(Y)</span> 的隐式定义实际上是无约束函数在欧几里得空间中梯度方向导数的解释。
+  href="footnode.html#foot43372"><sup><button class="footnote"></button></sup></a>，<span class="math-inline">dF(Y)</span> 的隐式定义实际上是无约束函数在欧几里得空间中梯度方向导数的解释。
 
 <p>
 对于我们在示例中使用的大多数函数，获取 <span class="math-inline">dF</span> 公式的最简单方法是实际使用隐式定义。

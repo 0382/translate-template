@@ -42,6 +42,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         cursor: pointer;
         border-radius: 8px;
     }
+    .crossref {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+    }
+    .footnote {
+        width: 10pt;
+        height: 10pt;
+        border: 1px solid black;
+        padding: 0;
+        transform: rotate(45deg);
+    }
 </style>
 <link rel="next" href="node112.html">
 <link rel="previous" href="node107.html">
@@ -92,8 +105,7 @@ orthogonal to working
 precision to the two latest vectors <span class="math-inline">v_{j-1}</span> and <span class="math-inline">v_j</span>, 
 and orthogonality to the earlier vectors follows from the symmetry of
 <span class="math-inline">A</span> and the recursion (<a href="node103.html#herm-recursion">4.10</a>). As soon as one
-eigenvalue converges, i.e., the Ritz pair has a small residual (<a href="#estimate___residual"><IMG  align="bottom" border="1" alt="[*]"
- src="icons/crossref.png"></a>), all the basis vectors <span class="math-inline">v_j</span> get perturbations in the
+eigenvalue converges, i.e., the Ritz pair has a small residual (<a href="#estimate___residual"><button class="crossref"></button></a>), all the basis vectors <span class="math-inline">v_j</span> get perturbations in the
 direction of the eigenspace of the converged eigenvalue. As a result of this,
 a duplicate copy of that eigenvalue will soon show up in 
 the tridiagonal matrix <span class="math-inline">T</span>.
