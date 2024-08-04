@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Singular Matrix Pencils &nbsp; B.&nbsp;K&#229;gstr&#246;m </title>
-<meta name="description" content="Singular Matrix Pencils &nbsp; B.&nbsp;K&#229;gstr&#246;m ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Singular Matrix Pencils &nbsp; B.&nbsp;K&#229;gstr&#246;m ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node324.html">
-<link rel="previous" href="node296.html">
-<link rel="up" href="node280.html">
-<link rel="next" href="node308.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5446"
   href="node308.html">
@@ -80,45 +73,40 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5447"
-  href="node308.html">Regular Versus Singular Problems</a>
-<b> Up:</b> <a name="tex2html5441"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5435"
-  href="node306.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html5443"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5445"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5447" href="node308.html">常规问题与奇异问题</a>
+<b>上一级：</b><a name="tex2html5441" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5435" href="node306.html">注释与参考文献</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001770000000000000000"></a> <a name="sec:singularpencil"></a>
 <br>
 奇异矩阵束
-<br>&nbsp; <em>B. Kågström</em>
+<br>&nbsp; <em>B. 卡格斯特罗姆(B. Kågström)</em>
 </h1>
 
 <p>
 
 <p>
-标准特征值问题 <span class="math-inline">Ax = \lambda x</span> 与前几节讨论的广义特征值问题 <span class="math-inline">Ax = \lambda Bx</span> 至少在理论上的一个区别是，当 <span class="math-inline">B</span> 为奇异矩阵时，会出现无穷特征值。解决稠密广义特征值问题的标准方法是QZ算法，参见第&#167;<a href="node282.html#sec:qzalg">8.2</a>节。然而，故事不止于此。例如，如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 有共同的零空间，那么广义特征值问题在某种意义上是病态的，即任意小的扰动都可能完全改变特征值。通常，QZ算法无法可靠地处理这类问题。因此，有必要通过允许有限精度下的范围或零空间分离的降阶准则来应用正则化技术，从而计算邻近问题的特征值。通常，正则化后的邻近问题与原问题的距离与所使用的降阶容差的尺寸成正比。
+至少在理论上，标准特征值问题<span class="math-inline">Ax = \lambda x</span>与前几节讨论的广义特征值问题<span class="math-inline">Ax = \lambda Bx</span>之间的一个区别是，每当<span class="math-inline">B</span>是奇异矩阵时，会出现无穷特征值。解决稠密广义特征值问题的标准方法是QZ算法；参见第<a href="node282.html#sec:qzalg">8.2</a>节。然而，故事不止于此。例如，如果<span class="math-inline">A</span>和<span class="math-inline">B</span>具有共同的零空间，那么广义特征值问题在病态的意义上是不适定的，即任意小的扰动可能完全改变特征值。通常，QZ算法无法可靠地处理这类问题。有必要通过允许有限精度下的范围或零空间分离的降阶准则来应用正则化技术，从而计算附近问题的特征值。通常，正则化附近问题与原始问题的距离与所用的降阶容差的大小成正比。
 
 <p>
-在本节中，我们将介绍解决最一般的 <span class="math-inline">Ax = \lambda Bx</span> 问题的理论、算法和软件，包括 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 为矩形矩阵的情况。该软件计算矩阵对 <span class="math-inline">\{A,B\}</span> 的Schur标准形式的推广，称为GUPTRI（广义上三角）形式[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：<a name="37187"></a>
+在本节中，我们将介绍解决最一般的<span class="math-inline">Ax = \lambda Bx</span>问题的理论、算法和软件，包括<span class="math-inline">A</span>和<span class="math-inline">B</span>为矩形矩阵的情况。该软件计算矩阵对<span class="math-inline">\{A,B\}</span>的Schur标准形式的推广，称为GUPTRI（广义上三角）形式[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：<a name="37187"></a>
 <a name="eq.guptri0"></a>
 <span class="math-inline">P^ (A - B) Q =</span>
 ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
 <br>
 0 &amp; <span class="math-inline">A_{reg} - B_{reg}</span> &amp; *
 <br>
-0 &amp; 0 &amp; <span class="math-inline">A_l - B_l</span> ,
+0 &amp; 0 &amp; <span class="math-inline">A_l - B_l</span>，
 
-具有以下特性：它分离了问题的规则部分和奇异部分。
+具有以下特性：它分离了问题的正则部分和奇异部分。
 
-<span class="math-inline">A_{reg} - \lambda B_{reg}</span> 是规则部分，包含所有特征值。块 <span class="math-inline">A_r - \lambda B_r</span> 和 <span class="math-inline">A_l - \lambda B_l</span> 在(<a href="node307.html#eq.guptri0">8.28</a>)中对应于奇异部分，并具有特殊的块结构。这里 <span class="math-inline">*</span> 表示任意符合的子矩阵。<a name="37196"></a>
+<span class="math-inline">A_{reg} - \lambda B_{reg}</span>是正则部分，包含所有特征值。块<span class="math-inline">A_r - \lambda B_r</span>和<span class="math-inline">A_l - \lambda B_l</span>（参见<a href="node307.html#eq.guptri0">8.28</a>）对应于奇异部分，并具有特殊的块结构。这里<span class="math-inline">*</span>表示任意符合的子矩阵。<a name="37196"></a>
 
 <p>
-在我们完整描述GUPTRI形式并介绍计算它的算法和软件之前，我们需要引入一些与奇异问题相关的新符号和定义。所呈现的一些材料按定义较为技术性和全面。为了简化呈现，我们还提供了几个例子，以说明奇异和近奇异特征问题的性质、处理它们遇到的困难以及如何克服这些困难。
+在我们对GUPTRI形式进行完整描述并介绍计算它的算法和软件之前，我们需要引入一些与奇异问题相关的新符号和定义。其中一些内容按定义相当技术性和全面。为了简化表述，我们还提供了几个例子，说明奇异和近奇异特征问题的性质、处理这些问题的困难以及如何克服这些困难。
 
 <p>
 <br><hr>
@@ -126,10 +114,10 @@ ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><a name="tex2html5448" href="node308.html">规则问题与奇异问题</a>
+<li><a name="tex2html5448" href="node308.html">正则问题与奇异问题</a>
 <li><a name="tex2html5449" href="node309.html">Kronecker标准形式</a>
 <li><a name="tex2html5450" href="node310.html">通用与非通用Kronecker结构</a>
-<li><a name="tex2html5451" href="node311.html">病态性</a>
+<li><a name="tex2html5451" href="node311.html">病态问题</a>
 <li><a name="tex2html5452" href="node312.html">广义Schur阶梯形式</a>
 <li><a name="tex2html5453" href="node313.html">GUPTRI算法</a>
 <ul>
@@ -140,9 +128,9 @@ ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
 <li><a name="tex2html5457" href="node317.html">软件可用性</a>
 <li><a name="tex2html5458" href="node318.html">更多关于GUPTRI和数值示例</a>
 <ul>
-<li><a name="tex2html5459" href="node319.html">计算的GUPTRI形式的鲁棒性和误差界限</a>
+<li><a name="tex2html5459" href="node319.html">计算GUPTRI形式的稳健性和误差界限</a>
 <li><a name="tex2html5460" href="node320.html">算术和空间复杂度</a>
-<li><a name="tex2html5461" href="node321.html">MATLAB中GUPTRI的接口</a>
+<li><a name="tex2html5461" href="node321.html">MATLAB与GUPTRI的接口</a>
 <li><a name="tex2html5462" href="node322.html">MATLAB中的示例</a>
 </ul>
 <li><a name="tex2html5463" href="node323.html">笔记和参考文献</a>
@@ -165,16 +153,11 @@ ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5447"
-  href="node308.html">Regular Versus Singular Problems</a>
-<b> Up:</b> <a name="tex2html5441"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5435"
-  href="node306.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html5443"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5445"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5447" href="node308.html">常规问题与奇异问题</a>
+<b>上一级：</b><a name="tex2html5441" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5435" href="node306.html">注释与参考文献</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

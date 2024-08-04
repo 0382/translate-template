@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Numerical Example</title>
-<meta name="description" content="Numerical Example">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Numerical Example">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node146.html">
-<link rel="up" href="node136.html">
-<link rel="next" href="node148.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2952"
   href="node148.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2953"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Up:</b> <a name="tex2html2947"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html2943"
-  href="node146.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2949"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2951"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2953" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html2943" href="node146.html">可用的软件</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001376000000000000000">
@@ -96,60 +85,71 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-我们包含了一个数值示例，以便潜在用户可以验证和比较他们的结果。
+我们包含了一个数值示例，以便潜在用户可以验证和比较Jacobi-Davidson算法的计算结果。
 
 <p>
-对称矩阵 <span class="math-inline">A</span> 的维度为 <span class="math-inline">n=1000</span>。对角线元素为 <span class="math-inline">a_{i,i} = i</span>，副对角线元素为 <span class="math-inline">a_{i,i-1} = a_{i,i+1}= 0.5</span>，并且 <span class="math-inline">a_{1000,1} = a_{1,1000} = 0.5</span>。其他所有元素均为零。这个示例取自 [<a href="node421.html#crps94">88</a>]，并在 [<a href="node421.html#slvo96">411</a>, p.&nbsp;410] 中关于 Jacobi-Davidson 算法的背景下进行了讨论。
+对称矩阵<span class="math-inline">A</span>的维度为<span class="math-inline">n=1000</span>。对角线元素为<span class="math-inline">a_{i,i} = i</span>，次对角线元素为<span class="math-inline">a_{i,i-1} = a_{i,i+1}= 0.5</span>，并且<span class="math-inline">a_{1000,1} = a_{1,1000} = 0.5</span>。其他所有元素均为零。此示例取自[<a href="node421.html#crps94">88</a>]，并在[<a href="node421.html#slvo96">411</a>, p.&nbsp;410]中针对Jacobi-Davidson算法进行了讨论。
 
 <p>
-我们使用算法 <a href="node144.html#alg:jdqr">4.17</a> 来计算 <span class="math-inline">{k}_{\max}=10</span> 个最大特征值。输入参数选择如下：初始向量 <span class="math-inline">{v}_0=(0.01,\ldots,0.01,1)^T</span>，容差 <span class="math-inline">\epsilon = 10^{-8}</span>，子空间维度参数 <span class="math-inline">{m}_{\min}=10</span>，<span class="math-inline">{m}_{\max}=15</span>，目标值 <span class="math-inline">\tau=1001</span>。
+我们使用算法<a href="node144.html#alg:jdqr">4.17</a>来计算<span class="math-inline">{k}_{\max}=10</span>个最大特征值。输入参数选择如下：初始向量<span class="math-inline">{v}_0=(0.01,\ldots,0.01,1)^T</span>，容差<span class="math-inline">\epsilon = 10^{-8}</span>，子空间维度参数<span class="math-inline">{m}_{\min}=10</span>，<span class="math-inline">{m}_{\max}=15</span>，目标值<span class="math-inline">\tau=1001</span>。
 
 <p>
 
 <p></p>
-<div align="center"><a name="fig:exjd1"></a><a name="10618"></a>
+<div align="CENTER"><a name="fig:exjd1"></a><a name="10618"></a>
 <table>
-<caption align="bottom"><strong>图 4.5：</strong>
-Jacobi-Davidson 算法用于外部特征值，采用多种策略求解校正方程。</caption>
-<tr><td><IMG width="705" height="16" border="0" src="img1433.png" alt="\begin{figure}\@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@@@@}}4{Chap3JDa11.eps}{Chap3JDa12.eps}{Chap3JDa21.eps}{Chap3JDa22.eps} \end{figure}"></td></tr>
+<caption align="BOTTOM"><strong>图4.5：</strong>
+针对外部特征值的Jacobi-Davidson算法，采用多种策略求解校正方程。</caption>
+<tr><td><img
+ width="705" height="16" border="0"
+ src="img1433.png"
+ alt="\begin{figure}\@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@@@@}}4{Chap3JDa11.eps}{Chap3JDa12.eps}{Chap3JDa21.eps}{Chap3JDa22.eps}
+\end{figure}"></td></tr>
 </table>
 </div><p></p>
 
 <p>
 
 <p></p>
-<div align="center"><a name="fig:exjd2"></a><a name="10627"></a>
+<div align="CENTER"><a name="fig:exjd2"></a><a name="10627"></a>
 <table>
-<caption align="bottom"><strong>图 4.6：</strong>
-Jacobi-Davidson 算法用于外部特征值（顶部）和内部特征值（底部）。校正方程通过 5 步普通 GMRES（左侧）和 5 步预处理 GMRES（右侧）求解。</caption>
-<tr><td><IMG width="709" height="16" border="0" src="img1434.png" alt="\begin{figure}\begin{center} \@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@... ...{Chap3JDb21.eps}{Chap3JDb22.eps} \end{center}\vspace*{-18pt}%% help \end{figure}"></td></tr>
+<caption align="BOTTOM"><strong>图4.6：</strong>
+针对外部特征值（顶部）和内部特征值（底部）的Jacobi-Davidson算法。校正方程通过5步普通GMRES（左侧）和5步预处理GMRES（右侧）求解。</caption>
+<tr><td><img
+ width="709" height="16" border="0"
+ src="img1434.png"
+ alt="\begin{figure}\begin{center}
+\@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@...
+...{Chap3JDb21.eps}{Chap3JDb22.eps}
+\end{center}\vspace*{-18pt}%% help
+\end{figure}"></td></tr>
 </table>
 </div><p></p>
 
 <p>
-我们在图 <a href="node147.html#fig:exjd1">4.5</a> 中以图形方式展示了残差向量的范数随迭代次数的变化。每当范数小于 <span class="math-inline">\epsilon</span> 时，我们确定了一个在该精度内的特征值，并继续进行下一次特征值的迭代。四幅图按字典顺序表示以下不同情况：
+我们在图<a href="node147.html#fig:exjd1">4.5</a>中以图形方式展示了残差向量的范数随迭代次数的变化。每次范数小于<span class="math-inline">\epsilon</span>时，表示在此精度内确定了特征值，并通过缩减继续迭代以确定下一个特征值。四幅图按字母顺序分别代表以下不同情况：
 
 <p>
 
 <ol>
-<li>左上：这展示了当 <span class="math-inline">{t}</span> 在算法 <a href="node144.html#alg:jdqr">4.17</a> 的第 (32) 项中简单地取为 <span class="math-inline">{t}=-r</span> 时会发生什么。在精确算术中，这应该提供与 Arnoldi 算法相同的 Ritz 值（假设 Arnoldi 采用与算法 <a href="node144.html#alg:jdqr">4.17</a> 类似的重新启动策略）。
+<li>左上：显示了在算法<a href="node144.html#alg:jdqr">4.17</a>的第(32)项中，简单地将<span class="math-inline">{t}</span>取为<span class="math-inline">{t}=-r</span>时的情况。在精确算术中，这应提供与Arnoldi算法相同的Ritz值（假设Arnoldi采用类似算法<a href="node144.html#alg:jdqr">4.17</a>中的重启策略）。
 
 <p>
 </li>
-<li>右上：这里我们应用了一个简单的预条件器 <span class="math-inline">{K}=\mathrm{diag}(A)</span>，如算法 <a href="node144.html#alg:corrit2">4.18</a> 所示，没有进一步的子空间加速；即我们在步骤 (d<span class="math-inline">{}^{\,\prime}</span>) 后停止。这相当于目前量子化学家使用的方法 [<a href="node421.html#oljs90">344</a>]。
+<li>右上：这里我们应用了一个简单的预条件子<span class="math-inline">{K}=\mathrm{diag}(A)</span>，如算法<a href="node144.html#alg:corrit2">4.18</a>所示，没有进一步的子空间加速；即在步骤(d<span class="math-inline">{}^{\,\prime}</span>)后停止。这相当于当前量子化学家使用的[344]方法。
 
 <p>
 </li>
-<li>左下：这给出了在没有预处理的情况下，使用 5 步 MINRES 求解校正方程的迭代结果（算法 <a href="node144.html#alg:jdqr">4.17</a> 中 <span class="math-inline">{K}=I</span>）。
+<li>左下：给出了未预处理的5步MINRES求解校正方程时的迭代结果（算法<a href="node144.html#alg:jdqr">4.17</a>中<span class="math-inline">{K}=I</span>）。
 
 <p>
 </li>
-<li>右下：这里我们使用了与算法 <a href="node144.html#alg:jdqr">4.17</a> 相同的预处理，<span class="math-inline">{K}=\mathrm{diag}(A)</span> 和 5 步 GMRES（注意使用 MINRES 会更高效，但这需要双边预处理，我们没有提供相应的算法）。
+<li>右下：这里我们采用了算法<a href="node144.html#alg:jdqr">4.17</a>中的预处理，使用<span class="math-inline">{K}=\mathrm{diag}(A)</span>和5步GMRES（注意使用MINRES会更高效，但这需要双边预处理，我们未提供相应算法）。
 </li>
 </ol>
 
 <p>
-在图 <a href="node147.html#fig:exjd2">4.6</a> 中，我们给出了使用算法 <a href="node144.html#alg:jdqr">4.17</a>（顶部）和算法 <a href="node145.html#alg:jdqrhar">4.19</a>（底部）获得的内部特征值的收敛历史，输入参数如下：<span class="math-inline">{v}_0=(0.01,\ldots,0.01,1)^T</span>，<span class="math-inline">\tau=900.5</span>，<span class="math-inline">\epsilon = 10^{-8}</span>，<span class="math-inline">{k}_{\max}=10</span>，<span class="math-inline">{m}_{\min}=5</span>，<span class="math-inline">{m}_{\max}=10</span>。同样，每当曲线低于 <span class="math-inline">\epsilon</span>，这表明一个近似特征值在该容差内收敛。对于所有图，我们使用 5 步 GMRES 来求解校正方程 (32)。对于左侧图，我们没有使用预处理。对于右侧图，我们使用 <span class="math-inline">{K}=\mathrm{diag}(A)-\tau I</span> 预处理 GMRES，如算法 <a href="node144.html#alg:corrit2">4.18</a> 所示。
+在图<a href="node147.html#fig:exjd2">4.6</a>中，我们展示了内部特征值的收敛历史，分别由算法<a href="node144.html#alg:jdqr">4.17</a>（顶部）和算法<a href="node145.html#alg:jdqrhar">4.19</a>（底部）获得，输入参数如下：<span class="math-inline">{v}_0=(0.01,\ldots,0.01,1)^T</span>，<span class="math-inline">\tau=900.5</span>，<span class="math-inline">\epsilon = 10^{-8}</span>，<span class="math-inline">{k}_{\max}=10</span>，<span class="math-inline">{m}_{\min}=5</span>，<span class="math-inline">{m}_{\max}=10</span>。同样，每次曲线低于<span class="math-inline">\epsilon</span>，表示在此容差内特征值的近似收敛。所有图中，我们使用5步GMRES来求解校正方程(32)。左图未使用预处理，右图则采用<span class="math-inline">{K}=\mathrm{diag}(A)-\tau I</span>进行预处理，如算法<a href="node144.html#alg:corrit2">4.18</a>所示。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -169,16 +169,11 @@ Jacobi-Davidson 算法用于外部特征值（顶部）和内部特征值（底�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2953"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Up:</b> <a name="tex2html2947"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html2943"
-  href="node146.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2949"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2951"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2953" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html2943" href="node146.html">可用的软件</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

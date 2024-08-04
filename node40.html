@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Singular Values and Singular Vectors</title>
-<meta name="description" content="Singular Values and Singular Vectors">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Singular Values and Singular Vectors">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node41.html">
-<link rel="previous" href="node39.html">
-<link rel="up" href="node39.html">
-<link rel="next" href="node41.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1307"
   href="node41.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1308"
-  href="node41.html">Singular Subspaces</a>
-<b> Up:</b> <a name="tex2html1302"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1296"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
- &nbsp <b>  <a name="tex2html1304"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1306"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1308" href="node41.html">奇异子空间</a>
+<b>上一级：</b><a name="tex2html1302" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1296" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001141000000000000000"></a>
@@ -102,13 +90,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="1321"></a> 
 
 <p>
-矩阵 <span class="math-inline">A^* A</span> 的 <span class="math-inline">n</span> 个特征值的平方根被称为 <span class="math-inline">A</span> 的<em>奇异值</em>。由于 <span class="math-inline">A^* A</span> 是埃尔米特矩阵且为半正定矩阵，奇异值均为实数且非负。因此，我们可以将它们按从小到大的顺序排列为 <span class="math-inline">0 \leq \sigma_n \leq \cdots \leq \sigma_1</span>。
+<span class="math-inline">A^* A</span>的<span class="math-inline">n</span>个特征值的平方根即为<span class="math-inline">A</span>的<em>奇异值</em>。由于<span class="math-inline">A^* A</span>是厄米且半正定的，奇异值均为实数且非负。因此，我们可以将它们按排序表示为<span class="math-inline">0 \leq \sigma_n \leq \cdots \leq \sigma_1</span>。
 
 <p>
-<span class="math-inline">A^* A</span> 的 <span class="math-inline">n</span> 个特征向量被称为<em>（右）奇异向量</em>。我们用 <span class="math-inline">v_1,\ldots,v_n</span> 表示它们，其中 <span class="math-inline">v_i</span> 是特征值 <span class="math-inline">\sigma_i^2</span> 对应的特征向量。<span class="math-inline">m</span> 阶矩阵 <span class="math-inline">AA^*</span> 同样是埃尔米特矩阵且为半正定矩阵。其最大的 <span class="math-inline">n</span> 个特征值与 <span class="math-inline">AA^*</span> 的特征值相同，其余为零。<span class="math-inline">AA^*</span> 的 <span class="math-inline">m</span> 个特征向量被称为<em>（左）奇异向量</em>。我们用 <span class="math-inline">u_1,\ldots,u_m</span> 表示它们，其中 <span class="math-inline">u_1</span> 到 <span class="math-inline">u_n</span> 是特征值 <span class="math-inline">\sigma_1^2</span> 到 <span class="math-inline">\sigma_n^2</span> 对应的特征向量，而 <span class="math-inline">u_{n+1}</span> 到 <span class="math-inline">u_{m}</span> 是零特征值对应的特征向量。奇异向量满足以下恒等式：<span class="math-inline">Av_i = \sigma_i u_i</span> 和 <span class="math-inline">A^* u_i = \sigma_i v_i</span>（对于 <span class="math-inline">i=1,\ldots,n</span>），以及 <span class="math-inline">A^*u_i = 0</span>（对于 <span class="math-inline">i=n+1,\ldots,m</span>）。
+<span class="math-inline">A^* A</span>的<span class="math-inline">n</span>个特征向量被称为<em>（右）奇异向量</em>。我们用<span class="math-inline">v_1,\ldots,v_n</span>表示它们，其中<span class="math-inline">v_i</span>对应特征值<span class="math-inline">\sigma_i^2</span>。<span class="math-inline">m</span>阶矩阵<span class="math-inline">AA^*</span>同样为厄米且半正定。其最大的<span class="math-inline">n</span>个特征值与<span class="math-inline">AA^*</span>相同，其余为零。<span class="math-inline">AA^*</span>的<span class="math-inline">m</span>个特征向量被称为<em>（左）奇异向量</em>。我们用<span class="math-inline">u_1,\ldots,u_m</span>表示它们，其中<span class="math-inline">u_1</span>至<span class="math-inline">u_n</span>对应特征值<span class="math-inline">\sigma_1^2</span>至<span class="math-inline">\sigma_n^2</span>，而<span class="math-inline">u_{n+1}</span>至<span class="math-inline">u_{m}</span>对应零特征值。奇异向量可选择满足以下恒等式：<span class="math-inline">Av_i = \sigma_i u_i</span>和<span class="math-inline">A^* u_i = \sigma_i v_i</span>（对于<span class="math-inline">i=1,\ldots,n</span>），以及<span class="math-inline">A^*u_i = 0</span>（对于<span class="math-inline">i=n+1,\ldots,m</span>）。
 
 <p>
-我们可以不失一般性地假设每个 <span class="math-inline">\Vert u_i\Vert _2=1</span> 且 <span class="math-inline">\Vert v_i\Vert _2=1</span>。如果 <span class="math-inline">A</span> 是实矩阵，奇异向量也是实数。尽管奇异向量可能不唯一（例如，单位矩阵的任何向量都是奇异向量），但它们可以选择为彼此正交：<span class="math-inline">u_i^*u_j = v_i^*v_j = 0</span>（当 <span class="math-inline">i \neq j</span> 时）。当某个奇异值与其他所有奇异值都不同时，其对应的奇异向量是唯一的（至多乘以标量）。
+我们可以不失一般性地假设每个<span class="math-inline">\Vert u_i\Vert _2=1</span>和<span class="math-inline">\Vert v_i\Vert _2=1</span>。若<span class="math-inline">A</span>为实数矩阵，则奇异向量为实数。尽管奇异向量可能不唯一（例如，单位矩阵的任意向量都是奇异向量），但它们均可选择为相互正交：<span class="math-inline">u_i^*u_j = v_i^*v_j = 0</span>（若<span class="math-inline">i \neq j</span>）。当某个奇异值与其他所有奇异值均不相同时，其奇异向量唯一（至多乘以标量）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -128,16 +116,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1308"
-  href="node41.html">Singular Subspaces</a>
-<b> Up:</b> <a name="tex2html1302"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1296"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
- &nbsp <b>  <a name="tex2html1304"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1306"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1308" href="node41.html">奇异子空间</a>
+<b>上一级：</b><a name="tex2html1302" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1296" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

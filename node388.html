@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Solvers for Sparse Matrices</title>
-<meta name="description" content="Direct Solvers for Sparse Matrices">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Solvers for Sparse Matrices">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node389.html">
-<link rel="previous" href="node387.html">
-<link rel="up" href="node385.html">
-<link rel="next" href="node389.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6719"
   href="node389.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6720"
-  href="node389.html">Direct Solvers for Structured</a>
-<b> Up:</b> <a name="tex2html6714"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6708"
-  href="node387.html">Direct Solvers for Band</a>
- &nbsp <b>  <a name="tex2html6716"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6718"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6720" href="node389.html">Direct Solvers for Structured</a>
+<b>上一级：</b><a name="tex2html6714" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6708" href="node387.html">Direct Solvers for Band</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001933000000000000000"></a> <a name="sec:SparseDirect"></a><a name="46395"></a>
@@ -98,232 +86,231 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-稀疏矩阵的直接求解器涉及比密集矩阵更为复杂的算法。主要复杂性源于高效处理因子 <span class="math-inline">L</span> 和 <span class="math-inline">U</span> 中的 <em>填入</em> 的需要。一个典型的稀疏求解器包含四个不同的步骤，而密集矩阵的情况下只有两个步骤：
+稀疏矩阵的直接求解器涉及比稠密矩阵更为复杂的算法。主要复杂性在于需要高效处理<span class="math-inline">L</span>和<span class="math-inline">U</span>因子中的<em>填入</em>。一个典型的稀疏求解器包含四个不同的步骤，而稠密情况下只有两个步骤：
 
 <p>
 
 <ol>
-<li>一个排序步骤，重新排列行和列，使得因子受到较少的填入，或者矩阵具有特殊的结构，如块三角形式。</li>
-<li>一个分析步骤或符号分解，确定因子中的非零结构，并为因子创建合适的数据结构。</li>
-<li>数值分解步骤，计算 <span class="math-inline">L</span> 和 <span class="math-inline">U</span> 因子。</li>
-<li>一个求解步骤，使用因子进行前向和后向代入。</li>
+<li>排序步骤，重新排序行和列，以减少因子中的填入，或者使矩阵具有特殊结构，如块三角形式。</li>
+<li>分析步骤或符号分解，确定因子中的非零结构，并为因子创建合适的数据结构。</li>
+<li>数值分解步骤，计算<span class="math-inline">L</span>和<span class="math-inline">U</span>因子。</li>
+<li>求解步骤，使用因子进行前向和后向代入。</li>
 </ol>
 
 <p>
-每个步骤都有大量的算法与之相关。Duff的综述论文[<a href="node421.html#duff98">137</a>]（另见[<a href="node421.html#ddsv98">135</a>, 第6章]）和Heath、Ng及Peyton的论文[<a href="node421.html#heathngpeyton91">219</a>]可以作为各种算法的优秀参考。通常，步骤1和2仅涉及矩阵的图，因此只涉及整数运算。步骤3和4涉及浮点运算。步骤3通常是最耗时的部分，而步骤4大约快一个数量级。步骤1中使用的算法与步骤3中使用的算法相当独立。但步骤2中的算法通常与步骤3中的算法密切相关。在最简单的系统，即对称正定系统中，这四个步骤可以很好地分离。对于最一般的非对称系统，求解器可能会合并步骤2和3（例如SuperLU），甚至合并步骤1、2和3（例如UMFPACK），以便数值也参与确定消去顺序。
+每个步骤都有多种算法。Duff的综述论文[<a href="node421.html#duff98">137</a>]（另见[<a href="node421.html#ddsv98">135</a>, 第6章]）和Heath、Ng及Peyton的论文[<a href="node421.html#heathngpeyton91">219</a>]可以作为各种算法的优秀参考。通常，步骤1和2仅涉及矩阵的图，因此仅涉及整数运算。步骤3和4涉及浮点运算。步骤3通常是最耗时的部分，而步骤4大约快一个数量级。步骤1中使用的算法与步骤3中使用的算法相当独立。但步骤2中的算法通常与步骤3中的算法密切相关。在最简单的系统，即对称正定系统中，这四个步骤可以很好地分离。对于最一般的非对称系统，求解器可能会合并步骤2和3（例如SuperLU），甚至合并步骤1、2和3（例如UMFPACK），以便数值也参与确定消去顺序。
 
 <p>
-在过去十年中，许多新算法和新软件涌现出来，利用了新的架构特性，如内存层次结构和并行性。在表<a href="node388.html#tab:SparseDirectSolver">10.1</a>中，我们编制了一个相当全面的稀疏直接求解器列表。最方便的是将软件分为三类：串行机器软件、共享内存并行机器软件和分布式内存并行机器软件。
+在过去十年中，出现了许多利用新架构特性（如内存层次结构和并行性）的新算法和新软件。在表<a href="node388.html#tab:SparseDirectSolver">10.1</a>中，我们列出了相当全面的稀疏直接求解器清单。最方便的是将软件分为三类：串行机软件、共享内存并行机软件和分布式内存并行机软件。
 
 <p>
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <a name="tab:SparseDirectSolver"></a> 
-<div align="center">
+<div align="CENTER">
 <a name="46405"></a>
-<table cellpadding=3 border="1">
-<caption><strong>表10.1：</strong>
-使用直接方法求解稀疏线性系统的软件。</caption>
-<tr><td align="left">代码</td>
-<td align="left">技术</td>
-<td align="left">范围</td>
-<td align="left">联系</td>
-<td align="right">&nbsp;</td>
+<table CELLPADDING=3 border="1">
+<caption><strong>表10.1:</strong> 使用直接方法求解稀疏线性系统的软件。</caption>
+<tr><td align="LEFT">代码</td>
+<td align="LEFT">技术</td>
+<td align="LEFT">范围</td>
+<td align="LEFT">联系</td>
+<td align="RIGHT">&nbsp;</td>
 </tr>
-<tr><td align="left" colspan=5>串行平台</td>
+<tr><td align="LEFT" COLSPAN=5>串行平台</td>
 </tr>
-<tr><td align="left">MA27</td>
-<td align="left">多前端</td>
-<td align="left">对称</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#duffreid83">140</a>]</td>
+<tr><td align="LEFT">MA27</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#duffreid83">140</a>]</td>
 </tr>
-<tr><td align="left">MA41</td>
-<td align="left">多前端</td>
-<td align="left">对称-模式</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#amdu:89">6</a>]</td>
+<tr><td align="LEFT">MA41</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称-模式</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#amdu:89">6</a>]</td>
 </tr>
-<tr><td align="left">MA42</td>
-<td align="left">前端</td>
-<td align="left">非对称</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#duffscott96">144</a>]</td>
+<tr><td align="LEFT">MA42</td>
+<td align="LEFT">前端</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#duffscott96">144</a>]</td>
 </tr>
-<tr><td align="left">MA47</td>
-<td align="left">多前端</td>
-<td align="left">对称</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#dure95">141</a>]</td>
+<tr><td align="LEFT">MA47</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#dure95">141</a>]</td>
 </tr>
-<tr><td align="left">MA48</td>
-<td align="left">右看</td>
-<td align="left">非对称</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#duffreid96">142</a>]</td>
+<tr><td align="LEFT">MA48</td>
+<td align="LEFT">右看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#duffreid96">142</a>]</td>
 </tr>
-<tr><td align="left">SPARSE</td>
-<td align="left">右看</td>
-<td align="left">非对称</td>
-<td align="left">Kundert</td>
-<td align="right">[<a href="node421.html#kundert86">281</a>]</td>
+<tr><td align="LEFT">SPARSE</td>
+<td align="LEFT">右看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Kundert</td>
+<td align="RIGHT">[<a href="node421.html#kundert86">281</a>]</td>
 </tr>
-<tr><td align="left">SPARSPAK</td>
-<td align="left">左看</td>
-<td align="left">对称正定</td>
-<td align="left">George</td>
-<td align="right">[<a href="node421.html#georgeliu81">191</a>]</td>
+<tr><td align="LEFT">SPARSPAK</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">George</td>
+<td align="RIGHT">[<a href="node421.html#georgeliu81">191</a>]</td>
 </tr>
-<tr><td align="left">SPOOLES</td>
-<td align="left">左看</td>
-<td align="left">对称和对称-模式</td>
-<td align="left">Ashcraft</td>
-<td align="right">[<a href="node421.html#asgr:99">21</a>]</td>
+<tr><td align="LEFT">SPOOLES</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称和对称-模式</td>
+<td align="LEFT">Ashcraft</td>
+<td align="RIGHT">[<a href="node421.html#asgr:99">21</a>]</td>
 </tr>
-<tr><td align="left">SuperLLT</td>
-<td align="left">左看</td>
-<td align="left">对称正定</td>
-<td align="left">Ng</td>
-<td align="right">[<a href="node421.html#ngpeyton93b">339</a>]</td>
+<tr><td align="LEFT">SuperLLT</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">Ng</td>
+<td align="RIGHT">[<a href="node421.html#ngpeyton93b">339</a>]</td>
 </tr>
-<tr><td align="left">SuperLU</td>
-<td align="left">左看</td>
-<td align="left">非对称</td>
-<td align="left">Li</td>
-<td align="right">[<a href="node421.html#deei:99">126</a>]</td>
+<tr><td align="LEFT">SuperLU</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Li</td>
+<td align="RIGHT">[<a href="node421.html#deei:99">126</a>]</td>
 </tr>
-<tr><td align="left">UMFPACK</td>
-<td align="left">多前端</td>
-<td align="left">非对称</td>
-<td align="left">Davis</td>
-<td align="right">[<a href="node421.html#davisduff95">103</a>]</td>
+<tr><td align="LEFT">UMFPACK</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Davis</td>
+<td align="RIGHT">[<a href="node421.html#davisduff95">103</a>]</td>
 </tr>
-<tr><td align="left" colspan=5>共享内存并行机器</td>
+<tr><td align="LEFT" COLSPAN=5>共享内存并行机</td>
 </tr>
-<tr><td align="left">Cholesky</td>
-<td align="left">左看</td>
-<td align="left">对称正定</td>
-<td align="left">Rothberg</td>
-<td align="right">[<a href="node421.html#splash-2">405</a>]</td>
+<tr><td align="LEFT">Cholesky</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">Rothberg</td>
+<td align="RIGHT">[<a href="node421.html#splash-2">405</a>]</td>
 </tr>
-<tr><td align="left">DMF</td>
-<td align="left">多前端</td>
-<td align="left">对称</td>
-<td align="left">Lucas</td>
-<td align="right">[<a href="node421.html#lucas">308</a>]</td>
+<tr><td align="LEFT">DMF</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称</td>
+<td align="LEFT">Lucas</td>
+<td align="RIGHT">[<a href="node421.html#lucas">308</a>]</td>
 </tr>
-<tr><td align="left">MA41</td>
-<td align="left">多前端</td>
-<td align="left">对称-模式</td>
-<td align="left">HSL</td>
-<td align="right">[<a href="node421.html#amdu:93">7</a>]</td>
+<tr><td align="LEFT">MA41</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称-模式</td>
+<td align="LEFT">HSL</td>
+<td align="RIGHT">[<a href="node421.html#amdu:93">7</a>]</td>
 </tr>
-<tr><td align="left">PanelLLT</td>
-<td align="left">左看</td>
-<td align="left">对称正定</td>
-<td align="left">Ng</td>
-<td align="right">[<a href="node421.html#gupta92">211</a>]</td>
+<tr><td align="LEFT">PanelLLT</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">Ng</td>
+<td align="RIGHT">[<a href="node421.html#gupta92">211</a>]</td>
 </tr>
-<tr><td align="left">PARASPAR</td>
-<td align="left">右看</td>
-<td align="left">非对称</td>
-<td align="left">Zlatev</td>
-<td align="right">[<a href="node421.html#zlatev95">471</a>]</td>
+<tr><td align="LEFT">PARASPAR</td>
+<td align="LEFT">右看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Zlatev</td>
+<td align="RIGHT">[<a href="node421.html#zlatev95">471</a>]</td>
 </tr>
-<tr><td align="left">PARDISO</td>
-<td align="left">左右看</td>
-<td align="left">对称-模式</td>
-<td align="left">Schenk</td>
-<td align="right">[<a href="node421.html#scgf:00">395</a>]</td>
+<tr><td align="LEFT">PARDISO</td>
+<td align="LEFT">左右看</td>
+<td align="LEFT">对称-模式</td>
+<td align="LEFT">Schenk</td>
+<td align="RIGHT">[<a href="node421.html#scgf:00">395</a>]</td>
 </tr>
-<tr><td align="left">SPOOLES</td>
-<td align="left">左看</td>
-<td align="left">对称和对称-模式</td>
-<td align="left">Ashcraft</td>
-<td align="right">[<a href="node421.html#asgr:99">21</a>]</td>
+<tr><td align="LEFT">SPOOLES</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称和对称-模式</td>
+<td align="LEFT">Ashcraft</td>
+<td align="RIGHT">[<a href="node421.html#asgr:99">21</a>]</td>
 </tr>
-<tr><td align="left">SuperLU_MT</td>
-<td align="left">左看</td>
-<td align="left">非对称</td>
-<td align="left">Li</td>
-<td align="right">[<a href="node421.html#degl:99">127</a>]</td>
+<tr><td align="LEFT">SuperLU_MT</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Li</td>
+<td align="RIGHT">[<a href="node421.html#degl:99">127</a>]</td>
 </tr>
-<tr><td align="left" colspan=5>分布式内存并行机器</td>
+<tr><td align="LEFT" COLSPAN=5>分布式内存并行机</td>
 </tr>
-<tr><td align="left">CAPSS</td>
-<td align="left">多前端</td>
-<td align="left">对称正定</td>
-<td align="left">Raghavan</td>
-<td align="right">[<a href="node421.html#hera:97">220</a>]</td>
+<tr><td align="LEFT">CAPSS</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">Raghavan</td>
+<td align="RIGHT">[<a href="node421.html#hera:97">220</a>]</td>
 </tr>
-<tr><td align="left">DMF</td>
-<td align="left">多前端</td>
-<td align="left">对称</td>
-<td align="left">Lucas</td>
-<td align="right">[<a href="node421.html#lucas">308</a>]</td>
+<tr><td align="LEFT">DMF</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称</td>
+<td align="LEFT">Lucas</td>
+<td align="RIGHT">[<a href="node421.html#lucas">308</a>]</td>
 </tr>
-<tr><td align="left">MUMPS</td>
-<td align="left">多前端</td>
-<td align="left">对称和对称-模式</td>
-<td align="left">Amestoy</td>
-<td align="right">[<a href="node421.html#adek:99">8</a>]</td>
+<tr><td align="LEFT">MUMPS</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称和对称-模式</td>
+<td align="LEFT">Amestoy</td>
+<td align="RIGHT">[<a href="node421.html#adek:99">8</a>]</td>
 </tr>
-<tr><td align="left">PaStiX</td>
-<td align="left">左右看<span class="math-inline">{}^*</span></td>
-<td align="left">对称正定</td>
-<td align="left">CEA</td>
-<td align="right">[<a href="node421.html#herr:99">224</a>]</td>
+<tr><td align="LEFT">PaStiX</td>
+<td align="LEFT">左右看<span class="math-inline">{}^*</span></td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">CEA</td>
+<td align="RIGHT">[<a href="node421.html#herr:99">224</a>]</td>
 </tr>
-<tr><td align="left">PSPASES</td>
-<td align="left">多前端</td>
-<td align="left">对称正定</td>
-<td align="left">Gupta</td>
-<td align="right">[<a href="node421.html#gukk:97">210</a>]</td>
+<tr><td align="LEFT">PSPASES</td>
+<td align="LEFT">多前端</td>
+<td align="LEFT">对称正定</td>
+<td align="LEFT">Gupta</td>
+<td align="RIGHT">[<a href="node421.html#gukk:97">210</a>]</td>
 </tr>
-<tr><td align="left">SPOOLES</td>
-<td align="left">左看</td>
-<td align="left">对称和对称-模式</td>
-<td align="left">Ashcraft</td>
-<td align="right">[<a href="node421.html#asgr:99">21</a>]</td>
+<tr><td align="LEFT">SPOOLES</td>
+<td align="LEFT">左看</td>
+<td align="LEFT">对称和对称-模式</td>
+<td align="LEFT">Ashcraft</td>
+<td align="RIGHT">[<a href="node421.html#asgr:99">21</a>]</td>
 </tr>
-<tr><td align="left">SuperLU_DIST</td>
-<td align="left">右看</td>
-<td align="left">非对称</td>
-<td align="left">Li</td>
-<td align="right">[<a href="node421.html#lide:99">306</a>]</td>
+<tr><td align="LEFT">SuperLU_DIST</td>
+<td align="LEFT">右看</td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Li</td>
+<td align="RIGHT">[<a href="node421.html#lide:99">306</a>]</td>
 </tr>
-<tr><td align="left">S+</td>
-<td align="left">右看<span class="math-inline">\dag </span></td>
-<td align="left">非对称</td>
-<td align="left">Yang</td>
-<td align="right">[<a href="node421.html#fujy:98">182</a>]</td>
+<tr><td align="LEFT">S+</td>
+<td align="LEFT">右看<span class="math-inline">\dag </span></td>
+<td align="LEFT">非对称</td>
+<td align="LEFT">Yang</td>
+<td align="RIGHT">[<a href="node421.html#fujy:98">182</a>]</td>
 </tr>
 </table>
 </div>
 <span class="math-inline">{}^*</span> 尽管论文标题如此
 <br>
-<span class="math-inline">\dag </span> 使用QR存储以静态容纳任何LU填入
+<span class="math-inline">\dag </span> 使用QR存储静态容纳任何LU填入
 <br>
 表中使用的缩写：
 SPD = 对称正定；
 Sym = 对称且可能不定；
 Sym-pat = 对称非零模式但非对称值；
 Unsym = 非对称；
-HSL = Harwell子程序库：
-         http://www.cse.clrc.ac.uk/Activity/HSL</div>
+HSL = 哈威尔子程序库：http://www.cse.clrc.ac.uk/Activity/HSL
+</div>
 <br>
 
 <p>
-没有单一的算法或软件适用于所有类型的线性系统。有些软件针对特殊矩阵，如对称正定矩阵，有些则针对最一般的情况。这在表的第三列“范围”中有所体现。即使是相同的范围，软件也可能决定使用特定的算法或实现技术，这对某些应用更好，但对其他应用则不然。在第二列“技术”中，我们给出了高级的算法描述。关于左看、右看和多前端之间的区别及其对性能的影响的综述，我们参考Heath、Ng和Peyton的论文[<a href="node421.html#heathngpeyton91">219</a>]和Rothberg的论文[<a href="node421.html#rothberg92">370</a>]。有时最好的（或唯一的）软件不是公开的，而是商业的或研究原型。这在第四列“联系”中有所体现，可能是公司名称或研究代码的作者。
+没有单一的算法或软件适用于所有类型的线性系统。有些软件针对特殊矩阵，如对称正定矩阵，有些则针对最一般的情况。这在表的第三列“范围”中有所体现。即使是相同的范围，软件也可能决定使用特定的算法或实现技术，这对某些应用更好，而对其他应用则不然。在第二列“技术”中，我们给出了高级的算法描述。关于左看、右看和多前端之间的区别及其对性能的影响，请参阅Heath、Ng和Peyton的论文[<a href="node421.html#heathngpeyton91">219</a>]以及Rothberg的论文[<a href="node421.html#rothberg92">370</a>]。有时，最好的（或唯一的）软件不是公开的，而是商业的或研究原型。这在第四列“联系”中有所体现，可能是公司名称或研究代码的作者姓名。
 <br>
 <p>
-另一个复杂性源于多样化的应用...像SPARSE这样的旧代码，独特的优势...
+另一个复杂性是由于多样化的应用...像SPARSE这样的旧代码，独特的优势...
 
 <p>
-在特征系统分析中使用移位-反演谱变换（SI）的背景下，我们需要对 <span class="math-inline">A-\sigma I</span> 进行因子分解，其中 <span class="math-inline">A</span> 是固定的。因此，<span class="math-inline">A-\sigma I</span> 的非零结构是固定的。此外，对于相同的移位 <span class="math-inline">\sigma</span>，通常需要用相同的矩阵和不同的右端解许多系统（在这种情况下，求解成本可以与分解成本相当）。在步骤1和2中花费更多时间以加快步骤3和4是合理的。也就是说，可以尝试不同的排序方案，并根据符号分解估计数值分解和求解的成本，使用最佳排序。例如，在计算SVD时，可以选择 <span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span> 和 <span class="math-inline">[{0 \atop A^*} \; {A \atop 0}]</span> 之间的移位-反演，所有这些都可能有相当不同的分解成本，如第<a href="node190.html#chap:svd">6</a>章所述。
+在特征系统分析的移位-反演谱变换（SI）上下文中，我们需要对<span class="math-inline">A-\sigma I</span>进行因子分解，其中<span class="math-inline">A</span>是固定的。因此，<span class="math-inline">A-\sigma I</span>的非零结构是固定的。此外，对于相同的移位<span class="math-inline">\sigma</span>，通常需要用相同的矩阵和不同的右端解多个系统（在这种情况下，求解成本可以与分解成本相当）。在步骤1和2中花费更多时间以加速步骤3和4是合理的。也就是说，可以尝试不同的排序方案，并根据符号分解估计数值分解和求解的成本，使用最佳排序。例如，在计算SVD时，可以选择<span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span>和<span class="math-inline">[{0 \atop A^*} \; {A \atop 0}]</span>之间的移位-反演，所有这些都可能具有相当不同的分解成本，如第<a href="node190.html#chap:svd">6</a>章所述。
 
 <p>
-一些求解器内置了排序方案，但其他则没有。内置的排序方案可能不是目标应用的最佳选择。有时用外部排序方案替换内置的排序方案更好。许多求解器提供了定义良好的接口，使用户可以轻松进行这种替换。应该阅读求解器文档，了解如何做到这一点，以及推荐的排序方法。
+一些求解器内置了排序方案，但其他求解器没有。内置的排序方案也可能不是目标应用的最佳选择。有时，用外部排序方案替换内置的排序方案更好。许多求解器提供了定义良好的接口，使用户可以轻松进行这种替换。应该阅读求解器文档，了解如何进行这种替换，以及推荐的排序方法。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -343,16 +330,11 @@ HSL = Harwell子程序库：
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6720"
-  href="node389.html">Direct Solvers for Structured</a>
-<b> Up:</b> <a name="tex2html6714"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6708"
-  href="node387.html">Direct Solvers for Band</a>
- &nbsp <b>  <a name="tex2html6716"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6718"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6720" href="node389.html">Direct Solvers for Structured</a>
+<b>上一级：</b><a name="tex2html6714" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6708" href="node387.html">Direct Solvers for Band</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

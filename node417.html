@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Methods with Preconditioned Inner Iterations</title>
-<meta name="description" content="Methods with Preconditioned Inner Iterations">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Methods with Preconditioned Inner Iterations">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node418.html">
-<link rel="previous" href="node416.html">
-<link rel="up" href="node410.html">
-<link rel="next" href="node418.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html7163"
   href="node418.html">
@@ -80,57 +73,54 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7164"
-  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
-<b> Up:</b> <a name="tex2html7158"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7152"
-  href="node416.html">Davidson Method</a>
- &nbsp <b>  <a name="tex2html7160"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7162"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7164" href="node418.html">预处理共轭梯度法</a>
+<b>上一级：</b><a name="tex2html7158" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7152" href="node416.html">Davidson方法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002037000000000000000"></a>
 <a name="sec:prec_rqi"></a>
 <br>
-预处理内迭代方法
+带预处理内迭代的算法
 </h2>
 
 <p>
-我们注意到，在我们的预处理特征求解器类别中，并不存在逆幂方法的类似方法，因为逆幂方法需要精确求解矩阵 <span class="math-inline">B - \alpha A</span> 的线性系统。然而，如果使用预处理的迭代方法作为内迭代来求解这些系统，那么内外迭代方法就属于预处理特征求解器的范畴。作为一个例子，我们在这里考虑最直接的RQI版本，应用于矩阵束 <span class="math-inline">B - \mu A</span>；参见第4.3节。
+我们注意到，在我们的预处理特征求解器类别中，并不存在逆幂法的类似算法，因为它需要精确求解与矩阵<span class="math-inline">B - \alpha A</span>相关的线性系统。然而，如果使用预处理迭代方法作为内迭代来求解这些系统，那么内外迭代的方法就属于预处理特征求解器的范畴。作为一个例子，我们在这里考虑最直接的RQI版本，应用于矩阵束<span class="math-inline">B - \mu A</span>；参见第4.3节。
 
 <p>
 <br>
-<a name="fig:prec_rqiBA"></a><IMG
- width="598" height="243" align="bottom" border="0"
+<a name="fig:prec_rqiBA"></a><img
+ width="598" height="243" align="BOTTOM" border="0"
  src="img3964.png"
  alt="\begin{algorithm}{RQI
 with Preconditioned Inner Iterative Solver for GHEP
 \inde...
-...$\ the last iteration vector of inner iterations.
+...<span class="math-inline">\ the last iteration vector of inner iterations.
 \end{tabbing}}
 \end{algorithm}">
 <br>
 
 <p>
-通常选择MINRES作为内迭代求解器，因为系统矩阵 <span class="math-inline">T(B - \mu^{(i)}A)</span> 是不定的。当仅使用固定数量的内迭代时，我们不能假设方程 <span class="math-inline">(B - \mu^{(i)}A) x = A x^{(i)}</span> 被精确求解，因此，已知的RQI收敛性质，如三次收敛，不能直接用于确立实际的内外迭代方法的收敛性。同样，标准扰动理论也不能轻易应用，除非假设内步数足够大。
+通常选择MINRES作为内迭代求解器，因为系统矩阵</span>T(B - \mu^{(i)}A)<span class="math-inline">是不定的。当仅使用固定数量的内迭代时，我们不能假设方程</span>(B - \mu^{(i)}A) x = A x^{(i)}<span class="math-inline">能被准确求解，因此，像RQI的三次收敛性这样的已知收敛特性，不能直接用来确立实际内外迭代方法的收敛性。同样，标准的扰动理论也不容易应用，除非假设内步数足够大。
 
 <p>
-方程的矩阵 <span class="math-inline">B - \mu^{(i)}A</span> 是病态的，不仅因为 <span class="math-inline">A</span> 是病态的，还因为 <span class="math-inline">\mu^{(i)}</span> 越来越接近矩阵束 <span class="math-inline">B - \mu A</span> 的特征值。通常通过投影出子空间 <span class="math-inline">{\rm span}\{ x^{(i)} \}</span>，使用正则化或/和选择不定预条件子 <span class="math-inline">T</span> 来尝试改善矩阵的条件数。然而，内迭代的收敛性改善是否对仅有少数内步的实际内外迭代方法的收敛性有益，这一点并不明显。
+方程中的矩阵</span>B - \mu^{(i)}A<span class="math-inline">是病态的，不仅因为</span>A<span class="math-inline">是病态的，还因为</span>\mu^{(i)}<span class="math-inline">越来越接近矩阵束</span>B - \mu A<span class="math-inline">的特征值。通常尝试通过投影出子空间</span>{\rm span}\{ x^{(i)} \}<span class="math-inline">，使用正则化或/和选择不定预处理器</span>T$来改善矩阵的条件数。然而，内迭代收敛性的改善是否有利于只有少数内步的实际内外迭代方法的收敛，这一点并不明显。
 
 <p>
-存在几种具有类似性质的类似方法，例如，用于寻找作为瑞利商静态向量的特征向量的不同版本的牛顿方法（例如，[461,468]）或截断的有理Krylov方法（例如，[378,291]）或不精确的同伦方法（例如，[309,235,469,310]）；参见前一节。
+还有几种具有类似特性的类似方法，例如，寻找特征向量的不同版本的牛顿法作为瑞利商的平稳向量（例如，[461,468]）或截断的有理Krylov方法（例如，[378,291]）或不完全同伦方法（例如，[309,235,469,310]）；参见前一节。
 
 <p>
-Jacobi-Davidson方法[411]，在第5.6节中描述用于广义对称特征问题，是这一类别中最著名的方法之一。具有预处理系统求解器作为内迭代的不精确Jacobi-Davidson方法确实满足我们预处理特征求解器的定义。
+Jacobi-Davidson方法[411]，在第5.6节中描述了用于广义对称特征问题的求解，是这一类别中最著名的方法之一。带有预处理系统求解器作为内迭代的不精确Jacobi-Davidson方法确实符合我们对预处理特征求解器的定义。
 
 <p>
 这类方法在少量内迭代情况下的收敛行为尚未被充分理解。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+</p><!--Navigation Panel-->
 <a name="tex2html7163"
   href="node418.html">
 <button class="navigate">下一节</button></a> 
@@ -147,16 +137,11 @@ Jacobi-Davidson方法[411]，在第5.6节中描述用于广义对称特征问题
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7164"
-  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
-<b> Up:</b> <a name="tex2html7158"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7152"
-  href="node416.html">Davidson Method</a>
- &nbsp <b>  <a name="tex2html7160"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7162"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7164" href="node418.html">预处理共轭梯度法</a>
+<b>上一级：</b><a name="tex2html7158" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7152" href="node416.html">Davidson方法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

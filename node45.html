@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Specifying a Singular Value Problem</title>
-<meta name="description" content="Specifying a Singular Value Problem">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Specifying a Singular Value Problem">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node46.html">
-<link rel="previous" href="node44.html">
-<link rel="up" href="node39.html">
-<link rel="next" href="node46.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1377"
   href="node46.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1378"
-  href="node46.html">Related Singular Value Problems</a>
-<b> Up:</b> <a name="tex2html1372"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1366"
-  href="node44.html">Conditioning</a>
- &nbsp <b>  <a name="tex2html1374"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1376"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1378" href="node46.html">相关的奇异值问题</a>
+<b>上一级：</b><a name="tex2html1372" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1366" href="node44.html">条件数</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001146000000000000000"></a> 
@@ -99,43 +87,46 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-以下问题具有典型性，既因为它们在应用中自然出现，也因为我们对它们有良好的算法。这些问题对应于&#167;<a href="node27.html#sec_chap2_HepSpec">2.2.6</a>节中的问题。
+以下问题具有典型性，这既因为它们在应用中自然出现，也因为我们对它们有良好的算法。它们对应于第&#167;<a href="node27.html#sec_chap2_HepSpec">2.2.6</a>节中的问题。
 
 <p>
 
 <ol>
-<li>计算所有奇异值至指定精度。
+<li>以某种指定精度计算所有奇异值。
 </li>
-<li>计算某些指定下标的奇异值 <span class="math-inline">\sigma_i</span>，
+<li>计算某些指定下标集合的奇异值 <span class="math-inline">\sigma_i</span>，
 
-<span class="math-inline">i \in {\mathcal I} = \{1,2,\ldots,n\}</span>，
+其中 <span class="math-inline">i \in {\mathcal I} = \{1,2,\ldots,n\}</span>，
 包括特殊情况下的最小 <span class="math-inline">r</span> 个奇异值
 
-<span class="math-inline">\sigma_{n-r+1}</span> 至
-<span class="math-inline">\sigma_n</span>，以及最大 <span class="math-inline">r</span> 个奇异值 <span class="math-inline">\sigma_1</span> 至 <span class="math-inline">\sigma_r</span>。同样，所需精度可指定。
+<span class="math-inline">\sigma_{n-r+1}</span> 到
+<span class="math-inline">\sigma_n</span>，以及最大 <span class="math-inline">r</span> 个奇异值 <span class="math-inline">\sigma_1</span> 到 <span class="math-inline">\sigma_r</span>。同样，可以指定所需的精度。
 </li>
 <li>计算给定实轴子集内的所有奇异值，
 例如区间
-<span class="math-inline">[\alpha, \beta]</span>。同样，所需精度可指定。
+<span class="math-inline">[\alpha, \beta]</span>。同样，可以指定所需的精度。
 </li>
 <li>计算区间
-<span class="math-inline">[\alpha, \beta]</span> 内的所有奇异值数量。
+<span class="math-inline">[\alpha, \beta]</span> 内的所有奇异值的数量。
 这不需要计算区间
 <span class="math-inline">[\alpha, \beta]</span> 内的奇异值，
 因此成本可能低得多。
 </li>
-<li>计算最接近给定值 <span class="math-inline">\mu</span> 的若干奇异值。
+<li>计算最接近给定值
+      <span class="math-inline">\mu</span> 的若干个奇异值。
 </li>
 </ol>
 
 <p>
-对于上述每种可能性（第4项除外），用户还可以计算相应的奇异向量（左奇异向量、右奇异向量或两者）。对于聚集在一起的奇异值，用户可以选择计算相关的奇异子空间，因为在这种情况下，单个奇异向量可能非常病态，而奇异子空间可能相对较好。最后，对于这些量中的任何一个，用户可能还希望计算其条件数。
+对于上述每种可能性（第4项除外），用户还可以计算相应的奇异向量（左奇异向量、右奇异向量或两者）。对于聚集在一起的奇异值，用户可以选择计算相关的奇异子空间，因为在这种情况下，单个奇异向量可能非常病态，而奇异子空间可能不那么病态。最后，对于这些量中的任何一个，用户可能还希望计算其条件数。
 
 <p>
 尽管我们有解决这些问题的有效算法，但对于大规模问题，我们不一定能在所有用户可接受的时间和空间内实现所有这些目标。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段文字详细介绍了奇异值问题的几种典型情况及其相应的计算需求，强调了在处理大规模问题时可能面临的挑战。<!--Navigation Panel-->
 <a name="tex2html1377"
   href="node46.html">
 <button class="navigate">下一节</button></a> 
@@ -152,16 +143,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1378"
-  href="node46.html">Related Singular Value Problems</a>
-<b> Up:</b> <a name="tex2html1372"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1366"
-  href="node44.html">Conditioning</a>
- &nbsp <b>  <a name="tex2html1374"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1376"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1378" href="node46.html">相关的奇异值问题</a>
+<b>上一级：</b><a name="tex2html1372" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1366" href="node44.html">条件数</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

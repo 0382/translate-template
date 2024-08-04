@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>What to Modify</title>
-<meta name="description" content="What to Modify">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="What to Modify">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node362.html">
-<link rel="up" href="node360.html">
-<link rel="next" href="node364.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6332"
   href="node364.html">
@@ -79,24 +73,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6333"
-  href="node364.html">Geometric Technicalities</a>
-<b> Up:</b> <a name="tex2html6327"
-  href="node360.html">Modifying the Templates</a>
-<b> Previous:</b> <a name="tex2html6323"
-  href="node362.html">Under the Hood</a>
- &nbsp <b>  <a name="tex2html6329"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6331"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6333" href="node364.html">几何技术细节</a>
+<b>上一级：</b><a name="tex2html6327" href="node360.html">修改模板</a>
+<b>上一节：</b><a name="tex2html6323" href="node362.html">揭秘内幕</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001845300000000000000">
-需修改的内容</a>
+需要修改的内容</a>
 </h3>
 
 <p>
-以下是用户可能希望对代码进行的具体修改概述。
+以下概述了用户可能希望对代码进行的特定修改。
 
 <p>
 
@@ -106,31 +95,31 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 </li>
-<li><i>高级算法。</i> 用户可能希望使用不同于当前可用方法或更为复杂的最小化算法，或者有我们未预料到的不同停止准则[<a href="node421.html#ardr:92">17</a>]。可以调整其他平面优化算法以适应新的<code>sg_</code>算法，而无需了解太多细节。大多数无约束最小化包含线搜索（<code>y</code> <span class="math-inline">\rightarrow</span> <code>y</code>+<code>t*v</code>）、Hessian应用（<code>H*v</code>）和内积（<code>v'w</code>）。为了正确几何化算法，只需将这些组件分别替换为<code>move(Y,V,t)</code>、<code>dgrad(Y,V)</code>和<code>ip(Y,V,W)</code>。
+<li><i>高级算法。</i> 用户可能希望使用不同于当前可用方法或更为复杂的最小化算法，或者有我们未预料到的不同停止准则[<a href="node421.html#ardr:92">17</a>]。将其他平面优化算法适应到新的<code>sg_</code>算法是可能的，且无需了解太多细节。大多数无约束最小化包含线搜索（<code>y</code> <span class="math-inline">\rightarrow</span> <code>y</code>+<code>t*v</code>）、海森堡应用（<code>H*v</code>）和内积（<code>v'w</code>）。为了正确几何化算法，只需将这些组件分别替换为<code>move(Y,V,t)</code>、<code>dgrad(Y,V)</code>和<code>ip(Y,V,W)</code>。
 
 <p>
 </li>
-<li><i>Hessian逆运算。</i> 我们目前提供了在函数<code>invdgrad_CG</code>（使用共轭梯度法）和<code>invdgrad_MINRES</code>（使用MINRES算法）中逆变Hessian的代码。任何能够稳定逆运算黑盒线性算子的矩阵逆运算程序都可以替代这些，且无需对代码进行其他修改。
+<li><i>海森堡逆变换。</i> 我们目前提供了在函数<code>invdgrad_CG</code>（使用共轭梯度法）和<code>invdgrad_MINRES</code>（使用MINRES算法）中逆变换协变海森堡的代码。任何能够稳定逆变换黑盒线性算子的矩阵逆变换程序都可以替代这些，且无需对代码进行其他修改。
 
 <p>
 </li>
-<li><i>工作区。</i> 为了提高代码的可读性，我们没有实现任何工作区变量，尽管有许多计算可以重复使用。例如，在目标函数组中，对于许多示例问题，形式为<code>A*Y</code>或<code>Y*B</code>的产品或复杂的矩阵函数如Jordan示例中的<code>B(Y)</code>可以保存在工作区中。计算<code>grad</code>和<code>dgrad</code>时的一些项也可以保存（实际上，我们当前的实现每次应用逆变Hessian时几乎都会重新计算梯度）。
+<li><i>工作区。</i> 为了提高代码的可读性，我们没有实现任何工作区变量，尽管有许多计算可以重复使用。例如，在目标函数组中，对于许多示例问题，形式为<code>A*Y</code>或<code>Y*B</code>的产品或复杂的矩阵函数（如Jordan示例中的<code>B(Y)</code>）可以保存在工作区中。计算<code>grad</code>和<code>dgrad</code>时的一些项也可以同样保存（事实上，我们当前的实现基本上每次应用协变海森堡时都会重新计算梯度）。
 
 <p>
 </li>
-<li><i>内联化。</i> 尽管我们将<code>tangent</code>和<code>dtangent</code>函数与<code>grad</code>和<code>dgrad</code>函数分开，但通常会发现当这些函数内联时，某些项会抵消，因此无需计算。在进行线搜索最小化时，也可以考虑内联<code>move</code>函数，以便重用数据，加快函数评估和点更新。
+<li><i>内联化。</i> 虽然我们已经将<code>tangent</code>和<code>dtangent</code>函数与<code>grad</code>和<code>dgrad</code>函数分开，但通常会发现当这些函数内联时，有些项会相互抵消，因此不需要计算。在进行线搜索最小化时，也可以考虑内联<code>move</code>函数，以便可以重复使用数据，加快函数评估和点更新。
 
 <p>
 </li>
-<li><i>球面或<span class="math-inline">{\mathcal O}(n)</span>几何。</i> 某些问题总是设定在单位球面或<span class="math-inline">{\mathcal O}(n)</span>上，这两者的几何结构比Stiefel流形更简单。两者的测地线和切线投影都更容易计算。为了利用这一点，应修改几何实现组。
+<li><i>球面或<span class="math-inline">{\mathcal O}(n)</span>几何。</i> 某些问题总是设置在单位球面或<span class="math-inline">{\mathcal O}(n)</span>上，这两者的几何结构都比Stiefel流形简单。在这两者上，测地线和切线投影的计算都更为简单。为了利用这一点，用户应修改几何实现组。
 
 <p>
 </li>
-<li><i>全局变量。</i> 为了使代码具有适应性和可读性，我们选择使用全局结构<code>SGParameters</code>和<code>FParameters</code>来保存可以放入所有函数参数列表中的数据。用户可能希望修改代码，以便将这些数据作为单独的参数显式传递给每个函数。
+<li><i>全局变量。</i> 为了使代码具有适应性和可读性，我们选择使用全局结构<code>SGParameters</code>和<code>FParameters</code>来保存可以放在所有函数参数列表中的数据。用户可能希望修改代码，以便将这些数据作为单独的参数显式传递给每个函数。
 
 <p>
 </li>
-<li><i>预处理。</i> 通过共轭梯度法进行的Hessian求解，即<code>invdgrad</code>，没有预处理步骤。没有预处理的共轭梯度性能可能非常差，而对黑盒线性算子如<code>dgrad</code>进行预处理是一个非常困难的问题。用户可以尝试为<code>dgrad</code>找到一个好的预处理方法。
+<li><i>预处理。</i> 通过共轭梯度法进行的海森堡求解，<code>invdgrad</code>，没有预处理步骤。没有预处理的共轭梯度性能可能非常差，而对黑盒线性算子如<code>dgrad</code>进行预处理是一个非常困难的问题。用户可以尝试为<code>dgrad</code>找到一个好的预处理方法。
 
 <p>
 </li>
@@ -154,16 +143,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6333"
-  href="node364.html">Geometric Technicalities</a>
-<b> Up:</b> <a name="tex2html6327"
-  href="node360.html">Modifying the Templates</a>
-<b> Previous:</b> <a name="tex2html6323"
-  href="node362.html">Under the Hood</a>
- &nbsp <b>  <a name="tex2html6329"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6331"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6333" href="node364.html">几何技术细节</a>
+<b>上一级：</b><a name="tex2html6327" href="node360.html">修改模板</a>
+<b>上一节：</b><a name="tex2html6323" href="node362.html">揭秘内幕</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

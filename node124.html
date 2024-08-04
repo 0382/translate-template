@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Orthogonal Deflating Transformation</title>
-<meta name="description" content="Orthogonal Deflating Transformation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Orthogonal Deflating Transformation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node129.html">
-<link rel="previous" href="node123.html">
-<link rel="up" href="node117.html">
-<link rel="next" href="node125.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2618"
   href="node125.html">
@@ -80,33 +73,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2619"
-  href="node125.html">Locking or Purging a</a>
-<b> Up:</b> <a name="tex2html2613"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2607"
-  href="node123.html">Deflation and Stopping Rules</a>
- &nbsp <b>  <a name="tex2html2615"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2617"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2619" href="node125.html">Locking or Purging a</a>
+<b>上一级：</b><a name="tex2html2613" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2607" href="node123.html">收缩与停止规则</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001357000000000000000"></a> <a name="orth_sec"></a>
 <br>
 正交缩减变换
 </h2>
-我们将利用一种特殊的正交变换来实现上述缩减方案。这些缩减方案与一个与待缩减（锁定或清除）的Ritz值相关的特征向量有关。给定一个单位长度的向量<span class="math-inline">y</span>，算法<a href="node124.html#fig:orthQ">4.9</a>计算出一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q e_1 = y</span>（因此<span class="math-inline">e_1 = Q^* y</span>）。这个正交矩阵具有非常特殊的形式，可以写成
+我们将利用一种特殊的正交变换来实现上述的缩减方案。这些缩减方案与一个与需要缩减（锁定或清除）的Ritz值相关联的特征向量有关。给定一个单位长度的向量<span class="math-inline">y</span>，如算法<a href="node124.html#fig:orthQ">4.9</a>所示，计算出一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q e_1 = y</span>（因此<span class="math-inline">e_1 = Q^* y</span>）。这个正交矩阵具有非常特殊的形式，可以写成
 
 <a name="upform"></a>   <span class="math-inline">Q = R + y e_1^*</span>，其中  
                        <span class="math-inline">R e_1 = 0</span>，<span class="math-inline">R^* y = 0</span>，
 
-其中<span class="math-inline">R</span>是上三角矩阵。它也可以写成
+这里<span class="math-inline">R</span>是上三角矩阵。它也可以写成
 
 <a name="loform"></a>          <span class="math-inline">Q = L + y g^*</span>，其中  
                        <span class="math-inline">L e_1 = 0</span>，<span class="math-inline">L^* y = e_1 - g</span>，
 
-其中<span class="math-inline">L</span>是下三角矩阵，
+这里<span class="math-inline">L</span>是下三角矩阵，
 <span class="math-inline">g^* \equiv e_1^* + \frac{1}{\eta_1} e_1^* R</span>。
 这里我们假设
 <span class="math-inline">y^T=(\eta_1,\dots,\eta_n)</span>。
@@ -115,34 +103,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 现在，考虑矩阵<span class="math-inline">Q^* T Q</span>。代入
 <span class="math-inline">Q^* = (L + y g^* )^*</span>，
 
-<span class="math-inline">Q = (R + y fe_1^* )</span>来自<a href="node124.html#loform">4.24</a>和<a href="node124.html#upform">4.23</a>，以及事实
-<span class="math-inline">Q^* T y = \theta e_1</span>和<span class="math-inline">1 = y^*y</span>，将得到
+<span class="math-inline">Q = (R + y fe_1^* )</span> 来自<a href="node124.html#loform">4.24</a>和<a href="node124.html#upform">4.23</a>
+以及事实
+<span class="math-inline">Q^* T y = \theta e_1</span> 和 <span class="math-inline">1 = y^*y</span>，将得到
 
 <span class="math-inline">Q^* T Q</span>  &=& <span class="math-inline">Q^* T ( R + y e_1^*)</span>
 <br>               &=& <span class="math-inline">(L^* + g y^*) T R + e_1 e_1^*</span>
 <br>               &=& <span class="math-inline">L^*TR + g y^*T R + e_1 e_1^*</span>。
 
-由于<span class="math-inline">L^*</span>和<span class="math-inline">R</span>都是上三角矩阵，因此<span class="math-inline">L^*TR</span>是上Hessenberg矩阵，其第一行和第一列均为零，因为<span class="math-inline">Le_1 = Re_1 = 0</span>。此外，<span class="math-inline">g y^*T R = g \theta y^*R = 0</span>。由此我们得出<span class="math-inline">L^*TR</span>也必须是对称的，因此是三对角矩阵。因此，我们看到
-<span class="math-inline">T_+ \equiv Q^* T Q</span>的形式为
+由于<span class="math-inline">L^*</span>和<span class="math-inline">R</span>都是上三角矩阵，因此<span class="math-inline">L^*TR</span>是上Hessenberg矩阵，其第一行和第一列均为零，因为<span class="math-inline">Le_1 = Re_1 = 0</span>。同时，<span class="math-inline">g y^*T R = g \theta y^*R = 0</span>。由此我们得出<span class="math-inline">L^*TR</span>也必须是对称的，因此是三对角的。因此，我们看到
+<span class="math-inline">T_+ \equiv Q^* T Q</span> 具有以下形式
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">T_+ = \left[\begin{array}{cc}\theta & 0 \\0 & \widehat{T} \\\end{array}\right],</div>
+
+<div class="math-display">T_+ = \left[\ba{cc}\theta & 0 \\0 & \widehat{T} \\\ea \right],</div>
 </div>
 <br clear="ALL">
 <p></p>
 其中<span class="math-inline">\widehat{T}</span>是对称且三对角的。
 
 <p>
-需要注意的是，如算法<a href="node124.html#fig:orthQ">4.9</a>所计算的，
-<span class="math-inline">Q</span>将具有与机器精度<span class="math-inline">\epsilon_M</span>相当的各分量相对误差，且没有元素增长。
+需要注意的是，如算法<a href="node124.html#fig:orthQ">4.9</a>计算的那样，<span class="math-inline">Q</span>将在元素相对误差上达到机器精度<span class="math-inline">\epsilon_M</span>，且没有元素增长。
 
 <p>
 <br>
-<a name="fig:orthQ"></a><IMG
- width="598" height="316" align="bottom" border="0"
+<a name="fig:orthQ"></a><img
+ width="598" height="316" align="BOTTOM" border="0"
  src="img1048.png"
- alt="\begin{algorithm}{正交缩减变换用于IRLM}
+ alt="\begin{algorithm}{Orthogonal Deflating Transformation for IRLM
+}
 {
 \begin{tabb...
 ...<span class="math-inline"> \tau_o = \tau</span>\\
@@ -154,21 +144,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>小节</strong></a>
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
 <li><ul>
 <li><a name="tex2html2620"
-  href="node125.html">锁定或清除单个特征值。</a>
+  href="node125.html">锁定或清除单个特征值</a>
 <li><a name="tex2html2621"
-  href="node126.html">锁定<span class="math-inline">\theta</span>。</a>
+  href="node126.html">锁定<span class="math-inline">\theta</span></a>
 <li><a name="tex2html2622"
-  href="node127.html">清除<span class="math-inline">\theta</span>。</a>
+  href="node127.html">清除<span class="math-inline">\theta</span></a>
 <li><a name="tex2html2623"
-  href="node128.html"><span class="math-inline">Q^* T Q</span>的稳定性。</a>
+  href="node128.html"><span class="math-inline">Q^* T Q</span>的稳定性</a>
 </ul></ul>
 <!--End of Table of Child-Links-->
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容介绍了正交缩减变换的概念及其在矩阵运算中的应用，通过特定的算法和数学推导，展示了如何利用正交矩阵进行特征值的锁定或清除，并分析了变换后的矩阵性质及其稳定性。<!--Navigation Panel-->
 <a name="tex2html2618"
   href="node125.html">
 <button class="navigate">下一节</button></a> 
@@ -185,16 +177,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2619"
-  href="node125.html">Locking or Purging a</a>
-<b> Up:</b> <a name="tex2html2613"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2607"
-  href="node123.html">Deflation and Stopping Rules</a>
- &nbsp <b>  <a name="tex2html2615"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2617"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2619" href="node125.html">Locking or Purging a</a>
+<b>上一级：</b><a name="tex2html2613" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2607" href="node123.html">收缩与停止规则</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Introduction</title>
-<meta name="description" content="Introduction">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node163.html">
-<link rel="previous" href="node155.html">
-<link rel="up" href="node155.html">
-<link rel="next" href="node157.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3114"
   href="node157.html">
@@ -80,74 +73,74 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3115"
-  href="node157.html">Overview of Available Algorithms.</a>
-<b> Up:</b> <a name="tex2html3109"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3103"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
- &nbsp <b>  <a name="tex2html3111"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3113"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3115" href="node157.html">Overview of Available Algorithms.</a>
+<b>上一级：</b><a name="tex2html3109" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3103" href="node155.html">广义厄米特征值问题</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001410000000000000000">
 引言</a>
 </h1>
-广义厄米特特征值问题（GHEP）由以下方程给出：
+一个广义厄米特征值问题(GHEP)由以下形式给出：
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gsymeig"></a><div class="math-display">ax=\lambda B x\,,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gsymeig"></a><div class="math-display">Ax=\lambda B x\,,</div></td>
+<td WIDTH=10 align="RIGHT">
 (66)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是厄米特矩阵，即 <span class="math-inline">A^{\ast} = A</span>，<span class="math-inline">B^{\ast} = B</span>。
-我们称 (<a href="node156.html#gsymeig">5.1</a>) 中的矩阵对 <span class="math-inline">\{A,B\}</span> 为<i>矩阵束</i>。
-在本章中，我们进一步假设 <span class="math-inline">A</span> 或 <span class="math-inline">B</span> 或 
-对于某些标量 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>，<span class="math-inline">\alpha A + \beta B</span> 是正定矩阵，在这种情况下，我们讨论<i>厄米特正定束</i>。
-<a name="17010"></a><a name="17011"></a>这一假设在许多实际重要情况下成立，且其理论与第<a href="node85.html#chap:heig">4</a>章阐述的标准厄米特特征值问题密切相关。
-如果不存在正定组合，我们可以将 <span class="math-inline">\{A,B\}</span> 视为一般束，并使用第<a href="node280.html#chap:gnsym">8</a>章描述的理论和算法。
+其中，<span class="math-inline">A</span>和<span class="math-inline">B</span>是厄米的，即<span class="math-inline">A^{\ast} = A</span>，<span class="math-inline">B^{\ast} = B</span>。
+我们称形式为(<a href="node156.html#gsymeig">5.1</a>)中的矩阵对<span class="math-inline">\{A,B\}</span>为一个<i>矩阵束</i>。
+在本章中，我们进一步假设<span class="math-inline">A</span>或<span class="math-inline">B</span>或对于某些标量<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>的<span class="math-inline">\alpha A + \beta B</span>是正定矩阵，在这种情况下，我们谈论一个<i>厄米正定束</i>。
+<a name="17010"></a><a name="17011"></a>这一假设在许多实际重要情况下成立，并且其理论与标准厄米特征值问题密切相关，如第<a href="node85.html#chap:heig">4</a>章所述。
+如果不存在正定组合，我们也可以将<span class="math-inline">\{A,B\}</span>视为一般束，并使用第<a href="node280.html#chap:gnsym">8</a>章所述的理论和算法。
 
 <p>
-非标准情况，即 <span class="math-inline">\alpha A + \beta B</span> 为正定矩阵，可以通过注意到当 <span class="math-inline">B</span> 为正定时，束
+在非标准情况下，即<span class="math-inline">\alpha A + \beta B</span>是正定矩阵时，可以通过注意到当<span class="math-inline">B</span>是正定时，束
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="make_B_pd"></a><div class="math-display">(A-\theta(\alpha A + \beta B))x=0</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="make_B_pd"></a><div class="math-display">(A-\theta(\alpha A + \beta B))x=0</div></td>
+<td WIDTH=10 align="RIGHT">
 (67)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-具有特征值 <span class="math-inline">\theta_i=\lambda_i/(\beta+\alpha \lambda_i)</span> 和与原束 (<a href="node156.html#gsymeig">5.1</a>) 相同的特征向量。
-可以对这一修改后的束应用适用于正定 <span class="math-inline">B</span> 的任何算法，并从 <span class="math-inline">\theta_i</span> 恢复 <span class="math-inline">\lambda_i</span>。
+具有特征值<span class="math-inline">\theta_i=\lambda_i/(\beta+\alpha \lambda_i)</span>，并且与原始束(<a href="node156.html#gsymeig">5.1</a>)具有相同的特征向量。
+可以对这一修改后的束应用任何适用于正定<span class="math-inline">B</span>的算法，并从<span class="math-inline">\theta_i</span>恢复<span class="math-inline">\lambda_i</span>。
 
 <p>
-GHEP (<a href="node156.html#gsymeig">5.1</a>) 具有 <span class="math-inline">n</span> 个实特征值 <span class="math-inline">\lambda_i</span>，我们可以按递增顺序排列它们，使得
-<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。与标准情况一样，多个特征值可能重合，但某些特征值可能是无穷大。如果矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是正定矩阵，则 <span class="math-inline">\lambda_1>0</span>，但如果 <span class="math-inline">A</span> 是半正定矩阵，我们只能说 <span class="math-inline">\lambda_1\geq 0</span>。
+GHEP (<a href="node156.html#gsymeig">5.1</a>)具有<span class="math-inline">n</span>个实特征值<span class="math-inline">\lambda_i</span>，我们可以按递增顺序排列它们，使得<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。
+与标准情况一样，多个特征值可能重合，但某些特征值可能是无穷大。
+如果矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>是正定的，则<span class="math-inline">\lambda_1>0</span>，但如果<span class="math-inline">A</span>是半正定的，我们只能说<span class="math-inline">\lambda_1\geq 0</span>。
 
 <p>
-当束 <span class="math-inline">\{A,B\}</span> 是厄米特正定时，可以找到 <span class="math-inline">n</span> 个相互 <span class="math-inline">B</span>-正交的特征向量 <span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
+当束<span class="math-inline">\{A,B\}</span>是厄米正定时，可以找到<span class="math-inline">n</span>个相互<span class="math-inline">B</span>-正交的特征向量<span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gsymeigdec"></a><div class="math-display">A=X \Lambda X^{\ast},\quad B=X X^{\ast},\pagebreak</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gsymeigdec"></a><div class="math-display">A=X \Lambda X^{\ast},\quad B=X X^{\ast},\pagebreak</div></td>
+<td WIDTH=10 align="RIGHT">
 (68)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 <span class="math-inline">\lambda=\diag(\lambda_i)</span> 且 <span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>。特征向量 <span class="math-inline">x_i</span> 不是唯一的，但每个不同的特征值都有一个唯一的<i>约化子空间</i>。对于厄米特正定束，约化子空间的维数与特征值的重数相同。重要的是要记住，当一对特征值重合时，它们的特征向量失去个性：无法说一组向量是多重特征值的<i>特征向量</i>。
+其中<span class="math-inline">\Lambda=\diag(\lambda_i)</span>，<span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>。
+特征向量<span class="math-inline">x_i</span>不是唯一的，但对于每个不同的特征值，存在一个唯一的<i>约化子空间</i>。
+对于厄米正定束，约化子空间与特征值的重数具有相同的维度。重要的是要记住，当一对特征值重合时，它们的特征向量失去了个性：无法说一组向量是多重特征值的<i>唯一</i>特征向量。
 
 <p>
-有些情况下矩阵 <span class="math-inline">B</span> 是奇异的（半正定）。只要 <span class="math-inline">Ax\neq 0</span> 对于 <span class="math-inline">B</span> 的零空间中的所有向量 <span class="math-inline">x</span> 成立，我们仍然有一个厄米特正定束。此时，束 (<a href="node156.html#gsymeig">5.1</a>) 具有 <span class="math-inline">p</span> 重无穷大特征值，其约化子空间为 <span class="math-inline">B</span> 的零空间。在大多数实际情况下，我们不关心计算这些无穷大特征值，因为它们对应于由特征值计算引起的物理应用中的约束、对称性或刚体模式。
+在某些情况下，矩阵<span class="math-inline">B</span>是奇异的（半正定）。只要对于<span class="math-inline">B</span>的零空间中的所有向量<span class="math-inline">x</span>，<span class="math-inline">Ax\neq 0</span>，我们仍然有一个厄米正定束。此时，束(<a href="node156.html#gsymeig">5.1</a>)具有<span class="math-inline">p</span>重无穷特征值，其约化子空间为<span class="math-inline">B</span>的零空间。在大多数实际情况下，我们并不关心计算这些无穷特征值，因为它们对应于约束、对称性或物理应用中特征值计算的刚体模式。
 
 <p>
-<span class="math-inline">A - \lambda B</span> 的特征值 <span class="math-inline">\{\lambda_i\}</span> 可能是良态的或病态的。如果 <span class="math-inline">B=I</span>（或接近它），特征值是良态的（接近它），如同厄米特特征值问题。但如果 <span class="math-inline">\vert x^{\ast}_i B x_i\vert</span> 很小，其中 <span class="math-inline">x_i</span> 是 <span class="math-inline">\lambda_i</span> 的单位特征向量，<span class="math-inline">\lambda_i</span> 可能非常病态。我们在第<a href="node177.html#sec:gsym_pert">5.7</a>节中更详细地介绍了计算特征值和特征向量的误差评估。
+<span class="math-inline">A - \lambda B</span>的特征值<span class="math-inline">\{\lambda_i\}</span>可能是良态或病态的。如果<span class="math-inline">B=I</span>（或接近它），特征值是良态的（接近它），如同厄米特征值问题。但如果<span class="math-inline">\vert x^{\ast}_i B x_i\vert</span>很小，其中<span class="math-inline">x_i</span>是<span class="math-inline">\lambda_i</span>的单位特征向量，<span class="math-inline">\lambda_i</span>可能非常病态。我们在第<a href="node177.html#sec:gsym_pert">5.7</a>节中更详细地介绍了计算特征值和特征向量的误差评估。
 
 <p>
 <br><hr>
@@ -158,20 +151,22 @@ GHEP (<a href="node156.html#gsymeig">5.1</a>) 具有 <span class="math-inline">n
 <li><ul>
 <li><ul>
 <li><a name="tex2html3116"
-  href="node157.html">可用算法概述。</a>
+  href="node157.html">可用算法的概述</a>
 <li><a name="tex2html3117"
-  href="node158.html">选择总结。</a>
+  href="node158.html">选择总结</a>
 <li><a name="tex2html3118"
-  href="node159.html">应用。</a>
+  href="node159.html">应用</a>
 <li><a name="tex2html3119"
-  href="node160.html">正交化。</a>
+  href="node160.html">正交化</a>
 <li><a name="tex2html3120"
-  href="node161.html">寻求的特征值。</a>
+  href="node161.html">寻求的特征值</a>
 <li><a name="tex2html3121"
-  href="node162.html">存储和工作量。</a>
+  href="node162.html">存储与工作量</a>
 </ul></ul></ul>
 <!--End of Table of Child-Links-->
-<hr><!--Navigation Panel-->
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html3114"
   href="node157.html">
 <button class="navigate">下一节</button></a> 
@@ -188,16 +183,11 @@ GHEP (<a href="node156.html#gsymeig">5.1</a>) 具有 <span class="math-inline">n
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3115"
-  href="node157.html">Overview of Available Algorithms.</a>
-<b> Up:</b> <a name="tex2html3109"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3103"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
- &nbsp <b>  <a name="tex2html3111"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3113"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3115" href="node157.html">Overview of Available Algorithms.</a>
+<b>上一级：</b><a name="tex2html3109" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3103" href="node155.html">广义厄米特征值问题</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

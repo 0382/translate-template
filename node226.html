@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Deflation and Stopping Rules</title>
-<meta name="description" content="Deflation and Stopping Rules">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Deflation and Stopping Rules">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node227.html">
-<link rel="previous" href="node225.html">
-<link rel="up" href="node220.html">
-<link rel="next" href="node227.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4226"
   href="node227.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4227"
-  href="node227.html">Orthogonal Deflating Transformation</a>
-<b> Up:</b> <a name="tex2html4221"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4215"
-  href="node225.html">Computational Costs and Tradeoffs</a>
- &nbsp <b>  <a name="tex2html4223"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4225"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4227" href="node227.html">正交收缩变换</a>
+<b>上一级：</b><a name="tex2html4221" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4215" href="node225.html">计算成本与权衡</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001666000000000000000"></a> <a name="sec:deflation"></a><a name="23514"></a>
@@ -98,20 +86,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-缩减是QR迭代实际应用中的一个重要概念，因此对IRAM同样重要。在QR迭代的背景下，缩减意味着将Hessenberg矩阵<span class="math-inline">H</span>的一个小次对角元素置零。之所以称为缩减，是因为它将Hessenberg矩阵分割成两个更小的子问题，这两个子问题可以独立进一步细化。
+缩减是QR迭代实际应用中的一个重要概念，因此对IRAM（隐式重启Arnoldi方法）同样至关重要。在QR迭代的背景下，缩减意味着将海森堡矩阵<span class="math-inline">H</span>的一个小次对角元素置零。之所以称为缩减，是因为这会将海森堡矩阵分割成两个更小的子问题，这两个子问题可以独立地进一步细化。
 
 <p>
-然而，在IRAM的背景下，常规的QR缩减技术并不总是适用。需要针对隐式重启的额外缩减能力。通常希望在精度水平<span class="math-inline">\epsilon_D</span>处进行缩减，其中<span class="math-inline">1 > \epsilon_D > \epsilon_M</span>，<span class="math-inline">\epsilon_M</span>是机器精度。理论上（即在精确算术中），当<span class="math-inline">A</span>具有对应于不同特征向量的多重特征值时，IRAM不可能计算出这种多重性的多个实例，因为它是一种“单向量”方法，而不是块方法。然而，在实践中，计算多重特征值通常没有太大困难，因为该方法在收敛过程中会自行缩减，并且舍入误差通常会在后续起始向量中引入新特征向量方向的分量。尽管如此，这可能不可靠，并且会遗漏多重特征值。无论如何，这种方法通常需要严格的收敛容差才能成功找到多重特征值的所有实例。更有效的方法是，一旦近似特征值收敛到一定精度水平，就进行缩减（即锁定），然后强制后续Arnoldi向量与收敛子空间正交。通过这种能力，可以以相同的指定精度计算多重特征值的额外实例，而无需将它们收敛到不必要的过高精度。
+然而，在IRAM的背景下，传统的QR缩减技术并不总是适用。需要针对隐式重启的额外缩减功能。通常希望在精度水平<span class="math-inline">\epsilon_D</span>处进行缩减，其中<span class="math-inline">1 > \epsilon_D > \epsilon_M</span>，<span class="math-inline">\epsilon_M</span>是机器精度。理论上（即在精确算术中），当<span class="math-inline">A</span>具有对应于不同特征向量的多重特征值时，IRAM不可能计算出该多重性的多个实例，因为它是一种“单向量”方法，而非块方法。然而，在实践中，通常在收敛过程中方法会自行缩减，且舍入误差通常会在后续起始向量中引入新特征向量方向的分量，因此计算多重特征值通常没有太大困难。尽管如此，这种方法可能不可靠，可能会遗漏多重特征值。无论如何，这种方法通常需要严格的收敛容差才能成功找到多重特征值的所有实例。更有效的方法是，一旦近似特征值收敛到一定精度水平，就进行缩减（即锁定），然后强制后续的Arnoldi向量与收敛的子空间正交。通过这一功能，可以以相同的指定精度计算多重特征值的额外实例，而无需将它们收敛到不必要的过高精度。
 
 <p>
-在Arnoldi过程中，与QR迭代一样，在隐式重启的过程中，前<span class="math-inline">k</span>个次对角线元素可能会变得很小。然而，通常情况下，在出现小的次对角元素之前，<span class="math-inline">H</span>的谱中就会出现已经收敛的Ritz值。这种收敛通常通过观察<span class="math-inline">H</span>的特征向量<span class="math-inline">y</span>中的小最后一个分量来检测。当这种情况发生时，我们能够构造<span class="math-inline">H</span>的正交相似变换，这将给出一个略有扰动的<span class="math-inline">H</span>的等价Arnoldi分解，确实具有零次对角线，这是我们缩减方案的基础。
+在Arnoldi过程中，与QR迭代一样，在隐式重启的过程中，前<span class="math-inline">k</span>个次对角线元素可能会变小。然而，通常情况下，在次对角元素变小之前，<span class="math-inline">H</span>的谱中就已经出现了收敛的Ritz值。这种收敛通常通过观察<span class="math-inline">H</span>的特征向量<span class="math-inline">y</span>中的小末端分量来检测。当这种情况发生时，我们能够构造<span class="math-inline">H</span>的正交相似变换，得到一个略微扰动的<span class="math-inline">H</span>，确实具有零次对角线，这是我们缩减方案的基础。
 
 <p>
 在IRAM的背景下，需要两种类型的缩减：
 <dl>
 <dt><strong><i>锁定：</i></strong></dt>
 <dd><a name="23516"></a> 
-如果一个Ritz值<span class="math-inline">\theta</span>已经收敛（意味着<span class="math-inline">\Vert Ax - x\theta\Vert < \epsilon_D</span>）并且被认为是所需特征值集合的成员，那么我们希望宣布它已经收敛，解耦特征对<span class="math-inline">(x, \theta)</span>，并继续计算剩余的特征值，不再对<span class="math-inline">x</span>或<span class="math-inline">\theta</span>进行任何更改。这个过程称为锁定。
+如果一个Ritz值<span class="math-inline">\theta</span>已经收敛（意味着<span class="math-inline">\Vert Ax - x\theta\Vert < \epsilon_D</span>），并且被认为是所需特征值集合的成员，那么我们希望宣布其收敛，解耦特征对<span class="math-inline">(x, \theta)</span>，并在不进一步改变<span class="math-inline">x</span>或<span class="math-inline">\theta</span>的情况下继续计算剩余的特征值。这个过程称为锁定。
 
 <p>
 </dd>
@@ -120,7 +108,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果一个Ritz值<span class="math-inline">\theta</span>已经收敛但不是所需集合的成员，那么我们希望解耦并从由Arnoldi向量张成的当前Krylov子空间中移除特征对<span class="math-inline">(x, \theta)</span>。这个过程称为清除。
 </dd>
 </dl> 
-这种缩减技术最初是在[<a href="node421.html#leho95">289</a>,<a href="node421.html#leso96">294</a>]中开发的。我们在这里介绍的方案基于[<a href="node421.html#sore98">420</a>]中开发的改进。该方案允许对已经收敛到指定相对精度<span class="math-inline">\epsilon_D</span>的Ritz值进行稳定和高效的缩减（或锁定），这可能远大于机器精度<span class="math-inline">\epsilon_M</span>。在没有SI加速收敛的情况下，这一点尤为重要。通常，在这种情况下，矩阵-向量乘积的数量会很大，在低容差下锁定收敛的Ritz值将非常可取。这将避免为了达到允许正常QR类型缩减的精度而需要的矩阵-向量乘积的开销。此外，能够清除已经收敛但不需要的Ritz值非常重要。正如[<a href="node421.html#leho95">289</a>]中指出的，Parlett和Le在[<a href="node421.html#pale93">359</a>]中发现的QR气泡追逐过程的前向不稳定性将阻止隐式重启用于清除已经收敛但不需要的Ritz值。
+这种缩减技术最初是在[<a href="node421.html#leho95">289</a>,<a href="node421.html#leso96">294</a>]中开发的。我们在这里介绍的方案基于[<a href="node421.html#sore98">420</a>]中的改进。该方案允许稳定且高效地缩减（或锁定）已经以指定相对精度<span class="math-inline">\epsilon_D</span>收敛的Ritz值，该精度可能远大于机器精度<span class="math-inline">\epsilon_M</span>。在没有加速收敛的SI（Shift-and-Invert）时，这一点尤其重要。通常，在这种情况下，矩阵-向量乘积的数量会很大，因此以低容差锁定收敛的Ritz值将非常可取。这将避免为达到允许正常QR类型缩减的精度所需的矩阵-向量乘积的开销。此外，能够清除已收敛但不需要的Ritz值非常重要。正如[<a href="node421.html#leho95">289</a>]中指出的，Parlett和Le[<a href="node421.html#pale93">359</a>]发现的QR波纹追踪过程的前向不稳定性将阻止隐式重启用于清除已收敛的不需要Ritz值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -140,16 +128,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4227"
-  href="node227.html">Orthogonal Deflating Transformation</a>
-<b> Up:</b> <a name="tex2html4221"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4215"
-  href="node225.html">Computational Costs and Tradeoffs</a>
- &nbsp <b>  <a name="tex2html4223"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4225"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4227" href="node227.html">正交收缩变换</a>
+<b>上一级：</b><a name="tex2html4221" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4215" href="node225.html">计算成本与权衡</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

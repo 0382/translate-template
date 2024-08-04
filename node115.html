@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Results for Medline SVD.</title>
-<meta name="description" content="Results for Medline SVD.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Results for Medline SVD.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node116.html">
-<link rel="previous" href="node114.html">
-<link rel="up" href="node113.html">
-<link rel="next" href="node116.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2481"
   href="node116.html">
@@ -80,25 +73,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2482"
-  href="node116.html">Results for L-Shaped Membrane</a>
-<b> Up:</b> <a name="tex2html2476"
-  href="node113.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html2470"
-  href="node114.html">Results for L-Shaped Membrane.</a>
- &nbsp <b>  <a name="tex2html2478"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2480"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2482" href="node116.html">Results for L-Shaped Membrane</a>
+<b>上一级：</b><a name="tex2html2476" href="node113.html">数值示例</a>
+<b>上一节：</b><a name="tex2html2470" href="node114.html">Results for L-Shaped Membrane.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001346020000000000000">
-Medline SVD 测试结果</a>
+Medline SVD 的结果</a>
 </h4>
-第二个测试案例，Medline SVD，表现出了相当不同的特性。其主要特征值（<span class="math-inline">\lambda_i(A)=\sigma_i(X)^2</span>）区分得相当明显（最大的一个是<span class="math-inline">\lambda_1=3442.5</span>，其次是<span class="math-inline">\lambda_2=756.6</span>），即便对于较大的<span class="math-inline">i</span>，比值<span class="math-inline">\lambda_i/\lambda_{i+1}</span>较小，如图<a href="node114.html#MedlLanRes">4.3</a>所示，我们仍能获得快速的收敛。第一个特征值在第<span class="math-inline">j=14</span>步时已达到完全精度，而在第<span class="math-inline">j=50</span>步后，前六个特征值均已收敛。到了第<span class="math-inline">j=300</span>步时，我们得到了100个特征值。
+第二个测试例子 Medline SVD 表现得相当不同。主要的特征值（<span class="math-inline">\lambda_i(A)=\sigma_i(X)^2</span>）分离得相当好（最大的一个是 <span class="math-inline">\lambda_1=3442.5</span>，接下来一个是 <span class="math-inline">\lambda_2=756.6</span>），即使对于较大的 <span class="math-inline">i</span>，比值 <span class="math-inline">\lambda_i/\lambda_{i+1}</span> 较小，如图 <a href="node114.html#MedlLanRes">4.3</a> 所示，我们仍将获得快速的收敛。第一个特征值在第 <span class="math-inline">j=14</span> 步时已经达到了完全的精度，而在第 <span class="math-inline">j=50</span> 步后，前六个特征值已经收敛。在第 <span class="math-inline">j=300</span> 步后，我们得到了 100 个特征值。
 
 <p>
-这个区分良好的问题与L形膜问题之间还有一个有趣的差异，即后者因其特征值更为集中，导致重新正交化更为频繁。我们用虚线垂直线标记了重新正交化的步骤，分别在第<span class="math-inline">j=7</span>步、第<span class="math-inline">j=12</span>步，以及之后的每四步进行一次。由于每次重新正交化涉及两个向量，选择性重新正交化所需的工作量大约是全面重新正交化的一半。在这种情况下，建议用户采用全面重新正交化，因为它能在适度的额外计算工作下确保基向量的完全正交性。
+这个分离良好的问题与 L 形膜问题之间还有一个有趣的差异，后者具有更多聚集的特征值，即重新正交化触发的频率更高。我们在第 <span class="math-inline">j=7</span> 步用一条虚线标记重新正交化，第 <span class="math-inline">j=12</span> 步又有一条，之后每四步标记一次。由于每次重新正交化涉及两个向量，选择性重新正交化所需的工作量大约是全面重新正交化的一半。在这种情况下，建议用户使用全面重新正交化，因为它能在算术工作量适度增加的情况下确保基向量的完全正交性。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -118,16 +106,11 @@ Medline SVD 测试结果</a>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2482"
-  href="node116.html">Results for L-Shaped Membrane</a>
-<b> Up:</b> <a name="tex2html2476"
-  href="node113.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html2470"
-  href="node114.html">Results for L-Shaped Membrane.</a>
- &nbsp <b>  <a name="tex2html2478"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2480"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2482" href="node116.html">Results for L-Shaped Membrane</a>
+<b>上一级：</b><a name="tex2html2476" href="node113.html">数值示例</a>
+<b>上一节：</b><a name="tex2html2470" href="node114.html">Results for L-Shaped Membrane.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Storage and Work.</title>
-<meta name="description" content="Storage and Work.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Storage and Work.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node161.html">
-<link rel="up" href="node156.html">
-<link rel="next" href="node163.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3202"
   href="node163.html">
@@ -79,43 +73,41 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3203"
-  href="node163.html">Transformation to Standard Problem</a>
-<b> Up:</b> <a name="tex2html3197"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3193"
-  href="node161.html">Eigenvalues Sought.</a>
- &nbsp <b>  <a name="tex2html3199"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3201"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3203" href="node163.html">转换为标准问题</a>
+<b>上一级：</b><a name="tex2html3197" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3193" href="node161.html">Eigenvalues Sought.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001410060000000000000">
 存储与工作量</a>
 </h4>
-在表<a href="node158.html#gsym_alg_choice">5.1</a>的最后一列中，我们给出了因式分解所需的存储量和额外工作量的估计。<dl>
+在表<a href="node158.html#gsym_alg_choice">5.1</a>的最后几列中，我们给出了因式分解所需的存储量和工作量的估计。<dl>
 <dt><strong>“#vec”</strong></dt>
-<dd>表示需要存储多少个向量。2的含义显而易见；“适度”意味着所需向量数是所求特征值数量<span class="math-inline">m</span>的倍数，例如<span class="math-inline">3m</span>到<span class="math-inline">5m</span>。“少量”比适度更少，例如<span class="math-inline">m+10</span>，而“大量”则更多。
+<dd>表示需要存储多少个向量。2的含义是显而易见的；“中等”意味着所需向量数是所求特征值数量<span class="math-inline">m</span>的倍数，例如<span class="math-inline">3m</span>到<span class="math-inline">5m</span>。“少量”比中等更少，例如<span class="math-inline">m+10</span>，而“大量”则更多。
 </dd>
 <dt><strong>“Fact”</strong></dt>
-<dd>指示是否需要额外的矩阵存储。“<span class="math-inline">LL^{\ast}</span>”表示稀疏Cholesky分解，“<span class="math-inline">LDL^{\ast}</span>”表示稀疏对称非定矩阵的高斯消去法，而“ILU”是不完全分解。它被认为比其他两种方法更紧凑，需要的算术工作量更少。
+<dd>指示是否需要额外的矩阵存储。“<span class="math-inline">LL^{\ast}</span>”表示稀疏的Cholesky分解，“<span class="math-inline">LDL^{\ast}</span>”表示稀疏的对称非定态高斯消元法，而“ILU”是不完全分解。它应该比其他两种方法更紧凑，需要的算术工作量更少。
 </dd>
 </dl> 
 
 <p>
-我们注意到，诸如计算小于给定实数<span class="math-inline">\alpha</span>或在给定区间<span class="math-inline">[\alpha, \beta]</span>内的<span class="math-inline">A - \lambda B</span>的特征值数量这样的任务，并不需要计算特征值，因此可以成本更低。关键工具是矩阵惯性，如第<a href="node86.html#sec:heigintro">4.1</a>节（第<a href="node92.html#eigcounting"><button class="crossref"></button></a>页）所述。假设<span class="math-inline">B</span>为正定矩阵，这一方法可以很容易地扩展到<span class="math-inline">A - \lambda B</span>的情况。总之，令
+我们注意到，诸如计算小于给定实数<span class="math-inline">\alpha</span>或位于给定区间<span class="math-inline">[\alpha, \beta]</span>内的<span class="math-inline">A - \lambda B</span>的特征值数量这样的任务，并不需要计算特征值，因此可以便宜得多。关键工具是矩阵惯性，如第<a href="node86.html#sec:heigintro">4.1</a>节（第<a href="node92.html#eigcounting"><button class="crossref"></button></a>页）所述。假设<span class="math-inline">B</span>为正定矩阵，这一方法可以很容易地扩展到<span class="math-inline">A - \lambda B</span>的情况。总之，设
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">A - \alpha B = L_{\alpha} D_{\alpha} L^T_{\alpha}, \quad A - \beta B = L_{\beta} D_{\beta} L^T_{\beta}</div>
 </div>
 <br clear="ALL">
 <p></p>
-分别为矩阵<span class="math-inline">A - \alpha B</span>和<span class="math-inline">A - \beta B</span>的LDL<span class="math-inline">^{T}</span>分解，我们假设<span class="math-inline">D_{\alpha}</span>和<span class="math-inline">D_{\beta}</span>是非奇异对角矩阵。关于LDL<span class="math-inline">^{T}</span>分解的软件可用性信息，请参阅第<a href="node385.html#sec:directsolvers">10.3</a>节。然后，<span class="math-inline">A - \lambda B</span>在<span class="math-inline">[\alpha, \beta]</span>区间内的特征值数量等于<span class="math-inline">\nu(D_{\beta}) - \nu(D_{\alpha})</span>，其中<span class="math-inline">\nu(D)</span>表示负对角元素的数量。
+分别为矩阵<span class="math-inline">A - \alpha B</span>和<span class="math-inline">A - \beta B</span>的LDL<span class="math-inline">^{T}</span>分解，我们假设<span class="math-inline">D_{\alpha}</span>和<span class="math-inline">D_{\beta}</span>是非奇异的对角矩阵。关于LDL<span class="math-inline">^{T}</span>分解的软件可用性信息，请参阅第<a href="node385.html#sec:directsolvers">10.3</a>节。然后，<span class="math-inline">A - \lambda B</span>在<span class="math-inline">[\alpha, \beta]</span>区间内的特征值数量等于<span class="math-inline">\nu(D_{\beta}) - \nu(D_{\alpha})</span>，其中<span class="math-inline">\nu(D)</span>表示负对角元素的数量。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容主要介绍了在计算特定区间内特征值数量时，如何通过矩阵分解来减少计算量和存储需求。通过LDL<span class="math-inline">^{T}</span>分解，可以高效地确定特征值的分布，而不必实际计算每个特征值。<!--Navigation Panel-->
 <a name="tex2html3202"
   href="node163.html">
 <button class="navigate">下一节</button></a> 
@@ -132,16 +124,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3203"
-  href="node163.html">Transformation to Standard Problem</a>
-<b> Up:</b> <a name="tex2html3197"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3193"
-  href="node161.html">Eigenvalues Sought.</a>
- &nbsp <b>  <a name="tex2html3199"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3201"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3203" href="node163.html">转换为标准问题</a>
+<b>上一级：</b><a name="tex2html3197" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3193" href="node161.html">Eigenvalues Sought.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

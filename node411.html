@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Introduction</title>
-<meta name="description" content="Introduction">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node412.html">
-<link rel="previous" href="node410.html">
-<link rel="up" href="node410.html">
-<link rel="next" href="node412.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html7079"
   href="node412.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7080"
-  href="node412.html">General Framework of Preconditioning</a>
-<b> Up:</b> <a name="tex2html7074"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7068"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
- &nbsp <b>  <a name="tex2html7076"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7078"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7080" href="node412.html">预处理的一般框架</a>
+<b>上一级：</b><a name="tex2html7074" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7068" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002031000000000000000"></a>
@@ -99,37 +87,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-我们考虑一类广义的<em>对称正定</em>特征值问题，形式如下：
+我们考虑一类广义的<em>对称正定</em>特征值问题，其形式为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(A - \lambda B)x=0</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">A</span>和<span class="math-inline">B</span>是实对称<span class="math-inline">n</span>阶矩阵，并假设<span class="math-inline">A</span>为正定矩阵。
+其中<span class="math-inline">A</span>和<span class="math-inline">B</span>是<span class="math-inline">n</span>阶实对称矩阵，且假设<span class="math-inline">A</span>为正定矩阵。
 <a name="48538"></a>
-这描述了一个具有离散谱的正则矩阵束<span class="math-inline">A - \lambda B</span>，包含<span class="math-inline">n</span>个实数特征值，其中一些可能是无穷大，
+这描述了一个具有离散谱的正则矩阵束<span class="math-inline">A - \lambda B</span>，包含<span class="math-inline">n</span>个实数特征值，其中某些可能为无穷大，
 
-<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。若<span class="math-inline">B</span>是非奇异的，所有特征值都是有限的。若<span class="math-inline">B</span>是半正定的（例如<span class="math-inline">B=I</span>），所有特征值都是正的，
-我们考虑计算矩阵束<span class="math-inline">A - \lambda B</span>的最小<span class="math-inline">m</span>个特征值的问题。当<span class="math-inline">B</span>不定的时候，考虑矩阵束<span class="math-inline">B - \mu A</span>更为方便，其特征值为
+<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。若<span class="math-inline">B</span>为非奇异矩阵，则所有特征值均为有限值。若<span class="math-inline">B</span>为半正定矩阵（例如，<span class="math-inline">B=I</span>），则所有特征值均为正数，
+我们考虑计算矩阵束<span class="math-inline">A - \lambda B</span>的最小<span class="math-inline">m</span>个特征值的问题。当<span class="math-inline">B</span>为不定矩阵时，考虑矩阵束<span class="math-inline">B - \mu A</span>及其特征值更为方便，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\mu = \frac 1 \lambda, \quad\mu_{\min} = \mu_n \leq \cdots \leq \mu_1 = \mu_{\max},</div>
 </div>
 <br clear="ALL">
 <p></p>
-我们希望计算最大的<span class="math-inline">m</span>个特征值，
-<span class="math-inline">\mu_1, \ldots, \mu_m</span>。计算最小的<span class="math-inline">m</span>个特征值<span class="math-inline">\mu_i</span>的问题可以通过将<span class="math-inline">B</span>替换为<span class="math-inline">-B</span>来重构为前述问题。在屈曲问题中，最大的和最小的特征值<span class="math-inline">\mu_i</span>都是感兴趣的。
+我们希望计算最大的<span class="math-inline">m</span>个特征值，即<span class="math-inline">\mu_1, \ldots, \mu_m</span>。计算最小<span class="math-inline">m</span>个特征值<span class="math-inline">\mu_i</span>的问题可以通过将<span class="math-inline">B</span>替换为<span class="math-inline">-B</span>来重新表述为前述问题。在屈曲问题中，最大的和最小的特征值<span class="math-inline">\mu_i</span>都具有重要意义。
 
 <p>
-众所周知，满足
-<span class="math-inline">(B - \mu_i A) x_i = 0</span>的（右）特征向量<span class="math-inline">x_i</span>可以选择为正交的，即：
+众所周知，满足<span class="math-inline">(B - \mu_i A) x_i = 0</span>的（右）特征向量<span class="math-inline">x_i</span>可以选择为正交的，具体含义如下：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(x_i,A x_j) = (x_i, B x_j) = 0, \qquad i \neq j.</div>
@@ -138,72 +124,64 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p></p>
 
 <p>
-一类重要的特征值问题是<i>网格特征值问题</i>，
-源自数学物理中自伴微分算子的边值问题的离散化。网格特征值问题具有以下典型性质：
+一类重要的特征值问题是<i>网格特征值问题</i>，源自数学物理中自伴微分算子的边界值问题的离散化。网格特征值问题具有以下典型特性：
 
 <ul>
-<li>矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>的规模<span class="math-inline">n</span>很大，远大于所需的特征对数目<span class="math-inline">m</span>。有时，必须解决一系列相似的特征值问题，且<span class="math-inline">n</span>不断增加。
-</li>
-<li><span class="math-inline">A</span>和<span class="math-inline">B</span>是稀疏的。非常大的矩阵即使用稀疏表示也无法完全适应可用内存。在某些情况下，矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>无法以显式矩阵形式提供。
-</li>
-<li>无法廉价地对<span class="math-inline">A</span>或形式为<span class="math-inline">A + \beta B</span>的任何矩阵进行分解。我们唯一能对<span class="math-inline">A</span>执行的操作是向量与<span class="math-inline">A</span>的乘法。
-</li>
-<li>有时可以廉价地对<span class="math-inline">B</span>进行分解，但通常我们能高效地对<span class="math-inline">B</span>执行的唯一操作是向量与<span class="math-inline">B</span>的乘法。
-</li>
-<li>矩阵<span class="math-inline">A</span>是病态的。通常，<span class="math-inline">B</span>的条件数比<span class="math-inline">A</span>小。
-</li>
-<li>所需的特征对数目<span class="math-inline">m</span>可以选择，使得感兴趣的特征值与谱的其余部分很好地分离；换句话说，
+<li>矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>的规模<span class="math-inline">n</span>很大，远大于所需特征对的数量<span class="math-inline">m</span>。有时，必须解决一系列相似的特征值问题，且<span class="math-inline">n</span>不断增加。</li>
+<li><span class="math-inline">A</span>和<span class="math-inline">B</span>是稀疏的。即使采用稀疏表示，非常大的矩阵也无法完全适应可用内存。在某些情况下，矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>无法以显式矩阵形式提供。</li>
+<li>无法廉价地对<span class="math-inline">A</span>或形式为<span class="math-inline">A + \beta B</span>的任何矩阵进行分解。我们只能执行<span class="math-inline">A</span>与向量的乘法运算。</li>
+<li>有时可能廉价地对<span class="math-inline">B</span>进行分解，但通常情况下，我们只能高效地执行<span class="math-inline">B</span>与向量的乘法运算。</li>
+<li>矩阵<span class="math-inline">A</span>是病态的。通常，<span class="math-inline">B</span>的条件数小于<span class="math-inline">A</span>。</li>
+<li>所需的特征对数量<span class="math-inline">m</span>可以选择，使得感兴趣的特征值与谱的其余部分良好分离；换句话说，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\frac{ \mu_m - \mu_{m+1} } { \mu_{\max} - \mu_{\min}}</div>
 </div>
 <br clear="ALL">
 <p></p>
-的比值不太小。这意味着矩阵<span class="math-inline">A^{-1}B</span>的不变子空间由感兴趣的特征向量张成，是良态的，因此计算<span class="math-inline">m</span>个特征对的问题是良定的。在许多应用中，当矩阵束<span class="math-inline">B - \mu A</span>的谱近似于紧算子的谱时，可以建立这种性质，使得零是近似特征值的唯一凝聚点。
-</li>
+的比值不太小。这意味着矩阵<span class="math-inline">A^{-1}B</span>的不变子空间由感兴趣的特征向量张成，是良态的，因此计算<span class="math-inline">m</span>个特征对的问题是良定的。在许多应用中，当矩阵束<span class="math-inline">B - \mu A</span>的谱近似于紧算子的谱时，可以建立这一性质，使得零是近似特征值的唯一凝聚点。</li>
 </ul>
 
 <p>
-这类问题出现在结构力学等领域，其中通常称<span class="math-inline">A</span>为<i>刚度</i>矩阵，<span class="math-inline">B</span>为<i>质量</i>矩阵。质量矩阵通常是正定的，但在某些应用中，例如在屈曲问题中，矩阵<span class="math-inline">B</span>仅是非负的，甚至是非定的，而<span class="math-inline">A</span>是正定的。
+这类问题出现在结构力学等领域，其中通常称<span class="math-inline">A</span>为<i>刚度</i>矩阵，<span class="math-inline">B</span>为<i>质量</i>矩阵。质量矩阵通常是正定的，但在某些应用中，例如在屈曲问题中，矩阵<span class="math-inline">B</span>仅为非负的，甚至是非定的，而<span class="math-inline">A</span>为正定的。
 
 <p>
-在本节的其余部分，为简洁起见，我们仅处理矩阵束<span class="math-inline">B - \mu A</span>。当<span class="math-inline">B=I</span>且
-<span class="math-inline">\lambda = 1 / \mu</span>时，我们的结果和论点可以直接应用于矩阵束<span class="math-inline">A - \lambda I</span>。
+为了简洁起见，在本节的其余部分，我们仅处理矩阵束<span class="math-inline">B - \mu A</span>。当<span class="math-inline">B=I</span>且<span class="math-inline">\lambda = 1 / \mu</span>时，我们的结果和论证可以直接应用于矩阵束<span class="math-inline">A - \lambda I</span>。
 
 <p>
-现在，我们简要考虑两种传统的求解此类广义特征值问题的方法。
+现在，我们简要考虑两种传统的广义特征值问题求解方法。
 
 <p>
 一种流行的方法是基于移位-逆变换算子的乘法：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">x^{(i+1)}=(B - \mu A)^{-1}Ax^{(i)};</div>
 </div>
 <br clear="ALL">
 <p></p>
-参见第4.3节。该方法使我们能够快速计算最接近移位<span class="math-inline">\mu</span>的特征值，假设这一操作可以通过对<span class="math-inline">B - \mu A</span>进行显式高效三角分解来实现。通过适当选择的变量移位，例如基于瑞利商
+参见第4.3节。该方法允许我们快速计算最接近移位<span class="math-inline">\mu</span>的特征值，假设这一操作可以通过<span class="math-inline">B - \mu A</span>的显式高效三角分解来实现。通过适当选择的变量移位，例如基于瑞利商
 <a name="prec_RQ"></a>(x) = (x,Bx)(x,Ax)，
 
-对称特征值问题的收敛速度是三次方的。然而，对于非常大的问题，这种分解通常成本过高。取而代之的是，可以采用迭代系统求解器来近似求解相应的线性系统，从而得到一种内-外迭代方法，其中外迭代可能会因内步数不足而显著减慢。如果我们考虑内-外迭代步骤的总数，收敛速度通常仅为线性。
+对称特征值问题的收敛速度为三次方。然而，对于非常大的问题，这种分解通常成本过高。取而代之的是，可以采用迭代系统求解器对相应的线性系统进行近似求解。这样，我们得到一个内-外迭代方法，其中外迭代可能因内步骤数量不足而显著减慢。如果我们考虑内-外迭代步骤的总数，收敛速度通常仅为线性。
 
 <p>
-如果使用预处理的迭代求解器进行内迭代，这种方法就变成了<i>预处理特征求解器</i>。我们将在第11.3.7节讨论这种方法。
+如果使用预处理的迭代求解器进行内迭代，这种方法就变成了一种<i>预处理特征值求解器</i>。我们将在第11.3.7节讨论这种方法。
 
 <p>
-另一种方法可以在<span class="math-inline">B</span>能够高效分解的情况下使用，这样我们可以对向量进行<span class="math-inline">AB^{-1}</span>或<span class="math-inline">B^{-1}A</span>的乘法，并使用传统的Lanczos方法等；参见第4.4节。在这种情况下，单次迭代成本不高，但收敛可能较慢。如果<span class="math-inline">B</span>是非定的，那么我们需要使用多项式方法在谱的中间部分寻找特征值<span class="math-inline">\lambda_i</span>，这是一个已知难题。如果<span class="math-inline">B</span>是正定的，情况则较为简单，因为我们希望找到极端（最小）特征值<span class="math-inline">\lambda_i</span>。尽管如此，
+另一种方法是在<span class="math-inline">B</span>可以高效分解的情况下使用，这样我们可以通过<span class="math-inline">AB^{-1}</span>或<span class="math-inline">B^{-1}A</span>乘以向量，并使用传统的Lanczos方法；参见第4.4节。在这种情况下，单次迭代成本不高，但收敛可能较慢。如果<span class="math-inline">B</span>是不定的，我们需要使用多项式方法在中谱中寻找特征值<span class="math-inline">\lambda_i</span>，这是一个已知难题。如果<span class="math-inline">B</span>是正定的，情况则较为简单，因为我们希望找到极值（最小）特征值<span class="math-inline">\lambda_i</span>。然而，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\frac{\lambda_{m+1} - \lambda_m}{\lambda_{\max} - \lambda_{\min}}</div>
 </div>
 <br clear="ALL">
 <p></p>
-的比值通常较小，这是由于分母较大，表明<span class="math-inline">\lambda_m</span>的收敛速度可能较慢。
+这一比值通常表征<span class="math-inline">\lambda_m</span>的收敛速度，由于分母较大，可能导致收敛缓慢。
 
 <p>
 因此，上述传统方法通常对于非常大的特征值问题效率不高。预处理是显著提升性能的关键。
@@ -226,16 +204,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7080"
-  href="node412.html">General Framework of Preconditioning</a>
-<b> Up:</b> <a name="tex2html7074"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7068"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
- &nbsp <b>  <a name="tex2html7076"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7078"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7080" href="node412.html">预处理的一般框架</a>
+<b>上一级：</b><a name="tex2html7074" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7068" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

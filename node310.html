@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Generic and Nongeneric Kronecker Structures</title>
-<meta name="description" content="Generic and Nongeneric Kronecker Structures">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Generic and Nongeneric Kronecker Structures">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node311.html">
-<link rel="previous" href="node309.html">
-<link rel="up" href="node307.html">
-<link rel="next" href="node311.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5504"
   href="node311.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5505"
-  href="node311.html">Ill-Conditioning</a>
-<b> Up:</b> <a name="tex2html5499"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5493"
-  href="node309.html">Kronecker Canonical Form</a>
- &nbsp <b>  <a name="tex2html5501"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5503"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5505" href="node311.html">病态条件</a>
+<b>上一级：</b><a name="tex2html5499" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5493" href="node309.html">Kronecker标准型</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001773000000000000000">
@@ -97,19 +85,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-尽管在一般情况下，KCF看起来相当复杂，但大多数矩阵束具有更简单的Kronecker结构。如果<span class="math-inline">A - \lambda B</span>是<span class="math-inline">m \times n</span>，其中<span class="math-inline">m \neq n</span>，那么对于几乎所有的<span class="math-inline">A</span>和<span class="math-inline">B</span>，它将具有相同的KCF，仅取决于<span class="math-inline">m</span>和<span class="math-inline">n</span>。这对应于<em>通用情况</em>，即<span class="math-inline">A - \lambda B</span>对任何复数（或实数）值的<span class="math-inline">\lambda</span>都具有满秩。因此，通用矩形束没有规则部分。对于<span class="math-inline">d = n - m > 0</span>的<span class="math-inline">A - \lambda B</span>，其通用Kronecker结构为
+尽管在一般情况下，KCF（Kronecker Canonical Form，Kronecker规范形式）看起来相当复杂，但大多数矩阵束具有更简单的Kronecker结构。如果<span class="math-inline">A - \lambda B</span>是<span class="math-inline">m \times n</span>，其中<span class="math-inline">m \neq n</span>，那么对于几乎所有的<span class="math-inline">A</span>和<span class="math-inline">B</span>，它将具有相同的KCF，仅取决于<span class="math-inline">m</span>和<span class="math-inline">n</span>。这对应于<em>通用情况</em>，即当<span class="math-inline">A - \lambda B</span>对于任何复数（或实数）的<span class="math-inline">\lambda</span>都具有满秩时。因此，通用的矩形束没有规则部分。对于<span class="math-inline">A - \lambda B</span>且<span class="math-inline">d = n - m > 0</span>的通用Kronecker结构是
 <a name="eq.kcf4"></a>  
 diag(L_, ..., L_, L_+ 1, 
 ..., L_+ 1), 
 
-其中<span class="math-inline">\ell = \lfloor m/d \rfloor</span>，块的总数为<span class="math-inline">d</span>，<span class="math-inline">L_{\ell + 1}</span>块的数量为<span class="math-inline">m~{\rm mod}~d</span>（当<span class="math-inline">d</span>整除<span class="math-inline">m</span>时为0）[<a href="node421.html#vandooren79">446</a>,<a href="node421.html#demmeledelman95">116</a>]。对于<span class="math-inline">d = m - n > 0</span>，如果我们将(<a href="node309.html#eq.kcf3">8.31</a>)中的<span class="math-inline">L_{\ell}, L_{\ell + 1}</span>替换为<span class="math-inline">L_{\ell}^T,L_{\ell + 1}^T</span>，同样的陈述也成立。例如，一个<span class="math-inline">2 \times 3</span>的通用束具有一个<span class="math-inline">L_2</span>块作为其KCF。
+其中<span class="math-inline">\ell = \lfloor m/d \rfloor</span>，块的总数是<span class="math-inline">d</span>，<span class="math-inline">L_{\ell + 1}</span>块的数量是<span class="math-inline">m \mod d</span>（当<span class="math-inline">d</span>整除<span class="math-inline">m</span>时为0）[<a href="node421.html#vandooren79">446</a>,<a href="node421.html#demmeledelman95">116</a>]。对于<span class="math-inline">d = m - n > 0</span>的情况，如果我们将(<a href="node309.html#eq.kcf3">8.31</a>)中的<span class="math-inline">L_{\ell}, L_{\ell + 1}</span>替换为<span class="math-inline">L_{\ell}^T,L_{\ell + 1}^T</span>，同样的陈述也成立。例如，一个<span class="math-inline">2 \times 3</span>的通用束具有一个<span class="math-inline">L_2</span>块作为其KCF。
 
 <p>
-方形束通常是规则的；即，<span class="math-inline">{\rm det}(A - \lambda B) = 0</span>当且仅当<span class="math-inline">\lambda</span>是特征值。此外，最通用的规则束是可对角化的，具有不同的有限特征值。<span class="math-inline">n \times n</span>的通用奇异束具有Kronecker结构[<a href="node421.html#waterhouse84">456</a>]：
+方阵束通常是规则的；即，<span class="math-inline">{\rm det}(A - \lambda B) = 0</span>当且仅当<span class="math-inline">\lambda</span>是特征值。此外，最通用的规则束是可对角化的，具有不同的有限特征值。<span class="math-inline">n \times n</span>的通用奇异束具有Kronecker结构[<a href="node421.html#waterhouse84">456</a>]：
 <a name="eq.kcf5"></a>  
 diag(L_j, L_n-j-1^T), &nbsp;&nbsp;&nbsp;&nbsp;j = 0, ..., n-1. 
 
-只有当奇异的<span class="math-inline">A - \lambda B</span>在某些<span class="math-inline">\lambda</span>下秩不足时，相关的KCF可能更复杂，并可能包括规则部分以及左右奇异块。这种情况对应于<em>非通用</em>（或<em>退化</em>）<em>情况</em>，从计算角度来看，这是真正的挑战。退化矩形束在控制理论中有多种应用，例如，用于计算线性描述系统的可控子空间和不可控模态[<a href="node421.html#vandooren81">447</a>,<a href="node421.html#demmelkagstrom88">120</a>]。
+只有当奇异的<span class="math-inline">A - \lambda B</span>在某些<span class="math-inline">\lambda</span>下秩不足时，相关的KCF可能更复杂，并可能包含规则部分以及左右奇异块。这种情况对应于<em>非通用</em>（或<em>退化</em>）<em>情况</em>，从计算角度来看，这是一个真正的挑战。退化的矩形束在控制理论中有几个应用，例如，用于计算线性描述系统的可控子空间和不可控模式[<a href="node421.html#vandooren81">447</a>,<a href="node421.html#demmelkagstrom88">120</a>]。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -129,16 +117,11 @@ diag(L_j, L_n-j-1^T), &nbsp;&nbsp;&nbsp;&nbsp;j = 0, ..., n-1.
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5505"
-  href="node311.html">Ill-Conditioning</a>
-<b> Up:</b> <a name="tex2html5499"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5493"
-  href="node309.html">Kronecker Canonical Form</a>
- &nbsp <b>  <a name="tex2html5501"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5503"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5505" href="node311.html">病态条件</a>
+<b>上一级：</b><a name="tex2html5499" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5493" href="node309.html">Kronecker标准型</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

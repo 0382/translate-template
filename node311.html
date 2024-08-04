@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Ill-Conditioning</title>
-<meta name="description" content="Ill-Conditioning">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Ill-Conditioning">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node312.html">
-<link rel="previous" href="node310.html">
-<link rel="up" href="node307.html">
-<link rel="next" href="node312.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5518"
   href="node312.html">
@@ -80,27 +73,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5519"
-  href="node312.html">Generalized Schur-Staircase Form</a>
-<b> Up:</b> <a name="tex2html5513"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5507"
-  href="node310.html">Generic and Nongeneric Kronecker</a>
- &nbsp <b>  <a name="tex2html5515"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5517"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5519" href="node312.html">广义Schur-阶梯形式</a>
+<b>上一级：</b><a name="tex2html5513" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5507" href="node310.html">Generic and Nongeneric Kronecker</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001774000000000000000"></a><a name="sing_examples"></a><a name="37306"></a>
 <br>
-病态条件
+病态性
 </h2>
 
 <p>
-奇异束可能具有也可能不具有特征值。实际上，一般情况对应于没有特征值的奇异束。下面我们通过两个3×3的例子来说明这一点：
+奇异矩阵束可能有也可能没有特征值。
+事实上，一般情况对应于一个没有特征值的奇异矩阵束。
+下面我们通过两个3×3的例子来说明这一点：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">A_1 - \lambda B_1 = \left[ \begin{array}{c\vert c\vert c}1......line0 &amp; 0 &amp; 1\\0 &amp; 0 &amp; -\lambda \\\end{array} \right].</div>
@@ -108,75 +98,111 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 显然，
-<span class="math-inline">{\rm det}(A_1 - \lambda B_1) \equiv 0</span> 和 
+<span class="math-inline">{\rm det}(A_1 - \lambda B_1) \equiv 0</span> 和
 
-<span class="math-inline">{\rm det}(A_2 - \lambda B_2) \equiv 0</span> 对所有 <span class="math-inline">\lambda</span> 都成立。尽管这两个束具有相同的对角元素，但它们的规范形式非常不同。实际上，这两个束都处于KCF形式：
+<span class="math-inline">{\rm det}(A_2 - \lambda B_2) \equiv 0</span> 对所有 <span class="math-inline">\lambda</span> 都成立。
+尽管这两个矩阵束具有相同的对角元素，但它们的典范形式非常不同。
+实际上，这两个矩阵束都处于KCF形式：
 
 <span class="math-inline">A_1 - \lambda B_1 = {\rm diag}(N_1, L_0, L_0^T, J_1(0))</span>
-和 
+和
 <span class="math-inline">A_2 - \lambda B_2 = {\rm diag}(L_1, L_1^T)</span>。从上到下，
-<span class="math-inline">A_1 - \lambda B_1</span> 的对角块分别对应于 <span class="math-inline">N_1</span>、<span class="math-inline">\mathrm{diag}(L_0, L_0^T)</span> 和 <span class="math-inline">J_1</span>。因此，
-<span class="math-inline">A_1 - \lambda B_1</span> 具有一个大小为 <span class="math-inline">2 \times 2</span> 的正则部分，其特征值在零点（<span class="math-inline">J_1(0)</span>）和无穷大（<span class="math-inline">N_1</span>），以及一个大小为 <span class="math-inline">1 \times 1</span> 的奇异部分，对应于一个 <span class="math-inline">L_0</span> 块（大小为 <span class="math-inline">0 \times 1</span>）和一个 <span class="math-inline">L_0^T</span> 块，而
+<span class="math-inline">A_1 - \lambda B_1</span> 的对角块分别对应于 <span class="math-inline">N_1</span>、<span class="math-inline">\mathrm{diag}(L_0, L_0^T)</span> 和 <span class="math-inline">J_1</span>。
+因此，<span class="math-inline">A_1 - \lambda B_1</span> 有一个大小为 <span class="math-inline">2 \times 2</span> 的正则部分，
+其特征值在零 (<span class="math-inline">J_1(0)</span>) 和无穷大 (<span class="math-inline">N_1</span>)，
+以及一个大小为 <span class="math-inline">1 \times 1</span> 的奇异部分，对应于一个 <span class="math-inline">L_0</span> 块（大小为 <span class="math-inline">0 \times 1</span>）和一个 <span class="math-inline">L_0^T</span> 块，而
 
-<span class="math-inline">A_2 - \lambda B_2</span> 是一个一般的 <span class="math-inline">3 \times 3</span> 奇异束，没有正则部分。
+<span class="math-inline">A_2 - \lambda B_2</span> 是一个没有正则部分的通用 <span class="math-inline">3 \times 3</span> 奇异矩阵束。
 
 <p>
-如果 <span class="math-inline">A - \lambda B</span> 是上三角形式且对角线上出现零元素，则该束是奇异的。我们看到这两个例子都具有这一性质（<span class="math-inline">A_1</span> 和 <span class="math-inline">B_1</span> 的 <span class="math-inline">(2,2)</span> 元素为零，<span class="math-inline">A_2</span> 和 <span class="math-inline">B_2</span> 也是如此）。如果我们在无限精度下对一个方形奇异束应用QZ算法，这种情况就会出现。这样的一对 (<span class="math-inline">\alpha</span>, <span class="math-inline">\beta</span>) = (0, 0) 被称为不确定特征值 0/0。在存在舍入误差的情况下，由于问题的病态条件，QZ算法可能无法检测和隔离奇异性，如下所示。
+如果 <span class="math-inline">A - \lambda B</span> 是上三角形式且对角线上出现零元素，则该矩阵束是奇异的。
+我们看到这两个例子都具有这一性质
+（<span class="math-inline">A_1</span> 和 <span class="math-inline">B_1</span> 的 <span class="math-inline">(2,2)</span> 元素以及 <span class="math-inline">A_2</span> 和 <span class="math-inline">B_2</span> 的 <span class="math-inline">(2,2)</span> 元素均为零）。
+这种情况会在我们对一个方形的奇异矩阵束应用QZ算法时出现，假设是在无限精度下。
+这样的 <span class="math-inline">(\alpha, \beta) = (0, 0)</span> 被称为不确定特征值 0/0。
+在存在舍入误差的情况下，QZ算法可能无法检测和隔离奇异性，这是由于问题的病态性，如下所示。
 
 <p>
-奇异对的特征值问题比正则对复杂得多。例如，考虑奇异对
+奇异矩阵对的特征值问题比正则矩阵对要复杂得多。
+例如，考虑奇异矩阵对
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">A = \left[ \begin{array}{cc}1 &amp; 0 \\0 &amp; 0 \\\end{arr...... \begin{array}{cc}1 &amp; 0 \\0 &amp; 0 \\\end{array} \right],</div>
+<div class="math-display">A = \left[ \begin{array}{cc}1 &amp; 0 \\0 &amp; 0 \\\end{array} \right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-它具有一个有限特征值1和一个不确定特征值0/0（对应于奇异部分 <span class="math-inline">\mathrm{diag}(L_0, L_0^T)</span>）。为了看到特征值1和奇异部分都不能很好地由数据确定，考虑稍微扰动的问题
+它有一个有限特征值1和一个不确定特征值0/0
+（对应于奇异部分 <span class="math-inline">\mathrm{diag}(L_0, L_0^T)</span>）。
+为了看到特征值1和奇异部分都不能由数据很好地确定，考虑
+稍微扰动的问题
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">A' = \left[ \begin{array}{cc}1 &amp; \epsilon_1 \\\epsilon_......1 &amp; \epsilon_3 \\\epsilon_4 &amp; 0 \\\end{array} \right],</div>
+<div class="math-display">A' = \left[ \begin{array}{cc}1 &amp; \epsilon_1 \\\epsilon_2 &amp; 0 \\\end{array} \right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中 <span class="math-inline">\epsilon_i</span> 是微小的非零数。由此可得 <span class="math-inline">\{A', B'\}</span> 是正则的，具有特征值
+其中 <span class="math-inline">\epsilon_i</span> 是微小的非零数。
+由此可知 <span class="math-inline">\{A', B'\}</span> 是正则的，其特征值为
 
-<span class="math-inline">\epsilon_1/\epsilon_3</span> 和 
-<span class="math-inline">\epsilon_2/\epsilon_4</span>。给定任意两个复数 <span class="math-inline">\lambda_1</span> 和 <span class="math-inline">\lambda_2</span>，我们可以找到任意小的 <span class="math-inline">\epsilon_i</span> 使得
+<span class="math-inline">\epsilon_1/\epsilon_3</span> 和
+<span class="math-inline">\epsilon_2/\epsilon_4</span>。
+给定任意两个复数 <span class="math-inline">\lambda_1</span> 和 <span class="math-inline">\lambda_2</span>，
+我们可以找到任意微小的 <span class="math-inline">\epsilon_i</span> 使得
 
-<span class="math-inline">\lambda_1 = \epsilon_1/\epsilon_3</span> 和 
+<span class="math-inline">\lambda_1 = \epsilon_1/\epsilon_3</span> 和
 <span class="math-inline">\lambda_2 = \epsilon_2/\epsilon_4</span>
-是 <span class="math-inline">\{A', B'\}</span> 的特征值。由于原则上舍入误差可能将 <span class="math-inline">\{A,B\}</span> 变为 <span class="math-inline">\{A', B'\}</span>，我们无法希望在没有进一步信息的情况下计算奇异问题的准确或有意义的特征值。通常，这些信息包括对允许扰动的限制，使得未扰动和扰动问题具有相似的结构特征。对于这个例子，正则化要求扰动束也具有一个 <span class="math-inline">1 \times 1</span> 的正则部分和一个 <span class="math-inline">1 \times 1</span> 的奇异部分。
+是 <span class="math-inline">\{A', B'\}</span> 的特征值。
+由于原则上舍入误差可能将 <span class="math-inline">\{A,B\}</span> 变为 <span class="math-inline">\{A', B'\}</span>，
+我们无法期望在没有进一步信息的情况下计算奇异问题的准确或有意义的特征值。
+通常，这些信息包括对允许扰动的限制，使得
+未扰动和扰动问题具有相似的结构特征。
+对于这个例子，正则化要求扰动矩阵束也
+具有一个 <span class="math-inline">1 \times 1</span> 的正则部分和一个 <span class="math-inline">1 \times 1</span> 的奇异部分。
 
 <p>
-一个著名的奇异束类是具有相交零空间的矩阵对。设 <span class="math-inline">x \neq 0</span> 属于 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间的交集，即 <span class="math-inline">A x = B x = 0</span>。那么对于任何 
-<span class="math-inline">(\alpha,\beta)</span>，我们有 
+一个著名的奇异矩阵束类别是具有相交零空间的矩阵对。
+设 <span class="math-inline">x \neq 0</span> 属于 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间的交集，即 <span class="math-inline">A x = B x = 0</span>。
+那么对于任何
+<span class="math-inline">(\alpha, \beta)</span>，我们有
 <span class="math-inline">(\beta A - \alpha B ) x = 0</span>，
-这意味着对 <span class="math-inline">\{A,B\}</span> 是奇异的。通过检查我们看到 <span class="math-inline">A_1</span> 和 <span class="math-inline">B_1</span> 具有一个共同的单维列（和行）零空间，由 <span class="math-inline">x = e_2</span> 张成。相交列和行零空间的维数分别是束的KCF中 <span class="math-inline">L_0</span> 和 <span class="math-inline">L_0^T</span> 块的数量。注意，<span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间交集是束奇异的充分条件，但不是必要条件，如第一个例子中的 
-<span class="math-inline">A_2 - \lambda B_2</span> 所示。
+这意味着矩阵对 <span class="math-inline">\{A,B\}</span> 是奇异的。
+通过检查我们看到 <span class="math-inline">A_1</span> 和 <span class="math-inline">B_1</span> 上面有一个共同的一维列（和行）零空间，由 <span class="math-inline">x = e_2</span> 张成。
+相交的列和行零空间的维度分别是
+矩阵束KCF中 <span class="math-inline">L_0</span> 和 <span class="math-inline">L_0^T</span> 块的数量。
+注意，<span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间的交集是矩阵束奇异的充分条件，但不是必要条件，
+如第一个例子中的 <span class="math-inline">A_2 - \lambda B_2</span> 所示。
 
 <p>
-一个处于Schur形式的 <span class="math-inline">\{A,B\}</span> 对可能非常接近奇异，因此具有非常敏感的特征值，即使 <span class="math-inline">A</span> 或 <span class="math-inline">B</span> 的对角元素都不小。只要 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 几乎具有一个共同的零空间就足够了。例如，考虑 <span class="math-inline">16 \times 16</span> 矩阵
+一个处于Schur形式的矩阵对 <span class="math-inline">\{A,B\}</span> 可能非常接近奇异，因此具有非常敏感的特征值，即使 <span class="math-inline">A</span> 或 <span class="math-inline">B</span> 的对角线元素都不小。
+只要 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 近似具有一个共同的零空间就足够了。
+例如，考虑 <span class="math-inline">16 \times 16</span> 矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">A'' = \left[ \begin{array}{ccccc}0.1 &amp; 1 &amp; &amp; &amp; \\&amp; 0.1 ......end{array} \right] \quad\quad\mathrm{and} \quad\quad B'' = A''.</div>
+<div class="math-display">A'' = \left[ \begin{array}{ccccc}0.1 &amp; 1 &amp; &amp; &amp; \\&amp; 0.1 &amp; 1 &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; 0.1 &amp; 1 \\&amp; &amp; &amp; &amp; 0.1 \\\end{array} \right] \quad\quad\mathrm{and} \quad\quad B'' = A''.</div>
 </div>
 <br clear="ALL">
 <p></p>
-那么 <span class="math-inline">\{A'', B''\}</span> 的所有特征值都在1。将 <span class="math-inline">{A}_{n1}''</span> 和 <span class="math-inline">{B}_{n1}''</span> 改为 <span class="math-inline">10^{-16}</span> 使得 <span class="math-inline">A''</span> 和 <span class="math-inline">B''</span> 在机器精度下都是奇异的，具有一个共同的零向量；即存在一个单位向量 <span class="math-inline">x</span> 使得 
-<span class="math-inline">\Vert A''x\Vert _2 = \Vert B''x\Vert _2 \approx O(10^{-16})</span>。然后，使用类似于应用于上述 <span class="math-inline">2 \times 2</span> 例子的技术，我们可以证明存在一个范数为 
-<span class="math-inline">10^{-16} + \epsilon</span> 的 <span class="math-inline">A''</span> 和 <span class="math-inline">B''</span> 的扰动，对于任何 <span class="math-inline">\epsilon > 0</span>，使得16个扰动特征值具有任意指定的复数值。
+那么 <span class="math-inline">\{A'', B''\}</span> 的所有特征值都在1。
+将 <span class="math-inline">{A}_{n1}''</span> 和 <span class="math-inline">{B}_{n1}''</span> 改为 <span class="math-inline">10^{-16}</span> 使得
+<span class="math-inline">A''</span> 和 <span class="math-inline">B''</span> 在机器精度下都是奇异的，并且具有一个共同的零向量；即存在一个单位向量 <span class="math-inline">x</span> 使得
+<span class="math-inline">\Vert A''x\Vert _2 = \Vert B''x\Vert _2 \approx O(10^{-16})</span>。
+然后，使用类似于应用于上面 <span class="math-inline">2 \times 2</span> 例子的技术，我们可以证明存在一个 <span class="math-inline">A''</span> 和 <span class="math-inline">B''</span> 的扰动，范数为
+<span class="math-inline">10^{-16} + \epsilon</span>，对于任何 <span class="math-inline">\epsilon > 0</span>，
+使得16个扰动特征值具有任意指定的复数值。
 
 <p>
-考虑到这些例子，我们准备引入GUPTRI形式和用于计算有意义和可靠信息的正则化方法。
+考虑到这些例子，我们准备好介绍
+GUPTRI形式和用于计算有意义且可靠信息的正则化方法。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+</p><!--Navigation Panel-->
 <a name="tex2html5518"
   href="node312.html">
 <button class="navigate">下一节</button></a> 
@@ -193,16 +219,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5519"
-  href="node312.html">Generalized Schur-Staircase Form</a>
-<b> Up:</b> <a name="tex2html5513"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5507"
-  href="node310.html">Generic and Nongeneric Kronecker</a>
- &nbsp <b>  <a name="tex2html5515"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5517"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5519" href="node312.html">广义Schur-阶梯形式</a>
+<b>上一级：</b><a name="tex2html5513" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5507" href="node310.html">Generic and Nongeneric Kronecker</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

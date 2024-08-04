@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Band Lanczos Method &nbsp; R. Freund </title>
-<meta name="description" content="Band Lanczos Method &nbsp; R. Freund ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Band Lanczos Method &nbsp; R. Freund ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node136.html">
-<link rel="previous" href="node117.html">
-<link rel="up" href="node85.html">
-<link rel="next" href="node132.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2716"
   href="node132.html">
@@ -80,75 +73,66 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2717"
-  href="node132.html">The Need for Deflation</a>
-<b> Up:</b> <a name="tex2html2711"
-  href="node85.html">Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html2705"
-  href="node130.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2713"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2715"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2717" href="node132.html">收缩的必要性</a>
+<b>上一级：</b><a name="tex2html2711" href="node85.html">厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html2705" href="node130.html">可用的软件</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001360000000000000000"></a> <a name="rwf:bandsym"></a><a name="8295"></a>
 <br>
 带状Lanczos方法
-<br>&nbsp; <em>R. Freund</em>
+<br>&nbsp; <em>R. 弗罗因德(R. Freund)</em>
 </h1>
 
 <p>
-标准的Hermitian Lanczos算法利用矩阵<span class="math-inline">A</span>和单个初始向量<span class="math-inline">b</span>生成的Krylov子空间，来近似求解Hermitian特征值问题<span class="math-inline">Ax = \lambda x</span>。然而，在某些情况下，使用一组<span class="math-inline">p</span>个初始向量而非单个初始向量更为可取。例如，对于具有多个或紧密聚集特征值的矩阵，为了获得对应于这组<span class="math-inline">p</span>个特征值的特征空间的基向量，需要使用由<span class="math-inline">A</span>和一组<span class="math-inline">p</span>个初始向量生成的块Krylov子空间。
+标准的厄米Lanczos算法利用由矩阵<span class="math-inline">A</span>和一个初始向量<span class="math-inline">b</span>生成的Krylov子空间来近似求解厄米特征值问题<span class="math-inline">Ax = \lambda x</span>。然而，在某些情况下，使用一组<span class="math-inline">p</span>个初始向量而非单一初始向量更为可取。例如，对于具有多个或紧密聚集特征值的矩阵，为了获得对应于这<span class="math-inline">p</span>个特征值的特征空间的基向量，需要使用由<span class="math-inline">A</span>和一组<span class="math-inline">p</span>个初始向量生成的块Krylov子空间。
 
 <p>
-一个重要应用场景是<span class="math-inline">m</span>输入<span class="math-inline">p</span>输出的线性动态系统的降阶建模，其中多组初始向量作为问题的一部分给出；参见&#167;<a href="node260.html#rwf:reduced_order">7.10.4</a>节。虽然这一应用通常涉及非Hermitian方阵<span class="math-inline">A</span>、具有<span class="math-inline">m</span>列的矩形“输入”矩阵<span class="math-inline">B</span>和具有<span class="math-inline">p</span>列的矩形“输出”矩阵<span class="math-inline">C</span>，但当<span class="math-inline">A</span>为Hermitian矩阵且输入和输出矩阵<span class="math-inline">B</span>与<span class="math-inline">C</span>相同时，具有特别重要的意义。例如，这种情况出现在超大规模集成电路（VLSI）电路的互连建模中；参见，例如[<a href="node421.html#freu98">176</a>]。对于这种特殊情况，需要将Hermitian Lanczos算法扩展到多组初始向量，即<span class="math-inline">B=C</span>的<span class="math-inline">p</span>列。
+一个重要的应用场景是<span class="math-inline">m</span>输入<span class="math-inline">p</span>输出的线性动态系统的降阶建模，其中多个初始向量作为问题的一部分给出；详见&#167;<a href="node260.html#rwf:reduced_order">7.10.4</a>节。尽管这类应用通常涉及非厄米方阵<span class="math-inline">A</span>、具有<span class="math-inline">m</span>列的矩形“输入”矩阵<span class="math-inline">B</span>和具有<span class="math-inline">p</span>列的矩形“输出”矩阵<span class="math-inline">C</span>，但当<span class="math-inline">A</span>为厄米矩阵且输入和输出矩阵<span class="math-inline">B</span>与<span class="math-inline">C</span>相同时，具有特殊重要性。例如，这种情况在VLSI电路互连建模的背景下出现；参见例如[<a href="node421.html#freu98">176</a>]。对于这种特殊情况，需要将厄米Lanczos算法扩展到多个初始向量，即<span class="math-inline">B=C</span>的<span class="math-inline">p</span>列。
 
 <p>
-最后，在计算矩阵-矩阵乘积<span class="math-inline">AV</span>（其中<span class="math-inline">V</span>是具有<span class="math-inline">p</span>列的矩阵）比依次计算<span class="math-inline">p</span>个向量的矩阵-向量乘积<span class="math-inline">Av</span>更经济时，采用块Krylov子空间也是有利的。基于块Krylov子空间的Lanczos方法允许将所有必要的<span class="math-inline">A</span>乘法计算为矩阵-矩阵乘积<span class="math-inline">AV</span>，其中<span class="math-inline">V</span>是大小为<span class="math-inline">p</span>的块，而在标准Hermitian Lanczos算法中，<span class="math-inline">A</span>的乘法必须计算为一系列矩阵-向量乘积<span class="math-inline">Av</span>。
+最后，当计算矩阵-矩阵乘积<span class="math-inline">AV</span>（其中<span class="math-inline">V</span>是具有<span class="math-inline">p</span>列的矩阵）比依次计算<span class="math-inline">p</span>个向量的矩阵-向量乘积<span class="math-inline">Av</span>更经济时，利用块Krylov子空间也是有益的。基于块Krylov子空间的Lanczos方法允许将所有必要的<span class="math-inline">A</span>乘法计算为块大小为<span class="math-inline">p</span>的矩阵-矩阵乘积<span class="math-inline">AV</span>，而在标准厄米Lanczos算法中，<span class="math-inline">A</span>的乘法必须计算为一连串的矩阵-向量乘积<span class="math-inline">Av</span>。
 
 <p>
-本节中，我们描述了一种针对Hermitian特征值问题的带状Lanczos方法，
+在本节中，我们描述了一种用于厄米特征值问题的带状Lanczos方法，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AAA"></a><div class="math-display">A x = \lambda x, %%\quad \mathrm{where} \quad A = A^H,</div></td>
-<td width=10 align="right">
-(34)</td></tr>
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AAA"></a><div class="math-display">A x = \lambda x, %%\quad \mathrm{where} \quad A = A^H,</div></td>
+<td WIDTH=10 align="RIGHT">(34)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 该方法基于由矩阵<span class="math-inline">A</span>和一组<span class="math-inline">p</span>个初始向量生成的块Krylov子空间，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AAB"></a><div class="math-display">b_1,b_2,\ldots,b_p.</div></td>
-<td width=10 align="right">
-(35)</td></tr>
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AAB"></a><div class="math-display">b_1,b_2,\ldots,b_p.</div></td>
+<td WIDTH=10 align="RIGHT">(35)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-矩阵<span class="math-inline">A</span>和初始向量（<a href="node131.html#rwf:AAB">4.26</a>）生成了块Krylov序列
+矩阵<span class="math-inline">A</span>和初始向量(<a href="node131.html#rwf:AAB">4.26</a>)生成了块Krylov序列
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABA"></a><div class="math-display">b_1,b_2,\ldots,b_p,A b_1, A b_2, \ldots, A b_p,\ldots,A^{k-1} b_1, A^{k-1} b_2, \ldots, A^{k-1} b_p, \ldots.</div></td>
-<td width=10 align="right">
-(36)</td></tr>
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABA"></a><div class="math-display">b_1,b_2,\ldots,b_p,A b_1, A b_2, \ldots, A b_p,\ldots,A^{k-1} b_1, A^{k-1} b_2, \ldots, A^{k-1} b_p, \ldots.</div></td>
+<td WIDTH=10 align="RIGHT">(36)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 带状Lanczos算法的目标是构造正交向量，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:ABB"></a><div class="math-display">v_1,v_2,\ldots,v_j,</div></td>
-<td width=10 align="right">
-(37)</td></tr>
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABB"></a><div class="math-display">v_1,v_2,\ldots,v_j,</div></td>
+<td WIDTH=10 align="RIGHT">(37)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这些向量构成了块Krylov序列（<a href="node131.html#rwf:ABA">4.27</a>）中前<span class="math-inline">j</span>个线性独立向量所张成子空间的基。
+这些向量构成了块Krylov序列(<a href="node131.html#rwf:ABA">4.27</a>)中前<span class="math-inline">j</span>个线性无关向量所张成子空间的基。
 
 <p>
 <br><hr>
@@ -156,7 +140,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><a name="tex2html2718" href="node132.html">需要分解的原因</a>
+<li><a name="tex2html2718" href="node132.html">分解的必要性</a>
 <li><a name="tex2html2719" href="node133.html">基本性质</a>
 <li><a name="tex2html2720" href="node134.html">算法</a>
 <li><a name="tex2html2721" href="node135.html">变体</a>
@@ -179,16 +163,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2717"
-  href="node132.html">The Need for Deflation</a>
-<b> Up:</b> <a name="tex2html2711"
-  href="node85.html">Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html2705"
-  href="node130.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2713"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2715"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2717" href="node132.html">收缩的必要性</a>
+<b>上一级：</b><a name="tex2html2711" href="node85.html">厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html2705" href="node130.html">可用的软件</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Invert .</title>
-<meta name="description" content="Invert .">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Invert .">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node285.html">
-<link rel="previous" href="node283.html">
-<link rel="up" href="node283.html">
-<link rel="next" href="node285.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5112"
   href="node285.html">
@@ -80,97 +73,91 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5113"
-  href="node285.html">Split-and-invert .</a>
-<b> Up:</b> <a name="tex2html5107"
-  href="node283.html">Transformation to Standard Problems</a>
-<b> Previous:</b> <a name="tex2html5101"
-  href="node283.html">Transformation to Standard Problems</a>
- &nbsp <b>  <a name="tex2html5109"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5111"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5113" href="node285.html">Split-and-invert .</a>
+<b>上一级：</b><a name="tex2html5107" href="node283.html">转换为标准问题</a>
+<b>上一节：</b><a name="tex2html5101" href="node283.html">转换为标准问题</a>
+  
+  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001730010000000000000">
-求逆 <span class="math-inline">B</span>。</a>
+<!--End of Navigation Panel--><h4><a name="SECTION001730000000000000000">
+求逆<span class="math-inline">B</span>。</a>
 </h4>
-如果 <span class="math-inline">B</span> 是非奇异的，
-那么问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>) 等价于
+若<span class="math-inline">B</span>为非奇异矩阵，
+则问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>)等价于
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="zb:snep1"></a><div class="math-display">(B^{-1}A) x = \lambda x \quad \mathrm{and} \quad\tilde{y}^{\ast} (B^{-1} A) = \lambda \tilde{y}^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:snep1"></a><div class="math-display">(B^{-1}A) x = \lambda x \quad \mathrm{且} \quad\tilde{y}^{\ast} (B^{-1} A) = \lambda \tilde{y}^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (216)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 
-<span class="math-inline">\tilde{y} = B^{\ast} y</span>。 
-或者，问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>) 也等价于
+其中
+<span class="math-inline">\tilde{y} = B^{\ast} y</span>。
+或者，问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>)也等价于
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="zb:snep2"></a><div class="math-display">(AB^{-1})\tilde{x} = \lambda \tilde{x} \quad \mathrm{and} \quady^{\ast} (AB^{-1}) = \lambda y^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:snep2"></a><div class="math-display">(AB^{-1})\tilde{x} = \lambda \tilde{x} \quad \mathrm{且} \quady^{\ast} (AB^{-1}) = \lambda y^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (217)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 
-<span class="math-inline">\tilde{x} = B x</span>。 
-如果主要关注的是右特征向量，那么 (<a href="node284.html#zb:snep1">8.3</a>) 更可取，因为它避免了额外的反向变换。
+其中
+<span class="math-inline">\tilde{x} = B x</span>。
+若主要关注右特征向量，则(<a href="node284.html#zb:snep1">8.3</a>)更优，因为它避免了额外的反向变换。
 
 <p>
 对于迭代方法，如第&nbsp;<a href="node203.html#chap:nep">7</a>章所述，
-对于简化的标准特征值问题&nbsp;(<a href="node284.html#zb:snep1">8.3</a>) 
-或 (<a href="node284.html#zb:snep2">8.4</a>)，不需要计算
-乘积 <span class="math-inline">B^{-1}A</span> 或 <span class="math-inline">AB^{-1}</span>。这是处理大型稀疏矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的关键观察点。
-只需计算矩阵向量乘积，例如
+针对简化标准特征值问题&nbsp;(<a href="node284.html#zb:snep1">8.3</a>)
+或(<a href="node284.html#zb:snep2">8.4</a>)，无需计算
+<span class="math-inline">B^{-1}A</span>或<span class="math-inline">AB^{-1}</span>。这是处理大型稀疏<span class="math-inline">A</span>和<span class="math-inline">B</span>的关键观察点。
+只需计算矩阵-向量乘积，例如
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">r = (B^{-1}A) q,</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于给定的向量 <span class="math-inline">q</span>。对于双侧 Lanczos 型方法，向量
+对于给定向量<span class="math-inline">q</span>。对于双侧Lanczos型方法，向量
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">s = (B^{-1}A)^{\ast}p</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于给定的向量 <span class="math-inline">p</span> 也是必要的。
-注意，向量 
-<span class="math-inline">r = (B^{-1}A) q</span> 可以通过以下两步计算：
+对于给定向量<span class="math-inline">p</span>也是必要的。
+注意，向量
+<span class="math-inline">r = (B^{-1}A) q</span>可以分两步计算：
 
-		 (a) 		 		 形成 <span class="math-inline">u = A q</span>， 
-<br>(b) 		 		 解 <span class="math-inline">B r = u</span> 求 <span class="math-inline">r</span>。 
+		 (a) 		 		 形成<span class="math-inline">u = A q</span>，
+<br>(b) 		 		 解<span class="math-inline">B r = u</span>求<span class="math-inline">r</span>。
 
-类似地，向量 
-<span class="math-inline">s = (B^{-1}A)^{\ast}p</span>，如果需要，可以按以下步骤计算：
+类似地，若必要，向量
+<span class="math-inline">s = (B^{-1}A)^{\ast}p</span>可以这样计算：
 
-		 (a)<span class="math-inline">^{\prime}</span> 解 <span class="math-inline">B^{\ast} v = p</span> 求 <span class="math-inline">v</span>，  
-<br>(b)<span class="math-inline">^{\prime}</span> 形成 <span class="math-inline">s = A^{\ast} v</span>。
+		 (a)<span class="math-inline">^{\prime}</span> 解<span class="math-inline">B^{\ast} v = p</span>求<span class="math-inline">v</span>，
+<br>(b)<span class="math-inline">^{\prime}</span> 形成<span class="math-inline">s = A^{\ast} v</span>。
 
-可以在每一步中利用稀疏性。
-一般来说，除了 Jacobi-Davidson 方法外，迭代方法在步骤 (b) 
-（和 (b)<span class="math-inline">^{\prime}</span>）中需要精确求解线性系统。如果可能，使用 LU 分解的直接线性系统求解器更可取。
-参见第&nbsp;<a href="node385.html#sec:directsolvers">10.3</a>节关于稠密或稀疏 LU 分解的讨论。
+每一步都可以利用稀疏性。
+一般而言，除了Jacobi-Davidson方法外，迭代方法在步骤(b)
+（及(b)<span class="math-inline">^{\prime}</span>）需要精确求解线性系统。若可能，优先使用直接线性系统求解器，例如利用<span class="math-inline">B</span>的LU分解。详见第&nbsp;<a href="node385.html#sec:directsolvers">10.3</a>节关于稠密或稀疏LU分解的讨论。
 
 <p>
 这种转换为标准形式引入的误差
-可能与 
-<span class="math-inline">\Vert A\Vert _2 \Vert B^{-1}\Vert _2</span> 成正比。
-如果 <span class="math-inline">B</span> 是病态的，那么这种方法可能存在问题。
-在这种情况下，可以考虑使用 SI 进行变换或下面讨论的 Jacobi-Davidson 方法。
+可能与
+<span class="math-inline">\Vert A\Vert _2 \Vert B^{-1}\Vert _2</span>成正比。
+若<span class="math-inline">B</span>为病态矩阵，则此方法可能存在问题。
+在这种情况下，可以考虑使用SI变换或下文讨论的Jacobi-Davidson方法。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -190,16 +177,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5113"
-  href="node285.html">Split-and-invert .</a>
-<b> Up:</b> <a name="tex2html5107"
-  href="node283.html">Transformation to Standard Problems</a>
-<b> Previous:</b> <a name="tex2html5101"
-  href="node283.html">Transformation to Standard Problems</a>
- &nbsp <b>  <a name="tex2html5109"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5111"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5113" href="node285.html">Split-and-invert .</a>
+<b>上一级：</b><a name="tex2html5107" href="node283.html">转换为标准问题</a>
+<b>上一节：</b><a name="tex2html5101" href="node283.html">转换为标准问题</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

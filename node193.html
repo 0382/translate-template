@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Methods</title>
-<meta name="description" content="Direct Methods">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Methods">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node194.html">
-<link rel="previous" href="node191.html">
-<link rel="up" href="node190.html">
-<link rel="next" href="node194.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3666"
   href="node194.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3667"
-  href="node194.html">Iterative Algorithms &nbsp; J.</a>
-<b> Up:</b> <a name="tex2html3661"
-  href="node190.html">Singular Value Decomposition</a>
-<b> Previous:</b> <a name="tex2html3655"
-  href="node192.html">Overview of Available Algorithms.</a>
- &nbsp <b>  <a name="tex2html3663"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3665"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3667" href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html3661" href="node190.html">奇异值分解</a>
+<b>上一节：</b><a name="tex2html3655" href="node192.html">Overview of Available Algorithms.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001520000000000000000"></a> <a name="sec:svdtm"></a> 
@@ -102,20 +90,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h1>
 
 <p>
-在本节中，我们将简要讨论用于计算稠密矩阵的奇异值和奇异向量的方法。这些方法有时被称为变换方法。其中一些或全部方法已在LAPACK、ScaLAPACK以及MATLAB的svd命令中实现。<a name="tex2html32"
+在本节中，我们将简要讨论计算稠密矩阵的奇异值和奇异向量的方法。
+这些方法有时被称为变换方法。
+其中一些或全部方法已在LAPACK、ScaLAPACK以及MATLAB的svd命令中实现。<a name="tex2html32"
   href="footnode.html#foot21142"><sup><button class="footnote"></button></sup></a>
 <p>
-虽然可以将第<a href="node93.html#sec:dense">4.2</a>节中的变换方法应用于Hermitian矩阵<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>之一，但实际使用的专门针对SVD的方法更为高效和准确。
+虽然可以将第<a href="node93.html#sec:dense">4.2</a>节中的变换方法应用于其中一个厄米矩阵<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>，但实际使用的方法是专门为SVD设计的，因此更高效和准确。
 
 <p>
-最常见的变换方法分三个阶段计算瘦SVD，如下所示。（它们可以轻松修改以计算完整SVD，或仅计算选定的奇异值和/或奇异向量，但为了简单起见，我们仅介绍瘦SVD。）
+最常见的变换方法分三个阶段计算瘦SVD，如下所示。
+（它们可以很容易地修改以计算完整的SVD，或者仅计算选定的奇异值和/或奇异向量，但为了简单起见，我们只介绍瘦SVD。）
 
 <p>
 
 <ol>
-<li>找到一个<span class="math-inline">n</span>阶酉矩阵<span class="math-inline">V_1</span>和一个<span class="math-inline">m \times n</span>矩阵<span class="math-inline">U_1</span>，其列向量正交归一，使得
+<li>找到一个<span class="math-inline">n</span>阶酉矩阵<span class="math-inline">V_1</span>和一个<span class="math-inline">m</span>行<span class="math-inline">n</span>列、列正交的矩阵<span class="math-inline">U_1</span>，使得
 
-<span class="math-inline">U_1^* A V_1 = B</span>是一个<span class="math-inline">n \times n</span>的双对角矩阵，即仅主对角线和第一上对角线上的元素非零。<a name="20842"></a> 
+<span class="math-inline">U_1^*A V_1 = B</span>是一个<span class="math-inline">n</span>阶双对角矩阵，即仅在主对角线和第一上对角线上非零。
+<a name="20842"></a> 
 </li>
 <li>计算<span class="math-inline">B</span>的SVD：
 <span class="math-inline">B = U_2 \Sigma V_2^*</span>。
@@ -126,56 +118,69 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ol>
 
 <p>
-第一阶段，双对角化，由LAPACK例程xGEBRD和ScaLAPACK例程PxGEBRD执行，使用一系列<span class="math-inline">\min(m-1,n)</span>左酉Householder反射和<span class="math-inline">n-2</span>右酉Householder反射，成本为<span class="math-inline">4n^2(m-\frac{1}{3}n)</span>次浮点运算。如果仅需要奇异值，第二阶段成本仅为<span class="math-inline">O(n^2)</span>，远低于第一阶段成本，第三阶段则省略。如果需要所有左右奇异向量，成本则强烈依赖于所选算法，如下所述。
+第一阶段，即双对角化阶段，通过LAPACK例程xGEBRD和ScaLAPACK例程PxGEBRD使用一系列<span class="math-inline">\min (m-1,n)</span>个左酉Householder反射和<span class="math-inline">n-2</span>个右酉Householder反射实现，成本为<span class="math-inline">4n^2(m-\frac{1}{3}n)</span>次浮点运算。
+如果只需要奇异值，第二阶段的成本仅为<span class="math-inline">O(n^2)</span>，远低于第一阶段的成本，第三阶段则省略。
+如果需要所有左和右奇异向量，成本则强烈依赖于所选算法，如下所述。
 
 <p>
-第二阶段的算法类似于第<a href="node93.html#sec:dense">4.2</a>节中讨论的对称三对角特征问题的可用算法，下面概述了一些差异。
+第二阶段的算法类似于第<a href="node93.html#sec:dense">4.2</a>节中讨论的对称三对角特征问题的算法，下面概述了一些差异。
 
 <p>
-目前，最快的顺序或共享内存并行稠密SVD例程是LAPACK的xGESDD，但更快的例程即将推出。最快的分布式内存并行稠密SVD例程是ScaLAPACK的PxGESVD，同样，更好的例程也在研发中。
+目前，最快的串行或共享内存并行稠密SVD例程是LAPACK的xGESDD，但更快的正在开发中。
+最快的分布式内存并行稠密SVD例程是ScaLAPACK的PxGESVD，同样，更好的也在开发中。
 
 <p>
 <dl>
 <dt><strong><i>QR算法：</i></strong></dt>
 <dd><a name="20852"></a>
-该算法找到所有奇异值，并可选地找到所有左右奇异向量。仅奇异值的成本为<span class="math-inline">O(n^2)</span>，奇异向量也包括在内的成本为<span class="math-inline">O(n^3)</span>。它可以实现，使得所有奇异值几乎都计算出正确的有效数字，即使是极小的奇异值（只要不发生下溢）[<a
- href="node421.html#deka:90">123</a>]。QR用于在LAPACK的计算例程xBDSQR中计算奇异向量，该例程被驱动例程xGESVD用于计算稠密矩阵的SVD，但已被下面描述的更快方法所取代。xBDSQR也被ScaLAPACK驱动例程PxGESVD使用。
+该算法找到所有奇异值，并可选地找到所有左和/或右奇异向量。
+仅奇异值的成本为<span class="math-inline">O(n^2)</span>，奇异向量的成本为<span class="math-inline">O(n^3)</span>。
+它可以实现，使得所有奇异值几乎都计算出正确的有效数字，即使是极小的奇异值（只要不发生下溢）[<a
+ href="node421.html#deka:90">123</a>]。
+QR用于在LAPACK的计算例程xBDSQR中计算奇异向量，该例程被驱动例程xGESVD用于计算稠密矩阵的SVD，但已被下面描述的更快方法取代。
+xBDSQR也被ScaLAPACK驱动例程PxGESVD使用。
 
 <p>
 </dd>
 <dt><strong><i>DQDS算法：</i></strong></dt>
 <dd><a name="20858"></a>
-该算法仅在<span class="math-inline">O(n^2)</span>时间内找到双对角矩阵的奇异值，但比QR更准确且效率更高[<a
+该算法仅在<span class="math-inline">O(n^2)</span>时间内找到双对角矩阵的奇异值，但比QR更准确和更高效[<a
  href="node421.html#fepa:94">168</a>,<a
  href="node421.html#parlett95a">355</a>,<a
- href="node421.html#pama:99">360</a>]。它是奇异值的首选顺序算法，在LAPACK中实现为xLASQ1，并被所有LAPACK驱动例程使用。
+ href="node421.html#pama:99">360</a>]。
+它是计算奇异值的首选串行算法，在LAPACK中实现为xLASQ1，并被所有LAPACK驱动例程使用。
 
 <p>
 </dd>
 <dt><strong><i>分治法：</i></strong></dt>
 <dd><a name="20861"></a>
-这是目前LAPACK中用于找到大于约25×25的双对角矩阵的所有奇异值和向量的最快方法[<a
+这是目前LAPACK中用于找到大于约25乘25的双对角矩阵的所有奇异值和向量的最快方法[<a
  href="node421.html#gudemmeldhillon94">208</a>,<a
- href="node421.html#lapack">12</a>]。它将矩阵分成两半，计算每半的SVD，并通过求解一个特殊的有理方程将解拼接在一起。对于大型双对角矩阵，这会递归重复，直到部分小于25，此时调用QR算法。<a name="tex2html33"
-  href="footnode.html#foot20863"><sup><button class="footnote"></button></sup></a>它可能比DQDS或QR略不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
+ href="node421.html#lapack">12</a>]。
+它将矩阵分成两半，计算每一半的SVD，并通过求解一个特殊的有理方程将解粘合在一起。对于一个大的双对角矩阵，这会递归重复，直到部分小于25，这时调用QR算法。<a name="tex2html33"
+  href="footnode.html#foot20863"><sup><button class="footnote"></button></sup></a>它可能比DQDS或QR稍不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
 
 <p>
-分治法由LAPACK计算例程xBDSDC实现，该例程被LAPACK驱动例程xGESDD用于计算稠密矩阵的SVD。xGESDD目前是LAPACK中稠密矩阵SVD的首选算法。
+分治法由LAPACK计算例程xBDSDC实现，该例程被LAPACK驱动例程xGESDD用于计算稠密矩阵的SVD。
+xGESDD是目前LAPACK中稠密矩阵SVD的首选算法。
 
 <p>
 </dd>
 <dt><strong><i>二分法和逆迭代：</i></strong></dt>
 <dd><a name="20867"></a>
 <a name="20868"></a>
-二分法和逆迭代可用于仅找到感兴趣的奇异值和向量。当前算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，除非奇异值在一个<span class="math-inline">k</span>个相邻奇异值的簇中，此时成本可能上升到<span class="math-inline">O(nk^2)</span>，如果使用正交化尝试保证正交奇异向量，则可能高达<span class="math-inline">O(n^3)</span>。尽管如此，有时仍可能无法保证正交性[<a
- href="node421.html#dhillon98">129</a>]。LAPACK、ScaLAPACK或MATLAB目前都不包含基于二分法和逆迭代的SVD例程。
+二分法和逆迭代可用于仅找到感兴趣的奇异值和向量。
+当前算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，除非奇异值在一个<span class="math-inline">k</span>个相邻奇异值的簇中，在这种情况下，如果使用正交化以尝试保证正交奇异向量，成本可能上升到<span class="math-inline">O(nk^2)</span>。如果许多奇异值紧密聚集，这可能高达<span class="math-inline">O(n^3)</span>。
+尽管如此，有时仍可能无法保证正交性[<a
+ href="node421.html#dhillon98">129</a>]。
+LAPACK、ScaLAPACK或MATLAB目前不包含基于二分法和逆迭代的SVD例程。
 
 <p>
 最近在[<a
  href="node421.html#fepa:94">168</a>,<a
  href="node421.html#dhil97">128</a>,<a
  href="node421.html#parldhi97">358</a>,<a
- href="node421.html#parl96">356</a>]中的进展承诺了一种算法，该算法每个奇异三元组的工作量为<span class="math-inline">O(n)</span>，同时保证正交性，但尚未完成。完成后，LAPACK和ScaLAPACK都将提供此算法，它应该是所有情况下的最快算法。
+ href="node421.html#parl96">356</a>]中的进展承诺了一种算法，该算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，同时保证正交性，但尚未完成。完成后，LAPACK和ScaLAPACK都将提供这种算法，它应该是所有情况下的最快算法。
 
 <p>
 </dd>
@@ -187,9 +192,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 最后，我们提到用于SVD的<em>雅可比方法</em>[<a
  href="node421.html#demmelbook">114</a>,<a
- href="node421.html#golo96">198</a>]。<a name="20875"></a>
-这种变换方法反复将<span class="math-inline">A</span>右乘基本正交矩阵（雅可比旋转），直到<span class="math-inline">A</span>收敛到<span class="math-inline">U \Sigma</span>；雅可比旋转的乘积为<span class="math-inline">V</span>。雅可比比上述任何变换方法都慢（它可以被优化到大约是QR的两倍时间[<a
- href="node421.html#drmac98">136</a>]），但对于某些<span class="math-inline">A</span>，它可以比上述任何方法更准确地提供极小的奇异值及其奇异向量，前提是正确实现[<a
+ href="node421.html#golo96">198</a>]。
+<a name="20875"></a>
+这种变换方法反复将<span class="math-inline">A</span>右乘以基本正交矩阵（雅可比旋转），直到<span class="math-inline">A</span>收敛到<span class="math-inline">U \Sigma</span>；雅可比旋转的乘积是<span class="math-inline">V</span>。雅可比比上述任何变换方法都慢（它可以做到运行时间大约是QR的两倍[<a
+ href="node421.html#drmac98">136</a>]），但有一个有用的特性，即对于某些<span class="math-inline">A</span>，它可以比上述任何方法更准确地提供极小的奇异值及其奇异向量，前提是它得到了适当的实现[<a
  href="node421.html#dgesvd:99">118</a>,<a
  href="node421.html#demm:00">115</a>]。
 
@@ -213,16 +219,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3667"
-  href="node194.html">Iterative Algorithms &nbsp; J.</a>
-<b> Up:</b> <a name="tex2html3661"
-  href="node190.html">Singular Value Decomposition</a>
-<b> Previous:</b> <a name="tex2html3655"
-  href="node192.html">Overview of Available Algorithms.</a>
- &nbsp <b>  <a name="tex2html3663"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3665"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3667" href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html3661" href="node190.html">奇异值分解</a>
+<b>上一节：</b><a name="tex2html3655" href="node192.html">Overview of Available Algorithms.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

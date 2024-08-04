@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Notes and References</title>
-<meta name="description" content="Notes and References">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Notes and References">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node318.html">
-<link rel="up" href="node307.html">
-<link rel="next" href="node324.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5687"
   href="node324.html">
@@ -79,76 +73,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5688"
-  href="node324.html">Stability and Accuracy Assessments</a>
-<b> Up:</b> <a name="tex2html5682"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5678"
-  href="node322.html">Example in MATLAB.</a>
- &nbsp <b>  <a name="tex2html5684"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5686"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5688" href="node324.html">Stability and Accuracy Assessments</a>
+<b>上一级：</b><a name="tex2html5682" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5678" href="node322.html">Example in MATLAB.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001779000000000000000">
 注释与参考文献</a>
 </h2>
-奇异矩阵束的谱特性理论与计算在过去二十年间得到了深入研究。
-许多研究动机源自系统与控制理论，例如计算可控子空间与不可控模式（例如参见[<a
- href="node421.html#paige81">348</a>,<a
- href="node421.html#vandooren81">447</a>,<a
- href="node421.html#demmelkagstrom88">120</a>]及其中的参考文献）。
-基础理论可追溯至1890年的Kronecker [<a
- href="node421.html#kronecker">276</a>]，并在Gantmacher [<a
- href="node421.html#gant59">187</a>]中有很好的阐述。
-其中描述的计算KCF的方法在数值上是不稳定的。
-近期，多位作者提出了将奇异<span class="math-inline">A - \lambda B</span>化为广义Schur阶梯形式的算法，这些算法在数值上是稳定的。
-它们计算出与输入矩阵束<span class="math-inline">A - \lambda B</span>仅有微小差异的矩阵束<span class="math-inline">A' - \lambda B'</span>的精确GUPTRI形式（或类似形式）。
+过去二十年间，奇异矩阵束的谱性质理论与计算得到了深入研究。许多动力源自系统和控制理论，例如计算可控子空间和不可控模式（例如参见[<a href="node421.html#paige81">348</a>,<a href="node421.html#vandooren81">447</a>,<a href="node421.html#demmelkagstrom88">120</a>]及其参考文献）。基本理论可追溯至1890年的Kronecker [<a href="node421.html#kronecker">276</a>]，并在Gantmacher [<a href="node421.html#gant59">187</a>]中有良好阐述。该处描述的计算KCF的方法在数值上不稳定。近期，多位作者提出了将奇异<span class="math-inline">A - \lambda B</span>转化为数值稳定的广义Schur阶梯形式的算法。它们计算与输入束<span class="math-inline">A - \lambda B</span>仅略有差异的束<span class="math-inline">A' - \lambda B'</span>的精确GUPTRI形式（或类似形式）。
 
 <p>
-Kublanovskaya于1966年[<a
- href="node421.html#Kublanovskaya66">278</a>]首次引入阶梯算法来计算矩阵的Jordan结构。
-她使用归一化RQ分解进行秩判定和零空间分离。
-1970年，Ruhe [<a
- href="node421.html#ruhe70a">371</a>]在阶梯算法中引入了SVD的应用。
-基于链式关系的算法中使用SVD的方法由Golub和Wilkinson [<a
- href="node421.html#golubwilkinson76">199</a>]引入，并在[<a
- href="node421.html#Kagstrom81">250</a>]中进一步分析和推广。
-Kågström和Ruhe [<a
- href="node421.html#kagstromruhe80">253</a>,<a
- href="node421.html#kagstromruhe80a">252</a>]开发了首个库级质量的软件，用于完全化为Jordan标准形（JNF），并能在归约的不同步骤后返回结果。
-近期，Chaitin-Chatelin和Frayssé [<a
- href="node421.html#chatelinfraysse96">77</a>]开发了一种非阶梯定性方法。
-Kågström和Wiberg [<a
- href="node421.html#kagstromwiberg98">254</a>]考虑了计算大规模特征值问题的部分规范信息问题。
-他们结合隐式重启Arnoldi方法（IRAM）[<a
- href="node421.html#sore92">419</a>]来计算部分Schur形式，以及阶梯算法来计算矩阵和正则矩阵束的Jordan-Schur和Weierstrass-Schur形式。
+Kublanovskaya于1966年[<a href="node421.html#Kublanovskaya66">278</a>]引入了首个用于计算矩阵Jordan结构的阶梯算法，她采用归一化RQ分解进行秩确定和零空间分离。1970年，Ruhe [<a href="node421.html#ruhe70a">371</a>]在阶梯算法中引入了SVD的使用。基于链关系的算法中SVD的应用由Golub和Wilkinson [<a href="node421.html#golubwilkinson76">199</a>]提出，并在[<a href="node421.html#Kagstrom81">250</a>]中进一步分析和推广。Kågström和Ruhe [<a href="node421.html#kagstromruhe80">253</a>,<a href="node421.html#kagstromruhe80a">252</a>]开发了首个用于完全化简至Jordan正规形式（JNF）的库质量软件，能在化简的不同步骤后返回。近期，Chaitin-Chatelin和Frayssé [<a href="node421.html#chatelinfraysse96">77</a>]开发了一种非阶梯定性方法。Kågström和Wiberg [<a href="node421.html#kagstromwiberg98">254</a>]考虑了计算大规模特征值问题的部分典范信息问题，他们结合了隐式重启Arnoldi方法（IRAM）[<a href="node421.html#sore92">419</a>]以计算部分Schur形式与阶梯算法，分别用于计算矩阵和正则矩阵束的Jordan-Schur与Weierstrass-Schur形式。
 
 <p>
-Van Dooren [<a
- href="node421.html#vandooren79">446</a>,<a
- href="node421.html#vandooren83a">451</a>]将Kublanovskaya的阶梯算法[<a
- href="node421.html#Kublanovskaya66">278</a>]推广至奇异矩阵束，使用酉等价变换。
-1977年，Kublanovskaya引入了<span class="math-inline">AB</span>算法来计算奇异矩阵束的右奇异结构和零特征值的Jordan结构（例如参见[<a
- href="node421.html#kublanovskaya83">279</a>,<a
- href="node421.html#kublanovskaya84">280</a>]）。
-Kågström [<a
- href="node421.html#kagstrom86">251</a>]提出了RGSVD/RGQZD算法，为后续软件工作提供了基础。
-Beelen和Van Dooren提出了一种更快但可靠性较低的算法，对于<span class="math-inline">m \times n</span>矩阵束需要<span class="math-inline">O(m^2n)</span>次操作。
-Demmel和Kågström [<a
- href="node421.html#demmelkagstrom87">119</a>]给出了诸如归约子空间和特征值等计算量的误差界限，并在他们的软件中实现了这些界限[<a
- href="node421.html#demmelkagstrom93a">121</a>,<a
- href="node421.html#demmelkagstrom93b">122</a>]。
+Van Dooren [<a href="node421.html#vandooren79">446</a>,<a href="node421.html#vandooren83a">451</a>]将Kublanovskaya的阶梯算法[<a href="node421.html#Kublanovskaya66">278</a>]推广至奇异束，使用酉等价变换。1977年，Kublanovskaya引入了<span class="math-inline">AB</span>算法，用于计算奇异束的右奇异结构和零特征值的Jordan结构（例如参见[<a href="node421.html#kublanovskaya83">279</a>,<a href="node421.html#kublanovskaya84">280</a>]）。Kågström [<a href="node421.html#kagstrom86">251</a>]提出了RGSVD/RGQZD算法，为后续软件工作提供了基础。Beelen和Van Dooren提出了一种更快但可靠性较低的算法，对于<span class="math-inline">m \times n</span>束需要<span class="math-inline">O(m^2n)</span>次操作。Demmel和Kågström [<a href="node421.html#demmelkagstrom87">119</a>]给出了诸如化简子空间和特征值等计算量的误差界限，并在他们的软件[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]中实现了这些界限。
 
 <p>
-近期，多篇论文利用矩阵和矩阵束空间的几何特性来理解Jordan和Kronecker结构问题及算法。
-Demmel和Edelman [<a
- href="node421.html#demmeledelman95">116</a>]使用阶梯算法计算具有给定规范形式的矩阵和矩阵束的维度。
-Elmroth和Kågström [<a
- href="node421.html#elmrothkagstrom96">160</a>]对<span class="math-inline">2 \times 3</span>矩阵束进行了全面研究，这是最小的非平凡矩形情况。
-Edelman和Ma [<a
- href="node421.html#EdelmanMa99">154</a>]给出了阶梯算法失败的<!--Navigation Panel-->
+近期，多篇论文利用矩阵和矩阵束空间的<!--Navigation Panel-->
 <a name="tex2html5687"
   href="node324.html">
 <button class="navigate">下一节</button></a> 
@@ -165,16 +109,11 @@ Edelman和Ma [<a
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5688"
-  href="node324.html">Stability and Accuracy Assessments</a>
-<b> Up:</b> <a name="tex2html5682"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5678"
-  href="node322.html">Example in MATLAB.</a>
- &nbsp <b>  <a name="tex2html5684"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5686"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5688" href="node324.html">Stability and Accuracy Assessments</a>
+<b>上一级：</b><a name="tex2html5682" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5678" href="node322.html">Example in MATLAB.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

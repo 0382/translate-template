@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Basic Algorithm</title>
-<meta name="description" content="Basic Algorithm">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Basic Algorithm">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node217.html">
-<link rel="previous" href="node215.html">
-<link rel="up" href="node215.html">
-<link rel="next" href="node217.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4074"
   href="node217.html">
@@ -80,36 +73,31 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4075"
-  href="node217.html">Variants</a>
-<b> Up:</b> <a name="tex2html4069"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b> Previous:</b> <a name="tex2html4063"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
- &nbsp <b>  <a name="tex2html4071"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4073"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4075" href="node217.html">变体</a>
+<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001651000000000000000">
 基本算法</a>
 </h2> 
-Arnoldi方法是一种基于Krylov子空间的正交投影方法。
+Arnoldi方法是一种投影到Krylov子空间上的正交投影方法。
 它从Arnoldi过程开始，如算法<a href="node216.html#alg:arn0">7.3</a>所述。
-该过程本质上可以看作是构建Krylov子空间<span class="math-inline">\mathcal{K}^m(A,v)</span>正交基的修正Gram-Schmidt过程。
+该过程基本上可以看作是构建Krylov子空间<span class="math-inline">\mathcal{K}^m(A,v)</span>正交基的改进Gram-Schmidt过程。
 
 <p>
 <br>
-<a name="alg:arn0"></a><IMG
- width="598" height="259" align="bottom" border="0"
+<a name="alg:arn0"></a><img
+ width="598" height="259" align="BOTTOM" border="0"
  src="img1893.png"
  alt="\begin{algorithm}{Arnoldi Procedure
 }
 {
 \begin{tabbing}
 (nr)ss\=ijkl\=bbb\=ccc\...
-... h_{j+1,j} $\ \\
+... h_{j+1,j} <span class="math-inline">\ \\
 {\rm (11)} \&gt; \&gt; {\bf end for}
 \end{tabbing}}
 \end{algorithm}">
@@ -117,56 +105,61 @@ Arnoldi方法是一种基于Krylov子空间的正交投影方法。
 
 <p>
 上述过程<a name="23104"></a>
-会在第(8)行计算的向量<span class="math-inline">w</span>消失时停止。
-向量<span class="math-inline">v_1, v_2, \ldots , v_m</span>通过构造形成一个正交系统，被称为<em>Arnoldi向量</em>。
+会在第(8)行计算的向量</span>w<span class="math-inline">消失时停止。
+向量</span>v_1, v_2, \ldots , v_m<span class="math-inline">通过构造形成一个正交系统，被称为<em>Arnoldi向量</em>。
 <a name="23106"></a>
-一个简单的归纳论证表明，这个系统是Krylov子空间<span class="math-inline">\mathcal{K}^m(A,v)</span>的一个基。
+一个简单的归纳论证表明，这个系统是Krylov子空间</span>\mathcal{K}^m(A,v)<span class="math-inline">的一个基。
 
 <p>
-接下来我们考虑算法生成量之间的一个基本关系。
-以下等式容易推导出：
+接下来我们考虑算法生成的量之间的一个基本关系。
+以下等式很容易推导出：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="10"></a><div class="math-display">A v_j = \sum_{i=1}^{j+1} h_{ij} v_i , \quad j=1,2,\ldots ,m \ .</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="10"></a><div class="math-display">A v_j = \sum_{i=1}^{j+1} h_{ij} v_i , \quad j=1,2,\ldots ,m \ .</div></td>
+<td WIDTH=10 align="RIGHT">
 (122)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-如果我们用<span class="math-inline">V_m</span>表示列向量为<span class="math-inline">v_1,\ldots,v_m</span>的<span class="math-inline">n \times m</span>矩阵，用<span class="math-inline">H_m</span>表示由算法定义的非零元素<span class="math-inline">h_{ij}</span>的<span class="math-inline">m \times m</span>Hessenberg矩阵，那么以下关系成立：
+如果我们用</span>V_m<span class="math-inline">表示列向量为</span>v_1,\ldots, v_m<span class="math-inline">的</span>n \times m<span class="math-inline">矩阵，用</span>H_m<span class="math-inline">表示由算法定义的非零元素</span>h_{ij}<span class="math-inline">的</span>m \times m<span class="math-inline">海森堡矩阵，那么以下关系成立：
 <br>
-<div align="center"><a name="eq:AVm"></a><a name="eq:VmTAVm"></a>
+<div align="CENTER"><a name="eq:AVm"></a><a name="eq:VmTAVm"></a>
 
-<table align="center" cellpadding="0" width="100%">
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A V_m</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle V_m H_m + h_{m+1,m} v_{m+1} e_m^{\ast},</span></td>
-<td width=10 align="right">
+<table align="CENTER" cellpadding="0" width="100%">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A V_m<span class="math-inline"></td>
+<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
+<td align="LEFT" NOWRAP></span>\displaystyle V_m H_m + h_{m+1,m} v_{m+1} e_m^{\ast},<span class="math-inline"></td>
+<td WIDTH=10 align="RIGHT">
 (123)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle V_m^{\ast} A V_m</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle H_m \ .</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle V_m^{\ast} A V_m<span class="math-inline"></td>
+<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
+<td align="LEFT" NOWRAP></span>\displaystyle H_m \ .<span class="math-inline"></td>
+<td WIDTH=10 align="RIGHT">
 (124)</td></tr>
 </table></div>
 <br clear="ALL"><p></p>
-关系eq:VmTAVm通过将eq:AVm的两边乘以<span class="math-inline">V_m^{\ast}</span>并利用<span class="math-inline">\{v_1,\ldots,v_m\}</span>的正交性从eq:AVm得出。
+关系eq:VmTAVm通过将eq:AVm的两边乘以</span>V_m^{\ast}<span class="math-inline">并利用</span>\{v_1, \ldots,v_m\}<span class="math-inline">的正交性从eq:AVm得出。
 
 <p>
-如前所述，当第(8)行计算的<span class="math-inline">w</span>的范数在某一步<span class="math-inline">j</span>消失时，算法会中断。事实证明，这当且仅当起始向量<span class="math-inline">v</span>是<span class="math-inline">j</span>个特征向量的组合时发生（即，<span class="math-inline">v_1</span>的最小多项式是<span class="math-inline">j</span>次）。此外，子空间<span class="math-inline">\mathcal{K}_j</span>在这种情况下是不变的，近似的特征值和特征向量是精确的[<a href="node421.html#saad92">387</a>]。
+如前所述，当第(8)行计算的</span>w<span class="math-inline">的范数在某一步</span>j<span class="math-inline">消失时，算法会中断。
+事实证明，这当且仅当起始向量</span>v<span class="math-inline">是</span>j<span class="math-inline">个特征向量的组合时发生（即，</span>v_1<span class="math-inline">的最小多项式是</span>j<span class="math-inline">次）。
+此外，子空间</span>\mathcal{K}_j<span class="math-inline">是然后不变的，近似特征值和特征向量是精确的[<a href="node421.html#saad92">387</a>]。
 
 <p>
-投影过程在<span class="math-inline">\mathcal{K}_m</span>上提供的近似特征值<span class="math-inline">\lambda_i \sup{m}</span>是Hessenberg矩阵<span class="math-inline">H_m</span>的特征值。这些被称为<em>Ritz值</em>。与Ritz值<span class="math-inline">\lambda_i \sup{m}</span>相关联的<em>Ritz近似特征向量</em>定义为<span class="math-inline">u_i \sup{m}= V_m y_i \sup{m}</span>，其中<span class="math-inline">y_i \sup{m}</span>是与特征值<span class="math-inline">\lambda_i \sup{m}</span>相关联的特征向量。通常，Ritz特征值的一小部分将构成矩阵<span class="math-inline">A</span>的相应特征值<span class="math-inline">\lambda_i</span>的良好近似，并且随着<span class="math-inline">m</span>的增加，近似的质量通常会提高。
+投影过程在</span>\mathcal{K}_m<span class="math-inline">上提供的近似特征值</span>\lambda_i \sup{m}<span class="math-inline">是海森堡矩阵</span>H_m<span class="math-inline">的特征值。这些被称为<em>Ritz值</em>。
+与Ritz值</span>\lambda_i \sup{m}<span class="math-inline">相关的<em>Ritz近似特征向量</em>定义为</span>u_i \sup{m}= V_m y_i \sup{m}<span class="math-inline">，其中</span>y_i \sup{m}<span class="math-inline">是与特征值</span>\lambda_i \sup{m}<span class="math-inline">相关的特征向量。通常，Ritz特征值的少数几个将构成</span>A<span class="math-inline">的相应特征值</span>\lambda_i<span class="math-inline">的良好近似，并且近似的质量通常会随着</span>m<span class="math-inline">的增加而提高。
 
 <p>
-原始算法包括增加<span class="math-inline">m</span>直到找到<span class="math-inline">A</span>的所有期望特征值。对于大型矩阵，这在计算和存储方面都变得昂贵。在存储方面，我们需要保持<span class="math-inline">m</span>个长度为<span class="math-inline">n</span>的向量加上一个<span class="math-inline">m \times m</span>的Hessenberg矩阵，总共大约是<span class="math-inline">nm + m^2/2</span>。在算术成本方面，我们需要将<span class="math-inline">v_j</span>乘以<span class="math-inline">A</span>，成本为<span class="math-inline">2 \times N_z</span>，其中<span class="math-inline">N_z</span>是<span class="math-inline">A</span>中非零元素的数量，然后对<span class="math-inline">j</span>个向量进行正交化，成本为<span class="math-inline">4(j+1)n</span>，这随着步数<span class="math-inline">j</span>增加。因此，<span class="math-inline">m</span>维Arnoldi过程在存储上成本约为<span class="math-inline">nm + m^2/2</span>，在算术操作上成本约为<span class="math-inline">N_z + 2nm^2</span>。
+原始算法包括增加</span>m<span class="math-inline">直到找到</span>A<span class="math-inline">的所有期望特征值。对于大矩阵，这在计算和存储方面都变得昂贵。
+在存储方面，我们需要保留</span>m<span class="math-inline">个长度为</span>n<span class="math-inline">的向量加上一个</span>m \times m<span class="math-inline">海森堡矩阵，总共大约</span>nm + m^2/2<span class="math-inline">。对于算术成本，我们需要将</span>v_j<span class="math-inline">乘以</span>A<span class="math-inline">，成本为</span>2 \times N_z<span class="math-inline">，其中</span>N_z<span class="math-inline">是</span>A<span class="math-inline">中的非零元素数量，然后对</span>j<span class="math-inline">个向量进行正交化，成本为</span>4(j+1)n<span class="math-inline">，这随着步数</span>j<span class="math-inline">增加。因此，</span>m<span class="math-inline">维Arnoldi过程的成本在存储上为</span>\approx nm + m^2/2<span class="math-inline">，在算术操作上为</span>\approx N_z + 2nm^2<span class="math-inline">。
 
 <p>
-在算法进行过程中获取Ritz对的残差范数相当便宜。设<span class="math-inline">y_i \sup{m}</span>是与特征值<span class="math-inline">\lambda_i \sup{m}</span>相关联的<span class="math-inline">H_m</span>的特征向量，<span class="math-inline">u_i \sup{m}</span>是Ritz近似特征向量<span class="math-inline">u_i \sup{m}= V_m y_i \sup{m}</span>。我们有以下关系：
+在算法进行过程中获得Ritz对的残差范数是相当廉价的。
+设</span>y_i \sup{m}<span class="math-inline">是与特征值</span>\lambda_i \sup{m}<span class="math-inline">相关的</span>H_m<span class="math-inline">的特征向量，设</span>u_i \sup{m}<span class="math-inline">是Ritz近似特征向量</span>u_i \sup{m}= V_m y_i \sup{m}<span class="math-inline">。我们有以下关系：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(A - \lambda_i \sup{m}I ) u_i \sup{m}= h_{m+1,m}(e_m^{\ast} y_i\sup{m})v_{m+1},</div>
@@ -175,17 +168,19 @@ Arnoldi方法是一种基于Krylov子空间的正交投影方法。
 <p></p>
 因此，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\Vert ( A - \lambda_i \sup{m}I ) u_i \sup{m}\Vert _2 = h_{m+1,m} \vert e_m^{\ast} y_i\sup{m}\vert \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
-因此，残差范数等于特征向量<span class="math-inline">y_i \sup{m}</span>的最后一个分量的绝对值乘以<span class="math-inline">h_{m+1,m}</span>。残差范数并不总是实际误差<span class="math-inline">\lambda_i \sup{m}</span>的指示，但在推导停止过程时可能非常有帮助。
+因此，残差范数等于特征向量</span>y_i \sup{m}<span class="math-inline">的最后一个分量的绝对值乘以</span>h_{m+1,m}<span class="math-inline">。残差范数并不总是指示</span>\lambda_i \sup{m}$中的实际误差，但可以非常有帮助地推导停止过程。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+</p><!--Navigation Panel-->
 <a name="tex2html4074"
   href="node217.html">
 <button class="navigate">下一节</button></a> 
@@ -202,16 +197,11 @@ Arnoldi方法是一种基于Krylov子空间的正交投影方法。
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4075"
-  href="node217.html">Variants</a>
-<b> Up:</b> <a name="tex2html4069"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b> Previous:</b> <a name="tex2html4063"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
- &nbsp <b>  <a name="tex2html4071"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4073"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4075" href="node217.html">变体</a>
+<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

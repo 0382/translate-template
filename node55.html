@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Related Eigenproblems</title>
-<meta name="description" content="Related Eigenproblems">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Related Eigenproblems">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node56.html">
-<link rel="previous" href="node54.html">
-<link rel="up" href="node48.html">
-<link rel="next" href="node56.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1523"
   href="node56.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1524"
-  href="node56.html">Example</a>
-<b> Up:</b> <a name="tex2html1518"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b> Previous:</b> <a name="tex2html1512"
-  href="node54.html">Specifying an Eigenproblem</a>
- &nbsp <b>  <a name="tex2html1520"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1522"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1524" href="node56.html">示例</a>
+<b>上一级：</b><a name="tex2html1518" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一节：</b><a name="tex2html1512" href="node54.html">特征问题的具体化</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001157000000000000000"></a>
@@ -101,36 +89,37 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 
 <ol>
-<li>考虑广义非 Hermitian 特征值问题（GNHEP）
+<li>考虑广义厄米特征问题（GNHEP）
 <span class="math-inline">Ax = \lambda Bx</span>，
-其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是方阵且 <span class="math-inline">B</span> 是非奇异的。矩阵 <span class="math-inline">B^{-1}A</span> 具有与
-<span class="math-inline">Ax - \lambda Bx</span> 相同的特征值和右特征向量。如果 <span class="math-inline">y</span> 是左特征向量，即，
+其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是方阵且 <span class="math-inline">B</span> 非奇异。矩阵 <span class="math-inline">B^{-1}A</span> 具有与
+<span class="math-inline">Ax - \lambda Bx</span> 相同的特征值和右特征向量。如果 <span class="math-inline">y</span> 是左特征向量，即
 <span class="math-inline">y^*A = \lambda y^*B</span>，
-则 <span class="math-inline">B^*y</span> 是 <span class="math-inline">B^{-1}A</span> 的左特征向量。类似的陈述也适用于 <span class="math-inline">AB^{-1}</span>。如果 <span class="math-inline">B = B_L B_R</span> 是 <span class="math-inline">B</span> 的分解
-（来自高斯消元法、QR 分解或其他方法），
-<span class="math-inline">B_L^{-1} A B_R^{-1}</span> 具有与 <span class="math-inline">A</span> 相同的特征值，右特征向量为 <span class="math-inline">B_R x</span>，左特征向量为 <span class="math-inline">B_L^*y</span>。
+则 <span class="math-inline">B^*y</span> 是 <span class="math-inline">B^{-1}A</span> 的左特征向量。关于 <span class="math-inline">AB^{-1}</span> 的类似陈述也成立。如果 <span class="math-inline">B = B_L B_R</span> 是 <span class="math-inline">B</span> 的分解
+（来自高斯消元法、QR分解或其他方法），
+<span class="math-inline">B_L^{-1} A B_R^{-1}</span> 具有与 <span class="math-inline">A</span> 相同的
+特征值，右特征向量为 <span class="math-inline">B_R x</span>，左特征向量为 <span class="math-inline">B_L^*y</span>。
 如果 <span class="math-inline">B</span> 是良态的，或者 <span class="math-inline">AB^{-1}</span>、<span class="math-inline">B^{-1}A</span> 或
 <span class="math-inline">B_L^{-1} A B_R^{-1}</span>
 可以准确计算，这是求解
-<span class="math-inline">Ax = \lambda Bx</span> 的有效方法。如果 <span class="math-inline">B</span> 是病态的，最好将其视为 GNHEP，
-参见第&#167;<a href="node57.html#sec_chap2_GnHep">2.6</a>节。
+<span class="math-inline">Ax = \lambda Bx</span> 的有效方法。如果 <span class="math-inline">B</span> 是病态的，最好将其视为 GNHEP 处理，
+参见第<a href="node57.html#sec_chap2_GnHep">2.6</a>节。
 
 <p>
 </li>
 <li>设
-<span class="math-inline">p( \lambda ) = \lambda^n - \sum_{i=0}^{n-1} a_i \lambda^i</span> 是一个首一多项式。定义 <span class="math-inline">n</span> 阶的 <em>伴随矩阵 <span class="math-inline">p(\lambda)</span></em> 为
+<span class="math-inline">p( \lambda ) = \lambda^n - \sum_{i=0}^{n-1} a_i \lambda^i</span> 是一个首一多项式。定义 <span class="math-inline">n</span> 阶的<em>多项式 <span class="math-inline">p(\lambda)</span> 的伴随矩阵</em>为
 <a name="1628"></a>
 <a name="1629"></a>
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">C = \bmat{ccccc} 0 &amp; 1 &amp; &amp; &amp; \\&amp; \ddots &amp; \ddots &amp; &amp; \\...... &amp; &amp; 0 &amp; 1 \\a_0 &amp; a_1 &amp; \cdots &amp; a_{n-2} &amp; a_{n-1} \emat,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中所有未明确显示的条目均为 0。那么 <span class="math-inline">C</span> 的特征值是
-<span class="math-inline">p(\lambda)=0</span> 的根 <span class="math-inline">\lambda_i</span>，右特征向量
+其中未明确显示的所有元素均为 0。那么 <span class="math-inline">C</span> 的特征值
+是 <span class="math-inline">p(\lambda)=0</span> 的根 <span class="math-inline">\lambda_i</span>，右特征向量
 为
 <span class="math-inline">x_i = [ 1, \lambda_i , \ldots , \lambda_i^{n-1}]^T</span>。如果 <span class="math-inline">p(\lambda)</span> 有重根，<span class="math-inline">C</span> 不可对角化。
 求解多项式 <span class="math-inline">p(\lambda)</span> 的根的一个可靠但非最优高效的算法是求出 <span class="math-inline">C</span> 的所有特征值。
@@ -140,27 +129,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li>设
 <span class="math-inline">p( \lambda ) = \lambda^n - \sum_{i=0}^{n-1} A_i \lambda^i</span> 
 是一个首一矩阵多项式，
-其中每个 <span class="math-inline">A_i</span> 是一个 <span class="math-inline">m</span> 阶矩阵。
-<span class="math-inline">p(\lambda)</span> 的特征对 <span class="math-inline">(\lambda_i, x_i)</span>
-满足
+其中每个 <span class="math-inline">A_i</span> 是 <span class="math-inline">m</span> 阶方阵。
+<span class="math-inline">p(\lambda)</span> 的特征对
+<span class="math-inline">(\lambda_i, x_i)</span> 满足
 <span class="math-inline">p(\lambda_i)x_i = 0</span>。
-定义 <span class="math-inline">nm</span> 阶的 <em>块伴随矩阵 <span class="math-inline">p(\lambda)</span></em> 为
+定义 <span class="math-inline">nm</span> 阶的<em>多项式 <span class="math-inline">p(\lambda)</span> 的块伴随矩阵</em>为
 <a name="1637"></a>
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">C = \bmat{ccccc} 0 &amp; I &amp; &amp; &amp; \\&amp; \ddots &amp; \ddots &amp; &amp; \\......&amp; &amp; &amp; 0 &amp; I \\A_0 &amp; A_1 &amp; \cdots &amp; A_{n-2} &amp; A_{n-1} \emat,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中所有条目均为 <span class="math-inline">m</span> 阶块，所有未明确显示的条目均为 0。
+其中所有元素均为 <span class="math-inline">m</span> 阶方块，未明确显示的所有元素均为 0。
 那么 <span class="math-inline">C</span> 的特征值 <span class="math-inline">\lambda_i</span> 是 <span class="math-inline">p(\lambda_i)</span> 的特征值。
-注意有 <span class="math-inline">mn</span> 个特征值。
+注意共有 <span class="math-inline">mn</span> 个特征值。
 如果
-<span class="math-inline">(\lambda_i, x_i)</span> 是 <span class="math-inline">p(\lambda)</span> 的特征对，那么
+<span class="math-inline">(\lambda_i, x_i)</span> 是 <span class="math-inline">p(\lambda)</span> 的特征对，则
 
-<span class="math-inline">[ x_i^T, \lambda_i x_i^T , \ldots , \lambda_i^{n-1} x_i^T]^T</span> 是 <span class="math-inline">C</span> 的右特征向量 [<a
+<span class="math-inline">[ x_i^T, \lambda_i x_i^T , \ldots , \lambda_i^{n-1} x_i^T]^T</span> 是 <span class="math-inline">C</span> 的右特征向量[<a
  href="node421.html#gohberglancasterrodman82">194</a>]。
 </li>
 </ol>
@@ -183,16 +172,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1524"
-  href="node56.html">Example</a>
-<b> Up:</b> <a name="tex2html1518"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b> Previous:</b> <a name="tex2html1512"
-  href="node54.html">Specifying an Eigenproblem</a>
- &nbsp <b>  <a name="tex2html1520"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1522"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1524" href="node56.html">示例</a>
+<b>上一级：</b><a name="tex2html1518" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一节：</b><a name="tex2html1512" href="node54.html">特征问题的具体化</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

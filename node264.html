@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Properties of the Algorithm</title>
-<meta name="description" content="Properties of the Algorithm">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Properties of the Algorithm">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node265.html">
-<link rel="previous" href="node263.html">
-<link rel="up" href="node262.html">
-<link rel="next" href="node265.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4780"
   href="node265.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4781"
-  href="node265.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html4775"
-  href="node262.html">Lanczos Method for Complex</a>
-<b> Previous:</b> <a name="tex2html4769"
-  href="node263.html">Properties of Complex Symmetric</a>
- &nbsp <b>  <a name="tex2html4777"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4779"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4781" href="node265.html">算法</a>
+<b>上一级：</b><a name="tex2html4775" href="node262.html">Lanczos Method for Complex</a>
+<b>上一节：</b><a name="tex2html4769" href="node263.html">Properties of Complex Symmetric</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016112000000000000000">
@@ -97,107 +85,107 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-尽管<span class="math-inline">A</span>的复对称性对<span class="math-inline">A</span>的特征值没有影响，但这种特殊结构可以被利用，从而将一般的非厄米特兰索兹方法的计算和存储需求减半，该方法在&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>中描述。实际上，非厄米特兰索兹方法在每次迭代中涉及一次<span class="math-inline">A</span>的矩阵向量乘积和一次<span class="math-inline">A^*</span>的矩阵向量乘积，而复对称兰索兹方法在每次迭代中仅需要一次<span class="math-inline">A</span>的矩阵向量乘积。
+尽管矩阵 <span class="math-inline">A</span> 的复对称性对其特征值没有影响，但这种特殊结构可以被利用，从而将一般的非厄米Lanczos方法的计算和存储需求减半，如第&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>节所述。实际上，非厄米Lanczos方法在每次迭代中涉及一次与 <span class="math-inline">A</span> 和一次与 <span class="math-inline">A^*</span> 的矩阵向量乘积，而复对称Lanczos方法在每次迭代中仅需要一次与 <span class="math-inline">A</span> 的矩阵向量乘积。
 
 <p>
-经过<span class="math-inline">j</span>次迭代后，复对称兰索兹方法生成了<span class="math-inline">j</span>个兰索兹向量，
+经过 <span class="math-inline">j</span> 次迭代后，复对称Lanczos方法生成了 <span class="math-inline">j</span> 个Lanczos向量，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBB"></a><div class="math-display">v_1,v_2,\ldots,v_j,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBB"></a><div class="math-display">v_1,v_2,\ldots,v_j,</div></td>
+<td WIDTH=10 align="RIGHT">
 (200)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这些向量张成了由复对称矩阵<span class="math-inline">A</span>和任意非零初始向量<span class="math-inline">b</span>诱导的第<span class="math-inline">j</span>个Krylov子空间<span class="math-inline">{\mathcal K}^j(A,b)</span>。向量（<a href="node264.html#rwf:CBB">7.94</a>）被构造为复正交的：
+这些向量张成了由复对称矩阵 <span class="math-inline">A</span> 和任意非零初始向量 <span class="math-inline">b</span> 生成的第 <span class="math-inline">j</span> 个Krylov子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span>。这些向量（参见<a href="node264.html#rwf:CBB">7.94</a>）被构造为复正交的：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBC"></a><div class="math-display">V_j^T V_j = I_j,\quad \mathrm{其中}\quadV_j = \left[ \begin{array}{cccc}v_1 &amp; v_2 &amp; \cdots &amp; v_j\end{array} \right].</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBC"></a><div class="math-display">V_j^T V_j = I_j,\quad \mathrm{其中}\quadV_j = \left[ \begin{array}{cccc}v_1 &amp; v_2 &amp; \cdots &amp; v_j\end{array} \right].</div></td>
+<td WIDTH=10 align="RIGHT">
 (201)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-需要注意的是，考虑到可对角化的复对称矩阵<span class="math-inline">A</span>的特征分解（<a href="node263.html#rwf:CAG">7.91</a>），兰索兹向量的复正交性（<a href="node264.html#rwf:CBC">7.95</a>）是自然的。
+注意到，考虑到可对角化的复对称矩阵 <span class="math-inline">A</span> 的特征分解（参见<a href="node263.html#rwf:CAG">7.91</a>），Lanczos向量的复正交性（参见<a href="node264.html#rwf:CBC">7.95</a>）是自然的。
 
 <p>
-复对称兰索兹算法通过三项递归关系计算向量（<a href="node264.html#rwf:CBB">7.94</a>），可以总结如下：
+复对称Lanczos算法通过三项递归关系计算这些向量（参见<a href="node264.html#rwf:CBB">7.94</a>），可以总结如下：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBD"></a><div class="math-display">A V_j = V_j T_j + \left[ \begin{array}{cccc}0 &amp; \cdots &amp; 0 &amp; \hat{v}_{j+1}\end{array} \right].</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBD"></a><div class="math-display">A V_j = V_j T_j + \left[ \begin{array}{cccc}0 &amp; \cdots &amp; 0 &amp; \hat{v}_{j+1}\end{array} \right].</div></td>
+<td WIDTH=10 align="RIGHT">
 (202)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 这里，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBE"></a><div class="math-display">T_j = T_j^T = \left[ \begin{array}{cccc}\alpha_1 &amp; \beta_2 &amp; \cdots &amp; \beta_j \\&amp; &amp; \beta_j &amp; \alpha_j\end{array} \right]</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBE"></a><div class="math-display">T_j = T_j^T = \left[ \begin{array}{cccc}\alpha_1 &amp; \beta_2 &amp; \cdots &amp; \beta_j \\ &amp; &amp; \beta_j &amp; \alpha_j\end{array} \right]</div></td>
+<td WIDTH=10 align="RIGHT">
 (203)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-是一个复对称三对角矩阵，其元素是三项递归的系数。向量<span class="math-inline">\hat{v}_{j+1}</span>是下一个兰索兹向量<span class="math-inline">v_{j+1}</span>的候选。它被构造为满足正交条件
+是一个复对称的三对角矩阵，其元素是三项递归的系数。向量 <span class="math-inline">\hat{v}_{j+1}</span> 是下一个Lanczos向量 <span class="math-inline">v_{j+1}</span> 的候选，它被构造为满足正交条件
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBM"></a><div class="math-display">V_j^T \hat{v}_{j+1} = 0</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBM"></a><div class="math-display">V_j^T \hat{v}_{j+1} = 0</div></td>
+<td WIDTH=10 align="RIGHT">
 (204)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-并且只需要归一化，使得<span class="math-inline">v_{j+1}^T v_{j+1}=1</span>。然而，不能排除
+并且只需归一化使得 <span class="math-inline">v_{j+1}^T v_{j+1}=1</span>。然而，不能排除以下情况：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBN"></a><div class="math-display">\hat{v}_{j+1}^T \hat{v}_{j+1} = 0,\quad \mathrm{但}\quad\hat{v}_{j+1}\not=0.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBN"></a><div class="math-display">\hat{v}_{j+1}^T \hat{v}_{j+1} = 0,\quad \mathrm{但}\quad\hat{v}_{j+1}\not=0.</div></td>
+<td WIDTH=10 align="RIGHT">
 (205)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-如果（<a href="node264.html#rwf:CBN">7.99</a>）发生，那么通过简单地归一化<span class="math-inline">\hat{v}_{j+1}</span>无法获得下一个向量<span class="math-inline">v_{j+1}</span>，因为这需要除以零。因此，（<a href="node264.html#rwf:CBN">7.99</a>）被称为复对称兰索兹算法的“中断”。<a name="26036"></a>中断可以通过在算法中加入前瞻来补救。这里，为了简单起见，我们仅限于没有前瞻的复对称兰索兹算法，并且在遇到中断（<a href="node264.html#rwf:CBN">7.99</a>）时简单地停止算法。
+如果（参见<a href="node264.html#rwf:CBN">7.99</a>）发生，则无法通过简单归一化 <span class="math-inline">\hat{v}_{j+1}</span> 来获得下一个向量 <span class="math-inline">v_{j+1}</span>，因为这将需要除以零。因此，（参见<a href="node264.html#rwf:CBN">7.99</a>）被称为复对称Lanczos算法的<i>中断</i>。中断可以通过在算法中加入前瞻来修复。这里，为了简单起见，我们限制自己使用没有前瞻的复对称Lanczos算法，并且在遇到中断（参见<a href="node264.html#rwf:CBN">7.99</a>）时简单地停止算法。
 
 <p>
-经过<span class="math-inline">j</span>次复对称兰索兹算法迭代后，通过计算<span class="math-inline">T_j</span>的特征解，得到了复对称特征值问题（<a href="node262.html#rwf:CAA">7.88</a>）的近似特征解，
+经过 <span class="math-inline">j</span> 次复对称Lanczos算法迭代后，通过计算 <span class="math-inline">T_j</span> 的特征解，可以得到复对称特征值问题（参见<a href="node262.html#rwf:CAA">7.88</a>）的近似特征解，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBZ"></a><div class="math-display">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quadi=1,2,\ldots,j.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBZ"></a><div class="math-display">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quadi=1,2,\ldots,j.</div></td>
+<td WIDTH=10 align="RIGHT">
 (206)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-每个值<span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量<span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>产生<span class="math-inline">A</span>的一个近似特征对。注意，<span class="math-inline">T_j</span>是<span class="math-inline">A</span>在由兰索兹基矩阵<span class="math-inline">V_j</span>张成的空间上的复正交投影，即
+每个值 <span class="math-inline">\theta_i^{(j)}</span> 及其Ritz向量 <span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span> 产生 <span class="math-inline">A</span> 的一个近似特征对。注意到 <span class="math-inline">T_j</span> 是 <span class="math-inline">A</span> 在由Lanczos基矩阵 <span class="math-inline">V_j</span> 张成的空间上的复正交投影，即
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CBY"></a><div class="math-display">T_j = V_j^T A V_j.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CBY"></a><div class="math-display">T_j = V_j^T A V_j.</div></td>
+<td WIDTH=10 align="RIGHT">
 (207)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-实际上，这个关系是通过从左边乘以（<a href="node264.html#rwf:CBD">7.96</a>）并使用正交关系（<a href="node264.html#rwf:CBC">7.95</a>）和（<a href="node264.html#rwf:CBM">7.98</a>）得出的。当然，在复对称兰索兹算法中，矩阵<span class="math-inline">T_j</span>不是通过关系（<a href="node264.html#rwf:CBY">7.101</a>）计算的。相反，利用定义（<a href="node264.html#rwf:CBE">7.97</a>）中的对称三对角结构，仅显式生成<span class="math-inline">T_j</span>的对角线和次对角线元素。
+确实，通过从左边乘以 <span class="math-inline">V_j^T</span> 并利用正交关系（参见<a href="node264.html#rwf:CBC">7.95</a>）和（参见<a href="node264.html#rwf:CBM">7.98</a>），可以得出这一关系。当然，在复对称Lanczos算法中，矩阵 <span class="math-inline">T_j</span> 不是通过关系（参见<a href="node264.html#rwf:CBY">7.101</a>）计算的。相反，利用定义（参见<a href="node264.html#rwf:CBE">7.97</a>）中的对称三对角结构，仅显式生成 <span class="math-inline">T_j</span> 的对角线和次对角线元素。
 
 <p>
-需要指出的是，<span class="math-inline">V_j</span>是复正交的，但不是酉的，这可能对数值稳定性有影响。
+应该指出，<span class="math-inline">V_j</span> 是复正交的，但不是酉的，这可能会影响数值稳定性。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -217,16 +205,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4781"
-  href="node265.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html4775"
-  href="node262.html">Lanczos Method for Complex</a>
-<b> Previous:</b> <a name="tex2html4769"
-  href="node263.html">Properties of Complex Symmetric</a>
- &nbsp <b>  <a name="tex2html4777"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4779"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4781" href="node265.html">算法</a>
+<b>上一级：</b><a name="tex2html4775" href="node262.html">Lanczos Method for Complex</a>
+<b>上一节：</b><a name="tex2html4769" href="node263.html">Properties of Complex Symmetric</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Properties of Complex Symmetric Matrices</title>
-<meta name="description" content="Properties of Complex Symmetric Matrices">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Properties of Complex Symmetric Matrices">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node264.html">
-<link rel="previous" href="node262.html">
-<link rel="up" href="node262.html">
-<link rel="next" href="node264.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4766"
   href="node264.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4767"
-  href="node264.html">Properties of the Algorithm</a>
-<b> Up:</b> <a name="tex2html4761"
-  href="node262.html">Lanczos Method for Complex</a>
-<b> Previous:</b> <a name="tex2html4755"
-  href="node262.html">Lanczos Method for Complex</a>
- &nbsp <b>  <a name="tex2html4763"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4765"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4767" href="node264.html">算法性质</a>
+<b>上一级：</b><a name="tex2html4761" href="node262.html">Lanczos Method for Complex</a>
+<b>上一节：</b><a name="tex2html4755" href="node262.html">Lanczos Method for Complex</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016111000000000000000">
@@ -98,107 +86,94 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 复对称性是一种纯代数性质，它对矩阵的谱没有影响。
-确实，对于任何给定的一组 <span class="math-inline">n</span> 个数，
+确实，对于任何给定的 <span class="math-inline">n</span> 个数，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CAB"></a><div class="math-display">\lambda_1,\lambda_2,\ldots,\lambda_n \in {\mathcal C},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CAB"></a><div class="math-display">\lambda_1,\lambda_2,\ldots,\lambda_n \in {\mathcal C},</div></td>
+<td WIDTH=10 align="RIGHT">
 (195)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-存在一个复对称 <span class="math-inline">n \times n</span> 矩阵 <span class="math-inline">A</span>，其特征值恰好是这些预设的数&nbsp;(<a href="node263.html#rwf:CAB">7.89</a>)；
-参见，例如&nbsp;[<a
- href="node421.html#hojo85">233</a>, 定理 4.4.9]。
+存在一个复对称 <span class="math-inline">n \times n</span> 矩阵 <span class="math-inline">A</span>，其特征值正是这些预先指定的数 (<a href="node263.html#rwf:CAB">7.89</a>)；参见，例如 [<a href="node421.html#hojo85">233</a>, 定理 4.4.9]。
 
 <p>
 一个复对称矩阵甚至可能不可对角化。
 例如，考虑复对称矩阵
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:EXA"></a><div class="math-display">A = \left[\begin{array}{cc} 2 {\tt i} &amp; 1\\1 &amp; 0\end{array} \right],\quad\mathrm{其中}\quad {\tt i} = \sqrt{-1}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:EXA"></a><div class="math-display">A = \left[\begin{array}{cc} 2 {\tt i} &amp; 1\\1 &amp; 0\end{array} \right],\quad\mathrm{其中}\quad {\tt i} = \sqrt{-1}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (196)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这个矩阵的唯一特征值是 <span class="math-inline">\lambda={\tt i}</span>，具有代数重数 <span class="math-inline">2</span> 但几何重数 <span class="math-inline">1</span>。
+该矩阵的唯一特征值是 <span class="math-inline">\lambda={\tt i}</span>，具有代数重数 <span class="math-inline">2</span> 但几何重数 <span class="math-inline">1</span>。
 实际上，<span class="math-inline">A</span> 的 Jordan 标准型如下：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">Z^{-1} A Z = \left[\begin{array}{cc} {\tt i} &amp; 1\\0 &amp; {...... \begin{array}{cc} {\tt i} &amp; 1\\1 &amp; 0\end{array} \right].</div>
+<div class="math-display">Z^{-1} A Z = \left[\begin{array}{cc} {\tt i} &amp; 1\\0 &amp; {\tt i}\end{array} \right].</div>
 </div>
 <br clear="ALL">
 <p></p>
 因此，<span class="math-inline">A</span> 不可对角化。
 
 <p>
-如果一个复对称矩阵 <span class="math-inline">A</span> 可对角化，那么
-它具有反映复对称性的特征分解；
-参见，例如&nbsp;[<a
- href="node421.html#hojo85">233</a>, 定理 4.4.13]。
-更确切地说，一个复对称矩阵 <span class="math-inline">A</span> 可对角化
-当且仅当其特征向量矩阵 <span class="math-inline">Z</span> 可以选择使得
+如果一个复对称矩阵 <span class="math-inline">A</span> 可对角化，则它具有反映复对称性的特征分解；参见，例如 [<a href="node421.html#hojo85">233</a>, 定理 4.4.13]。
+更确切地说，复对称矩阵 <span class="math-inline">A</span> 可对角化当且仅当其特征向量矩阵 <span class="math-inline">Z</span> 可以选择为
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CAG"></a><div class="math-display">Z^T A Z = \Lambda = {\mathop{\rm diag}\nolimits}\left(\lambd......da_2,\ldots,\lambda_n\right)\quad \mathrm{并且}\quadZ^T Z = I_n.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CAG"></a><div class="math-display">Z^T A Z = \Lambda = {\mathop{\rm diag}\nolimits}\left(\lambda_1,\lambda_2,\ldots,\lambda_n\right)\quad \mathrm{且}\quad Z^T Z = I_n.</div></td>
+<td WIDTH=10 align="RIGHT">
 (197)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-一个满足 <span class="math-inline">Z^T Z = I_n</span> 的具有 <span class="math-inline">n</span> 列的矩阵 <span class="math-inline">Z</span> 被称为 <i>复正交</i>。
-在&nbsp;(<a href="node263.html#rwf:CAG">7.91</a>) 中，<span class="math-inline">Z</span> 的复正交性反映了 <span class="math-inline">A</span> 的复对称性。
+满足 <span class="math-inline">Z^T Z = I_n</span> 的矩阵 <span class="math-inline">Z</span> 称为复正交矩阵。
+在 (<a href="node263.html#rwf:CAG">7.91</a>) 中 <span class="math-inline">Z</span> 的复正交性反映了 <span class="math-inline">A</span> 的复对称性。
 
 <p>
-我们注意到，特征分解&nbsp;(<a href="node263.html#rwf:CAG">7.91</a>) 是
-对 Hermitian 矩阵相应分解的适当适应。
-回想一下，对于任何矩阵 <span class="math-inline">A=A^{\ast}</span>，特征向量矩阵
-<span class="math-inline">Z</span> 总是可以选择为酉矩阵：
+我们注意到，特征分解 (<a href="node263.html#rwf:CAG">7.91</a>) 是对厄米矩阵相应分解的适当适应。
+回想一下，对于任何矩阵 <span class="math-inline">A=A^{\ast}</span>，特征向量矩阵 <span class="math-inline">Z</span> 总是可以选择为酉矩阵：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CAF"></a><div class="math-display">Z^{\ast} A Z = \Lambda = {\mathop{\rm diag}\nolimits}\left(\......\ldots,\lambda_n\right)\quad \mathrm{并且}\quadZ^{\ast} Z = I_n.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CAF"></a><div class="math-display">Z^{\ast} A Z = \Lambda = {\mathop{\rm diag}\nolimits}\left(\lambda_1,\lambda_2,\ldots,\lambda_n\right)\quad \mathrm{且}\quad Z^{\ast} Z = I_n.</div></td>
+<td WIDTH=10 align="RIGHT">
 (198)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-在&nbsp;(<a href="node263.html#rwf:CAF">7.92</a>) 中，<span class="math-inline">Z</span> 的酉性质反映了 <span class="math-inline">A</span> 是 Hermitian 矩阵的事实。
+在 (<a href="node263.html#rwf:CAF">7.92</a>) 中 <span class="math-inline">Z</span> 的酉性反映了 <span class="math-inline">A</span> 是厄米矩阵的事实。
 
 <p>
-特征分解&nbsp;(<a href="node263.html#rwf:CAG">7.91</a>) 并不总是存在的原因是存在复向量 <span class="math-inline">z</span> 满足
+特征分解 (<a href="node263.html#rwf:CAG">7.91</a>) 并不总是存在的原因是存在满足
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:CAM"></a><div class="math-display">z^T z = 0,\quad \mathrm{但}\quad z\not=0.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:CAM"></a><div class="math-display">z^T z = 0,\quad \mathrm{但}\quad z\not=0.</div></td>
+<td WIDTH=10 align="RIGHT">
 (199)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-实际上，假设 <span class="math-inline">A</span> 有一个特征值对应的一维特征空间
-并且向量 <span class="math-inline">z</span> 跨越该空间满足&nbsp;(<a href="node263.html#rwf:CAM">7.93</a>)。
-那么 <span class="math-inline">A</span> 的任何特征向量矩阵 <span class="math-inline">Z</span> 的一列将是
-形式 <span class="math-inline">z_k = \gamma z</span>，其中 <span class="math-inline">\gamma\not=0</span> 是一个标量。
-然后，根据&nbsp;(<a href="node263.html#rwf:CAM">7.93</a>)，<span class="math-inline">z_k^T z_k = 0</span>，而
-复正交条件，<span class="math-inline">Z^T Z = I_n</span>，在&nbsp;(<a href="node263.html#rwf:CAG">7.91</a>)
-将意味着 <span class="math-inline">z_k^T z_k =1</span>。  
-注意例如&nbsp;(<a href="node263.html#rwf:EXA">7.90</a>)，向量
+确实，假设 <span class="math-inline">A</span> 有一个一维特征空间对应的特征值，且该空间由满足 (<a href="node263.html#rwf:CAM">7.93</a>) 的向量 <span class="math-inline">z</span> 张成。
+那么，<span class="math-inline">A</span> 的任何特征向量矩阵 <span class="math-inline">Z</span> 的一列将是形式 <span class="math-inline">z_k = \gamma z</span>，其中 <span class="math-inline">\gamma\not=0</span> 是标量。
+然后，根据 (<a href="node263.html#rwf:CAM">7.93</a>)，<span class="math-inline">z_k^T z_k = 0</span>，而复正交条件 <span class="math-inline">Z^T Z = I_n</span> 在 (<a href="node263.html#rwf:CAG">7.91</a>) 中将意味着 <span class="math-inline">z_k^T z_k =1</span>。
+注意，例如 (<a href="node263.html#rwf:EXA">7.90</a>)，向量
 
 <span class="math-inline">z=\left[\begin{array}{cc} {\tt i} &amp; 1 \end{array}\right]^T</span>
-跨越与 <span class="math-inline">\lambda={\tt i}</span> 相关的一维特征空间
-并且它满足&nbsp;(<a href="node263.html#rwf:CAM">7.93</a>)。
+张成了与 <span class="math-inline">\lambda={\tt i}</span> 相关联的一维特征空间，并且满足 (<a href="node263.html#rwf:CAM">7.93</a>)。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -218,16 +193,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4767"
-  href="node264.html">Properties of the Algorithm</a>
-<b> Up:</b> <a name="tex2html4761"
-  href="node262.html">Lanczos Method for Complex</a>
-<b> Previous:</b> <a name="tex2html4755"
-  href="node262.html">Lanczos Method for Complex</a>
- &nbsp <b>  <a name="tex2html4763"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4765"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4767" href="node264.html">算法性质</a>
+<b>上一级：</b><a name="tex2html4761" href="node262.html">Lanczos Method for Complex</a>
+<b>上一节：</b><a name="tex2html4755" href="node262.html">Lanczos Method for Complex</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

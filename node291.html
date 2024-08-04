@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Restart.</title>
-<meta name="description" content="Restart.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Restart.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node290.html">
-<link rel="up" href="node289.html">
-<link rel="next" href="node292.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5215"
   href="node292.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5216"
-  href="node292.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html5210"
-  href="node289.html">Deflation and Restart</a>
-<b> Previous:</b> <a name="tex2html5206"
-  href="node290.html">Deflation.</a>
- &nbsp <b>  <a name="tex2html5212"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5214"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5216" href="node292.html">算法</a>
+<b>上一级：</b><a name="tex2html5210" href="node289.html">收缩与重启</a>
+<b>上一节：</b><a name="tex2html5206" href="node290.html">Deflation.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -99,7 +88,7 @@ Restart.</a>
 Suppose that the generalized Schur form (<a href="node288.html#eq:JD7-appschur">8.12</a>) is
 ordered with respect to <span class="math-inline">\tau </span> such that
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\vert T^A_{1,1}/T^B_{1,1}-\tau\vert\leq\vert T^A_{2,2}/T^B......t\leq\cdots \leq\vert T^A_{{m},{m}}/T^B_{{m},{m}}-\tau\vert,</div>
@@ -124,10 +113,10 @@ through <span class="math-inline">v_{m}</span> and
 through <span class="math-inline">w_{m}</span> can simply be discarded
 and the Jacobi-Davidson algorithm can be continued with
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">V=[Vs^R_1,\ldots,Vs^R_{{m}_{\min}}]\quad \mathrm{and}\quadw=[Ws^L_1,\ldots,Ws^L_{{m}_{\min}}].</div>
+<div class="math-display">V=[Vs^R_1,\ldots,Vs^R_{{m}_{\min}}]\quad \mathrm{and}\quadW=[Ws^L_1,\ldots,Ws^L_{{m}_{\min}}].</div>
 </div>
 <br clear="ALL">
 <p></p> 

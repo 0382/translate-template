@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Lanczos Method &nbsp; Z.&nbsp;Bai and D.&nbsp;Day </title>
-<meta name="description" content="Lanczos Method &nbsp; Z.&nbsp;Bai and D.&nbsp;Day ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Lanczos Method &nbsp; Z.&nbsp;Bai and D.&nbsp;Day ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node250.html">
-<link rel="previous" href="node235.html">
-<link rel="up" href="node203.html">
-<link rel="next" href="node245.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4487"
   href="node245.html">
@@ -80,41 +73,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4488"
-  href="node245.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html4482"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4476"
-  href="node243.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html4484"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4486"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
+<b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4476" href="node243.html">注释与参考文献</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001680000000000000000"></a> <a name="sec:nsymlanczos"></a> 
 <a name="23974"></a>
 <br>
-Lanczos方法 
-<br>&nbsp; <em>Z. Bai和D. Day</em> 
+Lanczos方法
+<br>&nbsp; <em>Z. 白(Bai) 和 D. 戴(Day)</em> 
 </h1> 
 
 <p>
-非Hermitian Lanczos方法是一种斜投影方法（参见&#167;<a href="node79.html#sec:algbasics">3.2</a>），用于解决非Hermitian特征值问题（NHEP），
+非厄米Lanczos方法是一种斜投影方法(参见第<a href="node79.html#sec:algbasics">3.2</a>节)，用于求解非厄米特征值问题，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="nhevp"></a><div class="math-display">ax=\lambda x \quad \mathrm{and} \quad y^{\ast} A = \lambda y^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nhevp"></a><div class="math-display">Ax=\lambda x \quad \mathrm{和} \quad y^{\ast} A = \lambda y^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (138)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">A</span>是一个非Hermitian矩阵。对于复对称矩阵（<span class="math-inline">A=A^T</span>但<span class="math-inline">A \ne A^{\ast}</span>），在&#167;<a href="node262.html#sec:csymlanczos">7.11</a>中介绍了一种特殊的Lanczos方法。
+其中<span class="math-inline">A</span>是一个非厄米矩阵。对于复对称矩阵(<span class="math-inline">A=A^T</span>但<span class="math-inline">A \ne A^{\ast}</span>)，第<a href="node262.html#sec:csymlanczos">7.11</a>节介绍了一种特殊的Lanczos方法。
 
 <p>
-通过两个初始向量<span class="math-inline">q_1</span>和<span class="math-inline">p_1</span>，Lanczos方法构建了一对双正交基，用于Krylov子空间<span class="math-inline">{\mathcal K}^j(A,q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast},p_1)</span>，前提是对于任意向量<span class="math-inline">z</span>，矩阵向量乘法<span class="math-inline">Az</span>和<span class="math-inline">A^{\ast} z</span>是可行的。内循环使用两个三项递归。这些递归使用的内存和内存引用比在&#167;<a href="node215.html#sec:arnodimethod">7.5</a>中讨论的Arnoldi方法中的相应递归要少。Lanczos方法提供了右特征向量和左特征向量的近似。在估计计算出的特征对的误差和条件数时，左右特征向量的可用性至关重要。然而，由于该方法不使用正交变换，存在中断和数值不稳定的风险。本节定义了基本的Lanczos方法及其主要性质，并介绍了提高方法数值稳定性和准确性的算法技术。
+通过两个初始向量<span class="math-inline">q_1</span>和<span class="math-inline">p_1</span>，Lanczos方法构建了一对双正交基，用于Krylov子空间<span class="math-inline">{\mathcal K}^j(A,q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast},p_1)</span>，前提是对于任意向量<span class="math-inline">z</span>，矩阵向量乘法<span class="math-inline">Az</span>和<span class="math-inline">A^{\ast} z</span>是可行的。内部循环使用两个三项递归。这些递归使用的内存和内存引用比第<a href="node215.html#sec:arnodimethod">7.5</a>节讨论的Arnoldi方法中的相应递归要少。Lanczos方法提供了右特征向量和左特征向量的近似。在估计计算的特征对的误差和条件数时，左右特征向量的可用性至关重要。然而，由于该方法不使用正交变换，存在中断和数值不稳定的风险。本节定义了基本的Lanczos方法及其主要性质，并介绍了提高方法数值稳定性和准确性的算法技术。
 <a name="23989"></a> 
 
 <p>
@@ -129,7 +117,7 @@ Lanczos方法
   href="node246.html">收敛性质</a>
 <ul>
 <li><a name="tex2html4491"
-  href="node247.html">多重特征值</a>
+  href="node247.html">多重特征值。</a>
 </ul>
 <li><a name="tex2html4492"
   href="node248.html">软件可用性</a>
@@ -139,7 +127,7 @@ Lanczos方法
 <!--End of Table of Child-Links-->
 <hr>
 
-这段内容介绍了非Hermitian Lanczos方法，这是一种用于解决非Hermitian特征值问题的斜投影方法。该方法通过两个初始向量构建Krylov子空间的双正交基，并使用三项递归进行计算，相比于Arnoldi方法，它在内存使用上更为高效。Lanczos方法能够提供左右特征向量的近似，这对于估计特征对的误差和条件数非常重要。然而，该方法存在中断和数值不稳定的风险。文中还列出了相关的小节链接，包括算法、收敛性质、软件可用性以及注释和参考文献。<!--Navigation Panel-->
+这段文字介绍了非厄米Lanczos方法，这是一种用于求解非厄米特征值问题的斜投影方法。该方法通过两个初始向量构建双正交基，用于Krylov子空间，并使用两个三项递归来减少内存需求。Lanczos方法能够提供左右特征向量的近似，对于估计特征对的误差和条件数非常重要。然而，由于不使用正交变换，该方法存在中断和数值不稳定的风险。<!--Navigation Panel-->
 <a name="tex2html4487"
   href="node245.html">
 <button class="navigate">下一节</button></a> 
@@ -156,16 +144,11 @@ Lanczos方法
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4488"
-  href="node245.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html4482"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4476"
-  href="node243.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html4484"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4486"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
+<b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4476" href="node243.html">注释与参考文献</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

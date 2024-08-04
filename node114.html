@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Results for L-Shaped Membrane.</title>
-<meta name="description" content="Results for L-Shaped Membrane.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Results for L-Shaped Membrane.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node115.html">
-<link rel="previous" href="node113.html">
-<link rel="up" href="node113.html">
-<link rel="next" href="node115.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2467"
   href="node115.html">
@@ -80,31 +73,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2468"
-  href="node115.html">Results for Medline SVD.</a>
-<b> Up:</b> <a name="tex2html2462"
-  href="node113.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html2456"
-  href="node113.html">Numerical Examples</a>
- &nbsp <b>  <a name="tex2html2464"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2466"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2468" href="node115.html">Results for Medline SVD.</a>
+<b>上一级：</b><a name="tex2html2462" href="node113.html">数值示例</a>
+<b>上一节：</b><a name="tex2html2456" href="node113.html">数值示例</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001346010000000000000">
-L型薄膜的结果</a>
+L形膜片的结果。</a>
 </h4>
-对于直接应用Lanczos算法的情形，极值特征值首先收敛，并且在这种情况下，无论是在谱的哪一端，收敛情况都会非常相似。
+对于直接应用Lanczos算法的情况，极值特征值首先收敛，并且在这种情况下，收敛在谱的两端都非常相似。
 
 <p>
 
 <p></p>
-<div align="center"><a name="LmembLanRes"></a><a name="7915"></a>
+<div align="CENTER"><a name="LmembLanRes"></a><a name="7915"></a>
 <table>
-<caption align="bottom"><strong>图4.1：</strong>
-L型薄膜矩阵的残差估计</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图4.1：</strong>
+L形膜片矩阵的残差估计。</caption>
+<tr><td><img
  width="445" height="355" border="0"
  src="img937.png"
  alt="\begin{figure}\centerline{\psfig{file=LmembLanRes.eps,width=0.80\textwidth}}\vspace*{8pt}%% help
@@ -115,11 +103,11 @@ L型薄膜矩阵的残差估计</caption>
 <p>
 
 <p></p>
-<div align="center"><a name="LmembLanRitz"></a><a name="7921"></a>
+<div align="CENTER"><a name="LmembLanRitz"></a><a name="7921"></a>
 <table>
-<caption align="bottom"><strong>图4.2：</strong>
-L型薄膜矩阵的Ritz值</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图4.2：</strong>
+L形膜片矩阵的Ritz值。</caption>
+<tr><td><img
  width="445" height="357" border="0"
  src="img938.png"
  alt="\begin{figure}\centerline{\psfig{file=LmembLanRitz.eps,width=0.80\textwidth}}\end{figure}"></td></tr>
@@ -127,19 +115,19 @@ L型薄膜矩阵的Ritz值</caption>
 </div><p></p>
 
 <p>
-我们在图<a href="node114.html#LmembLanRes">4.1</a>中绘制了作为Lanczos步数<span class="math-inline">j</span>函数的六个最大特征值的估计残差（<a href="node103.html#estimate_residual">4.13</a>）。这些曲线显示了每一步的残差估计（<a href="node103.html#estimate_residual">4.13</a>），并且仅在实际计算后为了说明目的而计算。LANSO算法调用QL算法来计算特征值和特征向量的最后元素以测试收敛性（<a href="node103.html#estimate_residual">4.13</a>），在图中用虚线垂直线标记的迭代中。选择性正交化在我们用虚线标记的步骤中触发了再正交化，总共仅在这300步中发生了三次。这是收敛缓慢情况的典型特征：正交性一直保持到第一个Ritz值收敛。
+我们在图<a href="node114.html#LmembLanRes">4.1</a>中绘制了作为Lanczos步数<span class="math-inline">j</span>函数的六个最大特征值的估计残差（<a href="node103.html#estimate_residual">4.13</a>）。这些曲线显示了每一步的残差估计（<a href="node103.html#estimate_residual">4.13</a>），并且仅在实际计算后为了说明目的而计算。LANSO算法调用QL算法来计算特征值和特征向量的最后元素以测试收敛性（<a href="node103.html#estimate_residual">4.13</a>），在图中用虚线垂直线标记的迭代中。选择性正交化在我们用虚线标记的步骤中触发了重新正交化，总共在这300步中只发生了三次。这是典型的情况，收敛缓慢：正交性一直保持到第一个Ritz值收敛。
 
 <p>
-请注意，需要相对较多的步骤，大约150步，才能将主导特征值的残差降低到<span class="math-inline">10^{-4}</span>，并且还需要另外150步才能达到完全的机器精度。观察图<a href="node114.html#LmembLanRitz">4.2</a>中绘制的Ritz值<span class="math-inline">\theta^{(j)}_i</span>（<a href="node103.html#T-eigenvalues">4.11</a>）与<span class="math-inline">j</span>的关系，我们可以看到最大的Ritz值随着<span class="math-inline">j</span>增长，直到大约<span class="math-inline">j=60</span>步时稳定下来。通常一个Ritz值会开始接近一个特征值，但随后会移动到另一个尚未发现的特征值。这在第60到80步的第三个Ritz值和第150到210步的第六个Ritz值中表现得更为明显。这种现象在图<a href="node114.html#LmembLanRes">4.1</a>中以不太明显的方式出现，其中第三和第六条曲线在Ritz值改变归属的步骤中出现了平台。直接使用Lanczos方法的用户在判断所有最大特征值是否真正收敛时应谨慎。
+需要注意的是，大约需要150步才能将主导特征值的残差降低到<span class="math-inline">10^{-4}</span>，并且还需要另外150步才能达到完全的机器精度。观察图<a href="node114.html#LmembLanRitz">4.2</a>中绘制的Ritz值<span class="math-inline">\theta^{(j)}_i</span>（<a href="node103.html#T-eigenvalues">4.11</a>）与<span class="math-inline">j</span>的关系，我们可以看到最大的Ritz值随着<span class="math-inline">j</span>增长直到大约第60步时趋于稳定。通常一个Ritz值会开始接近一个特征值，但随后会移动到另一个尚未找到的特征值。这在第60到80步的第三个Ritz值和第150到210步的第六个Ritz值中表现得更为明显。这种现象在图<a href="node114.html#LmembLanRes">4.1</a>中以不太明显的方式出现，其中第三和第六条曲线在Ritz值改变归属的步骤处出现了平台。直接使用Lanczos方法的用户在决定是否所有最大特征值都真正收敛时应谨慎。
 
 <p>
 
 <p></p>
-<div align="center"><a name="MedlLanRes"></a><a name="7935"></a>
+<div align="CENTER"><a name="MedlLanRes"></a><a name="7935"></a>
 <table>
-<caption align="bottom"><strong>图4.3：</strong>
-Medline SVD矩阵的残差估计</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图4.3：</strong>
+Medline SVD矩阵的残差估计。</caption>
+<tr><td><img
  width="444" height="355" border="0"
  src="img947.png"
  alt="\begin{figure}\centerline{\psfig{file=MedlLanRes.eps,width=0.80\textwidth}}\end{figure}"></td></tr>
@@ -149,11 +137,11 @@ Medline SVD矩阵的残差估计</caption>
 <p>
 
 <p></p>
-<div align="center"><a name="Lmemb5SIres"></a><a name="7940"></a>
+<div align="CENTER"><a name="Lmemb5SIres"></a><a name="7940"></a>
 <table>
-<caption align="bottom"><strong>图4.4：</strong>
-移位-反演L型薄膜矩阵的残差估计</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图4.4：</strong>
+移位反转L形膜片矩阵的残差估计。</caption>
+<tr><td><img
  width="445" height="360" border="0"
  src="img948.png"
  alt="\begin{figure}\centerline{\psfig{file=Lmemb5SI.eps,width=0.80\textwidth}}\end{figure}"></td></tr>
@@ -178,16 +166,11 @@ Medline SVD矩阵的残差估计</caption>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2468"
-  href="node115.html">Results for Medline SVD.</a>
-<b> Up:</b> <a name="tex2html2462"
-  href="node113.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html2456"
-  href="node113.html">Numerical Examples</a>
- &nbsp <b>  <a name="tex2html2464"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2466"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2468" href="node115.html">Results for Medline SVD.</a>
+<b>上一级：</b><a name="tex2html2462" href="node113.html">数值示例</a>
+<b>上一节：</b><a name="tex2html2456" href="node113.html">数值示例</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

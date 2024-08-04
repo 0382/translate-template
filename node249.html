@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Notes and References</title>
-<meta name="description" content="Notes and References">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Notes and References">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node248.html">
-<link rel="up" href="node244.html">
-<link rel="next" href="node250.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4559"
   href="node250.html">
@@ -79,64 +73,59 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4560"
-  href="node250.html">Block Lanczos Methods &nbsp;</a>
-<b> Up:</b> <a name="tex2html4554"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b> Previous:</b> <a name="tex2html4550"
-  href="node248.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html4556"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4558"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4560" href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b>上一级：</b><a name="tex2html4554" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b>上一节：</b><a name="tex2html4550" href="node248.html">可用的软件</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001684000000000000000">
 注释与参考文献</a>
 </h2>
-Lanczos在1950年的原始论文研究了一般矩阵<span class="math-inline">A</span>的特征值问题
+兰索斯(Lanczos)在1950年的原始论文中研究了对于一般矩阵<span class="math-inline">A</span>的特征值问题
 <span class="math-inline">Ax = \lambda x</span>
 [<a
  href="node421.html#lanc50">285</a>].<a name="tex2html43"
-  href="footnode.html#foot24355"><sup><button class="footnote"></button></sup></a>Cullum和Willoughby&nbsp;[<a
- href="node421.html#cuwi86">93</a>] 展示了非对称Lanczos方法在没有重新正交化的情况下，在多个来自实际应用的非对称特征值问题中的成功应用。
-针对简化三对角矩阵的特征值问题以及识别良好和虚假Ritz值，提出了特殊的方法。
+  href="footnode.html#foot24355"><sup><button class="footnote"></button></sup></a>卡拉姆(Cullum)和威洛比(Willoughby) [<a
+ href="node421.html#cuwi86">93</a>] 展示了无再正交化的非对称兰索斯方法在多个应用中的非对称特征值问题上的成功。
+为了解决简化后的三对角矩阵的特征值问题并识别良好的和虚假的里兹值，提出了一些特殊的方法。
 
 <p>
-Taylor&nbsp;[<a
- href="node421.html#tayl82">434</a>] 和 Parlett、Taylor 及 Liu&nbsp;[<a
+泰勒(Taylor) [<a
+ href="node421.html#tayl82">434</a>] 和帕利特(Parlett)、泰勒(Taylor)及刘(Liu) [<a
  href="node421.html#patl85">364</a>] 
 是最早尝试解决中断问题的人。
-他们在论文中创造了“向前看”这一术语。
-为了解决中断问题，对向前看方案的新研究始于Freund、Gutknecht和Nachtigal的工作&nbsp;[<a
+他们在论文中创造了“前瞻”这一术语。
+为了解决中断问题，对前瞻方案的新研究始于弗伦德(Freund)、古特尼希(Gutknecht)和纳赫蒂加尔(Nachtigal)的工作 [<a
  href="node421.html#frgn93">178</a>]。
-Ye也提出了一种方案，通过选择一个新的起始向量来生成另一个Krylov子空间，该子空间以适当的方式包含旧的子空间，从而解决中断问题&nbsp;[<a
+叶(Ye)也提出了一种通过选择一个新的起始向量来生成另一个包含旧子空间的克雷洛夫子空间的方法来解决中断问题 [<a
  href="node421.html#yeqi94">465</a>]。
-这一基本思想被纳入1995年由Bai、Day和Ye提出的ABLE方法中[<a
+这一基本思想被融入到1995年由白(Bai)、戴(Day)和叶(Ye)提出的ABLE方法中 [<a
  href="node421.html#bady99">29</a>]（见
 &#167;<a href="node250.html#sec:nsymblocklanczos">7.9</a>）。
-关于中断现象的理论研究及其与基础多项式理论的联系，可以在Gutknecht的论文[<a
+关于中断现象的理论研究及其与基础多项式理论的联系可以在古特尼希(Gutknecht)的论文 [<a
  href="node421.html#gutk92">213</a>,<a
- href="node421.html#gutk94">214</a>]和
-Brezinski、Redivo Zaglia及Sadok的论文[<a
- href="node421.html#brez91">65</a>]中找到。
+ href="node421.html#gutk94">214</a>] 和
+布雷津斯基(Brezinski)、雷迪沃·兹利亚(Redivo Zaglia)及萨多克(Sadok)的论文 [<a
+ href="node421.html#brez91">65</a>] 中找到。
 
 <p>
-由于Lanczos方法是斜投影方法，Saad[<a
- href="node421.html#saad87">384</a>]和
-Jia[<a
- href="node421.html#jia95">243</a>]对投影方法的一般收敛性分析是适用的，但在实际应用中存在显著限制。
+由于兰索斯方法是一种斜投影方法，萨德(Saad) [<a
+ href="node421.html#saad87">384</a>] 和
+贾(Jia) [<a
+ href="node421.html#jia95">243</a>] 对投影方法的一般收敛性分析是适用的，但在实际应用中存在显著限制。
 
 <p>
-Paige关于计算的Lanczos向量之间正交性丧失与对称Lanczos方法中Ritz值收敛之间关系的理论，被Bai[<a
- href="node421.html#bai94">26</a>]扩展到了非对称Lanczos方法。
-Day发表了关于非对称Lanczos过程在有限精度算术中的误差分析[<a
+白(Bai) [<a
+ href="node421.html#bai94">26</a>] 将派奇(Paige)关于计算的兰索斯向量之间正交性丧失与对称兰索斯方法中里兹值收敛之间关系的理论扩展到了非对称兰索斯方法。
+戴(Day)发表了关于非对称兰索斯过程在有限精度算术中的误差分析 [<a
  href="node421.html#day93">104</a>,<a
  href="node421.html#day97">105</a>]。
-许多关于对称Lanczos方法的著名结果被扩展到了非对称情况。
-例如，Simon针对对称Lanczos的部分重新正交化方案[<a
- href="node421.html#simo84">403</a>]的非对称对应方案被提出。
-van der Veen和Vuik最近也发表了一个部分重新正交化方案[<a
+许多关于对称兰索斯方法的著名结果被扩展到了非对称情况。
+例如，提出了西蒙(Simon)对称兰索斯部分再正交化方案的非对称对应方案 [<a
+ href="node421.html#simo84">403</a>]。
+最近，范德维恩(van der Veen)和维克(Vuik)也发表了一种部分再正交化方案 [<a
  href="node421.html#vavu95">443</a>]。
 
 <p>
@@ -157,16 +146,11 @@ van der Veen和Vuik最近也发表了一个部分重新正交化方案[<a
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4560"
-  href="node250.html">Block Lanczos Methods &nbsp;</a>
-<b> Up:</b> <a name="tex2html4554"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b> Previous:</b> <a name="tex2html4550"
-  href="node248.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html4556"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4558"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4560" href="node250.html">Block Lanczos Methods &nbsp;</a>
+<b>上一级：</b><a name="tex2html4554" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b>上一节：</b><a name="tex2html4550" href="node248.html">可用的软件</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

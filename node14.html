@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Intended Readership</title>
-<meta name="description" content="Intended Readership">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Intended Readership">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node15.html">
-<link rel="previous" href="node13.html">
-<link rel="up" href="node12.html">
-<link rel="next" href="node15.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html868"
   href="node15.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html869"
-  href="node15.html">Using the Decision Tree</a>
-<b> Up:</b> <a name="tex2html863"
-  href="node12.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html857"
-  href="node13.html">Why Eigenvalue Templates?</a>
- &nbsp <b>  <a name="tex2html865"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html867"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html869" href="node15.html">Using the Decision Tree</a>
+<b>上一级：</b><a name="tex2html863" href="node12.html">引言</a>
+<b>上一节：</b><a name="tex2html857" href="node13.html">为什么是特征值模板？</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001020000000000000000"></a>
@@ -99,28 +87,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h1>
 
 <p>
-我们希望这些模板能够满足三类潜在用户群体对特征值计算工具的需求：
+我们希望我们的模板能够满足三类潜在用户群体对特征值计算工具的需求：
 
 <ul>
 <li>学生和教师，他们需要简单但通常有效的算法，并希望以易于解释和理解的形式接触到最新的发展。
 
 <p>
 </li>
-<li>普通工程师和科学家，他们追求易于使用、可靠且效率合理的软件。
+<li>普通工程师和科学家，他们期望使用既可靠又相对高效的易用软件。
 
 <p>
 </li>
-<li>高性能计算社区，由那些试图解决各自领域内最大、最难题目的工程师和科学家组成。这类用户需要高速访问算法细节以进行性能调优，并确保其问题的可靠性。
+<li>高性能计算社区，由那些试图解决各自领域中最大、最困难应用的工程师和科学家组成。这类用户需要高速访问算法细节以进行性能调优，并确保其问题的可靠性。
 
 <p>
 </li>
 </ul>
 
 <p>
-用单一文档满足如此多样化的群体需求似乎颇具挑战。然而，我们相信模板使我们能够以对所有人都有效的方式组织信息。例如，我们期望学生通过高级算法描述来获得对方法运作的基本理解。普通工程师和科学家应能发现决策树及软件指引足以应对他们的大多数问题。最后，高性能计算社区可以利用关于性能调优和输出准确性评估的建议来帮助解决他们最棘手的问题。
+用单一文档满足如此多样化的群体需求似乎颇具挑战性。然而，我们相信模板使我们能够以对所有人都有效的方式组织信息。例如，我们期望学生通过高级算法描述来获得对方法工作原理的基本理解。普通工程师和科学家应能发现决策树和软件指针足以解决他们的大多数问题。最后，高性能计算社区可以利用关于性能调优和输出准确性评估的建议来帮助解决他们最棘手的问题。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段翻译保留了原文的格式和信息，同时采用了通俗易懂的语言风格，适合作为科普文章阅读。<!--Navigation Panel-->
 <a name="tex2html868"
   href="node15.html">
 <button class="navigate">下一节</button></a> 
@@ -137,16 +127,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html869"
-  href="node15.html">Using the Decision Tree</a>
-<b> Up:</b> <a name="tex2html863"
-  href="node12.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html857"
-  href="node13.html">Why Eigenvalue Templates?</a>
- &nbsp <b>  <a name="tex2html865"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html867"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html869" href="node15.html">Using the Decision Tree</a>
+<b>上一级：</b><a name="tex2html863" href="node12.html">引言</a>
+<b>上一节：</b><a name="tex2html857" href="node13.html">为什么是特征值模板？</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Remarks on Eigenvalue Computations to High Relative Accuracy.</title>
-<meta name="description" content="Remarks on Eigenvalue Computations to High Relative Accuracy.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Remarks on Eigenvalue Computations to High Relative Accuracy.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node153.html">
-<link rel="up" href="node148.html">
-<link rel="next" href="node155.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3052"
   href="node155.html">
@@ -79,43 +73,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3053"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Up:</b> <a name="tex2html3047"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3043"
-  href="node153.html">Remarks on Clustered Eigenvalues.</a>
- &nbsp <b>  <a name="tex2html3049"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3051"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3053" href="node155.html">广义厄米特征值问题</a>
+<b>上一级：</b><a name="tex2html3047" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3043" href="node153.html">Remarks on Clustered Eigenvalues.</a>
+  
+  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001380060000000000000">
+<!--End of Navigation Panel--><h4><a name="SECTION00138000000000000000">
 关于高相对精度特征值计算的评述</a>
 </h4> 
-在过去的十年左右，高精度特征值计算一直备受关注。
-无论是在理论理解还是数值算法方面，都取得了巨大的进步。但详细介绍这些内容超出了本书的范围。感兴趣的读者可以参考相关文献。
-在算法方面，有Demmel-Kahan QR方法用于双对角奇异值计算[<a
- href="node421.html#deka:90">123</a>]，以及（双侧）Jacobi方法用于正定矩阵的特征值问题。
-对于奇异值计算[<a
- href="node421.html#deve92">124</a>,<a
- href="node421.html#math:95a">317</a>,<a
- href="node421.html#slap92">406</a>]，有用于缩放对角占优矩阵的二分法[<a
- href="node421.html#bade90">40</a>]，以及用于无环图矩阵的新qd方法实现[<a
- href="node421.html#degr:93">117</a>,<a
- href="node421.html#kaha:66c">255</a>]和Demmel的结构化矩阵算法[<a
- href="node421.html#fepa:94">168</a>,<a
- href="node421.html#pama:99">360</a>]。最近，[<a
- href="node421.html#dgesvd:99">118</a>]展示了如何为可以精确分解为<span class="math-inline">B=X\Gamma Y^*</span>的矩阵（其中<span class="math-inline">\Gamma</span>是对角矩阵，<span class="math-inline">X</span>和<span class="math-inline">Y</span>是任意良态矩阵）计算高相对精度的SVD。
-在理论方面，对于乘法扰动<span class="math-inline">A\to\widetilde A=D^*AE</span>（当<span class="math-inline">A</span>是Hermitian矩阵时<span class="math-inline">E=D</span>），
-得到了许多与著名绝对扰动定理<span class="math-inline">A\to\widetilde A=A+\Delta A</span>类似的结果[<a
- href="node421.html#eiip:95">157</a>,<a
- href="node421.html#li:97a">300</a>,<a
- href="node421.html#rcli98">301</a>,<a
- href="node421.html#rcli99">302</a>,<a
- href="node421.html#li:99a">303</a>,<a
- href="node421.html#lima:99">297</a>]。
+过去10年左右，高精度特征值计算一直备受关注。在理论理解和数值算法方面都取得了巨大进展。但详细介绍超出了本书的范围。感兴趣的读者可参考相关文献。在算法方面，有Demmel-Kahan QR方法用于双对角奇异值计算[<a href="node421.html#deka:90">123</a>]，以及（双侧）Jacobi方法用于正定矩阵的特征值问题。对于奇异值计算[<a href="node421.html#deve92">124</a>,<a href="node421.html#math:95a">317</a>,<a href="node421.html#slap92">406</a>]，有针对缩放对角占优矩阵的二分法[<a href="node421.html#bade90">40</a>]，以及针对无环图矩阵的新qd方法实现[<a href="node421.html#degr:93">117</a>,<a href="node421.html#kaha:66c">255</a>]和Demmel的结构化矩阵算法[<a href="node421.html#demm:00">115</a>]。最近，[<a href="node421.html#dgesvd:99">118</a>]展示了如何为可精确分解为<span class="math-inline">B=X\Gamma Y^*</span>的矩阵计算高相对精度的SVD，其中<span class="math-inline">\Gamma</span>是对角矩阵，<span class="math-inline">X</span>和<span class="math-inline">Y</span>是任意良态矩阵。在理论方面，对于乘性扰动<span class="math-inline">A\to\widetilde A=D^*AE</span>（当<span class="math-inline">A</span>是厄米矩阵时<span class="math-inline">E=D</span>），得到了许多关于绝对扰动的著名定理的类似结果[<a href="node421.html#eiip:95">157</a>,<a href="node421.html#li:97a">300</a>,<a href="node421.html#rcli98">301</a>,<a href="node421.html#rcli99">302</a>,<a href="node421.html#li:99a">303</a>,<a href="node421.html#lima:99">297</a>]。
 
 <p>
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -140,16 +108,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3053"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Up:</b> <a name="tex2html3047"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3043"
-  href="node153.html">Remarks on Clustered Eigenvalues.</a>
- &nbsp <b>  <a name="tex2html3049"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3051"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3053" href="node155.html">广义厄米特征值问题</a>
+<b>上一级：</b><a name="tex2html3047" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3043" href="node153.html">Remarks on Clustered Eigenvalues.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

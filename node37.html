@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Related Eigenproblems</title>
-<meta name="description" content="Related Eigenproblems">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Related Eigenproblems">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node38.html">
-<link rel="previous" href="node36.html">
-<link rel="up" href="node30.html">
-<link rel="next" href="node38.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1259"
   href="node38.html">
@@ -80,47 +73,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1260"
-  href="node38.html">Example</a>
-<b> Up:</b> <a name="tex2html1254"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
-<b> Previous:</b> <a name="tex2html1248"
-  href="node36.html">Specifying an Eigenproblem</a>
- &nbsp <b>  <a name="tex2html1256"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1258"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1260" href="node38.html">示例</a>
+<b>上一级：</b><a name="tex2html1254" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一节：</b><a name="tex2html1248" href="node36.html">特征问题的具体化</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001137000000000000000"></a>
 <a name="sec_chap2_GHepRE"></a>
 <br>
-相关特征问题
+相关特征值问题
 </h2>
 
 <p>
 
 <ol>
-<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是厄米特矩阵，<span class="math-inline">B</span> 不是正定矩阵，但对于某些实数 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>，<span class="math-inline">\alpha A + \beta B</span> 是正定矩阵，则可以求解广义厄米特特征问题 <span class="math-inline">A - \lambda (\alpha A + \beta B)</span>。设 <span class="math-inline">\hat{B}= \alpha A + \beta B</span>，则 <span class="math-inline">A - \lambda B</span> 和 <span class="math-inline">A - \lambda \hat{B}</span> 的特征向量相同。<span class="math-inline">A - \lambda B</span> 的特征值 <span class="math-inline">\lambda_i</span> 和 <span class="math-inline">A - \lambda \hat{B}</span> 的特征值 <span class="math-inline">\hat{\lambda}_i</span> 之间的关系为 <span class="math-inline">\lambda_i = \beta \hat{\lambda}_i / (1 - \alpha \hat{\lambda}_i)</span>。
+<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是厄米矩阵，<span class="math-inline">B</span> 不是正定矩阵，但对于某些实数 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>，<span class="math-inline">\alpha A + \beta B</span> 是正定矩阵，则可以求解广义厄米特征值问题 <span class="math-inline">A - \lambda (\alpha A + \beta B)</span>。设 <span class="math-inline">\hat{B}= \alpha A + \beta B</span>，则 <span class="math-inline">A - \lambda B</span> 和 <span class="math-inline">A - \lambda \hat{B}</span> 的特征向量相同。<span class="math-inline">A - \lambda B</span> 的特征值 <span class="math-inline">\lambda_i</span> 与 <span class="math-inline">A - \lambda \hat{B}</span> 的特征值 <span class="math-inline">\hat{\lambda}_i</span> 之间的关系为 <span class="math-inline">\lambda_i = \beta \hat{\lambda}_i / (1 - \alpha \hat{\lambda}_i)</span>。
 
 <p>
 </li>
-<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 不是厄米特矩阵，但 <span class="math-inline">\hat{A}= \alpha SAT</span> 和 <span class="math-inline">\hat{B}= \beta SBT</span> 是厄米特矩阵，且 <span class="math-inline">\hat{B}</span> 是正定矩阵，对于容易确定的 <span class="math-inline">\alpha</span>、<span class="math-inline">\beta</span> 以及非奇异矩阵 <span class="math-inline">S</span> 和 <span class="math-inline">T</span>，则可以计算 <span class="math-inline">\hat{A}- \lambda \hat{B}</span> 的特征值 <span class="math-inline">\hat{\lambda}</span> 和特征向量 <span class="math-inline">\hat{x}</span>。通过 <span class="math-inline">\lambda = \hat{\lambda}\beta / \alpha</span> 和 <span class="math-inline">x = T \hat{x}</span> 可以将这些转换为 <span class="math-inline">A</span> 的特征值 <span class="math-inline">\lambda</span> 和特征向量 <span class="math-inline">x</span>。例如，如果 <span class="math-inline">B</span> 是厄米特正定矩阵，但 <span class="math-inline">A</span> 是斜厄米特矩阵（即 <span class="math-inline">A^* = -A</span>），则 <span class="math-inline">\sqrt{-1}A</span> 是厄米特矩阵，因此可以选择 <span class="math-inline">\alpha = \sqrt{-1}</span>、<span class="math-inline">\beta=1</span> 和 <span class="math-inline">S=T=I</span>。进一步讨论见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节。
+<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 不是厄米矩阵，但 <span class="math-inline">\hat{A}= \alpha SAT</span> 和 <span class="math-inline">\hat{B}= \beta SBT</span> 是厄米矩阵，且 <span class="math-inline">\hat{B}</span> 是正定矩阵，对于容易确定的 <span class="math-inline">\alpha</span>、<span class="math-inline">\beta</span> 以及非奇异矩阵 <span class="math-inline">S</span> 和 <span class="math-inline">T</span>，则可以计算 <span class="math-inline">\hat{A}- \lambda \hat{B}</span> 的特征值 <span class="math-inline">\hat{\lambda}</span> 和特征向量 <span class="math-inline">\hat{x}</span>。通过 <span class="math-inline">\lambda = \hat{\lambda}\beta / \alpha</span> 和 <span class="math-inline">x = T \hat{x}</span> 可以将这些特征值和特征向量转换为 <span class="math-inline">A</span> 的特征值和特征向量。例如，如果 <span class="math-inline">B</span> 是厄米正定矩阵，而 <span class="math-inline">A</span> 是斜厄米矩阵（即 <span class="math-inline">A^* = -A</span>），则 <span class="math-inline">\sqrt{-1}A</span> 是厄米矩阵，因此可以选择 <span class="math-inline">\alpha = \sqrt{-1}</span>，<span class="math-inline">\beta=1</span>，以及 <span class="math-inline">S=T=I</span>。更多讨论见第2.5节。
 
 <p>
 </li>
-<li>如果有一个广义厄米特特征问题 <span class="math-inline">Ax = \lambda Bx</span>，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是厄米特矩阵且 <span class="math-inline">B</span> 是正定矩阵，则可以将其转换为厄米特特征问题。首先，分解 <span class="math-inline">B = LL^*</span>，其中 <span class="math-inline">L</span> 是任意非奇异矩阵（通常使用 Cholesky 分解）。然后求解 <span class="math-inline">\hat{A}= L^{-1}A L^{-\ast}</span> 的厄米特特征问题。<span class="math-inline">\hat{A}</span> 和 <span class="math-inline">A - \lambda B</span> 的特征值相同，如果 <span class="math-inline">\hat{x}</span> 是 <span class="math-inline">\hat{A}</span> 的特征向量，则 <span class="math-inline">x = L^{-\ast}\hat{x}</span> 满足 <span class="math-inline">Ax = \lambda Bx</span>。实际上，这是一个标准的 <span class="math-inline">A - \lambda B</span> 算法。
+<li>如果有一个广义厄米特征值问题 <span class="math-inline">Ax = \lambda Bx</span>，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是厄米矩阵，且 <span class="math-inline">B</span> 是正定矩阵，则可以将其转换为标准特征值问题。首先，分解 <span class="math-inline">B = LL^*</span>，其中 <span class="math-inline">L</span> 是任意非奇异矩阵（通常使用Cholesky分解）。然后求解 <span class="math-inline">\hat{A}= L^{-1}A L^{-\ast}</span> 的标准特征值问题。<span class="math-inline">\hat{A}</span> 和 <span class="math-inline">A - \lambda B</span> 的特征值相同，如果 <span class="math-inline">\hat{x}</span> 是 <span class="math-inline">\hat{A}</span> 的特征向量，则 <span class="math-inline">x = L^{-\ast}\hat{x}</span> 满足 <span class="math-inline">Ax = \lambda Bx</span>。这确实是一个标准的 <span class="math-inline">A - \lambda B</span> 算法。
 
 <p>
 </li>
-<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是正定矩阵，且 <span class="math-inline">A = R^*R</span> 和 <span class="math-inline">B = U^*U</span> 对于某些矩形矩阵 <span class="math-inline">R</span> 和 <span class="math-inline">U</span>，则 <span class="math-inline">A - \lambda B</span> 的特征问题等价于 <span class="math-inline">R</span> 和 <span class="math-inline">U</span> 的商奇异值分解（QSVD），讨论见第&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>节。算法的状态表明，尝试求解 <span class="math-inline">A - \lambda B</span> 的特征问题可能比计算 <span class="math-inline">R</span> 和 <span class="math-inline">U</span> 的 QSVD 更好。
+<li>如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是正定矩阵，且 <span class="math-inline">A = R^*R</span> 和 <span class="math-inline">B = U^*U</span> 对于某些矩形矩阵 <span class="math-inline">R</span> 和 <span class="math-inline">U</span>，则 <span class="math-inline">A - \lambda B</span> 的特征值问题等价于 <span class="math-inline">R</span> 和 <span class="math-inline">U</span> 的商奇异值分解（QSVD），讨论见第2.4节。算法的状态表明，尝试求解 <span class="math-inline">A - \lambda B</span> 的特征值问题可能比计算 <span class="math-inline">R</span> 和 <span class="math-inline">U</span> 的QSVD更好。
 
 <p>
 </li>
 </ol>
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html1259"
   href="node38.html">
 <button class="navigate">下一节</button></a> 
@@ -137,16 +127,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1260"
-  href="node38.html">Example</a>
-<b> Up:</b> <a name="tex2html1254"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
-<b> Previous:</b> <a name="tex2html1248"
-  href="node36.html">Specifying an Eigenproblem</a>
- &nbsp <b>  <a name="tex2html1256"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1258"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1260" href="node38.html">示例</a>
+<b>上一级：</b><a name="tex2html1254" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一节：</b><a name="tex2html1248" href="node36.html">特征问题的具体化</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

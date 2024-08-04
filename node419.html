@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Preconditioned Simultaneous Iterations</title>
-<meta name="description" content="Preconditioned Simultaneous Iterations">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Preconditioned Simultaneous Iterations">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node420.html">
-<link rel="previous" href="node418.html">
-<link rel="up" href="node410.html">
-<link rel="next" href="node420.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html7191"
   href="node420.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7192"
-  href="node420.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html7186"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7180"
-  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
- &nbsp <b>  <a name="tex2html7188"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7190"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7192" href="node420.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html7186" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7180" href="node418.html">预处理共轭梯度法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002039000000000000000"></a>
@@ -100,122 +88,121 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-利用<em>同时</em>或<em>块迭代</em>是一个众所周知的方法，它对单向量方法提供了重要的改进，使我们能够计算一个<span class="math-inline">(m > 1)</span>维的不变子空间，而不是一次计算一个特征向量。它还可以作为并行计算机上单向量方法的加速技术，因为极端特征值的收敛通常随着块的大小增加而增加，并且每一步都可以自然地在多种多处理器计算机上实现。
+利用<em>同时</em>或<em>块迭代</em>是一个众所周知的方法，它比单向量方法有重要改进，并允许我们计算一个<span class="math-inline">(m > 1)</span>维的不变子空间，而不是一次计算一个特征向量。它还可以作为并行计算机上单向量方法的加速技术，因为对于极值特征值的收敛通常随着块的大小增加而增加，并且每一步都可以自然地在多种多处理器计算机上实现。
 
 <p>
-块算法是单向量方法的直接推广，通常与Rayleigh-Ritz过程结合使用。对于前面讨论的每个预处理特征求解器，可以很容易地提出几种同时迭代法的变体；例如，参见带有移位的预处理幂法的块版本[<a href="node421.html#k90">266</a>,<a href="node421.html#dk92">149</a>,<a href="node421.html#bkp96">63</a>,<a href="node421.html#d99">130</a>]。为了简洁起见，我们这里只描述一种方法——局部最优PCG方法的同时版本，建议在[<a href="node421.html#k98">268</a>]中提出——并且仅针对矩阵束<span class="math-inline">B - \mu A</span>。
+块算法是单向量方法的直接推广，通常与Rayleigh-Ritz过程结合使用。对于前面讨论的每个预处理特征求解器，可以很容易地提出几种同时迭代法的变体；例如，参见带有移位的预处理幂法的块版本[<a href="node421.html#k90">266</a>,<a href="node421.html#dk92">149</a>,<a href="node421.html#bkp96">63</a>,<a href="node421.html#d99">130</a>]。为了简洁起见，我们这里只描述一种方法——局部最优PCG方法的同时版本，建议在[<a href="node421.html#k98">268</a>]中——并且仅针对铅笔<span class="math-inline">B - \mu A</span>。
 
 <p>
 <br>
-<a name="fig:prec_bcgmBA"></a><IMG width="598" height="237" align="bottom" border="0" src="img3975.png" alt="\begin{algorithm}{Simultaneous PCG Method for GHEP}{\begin{tabbing}(nr)ss\=...\end{tabbing}}\end{algorithm}">
+<a name="fig:prec_bcgmBA"></a><img width="598" height="237" align="BOTTOM" border="0" src="img3975.png" alt="\begin{algorithm}{Simultaneous PCG Method for GHEP}{\begin{tabbing}(nr)ss\=...\&gt; \&gt; from the top Ritz value for <span class="math-inline"> j=1, \ldots, m</span>\end{tabbing}}\end{algorithm}">
 <br>
 
 <p>
-与单向量算法一样，需要采取特殊措施来克服算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>中试验子空间中几乎线性相关的基的问题。
+与单向量算法一样，需要采取特殊措施来克服算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>中试验子空间中几乎线性相关基的问题。
 
 <p>
-目前还没有理论能够准确预测算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速度。然而，通过类比已知的PCG系统求解器的收敛理论，我们预期<span class="math-inline">\mu^{(i)}_j</span>向<span class="math-inline">\mu_j</span>的收敛是线性的，其比率为<a name="49065"></a>
+目前还没有理论可以准确预测算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速度。然而，通过类比已知的PCG系统求解器的收敛理论，我们预计<span class="math-inline">\mu^{(i)}_j</span>向<span class="math-inline">\mu_j</span>的收敛是线性的，其比率为<a name="49065"></a>
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="prec_linear"></a><div class="math-display">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2, ......lta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}.</div></td>
-<td width=10 align="right">(288)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_linear"></a><div class="math-display">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2, ......lta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}.</div></td>
+<td WIDTH=10 align="RIGHT">(288)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 
 <p>
-我们通过数值比较（参见[<a href="node421.html#k98">268</a>]）了最陡上升算法<a href="node414.html#fig:prec_steepBA">11.6</a>的块变体和算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，块大小<span class="math-inline">m=3</span>。然而，我们只绘制了前两个最大特征值的误差，省略了第三个。两种红色阴影代表块SA方法，两种蓝色阴影对应于算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>。在黑白打印中也很容易区分这些方法，因为算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>总是收敛得更快。两条直线对应于由(<a href="node419.html#prec_linear">11.18</a>)预测的线性收敛。
+我们通过数值比较（参见[<a href="node421.html#k98">268</a>]）了块变体的最速上升算法<a href="node414.html#fig:prec_steepBA">11.6</a>和算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，块大小<span class="math-inline">m=3</span>。然而，我们只绘制了两个顶部特征值的误差，省略了第三个特征值。两种红色阴影代表块SA方法，两种蓝色阴影对应于算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>。在黑白打印上也很容易区分这些方法，因为算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>总是收敛得更快。两条直线对应于(<a href="node419.html#prec_linear">11.18</a>)预测的线性收敛。
 
 <p>
-在所有测试中，<span class="math-inline">B=I</span>，<span class="math-inline">A</span>是一个对角矩阵，最小元素为1, 2, 3，最大元素为<span class="math-inline">10^{10}</span>，我们测量特征值误差为<br><p></p>
-<div align="center">
+在所有测试中，<span class="math-inline">B=I</span>，<span class="math-inline">A</span>是一个对角矩阵，最小条目为1, 2, 3，最大条目为<span class="math-inline">10^{10}</span>，我们测量特征值误差为<br><p></p>
+<div align="CENTER">
 <div class="math-display">\lambda_i^{(i)} - \lambda_j, \ j=1,2.</div>
 </div>
-<br clear="ALL">
+<br clear="ALL"><p></p>
+问题的大小在100到2000之间变化。初始猜测对每次新的运行都是随机的。预处理器<span class="math-inline">T</span>是一个随机的对称正定矩阵，固定值为<span class="math-inline">\kappa (TA) = \delta_1 / \delta_0</span>（参见<a href="node412.html#prec_equiv">11.9</a>）。
+
+<p>
+我们的随机初始猜测导致初始误差非常大，因为矩阵<span class="math-inline">A</span>条件很差，<span class="math-inline">\kappa_2(A)=10^{10}</span>。我们在以下所有图中观察到许多初始误差在<span class="math-inline">10^{10}</span>水平，但两种测试方法在几次迭代后成功地将误差降低到个位数。
+
+<p>
+我们可以看到，<span class="math-inline">A</span>的巨大条件数、问题的大小、特征值在不需要部分的分布以及预处理器<span class="math-inline">T</span>的特定选择都不会显著影响算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛，因为在所有图中，收敛历史线的元素彼此非常接近。此外，我们的理论预测（<a href="node419.html#prec_linear">11.18</a>）算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速率相对准确，尽管有些悲观。<span class="math-inline">\delta_1 / \delta_0</span>的10倍增加导致迭代次数增加——块SA方法为10倍，而算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>仅为约3倍——正如我们所预期的那样。我们观察到，深色中的第一个特征值的收敛通常比浅色和虚线的第二个特征值快。最后，我们还观察到当迭代次数接近解决问题大小的一半时，超线性加速。然而，迭代次数和问题大小之间的这种大比率在实践中是不典型的，因此我们通过增加问题的大小来避免它；例如，在图<a href="node419.html#fig100">11.3</a>中，前两次运行是在大小为200的问题上进行的；注意到超线性收敛后，我们立即将大小增加到1000。
+
+<p>
 <p></p>
-问题的大小在100到2000之间变化。初始猜测对于每次新的运行都是随机的。预处理器<span class="math-inline">T</span>是一个随机对称正定矩阵，固定值为<span class="math-inline">\kappa (TA) = \delta_1 / \delta_0</span>（参见<a href="node412.html#prec_equiv">11.9</a>）。
-
-<p>
-我们的随机初始猜测导致初始误差非常大，因为矩阵<span class="math-inline">A</span>的条件数很差，<span class="math-inline">\kappa_2(A)=10^{10}</span>。我们在下面的所有图中观察到许多初始误差在<span class="math-inline">10^{10}</span>级别，但两种测试方法在经过很少几次迭代后成功地将误差降低到个位数。
-
-<p>
-我们可以看到，<span class="math-inline">A</span>的巨大条件数、问题的大小、特征值在不需要的部分谱中的分布以及预处理器<span class="math-inline">T</span>的特定选择，并没有明显影响算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛性，因为所有图中的收敛历史线束的元素都非常接近。此外，我们对算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>收敛速度的理论预测（参见<a href="node419.html#prec_linear">11.18</a>）相对准确，尽管有些悲观。<span class="math-inline">\delta_1 / \delta_0</span>的10倍增加导致迭代次数增加——块SA方法为10倍，而算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>仅为约3倍——正如我们所预期的那样。我们观察到，深色表示的第一个特征值的收敛通常比浅色和虚线表示的第二个特征值更快。最后，我们还观察到当迭代次数与解决问题的大小的一半相当时，会出现超线性加速。然而，这种迭代次数与问题大小的比率在实践中是不典型的，因此我们通过增加问题的大小来避免它；例如，在图<a href="node419.html#fig100">11.3</a>中，前两次运行是在大小为200的问题上进行的；注意到超线性收敛后，我们立即将大小增加到1000。
-
-<p>
-<p></p>
-<div align="center"><a name="fig10"></a><a name="49095"></a>
+<div align="CENTER"><a name="fig10"></a><a name="49095"></a>
 <table>
-<caption align="bottom"><strong>图11.2：</strong>共轭梯度与最陡上升，<span class="math-inline">\delta _1 / \delta _0=10</span></caption>
-<tr><td><IMG width="516" height="387" border="0" src="img3983.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig10.eps}\end{center}\end{figure}"></td></tr>
+<caption align="BOTTOM"><strong>图11.2：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=10</span></caption>
+<tr><td><img width="516" height="387" border="0" src="img3983.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig10.eps}\end{center}\end{figure}"></td></tr>
 </table>
 </div><p></p>
 
 <p>
 <p></p>
-<div align="center"><a name="fig100"></a><a name="49102"></a>
+<div align="CENTER"><a name="fig100"></a><a name="49102"></a>
 <table>
-<caption align="bottom"><strong>图11.3：</strong>共轭梯度与最陡上升，<span class="math-inline">\delta _1 / \delta _0=100</span></caption>
-<tr><td><IMG width="516" height="387" border="0" src="img3984.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig100.eps}\end{center}\end{figure}"></td></tr>
+<caption align="BOTTOM"><strong>图11.3：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=100</span></caption>
+<tr><td><img width="516" height="387" border="0" src="img3984.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig100.eps}\end{center}\end{figure}"></td></tr>
 </table>
 </div><p></p>
 
 <p>
 <p></p>
-<div align="center"><a name="fig1000"></a><a name="49109"></a>
+<div align="CENTER"><a name="fig1000"></a><a name="49109"></a>
 <table>
-<caption align="bottom"><strong>图11.4：</strong>共轭梯度与最陡上升，<span class="math-inline">\delta _1 / \delta _0=1000</span></caption>
-<tr><td><IMG width="516" height="387" border="0" src="img3985.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig1000.eps}\end{center}\end{figure}"></td></tr>
+<caption align="BOTTOM"><strong>图11.4：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=1000</span></caption>
+<tr><td><img width="516" height="387" border="0" src="img3985.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig1000.eps}\end{center}\end{figure}"></td></tr>
 </table>
 </div><p></p>
 
 <p>
-图<a href="node419.html#fig10">11.2</a>到<a href="node419.html#fig1000">11.4</a>清楚地说明了在§<a href="node397.html#sec:introduction">11.1</a>中提出的两个陈述。首先，<i>预处理求解器的性能在很大程度上取决于所使用的预处理器的质量</i>。一个好的预处理器会导致图<a href="node419.html#fig10">11.2</a>上的快速收敛。一个糟糕的预处理器会显著减慢图<a href="node419.html#fig1000">11.4</a>上的收敛速度。我们注意到问题的大小实际上并不影响收敛速度。其次，<i>即使使用相同的预处理器，每种方法的具体实现也会产生很大的差异</i>。这在质量较差的预处理器上尤为明显，例如在图<a href="node419.html#fig1000">11.4</a>上。算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，局部最优PCG方法，比算法<a href="node414.html#fig:prec_steepBA">11.6</a>快约<i>一百倍</i>收敛，尽管这两种算法使用相同的预处理器并且每次迭代的成本相似。
+图<a href="node419.html#fig10">11.2</a>到<a href="node419.html#fig1000">11.4</a>清楚地说明了在§<a href="node397.html#sec:introduction">11.1</a>中提出的两个陈述。首先，<i>预处理求解器的性能在很大程度上取决于所使用的预处理器的质量</i>。一个好的预处理器导致图<a href="node419.html#fig10">11.2</a>上的快速收敛。一个糟糕的预处理器显著减慢了图<a href="node419.html#fig1000">11.4</a>上的收敛速度。我们注意到问题的大小并不真正影响收敛速度。其次，<i>即使使用相同的预处理器，每种方法的具体实现也会产生很大的差异</i>。这在质量较差的预处理器上尤为明显，例如在图<a href="node419.html#fig1000">11.4</a>上。算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，局部最优PCG方法，比算法<a href="node414.html#fig:prec_steepBA">11.6</a>收敛大约<i>快一百倍</i>，尽管这两种算法使用相同的预处理器并且每次迭代的成本相似。
 
 <p>
-总之，我们的数值结果表明算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>是一种真正的共轭梯度方法。我们最新的数值结果[<a href="node421.html#k99">269</a>]表明，算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>实际上是<em>对称正定特征值问题预处理求解器类中的最优方法</em>。
+总之，我们的数值结果表明，算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>是一种真正的共轭梯度方法。我们最近的数值结果[<a href="node421.html#k99">269</a>]表明，算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>实际上是<em>对称正定特征值问题预处理求解器整个类别的最优方法</em>。
 
 <p>
-已知[<a href="node421.html#cuwi85a">91</a>]有块预处理方法用于同时计算<em>谱的两端</em>，但它们并没有比分别计算最小和最大特征值的标准方法提供太多改进。
+已知[<a href="node421.html#cuwi85a">91</a>]有块预处理方法用于同时计算<em>谱的两端</em>，但它们并没有比单独计算最小和最大特征值的标准方法提供太多改进。
 
 <p>
-另一个已知的构建块特征求解器的想法是使用<em>非线性优化方法来最小化或最大化Rayleigh-Ritz方法中投影矩阵的迹</em>（参见，例如，[<a href="node421.html#cuwi85a">91</a>,<a href="node421.html#eas94">16</a>,<a href="node421.html#pds99">366</a>]和§<a href="node343.html#sec:sgmin">9.4</a>]），这里<span class="math-inline">T=I</span>。如果使用共轭梯度方法进行优化，这会导致与算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>类似的方法，但算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的优势在于使用了Rayleigh-Ritz方法。
+另一个已知的构建块特征求解器的想法是使用<em>非线性优化方法来最小化或最大化Rayleigh-Ritz方法中的投影矩阵的迹</em>（参见，例如，[<a href="node421.html#cuwi85a">91</a>,<a href="node421.html#eas94">16</a>,<a href="node421.html#pds99">366</a>]和§<a href="node343.html#sec:sgmin">9.4</a>]，这里<span class="math-inline">T=I</span>。如果使用共轭梯度方法进行优化，这会导致与算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>类似的方法，但算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>有一个使用Rayleigh-Ritz方法的优势。
 
 <p>
-使用<em>锁定</em>，一种形式的<em>降维</em>，利用不同特征向量的不均匀收敛率，增强了上述预处理同时迭代方法的性能，类似于无预处理的经典方法；参见§<a href="node94.html#sec_power_sym">4.3</a>。由于同时迭代计算的每个近似特征向量的收敛率不同，通常的做法是提取那些已经收敛的并向量并进行降维。我们冻结提取的近似值并从后续迭代中移除它们，这样就不需要继续将它们与任何矩阵相乘。然而，我们仍然需要将它们包含在Rayleigh-Ritz方法的试验子空间的基中，或者在需要正交化时对冻结向量进行后续正交化。
+使用<em>锁定</em>，一种<em>降阶</em>形式，利用不同特征向量的不均匀收敛率，提高了上述预处理同时迭代方法的性能，与没有预处理的经典方法类似；参见§<a href="node94.html#sec_power_sym">4.3</a>。由于同时迭代计算的每个近似特征向量的不同收敛率，通常的做法是提取那些已经收敛的特征向量并进行降阶。我们冻结提取的近似值并将其从后续迭代中移除，这样就不需要继续将它们与任何矩阵相乘。然而，我们仍然需要将它们包含在Rayleigh-Ritz方法的试验子空间的基中，或者在需要时对冻结向量进行后续正交化。
 
 <p>
-前一种可能性似乎更自然，编程也更简单。利用已知的Rayleigh-Ritz方法精度结果，分析其对迭代方法的影响也相当简单；参见，例如，[<a href="node421.html#saad92">387</a>,<a href="node421.html#k97">267</a>]。然而，正交化的成本可能会更低，因为它减少了试验子空间的维度。
+前一种可能性似乎更自然，并且比后者更容易编程。利用已知的关于Rayleigh-Ritz方法精度的结果，分析其对迭代方法的影响也相当简单；参见，例如，[<a href="node421.html#saad92">387</a>,<a href="node421.html#k97">267</a>]。然而，正交化的成本可能更低，因为它减少了试验子空间的维数。
 
 <p>
-我们注意到，当我们尝试一次计算一组特征向量时，锁定也应该用于单向量迭代方法。
+我们注意到，当尝试一次计算一组特征向量时，也应该在单向量迭代方法中使用锁定。
 
 <p>
-不幸的是，如果我们要能够研究在进一步迭代过程中由此产生的误差的传播，那么在预处理特征求解器中使用正交化进行锁定可能并不简单。
+不幸的是，如果我们想要能够在进一步迭代过程中研究由此产生的误差的传播，那么在预处理特征求解器中使用正交化进行锁定可能并不简单。
 
 <p>
-作为一个例子，让我们考虑我们最简单的预处理特征求解器，算法<a href="node413.html#fig:prec_powerBA">11.5</a>，加上由正交投影器<span class="math-inline">P^\perp</span>定义的正交化，该投影器位于已计算特征向量所张成的子空间的正交补上，可以写成<br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="prec_orth"></a><div class="math-display">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquadw^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}).</div></td>
-<td width=10 align="right">(289)</td></tr>
+作为一个例子，让我们考虑我们最简单的预处理特征求解器，算法<a href="node413.html#fig:prec_powerBA">11.5</a>，带有由正交投影器<span class="math-inline">P^\perp</span>定义的附加正交化，该投影器位于已经计算的特征向量所张成的子空间的正交补上，可以写成<br>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_orth"></a><div class="math-display">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquadw^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}).</div></td>
+<td WIDTH=10 align="RIGHT">(289)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 我们需要弄清楚在我们的正交投影器<span class="math-inline">P^\perp</span>中要使用哪些标量积。
 
 <p>
-首先，我们需要为已计算特征向量所张成的子空间的正交补选择一个标量积。基于<span class="math-inline">A</span>的标量积在这里似乎是一个自然的选择。当<span class="math-inline">B</span>是正定矩阵时，通常也会使用基于<span class="math-inline">B</span>的标量积。
+首先，我们需要为已经计算的特征向量所张成的子空间的正交补选择一个标量积。基于<span class="math-inline">A</span>的标量积在这里似乎是一个自然的选择。当<span class="math-inline">B</span>是正定矩阵时，通常也使用基于<span class="math-inline">B</span>的标量积。
 
 <p>
-其次，我们需要定义一个标量积，其中投影器<span class="math-inline">P^\perp</span>是正交的。传统的做法是使用与第一步相同的标量积。在代码中实现这一点也很简单。
+其次，我们需要定义一个标量积，其中投影器<span class="math-inline">P^\perp</span>是正交的。传统的方法是使用与第一步相同的标量积。在代码中实现这一点也很简单。
 
 <p>
-不幸的是，通过这种选择，方法(<a href="node419.html#prec_orth">11.19</a>)中的迭代算子失去了相对于基于<span class="math-inline">T^{-1}</span>的标量积的对称性。这使得理论研究近似计算的特征向量的正交化的影响变得相当复杂（参见[<a href="node421.html#d">147</a>,<a href="node421.html#dk92">149</a>]），其中进行了直接的扰动分析。
+不幸的是，通过这样的选择，方法（<a href="node419.html#prec_orth">11.19</a>）中的迭代算子失去了相对于基于<span class="math-inline">T^{-1}</span>的标量积的对称性。这使得理论研究正交化对近似计算的特征向量的影响变得相当复杂（参见[<a href="node421.html#d">147</a>,<a href="node421.html#dk92">149</a>]），其中进行了直接的扰动分析。
 
 <p>
-为了保持对称性，我们必须使用基于<span class="math-inline">T^{-1}</span>的正交投影器<span class="math-inline">P^\perp</span>，尽管我们在第一步中使用不同的标量积（例如基于<span class="math-inline">A</span>的标量积）来定义正交补。通过这种选择，我们可以使用标准的和简单的后向误差分析[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]而不是直接分析[<a href="node421.html#d">147</a>,<a href="node421.html#dk92">149</a>]，但对于给定的<span class="math-inline">w</span>，实际计算<span class="math-inline">P^\perp w</span>需要特别注意。
+为了保持对称性，我们必须使用基于<span class="math-inline">T^{-1}</span>的正交投影器<span class="math-inline">P^\perp</span>，尽管我们在第一步中使用了不同的标量积，例如基于<span class="math-inline">A</span>的标量积来定义正交补。通过这种选择，我们可以使用标准的和简单的后向误差分析[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]，而不是直接分析[<a href="node421.html#d">147</a>,<a href="node421.html#dk92">149</a>]，但给定<span class="math-inline">w</span>的<span class="math-inline">P^\perp w</span>的实际计算需要特别注意。
 
 <p>
-根据[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]，我们取由冻结的近似特征向量张成的原始子空间（我们称之为<span class="math-inline">\tilde X</span>），并找到子空间<span class="math-inline">TA \tilde X</span>的基于<span class="math-inline">T^{-1}</span>的正交基。从数学上讲，后者的基于<span class="math-inline">T^{-1}</span>的正交补与原始子空间<span class="math-inline">\tilde X</span>的基于<span class="math-inline">A</span>的正交补一致。现在，我们可以使用标准的基于<span class="math-inline">T^{-1}</span>的投影器到基于<span class="math-inline">T^{-1}</span>的正交补上。显然，为了使用这个技巧，必须能够计算基于<span class="math-inline">T^{-1}</span>的标量积。
+遵循[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]，我们取由冻结的近似特征向量张成的原始子空间（我们称之为<span class="math-inline">\tilde X</span>），并找到子空间<span class="math-inline">TA \tilde X</span>的基于<span class="math-inline">T^{-1}</span>的正交基。从数学上讲，后者的基于<span class="math-inline">T^{-1}</span>的正交补与原始子空间<span class="math-inline">\tilde X</span>的基于<span class="math-inline">A</span>的正交补一致。现在，我们可以使用一个标准的基于<span class="math-inline">T^{-1}</span>的投影器到<span class="math-inline">TA \tilde X</span>的基于<span class="math-inline">T^{-1}</span>的正交补上。显然，必须能够计算基于<span class="math-inline">T^{-1}</span>的标量积才能使用这个技巧。
 
 <p>
 我们还注意到，使用基于<span class="math-inline">T^{-1}</span>的标量积，以及任何基于病态矩阵的标量积，可能会导致不稳定的计算。
@@ -238,16 +225,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7192"
-  href="node420.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html7186"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Previous:</b> <a name="tex2html7180"
-  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
- &nbsp <b>  <a name="tex2html7188"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7190"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7192" href="node420.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html7186" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一节：</b><a name="tex2html7180" href="node418.html">预处理共轭梯度法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

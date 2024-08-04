@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Shift-and-Invert QEP.</title>
-<meta name="description" content="Shift-and-Invert QEP.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Shift-and-Invert QEP.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node338.html">
-<link rel="previous" href="node336.html">
-<link rel="up" href="node334.html">
-<link rel="next" href="node338.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5938"
   href="node338.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5939"
-  href="node338.html">QEP with Cayley Transform.</a>
-<b> Up:</b> <a name="tex2html5933"
-  href="node334.html">Spectral Transformations for QEP</a>
-<b> Previous:</b> <a name="tex2html5927"
-  href="node336.html">Shifted QEP.</a>
- &nbsp <b>  <a name="tex2html5935"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5937"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5939" href="node338.html">QEP with Cayley Transform.</a>
+<b>上一级：</b><a name="tex2html5933" href="node334.html">谱变换在二次特征值问题中的应用</a>
+<b>上一节：</b><a name="tex2html5927" href="node336.html">Shifted QEP.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -102,18 +90,18 @@ Shift-and-Invert QEP.
 Combining the above shift-and-invert spectral transformations (SI),
 the so-called <em>shift-and-invert QEP</em> becomes
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:shinvqep"></a><div class="math-display">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:shinvqep"></a><div class="math-display">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0,</div></td>
+<td WIDTH=10 align="RIGHT">
 (261)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 where
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\mu=\frac{1}{\lambda-\sigma},\quad</div>
@@ -131,7 +119,7 @@ The exterior eigenvalues <span class="math-inline">\mu</span> of the QEP (<a hre
 approximate the eigenvalues <span class="math-inline">\lambda</span> of the original QEP&nbsp;(<a href="node332.html#qep">9.1</a>)
 closest to the shift <span class="math-inline">\sigma</span>. These eigenvalues <span class="math-inline">\lambda</span> are given by
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\sigma + \frac{1}{\mu}.</div>
@@ -141,7 +129,7 @@ closest to the shift <span class="math-inline">\sigma</span>. These eigenvalues 
 Again, the corresponding generalized ``linear'' eigenvalue problem
 in terms of <span class="math-inline">\lambda</span>, rather than <span class="math-inline">\mu</span>,  is
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\twobytwo{-\widehat{C}}{-\widehat{K}}{I}{0}\twobyone{x}{(\l......twobytwo{\widehat{M}}{0}{0}{I} \twobyone{x}{(\lambda-\sigma)x}</div>
@@ -150,7 +138,7 @@ in terms of <span class="math-inline">\lambda</span>, rather than <span class="m
 <p></p>
 or
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\twobytwo{\widehat{C}}{\widehat{K}}{\widehat{K}}{0}\twobyon......idehat{M}}{0}{0}{\widehat{K}} \twobyone{x}{(\lambda-\sigma)x},</div>

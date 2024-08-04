@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Organization of the Book</title>
-<meta name="description" content="Organization of the Book">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Organization of the Book">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node16.html">
-<link rel="up" href="node12.html">
-<link rel="next" href="node18.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html908"
   href="node18.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html909"
-  href="node18.html">A Brief Tour of</a>
-<b> Up:</b> <a name="tex2html903"
-  href="node12.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html899"
-  href="node16.html">What Is a Template?</a>
- &nbsp <b>  <a name="tex2html905"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html907"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html909" href="node18.html">A Brief Tour of</a>
+<b>上一级：</b><a name="tex2html903" href="node12.html">引言</a>
+<b>上一节：</b><a name="tex2html899" href="node16.html">什么是模板？</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001050000000000000000"></a>
@@ -99,66 +88,90 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 本书共分为11章。
-我们建议读者参阅第<a href="node6.html#notation"><button class="crossref"></button></a>页的符号和缩略语列表；
-我们将在全文中自由使用那里列出的符号。
+我们建议读者查阅第<a href="node6.html#notation"><button class="crossref"></button></a>页的符号和缩写列表；
+我们将在正文中自由使用那里列出的符号。
 
 <p>
-第<a href="node12.html#chap:introduction">1</a>章为本书的动机和概述。
+第<a href="node12.html#chap:introduction">1</a>章旨在激发并概述本书其余部分。
 
 <p>
-第<a href="node18.html#chap:eigentour">2</a>章介绍了书中讨论的所有特征值问题。如果你是首次阅读，请阅读本章！
-它提供了描述特征值问题所用的基本术语和定义，并将所有特征值问题分为六类。这是决策树的顶端。
-第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章分别详细介绍了这六类问题。
+第<a href="node18.html#chap:eigentour">2</a>章对本书讨论的所有特征值问题进行了全面介绍。
+如果你是首次阅读，请先读这一章！
+它介绍了描述特征值问题所用的基本术语和定义，并将所有特征值问题分为六类。
+这是决策树的顶端。
+第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章分别详细阐述了这六类问题。
 
 <p>
-第<a href="node77.html#chap:overview">3</a>章总结了大多数大型特征值问题算法所使用的两个数学原理：投影到子空间和谱变换。
+第<a href="node77.html#chap:overview">3</a>章总结了大多数大型特征值问题算法所依据的两个数学原理：
+投影到子空间和谱变换。
 
 <p>
 第<a href="node85.html#chap:heig">4</a>章涵盖了厄米特征值问题，
 
-<span class="math-inline">Ax = \lambda x</span>。这里<span class="math-inline">A = A^*</span>是一个厄米矩阵（如果<span class="math-inline">A</span>是实数，这意味着<span class="math-inline">A</span>是对称的）。
-第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章都以如何选择算法和简要讨论变换方法（这是中小规模密集矩阵的标准方法）开始。
-然后，针对每种主要的迭代方法提供了更详细的模板。对于厄米特征值问题，这是理解得最好的情况，这些方法包括幂法、逆迭代、瑞利商迭代、子空间迭代、Lanczos方法、隐式重启Lanczos方法、带状Lanczos方法和Jacobi-Davidson方法。每章末尾都有关于稳定性和准确性评估的总结。
+<span class="math-inline">Ax = \lambda x</span>。这里 <span class="math-inline">A = A^*</span> 是一个厄米矩阵
+（如果 <span class="math-inline">A</span> 是实数，这意味着 <span class="math-inline">A</span> 是对称的）。
+第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章均以
+如何选择算法及简要讨论变换方法（适用于中小规模稠密矩阵的标准方法）开始。
+随后详细介绍了每种主要迭代方法的模板。
+对于理解最为透彻的厄米特征值问题，这些方法包括幂法、
+逆迭代、瑞利商迭代、子空间迭代、
+Lanczos方法、隐式重启Lanczos方法、
+带状Lanczos方法以及Jacobi-Davidson方法。
+每章末尾都对稳定性和精度评估进行了总结。
 
 <p>
 第<a href="node155.html#chap:ghep">5</a>章涵盖了广义厄米特征值问题
 
-<span class="math-inline">Ax = \lambda Bx</span>，其中<span class="math-inline">A = A^*</span>和<span class="math-inline">B=B^*</span>是厄米的，且<span class="math-inline">B</span>也是正定的。
-讨论的方法与第<a href="node85.html#chap:heig">4</a>章中讨论的方法类似。
+<span class="math-inline">Ax = \lambda Bx</span>，其中 <span class="math-inline">A = A^*</span> 和 <span class="math-inline">B = B^*</span> 都是厄米的，且 <span class="math-inline">B</span> 还是正定的。
+讨论的方法与第<a href="node85.html#chap:heig">4</a>章类似。
 
 <p>
 第<a href="node190.html#chap:svd">6</a>章涵盖了奇异值分解
-
 <span class="math-inline">A = U \Sigma V^*</span>。
 本章重点介绍计算大型稀疏矩阵部分分解的方法。
-讨论的方法与第<a href="node85.html#chap:heig">4</a>章中讨论的方法类似。
+讨论的方法与第<a href="node85.html#chap:heig">4</a>章类似。
 
 <p>
 第<a href="node203.html#chap:nep">7</a>章涵盖了非厄米特征值问题
 
-<span class="math-inline">Ax = \lambda x</span>，其中<span class="math-inline">A</span>是一个一般的方阵。
-本章的核心部分包括关于Arnoldi方法、非厄米Lanczos方法和Jacobi-Davidson方法的章节，包括隐式重启、块和带状变体。
+<span class="math-inline">Ax = \lambda x</span>，其中 <span class="math-inline">A</span> 是一个一般的方阵。
+本章核心部分涉及Arnoldi方法、非厄米Lanczos方法
+以及Jacobi-Davidson方法，包括隐式重启、块状和带状变体。
 
 <p>
 第<a href="node280.html#chap:gnsym">8</a>章涵盖了广义非厄米特征值问题，
 
-<span class="math-inline">Ax = \lambda Bx</span>。这包括常规情况，其中<span class="math-inline">A</span>和<span class="math-inline">B</span>是<span class="math-inline">n</span>乘<span class="math-inline">n</span>的矩阵，并且有<span class="math-inline">n</span>个连续的特征值，以及奇异情况，其中可能少于<span class="math-inline">n</span>个特征值、不连续的特征值，或者（当<span class="math-inline">A</span>和<span class="math-inline">B</span>不是方阵时）根本没有特征值。在常规情况下，我们讨论了斜投影Jacobi-Davidson、有理Krylov和针对对称不定对的特殊Lanczos方法变体。
+<span class="math-inline">Ax = \lambda Bx</span>。这包括<em>常规情况</em>，
+即 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是 <span class="math-inline">n</span> 阶矩阵且有 <span class="math-inline">n</span> 个连续特征值，
+以及<em>奇异情况</em>，
+可能特征值少于 <span class="math-inline">n</span> 个，特征值不连续，
+或者（当 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 不是方阵时）根本没有特征值。
+在常规情况下，我们讨论了斜投影Jacobi-Davidson、
+有理Krylov以及对称不定对的一种特殊Lanczos方法变体。
 
 <p>
 第<a href="node329.html#chap:nlep">9</a>章涵盖了两类非线性特征值问题。
-首先，我们讨论了由三个或更多矩阵定义的多项式特征值问题。其次，我们讨论了带有正交约束的非线性特征值问题。
+首先，我们讨论了由三个或更多矩阵定义的多项式特征值问题。
+其次，我们讨论了带有正交约束的非线性特征值问题。
 
 <p>
 第<a href="node371.html#chap:commonissues">10</a>章
-描述了所有算法共享的稀疏矩阵表示和计算的常见问题，包括顺序和并行计算。这包括标准稀疏矩阵格式的列表、快速矩阵向量乘法（“BLAS”）算法、直接线性求解器调查、迭代线性求解器调查以及简要讨论如何利用并行性。
+描述了所有算法共有的稀疏矩阵表示和计算的常见问题，
+包括顺序计算和并行计算。
+这包括标准稀疏矩阵格式的列表、
+快速矩阵向量乘法的算法（“BLAS”）、
+直接线性求解器的概述、
+迭代线性求解器的概述，
+以及简要讨论了如何利用并行性。
 
 <p>
-第<a href="node396.html#chap:precond">11</a>章专注于当前研究主题的不精确方法和预处理技术。
+第<a href="node396.html#chap:precond">11</a>章专注于当前研究中的非精确方法和预处理技术。
 许多迭代方法部分依赖于预处理来提高性能和确保快速收敛。
 
 <p>
 不可避免地，大量重要材料需要从本书中排除。
-在附录中，我们列出了本书未涵盖的一些主题，并为对深入研究特定主题感兴趣的读者提供参考。
+在附录中，我们列出了本书未涵盖的一些主题，
+并为有兴趣深入研究特定主题的读者提供了参考资料。
 
 <p>
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -183,16 +196,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html909"
-  href="node18.html">A Brief Tour of</a>
-<b> Up:</b> <a name="tex2html903"
-  href="node12.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html899"
-  href="node16.html">What Is a Template?</a>
- &nbsp <b>  <a name="tex2html905"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html907"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html909" href="node18.html">A Brief Tour of</a>
+<b>上一级：</b><a name="tex2html903" href="node12.html">引言</a>
+<b>上一节：</b><a name="tex2html899" href="node16.html">什么是模板？</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

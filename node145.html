@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Computing Interior Eigenvalues</title>
-<meta name="description" content="Computing Interior Eigenvalues">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Computing Interior Eigenvalues">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node146.html">
-<link rel="previous" href="node140.html">
-<link rel="up" href="node136.html">
-<link rel="next" href="node146.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2926"
   href="node146.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2927"
-  href="node146.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2921"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html2915"
-  href="node144.html">An Algorithm Template.</a>
- &nbsp <b>  <a name="tex2html2923"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2925"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2927" href="node146.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2921" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html2915" href="node144.html">An Algorithm Template.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001374000000000000000"></a>
@@ -99,29 +87,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如果仅寻找最小或最大特征值对应的特征对，那么显而易见的重启方法效果相当好，但若关注的是内部特征值，这种方法往往表现不佳。问题在于，里兹值会单调地趋向外部特征值，而接近目标内部特征值的里兹值可能正朝着其他外部特征值发展。甚至可能出现对应的里兹向量在所需特征向量方向上的分量很小。显然，这样的里兹向量作为重启候选者质量不佳，因此问题在于，更好的重启向量是什么？一个答案是由所谓的<em>调和里兹</em>向量给出，这在第&#167;<a href="node79.html#sec:algbasics">3.2</a>节中讨论过；参见[<a href="node421.html#morg91">331</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]。
+如果只寻找最小或最大的特征值对应的特征对，那么显然的重启方法效果相当好，但通常如果感兴趣的是内部特征值，这种方法表现不佳。问题在于，里兹值会单调地向外部特征值收敛，而一个接近目标值的里兹值可能正朝着其他外部特征值发展。甚至可能出现对应的里兹向量在所需特征向量方向上的分量很小的情况。显然，这样的里兹向量作为重启的候选者质量很差，因此问题来了，什么样的向量更适合重启？一个答案是由所谓的<em>调和里兹</em>向量提供的，这在第&#167;<a href="node79.html#sec:algbasics">3.2</a>节中讨论过；参见[<a href="node421.html#morg91">331</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]。
 
 <p>
-如我们所见，雅可比-戴维森方法生成子空间<span class="math-inline">{\mathcal V}_{m}</span>的基向量<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>。对于<span class="math-inline">A</span>在该子空间上的投影，我们计算向量<span class="math-inline">{w}_j\equiv A{v}_j</span>。调和里兹值是<span class="math-inline">A^{-1}</span>的里兹值的倒数，相对于由<span class="math-inline">{w}_j</span>张成的子空间。它们可以在不实际求逆<span class="math-inline">A</span>的情况下计算，因为调和里兹对<span class="math-inline">(\widetilde{\theta}_j^{(m)},\widetilde{u}_j^{(m)})</span>满足
+如我们所见，雅可比-戴维森方法生成子空间<span class="math-inline">{\mathcal V}_{m}</span>的基向量<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>。对于<span class="math-inline">A</span>在这个子空间上的投影，我们计算向量<span class="math-inline">{w}_j\equiv A{v}_j</span>。调和里兹值是<span class="math-inline">A^{-1}</span>的里兹值的倒数，相对于由<span class="math-inline">{w}_j</span>张成的子空间。它们可以在不实际求逆<span class="math-inline">A</span>的情况下计算，因为一个调和里兹对<span class="math-inline">(\widetilde{\theta}_j^{(m)},\widetilde{u}_j^{(m)})</span>满足
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:harm"></a><div class="math-display">A\widetilde{u}_j^{(m)} -\widetilde{\theta}_j^{(m)} \widetilde{u}_j^{(m)} \perp{\mathcal W}_{m} \equiv \mathrm{span}({w}_1,\ldots , {w}_{m})</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:harm"></a><div class="math-display">A\widetilde{u}_j^{(m)} -\widetilde{\theta}_j^{(m)} \widetilde{u}_j^{(m)} \perp{\mathcal W}_{m} \equiv \mathrm{span}({w}_1,\ldots , {w}_{m})</div></td>
+<td WIDTH=10 align="RIGHT">
 (60)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-对于<span class="math-inline">\widetilde{u}_j^{(m)} \in {V}_{m}</span>且<span class="math-inline">\widetilde{u}_j^{(m)}\neq0</span>。这意味着调和里兹值是矩阵束<span class="math-inline">({W}_{m}^\ast A{V}_{m}, {W}_{m}^\ast {V}_{m})</span>的特征值，或者，由于<span class="math-inline">{W}_{m}=A{V}_{m}</span>：
+对于<span class="math-inline">\widetilde{u}_j^{(m)} \in {V}_{m}</span>且<span class="math-inline">\widetilde{u}_j^{(m)}\neq0</span>。这意味着调和里兹值是矩阵束<span class="math-inline">({W}_{m}^\ast A{V}_{m}, {W}_{m}^\ast {V}_{m})</span>的特征值，或者由于<span class="math-inline">{W}_{m}=A{V}_{m}</span>：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">{W}_{m}^\ast {W}_{m} {s}_j^{(m)} - \widetilde{\theta}_j^{(m)}{W}_{m}^\ast {V}_{m} {s}_j^{(m)} =0 \, .\, </div>
 </div>
 <br clear="ALL">
 <p></p>
-出于稳定性考虑，我们对<span class="math-inline">{W}_{m}</span>的列进行正交化，并相应地变换<span class="math-inline">{V}_{m}</span>的列。这进一步简化了方程：我们看到调和里兹值是对称矩阵<span class="math-inline">{W}_{m}^\ast {V}_{m}</span>的特征值的倒数。
+出于稳定性考虑，我们对<span class="math-inline">{W}_{m}</span>的列进行正交化处理，并相应地变换<span class="math-inline">{V}_{m}</span>的列。这进一步简化了方程：我们看到调和里兹值是对称矩阵<span class="math-inline">{W}_{m}^\ast {V}_{m}</span>的特征值的倒数。
 
 <p>
-在[<a href="node421.html#papv95">349</a>]中表明，对于埃尔米特矩阵<span class="math-inline">A</span>，调和里兹值单调地趋向于绝对值最小的非零特征值。注意，调和里兹值无法识别<span class="math-inline">A</span>的零特征值，因为那将对应于<span class="math-inline">A^{-1}</span>的无穷大特征值。同样，移位矩阵<span class="math-inline">A-\tau I</span>的调和里兹值单调地趋向于最接近目标值<span class="math-inline">\tau</span>的特征值<span class="math-inline">\lambda\neq \tau</span>。幸运的是，移位矩阵和未移位矩阵的搜索子空间<span class="math-inline">{\mathcal V}_m}</span>相同，这便于计算任意移位的调和里兹对。移位矩阵对应的调和里兹向量，对应于最接近<span class="math-inline">\tau</span>的调和里兹值，可以解释为最大化<span class="math-inline">(A-\tau I)^{-1}</span>的瑞利商。它代表了渐近意义上可获得的关于所需特征值的最佳信息，因此在<span class="math-inline">\tau\neq \lambda</span>的前提下，它代表了渐近意义上最佳的重启起始向量。
+在[<a href="node421.html#papv95">349</a>]中表明，对于厄米矩阵<span class="math-inline">A</span>，调和里兹值单调地向绝对值最小的非零特征值收敛。注意，调和里兹值无法识别<span class="math-inline">A</span>的零特征值，因为那对应于<span class="math-inline">A^{-1}</span>的无穷大特征值。同样，移位矩阵<span class="math-inline">A-\tau I</span>的调和里兹值单调地向最接近目标值<span class="math-inline">\tau</span>的特征值<span class="math-inline">\lambda\neq \tau</span>收敛。幸运的是，移位矩阵和未移位矩阵的搜索子空间<span class="math-inline">{\mathcal V}_m</span>相同，这便于计算任意移位的调和里兹对。移位矩阵对应的调和里兹向量，其调和里兹值最接近<span class="math-inline">\tau</span>，可以解释为最大化<span class="math-inline">(A-\tau I)^{-1}</span>的瑞利商。它代表了渐近意义上可获得的关于所需特征值的最佳信息，因此渐近意义上是重启时作为起始向量的最佳候选，前提是<span class="math-inline">\tau\neq \lambda</span>。
 
 <p>
 对于调和里兹值，校正方程需要考虑与<span class="math-inline">A\tilde u^{(m)}_j</span>的正交性，这导致斜投影。我们可以通过以下方式使用正交投影。如果<span class="math-inline">\tilde u=\tilde u^{(m)}_j</span>是被选中的特征向量近似，瑞利商<span class="math-inline">\theta = \tilde u^\ast A\tilde u/\tilde u^\ast \tilde u</span>导致具有最小范数的残差；即，对于<span class="math-inline">r\equiv A\tilde u-\theta \tilde u</span>，我们有<span class="math-inline">\Vert r\Vert _2\leq \Vert A\tilde u-\mu\tilde u\Vert _2</span>，对于任何标量<span class="math-inline">\mu</span>，包括调和里兹值<span class="math-inline">\mu=\tilde\theta^{(m)}_j</span>。此外，瑞利商的残差<span class="math-inline">r</span>与<span class="math-inline">\tilde u</span>正交。这使得<span class="math-inline">r</span>与校正方程中的算子<span class="math-inline">(I- u u^\ast)(A-\theta I)(I-u u^\ast)</span>“兼容”。这里<span class="math-inline">u\equiv \tilde u/\Vert\tilde u\Vert _2</span>。
@@ -131,24 +119,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <br>
-<a name="alg:jdqrhar"></a><IMG
- width="598" height="761" align="bottom" border="0"
- src="img1413.png"
- alt="\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">{k}_{\max}</span>\ Interior Eigenvalues...
-...st}){t} = -r$\ \\
+<a name="alg:jdqrhar"></a><img width="598" height="761" align="BOTTOM" border="0" src="img1413.png" alt="\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">{k}_{\max}</span>\ Interior Eigenvalues...
+...st}){t} = -r<span class="math-inline">\ \\
 {\rm (33)} \&gt; {\bf end while}
 \end{tabbing}}
 \end{algorithm}">
 <br>
 
 <p>
-要应用此算法，我们需要指定起始向量<span class="math-inline">{v}_0</span>，容差<span class="math-inline">\epsilon</span>，目标值<span class="math-inline">\tau</span>，以及指定应计算多少个接近<span class="math-inline">\tau</span>的特征对的数目<span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span>表示搜索子空间的最大维度。如果超过此值，将进行重启，使用指定维度<span class="math-inline">{m}_{\min}</span>的子空间。
+要应用此算法，我们需要指定一个起始向量</span>{v}_0<span class="math-inline">，一个容差</span>\epsilon<span class="math-inline">，一个目标值</span>\tau<span class="math-inline">，以及一个指定应计算多少个接近</span>\tau<span class="math-inline">的特征对的数值</span>{k}_{\max}<span class="math-inline">。</span>{m}_{\max}<span class="math-inline">表示搜索子空间的最大维度。如果超过此值，将进行重启，使用指定维度</span>{m}_{\min}<span class="math-inline">的子空间。
 
 <p>
-完成后，将提供最接近<span class="math-inline">\tau</span>右侧的<span class="math-inline">{k}_{\max}</span>个特征值。计算得到的特征对<span class="math-inline">(\widetilde\lambda_j,\widetilde{x}_{j})</span>，<span class="math-inline">\Vert\widetilde{x}_{j}\Vert _2=1</span>，满足<span class="math-inline">\Vert A \widetilde{x}_{j}-\widetilde\lambda_j\widetilde{x}_{j}\Vert _2\leq j\epsilon</span>，其中<span class="math-inline">\widetilde{x}_j</span>表示<span class="math-inline">\widetilde{X}</span>的第<span class="math-inline">j</span>列。
+完成后，将提供最接近</span>\tau<span class="math-inline">右侧的</span>{k}_{\max}<span class="math-inline">个特征值。计算的特征对</span>(\widetilde\lambda_j,\widetilde{x}_{j})<span class="math-inline">，</span>\Vert\widetilde{x}_{j}\Vert _2=1<span class="math-inline">，满足</span>\Vert A \widetilde{x}_{j}-\widetilde\lambda_j\widetilde{x}_{j}\Vert _2\leq j\epsilon<span class="math-inline">，其中</span>\widetilde{x}_j<span class="math-inline">表示</span>\widetilde{X}<span class="math-inline">的第</span>j<span class="math-inline">列。
 
 <p>
-对于外部特征值，已在第&#167;<a href="node140.html#sec:JDresdef">4.7.3</a>节中描述了一个更简单的算法。现在，我们将根据前几小节的讨论，对算法的一些部分进行评论。
+对于外部特征值，已在第&#167;<a href="node140.html#sec:JDresdef">4.7.3</a>节中描述了一个更简单的算法。现在我们将根据前几小节的讨论，对算法的一些部分进行评论。
 
 <p>
 <dl>
@@ -158,28 +143,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong>(3)-(7)</strong></dt>
-<dd>向量<span class="math-inline">w = (A-\tau I)t</span>通过修正的Gram-Schmidt方法与当前测试子空间<span class="math-inline">{\mathcal W}_{m}</span>正交。为了提高数值稳定性，可以使用算法<a href="node138.html#alg:rgs">4.14</a>中给出的模板（对于向量<span class="math-inline">t</span>）。
+<dd>向量</span>w = (A-\tau I)t<span class="math-inline">通过修正的Gram-Schmidt方法与当前测试子空间</span>{\mathcal W}_{m}<span class="math-inline">正交。为了提高数值稳定性，可以用算法<a href="node138.html#alg:rgs">4.14</a>中给出的模板（对于向量</span>t<span class="math-inline">）进行替代。
 
 <p>
 </dd>
 <dt><strong>(8)-(10)</strong></dt>
-<dd>值<span class="math-inline">{M}_{i,j}</span>表示<span class="math-inline">{m}</span>阶方阵<span class="math-inline">{M}\equiv {W}^\ast {V}</span>的元素，其中<span class="math-inline">{V}</span>表示列向量为<span class="math-inline">{v}_j</span>的<span class="math-inline">n</span>阶矩阵，<span class="math-inline">{W}</span>类似。由于<span class="math-inline">{M}</span>是埃尔米特矩阵，只计算该矩阵的上三角部分。
+<dd>数值</span>{M}_{i,j}<span class="math-inline">表示方阵</span>{M}\equiv {W}^\ast {V}<span class="math-inline">的元素，其中</span>{V}<span class="math-inline">表示列向量为</span>{v}_j<span class="math-inline">的</span>n<span class="math-inline">乘</span>{m}<span class="math-inline">矩阵，</span>{W}<span class="math-inline">同理。因为</span>{M}<span class="math-inline">是厄米的，所以只计算该矩阵的上三角部分。
 
 <p>
 </dd>
 <dt><strong>(11)-(13)</strong></dt>
-<dd>此时应计算问题<span class="math-inline">{M}{s}=\widetilde\theta {s}</span>的特征对。这可以使用LAPACK中适合埃尔米特稠密矩阵的适当例程来完成。注意，调和里兹值是<span class="math-inline">{M}</span>的特征值的倒数。我们需要计算<span class="math-inline">{V}{s}_1</span>的瑞利商<span class="math-inline">\theta</span>，然后归一化<span class="math-inline">{V}{s}_1</span>，以便计算适当的残差<span class="math-inline">r \perp {V}{s}_1</span>。我们使用了<span class="math-inline">{s}_1^\ast {V}^\ast (A-\tau I) {V}{s}_1 = {s}_1^\ast{M}^\ast {s}_1=\widetilde\theta_1</span>。
+<dd>此时应计算问题</span>{M}{s}=\widetilde\theta {s}<span class="math-inline">的特征对。这可以用LAPACK中适用于厄米稠密矩阵的合适例程来完成。注意，调和里兹值是</span>{M}<span class="math-inline">的特征值的倒数。我们需要计算</span>{V}{s}_1<span class="math-inline">的瑞利商</span>\theta<span class="math-inline">，然后归一化</span>{V}{s}_1<span class="math-inline">，以便计算一个适当的残差</span>r \perp {V}{s}_1<span class="math-inline">。我们使用了</span>{s}_1^\ast {V}^\ast (A-\tau I) {V}{s}_1 = {s}_1^\ast{M}^\ast {s}_1=\widetilde\theta_1<span class="math-inline">。
 
 <p>
-向量<span class="math-inline">s_j</span>是<span class="math-inline">m</span>阶矩阵<span class="math-inline">S</span>的列，<span class="math-inline">\tilde\Theta =\diag(\widetilde\theta_1,\ldots,\widetilde\theta_m)</span>。
+向量</span>s_j<span class="math-inline">是</span>m<span class="math-inline">乘</span>m<span class="math-inline">矩阵</span>S<span class="math-inline">的列，</span>\tilde\Theta =\diag(\widetilde\theta_1,\ldots,\widetilde\theta_m)<span class="math-inline">。
 
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
-<dd>停止准则是当归一化特征向量近似的残差范数低于<span class="math-inline">\epsilon</span>时接受一个特征向量近似。这意味着我们在计算的特征值中接受<span class="math-inline">\epsilon^2</span>量级的误差，并且在特征向量中接受<span class="math-inline">{\mathcalO}({\epsilon})</span>量级的误差（以角度计），前提是相关特征值是简单的且与其他特征值充分分离；参见(<a href="node86.html#eigvecpert">4.4</a>)。
+<dd>停止准则是在归一化特征向量近似的残差范数低于</span>\epsilon<span class="math-inline">时接受一个特征向量近似。这意味着我们接受计算特征值的误差在</span>\epsilon^2<span class="math-inline">数量级，以及特征向量的角度误差在</span>{\mathcalO}({\epsilon})<span class="math-inline">数量级，前提是相关特征值是简单的且与其他特征值充分分离；参见(<a href="node86.html#eigvecpert">4.4</a>)。
 
 <p>
-无法保证检测到所有所需的特征值；参见算法<a href="node138.html#alg:jd">4.13</a>的注释(14)和算法<a href="node144.html#alg:jdqr">4.17</a>的注释(13)。
+无法保证检测到所有想要的特征值；参见算法<a href="node138.html#alg:jd">4.13</a>的注释(14)和算法<a href="node144.html#alg:jdqr">4.17</a>的注释(13)。
 
 <p>
 </dd>
@@ -189,12 +174,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong>(24)</strong></dt>
-<dd>此时我们在子空间维度超过<span class="math-inline">{m}_{\max}</span>时进行重启。重启后，雅可比-戴维森迭代以维度为<span class="math-inline">{m}_{\min}</span>的子空间继续进行。该子空间的选择基于最接近目标<span class="math-inline">\tau</span>的调和里兹值。
+<dd>此时进行重启，当子空间维度超过</span>{m}_{\max}<span class="math-inline">时。重启后，雅可比-戴维森迭代以维度</span>{m}_{\min}<span class="math-inline">的子空间继续进行。该子空间的选择基于最接近目标</span>\tau<span class="math-inline">的调和里兹值。
 
 <p>
 </dd>
 <dt><strong>(31)-(32)</strong></dt>
-<dd>消减通过计算的特征向量由<span class="math-inline">\widetilde{X}</span>的因子表示。矩阵<span class="math-inline">\widetilde{X}</span>的列是计算得到的特征向量。如果对于算子<span class="math-inline">A-\theta I</span>存在左预条件器<span class="math-inline">{K}</span>，那么与外部特征值情况类似，可以使用Krylov求解器实现类似的简化。处理左预条件算子的有效模板在算法<a href="node144.html#alg:corrit2">4.18</a>中给出。
+<dd>通过</span>\widetilde{X}<span class="math-inline">的因子表示计算特征向量的消减。矩阵</span>\widetilde{X}<span class="math-inline">的列是计算的特征向量。如果存在左预条件子</span>{K}<span class="math-inline">用于算子</span>A-\theta I$，则可以像处理外部特征值的情况一样，通过类似Krylov求解器实现类似的简化。处理左预条件算子的有效模板在算法<a href="node144.html#alg:corrit2">4.18</a>中给出。
 
 <p>
 </dd>
@@ -218,16 +203,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2927"
-  href="node146.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2921"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html2915"
-  href="node144.html">An Algorithm Template.</a>
- &nbsp <b>  <a name="tex2html2923"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2925"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2927" href="node146.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2921" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html2915" href="node144.html">An Algorithm Template.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

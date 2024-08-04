@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Accuracy of Eigenvalues Computed after Balancing</title>
-<meta name="description" content="Accuracy of Eigenvalues Computed after Balancing">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Accuracy of Eigenvalues Computed after Balancing">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node207.html">
-<link rel="up" href="node205.html">
-<link rel="next" href="node209.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3956"
   href="node209.html">
@@ -79,43 +73,38 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3957"
-  href="node209.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html3951"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b> Previous:</b> <a name="tex2html3947"
-  href="node207.html">Krylov Balancing Algorithms</a>
- &nbsp <b>  <a name="tex2html3953"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3955"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3957" href="node209.html">直接方法</a>
+<b>上一级：</b><a name="tex2html3951" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一节：</b><a name="tex2html3947" href="node207.html">Krylov平衡算法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001623000000000000000"></a>
 <a name="22840"></a>
 <br>
-平衡后计算特征值的准确性
+平衡后计算特征值的精度
 </h2>
 
 <p>
-我们通过几个例子来展示密集和稀疏特征值求解器在有无平衡情况下计算特征值的准确性。这是“底线”，展示了平衡对整体特征值计算过程的帮助程度。
+我们通过几个例子来展示密集和稀疏特征求解器在有无平衡情况下计算特征值的精度。这是“底线”，展示了平衡对整体特征值计算过程的帮助程度。
 
 <p>
-为了研究计算特征值的准确性，我们需要知道真实的特征值。在这些实验中，我们首先使用SPBALANCE定位并平衡矩阵的各个对角块，然后使用密集特征值求解器分别找到每个对角块的特征值，以双精度计算“真实”特征值。接着，我们将单精度计算的特征值与这些“真实”特征值进行比较。
+为了研究计算特征值的精度，我们需要知道真实的特征值。在这些实验中，我们首先使用SPBALANCE定位并平衡矩阵的各个对角块，然后使用密集特征求解器分别找到每个对角块的特征值，以双精度计算“真实”特征值。接着，我们将单精度计算的特征值与这些“真实”特征值进行比较。
 
 <p>
-图<a href="node208.html#fig:direct_relerr">7.1</a>和<a href="node208.html#fig:kry_relerr">7.2</a>绘制了通过平衡计算的特征值的相对误差与未平衡计算的特征值的误差对比。位于虚线下方的十字表示通过平衡计算的特征值更准确；十字越位于虚线下方，平衡与未平衡之间的特征值准确性差异越大。
+图<a href="node208.html#fig:direct_relerr">7.1</a>和<a href="node208.html#fig:kry_relerr">7.2</a>绘制了通过平衡计算的特征值的相对误差与未平衡计算的特征值的误差对比。位于虚线对角线下方的十字表示通过平衡计算的特征值更准确；十字离虚线越远，平衡与未平衡之间的特征值精度差异越大。
 <br>
 <br>
 
 <p>
 
 <p></p>
-<div align="center"><a name="fig:direct_relerr"></a><a name="27088"></a>
+<div align="CENTER"><a name="fig:direct_relerr"></a><a name="27088"></a>
 <table>
-<caption align="bottom"><strong>图7.1：</strong>
-QH<span class="math-inline">768</span>和TOLOSA矩阵在直接平衡与未平衡情况下计算特征值的相对准确性。</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图7.1：</strong>
+QH<span class="math-inline">768</span>和TOLOSA矩阵在直接平衡和未平衡情况下计算特征值的相对精度。</caption>
+<tr><td><img
  width="594" height="231" border="0"
  src="img1861.png"
  alt="\begin{figure}\begin{center}
@@ -127,16 +116,16 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在直接平衡与未平衡
 </div><p></p>
 
 <p>
-图<a href="node208.html#fig:direct_relerr">7.1</a>清楚地显示，SPBALANCE在提高QH768和TOLOSA矩阵（参见[<a href="node421.html#bddd97">28</a>]）大多数特征值的计算准确性方面是有效的，通常提高许多数量级。
+图<a href="node208.html#fig:direct_relerr">7.1</a>清楚地显示，SPBALANCE有效地提高了QH768和TOLOSA矩阵大多数特征值的计算精度，通常提高了很多个数量级，如[<a href="node421.html#bddd97">28</a>]所述。
 
 <p>
 
 <p></p>
-<div align="center"><a name="fig:kry_relerr"></a><a name="27089"></a>
+<div align="CENTER"><a name="fig:kry_relerr"></a><a name="27089"></a>
 <table>
-<caption align="bottom"><strong>图7.2：</strong>
-QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡与未平衡情况下计算特征值的相对准确性。</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图7.2：</strong>
+QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡和未平衡情况下计算特征值的相对精度。</caption>
+<tr><td><img
  width="538" height="244" border="0"
  src="img1862.png"
  alt="\begin{figure}\begin{center}
@@ -148,22 +137,22 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡与未平衡
 </div><p></p>
 
 <p>
-图<a href="node208.html#fig:kry_relerr">7.2</a>显示，K<small>RYLOV</small>C<small>UTOFF</small>也在提高QH768和TOLOSA矩阵大多数特征值的计算准确性方面有所改进，但改进程度不如直接算法SPBALANCE。
+图<a href="node208.html#fig:kry_relerr">7.2</a>显示，K<small>RYLOV</small>C<small>UTOFF</small>也提高了QH768和TOLOSA矩阵大多数特征值的计算精度，但改进程度不如直接算法SPBALANCE。
 
 <p>
-在图<a href="node208.html#fig:kry_relerr">7.2</a>中，经过基于Krylov的平衡后，特征值使用密集特征值求解器而不是稀疏求解器计算；这是为了隔离平衡的效果。在实际应用中，如果明确给出一个稀疏矩阵并且愿意运行<span class="math-inline">O(n^3)</span>密集特征值求解器，人们会使用SPBALANCE预处理矩阵而不是基于Krylov的方法。在更实际的情况下，人们会使用K<small>RYLOV</small>C<small>UTOFF</small>来平衡那些仅使用矩阵-向量乘法的算法计算特征值的矩阵。
+在图<a href="node208.html#fig:kry_relerr">7.2</a>中，经过基于Krylov的平衡后，特征值使用密集特征求解器而不是稀疏求解器计算；这是为了隔离平衡的效果。实际上，如果明确给出一个稀疏矩阵并愿意运行<span class="math-inline">O(n^3)</span>密集特征求解器，人们会使用SPBALANCE而不是基于Krylov的方法预处理矩阵。在更实际的情况下，人们会使用K<small>RYLOV</small>C<small>UTOFF</small>来平衡那些仅使用矩阵-向量乘法的算法计算特征值的矩阵。
 
 <p>
-图<a href="node208.html#fig:qh768_eigs_relerr">7.3</a>和<a href="node208.html#fig:tolosa_eigs_relerr">7.4</a>展示了这种更实际的情况。它们显示了在未平衡、使用SPBALANCE、使用K<small>RYLOV</small>C<small>UTOFF</small>以及在[<a href="node421.html#ChenDe">82</a>]中描述的另外两种Krylov平衡算法（K<small>RYLOV</small>A<small>Z</small>仅使用<span class="math-inline">Az</span>，K<small>RYLOV</small>A<small>TZ</small>使用<span class="math-inline">Az</span>和<span class="math-inline">A^Tz</span>但没有截止）下计算的最大和最小（按大小）10个特征值的相对准确性。特征值在MATLAB中使用eigs函数计算，该函数使用第<a href="node220.html#sec:nsymiram">7.6</a>节中的IRAM。
+图<a href="node208.html#fig:qh768_eigs_relerr">7.3</a>和<a href="node208.html#fig:tolosa_eigs_relerr">7.4</a>展示了这种更实际的情况。它们显示了在未平衡、使用SPBALANCE、使用K<small>RYLOV</small>C<small>UTOFF</small>以及[<a href="node421.html#ChenDe">82</a>]中描述的另外两种Krylov平衡算法（K<small>RYLOV</small>A<small>Z</small>仅使用<span class="math-inline">Az</span>，K<small>RYLOV</small>A<small>TZ</small>使用<span class="math-inline">Az</span>和<span class="math-inline">A^Tz</span>但没有截断）计算时，最大和最小（按模）特征值的相对精度。特征值在MATLAB中使用eigs函数计算，该函数使用第<a href="node220.html#sec:nsymiram">7.6</a>节中的IRAM。
 
 <p>
 
 <p></p>
-<div align="center"><a name="fig:qh768_eigs_relerr"></a><a name="27090"></a>
+<div align="CENTER"><a name="fig:qh768_eigs_relerr"></a><a name="27090"></a>
 <table>
-<caption align="bottom"><strong>图7.3：</strong>
-比较QH<span class="math-inline">768</span>矩阵最大和最小（按大小）特征值在使用不同Krylov平衡算法时的相对准确性，使用默认设置的五次迭代和<span class="math-inline">10^{-8}</span>的截止值。</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图7.3：</strong>
+使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对QH<span class="math-inline">768</span>矩阵最大和最小（按模）特征值相对精度的比较。</caption>
+<tr><td><img
  width="595" height="231" border="0"
  src="img1863.png"
  alt="\begin{figure}\begin{center}
@@ -177,11 +166,11 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡与未平衡
 <p>
 
 <p></p>
-<div align="center"><a name="fig:tolosa_eigs_relerr"></a><a name="27091"></a>
+<div align="CENTER"><a name="fig:tolosa_eigs_relerr"></a><a name="27091"></a>
 <table>
-<caption align="bottom"><strong>图7.4：</strong>
-比较TOLOSA矩阵最大和最小（按大小）特征值在使用不同Krylov平衡算法时的相对准确性，使用默认设置的五次迭代和<span class="math-inline">10^{-8}</span>的截止值。</caption>
-<tr><td><IMG
+<caption align="BOTTOM"><strong>图7.4：</strong>
+使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对TOLOSA矩阵最大和最小（按模）特征值相对精度的比较。</caption>
+<tr><td><img
  width="595" height="231" border="0"
  src="img1864.png"
  alt="\begin{figure}\begin{center}
@@ -193,7 +182,7 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡与未平衡
 </div><p></p>
 
 <p>
-图<a href="node208.html#fig:qh768_eigs_relerr">7.3</a>显示QH768矩阵最小特征值的相对误差变化不大。然而，对于最大特征值，K<small>RYLOV</small>C<small>UTOFF</small>几乎与SPBALANCE一样好，并且明显优于未平衡的结果。在TOLOSA矩阵上，最小特征值在通过K<small>RYLOV</small>C<small>UTOFF</small>平衡后计算得最准确，甚至优于直接平衡。在最大特征值上，SPBALANCE最为有效，尽管所有三种Krylov平衡算法都明显优于不进行平衡。
+图<a href="node208.html#fig:qh768_eigs_relerr">7.3</a>显示，QH768矩阵最小特征值的相对误差变化不大。然而，对于最大特征值，K<small>RYLOV</small>C<small>UTOFF</small>几乎与SPBALANCE一样好，并且明显优于未平衡的结果。在TOLOSA矩阵上，最小特征值在经过K<small>RYLOV</small>C<small>UTOFF</small>平衡后计算得最准确，甚至优于直接平衡。对于最大特征值，SPBALANCE最为有效，尽管所有三种Krylov平衡算法都明显优于不进行平衡。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -213,16 +202,11 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡与未平衡
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3957"
-  href="node209.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html3951"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b> Previous:</b> <a name="tex2html3947"
-  href="node207.html">Krylov Balancing Algorithms</a>
- &nbsp <b>  <a name="tex2html3953"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3955"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3957" href="node209.html">直接方法</a>
+<b>上一级：</b><a name="tex2html3951" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一节：</b><a name="tex2html3947" href="node207.html">Krylov平衡算法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

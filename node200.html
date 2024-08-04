@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Software Availability</title>
-<meta name="description" content="Software Availability">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Software Availability">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node201.html">
-<link rel="previous" href="node197.html">
-<link rel="up" href="node194.html">
-<link rel="next" href="node201.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3771"
   href="node201.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3772"
-  href="node201.html">Numerical Example</a>
-<b> Up:</b> <a name="tex2html3766"
-  href="node194.html">Iterative Algorithms &nbsp; J.</a>
-<b> Previous:</b> <a name="tex2html3760"
-  href="node199.html">Relationship to Symmetric Lanczos.</a>
- &nbsp <b>  <a name="tex2html3768"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3770"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3772" href="node201.html">数值示例</a>
+<b>上一级：</b><a name="tex2html3766" href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b>上一节：</b><a name="tex2html3760" href="node199.html">Relationship to Symmetric Lanczos.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001534000000000000000">
@@ -97,16 +85,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如前所述，第四章<a href="node85.html#chap:heig">4</a>中针对埃尔米特特征值问题的所有软件均可应用于<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>之一。然而，其中一些软件以及其他软件专门针对奇异值分解（SVD），我们将在下文进行描述。
+如前所述，第<a href="node85.html#chap:heig">4</a>章中针对厄米特征值问题的所有软件均可应用于<span class="math-inline">A^* A</span>、<span class="math-inline">AA^*</span>或<span class="math-inline">H(A)</span>之一。然而，其中部分软件以及其它软件专为奇异值分解（SVD）设计，具体如下所述。
 
 <p>
-隐式重启的Lanczos方法，如第<a href="node117.html#sec:irlm">4.5</a>节所述，在ARPACK中可用，详见《ARPACK用户指南》[<a href="node421.html#lesy98">295</a>]。其任何变体均可应用于<span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span>或<span class="math-inline">H(A)</span>。ARPACK及其并行版本PARPACK均可电子获取。ARPACK还提供了一个针对SVD的驱动程序，直接应用于<span class="math-inline">A^* A</span>，即假设仅能进行<span class="math-inline">A</span>和<span class="math-inline">A^*</span>的乘法运算。这最适合于寻找少数几个最大奇异值及其奇异向量。
+隐式重启 Lanczos 方法（参见第<a href="node117.html#sec:irlm">4.5</a>节）在 ARPACK 中可用，相关文档详见《ARPACK 用户指南》[<a href="node421.html#lesy98">295</a>]。其任何变体均可应用于<span class="math-inline">AA^*</span>、<span class="math-inline">A^* A</span>或<span class="math-inline">H(A)</span>。ARPACK 及其并行版本 PARPACK 均可电子获取。ARPACK 还提供了一个直接应用于<span class="math-inline">A^* A</span>的 SVD 驱动程序，即假设仅能进行<span class="math-inline">A</span>和<span class="math-inline">A^*</span>的乘法运算。这最适合于寻找少数几个最大奇异值及其奇异向量。
 
 <p>
-PLANSO [<a href="node421.html#planso">462</a>] 是一种具有“厚重启”功能的并行Lanczos算法，在速度和内存方面与PARPACK相比表现更优。
+PLANSO [<a href="node421.html#planso">462</a>] 是一种具有“厚重启”功能的并行 Lanczos 算法，在速度和内存方面优于 PARPACK。
 
 <p>
-SVDPACK [<a href="node421.html#svdpack">49</a>] 专为寻找<span class="math-inline">A</span>的少数几个最大奇异值而设计。它包含多种方法，其中最快的是应用于<span class="math-inline">A^* A</span>的Lanczos方法（第<a href="node103.html#sec:lan">4.4</a>节）。SVDPACK中的其他方法包括子空间迭代（第<a href="node98.html#sec:4.pract">4.3.4</a>节）、一种简化版的块Lanczos方法（第<a href="node131.html#rwf:bandsym">4.6</a>节）以及迹最小化方法。这些方法均可应用于<span class="math-inline">A^* A</span>或<span class="math-inline">H(A)</span>。当将块Lanczos应用于<span class="math-inline">H(A)</span>时，使用的是第<a href="node197.html#sec_chap4_GolubKahanLanczos">6.3.3</a>节中算法的变体。迹最小化是第<a href="node343.html#sec:sgmin">9.4</a>节讨论的非线性特征值问题方法的一个特例。
+SVDPACK [<a href="node421.html#svdpack">49</a>] 专为寻找<span class="math-inline">A</span>的少数几个最大奇异值而设计。它包含多种方法，其中最快的是应用于<span class="math-inline">A^* A</span>的 Lanczos 方法（参见第<a href="node103.html#sec:lan">4.4</a>节）。SVDPACK 中的其他方法包括子空间迭代（参见第<a href="node98.html#sec:4.pract">4.3.4</a>节）、一种简化版的块 Lanczos 方法（参见第<a href="node131.html#rwf:bandsym">4.6</a>节）以及迹最小化方法。这些方法均可应用于<span class="math-inline">A^* A</span>或<span class="math-inline">H(A)</span>。当对<span class="math-inline">H(A)</span>应用块 Lanczos 方法时，采用了第<a href="node197.html#sec_chap4_GolubKahanLanczos">6.3.3</a>节中算法的变体。迹最小化是第<a href="node343.html#sec:sgmin">9.4</a>节讨论的非线性特征值问题方法之一。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -126,16 +114,11 @@ SVDPACK [<a href="node421.html#svdpack">49</a>] 专为寻找<span class="math-in
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3772"
-  href="node201.html">Numerical Example</a>
-<b> Up:</b> <a name="tex2html3766"
-  href="node194.html">Iterative Algorithms &nbsp; J.</a>
-<b> Previous:</b> <a name="tex2html3760"
-  href="node199.html">Relationship to Symmetric Lanczos.</a>
- &nbsp <b>  <a name="tex2html3768"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3770"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3772" href="node201.html">数值示例</a>
+<b>上一级：</b><a name="tex2html3766" href="node194.html">Iterative Algorithms &nbsp; J.</a>
+<b>上一节：</b><a name="tex2html3760" href="node199.html">Relationship to Symmetric Lanczos.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

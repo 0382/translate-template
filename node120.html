@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Lanczos Method in GEMV Form</title>
-<meta name="description" content="Lanczos Method in GEMV Form">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Lanczos Method in GEMV Form">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node121.html">
-<link rel="previous" href="node119.html">
-<link rel="up" href="node117.html">
-<link rel="next" href="node121.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2562"
   href="node121.html">
@@ -80,27 +73,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2563"
-  href="node121.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html2557"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2551"
-  href="node119.html">Shift Selection</a>
- &nbsp <b>  <a name="tex2html2559"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2561"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2563" href="node121.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html2557" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2551" href="node119.html">位移的选择</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001353000000000000000"></a>
 <a name="8054"></a>
 <br>
-Lanczos方法在GEMV形式中
+兰索斯法在GEMV形式中的应用
 </h2>
-在算法<a href="node118.html#fig:irlm">4.7</a>的每次重启时，我们有一个
-<span class="math-inline">k</span>步的Lanczos分解
+在算法<a href="node118.html#fig:irlm">4.7</a>每次重启时，我们拥有一个
+ <span class="math-inline">k</span>步的兰索斯分解
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">AV_k = V_k T_k + r_k e_k^{\ast}</div>
@@ -109,10 +97,10 @@ Lanczos方法在GEMV形式中
 <p></p>
 或者，对于<span class="math-inline">k=0</span>，有一个初始向量<span class="math-inline">r_0</span>。
 算法<a href="node120.html#fig:ksteplan">4.8</a>提供了一个模板，用于应用<span class="math-inline">p</span>个额外的
-Lanczos步骤
-将其扩展为<span class="math-inline">m</span>步的Lanczos分解
+兰索斯步骤
+将其扩展为一个<span class="math-inline">m</span>步的兰索斯分解
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">AV_m = V_m T_m + r_m e_m^{\ast}.</div>
@@ -123,9 +111,9 @@ Lanczos步骤
 <p>
 
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<p><a name="fig:ksteplan"></a></p><IMG
+<p><a name="fig:ksteplan"></a></p><img
  width="598" height="289" border="0"
  src="img992.png"
  alt="\begin{figure}\begin{algorithm}{<span class="math-inline">m</span>-Step Lanczos Factorization}
@@ -142,34 +130,51 @@ Lanczos步骤
 我们现在将描述一些实现细节，参考算法<a href="node120.html#fig:ksteplan">4.8</a>中的相应阶段。
 <dl>
 <dt><strong>(2)</strong></dt>
-<dd>如果从头开始（<span class="math-inline">k=0</span>），取<span class="math-inline">r_0=v</span>作为初始向量。
-理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的<span class="math-inline">v</span>。在没有其他考虑的情况下，随机向量是一个合理的选择。
+<dd>如果从头开始(<span class="math-inline">k=0</span>)，取<span class="math-inline">r_0=v</span>作为初始向量。
+理想情况下，为了计算特征值，应尝试构建一个在感兴趣的特征向量方向上占优势的<span class="math-inline">v</span>。
+在没有其他考虑的情况下，随机向量是一个合理的选择。
 
 <p>
 </dd>
 <dt><strong>(3)</strong></dt>
-<dd>将<span class="math-inline">r</span>归一化以得到新的基向量<span class="math-inline">v_{j}</span>。
-范数<span class="math-inline">\beta_{j-1} = \Vert r \Vert</span>
-已经在之前的<span class="math-inline">j</span>的步骤(7)中计算过了。
+<dd>将<span class="math-inline">r</span>归一化以获得新的基向量<span class="math-inline">v_{j}</span>。
+范数
+<span class="math-inline">\beta_{j-1} = \Vert r \Vert</span>
+已经在步骤(7)中为前一个<span class="math-inline">j</span>计算过了。
 
 <p>
 </dd>
 <dt><strong>(5)</strong></dt>
-<dd>这是Lanczos三项递归步骤，用于使<span class="math-inline">r</span>相对于<span class="math-inline">V_j</span>的两个最新列正交化。它以改进的Gram-Schmidt形式组织。
+<dd>这是兰索斯三项递归步骤，用于使<span class="math-inline">r</span>相对于<span class="math-inline">V_j</span>的两个最新列正交化。
+它以改进的格拉姆-施密特形式组织。
 
 <p>
 </dd>
 <dt><strong>(7)</strong></dt>
-<dd>这个<em>if</em>子句中的语句序列确保新的残差方向<span class="math-inline">r</span>在数值上与先前计算的方向正交，即与<span class="math-inline">V_{j}</span>的所有列正交。参数<span class="math-inline">\rho</span>必须指定（<span class="math-inline">0 \le \rho &lt; \infty</span>）。这个测试询问的问题是：“<span class="math-inline">r = Av_{j}</span>是否接近已经构建的空间？”比率
+<dd>此<em>if</em>子句中的语句序列确保新的残差方向<span class="math-inline">r</span>在数值上与先前计算的方向正交，即与<span class="math-inline">V_{j}</span>的所有列正交。
+参数<span class="math-inline">\rho</span>必须指定（
+<span class="math-inline">0 \le \rho &lt; \infty</span>）。
+此测试询问的问题是：“<span class="math-inline">r = Av_{j}</span>是否接近已经构建的空间？”
+比率
 
 <span class="math-inline"> \Vert r\Vert/ \sqrt{ \alpha_{j}^2 + \beta_{j-1}^2 } = \tan \theta</span>，
-其中<span class="math-inline">\theta</span>是向量<span class="math-inline">r</span>与<span class="math-inline">V_{j}</span>的值域空间所成的角度。
-<span class="math-inline">\rho</span>的值越大，正交性要求越严格。当<span class="math-inline">\rho = 0</span>时，算法恢复为没有再正交化的标准Lanczos过程。这一步的修正可能不够，应该实现为一个迭代过程，后续修正的测试为<span class="math-inline">\Vert r\Vert &lt; \rho \Vert s \Vert</span>；参见[<a href="node421.html#dgks76">96</a>]中的讨论。如果在固定次数的尝试后（例如五次）没有生成合适的<span class="math-inline">r</span>，则应将<span class="math-inline">\beta_{j}</span>设置为零，并生成一个随机向量，使其与基<span class="math-inline">V_j</span>正交，并替换<span class="math-inline">r</span>以继续分解。我们建议设置<span class="math-inline">\rho = 1</span>。
+其中<span class="math-inline">\theta</span>是向量<span class="math-inline">r</span>与<span class="math-inline">V_{j}</span>的值域空间之间的夹角。
+<span class="math-inline">\rho</span>的值越大，正交性要求越严格。
+当<span class="math-inline">\rho = 0</span>时，算法恢复为没有再正交化的标准兰索斯过程。
+这种修正的一个步骤可能不够，应该作为一个迭代实现，后续修正的测试为
+<span class="math-inline">\Vert r\Vert &lt; \rho \Vert s \Vert</span>；
+参见[<a
+ href="node421.html#dgks76">96</a>]中的讨论。
+如果在固定次数的尝试后（例如五次）没有生成合适的<span class="math-inline">r</span>，则应将<span class="math-inline">\beta_{j}</span>设为零，并随机生成一个向量，该向量与基<span class="math-inline">V_j</span>正交，并替换<span class="math-inline">r</span>以继续分解。
+我们建议设置<span class="math-inline">\rho = 1</span>。
 </dd>
 </dl>
 
 <p>
-众所周知，经典的Lanczos三项方案在Ritz值（近似特征值）收敛到<span class="math-inline">A</span>的特征值时，将无法精确产生正交向量。为了解决这个问题，我们引入了一种迭代细化技术，该技术以非常合理的成本保持全工作精度的正交性。隐式重启带来的特殊情况使得这种修改对于获得准确的特征值和数值上正交的特征向量至关重要。如果不能保持数值正交性，隐式重启机制的效果会降低，甚至可能失败。
+众所周知，经典的兰索斯三项方案在 Ritz 值（近似特征值）收敛到 <span class="math-inline">A</span> 的特征值时，将无法精确生成正交向量。
+为了解决这个问题，我们引入了一种迭代细化技术，该技术以非常合理的成本保持正交性至完全工作精度。
+隐式重启的特殊情况使得这种修改对于获得准确的特征值和数值上正交的特征向量至关重要。
+如果数值正交性没有保持，隐式重启机制的效果将降低，甚至可能失败。
 
 <p>
 <hr>
@@ -191,16 +196,11 @@ Lanczos步骤
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2563"
-  href="node121.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html2557"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2551"
-  href="node119.html">Shift Selection</a>
- &nbsp <b>  <a name="tex2html2559"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2561"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2563" href="node121.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html2557" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2551" href="node119.html">位移的选择</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

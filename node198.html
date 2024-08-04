@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Golub-Kahan-Lanczos Bidiagonalization Procedure.</title>
-<meta name="description" content="Golub-Kahan-Lanczos Bidiagonalization Procedure.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Golub-Kahan-Lanczos Bidiagonalization Procedure.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node199.html">
-<link rel="previous" href="node197.html">
-<link rel="up" href="node197.html">
-<link rel="next" href="node199.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3745"
   href="node199.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3746"
-  href="node199.html">Relationship to Symmetric Lanczos.</a>
-<b> Up:</b> <a name="tex2html3740"
-  href="node197.html">Golub-Kahan-Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html3734"
-  href="node197.html">Golub-Kahan-Lanczos Method</a>
- &nbsp <b>  <a name="tex2html3742"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3744"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3746" href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b>上一级：</b><a name="tex2html3740" href="node197.html">Golub-Kahan-Lanczos 方法</a>
+<b>上一节：</b><a name="tex2html3734" href="node197.html">Golub-Kahan-Lanczos 方法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001533010000000000000"></a> 
@@ -103,39 +91,39 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 可以选择为任意单位向量，之后<span class="math-inline">U</span>和<span class="math-inline">V</span>的其他列通常是唯一确定的。
 我们将其表示为
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="uav"></a><div class="math-display">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp; \alpha_{n} \\\end{array} \right].</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="uav"></a><div class="math-display">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp;\alpha_{n} \\\end{array} \right].</div></td>
+<td WIDTH=10 align="RIGHT">
 (111)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-即使<span class="math-inline">A</span>是复数，所有的<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>也都是实数。
+即使<span class="math-inline">A</span>是复数，所有<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>也都是实数。
 
 <p>
 常数<span class="math-inline">\alpha_k</span>和<span class="math-inline">\beta_k</span>由以下公式给出：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">\alpha_k = u^{\ast}_k A v_k \quad\mathrm{and}\quad\beta_k = u^{\ast}_k A v_{k+1}.</div>
+<div class="math-display">\alpha_k = u^{\ast}_k A v_k \quad\mathrm{和}\quad\beta_k = u^{\ast}_k A v_{k+1}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归关系。乘以<span class="math-inline">U</span>，我们有
+从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归。乘以<span class="math-inline">U</span>，我们有
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">A\left[\begin{array}{cccc}v_1 &amp; v_2 &amp; \ldots &amp; v_n\end{array} \right] = U\left[ \begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp; \alpha_{n} \\\end{array} \right].</div>
+<div class="math-display">A\left[\begin{array}{cccc}v_1 &amp; v_2 &amp; \ldots &amp; v_n\end{array} \right] = U\left[\begin{array}{cccccc}\alpha_1 &amp; \beta_1 &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_2 &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; \alpha_{n-1} &amp; \beta_{n-1} \\&amp; &amp; &amp; &amp; &amp;\alpha_n \\\end{array} \right].</div>
 </div>
 <br clear="ALL">
 <p></p>
-两边第<span class="math-inline">k</span>列相等，我们得到
+将两边第<span class="math-inline">k</span>列对应相等，我们得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">Av_k = \beta_{k-1}u_{k-1} + \alpha_k u_k</div>
@@ -144,27 +132,27 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 <p></p>
 或者
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><div class="math-display">\alpha_k u_k = Av_k - \beta_{k-1}u_{k-1}, \quad\quad \beta_0 = 0.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">\alpha_k u_k = Av_k - \beta_{k-1}u_{k-1}, \quad\quad \beta_0 = 0.</div></td>
+<td WIDTH=10 align="RIGHT">
 (112)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 另一方面，从关系式
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">A^{\ast} \left[\begin{array}{cccc}u_1 &amp; u_2 &amp; \ldots &amp; u_n\end{array} \right] = V\left[ \begin{array}{cccccc}\alpha_1 &amp; &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_1 &amp; &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; \beta_{n-1} &amp; \alpha_n \\\end{array} \right],</div>
+<div class="math-display">A^{\ast} \left[\begin{array}{cccc}u_1 &amp; u_2 &amp; \ldots &amp; u_n\end{array} \right] = V\left[\begin{array}{cccccc}\alpha_1 &amp; &amp; &amp; \\&amp; \alpha_2 &amp; \beta_1 &amp; \\&amp; &amp; \ddots &amp; \ddots &amp; \\&amp; &amp; &amp; \beta_{n-1} &amp; \alpha_n \\\end{array} \right],</div>
 </div>
 <br clear="ALL">
 <p></p>
 我们得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">A^{\ast} u_k = {\alpha}_k v_k + {\beta}_k v_{k+1}</div>
@@ -173,12 +161,12 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 <p></p>
 或者
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><div class="math-display">{\beta}_k v_{k+1} = A^{\ast} u_k - {\alpha}_k v_k.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">{\beta}_k v_{k+1} = A^{\ast} u_k - {\alpha}_k v_k.</div></td>
+<td WIDTH=10 align="RIGHT">
 (113)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -186,69 +174,69 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 <p>
 由于<span class="math-inline">U</span>和<span class="math-inline">V</span>的列是归一化的，我们必须有
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\alpha_k = \Vert Av_k - \beta_{k-1}u_{k-1}\Vert _2</div>
 </div>
 <br clear="ALL">
 <p></p>
-和
+以及
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\beta_k = \Vert A^* u_k - \alpha_k v_k\Vert _2.</div>
 </div>
 <br clear="ALL">
 <p></p>
-我们将递归关系总结在以下算法中。
+我们将递归总结在以下算法中。
 
 <p>
 <br>
-<a name="gklmethod"></a><IMG
- width="598" height="221" align="bottom" border="0"
+<a name="gklmethod"></a><img
+ width="598" height="221" align="BOTTOM" border="0"
  src="img1774.png"
  alt="\begin{algorithm}{Golub--Kahan--Lanczos Bidiagonalization Procedure
 }
 {
 \begin{t...
-...} = v_{k+1}/ \beta_k$\ \\
+...} = v_{k+1}/ \beta_k<span class="math-inline">\ \\
 {\rm (9)}\&gt; {\bf end}
 \end{tabbing}}
 \end{algorithm}">
 <br>
 
 <p>
-收集算法前<span class="math-inline">k</span>步计算的量，我们有以下重要关系：
+收集算法前</span>k<span class="math-inline">步计算的量，我们得到以下重要关系：
 <br>
-<div align="center"><a name="lansvdeq1"></a><a name="lansvdeq2"></a>
+<div align="CENTER"><a name="lansvdeq1"></a><a name="lansvdeq2"></a>
 
-<table align="center" cellpadding="0" width="100%">
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A V_k</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle U_k B_k,</span></td>
-<td width=10 align="right">
+<table align="CENTER" cellpadding="0" width="100%">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A V_k<span class="math-inline"></td>
+<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
+<td align="LEFT" NOWRAP></span>\displaystyle U_k B_k,<span class="math-inline"></td>
+<td WIDTH=10 align="RIGHT">
 (114)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A^{\ast} U_{k}</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle V_k B^*_k + \beta_{k}v_{k+1}e^*_k,</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A^{\ast} U_{k}<span class="math-inline"></td>
+<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
+<td align="LEFT" NOWRAP></span>\displaystyle V_k B^*_k + \beta_{k}v_{k+1}e^*_k,<span class="math-inline"></td>
+<td WIDTH=10 align="RIGHT">
 (115)</td></tr>
 </table></div>
 <br clear="ALL"><p></p>
 以及
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="uvorth"></a><div class="math-display">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="uvorth"></a><div class="math-display">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0,</div></td>
+<td WIDTH=10 align="RIGHT">
 (116)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">B_k</span>是<span class="math-inline">B</span>的<span class="math-inline">k</span>阶主子矩阵，定义见&nbsp;(<a href="node198.html#uav">6.4</a>)。
+其中</span>B_k<span class="math-inline">是</span>B<span class="math-inline">的</span>k$阶前主子矩阵，如&nbsp;(<a href="node198.html#uav">6.4</a>)所定义。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -268,16 +256,11 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3746"
-  href="node199.html">Relationship to Symmetric Lanczos.</a>
-<b> Up:</b> <a name="tex2html3740"
-  href="node197.html">Golub-Kahan-Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html3734"
-  href="node197.html">Golub-Kahan-Lanczos Method</a>
- &nbsp <b>  <a name="tex2html3742"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3744"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3746" href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b>上一级：</b><a name="tex2html3740" href="node197.html">Golub-Kahan-Lanczos 方法</a>
+<b>上一节：</b><a name="tex2html3734" href="node197.html">Golub-Kahan-Lanczos 方法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

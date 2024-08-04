@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Rayleigh Quotient Iteration</title>
-<meta name="description" content="Rayleigh Quotient Iteration">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Rayleigh Quotient Iteration">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node98.html">
-<link rel="previous" href="node96.html">
-<link rel="up" href="node94.html">
-<link rel="next" href="node98.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2216"
   href="node98.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2217"
-  href="node98.html">Subspace Iteration</a>
-<b> Up:</b> <a name="tex2html2211"
-  href="node94.html">Single- and Multiple-Vector Iterations</a>
-<b> Previous:</b> <a name="tex2html2205"
-  href="node96.html">Inverse Iteration</a>
- &nbsp <b>  <a name="tex2html2213"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2215"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
+<b>上一级：</b><a name="tex2html2211" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一节：</b><a name="tex2html2205" href="node96.html">逆迭代法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001333000000000000000"></a>
@@ -99,16 +87,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-逆迭代的自然延伸是在每一步改变移位值。事实证明，从特征向量近似值 <span class="math-inline">x \not =0</span> 中可以得出的最佳移位值是 <span class="math-inline">x</span> 的<em>瑞利商</em>，即 <span class="math-inline">\rho(x)\equiv x^{\ast} \, A \, x / x^{\ast} \, x</span>。
+逆迭代的自然延伸是在每一步改变移位值。事实证明，从特征向量近似值 <span class="math-inline">x \not =0</span> 中可以得出的最佳移位值是 <span class="math-inline">x</span> 的<em>瑞利商</em>，即 <span class="math-inline">\rho(x)\equiv x^{\ast} \, A \, x / x^{\ast} \, x </span>。
 <a name="7469"></a> 
 
 <p>
-通常，与使用固定移位的逆迭代相比，瑞利商迭代（RQI）需要更少的迭代次数来找到特征值；它最终具有三次收敛性，而逆迭代则是线性收敛。然而，如何选择初始向量 <span class="math-inline">y</span> 以使 RQI 收敛到特定的特征值/特征向量对并不明显。例如，RQI 可能收敛到一个特征值，该特征值并非最接近初始瑞利商 <span class="math-inline">\rho(y)</span>，或者收敛到一个特征向量，该特征向量并非最接近初始向量 <span class="math-inline">y</span>。此外，还存在一个微小但棘手的可能性，即它可能根本不收敛到任何特征值/特征向量对。RQI 比逆迭代更昂贵，因为它在每次迭代中都需要对 <span class="math-inline">A - \rho_k I</span> 进行分解，而当 <span class="math-inline">\rho_k</span> 达到某个特征值时，该矩阵会变得奇异。因此，只有当每次迭代都能廉价地获得这种分解时，RQI 才是实用的。更多细节请参见 Parlett [<a href="node421.html#parl80">353</a>]。
+一般来说，瑞利商迭代（RQI）比使用固定移位的逆迭代需要更少的迭代次数来找到一个特征值；它最终具有三次收敛性，而逆迭代是线性收敛的。然而，如何选择初始向量 <span class="math-inline">y</span> 以使 RQI 收敛到特定的特征值/特征向量对并不明显。例如，RQI 可能收敛到一个特征值，该特征值并不是最接近初始瑞利商 <span class="math-inline">\rho(y)</span> 的，或者收敛到一个特征向量，该特征向量并不是最接近初始向量 <span class="math-inline">y</span> 的。此外，还存在一个微小但令人讨厌的可能性，即它可能根本不收敛到任何特征值/特征向量对。RQI 比逆迭代更昂贵，因为它在每次迭代中都需要对 <span class="math-inline">A - \rho_k I</span> 进行因式分解，而当 <span class="math-inline">\rho_k</span> 达到某个特征值时，这个矩阵将变为奇异矩阵。因此，只有当每次迭代中都能廉价地获得这种因式分解时，RQI 才是实用的。更多细节请参见 Parlett [<a href="node421.html#parl80">353</a>]。
 
 <p>
 <br>
-<IMG
- width="598" height="245" align="bottom" border="0"
+<img
+ width="598" height="245" align="BOTTOM" border="0"
  src="img832.png"
  alt="\begin{algorithm}{RQI for HEP}
 {
@@ -119,7 +107,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+瑞利商迭代法是一种高效的特征值求解方法，尤其适用于需要快速收敛的场合。尽管存在一些不确定性和计算成本，但其在数值计算领域的应用仍然十分广泛。通过不断优化初始向量的选择和迭代过程中的参数调整，可以进一步提高瑞利商迭代法的实用性和可靠性。<!--Navigation Panel-->
 <a name="tex2html2216"
   href="node98.html">
 <button class="navigate">下一节</button></a> 
@@ -136,16 +126,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2217"
-  href="node98.html">Subspace Iteration</a>
-<b> Up:</b> <a name="tex2html2211"
-  href="node94.html">Single- and Multiple-Vector Iterations</a>
-<b> Previous:</b> <a name="tex2html2205"
-  href="node96.html">Inverse Iteration</a>
- &nbsp <b>  <a name="tex2html2213"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2215"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
+<b>上一级：</b><a name="tex2html2211" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一节：</b><a name="tex2html2205" href="node96.html">逆迭代法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Shift-and-Invert.</title>
-<meta name="description" content="Shift-and-Invert.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Shift-and-Invert.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node285.html">
-<link rel="up" href="node283.html">
-<link rel="next" href="node287.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5138"
   href="node287.html">
@@ -79,90 +73,81 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5139"
-  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b> Up:</b> <a name="tex2html5133"
-  href="node283.html">Transformation to Standard Problems</a>
-<b> Previous:</b> <a name="tex2html5129"
-  href="node285.html">Split-and-invert .</a>
- &nbsp <b>  <a name="tex2html5135"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5137"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b>上一级：</b><a name="tex2html5133" href="node283.html">转换为标准问题</a>
+<b>上一节：</b><a name="tex2html5129" href="node285.html">Split-and-invert .</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001730030000000000000"></a>
 <a name="35760"></a>
 <br>
-移位与反转
+位移-反转变换
 </h4>
-将问题转换为标准形式的所有变换，如（<a href="node284.html#zb:snep1">8.3</a>）、（<a href="node284.html#zb:snep2">8.4</a>）或（<a href="node285.html#zb:snep3">8.5</a>），在<span class="math-inline">A</span>和<span class="math-inline">B</span>都奇异或<span class="math-inline">B</span>条件数不佳时均无法使用。一种吸引人的流行技术是首先对原始问题进行移位，然后进行分裂反转。这就是SI方法，如第<a href="node84.html#spec_trans">3.3</a>节所述。具体来说，设<span class="math-inline">\sigma</span>为用户选定的移位值，使得矩阵<span class="math-inline">A-\sigma B</span>非奇异；那么原始问题（<a href="node281.html#eq:gnsym">8.1</a>）可以转换为
+无论是标准形式变换，如(<a href="node284.html#zb:snep1">8.3</a>)、(<a href="node284.html#zb:snep2">8.4</a>)还是(<a href="node285.html#zb:snep3">8.5</a>)，都无法应用于<span class="math-inline">A</span>和<span class="math-inline">B</span>均为奇异矩阵或<span class="math-inline">B</span>为病态矩阵的情况。一种吸引人的流行技术是首先对原始问题进行位移处理，然后进行分裂-反转变换。这就是SI方法，如第<a href="node84.html#spec_trans">3.3</a>节所述。具体来说，设<span class="math-inline">\sigma</span>为用户选定的位移，使得矩阵<span class="math-inline">A-\sigma B</span>非奇异；那么原始问题(<a href="node281.html#eq:gnsym">8.1</a>)可以变换为
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="zb:snep4"></a><div class="math-display">C x = \mu x\quad \mathrm{and} \quadz^{\ast} C = \mu z^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:snep4"></a><div class="math-display">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (219)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 其中
 <br><p></p>
-<div align="center">
-
-<div class="math-display">C = (A - \sigma B)^{-1} B, \quad\mu = \frac{1}{\lambda - \sigma}, \quad \mathrm{and} \quadz= (A - \sigma B)^{\ast} y.</div>
+<div align="CENTER">
+<div class="math-display">C = (A - \sigma B)^{-1} B, \quad\mu = \frac{1}{\lambda - \sigma}, \quad \mathrm{且} \quad z= (A - \sigma B)^{\ast} y.</div>
 </div>
 <br clear="ALL">
 <p></p>
-我们看到，最接近移位<span class="math-inline">\sigma</span>的问题（<a href="node281.html#eq:gnsym">8.1</a>）的特征值<span class="math-inline">\lambda</span>被映射为简化标准特征值问题（<a href="node286.html#zb:snep4">8.6</a>）的外部特征值，即最大幅值的特征值，这些特征值首先被迭代方法很好地近似。
+我们看到，问题(<a href="node281.html#eq:gnsym">8.1</a>)中接近位移<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda</span>被映射为简化标准特征值问题(<a href="node286.html#zb:snep4">8.6</a>)的外部特征值，即最大幅值的特征值，而这些特征值正是迭代方法首先能够良好近似的特征值。
 
 <p>
-在实践中，有效的移位选择取决于用户的偏好和对底层广义特征问题的了解。一个好的移位不仅放大了所需的特征值，还导致了一个条件良好的矩阵<span class="math-inline">A-\sigma B</span>。这往往使得选择好的移位成为一个挑战。
+在实践中，有效的位移选择取决于用户的偏好和对基础广义特征问题的了解。一个好的位移不仅能放大所需的特征值，还能导致矩阵<span class="math-inline">A-\sigma B</span>成为良态矩阵。这往往使得选择好的位移成为一个具有挑战性的任务。
 
 <p>
-对于简化标准特征值问题（<a href="node286.html#zb:snep4">8.6</a>）的迭代方法应用，需要计算矩阵向量乘积
+对于简化标准特征值问题(<a href="node286.html#zb:snep4">8.6</a>)的迭代方法应用，需要计算矩阵-向量乘积
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 <div class="math-display">r = C q = \left( (A - \sigma B)^{-1} B \right) q</div>
 </div>
 <br clear="ALL">
 <p></p>
 或
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 <div class="math-display">s = C^{\ast} p = \left( (A - \sigma B)^{-1} B \right)^{\ast} p</div>
 </div>
 <br clear="ALL">
 <p></p>
 对于给定的向量<span class="math-inline">q</span>和<span class="math-inline">p</span>。为了高效计算，设
 <br>
-<div align="right">
-
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="zb:ablufact"></a><div class="math-display">A - \sigma B = {\mathcal L} {\mathcal U}</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:ablufact"></a><div class="math-display">A - \sigma B = {\mathcal L} {\mathcal U}</div></td>
+<td WIDTH=10 align="RIGHT">
 (220)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-表示<span class="math-inline">A-\sigma B</span>的某种方便的分解，其中<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>是方阵。由于假设<span class="math-inline">A-\sigma B</span>是非奇异的，因此因子<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>也是非奇异的。分解应选择使得与<span class="math-inline">{\mathcal L}</span>、<span class="math-inline">{\mathcal L}^{\ast}</span>和/或<span class="math-inline">{\mathcal U}</span>、<span class="math-inline">{\mathcal U}^{\ast}</span>相关的线性方程组可以高效求解，通常使用稀疏LU分解。参见第<a href="node385.html#sec:directsolvers">10.3</a>节。当然，如果这导致方便的线性系统，也可以选择<span class="math-inline">{\mathcal L} = A - \sigma B</span>和<span class="math-inline">{\mathcal U} = I</span>。
+表示<span class="math-inline">A-\sigma B</span>的某种方便的分解，其中<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>是方阵。由于假设<span class="math-inline">A-\sigma B</span>是非奇异的，因子<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>也是非奇异的。分解应选择使得与<span class="math-inline">{\mathcal L}</span>、<span class="math-inline">{\mathcal L}^{\ast}</span>和/或<span class="math-inline">{\mathcal U}</span>、<span class="math-inline">{\mathcal U}^{\ast}</span>相关的线性方程组能够高效求解，通常使用稀疏LU分解。参见第<a href="node385.html#sec:directsolvers">10.3</a>节。当然，如果这导致方便的线性系统，也可以选择<span class="math-inline">{\mathcal L} = A - \sigma B</span>和<span class="math-inline">{\mathcal U} = I</span>。
 
 <p>
-利用上述分解，矩阵向量乘积<span class="math-inline">r = Cq</span>可以按以下步骤计算：
+利用上述分解，矩阵-向量乘积<span class="math-inline">r = Cq</span>可以按以下步骤计算：
 
 (a) 形成<span class="math-inline">v = B q</span>，
 <br>(b) 解<span class="math-inline">{\mathcal L} w = v</span>求<span class="math-inline">w</span>，
 <br>(c) 解<span class="math-inline">{\mathcal U} r = w</span>求<span class="math-inline">r</span>。
 
-类似地，矩阵向量乘积<span class="math-inline">s = C^{\ast} p</span>可以按以下三个步骤计算：
+类似地，矩阵-向量乘积<span class="math-inline">s = C^{\ast} p</span>可以按以下三个步骤计算：
 
-(a)<span class="math-inline">^{\prime}</span> 解<span class="math-inline">{\mathcal U}^{\ast} v = p</span>求<span class="math-inline">v</span>，
-<br>(b)<span class="math-inline">^{\prime}</span> 解<span class="math-inline">{\mathcal L}^{\ast} w = v</span>求<span class="math-inline">w</span>，
-<br>(c)<span class="math-inline">^{\prime}</span> 形成<span class="math-inline">s = B^{\ast} w</span>。
+(a')<span class="math-inline">{\mathcal U}^{\ast} v = p</span>求<span class="math-inline">v</span>，
+<br>(b')<span class="math-inline">{\mathcal L}^{\ast} w = v</span>求<span class="math-inline">w</span>，
+<br>(c')<span class="math-inline">s = B^{\ast} w</span>。
 
 <p>
-SI技术是处理广义特征问题（<a href="node281.html#eq:gnsym">8.1</a>）的强大工具。主要问题，往往成为瓶颈，是找到<span class="math-inline">A-\sigma B</span>的方便分解（<a href="node286.html#zb:ablufact">8.7</a>），使得相关的线性方程组可以高效求解。如果用<span class="math-inline">A-\sigma B</span>求解线性方程组的精度变得过于昂贵，那么可以考虑使用不精确的Cayley变换（参见第<a href="node398.html#sec:iemethods">11.2</a>节）或Jacobi-Davidson方法。
+SI技术在处理广义特征值问题(<a href="node281.html#eq:gnsym">8.1</a>)时是一个强大的工具。主要问题，往往成为瓶颈的，是找到<span class="math-inline">A-\sigma B</span>的方便分解(<a href="node286.html#zb:ablufact">8.7</a>)，使得相关的线性方程组能够高效求解。如果用<span class="math-inline">A-\sigma B</span>精确求解线性系统成本过高，那么可以考虑使用不精确的Cayley变换（见第<a href="node398.html#sec:iemethods">11.2</a>节），或者Jacobi-Davidson方法。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -182,16 +167,11 @@ SI技术是处理广义特征问题（<a href="node281.html#eq:gnsym">8.1</a>）
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5139"
-  href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b> Up:</b> <a name="tex2html5133"
-  href="node283.html">Transformation to Standard Problems</a>
-<b> Previous:</b> <a name="tex2html5129"
-  href="node285.html">Split-and-invert .</a>
- &nbsp <b>  <a name="tex2html5135"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5137"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b>上一级：</b><a name="tex2html5133" href="node283.html">转换为标准问题</a>
+<b>上一节：</b><a name="tex2html5129" href="node285.html">Split-and-invert .</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

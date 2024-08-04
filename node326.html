@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Transfer Residual Errors to Backward Errors.</title>
-<meta name="description" content="Transfer Residual Errors to Backward Errors.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Transfer Residual Errors to Backward Errors.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node327.html">
-<link rel="previous" href="node325.html">
-<link rel="up" href="node324.html">
-<link rel="next" href="node327.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5731"
   href="node327.html">
@@ -80,26 +73,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5732"
-  href="node327.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html5726"
-  href="node324.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html5720"
-  href="node325.html">Residual Vectors.</a>
- &nbsp <b>  <a name="tex2html5728"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5730"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5732" href="node327.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html5726" href="node324.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html5720" href="node325.html">Residual Vectors.</a>
+  
+  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001780020000000000000"></a>
+<!--End of Navigation Panel--><h4><a name="SECTION001780000000000000000"></a>
 <a name="37850"></a>
 <br>
-将残留误差转化为向后误差
+将残差误差转化为后向误差
 </h4>
-可以证明，计算出的特征值和特征向量是邻近矩阵对的精确特征值和特征向量，即
+可以证明，计算出的特征值和特征向量是某个邻近矩阵对的确切特征值和特征向量，即：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">\widetilde\beta (A+E)\widetilde x=\widetilde\alpha (B+F)\widetilde x,</div>
 </div>
@@ -107,7 +96,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p></p>
 以及
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">\widetilde\beta \widetilde y^{\ast} (A+E)=\widetilde\alpha\widetilde y^{\ast} (B+F)</div>
 </div>
@@ -116,48 +106,56 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果 <span class="math-inline">\widetilde y</span> 可用，其中误差矩阵 <span class="math-inline">E</span> 和 <span class="math-inline">F</span> 相对于 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的范数较小。
 
 <ol>
-<li>仅 <span class="math-inline">\widetilde x</span> 可用，但 <span class="math-inline">\widetilde y</span> 不可用。那么，最优误差矩阵 <span class="math-inline">(E,F)</span>（在 2-范数和 Frobenius 范数中）使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 成为矩阵对 <span class="math-inline">(A+E,B+F)</span> 的精确特征值及其对应的特征向量，满足
-<br>
-<div align="right">
+<li>仅 <span class="math-inline">\widetilde x</span> 可用而 <span class="math-inline">\widetilde y</span> 不可用。那么，对于 <span class="math-inline">(A+E,B+F)</span> 对，使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是其精确特征值及其对应特征向量的最优误差矩阵 <span class="math-inline">(E,F)</span>（在 2-范数和 Frobenius 范数中）满足
+      <br>
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:G-Rx-b2"></a><div class="math-display">\Vert(E,F)\Vert _2=\Vert(E,F)\Vert _{F}= \Vert r\Vert _2.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:G-Rx-b2"></a><div class="math-display">\Vert(E,F)\Vert _2=\Vert(E,F)\Vert _{F}= \Vert r\Vert _2.</div></td>
+<td WIDTH=10 align="RIGHT">
 (241)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 
 <p>
 </li>
-<li><span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 均可用。那么，最优误差矩阵 <span class="math-inline">(E_2,F_2)</span>（在 2-范数中）和 <span class="math-inline">(E_{F},F_{F})</span>（在 Frobenius 范数中）使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span>、<span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 成为矩阵对 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征值及其对应的特征向量，满足
-<br>
-<div align="right">
+<li><span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 均可用。那么，对于 <span class="math-inline">(A+E,B+F)</span> 对，使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span>、<span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 是其精确特征值及其对应特征向量的最优误差矩阵 <span class="math-inline">(E_2,F_2)</span>（在 2-范数中）和 <span class="math-inline">(E_{F},F_{F})</span>（在 Frobenius 范数中）满足
+      <br>
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:G_R-b2"></a><div class="math-display">\Vert(E_2,F_2)\Vert _2= %%\frac{1}{\sqrt{\vert\widetilde\alpha\ve......eta\vert^2}}\max\{\Vert r\Vert _2,\Vert s^{\ast}\Vert _2\}</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:G_R-b2"></a><div class="math-display">\Vert(E_2,F_2)\Vert _2= %%\frac{1}{\sqrt{\vert\widetilde\alpha\ve......eta\vert^2}}\max\{\Vert r\Vert _2,\Vert s^{\ast}\Vert _2\}</div></td>
+<td WIDTH=10 align="RIGHT">
 (242)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 以及
-<br>
-<div align="right">
+      <br>
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:G_R-b22"></a><div class="math-display">\Vert(E_{F},F_{F})\Vert _{F}= %%\frac{1}{\sqrt{\vert\widetilde\......eta\widetilde y^{\ast} A\widetilde x-\widetilde\alpha\widetilde y^{\ast} B\widetilde x)^2}.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:G_R-b22"></a><div class="math-display">\Vert(E_{F},F_{F})\Vert _{F}= %%\frac{1}{\sqrt{\vert\widetilde\......eta\widetilde y^{\ast} A\widetilde x-\widetilde\alpha\widetilde y^{\ast} B\widetilde x)^2}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (243)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 </li>
 </ol>
-参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。
+参见 [<a
+ href="node421.html#kapj82">256</a>,<a
+ href="node421.html#sun98">431</a>,<a
+ href="node421.html#hihi98">473</a>].
 
 <p>
-我们称算法输出的近似特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 对于范数 <span class="math-inline">\Vert\cdot\Vert</span> 是 <span class="math-inline">\tau</span>-向后稳定的，如果它是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征对，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>；类似地，算法输出的特征三元组 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x,\widetilde y)</span> 对于范数 <span class="math-inline">\Vert\cdot\Vert</span> 是 <span class="math-inline">\tau</span>-向后稳定的，如果它是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征三元组，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>。基于这些，可以对计算特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 或特征三元组 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x,\widetilde y)</span> 的算法的向后稳定性进行说明。传统上，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，算法被称为向后稳定的。
+我们称算法输出的近似特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 对于范数 <span class="math-inline">\Vert\cdot\Vert</span> 是 <span class="math-inline">\tau</span>-后向稳定的，如果它是 <span class="math-inline">(A+E,B+F)</span> 的精确特征对，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>；类似地，算法输出的特征三元组 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x,\widetilde y)</span> 对于范数 <span class="math-inline">\Vert\cdot\Vert</span> 是 <span class="math-inline">\tau</span>-后向稳定的，如果它是 <span class="math-inline">(A+E,B+F)</span> 的精确特征三元组，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>。基于这些，可以对计算特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 或特征三元组 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x,\widetilde y)</span> 的算法的后向稳定性进行论述。传统上，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，算法被称为后向稳定的。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html5731"
   href="node327.html">
 <button class="navigate">下一节</button></a> 
@@ -174,16 +172,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5732"
-  href="node327.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html5726"
-  href="node324.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html5720"
-  href="node325.html">Residual Vectors.</a>
- &nbsp <b>  <a name="tex2html5728"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5730"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5732" href="node327.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html5726" href="node324.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html5720" href="node325.html">Residual Vectors.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

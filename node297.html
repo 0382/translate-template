@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Some Properties of Symmetric Indefinite Matrix Pairs</title>
-<meta name="description" content="Some Properties of Symmetric Indefinite Matrix Pairs">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Some Properties of Symmetric Indefinite Matrix Pairs">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node298.html">
-<link rel="previous" href="node296.html">
-<link rel="up" href="node296.html">
-<link rel="next" href="node298.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5307"
   href="node298.html">
@@ -80,115 +73,106 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5308"
-  href="node298.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html5302"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5296"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
- &nbsp <b>  <a name="tex2html5304"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5306"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5308" href="node298.html">算法</a>
+<b>上一级：</b><a name="tex2html5302" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5296" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001761000000000000000">
-对称不定矩阵对的某些性质</a>
+对称不定矩阵对的若干性质</a>
 </h2> 
 
 <p>
-矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的对称性纯粹是一个代数性质，并不足以确保它们具有确定的矩阵束所享有的任何特殊数学性质，例如在第&#167;<a href="node30.html#sec_chap2_GHep">2.3</a>节中讨论的那些性质。事实上，可以证明任何实平方矩阵 <span class="math-inline">F</span> 都可以表示为 <span class="math-inline">F = AB^{-1}</span> 或 <span class="math-inline">F = B^{-1} A</span>，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是合适的对称矩阵；例如，参见[<a href="node421.html#parl80">353</a>]。
+矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的对称性纯粹是一个代数性质，并不足以保证它们具有确定矩阵束所享有的任何特殊数学性质，如第&#167;<a href="node30.html#sec_chap2_GHep">2.3</a>节所讨论的。事实上，可以证明任何实方阵 <span class="math-inline">F</span> 都可以表示为 <span class="math-inline">F = AB^{-1}</span> 或 <span class="math-inline">F = B^{-1} A</span>，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是合适的对称矩阵；例如，参见[<a href="node421.html#parl80">353</a>]。
 
 <p>
-确定的矩阵束的特征值都是实数，但一个不定的矩阵束可能具有复数特征值。例如，当
+确定矩阵束的所有特征值都是实数，但一个不定矩阵束可能具有复数特征值。例如，当
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">A = \left[\begin{array}{cc}0&amp;10\\ 10&amp;20\end{array}\right],\quad B = \left[\begin{array}{cc}-1&amp;0\\ 0&amp;10\end{array}\right],</div>
+<div class="math-display">A = \left[\begin{array}{cc}0&10\\ 10&20\end{array}\right],\quad B = \left[\begin{array}{cc}-1&0\\ 0&10\end{array}\right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-<span class="math-inline">\{A,B\}</span> 的特征值是复共轭对 <span class="math-inline">1\pm 3i</span>。与确定情况进一步的区别是，不定矩阵束可能没有完整的特征向量集。例如，考虑矩阵束
+矩阵对 <span class="math-inline">\{A,B\}</span> 的特征值是复共轭对 <span class="math-inline">1\pm 3i</span>。与确定情况进一步的区别在于，不定矩阵束可能没有完整的特征向量集。例如，考虑矩阵束
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">\left[\begin{array}{cc}0&amp;1\\ 1&amp;2\end{array}\right]-\lambda\left[\begin{array}{cc}0&amp;1\\ 1&amp;1\end{array}\right],</div>
+<div class="math-display">\left[\begin{array}{cc}0&1\\ 1&2\end{array}\right]-\lambda\left[\begin{array}{cc}0&1\\ 1&1\end{array}\right],</div>
 </div>
 <br clear="ALL">
 <p></p>
 它有一个特征值 <span class="math-inline">\lambda = 1</span>（重数为2），并且只有一个特征向量 <span class="math-inline">x = [{1 \atop 0}]</span>。
 
 <p>
-在第&#167;<a href="node30.html#sec_chap2_GHep">2.3</a>节中，我们知道当 <span class="math-inline">B</span> 是正定矩阵时，我们可以找到一个特征向量矩阵 <span class="math-inline">X</span> 和一个特征值对角矩阵 <span class="math-inline">\Lambda</span>，使得 <span class="math-inline">AX = BX \Lambda</span> 且 <span class="math-inline">X^tbx=I</span>。<span class="math-inline">B</span> 内积 <span class="math-inline">(x,y)_B</span> 形成一个真正的内积，且 <span class="math-inline">(x,x)_B^{1/2}</span> 是一个范数。
+在第&#167;<a href="node30.html#sec_chap2_GHep">2.3</a>节中，我们知道当 <span class="math-inline">B</span> 是正定矩阵时，可以找到特征向量矩阵 <span class="math-inline">X</span> 和特征值对角矩阵 <span class="math-inline">\Lambda</span>，使得 <span class="math-inline">AX = BX \Lambda</span> 且 <span class="math-inline">X^TBX=I</span>。<span class="math-inline">B</span> 内积 <span class="math-inline">(x,y)_B</span> 形成一个真正的内积，且 <span class="math-inline">(x,x)_B^{1/2}</span> 是一个范数。
 
 <p>
-当 <span class="math-inline">B</span> 是不定且非奇异的，并且如果 <span class="math-inline">B^{-1}A</span> 没有缺陷（即没有缺失的特征向量），我们可以找到一组完整的特征向量 <span class="math-inline">X</span>。方程 <span class="math-inline">AX = BX \Lambda</span> 仍然成立，并且可以选择特征向量使得 <span class="math-inline">X^tbx=J</span>，其中 <span class="math-inline">J</span> 是一个对角矩阵，对角线上有 <span class="math-inline">1</span> 和 <span class="math-inline">-1</span>（注意这是转置，而不是共轭转置，即使某些向量可能是复数）。<span class="math-inline">B</span> 内积 <span class="math-inline">(x,y)_B</span> 是一个不定内积或伪内积，<span class="math-inline">(x,x)_B</span> 可以用于归一化目的。与正定情况不同，存在一组向量的伪长度为零（由 <span class="math-inline">(x,x)_B</span> 测量）。事实上，一个特征向量 <span class="math-inline">x</span> 可能满足 <span class="math-inline">x^tax=x^tbx=0</span>。这意味着瑞利商
+当 <span class="math-inline">B</span> 是不定且非奇异的，并且如果 <span class="math-inline">B^{-1}A</span> 没有缺陷（即没有缺失特征向量），我们可以找到完整的特征向量集 <span class="math-inline">X</span>。方程 <span class="math-inline">AX = BX \Lambda</span> 仍然成立，并且可以选择特征向量使得 <span class="math-inline">X^TBX=J</span>，其中 <span class="math-inline">J</span> 是对角矩阵，对角线上有 <span class="math-inline">1</span> 和 <span class="math-inline">-1</span>（注意这是转置，而不是共轭转置，即使某些向量可能是复数）。<span class="math-inline">B</span> 内积 <span class="math-inline">(x,y)_B</span> 是一个不定内积或伪内积，<span class="math-inline">(x,x)_B</span> 可用于归一化目的。与正定情况不同，存在一组向量具有伪长度零（由 <span class="math-inline">(x,x)_B</span> 测量）。事实上，一个特征向量 <span class="math-inline">x</span> 可能满足 <span class="math-inline">x^TAx=x^TBx=0</span>。这意味着瑞利商
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\rho = \frac{x^TAx}{x^TBx}</div>
 </div>
 <br clear="ALL">
 <p></p>
-是未定义的。这种现象可以通过对角矩阵来说明
+是未定义的。这种现象由对角矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">A = {\rm diag}(-1,1,1), \quad B = {\rm diag}(1,1,-1).</div>
+<div class="math-display">A = {\rm diag}(-1,1,1), \quad B = {\rm diag}(1,1,-1)</div>
 </div>
 <br clear="ALL">
 <p></p>
-向量 <span class="math-inline">x = \left[ \begin{array}{ccc}1 &amp; 0 &amp; 1\end{array} \right]^T</span> 是 <span class="math-inline">\{A,B\}</span> 的特征向量，对应于重特征值 <span class="math-inline">\lambda = -1</span>，但 <span class="math-inline">x^tax=x^tbx=0</span>。
+说明。向量 <span class="math-inline">x = \left[ \begin{array}{ccc}1 & 0 & 1\end{array} \right]^T</span> 是矩阵对 <span class="math-inline">\{A,B\}</span> 对应于重特征值 <span class="math-inline">\lambda = -1</span> 的特征向量，但 <span class="math-inline">x^TAx=x^TBx=0</span>。
 
 <p>
-确定情况和不定情况之间的类比可以进一步展开。当 <span class="math-inline">B</span> 是正定矩阵时，<span class="math-inline">\tilde{u}</span> 是一个近似特征向量，<span class="math-inline">\tilde{\lambda}</span> 是一个近似特征值，我们有标准的残差界限：
+确定情况和不定情况之间的类比可以进一步展开。当 <span class="math-inline">B</span> 是正定矩阵时，<span class="math-inline">\tilde{u}</span> 是近似特征向量，<span class="math-inline">\tilde{\lambda}</span> 是近似特征值，我们有标准的残差界：
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _{B^{-1}}}{\Vert\tilde{u}\Vert _B},</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中 <span class="math-inline">\Vert\cdot \Vert _{B^{-1}}</span> 是关于 <span class="math-inline">B^{-1}</span> 的范数，即 <span class="math-inline">\Vert x \Vert _{B^{-1}}=(x^{\ast}B^{-1}x)^{1/2}</span>（类似地，另一个范数也是如此）。另见第&#167;<a href="node177.html#sec:gsym_pert">5.7</a>节。当 <span class="math-inline">B</span> 是不定且非奇异的，<span class="math-inline">X^tbx=J</span>，且 <span class="math-inline">B^{-1}A</span> 没有缺陷，可以证明
-<br><p></p>
-<div align="center">
+其中 <span class="math-inline">\Vert\cdot \Vert _{B^{-1}}</span> 是关于 <span class="math-inline">B^{-1}</span> 的范数，即
 
+<span class="math-inline">\Vert x \Vert _{B^{-1}}=(x^{\ast}B^{-1}x)^{1/2}</span>（类似地，其他范数也是如此）。另见第&#167;<a href="node177.html#sec:gsym_pert">5.7</a>节。当 <span class="math-inline">B</span> 是不定且非奇异的，<span class="math-inline">X^TBX=J</span>，且 <span class="math-inline">B^{-1}A</span> 没有缺陷时，可以证明
+<br><p></p>
+<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _{\bar{X}X^{T}}}{\Vert\tilde{u}\Vert _{(XX^{\ast})^{-1}}};</div>
 </div>
 <br clear="ALL">
 <p></p>
-注意在确定情况下 <span class="math-inline">B^{-1}=XX^{\ast}</span>。类似的界限由
+注意在确定情况下 <span class="math-inline">B^{-1}=XX^{\ast}</span>。类似的界由
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _2......t _2}\Vert B^{-1}\Vert _2\Vert X\Vert _2\Vert X^{-1}\Vert _2.</div>
 </div>
 <br clear="ALL">
 <p></p>
-即使这些界限无法计算，它们也表明小的残差是好的。当 <span class="math-inline">B</span> 是奇异的，有类似的界限；参见[<a href="node421.html#eric86">161</a>]。
+即使这些界不可计算，它们也表明小的残差是好的。当 <span class="math-inline">B</span> 是奇异的，有类似的界；参见[<a href="node421.html#eric86">161</a>]。
 
 <p>
-如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 都是奇异的，或者接近奇异的，可能会出现更严重的问题。假设存在一个非零向量 <span class="math-inline">z</span> 使得 <span class="math-inline">az=bz=0</span>；那么任何复数 <span class="math-inline">\lambda</span> 都是一个特征值。一个更一般的情况在下面的例子中说明：
+如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 都是奇异的，或者接近奇异的，可能会出现更严重的问题。假设存在一个非零向量 <span class="math-inline">z</span> 使得 <span class="math-inline">Az=Bz=0</span>；那么任何复数 <span class="math-inline">\lambda</span> 都是一个特征值。一个更一般的情况如下例所示：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">A=\left[\begin{array}{ccc}1 &amp; 0 &amp; 0\\0 &amp; -1 &amp; 0\\0 &amp; 0 &amp; 1\end{array}\right],\quad B=\left[\begin{array}{ccc}1 &amp; 0 &amp; 1\\0 &amp; -1 &amp; 1\\1 &amp; 1 &amp; 0\end{array}\right].</div>
+<div class="math-display">A=\left[\begin{array}{ccc}1 & 0 & 0\\0 & -1 & 0\\0 & 0 & 0\end{array}\right],\quad B=\left[\begin{array}{ccc}1 & 0 & 1\\0 & -1 & 1\\1 & 1 & 0\end{array}\right].</div>
 </div>
 <br clear="ALL">
 <p></p>
-特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 恒等于零，所以任何复数都是一个特征值；我们有一个奇异的矩阵束。矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间是一维的，分别由 <span class="math-inline">z_a=[0~0~1]^T</span> 和 <span class="math-inline">z_b=[-1~1~1]^T</span> 张成。注意零空间之间的交集只是零向量。问题的奇异性意味着 <span class="math-inline">z_a^tbz_a=0</span>（且 <span class="math-inline">z_b^taz_b=0</span>）。要使用数值方法解决奇异问题，必须消除奇异性。直接攻击原始问题是徒劳的，正如通过扰动 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 所看到的。设 <span class="math-inline">a_{3,3}=\epsilon</span> 并将 <span class="math-inline">\delta</span> 加到 <span class="math-inline">b_{1,1}</span>，则
-<span class="math-inline">\det (A-\lambda B)=\delta\lambda^3+\epsilon(\lambda-1)(\lambda(1+\delta)-1)</span>。所以如果 <span class="math-inline">\epsilon</span> 或 <span class="math-inline">\delta</span> 非零，这就不再是一个奇异矩阵束。取 <span class="math-inline">\delta=0</span>，则对于任何 <span class="math-inline">\epsilon > 0</span>，我们有特征值 <span class="math-inline">1,1</span> 和 <span class="math-inline">\infty</span>。如果 <span class="math-inline">\delta > 0</span> 且 <span class="math-inline">\epsilon = 0</span>，特征值是 <span class="math-inline">0,0</span> 和 <span class="math-inline">0</span>。当 <span class="math-inline">\delta=\epsilon\rightarrow 0</span>，特征值大约是 <span class="math-inline">0.56984</span> 和 <span class="math-inline">0.21508\pm1.30714</span>。注意扰动可以做得任意小。关于奇异矩阵束的一般讨论可以在第&#167;<a href="node307.html#sec:singularpencil">8.7</a>节中找到。
+特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 恒等于零，因此任何复数都是特征值；我们有一个奇异矩阵束。矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间是一维的，分别由 <span class="math-inline">z_a=[0~0~1]^T</span> 和 <span class="math-inline">z_b=[-1~1~1]^T</span> 张成。注意零空间之间的交集只是零向量。问题的奇异性意味着 <span class="math-inline">z_a^TBz_a=0</span>（且 <span class="math-inline">z_b^TAz_b=0</span>）。要使用数值方法解决奇异问题，必须消除奇异性。直接攻击原始问题是徒劳的，正如通过扰动 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 可以看到的那样。设 <span class="math-inline">a_{3,3}=\epsilon</span> 并将 <span class="math-inline">\delta</span> 加到 <span class="math-inline">b_{1,1}</span>，则
+
+<span class="math-inline">\det (A-\lambda B)=\delta\lambda^3+\epsilon(\lambda-1)(\lambda(1+\delta)-1)</span>。
+因此，如果 <span class="math-inline">\epsilon</span> 或 <span class="math-inline">\delta</span> 非零，这不再是一个奇异矩阵束。取 <span class="math-inline">\delta=0</span>，则对于任何 <span class="math-inline">\epsilon > 0</span>，我们有特征值 <span class="math-inline">1,1</span> 和 <span class="math-inline">\infty</span>。如果 <span class="math-inline">\delta>0</span> 且 <span class="math-inline">\epsilon = 0</span>，特征值是 <span class="math-inline">0,0</span> 和 <span class="math-inline">0</span>。当 <span class="math-inline">\delta=\epsilon\rightarrow 0</span> 时，特征值大约是 <span class="math-inline">0.56984</span> 和 <span class="math-inline">0.21508\pm1.30714</span>。注意扰动可以任意小。关于奇异矩阵束的一般讨论见第&#167;<a href="node307.html#sec:singularpencil">8.7</a>节。
 
 <p>
-在实践中，如果我们有一个奇异矩阵束，<span class="math-inline">A - \lambda B</span> 对任何 <span class="math-inline">\lambda</span> 都是奇异的，一个好的 LU 分解程序应该给出警告（当在第&#167;<a href="node298.html#syinalg">8.6.2</a>节的（a）和（b）中使用时）。奇异矩阵束的另一个迹象是特征值程序在同一问题上每次运行时产生一些随机特征值。
+在实践中，如果我们有一个奇异矩阵束，<span class="math-inline">A - \lambda B</span> 对任何 <span class="math-inline">\lambda</span> 都是奇异的，一个好的 LU 分解例程应该给出警告（当在以下第&#167;<a href="node298.html#syinalg">8.6.2</a>节中使用时）。奇异矩阵束的另一个迹象是特征值例程在同一问题上每次运行时产生一些随机特征值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -208,16 +192,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5308"
-  href="node298.html">Algorithm</a>
-<b> Up:</b> <a name="tex2html5302"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5296"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
- &nbsp <b>  <a name="tex2html5304"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5306"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5308" href="node298.html">算法</a>
+<b>上一级：</b><a name="tex2html5302" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5296" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

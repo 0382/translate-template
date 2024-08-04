@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Introduction</title>
-<meta name="description" content="Introduction">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node398.html">
-<link rel="previous" href="node396.html">
-<link rel="up" href="node396.html">
-<link rel="next" href="node398.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6867"
   href="node398.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6868"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Up:</b> <a name="tex2html6862"
-  href="node396.html">Preconditioning Techniques</a>
-<b> Previous:</b> <a name="tex2html6856"
-  href="node396.html">Preconditioning Techniques</a>
- &nbsp <b>  <a name="tex2html6864"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6866"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6868" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一级：</b><a name="tex2html6862" href="node396.html">预处理技术</a>
+<b>上一节：</b><a name="tex2html6856" href="node396.html">预处理技术</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION002010000000000000000"></a> <a name="sec:introduction"></a>
@@ -98,55 +86,54 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h1>
 
 <p>
-术语“预处理”在数值方法中常作为一个额外步骤，旨在加速收敛。预处理是求解大型线性方程组迭代方法中的重要技术。对于特征值问题的预处理并不那么直接，且发展较慢。在俄罗斯文献中有大量相关资料，其中一部分在§<a href="node410.html#sec:prec">11.3</a>中进行了讨论。Ruhe和Wiberg [<a href="node421.html#ruwi72">380</a>,<a href="node421.html#ruhe74">373</a>,<a href="node421.html#ruhe75">374</a>]在1970年代使用SOR和共轭梯度法来寻找特征值。与此同时，包括Davidson [<a href="node421.html#davi75">99</a>]在内的量子化学家，为他们的对称大型矩阵开发了校正方法。后来Scott认识到Davidson的方法是一种预处理形式，并在[<a href="node421.html#mosc86">335</a>]中给出了推广。最近的发展，Jacobi-Davidson方法，已在早先的章节中详细介绍。
+术语“预处理”在数值方法中常被用作加速收敛的额外步骤。预处理是求解大型线性方程组迭代方法中的重要技术。对于特征值问题的预处理并不直接，且发展较慢。俄罗斯文献中有大量相关资料，其中一部分在§<a href="node410.html#sec:prec">11.3</a>中讨论。鲁赫和维伯格[<a href="node421.html#ruwi72">380</a>,<a href="node421.html#ruhe74">373</a>,<a href="node421.html#ruhe75">374</a>]在1970年代使用SOR和共轭梯度法求解特征值。同期，包括戴维森[<a href="node421.html#davi75">99</a>]在内的量子化学家，为大型对称矩阵开发了校正方法。后来斯科特认识到戴维森的方法是一种预处理形式，并在[<a href="node421.html#mosc86">335</a>]中给出了推广。近期发展起来的Jacobi-Davidson方法在前几章中有详细介绍。
 
 <p>
 在本引言中，我们试图指出一些联系，首先是预处理特征值与线性方程之间的一些比较。然后简要讨论预处理方法与非预处理方法的差异。最后，给出各种预处理特征值求解器之间的联系。
-<a name="47910"></a>
 
 <p>
-在本段中，我们考察预处理任务在特征值与线性方程之间的比较。我们给出几个理由说明为什么预处理特征值问题更为困难。被预处理的矩阵通常接近奇异。内部特征值难以处理，类似于预处理不定线性方程组。与预处理线性方程不同，预处理特征值方法可能需要某种形式的重新启动，即使在对称情况下也是如此。然而，即使对于非预处理的Krylov特征值方法，重新启动也常常是必要的，这些方法计算特征向量。最后，我们提到特征值预处理方法往往专注于一次计算一个特征值，这与Krylov特征值方法不同。从非预处理到预处理线性方程方法没有类似的额外困难。
+在本段中，我们探讨预处理任务在特征值与线性方程之间的比较。我们列举了几个为何预处理特征值问题更为困难的原因。待预处理的矩阵通常接近奇异。内部特征值难以处理，类似于预处理不定线性方程组。与预处理线性方程不同，预处理特征值方法可能需要某种形式的重新启动，即使在对称情况下也是如此。然而，即使对于非预处理的Krylov特征值方法，计算特征向量时重启也常常是必要的。最后，我们提到特征值预处理方法往往侧重于一次计算一个特征值，这与Krylov特征值方法不同。从非预处理到预处理线性方程方法的过程中，没有类似的额外困难。
 
 <p>
-尽管存在这些困难，无疑这些困难导致了预处理特征值问题发展缓慢，但在找到一个好的预处理器的情境下，仍有许多潜力。决定是否采用预处理方法时，应考虑多个因素，包括预处理器的有效性、所需特征值的数量、是否需要特征向量，以及特定情境下的竞争方法。通常，如果不需要太多特征值且需要计算特征向量，预处理更具竞争力。我们还想提到，对于Krylov方法来说，寻找谱内部远处的特征值非常困难，以至于必须考虑预处理或完全分解一个移位矩阵。网格特征问题（见§<a href="node411.html#sec:prec_problems">11.3.1</a>）是一个重要的实际例子，其中预处理似乎特别有前景。
+尽管存在这些困难，无疑导致了预处理特征值问题发展缓慢，但在能够找到良好预处理器的情境中，仍有巨大的潜力。决定是否采用预处理方法的因素包括预处理器的有效性、所需特征值的数量、是否需要特征向量以及特定情境中的竞争方法。通常，如果不需要太多特征值且需要计算特征向量，预处理更具竞争力。我们还想提到，对于Krylov方法来说，寻找谱内远处的特征值非常困难，因此必须考虑预处理或对位移矩阵进行完全分解。网格特征值问题（见§<a href="node411.html#sec:prec_problems">11.3.1</a>）是预处理似乎特别有前景的一类实际特征值问题的重要例子。
 
 <p>
-本引言的其余部分考察了本章将描述的各种预处理方法之间的相似性。已经提到，预处理方法通常一次只找到一个特征值。这与非预处理的Krylov子空间方法截然不同，后者可以同时找到多个特征值。有时采用块方法来缓解预处理方法的这一问题；例如，参见§<a href="node419.html#sec:prec_block">11.3.9</a>。预处理方法之间的另一个相似之处是全球收敛可能更具挑战性。一些方法，例如§<a href="node418.html#sec:prec_pcg">11.3.8</a>中的局部最优预处理共轭梯度法，在数值实验中实际上非常稳健，通常在随机初始猜测下收敛。然而，其他一些方法，例如基于内外迭代的方法，如果可用合理的特征向量近似作为起始向量，效果更好。这引导我们讨论混合方法，以Krylov方法开始，以预处理方法结束。实际上，可以用于Krylov方法的运算符包括<span class="math-inline">A</span>、<span class="math-inline">M^{-1}</span>（其中<span class="math-inline">M</span>是移位矩阵<span class="math-inline">A-\nu I</span>的近似），甚至预处理的运算符<span class="math-inline">M^{-1}(A-\nu I)</span>，对于固定的<span class="math-inline">\nu</span>和<span class="math-inline">M</span>。混合方法可能提供更多的鲁棒性，值得进一步研究。
+引言的其余部分探讨了本章将描述的各种预处理方法之间的相似性。已经提到，预处理方法通常一次只寻找一个特征值。这与非预处理的Krylov子空间方法截然不同，后者可以同时找到多个特征值。有时采用块方法来缓解预处理方法的这一问题；例如，参见§<a href="node419.html#sec:prec_block">11.3.9</a>。预处理方法之间的另一个相似之处是全球收敛可能更具挑战性。某些方法，例如§<a href="node418.html#sec:prec_pcg">11.3.8</a>中的局部最优预处理共轭梯度法，在数值实验中实际上非常稳健，通常在随机初始猜测下收敛。然而，其他一些方法，例如基于内外迭代的方法，如果可用合理的特征向量近似作为起始向量，效果会更好。这引导我们关注混合方法，即以Krylov方法开始，以预处理方法结束。事实上，可以用于Krylov方法的算子包括<span class="math-inline">A</span>、<span class="math-inline">M^{-1}</span>（其中<span class="math-inline">M</span>是位移矩阵<span class="math-inline">A-\nu I</span>的近似），甚至是预处理的算子<span class="math-inline">M^{-1}(A-\nu I)</span>，对于固定的<span class="math-inline">\nu</span>和<span class="math-inline">M</span>。混合方法可能提供更多的鲁棒性，值得进一步研究。
 
 <p>
-我们再来看特征值预处理方法之间的一个相似之处。为了便于介绍，我们假设存在一个标准的对称特征值问题。似乎所有方法的共同点是运算符
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:keyop"></a><div class="math-display">M^{-1}(A-\nu I),</div></td>
-<td width=10 align="right">
+我们再看一个特征值预处理方法之间的相似之处。为便于阐述，我们假设存在一个标准的对称特征值问题。似乎所有方法的共同点是算子<br>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:keyop"></a><div class="math-display">M^{-1}(A-\nu I),</div></td>
+<td WIDTH=10 align="RIGHT">
 (272)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">\nu</span>是一个近似特征值，<span class="math-inline">M</span>是<span class="math-inline">A-\nu I</span>的（可能变化的）近似。我们将在这里看一些不同方法如何使用这个运算符的例子；有关一般讨论，参见§<a href="node412.html#sec:prec_preconditioning">11.3.2</a>。讨论的四种方法是预处理的幂法、Rayleigh商迭代（RQI）、Davidson方法和Jacobi-Davidson方法。预处理的幂法是§<a href="node410.html#sec:prec">11.3</a>中的算法<a href="node413.html#fig:prec_powerBA">11.5</a>。对于<span class="math-inline">B=I</span>，该算法的步骤4和5执行
-<div align="center">
+其中<span class="math-inline">\nu</span>是近似特征值，<span class="math-inline">M</span>是<span class="math-inline">A-\nu I</span>的（可能变化的）近似。我们将探讨一些不同方法如何使用此算子的例子；有关一般讨论，请参见§<a href="node412.html#sec:prec_preconditioning">11.3.2</a>。讨论的四种方法包括预处理的幂法、Rayleigh商迭代（RQI）、Davidson方法和Jacobi-Davidson方法。预处理的幂法是§<a href="node410.html#sec:prec">11.3</a>中的算法<a href="node413.html#fig:prec_powerBA">11.5</a>。当<span class="math-inline">B=I</span>时，该算法的步骤4和5执行<br><p></p>
+<div align="CENTER">
 <div class="math-display">w =T(x^{(i)}-\mu^{(i)}Ax^{(i)}) =-\mu^{(i)} T(A - {1/\mu^{(i)}} I) x^{(i)}. </div>
 </div>
 <br clear="ALL">
 <p></p>
-令<span class="math-inline">T=M^{-1}</span>和<span class="math-inline">{1/\mu^{(i)}} = \nu</span>，我们看到运算符（<a href="node397.html#eq:keyop">11.1</a>）。§<a href="node410.html#sec:prec">11.3</a>中的其他算法也有类似的运算符。
+令<span class="math-inline">T=M^{-1}</span>且<span class="math-inline">{1/\mu^{(i)}} = \nu</span>，我们看到算子（<a href="node397.html#eq:keyop">11.1</a>）。§<a href="node410.html#sec:prec">11.3</a>中的其他算法也有类似的算子。
 
 <p>
-接下来，使用预处理共轭梯度法（PCG）的RQI在PCG的内部迭代中使用了运算符<span class="math-inline">M^{-1}(A-\rho I)</span>，其中<span class="math-inline">\rho</span>是Rayleigh商，<span class="math-inline">M</span>是预处理器。而Davidson的原始方法，§11.2.4（参见§<a href="node416.html#sec:prec_Dav">11.3.6</a>）中的算法<a href="node402.html#alg:gdavidson">11.2</a>，对于标准特征值问题使用<span class="math-inline">(D-\nu I)^{-1}(A-\nu I)</span>，其中<span class="math-inline">D</span>是<span class="math-inline">A</span>的对角线，<span class="math-inline">\nu</span>是通过Rayleigh-Ritz过程找到的当前近似特征值。再次符合（<a href="node397.html#eq:keyop">11.1</a>）的形式。因此，如果使用相同的预处理，RQI（带PCG）和Davidson方法在方法的核心具有相同的运算符。不同的是，Davidson方法在每一步都改变<span class="math-inline">\nu</span>，而RQI在PCG运行期间固定<span class="math-inline">\rho</span>，并且Davidson方法使用其生成的向量来求解特征值问题，而RQI使用它们来求解线性方程。RQI中的线性方程是向最终解决特征值问题迈进的一个中间步骤。
+接下来，使用预处理共轭梯度法（PCG）的RQI在PCG的内迭代中使用算子<span class="math-inline">M^{-1}(A-\rho I)</span>，其中<span class="math-inline">\rho</span>是Rayleigh商，<span class="math-inline">M</span>是预处理器。而Davidson的原始方法，即§11.2.4（亦见§<a href="node416.html#sec:prec_Dav">11.3.6</a>）中的算法<a href="node402.html#alg:gdavidson">11.2</a>，用于标准特征值问题，使用<span class="math-inline">(D-\nu I)^{-1}(A-\nu I)</span>，其中<span class="math-inline">D</span>是<span class="math-inline">A</span>的对角线，<span class="math-inline">\nu</span>是通过Rayleigh-Ritz过程找到的当前近似特征值。这同样符合（<a href="node397.html#eq:keyop">11.1</a>）的形式。因此，如果使用相同的预处理，RQI（带PCG）和Davidson方法在方法的核心部分具有相同的算子。区别在于Davidson方法在每一步都改变<span class="math-inline">\nu</span>，而RQI在PCG运行期间固定<span class="math-inline">\rho</span>，且Davidson方法使用其生成的向量求解特征值问题，而RQI则用它们求解线性方程。RQI中的线性方程是向最终求解特征值问题迈进的一个中间步骤。
 
 <p>
-最后我们来看Jacobi-Davidson方法；参见§<a href="node405.html#sec:jd-cayley">11.2.5</a>和§<a href="node417.html#sec:prec_rqi">11.3.7</a>。有趣的是，运算符（<a href="node397.html#eq:keyop">11.1</a>）出现了两次。首先，在外部迭代中，从Jacobi-Davidson校正方程（<a href="node137.html#eq:jdcorr">4.49</a>），令<span class="math-inline">M =(I-zz^*)(A-\theta I)(I-zz^*)</span>，我们有<span class="math-inline">t \approx -M^{-1}r =-M^{-1}(A-\theta I)z</span>。其次，更重要的是，在生成近似解<span class="math-inline">t = -M^{-1}r</span>的内部迭代中，使用预处理的Krylov子空间迭代方法，运算符是<span class="math-inline">P^{-1}(I-zz^*)(A-\theta I)(I-zz^*)</span>，其中<span class="math-inline">P</span>是<span class="math-inline">(I-zz^*)(A-\theta I)(I-zz^*)</span>的预处理器。这个运算符类似于（<a href="node397.html#eq:keyop">11.1</a>），但增加了对<span class="math-inline">z</span>的消减。由这个预处理运算符生成的子空间用于求解线性方程。
+最后，我们来看Jacobi-Davidson方法；参见§<a href="node405.html#sec:jd-cayley">11.2.5</a>和§<a href="node417.html#sec:prec_rqi">11.3.7</a>。有趣的是，算子（<a href="node397.html#eq:keyop">11.1</a>）出现了两次。首先，在外迭代中，从Jacobi-Davidson校正方程（<a href="node137.html#eq:jdcorr">4.49</a>）出发，令<span class="math-inline">M =(I-zz^*)(A-\theta I)(I-zz^*)</span>，我们有<span class="math-inline">t \approx -M^{-1}r =-M^{-1}(A-\theta I)z</span>。其次，更重要的是，在生成近似解<span class="math-inline">t = -M^{-1}r</span>的内部迭代中，使用预处理的Krylov子空间迭代方法，算子为<span class="math-inline">P^{-1}(I-zz^*)(A-\theta I)(I-zz^*)</span>，其中<span class="math-inline">P</span>是<span class="math-inline">(I-zz^*)(A-\theta I)(I-zz^*)</span>的预处理器。该算子类似于（<a href="node397.html#eq:keyop">11.1</a>），额外增加了对<span class="math-inline">z</span>的消隐。由该预处理算子生成的子空间用于求解线性方程。
 
 <p>
-由于许多特征值预处理方法在其核心使用了密切相关的运算符，因此可以预期使用相同预处理器的结果会相似。事实并非如此。每种方法的具体实现可能会在收敛速度和成本上产生很大差异。例如，将在下一节讨论，不精确的Cayley变换（以及Jacobi-Davidson方法）在§<a href="node405.html#sec:jd-cayley">11.2.5</a>中比不精确的移位-反演Krylov方法要好得多，尽管它们相似。这部分是因为在移位-反演方法中，<span class="math-inline">M^{-1}(A-\nu I)</span>运算符的<span class="math-inline">\nu</span>是固定的，而不是接近一个特征值（在不精确的有理Krylov方法中也提到了这一点，<span class="math-inline">\nu</span>是变化的）。我们可以说所有预处理方法都有一个限制。它们的效果只能达到<span class="math-inline">M^{-1}(A-\nu I)</span>允许的程度。这取决于预处理器<span class="math-inline">M</span>的好坏。
+由于许多特征值预处理方法在其核心使用密切相关的算子，人们可能会预期使用相同预处理器的结果会相似。事实并非如此。每个方法的具体实现可能会在收敛速度和成本上产生巨大差异。例如，将在下一节讨论，不精确的Cayley变换（以及Jacobi-Davidson方法）在§<a href="node405.html#sec:jd-cayley">11.2.5</a>中比不精确的位移-反演Krylov方法要好得多，尽管它们相似。部分原因在于位移-反演方法中的<span class="math-inline">M^{-1}(A-\nu I)</span>算子固定了<span class="math-inline">\nu</span>，而不是接近特征值（在不精确的理性Krylov方法中，<span class="math-inline">\nu</span>是变化的，下一节也会提到）。我们可以说所有预处理方法都共享一个局限性。它们的效果只能达到<span class="math-inline">M^{-1}(A-\nu I)</span>所允许的程度。这取决于预处理器<span class="math-inline">M</span>的质量。
 
 <p>
-Davidson方法可能是最纯粹的预处理方法，因为在每次应用运算符时，它使用已知的最佳信息（对所需特征对的新的近似），并直接将其生成的向量应用于特征值问题。另一方面，每次迭代的成本显著。与此同时，对于其他一些方法，包括RQI和Jacobi-Davidson，预处理的线性方程迭代方法的内部迭代在成本和存储方面可能更高效。Jacobi-Davidson具有这种效率，并且比RQI更稳健，因为它使用子空间来求解特征值问题而不是单个向量，并且它使用近似特征向量的残差作为线性方程的右侧，而不是向量本身。
+Davidson方法或许是预处理方法中最纯粹的一种，因为每次应用算子时，它都使用已知最佳信息（新的近似特征对），并直接将生成的向量应用于特征值问题。另一方面，每次迭代都有显著的成本。与此同时，对于其他一些方法，包括RQI和Jacobi-Davidson，预处理的线性方程迭代方法的内部迭代在成本和存储方面可能更高效。Jacobi-Davidson具有这种效率，同时也比RQI更稳健，因为它使用子空间进行特征值问题而非单一向量，并且它使用近似特征向量的残差作为线性方程的右侧，而非向量本身。
 
 <p>
-最后，同时PCG方法，§<a href="node419.html#sec:prec_block">11.3.9</a>中的算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，是§<a href="node410.html#sec:prec">11.3</a>中最有前景的方法，具有Davidson方法快速收敛的优势，同时避免了其显著的成本，并直接将PCG应用于特征值问题，从而消除了任何内部迭代的需要。数值实验显示，该方法在初始近似、预处理器选择和矩阵<span class="math-inline">A</span>的条件数方面具有很强的实际鲁棒性。
+最后，同时PCG方法，即§<a href="node419.html#sec:prec_block">11.3.9</a>中的算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，是§<a href="node410.html#sec:prec">11.3</a>中最有前景的方法，它兼具Davidson方法的快速收敛优势，且无其显著成本，并直接将PCG应用于特征值问题，从而消除了内部迭代的需要。数值实验显示，该方法在初始近似、特定预处理器选择以及矩阵<span class="math-inline">A</span>的条件数方面具有极大的实际鲁棒性。
 
 <p>
-接下来的两节都考察了预处理特征值问题的一些细节，但有一些不同的见解。
+接下来的两节将分别探讨预处理特征值问题的一些细节，但视角有所不同。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -166,16 +153,11 @@ Davidson方法可能是最纯粹的预处理方法，因为在每次应用运算
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6868"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Up:</b> <a name="tex2html6862"
-  href="node396.html">Preconditioning Techniques</a>
-<b> Previous:</b> <a name="tex2html6856"
-  href="node396.html">Preconditioning Techniques</a>
- &nbsp <b>  <a name="tex2html6864"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6866"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6868" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一级：</b><a name="tex2html6862" href="node396.html">预处理技术</a>
+<b>上一节：</b><a name="tex2html6856" href="node396.html">预处理技术</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

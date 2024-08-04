@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Singular </title>
-<meta name="description" content="Singular ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Singular ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node301.html">
-<link rel="previous" href="node299.html">
-<link rel="up" href="node296.html">
-<link rel="next" href="node301.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5349"
   href="node301.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5350"
-  href="node301.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html5344"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5338"
-  href="node299.html">Stopping Criteria and Accuracy</a>
- &nbsp <b>  <a name="tex2html5346"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5348"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5350" href="node301.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html5344" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5338" href="node299.html">Stopping Criteria and Accuracy</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001764000000000000000"></a> <a name="sec:singularb"></a>
@@ -98,60 +86,60 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-在对称不定兰索斯过程（Lanczos procedure）中，当<span class="math-inline">B</span>矩阵为奇异时，需要特别注意。这里我们仅讨论<span class="math-inline">H^{-1} B</span>可对角化的情况。如果<span class="math-inline">H^{-1} B</span>是缺陷的，问题将更加复杂，详情请参阅[<a href="node421.html#eric86">161</a>]。
+在对称不定兰索斯过程实施中，当<span class="math-inline">B</span>矩阵奇异时需特别小心。这里我们仅限于讨论<span class="math-inline">H^{-1} B</span>可对角化的情况。若<span class="math-inline">H^{-1} B</span>是缺陷的，问题将更为复杂，详情请参阅[<a href="node421.html#eric86">161</a>]。
 
 <p>
-当<span class="math-inline">B</span>为奇异时，<span class="math-inline">\{A,B\}</span>具有无穷特征值；对应无穷特征值的特征向量位于<span class="math-inline">B</span>的零空间中，而对应感兴趣特征值（即有限特征值）的特征向量则属于<span class="math-inline">H^{-1} B</span>的值域。考虑以下示例：
+当<span class="math-inline">B</span>奇异时，<span class="math-inline">\{A,B\}</span>具有无穷大特征值；对应无穷大特征值的特征向量位于<span class="math-inline">B</span>的零空间中，而对应感兴趣特征值（即有限特征值）的特征向量则属于<span class="math-inline">H^{-1} B</span>的值域。考虑以下示例：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">A=\left[\begin{array}{cc}\alpha &amp; \beta\\\beta &amp; \gamma\end{array}\right], \quad B=\left[\begin{array}{cc}1 &amp; 0 \\0 &amp; 0\end{array}\right].</div>
+<div class="math-display">A=\left[\begin{array}{cc}\alpha & \beta\\\beta & \gamma\end{array}\right], \quad B=\left[\begin{array}{cc}1 & 0 \\0 & 0\end{array}\right].</div>
 </div>
 <br clear="ALL">
 <p></p>
 于是
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">H^{-1} B = (A-\sigma B)^{-1}B=\frac{1}{\delta}\left[\begin{array}{cc}\gamma &amp; 0\\-\beta &amp; 0\end{array}\right],</div>
+<div class="math-display">H^{-1} B = (A-\sigma B)^{-1}B=\frac{1}{\delta}\left[\begin{array}{cc}\gamma & 0\\-\beta & 0\end{array}\right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">\delta = (\alpha-\sigma)\gamma-\beta^2</span>。<span class="math-inline">H^{-1} B</span>的感兴趣特征值为<span class="math-inline">\gamma/\delta</span>，对应的特征向量为
+其中<span class="math-inline">\delta = (\alpha-\sigma)\gamma-\beta^2</span>。<span class="math-inline">H^{-1} B</span>的感兴趣特征值为<span class="math-inline">\gamma/\delta</span>，相应的特征向量为
 
-<span class="math-inline">\onebytwo{\gamma}{-\beta}^T</span>（零特征值对应于原问题的无穷特征值）。
-
-<p>
-注意，特征向量在<span class="math-inline">B</span>的零空间中有一个分量（例如示例中的<span class="math-inline">-\beta</span>），并且<span class="math-inline">H^{-1} B</span>的值域与<span class="math-inline">\sigma</span>无关。重要的是，兰索斯起始向量<span class="math-inline">q</span>必须位于此值域内，因为超出此空间的成分可能在兰索斯迭代过程中增长，并污染Ritz向量。
+<span class="math-inline">\onebytwo{\gamma}{-\beta}^T</span>（零特征值对应于原问题的无穷大特征值）。
 
 <p>
-确保算法<a href="node298.html#alg:jsymlan">8.4</a>生成的Ritz向量完全位于<span class="math-inline">H^{-1} B</span>的值域内至关重要。为此，我们建议对算法<a href="node298.html#alg:jsymlan">8.4</a>进行预处理和后处理步骤。
+注意，特征向量在<span class="math-inline">B</span>的零空间中有一个分量（例如示例中的<span class="math-inline">-\beta</span>），并且<span class="math-inline">H^{-1} B</span>的值域空间与<span class="math-inline">\sigma</span>无关。重要的是，兰索斯起始向量<span class="math-inline">q</span>必须位于此值域空间内，因为空间外的分量可能在兰索斯迭代过程中增长并污染里兹向量。
 
 <p>
-算法<a href="node298.html#alg:jsymlan">8.4</a>中的初始向量<span class="math-inline">q</span>应位于<span class="math-inline">H^{-1} B</span>的值域内。例如，可以使用<span class="math-inline">H^{-1} B</span>与随机向量的乘积。在精确算术中，如果初始向量<span class="math-inline">q</span>位于<span class="math-inline">H^{-1} B</span>的值域内，那么所有兰索斯向量<span class="math-inline">\{q_j\}</span>也将属于<span class="math-inline">H^{-1} B</span>的值域[<a href="node421.html#npej87">340</a>]。
+确保算法<a href="node298.html#alg:jsymlan">8.4</a>生成的里兹向量完全位于<span class="math-inline">H^{-1} B</span>的值域内至关重要。为此，我们建议对算法<a href="node298.html#alg:jsymlan">8.4</a>进行预处理和后处理步骤。
 
 <p>
-然而，在有限精度算术中，仅对初始向量<span class="math-inline">q</span>进行预处理可能不足以确保Ritz向量位于<span class="math-inline">H^{-1} B</span>的值域内。随着兰索斯迭代的进行，舍入误差导致兰索斯向量在<span class="math-inline">B</span>的零空间中获得不需要的分量。尽管可以通过[<a href="node421.html#npej87">340</a>]中推导的廉价递归来监控这些分量的大小，但没有廉价的方法从兰索斯向量中消除这些分量。幸运的是，有一个简单的后处理方案可以清除位于<span class="math-inline">B</span>零空间中的Ritz向量的不需要分量。其思路是用<span class="math-inline">H^{-1}Bx_i^{(j)}</span>的倍数替换Ritz向量<span class="math-inline">{x}_i^{(j)}</span>，显然这属于<span class="math-inline">H^{-1} B</span>的值域。实际上，无需显式计算向量<span class="math-inline">H^{-1}Bx_i^{(j)}</span>；我们可以利用兰索斯过程中 readily available 的量来计算与<span class="math-inline">H^{-1}B {x}_i^{(j)}</span>平行的向量。从方程(<a href="node298.html#RightResid">8.23</a>)可以得出
+算法<a href="node298.html#alg:jsymlan">8.4</a>中的初始向量<span class="math-inline">q</span>应位于<span class="math-inline">H^{-1} B</span>的值域内。例如，可以使用<span class="math-inline">H^{-1} B</span>与随机向量的乘积。在精确算术中，若初始向量<span class="math-inline">q</span>位于<span class="math-inline">H^{-1} B</span>的值域内，则所有兰索斯向量<span class="math-inline">\{q_j\}</span>都将属于<span class="math-inline">H^{-1} B</span>的值域[<a href="node421.html#npej87">340</a>]。
+
+<p>
+然而，在有限精度算术中，仅预处理初始向量<span class="math-inline">q</span>可能不足以确保里兹向量位于<span class="math-inline">H^{-1} B</span>的值域内。随着兰索斯迭代的进行，舍入误差导致兰索斯向量在<span class="math-inline">B</span>的零空间中获得不需要的分量。尽管可以通过[<a href="node421.html#npej87">340</a>]中推导的廉价递归来监控这些分量的大小，但无法廉价地从兰索斯向量中消除这些分量。幸运的是，有一种简单的后处理方案可以清除位于<span class="math-inline">B</span>零空间中的里兹向量的不期望分量。其思路是用<span class="math-inline">H^{-1}Bx_i^{(j)}</span>的倍数替换里兹向量<span class="math-inline">{x}_i^{(j)}</span>，显然这属于<span class="math-inline">H^{-1} B</span>的值域。实际上，无需显式计算向量<span class="math-inline">H^{-1}Bx_i^{(j)}</span>；我们可以利用兰索斯过程中现成的量来计算与<span class="math-inline">H^{-1}B {x}_i^{(j)}</span>平行的向量。由方程(<a href="node298.html#RightResid">8.23</a>)可知
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">H^{-1}B{x}_i^{(j)}= \theta_i^{(j)} {x}_i^{(j)} +\gamma_i^{(j)}q_{j+1}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-因此，可以通过简单地用<span class="math-inline">q_{j+1}</span>的倍数更新<span class="math-inline">{x}_i^{(j)}</span>来廉价计算纯化的Ritz向量，
+因此，可以通过简单地用<span class="math-inline">q_{j+1}</span>的倍数更新<span class="math-inline">{x}_i^{(j)}</span>来廉价计算净化的里兹向量，
 
 <span class="math-inline">(1/\theta_i^{(j)})H^{-1}B{x}_i^{(j)},</span>
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ercorrection"></a><div class="math-display">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ercorrection"></a><div class="math-display">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (240)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这种技术最初在[<a href="node421.html#erru80">162</a>]中提出，作为提高Ritz向量质量的机制，后来在[<a href="node421.html#npej87">340</a>]中被证明具有此处所需的纯化效果。数值经验表明，更新后的向量几乎完全位于<span class="math-inline">H^{-1} B</span>的值域内，并且通常提供更好的特征向量近似。此方案也推荐用于不定情况。
+这一技术最初在[<a href="node421.html#erru80">162</a>]中提出，旨在提高里兹向量的质量，后来在[<a href="node421.html#npej87">340</a>]中证明具有所需的净化效果。数值经验表明，更新后的向量几乎完全位于<span class="math-inline">H^{-1} B</span>的值域内，通常能提供更好的特征向量近似。该方案也推荐用于不定情况。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -171,16 +159,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5350"
-  href="node301.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html5344"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5338"
-  href="node299.html">Stopping Criteria and Accuracy</a>
- &nbsp <b>  <a name="tex2html5346"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5348"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5350" href="node301.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html5344" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5338" href="node299.html">Stopping Criteria and Accuracy</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

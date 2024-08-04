@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Implicitly Restarted Arnoldi Method &nbsp; R.&nbsp;Lehoucq and D.&nbsp;Sorensen</title>
-<meta name="description" content="Implicitly Restarted Arnoldi Method &nbsp; R.&nbsp;Lehoucq and D.&nbsp;Sorensen">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Implicitly Restarted Arnoldi Method &nbsp; R.&nbsp;Lehoucq and D.&nbsp;Sorensen">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node235.html">
-<link rel="previous" href="node215.html">
-<link rel="up" href="node203.html">
-<link rel="next" href="node221.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4128"
   href="node221.html">
@@ -80,52 +73,47 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4129"
-  href="node221.html">Arnoldi Procedure in GEMV</a>
-<b> Up:</b> <a name="tex2html4123"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4117"
-  href="node219.html">Deflation</a>
- &nbsp <b>  <a name="tex2html4125"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4127"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4129" href="node221.html">Arnoldi Procedure in GEMV</a>
+<b>上一级：</b><a name="tex2html4123" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4117" href="node219.html">收缩</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001660000000000000000"></a> <a name="sec:nsymiram"></a><a name="23264"></a>
 <br>
 隐式重启Arnoldi方法
-<br>&nbsp; <em>R. Lehoucq 和 D. Sorensen</em>
+<br>&nbsp; <em>R. 勒胡克(R. Lehoucq) 和 D. 索伦森(D. Sorensen)</em>
 </h1>
 
 <p>
-或许，对于计算一般方阵 <span class="math-inline">A</span> 的完整特征系统的最成功的数值算法是隐式移位QR算法。该方法成功的关键之一在于它与Schur分解的关系
+或许是计算一般方阵<span class="math-inline">A</span>完整特征系统的最成功的数值算法是隐式移位QR算法。该方法成功的关键之一在于其与Schur分解的关系
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:schur"></a><div class="math-display">A = U T U^{\ast}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:schur"></a><div class="math-display">A = U T U^{\ast}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (127)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这一著名的分解断言，每个方阵 <span class="math-inline">A</span> 都与一个上三角矩阵 <span class="math-inline">T</span> 是<em>酉相似</em>的。
+这一广为人知的分解断言，每个方阵<span class="math-inline">A</span>都与一个上三角矩阵<span class="math-inline">T</span>是<em>酉相似</em>的。
 
 <p>
-QR算法产生一系列酉相似变换，迭代地将 <span class="math-inline">A</span> 简化为上三角形式（参见第<a href="node209.html#sec:nsymeigdirect">7.3</a>节）。换句话说，它计算了一个Schur分解。QR算法的实际实现从将 <span class="math-inline">A</span> 通过初始酉相似变换简化为紧凑形式 <span class="math-inline">V^{\ast} AV = H</span> 开始，其中 <span class="math-inline">H</span> 是上Hessenberg矩阵（“几乎上三角”），<span class="math-inline">V</span> 是酉矩阵。然后执行以下迭代。
+QR算法产生一系列酉相似变换，迭代地将<span class="math-inline">A</span>化为上三角形式（见第<a href="node209.html#sec:nsymeigdirect">7.3</a>节）。换句话说，它计算了一个Schur分解。QR算法的实际实现首先通过一个初始的酉相似变换将<span class="math-inline">A</span>化为紧凑形式<span class="math-inline">V^{\ast} AV = H</span>，其中<span class="math-inline">H</span>是上Hessenberg矩阵（“几乎上三角”），而<span class="math-inline">V</span>是酉矩阵。然后执行以下迭代。
 
 <p>
 
-		 S<small>移位</small>QR M<small>方法</small> 
+		 S<small>HIFTED </small>QR M<small>ETHOD</small> 
 <br>
-分解 <span class="math-inline">V^{\ast} AV = H</span> 
+分解<span class="math-inline">V^{\ast} AV = H</span> 
 <br>
-对于 <span class="math-inline">j=1,2,3\ldots</span>，直到收敛  
+对<span class="math-inline">j=1,2,3\ldots</span>，直至收敛  
 <br>
-选择一个移位 <span class="math-inline">\mu</span> 
+选择一个移位<span class="math-inline">\mu</span> 
 <br>
-QR分解 <span class="math-inline">QR = H - \mu I</span> 
+QR分解<span class="math-inline">QR = H - \mu I</span> 
 <br><span class="math-inline">H := Q^{\ast} H Q</span> 
 <br><span class="math-inline">V := VQ</span> 
 <br>
@@ -134,31 +122,31 @@ QR分解 <span class="math-inline">QR = H - \mu I</span>
 
 
 <p>
-在此方案中，<span class="math-inline">Q</span> 是酉矩阵，<span class="math-inline">R</span> 是上三角矩阵（即 <span class="math-inline">H-\mu I</span> 的QR分解）。很容易看出，在整个迭代过程中，<span class="math-inline">H</span> 与 <span class="math-inline">A</span> 是酉相似的。迭代继续进行，直到 <span class="math-inline">H</span> 的次对角元素收敛到零，即直到获得（近似）Schur分解。
+在此方案中，<span class="math-inline">Q</span>是酉矩阵，<span class="math-inline">R</span>是上三角矩阵（即<span class="math-inline">H-\mu I</span>的QR分解）。显然，<span class="math-inline">H</span>在整个迭代过程中与<span class="math-inline">A</span>是酉相似的。迭代继续进行，直到<span class="math-inline">H</span>的次对角元素收敛到零，即直到获得了一个（近似的）Schur分解。
 
 <p>
-如果 <span class="math-inline">U_k</span> 表示 <span class="math-inline">U</span> 的前 <span class="math-inline">k</span> 列，<span class="math-inline">T_k</span> 表示 <span class="math-inline">T</span> 的前 <span class="math-inline">k \times k</span> 主子矩阵（参见第<a href="node220.html#eq:schur">7.11</a>节），那么
+如果<span class="math-inline">U_k</span>表示<span class="math-inline">U</span>的前<span class="math-inline">k</span>列，<span class="math-inline">T_k</span>表示公式(<a href="node220.html#eq:schur">7.11</a>)中<span class="math-inline">T</span>的前<span class="math-inline">k \times k</span>主子矩阵，那么
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">A U_k = U_k T_k,</div>
 </div>
 <br clear="ALL">
 <p></p>
-我们称其为 <span class="math-inline">A</span> 的<em>部分Schur分解</em>。<a name="23281"></a> 由于对于 <span class="math-inline">A</span> 的特征值按任意给定顺序排列，总存在一个Schur分解，因此对于 <span class="math-inline">A</span> 的任意指定子集的 <span class="math-inline">k</span> 个特征值，总存在一个部分Schur分解，其中 <span class="math-inline">T_k</span> 的对角元素由这些特征值组成。此外，<span class="math-inline">\mathrm{span}(U_k)</span> 是这些特征值的不变子空间。
+我们称其为<span class="math-inline">A</span>的<em>部分Schur分解</em>。<a name="23281"></a> 由于存在一个Schur分解，使得<span class="math-inline">A</span>的特征值按任意给定顺序出现在对角线上，因此总是存在一个<span class="math-inline">A</span>的部分Schur分解，使得<span class="math-inline">T_k</span>的对角元素由<span class="math-inline">A</span>的任意指定子集的<span class="math-inline">k</span>个特征值组成。此外，<span class="math-inline">\mathrm{span}(U_k)</span>是这些特征值对应的<span class="math-inline">A</span>的不变子空间。
 
 <p>
-我们将利用Schur分解的这一方面。我们还将利用QR迭代的一个变体，该变体可以设计为在迭代过程中迫使感兴趣的特征值出现在 <span class="math-inline">T</span> 的前 <span class="math-inline">k \times k</span> 块中。我们的目标将是开发一种适合于计算大型矩阵 <span class="math-inline">A</span> 的选定 <span class="math-inline">k</span> 个特征值的QR方法的截断形式。我们称隐式重启Arnoldi方法为IRAM。
+我们将利用Schur分解的这一特性。我们还将利用QR迭代的一个变体，该变体能够在迭代过程中迫使感兴趣的特征值出现在<span class="math-inline">T</span>的前<span class="math-inline">k \times k</span>块中。我们的目标是开发一种QR方法的截断形式，适合于计算大型矩阵<span class="math-inline">A</span>的选定<span class="math-inline">k</span>个特征值。我们称隐式重启Arnoldi方法为IRAM。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>小节</strong></a>
+<a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
 <li><a name="tex2html4130"
-  href="node221.html">GEMV形式的Arnoldi过程</a>
+  href="node221.html">GEMV形式中的Arnoldi过程</a>
 <li><a name="tex2html4131"
   href="node222.html">隐式重启</a>
 <li><a name="tex2html4132"
@@ -175,21 +163,23 @@ QR分解 <span class="math-inline">QR = H - \mu I</span>
 <li><a name="tex2html4137"
   href="node228.html">锁定或清除单个特征值</a>
 <li><a name="tex2html4138"
-  href="node229.html">锁定 <span class="math-inline">\theta </span></a>
+  href="node229.html">锁定<span class="math-inline">\theta </span></a>
 <li><a name="tex2html4139"
-  href="node230.html">清除 <span class="math-inline">\theta </span></a>
+  href="node230.html">清除<span class="math-inline">\theta </span></a>
 <li><a name="tex2html4140"
-  href="node231.html"><span class="math-inline">Q^{\ast } H Q</span> 的稳定性</a>
+  href="node231.html"><span class="math-inline">Q^{\ast } H Q</span>的稳定性</a>
 <li><a name="tex2html4141"
   href="node232.html">IRAM中的锁定与清除</a>
 </ul>
 <li><a name="tex2html4142"
-  href="node233.html">使用谱变换计算特征向量</a>
+  href="node233.html">利用谱变换计算特征向量</a>
 <li><a name="tex2html4143"
   href="node234.html">软件可用性</a>
 </ul>
 <!--End of Table of Child-Links-->
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容详细介绍了隐式重启Arnoldi方法（IRAM）及其相关理论和实现细节，适合于对数值线性代数感兴趣的读者。<!--Navigation Panel-->
 <a name="tex2html4128"
   href="node221.html">
 <button class="navigate">下一节</button></a> 
@@ -206,16 +196,11 @@ QR分解 <span class="math-inline">QR = H - \mu I</span>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4129"
-  href="node221.html">Arnoldi Procedure in GEMV</a>
-<b> Up:</b> <a name="tex2html4123"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4117"
-  href="node219.html">Deflation</a>
- &nbsp <b>  <a name="tex2html4125"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4127"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4129" href="node221.html">Arnoldi Procedure in GEMV</a>
+<b>上一级：</b><a name="tex2html4123" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4117" href="node219.html">收缩</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

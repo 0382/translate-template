@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Compressed Diagonal Storage</title>
-<meta name="description" content="Compressed Diagonal Storage">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Compressed Diagonal Storage">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node377.html">
-<link rel="previous" href="node375.html">
-<link rel="up" href="node372.html">
-<link rel="next" href="node377.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6546"
   href="node377.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6547"
-  href="node377.html">Jagged Diagonal Storage</a>
-<b> Up:</b> <a name="tex2html6541"
-  href="node372.html">Sparse Matrix Storage Formats</a>
-<b> Previous:</b> <a name="tex2html6535"
-  href="node375.html">Block Compressed Row Storage</a>
- &nbsp <b>  <a name="tex2html6543"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6545"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6547" href="node377.html">锯齿对角存储</a>
+<b>上一级：</b><a name="tex2html6541" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一节：</b><a name="tex2html6535" href="node375.html">块压缩行存储</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001914000000000000000"></a>
@@ -99,81 +87,70 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如果矩阵 <span class="math-inline">A</span> 是带状的，并且每行的带宽相当恒定，
-那么通过将矩阵的次对角线存储在连续位置中，
-利用这种结构在存储方案中是值得的。
-我们不仅可以消除用于标识列和行的向量，
-而且可以以一种使矩阵-向量乘积更高效的方式打包非零元素。
-这种存储方案在矩阵源于张量积网格上的有限元或有限差分离散化时特别有用。
+如果矩阵 <span class="math-inline">A</span> 的带宽在各行之间相当恒定，那么通过在连续位置存储矩阵的子对角线来利用这种结构进行存储是值得的。我们不仅可以消除用于标识列和行的向量，还可以将非零元素打包，以提高矩阵向量乘积的效率。这种存储方案对于矩阵来自张量积网格上的有限元或有限差分离散化特别有用。
 
 <p>
-我们称矩阵 <span class="math-inline">A=(a_{i,j})</span> 为
-<em>带状</em>的，如果存在非负常数 <span class="math-inline">p</span> 和 <span class="math-inline">q</span>，分别称为左半带宽和右半带宽，
-使得 <span class="math-inline">a_{i,j}\neq 0</span> 仅当 <span class="math-inline">i-p \leq j \leq i+q</span> 时成立。
-在这种情况下，我们可以为矩阵 <span class="math-inline">A</span> 分配一个数组 val(1:n,-p:q)。
-具有相反维度的声明 (-p:q,n) 对应于 LINPACK 带状格式[<a href="node421.html#linpack">132</a>]，
-与压缩对角存储（CDS）不同，如果 <span class="math-inline">{\tt p}+{\tt q}</span> 很小，它不允许高效的向量化矩阵-向量乘法。
+我们称矩阵 <span class="math-inline">A=(a_{i,j})</span> 为<em>带状</em>矩阵，如果存在非负常数 <span class="math-inline">p</span> 和 <span class="math-inline">q</span>，分别称为左半带宽和右半带宽，使得 <span class="math-inline">a_{i,j}\neq 0</span> 仅当 <span class="math-inline">i-p\leq j\leq i+q</span> 时成立。在这种情况下，我们可以为矩阵 <span class="math-inline">A</span> 分配一个数组 val(1:n,-p:q)。具有相反维度的声明 (-p:q,n) 对应于 LINPACK 带状格式[<a href="node421.html#linpack">132</a>]，与压缩对角存储（CDS）不同，如果 <span class="math-inline">{\tt p}+{\tt q}</span> 很小，它不允许高效的向量化矩阵向量乘法。
 
 <p>
-通常，带状格式涉及存储一些零。CDS 格式甚至可能包含一些根本不对应于矩阵元素的数组元素。
-考虑由以下定义的非对称矩阵 <span class="math-inline">A</span>：
+通常，带状格式涉及存储一些零。CDS 格式甚至可能包含一些根本不对应于矩阵元素的数组元素。考虑由以下定义的非对称矩阵 <span class="math-inline">A</span>：
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="sparseA2"></a><div class="math-display">A =\left[\begin{array}{rrrrrr}10 & -3 & 0 & 0 & 0 & 0 \\ ...... 9 & 9 & 13 \\0 & 0 & 0 & 0 & 2 & -1\end{array}\right] ~.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="sparseA2"></a><div class="math-display">A =\left[\begin{array}{rrrrrr}10 & -3 & 0 & 0 & 0 & 0 \\ ...... 9 & 9 & 13 \\0 & 0 & 0 & 0 & 2 & -1\end{array}\right] ~.</div></td>
+<td WIDTH=10 align="RIGHT">
 (270)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-使用 CDS 格式，我们将这个矩阵 <span class="math-inline">A</span> 存储在一个维度为 (6,-1:1) 的数组中，使用以下映射：
+使用 CDS 格式，我们将矩阵 <span class="math-inline">A</span> 存储在一个维度为 (6,-1:1) 的数组中，使用以下映射：
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eqn:diag-conversion"></a><div class="math-display">{\tt val(i,j)}=a_{i,i+j}. </div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn:diag-conversion"></a><div class="math-display">{\tt val(i,j)}=a_{i,i+j}. </div></td>
+<td WIDTH=10 align="RIGHT">
 (271)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 因此，val(:,:) 数组的行是：
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="right">val(:,-1)</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">7</td>
-<td align="right">8</td>
-<td align="right">9</td>
-<td align="right">2</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="RIGHT">val(:,-1)</td>
+<td align="RIGHT">0</td>
+<td align="RIGHT">3</td>
+<td align="RIGHT">7</td>
+<td align="RIGHT">8</td>
+<td align="RIGHT">9</td>
+<td align="RIGHT">2</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
 </tr>
-<tr><td align="right">val(:, 0)</td>
-<td align="right">10</td>
-<td align="right">9</td>
-<td align="right">8</td>
-<td align="right">7</td>
-<td align="right">9</td>
-<td align="right">-1</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
+<tr><td align="RIGHT">val(:, 0)</td>
+<td align="RIGHT">10</td>
+<td align="RIGHT">9</td>
+<td align="RIGHT">8</td>
+<td align="RIGHT">7</td>
+<td align="RIGHT">9</td>
+<td align="RIGHT">-1</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
 </tr>
-<tr><td align="right">val(:,+1)</td>
-<td align="right">-3</td>
-<td align="right">6</td>
-<td align="right">7</td>
-<td align="right">5</td>
-<td align="right">13</td>
-<td align="right">0</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
-<td align="right">&nbsp;</td>
+<tr><td align="RIGHT">val(:,+1)</td>
+<td align="RIGHT">-3</td>
+<td align="RIGHT">6</td>
+<td align="RIGHT">7</td>
+<td align="RIGHT">5</td>
+<td align="RIGHT">13</td>
+<td align="RIGHT">0</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
+<td align="RIGHT">&nbsp;</td>
 </tr>
 </table>
 </div>
@@ -197,16 +174,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6547"
-  href="node377.html">Jagged Diagonal Storage</a>
-<b> Up:</b> <a name="tex2html6541"
-  href="node372.html">Sparse Matrix Storage Formats</a>
-<b> Previous:</b> <a name="tex2html6535"
-  href="node375.html">Block Compressed Row Storage</a>
- &nbsp <b>  <a name="tex2html6543"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6545"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6547" href="node377.html">锯齿对角存储</a>
+<b>上一级：</b><a name="tex2html6541" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一节：</b><a name="tex2html6535" href="node375.html">块压缩行存储</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

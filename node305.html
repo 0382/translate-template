@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Example 8.6.3.</title>
-<meta name="description" content="Example 8.6.3.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Example 8.6.3.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node304.html">
-<link rel="up" href="node302.html">
-<link rel="next" href="node306.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5420"
   href="node306.html">
@@ -79,74 +73,66 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5421"
-  href="node306.html">Notes and References</a>
-<b> Up:</b> <a name="tex2html5415"
-  href="node302.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html5411"
-  href="node304.html">Example 8.6.2.</a>
- &nbsp <b>  <a name="tex2html5417"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5419"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5421" href="node306.html">注释与参考文献</a>
+<b>上一级：</b><a name="tex2html5415" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5411" href="node304.html">Example 8.6.2.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001766030000000000000">
-示例 8.6.3.</a>
+例8.6.3.</a>
 </h4>
 我们采用了在
 &#167;<a href="node250.html#sec:nsymblocklanczos">7.9</a>
 节中介绍的部分重正交化方案，用于我们的对称不定Lanczos实现。
-下表显示，与完全重正交化相比，部分重正交化在保持相当精度的同时，提供了显著但非剧烈的节省。
-表中所列时间为重正交化阶段所花费的CPU时间，无论是采用完全重正交化策略还是部分重正交化方案。CPU时间表明，在计算方面，完全重正交化的成本大约是部分重正交化的两倍。
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="left">模型</td>
-<td align="center">扬声器</td>
-<td align="center">扬声器</td>
-<td align="center">轴</td>
+下表显示，部分重正交化相对于完全重正交化提供了实质性的，尽管不是显著的，节约，同时保持了相当的精度。
+表格中列出的时间为在重正交化阶段所花费的CPU时间，无论是采用完全重正交化策略还是部分重正交化方案。CPU时间表明，就计算而言，完全重正交化的成本大约是部分重正交化的两倍。
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="LEFT">模型</td>
+<td align="CENTER">扬声器</td>
+<td align="CENTER">扬声器</td>
+<td align="CENTER">轴</td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">（简化模型）</td>
-<td align="center">&nbsp;</td>
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">(简化模型)</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="left">阶数 <span class="math-inline">\{A,B\}</span></td>
-<td align="center">1076</td>
-<td align="center">668</td>
-<td align="center">800</td>
+<tr><td align="LEFT">阶数 <span class="math-inline">\{A,B\}</span></td>
+<td align="CENTER">1076</td>
+<td align="CENTER">668</td>
+<td align="CENTER">800</td>
 </tr>
-<tr><td align="left">Lanczos迭代次数</td>
-<td align="center">91</td>
-<td align="center">96</td>
-<td align="center">110</td>
+<tr><td align="LEFT">Lanczos迭代次数</td>
+<td align="CENTER">91</td>
+<td align="CENTER">96</td>
+<td align="CENTER">110</td>
 </tr>
-<tr><td align="left">半正交化重正交化次数</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
+<tr><td align="LEFT">半正交化重正交化次数</td>
+<td align="CENTER">25</td>
+<td align="CENTER">31</td>
+<td align="CENTER">40</td>
 </tr>
-<tr><td align="left">半正交化重正交化次数</td>
-<td align="center">25</td>
-<td align="center">31</td>
-<td align="center">40</td>
+<tr><td align="LEFT">重正交化时间(部分)</td>
+<td align="CENTER">53.7</td>
+<td align="CENTER">25.7</td>
+<td align="CENTER">46.1</td>
 </tr>
-<tr><td align="left">部分重正交化时间</td>
-<td align="center">53.7</td>
-<td align="center">25.7</td>
-<td align="center">46.1</td>
-</tr>
-<tr><td align="left">完全重正交化时间</td>
-<td align="center">126.1</td>
-<td align="center">53.2</td>
-<td align="center">87.0</td>
+<tr><td align="LEFT">重正交化时间(完全)</td>
+<td align="CENTER">126.1</td>
+<td align="CENTER">53.2</td>
+<td align="CENTER">87.0</td>
 </tr>
 </table>
 </div> 
 
 <p>
  
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容展示了在Lanczos方法中采用部分重正交化与完全重正交化的对比。通过表格数据可以看出，部分重正交化在保证精度的前提下，显著减少了计算时间，是一种更为经济高效的策略。<!--Navigation Panel-->
 <a name="tex2html5420"
   href="node306.html">
 <button class="navigate">下一节</button></a> 
@@ -163,16 +149,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5421"
-  href="node306.html">Notes and References</a>
-<b> Up:</b> <a name="tex2html5415"
-  href="node302.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html5411"
-  href="node304.html">Example 8.6.2.</a>
- &nbsp <b>  <a name="tex2html5417"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5419"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5421" href="node306.html">注释与参考文献</a>
+<b>上一级：</b><a name="tex2html5415" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5411" href="node304.html">Example 8.6.2.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

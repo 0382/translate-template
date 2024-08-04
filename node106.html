@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Multiple Eigenvalues.</title>
-<meta name="description" content="Multiple Eigenvalues.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Multiple Eigenvalues.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node105.html">
-<link rel="up" href="node105.html">
-<link rel="next" href="node107.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2353"
   href="node107.html">
@@ -79,34 +73,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2354"
-  href="node107.html">Spectral Transformation</a>
-<b> Up:</b> <a name="tex2html2348"
-  href="node105.html">Convergence Properties</a>
-<b> Previous:</b> <a name="tex2html2344"
-  href="node105.html">Convergence Properties</a>
- &nbsp <b>  <a name="tex2html2350"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2352"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2354" href="node107.html">谱变换</a>
+<b>上一级：</b><a name="tex2html2348" href="node105.html">收敛性质</a>
+<b>上一节：</b><a name="tex2html2344" href="node105.html">收敛性质</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001342010000000000000">
 多重特征值</a>
 </h4>
-理论上，我们只能收敛到初始向量中表示的特征向量。通常这并不重要，因为舍入误差也会将那些在开始时未出现的方向引入计算中。然而，有一种情况这很重要，即当矩阵 <span class="math-inline">A</span> 具有多重特征值时。在这种情况下，我们只能从一个多维不变子空间中得到一个向量。请注意，子空间中的任何向量都是同样有效的：没有任何方法可以选择一个特殊的向量，每次使用不同的初始向量运行 Lanczos 算法都会为多重特征值提供一个新的特征向量建议。
+理论上，我们只能收敛到起始向量中表示的特征向量。通常这并不构成重大问题，因为舍入误差也会将初始时未出现的方向引入计算中。然而，在一种情况下这很重要，即当矩阵 <span class="math-inline">A</span> 具有多重特征值时。在这种情况下，我们只能从一个多维不变子空间中得到一个向量。需要注意的是，子空间中的任何向量都是同样有效的：没有任何方法或算法能够选择一个特殊的向量，每次使用不同的起始向量的Lanczos运行都会为多重特征值提出一个新的特征向量建议。
 
 <p>
-有两种不同的方法可以获得多重特征值的一组线性无关的特征向量。第一种方法是重新启动，并在与已收敛特征向量正交的子空间上运行投影算子，其中所有已收敛的特征方向都已被投影掉。这对应于在算法 <a href="node104.html#Symmetric_Lanczos">4.6</a> 的第 (9) 步中将向量 <span class="math-inline">r</span> 正交化到所有已收敛的特征向量。只要新的向量收敛，就重复此过程；例如，参见 [<a href="node421.html#MatlPDE">318</a>]。
+有两种不同的方法可以获得多重特征值的一组线性独立特征向量。第一种方法是重新启动，并在与已收敛特征向量正交的子空间上运行投影算子，其中所有已收敛的特征方向都已被投影掉。这对应于在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的第(9)步中将向量 <span class="math-inline">r</span> 正交化到所有已收敛的特征向量。此过程会重复进行，直到有新的向量收敛；例如，参见[<a href="node421.html#MatlPDE">318</a>]。还有一种更激进的方法来处理可能的多重特征值：块Lanczos方法。它从几个（例如 <span class="math-inline">p</span> 个）起始方向开始，形成一个块 <span class="math-inline">V_1</span>，并在第 <span class="math-inline">j</span> 步中让 <span class="math-inline">A</span> 作用于所有 <span class="math-inline">V_j</span>，以计算一个新的正交块 <span class="math-inline">V_{j+1}</span>。矩阵 <span class="math-inline">T</span> 将是一个块三对角矩阵，或者更准确地说是一个带状矩阵；参见第<a href="node131.html#rwf:bandsym">4.6</a>节的描述。
 
 <p>
-第二种更激进的方法是处理可能的多重特征值：<i>块 Lanczos</i> 方法。它从几个（例如 <span class="math-inline">p</span> 个）初始方向开始，形成一个块 <span class="math-inline">V_1</span>，并在第 <span class="math-inline">j</span> 步中让 <span class="math-inline">A</span> 作用于所有 <span class="math-inline">V_j</span>，以计算一个新的正交块 <span class="math-inline">V_{j+1}</span>。矩阵 <span class="math-inline">T</span> 将是一个块三对角矩阵，或者更准确地说是一个带状矩阵；参见第 <a href="node131.html#rwf:bandsym">4.6</a> 节的描述。
+在块Lanczos方法中，收敛性取决于期望的特征值 <span class="math-inline">\lambda_i</span> 与其他 <span class="math-inline">p</span> 个特征值在谱中的分离程度，假设特征值从小到大排序。然而，多项式的次数是 <span class="math-inline">j</span>，而不是 <span class="math-inline">jp</span>，如果我们对相同数量的基向量运行单向量Lanczos方法，这会降低一般情况下的收敛速度。
 
 <p>
-在块 Lanczos 方法中，收敛性取决于所需特征值 <span class="math-inline">\lambda_i</span> 与其他 <span class="math-inline">p</span> 个特征值在谱中的分离程度，假设特征值从小到大排序。然而，多项式的次数是 <span class="math-inline">j</span>，而不是 <span class="math-inline">jp</span>，如果我们对相同数量的基向量运行单向量 Lanczos 算法，这会减慢一般情况下的收敛速度。
-
-<p>
-尽管存在上述反对意见，但只要计算 <span class="math-inline">Y=AX</span> 对于一个 <span class="math-inline">n \times p</span> 矩阵 <span class="math-inline">X</span> 比依次计算 <span class="math-inline">p</span> 个向量的 <span class="math-inline">y=Ax</span> 便宜得多，块 Lanczos 在效率上就有优势。这对于大多数带有缓存内存的机器以及当矩阵非常大以至于需要存储在辅助存储器中时都是如此。
+尽管存在上述异议，但块Lanczos方法在计算效率上具有优势，尤其是在计算 <span class="math-inline">Y=AX</span> 对于一个 <span class="math-inline">n \times p</span> 矩阵 <span class="math-inline">X</span> 比依次计算 <span class="math-inline">p</span> 个向量的 <span class="math-inline">y=Ax</span> 便宜得多时。这在大多数具有缓存内存的机器上以及当矩阵非常大以至于需要存储在辅助存储器中时都是如此。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -126,16 +112,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2354"
-  href="node107.html">Spectral Transformation</a>
-<b> Up:</b> <a name="tex2html2348"
-  href="node105.html">Convergence Properties</a>
-<b> Previous:</b> <a name="tex2html2344"
-  href="node105.html">Convergence Properties</a>
- &nbsp <b>  <a name="tex2html2350"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2352"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2354" href="node107.html">谱变换</a>
+<b>上一级：</b><a name="tex2html2348" href="node105.html">收敛性质</a>
+<b>上一节：</b><a name="tex2html2344" href="node105.html">收敛性质</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

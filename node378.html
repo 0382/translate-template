@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Skyline Storage</title>
-<meta name="description" content="Skyline Storage">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Skyline Storage">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node377.html">
-<link rel="up" href="node372.html">
-<link rel="next" href="node379.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6572"
   href="node379.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6573"
-  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
-<b> Up:</b> <a name="tex2html6567"
-  href="node372.html">Sparse Matrix Storage Formats</a>
-<b> Previous:</b> <a name="tex2html6563"
-  href="node377.html">Jagged Diagonal Storage</a>
- &nbsp <b>  <a name="tex2html6569"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6571"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6573" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>上一级：</b><a name="tex2html6567" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一节：</b><a name="tex2html6563" href="node377.html">锯齿对角存储</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001916000000000000000"></a>
@@ -98,22 +87,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-我们考虑的最终存储方案是针对天际线矩阵的，这种矩阵也被称为变带宽或轮廓矩阵（参见Duff、Erisman和Reid [<a href="node421.html#duer86">138</a>]）。它主要在直接求解方法中具有重要性，但也可用于处理块矩阵分解方法中的对角块。求解具有天际线系数矩阵的线性系统的一个主要优点是，当不需要旋转时，天际线结构在Gauss消去过程中得以保留。如果矩阵是对称的，我们只存储其下三角部分。存储天际线矩阵元素的一个直接方法是将其所有行（按顺序）放入一个浮点数组（val(:)），然后保留一个整数数组（row_ptr(:)），其元素指向每一行的开始。存储在val(:)中的非零元素的列索引很容易推导出来，因此不进行存储。
+我们考虑的最终存储方案是针对天际线矩阵的，这种矩阵也被称为变带宽或轮廓矩阵（参见达夫、埃里斯曼和里德[<a href="node421.html#duer86">138</a>]）。它主要在直接求解方法中具有重要性，但也可用于处理块矩阵分解方法中的对角块。求解具有天际线系数矩阵的线性系统的显著优势在于，当不需要选主元时，天际线结构在Gauss消去过程中得以保留。如果矩阵是对称的，我们仅存储其下三角部分。存储天际线矩阵元素的一个直接方法是，将所有行（按顺序）放入一个浮点数组（val(:)），然后保留一个整数数组（row_ptr(:)），其元素指向每一行的起始位置。存储在val(:)中的非零元素的列索引容易推导出，因此不存储。
 
 <p>
-对于如图<a href="node378.html#sec:data-structures.skyline">10.1</a>所示的非对称天际线矩阵，我们以天际线存储（SKS）格式存储下三角元素，并以列导向的SKS格式存储上三角元素（转置存储在行导向的SKS格式中）。这两个分离的<em>子结构</em>可以通过多种方式链接。Saad在[<a href="node421.html#Saad:sprskit">386</a>]中讨论的一种方法是将下三角部分的每一行和上三角部分的每一列连续存储到浮点数组（val(:)）中。然后需要一个额外的指针来确定分隔下三角元素和上三角元素的对角元素的位置。
+对于如图<a href="node378.html#sec:data-structures.skyline">10.1</a>所示的非对称天际线矩阵，我们以天际线存储（SKS）格式存储下三角元素，并以列导向的SKS格式存储上三角元素（转置存储在行导向的SKS格式中）。这两个分离的<em>子结构</em>可以通过多种方式链接。萨阿德[<a href="node421.html#Saad:sprskit">386</a>]讨论的一种方法是将下三角部分的每一行和上三角部分的每一列连续存储到浮点数组（val(:)）中。然后需要一个额外的指针来确定分离下三角元素和上三角元素的对角元素的位置。
 
 <p>
 
 <p></p>
-<div align="center"><a name="sec:data-structures.skyline"></a><a name="46558"></a>
+<div align="CENTER"><a name="sec:data-structures.skyline"></a><a name="46558"></a>
 <table>
-<caption align="bottom"><strong>图10.1：</strong>
+<caption align="BOTTOM"><strong>图10.1：</strong>
 非对称天际线或变带宽矩阵的轮廓。</caption>
-<tr><td><IMG
- width="536" height="326" border="0"
- src="img3578.png"
- alt="\begin{figure}\begin{center}
+<tr><td><img width="536" height="326" border="0" src="img3578.png" alt="\begin{figure}\begin{center}
 \begin{tabular}{\vert ccccccccccccccccc\vert} \hlin...
 ... &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; + \\ \hline
 \end{tabular}\end{center}\end{figure}"></td></tr>
@@ -124,9 +110,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="46179"></a>
 
 <p>
-<hr>
-
-<!--Navigation Panel-->
+<hr><!--Navigation Panel-->
 <a name="tex2html6572"
   href="node379.html">
 <button class="navigate">下一节</button></a> 
@@ -143,16 +127,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6573"
-  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
-<b> Up:</b> <a name="tex2html6567"
-  href="node372.html">Sparse Matrix Storage Formats</a>
-<b> Previous:</b> <a name="tex2html6563"
-  href="node377.html">Jagged Diagonal Storage</a>
- &nbsp <b>  <a name="tex2html6569"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6571"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6573" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>上一级：</b><a name="tex2html6567" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一节：</b><a name="tex2html6563" href="node377.html">锯齿对角存储</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

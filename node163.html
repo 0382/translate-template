@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Transformation to Standard Problem</title>
-<meta name="description" content="Transformation to Standard Problem">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Transformation to Standard Problem">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node164.html">
-<link rel="previous" href="node156.html">
-<link rel="up" href="node155.html">
-<link rel="next" href="node164.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3216"
   href="node164.html">
@@ -80,125 +73,120 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3217"
-  href="node164.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html3211"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3205"
-  href="node162.html">Storage and Work.</a>
- &nbsp <b>  <a name="tex2html3213"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3215"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3217" href="node164.html">直接方法</a>
+<b>上一级：</b><a name="tex2html3211" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3205" href="node162.html">Storage and Work.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001420000000000000000"></a><a name="sec:dense_gsym"></a><a name="17092"></a>
 <br>
-标准问题的转换
+转换为标准问题
 </h1>
 
 <p>
-我们可以将GHEP（<a href="node156.html#gsymeig">5.1</a>）重新表述为一个标准特征值问题，如果我们能够对<span class="math-inline">B</span>或<span class="math-inline">A</span>或这些矩阵的线性组合进行因式分解。关于矩阵分解的简要概述，请参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>。
+我们可以将GHEP（<a href="node156.html#gsymeig">5.1</a>）重新表述为一个标准特征值问题，如果我们能对矩阵<span class="math-inline">B</span>或<span class="math-inline">A</span>或它们的线性组合进行因式分解。关于矩阵分解的简要概述，请参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>。
 
 <p>
 在前一种情况下，我们进行分解
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="B_chol"></a><div class="math-display">B=LL^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="B_chol"></a><div class="math-display">B=LL^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (69)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 例如，使用Cholesky分解，并对
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="C_eigenvalues"></a><div class="math-display">cy=\lambda y,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="C_eigenvalues"></a><div class="math-display">Cy=\lambda y,</div></td>
+<td WIDTH=10 align="RIGHT">
 (70)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-应用标准的Hermitian算法，其中<span class="math-inline">C=L^{-1}AL^{-\ast}</span>。原始矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征向量<span class="math-inline">x</span>可以通过反代入恢复，
+应用标准的厄米算法，其中<span class="math-inline">C=L^{-1}AL^{-\ast}</span>。原矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征向量<span class="math-inline">x</span>可以通过回代恢复，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">x=L^{-\ast}y\,.</div>
 </div>
 <br clear="ALL">
 <p></p>
-当矩阵<span class="math-inline">B</span>在求逆方面条件良好或其结构比<span class="math-inline">A</span>更简单时，例如当<span class="math-inline">B</span>是对角矩阵时，这种策略是可取的。<a name="tex2html28"
+这种策略在矩阵<span class="math-inline">B</span>相对于求逆是良态的，或者其结构比<span class="math-inline">A</span>更简单时是可取的，例如当<span class="math-inline">B</span>是对角矩阵时。<a name="tex2html28"
   href="footnode.html#foot18371"><sup><button class="footnote"></button></sup></a>
 <p>
-矩阵<span class="math-inline">C</span>是Hermitian的，我们可以应用第四章<a href="node85.html#chap:heig">4</a>中描述的任何迭代算法。每次矩阵<span class="math-inline">C</span>应用于向量时，计算按照表达式中的括号顺序进行，
+矩阵<span class="math-inline">C</span>是厄米的，我们可以应用第四章<a href="node85.html#chap:heig">4</a>中描述的任何迭代算法。每次矩阵<span class="math-inline">C</span>应用于一个向量时，计算按照表达式中的括号顺序进行，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">y=cx=L^{-1}(A(L^{-\ast}x)),</div>
+<div class="math-display">y=Cx=L^{-1}(A(L^{-\ast}x)),</div>
 </div>
 <br clear="ALL">
 <p></p>
-即先进行反代入，然后进行矩阵-向量乘法，最后进行正代入。
+即先回代，然后矩阵向量乘法，再前向代入。
 
 <p>
-我们也可以应用第四章<a href="node85.html#chap:heig">4</a>中的移位-反转变换（SI），注意到
+我们也可以应用第四章<a href="node85.html#chap:heig">4</a>中的移位-反演谱变换（SI），注意到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(C-\sigma I)^{-1}= (L^{-1}AL^{-\ast}-\sigma I)^{-1}= L^{\ast}(A-\sigma B)^{-1}L,</div>
 </div>
 <br clear="ALL">
 <p></p>
-并使用对称不定因子分解，通常是
-<a name="AshBfact"></a>a-b=R^DR
+并使用对称不定分解，通常，
+<a name="AshBfact"></a>A-B=R^DR
 
 其中<span class="math-inline">D</span>是块对角矩阵，以计算
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">y=(C-\sigma I)^{-1}x=L^{\ast}(R^{-1}(D^{-1}(R^{-\ast}(Lx))))</div>
 </div>
 <br clear="ALL">
 <p></p>
-按照括号中的顺序进行。
+按照括号中的顺序。
 
 <p>
-与标准情况一样，这种移位-反转变换通常在较少的步骤内收敛，弥补了因式分解移位矩阵<span class="math-inline">A-\sigma B</span>和应用额外三角矩阵操作的成本。
+与标准情况一样，这种移位-反演变体通常收敛步数更少，弥补了对移位矩阵<span class="math-inline">A-\sigma B</span>进行因式分解和在三角矩阵上应用额外操作的成本。
 
 <p>
-看起来移位-反转变换算法需要两次矩阵分解，一次是<span class="math-inline">B</span>（<a href="node163.html#B_chol">5.4</a>），另一次是<span class="math-inline">A-\sigma B</span>（<a href="node163.html#AshBfact">5.6</a>），但如果我们使用专门为广义特征问题开发的算法（<a href="node156.html#gsymeig">5.1</a>），本章后面会介绍，我们可以避免分解<span class="math-inline">B</span>。
+看起来移位-反演算法需要两次矩阵分解，一次是<span class="math-inline">B</span>（<a href="node163.html#B_chol">5.4</a>），一次是<span class="math-inline">A-\sigma B</span>（<a href="node163.html#AshBfact">5.6</a>），但如果我们使用专门为广义特征问题开发的算法（<a href="node156.html#gsymeig">5.1</a>），则可以避免对<span class="math-inline">B</span>进行分解，这些算法将在本章后面描述。
 
 <p>
-另一种避免分解<span class="math-inline">B</span>的方法是应用第七章<a href="node203.html#chap:nep">7</a>中描述的非Hermitian矩阵算法，对非Hermitian矩阵
+另一种避免分解<span class="math-inline">B</span>的方法是应用第七章<a href="node203.html#chap:nep">7</a>中描述的非厄米矩阵算法，对非厄米矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">C=(A-\sigma B)^{-1}B\,.</div>
 </div>
 <br clear="ALL">
 <p></p>
-原始矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征值<span class="math-inline">\lambda</span>可以计算为
+原矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征值<span class="math-inline">\lambda</span>可以计算为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\lambda=\sigma+\frac{1}{\theta},</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">\theta</span>是<span class="math-inline">C</span>的特征值。它具有与原始矩阵束（<a href="node156.html#gsymeig">5.1</a>）相同的特征向量。
+其中<span class="math-inline">\theta</span>是<span class="math-inline">C</span>的特征值。它与原矩阵束（<a href="node156.html#gsymeig">5.1</a>）具有相同的特征向量。
 
 <p>
-第二种方法的主要优点是我们可以轻松使用标准的非Hermitian代码，如隐式重启Arnoldi方法（见&#167;<a href="node220.html#sec:nsymiram">7.6</a>）。只要<span class="math-inline">B</span>在求逆方面条件良好，非对称矩阵<span class="math-inline">C</span>的特征问题条件合理，但仍存在风险，我们得到的解可能违反GHEP的一些性质，例如，可能得到具有小但非零虚部的特征值。
+第二种方法的主要优点是我们可以使用标准的非厄米代码，例如隐式重启Arnoldi方法（参见&#167;<a href="node220.html#sec:nsymiram">7.6</a>），易于获得。只要<span class="math-inline">B</span>相对于求逆是良态的，非对称矩阵<span class="math-inline">C</span>的特征问题就是良态的，但仍有可能得到违反GHEP某些性质的解，例如，可能会得到具有微小但非零虚部的特征值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -218,16 +206,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3217"
-  href="node164.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html3211"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3205"
-  href="node162.html">Storage and Work.</a>
- &nbsp <b>  <a name="tex2html3213"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3215"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3217" href="node164.html">直接方法</a>
+<b>上一级：</b><a name="tex2html3211" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3205" href="node162.html">Storage and Work.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

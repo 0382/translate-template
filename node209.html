@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Methods</title>
-<meta name="description" content="Direct Methods">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Methods">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node210.html">
-<link rel="previous" href="node205.html">
-<link rel="up" href="node203.html">
-<link rel="next" href="node210.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3970"
   href="node210.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3971"
-  href="node210.html">Single- and Multiple-Vector Iterations</a>
-<b> Up:</b> <a name="tex2html3965"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3959"
-  href="node208.html">Accuracy of Eigenvalues Computed</a>
- &nbsp <b>  <a name="tex2html3967"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3969"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3971" href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html3965" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html3959" href="node208.html">Accuracy of Eigenvalues Computed</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001630000000000000000"></a>  <a name="sec:nsymeigdirect"></a><a name="22905"></a> 
@@ -101,22 +89,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h1> 
 
 <p>
-实践中用于解决NHEP（非厄米特征值问题）的主要直接方法是QR算法<a name="tex2html40"
-  href="footnode.html#foot27092"><sup><button class="footnote"></button></sup></a>。该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
+实践中用于解决非厄米特征值问题(NHEP)（参见公式<a href="node204.html#eq:nep1">7.1</a>及<a href="node204.html#eq:nep2">7.2</a>）的主要直接方法是QR算法。<a name="22912"></a>该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="chap5:schur"></a><div class="math-display">A = U T U^{\ast},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="chap5:schur"></a><div class="math-display">A = U T U^{\ast},</div></td>
+<td WIDTH=10 align="RIGHT">
 (121)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">U</span>是酉矩阵，<span class="math-inline">U^{\ast} U = I</span>，而<span class="math-inline">T</span>是上双对角矩阵。矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>即为<span class="math-inline">T</span>的对角线元素（参见第<a href="node48.html#sec_chap2_nHep">2.5</a>节）。矩阵<span class="math-inline">A</span>的特征向量<span class="math-inline">x</span>为<span class="math-inline">U s</span>，其中<span class="math-inline">s</span>是<span class="math-inline">T</span>的特征向量，可通过求解三角形系统获得。当<span class="math-inline">A</span>为实矩阵时，QR算法计算实Schur分解，以避免复数运算，从而节省浮点运算和内存。
+其中<span class="math-inline">U</span>是酉矩阵，满足<span class="math-inline">U^{\ast} U = I</span>，而<span class="math-inline">T</span>是上三对角矩阵。矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>即为<span class="math-inline">T</span>的对角线元素（详见第<a href="node48.html#sec_chap2_nHep">2.5</a>节）。矩阵<span class="math-inline">A</span>的特征向量<span class="math-inline">x</span>为<span class="math-inline">U s</span>，其中<span class="math-inline">s</span>是<span class="math-inline">T</span>的特征向量，可通过求解三角形方程组获得。当<span class="math-inline">A</span>为实矩阵时，QR算法计算实Schur分解以避免复数运算，从而节省浮点运算和内存。
 
 <p>
-QR算法源自简单的QR迭代：
+QR算法起源于简单的QR迭代：
 
 <p>
 设<span class="math-inline">A_0 = A</span>，
@@ -128,50 +115,45 @@ QR算法源自简单的QR迭代：
 计算<span class="math-inline">A_{k} = R_k Q_k</span>
 
 <p>
-在一定条件下，<span class="math-inline">A_k</span>会收敛到Schur型<span class="math-inline">T</span>。然而，QR迭代的收敛速度对于实际应用来说极慢。为了使QR迭代成为计算Schur分解的快速有效方法，已开发出多项关键改进措施，包括Hessenberg约简、隐式移位、收缩和矩阵平衡。感兴趣的读者可参阅[<a
- href="node421.html#golo96">198</a>,<a
- href="node421.html#demmelbook">114</a>]及其中的参考文献，以了解相关理论和实现的详细信息。
+在一定条件下，<span class="math-inline">A_k</span>会收敛至Schur型<span class="math-inline">T</span>。然而，QR迭代的收敛速度对于实际应用而言极其缓慢。为了使QR迭代成为快速有效的Schur分解计算方法，已开发出多项关键改进措施，包括海森堡约简、<a name="22923"></a>隐式移位、缩减及矩阵平衡等。感兴趣的读者可参阅[<a href="node421.html#golo96">198</a>,<a href="node421.html#demmelbook">114</a>]及相关文献，了解相关理论及实现细节。
 
 <p>
-QR算法对于一般<span class="math-inline">n \times n</span>矩阵的计算成本为<span class="math-inline">O(n^3)</span>次浮点运算和<span class="math-inline">O(n^2)</span>内存。对于实<span class="math-inline">n \times n</span>矩阵的粗略估计，若同时计算<span class="math-inline">U</span>和<span class="math-inline">T</span>，则需<span class="math-inline">25n^3</span>次浮点运算；若仅需特征值，则大约需要<span class="math-inline">10n^3</span>次浮点运算。
+QR算法对于一般<span class="math-inline">n \times n</span>矩阵的计算成本为<span class="math-inline">O(n^3)</span>次浮点运算及<span class="math-inline">O(n^2)</span>内存需求。对于实<span class="math-inline">n \times n</span>矩阵，一个粗略的估计是若同时计算<span class="math-inline">U</span>和<span class="math-inline">T</span>，则需约<span class="math-inline">25n^3</span>次浮点运算；若仅需特征值，则大约需要<span class="math-inline">10n^3</span>次浮点运算。
 
 <p>
-QR算法具有后向稳定性<a name="22925"></a>，即对于计算得到的酉矩阵<span class="math-inline">\widehat{U}</span>（在机器精度范围内）和上三角矩阵<span class="math-inline">\widehat{T}</span>，我们有
+QR算法具有向后稳定性；<a name="22925"></a>即，对于计算得到的酉矩阵<span class="math-inline">\widehat{U}</span>（在机器精度范围内）及上三角矩阵<span class="math-inline">\widehat{T}</span>，我们有
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">A + E = \widehat{U}\widehat{T}\widehat{U}^{\ast},</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">\Vert E\Vert \leq p(n)\epsilon\Vert A\Vert</span>，<span class="math-inline">p(n)</span>是<span class="math-inline">n</span>的适度增长的多项式函数。
+其中<span class="math-inline">\Vert E\Vert \leq p(n)\epsilon\Vert A\Vert</span>，<span class="math-inline">p(n)</span>是一个适度增长的<span class="math-inline">n</span>的多项式函数。
 
 <p>
-实现QR算法的子程序几乎在每个与线性代数相关的软件包中都可用。在MATLAB中，它作为eig命令使用<a name="tex2html41"
-  href="footnode.html#foot27093"><sup><button class="footnote"></button></sup></a>。在LAPACK[<a
- href="node421.html#lapack">12</a>]中，以下驱动程序可用于执行计算Schur分解、特征值、特征向量及计算结果精度估计等任务的变体：
-<div align="center">
-<table cellpadding=3>
-<tr><td align="left">xGEES</td>
-<td align="left">计算Schur分解并按特征值排序，</td>
+实现QR算法的子程序几乎存在于所有与线性代数相关的软件包中。在MATLAB中，它作为eig命令使用。<a name="tex2html41" href="footnode.html#foot27093"><sup><button class="footnote"></button></sup></a>在LAPACK[<a href="node421.html#lapack">12</a>]中，提供了以下驱动程序例程，用于执行计算Schur分解、特征值、特征向量及计算结果精度估计的变种任务：
+<div align="CENTER">
+<table CELLPADDING=3>
+<tr><td align="LEFT">xGEES</td>
+<td align="LEFT">计算Schur分解并按特征值排序，</td>
 </tr>
-<tr><td align="left">xGEESX</td>
-<td align="left">xGEES加上条件估计，</td>
+<tr><td align="LEFT">xGEESX</td>
+<td align="LEFT">xGEES加上条件估计，</td>
 </tr>
-<tr><td align="left">xGEEV</td>
-<td align="left">计算特征值和特征向量，</td>
+<tr><td align="LEFT">xGEEV</td>
+<td align="LEFT">特征值与特征向量，</td>
 </tr>
-<tr><td align="left">xGEEVX</td>
-<td align="left">xGEEV加上条件估计，</td>
+<tr><td align="LEFT">xGEEVX</td>
+<td align="LEFT">xGEEV加上条件估计，</td>
 </tr>
 </table>
 </div>
 其中<span class="math-inline">{\tt x}</span>代表数据类型，S或D表示实数单精度或双精度，C或Z表示复数单精度或双精度。
 
 <p>
-在ScaLAPACK[<a
- href="node421.html#scalapack">52</a>]中，提供了用于并行Hessenberg约简和带隐式移位的并行QR迭代的计算例程，分别是PxGEHRD和PxLAHQR。
+在ScaLAPACK[<a href="node421.html#scalapack">52</a>]中，提供了用于并行执行海森堡约简及隐式移位QR迭代的计算例程，分别是PxGEHRD和PxLAHQR。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -191,16 +173,11 @@ QR算法具有后向稳定性<a name="22925"></a>，即对于计算得到的酉�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3971"
-  href="node210.html">Single- and Multiple-Vector Iterations</a>
-<b> Up:</b> <a name="tex2html3965"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3959"
-  href="node208.html">Accuracy of Eigenvalues Computed</a>
- &nbsp <b>  <a name="tex2html3967"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3969"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3971" href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html3965" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html3959" href="node208.html">Accuracy of Eigenvalues Computed</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

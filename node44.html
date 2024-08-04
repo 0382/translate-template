@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Conditioning</title>
-<meta name="description" content="Conditioning">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Conditioning">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node45.html">
-<link rel="previous" href="node43.html">
-<link rel="up" href="node39.html">
-<link rel="next" href="node45.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1363"
   href="node45.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1364"
-  href="node45.html">Specifying a Singular Value</a>
-<b> Up:</b> <a name="tex2html1358"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1352"
-  href="node43.html">Decompositions</a>
- &nbsp <b>  <a name="tex2html1360"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1362"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1364" href="node45.html">Specifying a Singular Value</a>
+<b>上一级：</b><a name="tex2html1358" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1352" href="node43.html">分解</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001145000000000000000"></a> 
@@ -102,18 +90,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="1377"></a>
 
 <p>
-矩阵 <span class="math-inline">A</span> 的奇异值和奇异向量在条件数方面与 Hermitian 矩阵的特征值和特征向量大致相同，如第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节所述。
+矩阵<span class="math-inline">A</span>的奇异值和奇异向量的条件数，与厄米矩阵的特征值和特征向量大致相同，这一点在&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节中已有描述。
 
 <p>
-矩阵 <span class="math-inline">A</span> 的奇异值总是条件良好的，这意味着在范数上最多改变 <span class="math-inline">\epsilon</span> 的 <span class="math-inline">A</span> 最多可以改变任意特征值 <span class="math-inline">\epsilon</span>。
+矩阵<span class="math-inline">A</span>的奇异值总是良态的，这意味着在范数上至多改变<span class="math-inline">\epsilon</span>的<span class="math-inline">A</span>，其任一特征值最多也只能改变<span class="math-inline">\epsilon</span>。
 
 <p>
-这对大多数目的来说已经足够了，除非用户对小奇异值的前几位感兴趣，这些奇异值的大小小于或等于 <span class="math-inline">\epsilon</span>。例如，计算
+这通常足以满足大多数需求，除非用户对小奇异值的前几位数字感兴趣，这些奇异值的幅值小于或等于<span class="math-inline">\epsilon</span>。例如，计算
 
-<span class="math-inline">\sigma_i = 10^{-5}</span> 到正负 <span class="math-inline">\epsilon = 10^{-4}</span> 的范围内，意味着计算出的 <span class="math-inline">\sigma_i</span> 的前几位可能都不正确。关于小奇异值的敏感性及其前几位何时能准确计算的讨论，请参见[<a href="node421.html#demmelbook">114</a>,<a href="node421.html#dgesvd:99">118</a>]。
+<span class="math-inline">\sigma_i = 10^{-5}</span>，误差范围在正负
+<span class="math-inline">\epsilon = 10^{-4}</span>之间，意味着计算得到的<span class="math-inline">\sigma_i</span>的前几位数字可能都不正确。关于小奇异值的敏感性及其前几位数字何时能准确计算的讨论，请参见[<a
+ href="node421.html#demmelbook">114</a>,<a
+ href="node421.html#dgesvd:99">118</a>]。
 
 <p>
-另一方面，奇异向量和奇异子空间可能是条件不良的。第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节中的例子说明了这一点。（该矩阵的特征值和特征向量与其奇异值和奇异向量相同。）因此，奇异向量的条件数取决于其奇异值与最近其他奇异值之间的<em>间隔</em>；间隔越小，奇异向量越敏感。当对应于一组接近奇异值的奇异向量条件太差时，用户可能希望计算它们所张成的奇异子空间的基，而不是单个奇异向量。
+另一方面，奇异向量和奇异子空间可能是病态的。
+&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节中的例子说明了这一点。
+（该矩阵的特征值和特征向量与其奇异值和奇异向量相同。）
+因此，奇异向量的条件数取决于其奇异值与最接近的其他奇异值之间的<em>间隔</em>；间隔越小，奇异向量越敏感。
+当对应于一组接近奇异值的奇异向量过于病态时，用户可能希望计算它们所张成的奇异子空间的基，而不是单个奇异向量。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -133,16 +128,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1364"
-  href="node45.html">Specifying a Singular Value</a>
-<b> Up:</b> <a name="tex2html1358"
-  href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b> Previous:</b> <a name="tex2html1352"
-  href="node43.html">Decompositions</a>
- &nbsp <b>  <a name="tex2html1360"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1362"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1364" href="node45.html">Specifying a Singular Value</a>
+<b>上一级：</b><a name="tex2html1358" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一节：</b><a name="tex2html1352" href="node43.html">分解</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

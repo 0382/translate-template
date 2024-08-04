@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Overview of Available Algorithms.</title>
-<meta name="description" content="Overview of Available Algorithms.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Overview of Available Algorithms.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node158.html">
-<link rel="previous" href="node156.html">
-<link rel="up" href="node156.html">
-<link rel="next" href="node158.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3134"
   href="node158.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3135"
-  href="node158.html">Summary of Choices.</a>
-<b> Up:</b> <a name="tex2html3129"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3123"
-  href="node156.html">Introduction</a>
- &nbsp <b>  <a name="tex2html3131"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3133"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3135" href="node158.html">Summary of Choices.</a>
+<b>上一级：</b><a name="tex2html3129" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3123" href="node156.html">引言</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001410010000000000000">
@@ -97,24 +85,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h4>
 
 <p>
-在许多情况下，我们可以将铅笔（<a href="node156.html#gsymeig">5.1</a>）
-转换为第<a href="node85.html#chap:heig">4</a>章讨论的标准HEP，或者在某些情况下转换为第<a href="node203.html#chap:nep">7</a>章讨论的标准NHEP，并使用这两章中描述的任何算法。我们在§<a href="node163.html#sec:dense_gsym">5.2</a>中简要回顾了此类转换。
+在许多情况下，我们可以将矩阵束（参见<a href="node156.html#gsymeig">5.1</a>节）转化为第四章<a href="node85.html#chap:heig">4</a>讨论的标准厄米特征值问题(HEP)，或在某些情况下转化为第七章<a href="node203.html#chap:nep">7</a>讨论的标准非厄米特征值问题(NHEP)，并使用这两章中描述的任何算法。我们在§<a href="node163.html#sec:dense_gsym">5.2</a>中简要回顾了此类转换。
 
 <p>
-本章的主体部分致力于针对广义Hermitian铅笔（<a href="node156.html#gsymeig">5.1</a>）的特殊形式的算法：
+本章的主体部分专门介绍针对广义厄米矩阵束（参见<a href="node156.html#gsymeig">5.1</a>节）的特殊形式的算法：
 <dl>
 <dt><strong><i>幂法与逆迭代</i></strong></dt>
-<dd>§<a href="node165.html#sec_power_gsym">5.4</a>，是基本的迭代方法。它从一个适当的初始向量开始，在每次迭代中进行一次矩阵-向量乘法和一次线性系统求解。由于需要这两种操作，它不如标准情况吸引人，但出于其简单性以及阐明其与后续描述的更复杂方案的关系，我们在此包含它。
+<dd>§<a href="node165.html#sec_power_gsym">5.4</a>介绍的基本迭代方法。它从一个适当的初始向量开始，在每次迭代中进行一次矩阵-向量乘法和一次线性系统求解。由于这两种操作都需要，它不如标准情况下的方法吸引人，但由于其简单性以及为了阐明它与后续描述的更复杂方案的关系，我们在此将其包括进来。
 
 <p>
 </dd>
 <dt><strong><i>Lanczos方法</i></strong></dt>
-<dd>§<a href="node169.html#sec:lan_gsym">5.5</a>，构建了一个<span class="math-inline">B</span>正交基，该基由矩阵算子表示为三对角矩阵<span class="math-inline">T</span>的Krylov向量序列组成，<span class="math-inline">T</span>的特征值产生原始矩阵铅笔（<a href="node156.html#gsymeig">5.1</a>）的几个特征值的Ritz近似。我们将在§<a href="node169.html#sec:lan_gsym">5.5</a>中描述两种变体，一种直接迭代需要<span class="math-inline">A</span>的乘法和<span class="math-inline">B</span>的系统求解，另一种位移-逆迭代需要<span class="math-inline">(A-\sigma B)</span>的系统求解和<span class="math-inline">B</span>的乘法。
+<dd>§<a href="node169.html#sec:lan_gsym">5.5</a>构建了一个<span class="math-inline">B</span>正交基，该基由矩阵算子表示为三对角矩阵<span class="math-inline">T</span>的Krylov序列向量组成，<span class="math-inline">T</span>的特征值产生原始矩阵束（参见<a href="node156.html#gsymeig">5.1</a>节）的几个特征值的Ritz近似。我们将在§<a href="node169.html#sec:lan_gsym">5.5</a>中描述两种变体，一种直接迭代需要进行<span class="math-inline">A</span>的乘法运算和<span class="math-inline">B</span>的系统求解，另一种位移-逆迭代需要进行<span class="math-inline">(A-\sigma B)</span>的系统求解和<span class="math-inline">B</span>的乘法运算。
 
 <p>
 </dd>
 <dt><strong><i>Jacobi-Davidson方法</i></strong></dt>
-<dd>§<a href="node176.html#sec:jacdav_gsym">5.6</a>，更新一系列子空间，操作预处理位移矩阵。它使用<span class="math-inline">B</span>正交性，不需要线性系统求解。这使得它在矩阵太大以至于无法进行线性系统求解的情况下适用，正如本章描述的其他算法所需的那样。
+<dd>§<a href="node176.html#sec:jacdav_gsym">5.6</a>更新一系列子空间，操作预处理的位移矩阵。它使用<span class="math-inline">B</span>正交性，不需要线性系统的求解。这使得它在矩阵太大以至于无法进行线性系统求解的情况下（如本章描述的其他算法所需）仍然适用。
 </dd>
 </dl>
 
@@ -136,16 +123,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3135"
-  href="node158.html">Summary of Choices.</a>
-<b> Up:</b> <a name="tex2html3129"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3123"
-  href="node156.html">Introduction</a>
- &nbsp <b>  <a name="tex2html3131"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3133"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3135" href="node158.html">Summary of Choices.</a>
+<b>上一级：</b><a name="tex2html3129" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3123" href="node156.html">引言</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

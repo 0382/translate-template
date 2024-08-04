@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Implementation of Locking and Purging</title>
-<meta name="description" content="Implementation of Locking and Purging">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Implementation of Locking and Purging">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node130.html">
-<link rel="previous" href="node124.html">
-<link rel="up" href="node117.html">
-<link rel="next" href="node130.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2690"
   href="node130.html">
@@ -80,30 +73,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2691"
-  href="node130.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2685"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2679"
-  href="node128.html">Stability of .</a>
- &nbsp <b>  <a name="tex2html2687"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2689"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2691" href="node130.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2685" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2679" href="node128.html">Stability of .</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001358000000000000000">
 锁定与清除的实现</a>
 </h2>
-尽管锁定和清除的基本通缩思路在概念上直截了当，但在实际操作中仍需考虑诸多细节和多种策略。最终，一些特定决策不可避免。此处采用的通缩策略相对保守，但在实践中表现相当合理。在[<a href="node421.html#sore98">420</a>]中，计算实例表明，即便设定非常粗略的容差，也不会遗漏多重或聚集的特征值。
+尽管锁定和清除的基本通缩思路在概念上简单明了，但在实施过程中仍需考虑许多细节和多种策略。最终，一些临时决策是不可避免的。这里采用的通缩策略相对保守，但实际表现相当合理。在[<a href="node421.html#sore98">420</a>]中，计算示例表明，即使指定非常粗略的容差，也不会遗漏多个或聚集的本征值。
 
 <p>
-实现细节相当复杂，仅通过展示代码难以传达其核心思想。因此，我们将通过较高层次的文字描述来概述策略的主要思路。
+实施细节相当复杂，仅通过展示代码难以传达这些思路。因此，我们将通过较高层次的口头描述来概述策略的主要思想。
 
 <p>
 <br>
-<a name="fig:defL"></a><IMG
- width="598" height="313" align="bottom" border="0"
+<a name="fig:defL"></a><img
+ width="598" height="313" align="BOTTOM" border="0"
  src="img1104.png"
  alt="\begin{algorithm}
 % latex2html id marker 8274
@@ -118,32 +106,30 @@ iteration is halted.
 <br> 
 
 <p>
-实现要点：
+实现笔记：
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>初始阶段，我们采用<span class="math-inline">(m = k+p)</span>步的Lanczos分解，并每次隐式重启应用<span class="math-inline">p</span>个位移。每当锁定一个Ritz值时，通过减少<span class="math-inline">p</span>的有效值（减1），可使多项式滤波器在下一个最可能收敛的Ritz值上具有更大的相对幅度。（参见&#167;<a href="node121.html#consec">4.5.4</a>。）当然，此举需适度，以免滤波器次数过低而失效。若<span class="math-inline">k_o</span>为已锁定Ritz值的数量，IRLM迭代在<span class="math-inline">V</span>的列<span class="math-inline">k_o + 1,\dots, m</span>中进行，基于<span class="math-inline">m-k_o</span>长度的Lanczos分解。此时，<span class="math-inline">k</span>的有效值变为<span class="math-inline">m-k_o - p_o</span>，而<span class="math-inline">p</span>的有效值变为<span class="math-inline">p_o = p - k_o</span>。这带来两个重要效果：如&#167;<a href="node121.html#consec">4.5.4</a>所述，收敛速度提升，且每次隐式重启的工作量减少。
+<dd>初始时，我们使用一个<span class="math-inline">(m = k+p)</span>步的Lanczos分解，并每次隐式重启应用<span class="math-inline">p</span>个位移。每当锁定一个Ritz值时，将<span class="math-inline">p</span>的有效值减少1是有利的。这使得多项式滤波器在下一个最可能收敛的Ritz值上的相对幅值增大。（参见&#167;<a href="node121.html#consec">4.5.4</a>）当然，这必须限制在避免滤波器次数过低而失效的范围内。如果<span class="math-inline">k_o</span>是已锁定的Ritz值数量，IRLM迭代在<span class="math-inline">V</span>的列<span class="math-inline">k_o + 1,\dots, m</span>中进行，工作在一个<span class="math-inline">m-k_o</span>长度的Lanczos分解内。<span class="math-inline">k</span>的有效值变为<span class="math-inline">m-k_o - p_o</span>，<span class="math-inline">p</span>的有效值变为<span class="math-inline">p_o = p - k_o</span>。这有两个重要效果：如&#167;<a href="node121.html#consec">4.5.4</a>所述，收敛速度增加，每次隐式重启的工作量减少。
 
 <p>
 </dd>
 <dt><strong>(2)</strong></dt>
-<dd>此时，亦可考虑清除所有已收敛但非目标的Ritz对。
+<dd>此时也可能希望清除所有已收敛但不需要的Ritz对。
 
 <p>
 </dd>
 <dt><strong>(3)</strong></dt>
-<dd>引入随机初始向量的目的在于大幅提高尚未发现的目标特征向量方向上存在分量的可能性。
+<dd>引入随机初始向量的目的是大幅增加尚未找到的所需本征向量方向上的分量。
 
 <p>
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>若无机会对<span class="math-inline">A</span>进行分解，此特定停止策略尚属合理。然而，无法确保已找到所有<span class="math-inline">k</span>个目标特征值（尤其是在存在聚集或多重特征值的情况下）。若能对<span class="math-inline">A</span>（或更佳的<span class="math-inline">A-\sigma I</span>）进行对称不定分解，则可通过谱变换显著增强收敛性，并获得惯性计数，从而更可靠地验证是否已找到所有<span class="math-inline">k</span>个目标特征值。详见&#167;<a href="node107.html#subsec_stlm">4.4.3</a>的讨论。
+<dd>如果没有机会对<span class="math-inline">A</span>进行分解，这种临时的停止策略是合理的。然而，无法最终保证已找到所有<span class="math-inline">k</span>个所需本征值（特别是在聚集或多重本征值的情况下）。如果<span class="math-inline">A</span>（或更好的<span class="math-inline">A-\sigma I</span>）可以分解为对称不定分解，那么通过谱变换可以大大增强收敛性，并且可以获得惯性计数。这将提供更可靠的验证，确保已找到所有<span class="math-inline">k</span>个所需本征值。参见&#167;<a href="node107.html#subsec_stlm">4.4.3</a>的讨论。
 </dd>
 </dl>
 
 <p>
-<hr>
-
-这段文字详细介绍了锁定与清除策略的实现细节，包括初始设置、收敛加速、清除非目标Ritz对、引入随机向量以及停止策略等关键点，旨在确保算法在处理特征值问题时的有效性和可靠性。<!--Navigation Panel-->
+<hr><!--Navigation Panel-->
 <a name="tex2html2690"
   href="node130.html">
 <button class="navigate">下一节</button></a> 
@@ -160,16 +146,11 @@ iteration is halted.
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2691"
-  href="node130.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2685"
-  href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html2679"
-  href="node128.html">Stability of .</a>
- &nbsp <b>  <a name="tex2html2687"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2689"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2691" href="node130.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2685" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一节：</b><a name="tex2html2679" href="node128.html">Stability of .</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

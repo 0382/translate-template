@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Implicit Restart</title>
-<meta name="description" content="Implicit Restart">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Implicit Restart">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node223.html">
-<link rel="previous" href="node221.html">
-<link rel="up" href="node220.html">
-<link rel="next" href="node223.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4170"
   href="node223.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4171"
-  href="node223.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html4165"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4159"
-  href="node221.html">Arnoldi Procedure in GEMV</a>
- &nbsp <b>  <a name="tex2html4167"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4169"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4171" href="node223.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html4165" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4159" href="node221.html">Arnoldi Procedure in GEMV</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001662000000000000000"></a> <a name="sec:imprest"></a><a name="23394"></a>
@@ -98,46 +86,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-Lanczos 或 Arnoldi 过程的一个不幸方面是，无法提前确定需要多少步才能在指定精度内确定感兴趣的特征值。通过这一过程获得的特征信息完全取决于初始向量 <span class="math-inline">v_1</span> 的选择。除非 <span class="math-inline">v_1</span> 的选择非常幸运，否则感兴趣的特征信息可能要等到 <span class="math-inline">k</span> 变得非常大时才会出现。显然，保持 <span class="math-inline">V_k</span> 的数值正交性变得难以处理。需要大量的存储空间，并且反复求解 <span class="math-inline">H_k</span> 的特征系统也会变得昂贵，需要 <span class="math-inline">O(k^3)</span> 次浮点运算。
+Lanczos或Arnoldi过程的一个不幸方面是，无法提前确定需要多少步才能在指定精度内确定感兴趣的特征值。通过这一过程获得的特征信息完全取决于初始向量<span class="math-inline">v_1</span>的选择。除非<span class="math-inline">v_1</span>的选择非常幸运，否则感兴趣的特征信息可能要等到<span class="math-inline">k</span>变得非常大时才会出现。显然，保持<span class="math-inline">V_k</span>的数值正交性变得难以处理。需要大量的存储空间，并且反复求解<span class="math-inline">H_k</span>的特征系统也会变得昂贵，成本为<span class="math-inline">O(k^3)</span>次浮点运算。
 
 <p>
-控制这一成本的明显需求促使了重启方案的发展。重启意味着用一个“改进的”初始向量 <span class="math-inline">v_1^+</span> 替换初始向量 <span class="math-inline">v_1</span>，然后使用新向量计算新的 Arnoldi 分解。<span class="math-inline">f_k</span> 的结构起到了指导作用：我们的目标是通过迭代迫使 <span class="math-inline">v_1</span> 成为感兴趣的特征向量的线性组合。理论上，如果 <span class="math-inline">v_1</span> 是 <span class="math-inline">A</span> 的 <span class="math-inline">k</span> 个特征向量的非平凡线性组合，<span class="math-inline">f_k</span> 将消失。然而，一个更通用且实际上更好的数值策略是迫使初始向量成为跨越所需不变子空间的 Schur 向量的线性组合。
+控制这一成本的明显需求促使了重启方案的发展。重启意味着用一个“改进的”初始向量<span class="math-inline">v_1^+</span>替换初始向量<span class="math-inline">v_1</span>，然后使用新向量计算一个新的Arnoldi分解。<span class="math-inline">f_k</span>的结构起到了指导作用：我们的目标是通过迭代迫使<span class="math-inline">v_1</span>成为感兴趣的特征向量的线性组合。理论上，如果<span class="math-inline">v_1</span>是<span class="math-inline">A</span>的<span class="math-inline">k</span>个特征向量的非平凡线性组合，<span class="math-inline">f_k</span>将消失。然而，一个更普遍且实际上更好的数值策略是迫使初始向量成为跨越所需不变子空间的Schur向量的线性组合。
 
 <p>
-Karush [<a href="node421.html#karu51">258</a>] 在 Lanczos 原始算法出现后不久就意识到了重启的必要性 [<a href="node421.html#lanc50">285</a>]。随后，Paige [<a href="node421.html#paig71">347</a>]、Cullum 和 Donath [<a href="node421.html#cudo74">89</a>]，以及 Golub 和 Underwood [<a href="node421.html#goun77">197</a>] 都有所发展。最近，Saad 基于 Manteuffel 最初为线性系统迭代求解引入的多项式加速方案 [<a href="node421.html#mant77">316</a>]，提出了一种用于特征值计算的重启方案。所有这些方案都是显式的，即通过某种过程产生一个新的初始向量，然后构建一个全新的 Arnoldi 分解。
+重启的需求在Karush[258]早期就已被认识到，不久之后Lanczos[285]的原始算法出现。随后，Paige[347]、Cullum和Donath[89]以及Golub和Underwood[197]等人的发展。最近，基于Manteuffel[316]最初为线性系统迭代求解引入的多项式加速方案，Saad提出了一种用于特征值计算的重启方案。所有这些方案都是显式的，即通过某种过程产生一个新的初始向量，然后构建一个全新的Arnoldi分解。
 
 <p>
-还有一种重启方法提供了更高效且数值稳定的公式。这种方法称为隐式重启，是一种将隐式移位 QR 方案与 <span class="math-inline">k</span> 步 Arnoldi 或 Lanczos 分解相结合的技术，以获得隐式移位 QR 迭代的截断形式。避免了通常与 Arnoldi 和 Lanczos 过程相关的数值困难和存储问题。该算法能够使用 <span class="math-inline">2nk + O(k^2)</span> 存储计算具有用户指定特征（如最大实部或最大幅值）的少数 (<span class="math-inline">k</span>) 个特征值。计算得到的所需 <span class="math-inline">k</span> 维特征空间的 Schur 基向量在数值上是正交的，达到工作精度。
+还有一种重启方法提供了更高效且数值稳定的公式。这种方法称为隐式重启，是一种将隐式移位的QR方案与<span class="math-inline">k</span>步Arnoldi或Lanczos分解相结合的技术，以获得隐式移位QR迭代的截断形式。避免了通常与Arnoldi和Lanczos过程相关的数值困难和存储问题。该算法能够计算具有用户指定特征（如最大实部或最大幅值）的少数(<span class="math-inline">k</span>)个特征值，使用<span class="math-inline">2nk + O(k^2)</span>存储。计算出的所需<span class="math-inline">k</span>维特征空间的Schur基向量在数值上是正交的，达到工作精度。
 
 <p>
-隐式重启提供了一种从大型 Krylov 子空间中提取感兴趣信息的方法，同时避免了与标准方法相关的存储和数值困难。它通过不断将感兴趣的信息压缩到固定大小的 <span class="math-inline">k</span> 维子空间来实现这一点。这是通过隐式移位 QR 机制完成的。一个长度为 <span class="math-inline">m = k+p</span> 的 Arnoldi 分解
+隐式重启提供了一种从大型Krylov子空间中提取有趣信息的方法，同时避免了与标准方法相关的存储和数值困难。它通过不断将有趣信息压缩到固定大小的<span class="math-inline">k</span>维子空间中来实现这一点。这是通过隐式移位的QR机制完成的。一个长度为<span class="math-inline">m = k+p</span>的Arnoldi分解，
 
-<span class="math-inline">A V_m = V_m H_m + f_m e_m^</span>，
+<span class="math-inline">A V_m = V_m H_m + f_m e_m^T</span>，
 
-被压缩为一个保留感兴趣特征信息的长度为 <span class="math-inline">k</span> 的分解。这是通过隐式应用 <span class="math-inline">p</span> 次移位的 QR 步骤实现的。移位过程的第一阶段结果为
+被压缩为一个保留感兴趣特征信息的<span class="math-inline">k</span>长度的分解。这是通过使用QR步骤隐式应用<span class="math-inline">p</span>个移位来完成的。移位过程的第一阶段结果为
 
-<a name="aaupd"></a><span class="math-inline">A V_m^+ = V_m^+ H_m^+ + f_m e_m^ Q</span>，
+<a name="aaupd"></a><span class="math-inline">A V_m^+ = V_m^+ H_m^+ + f_m e_m^T Q</span>，
 
-其中 <span class="math-inline">V_m^+ = V_m Q</span>，<span class="math-inline">H_m^+ = Q^{\ast} H_m Q</span>，以及
+其中<span class="math-inline">V_m^+ = V_m Q</span>，<span class="math-inline">H_m^+ = Q^* H_m Q</span>，且
 
-<span class="math-inline">Q = Q_1Q_2 \cdots Q_p</span>。每个 <span class="math-inline">Q_j</span> 是移位 QR 算法中使用的移位 <span class="math-inline">\mu_j</span> 相关的正交矩阵。由于矩阵 <span class="math-inline">Q_j</span> 的 Hessenberg 结构，向量 <span class="math-inline">e_m^{\ast} Q</span> 的前 <span class="math-inline">k-1</span> 个条目为零。这意味着方程 (<a href="node222.html#aaupd">7.13</a>) 中的前 <span class="math-inline">k</span> 列保持在 Arnoldi 关系中。将 (<a href="node222.html#aaupd">7.13</a>) 两边的第一个 <span class="math-inline">k</span> 列等式化，提供了更新的 <span class="math-inline">k</span> 步 Arnoldi 分解
+<span class="math-inline">Q = Q_1Q_2 \cdots Q_p</span>。每个<span class="math-inline">Q_j</span>是移位<span class="math-inline">\mu_j</span>在移位QR算法中使用的正交矩阵。由于矩阵<span class="math-inline">Q_j</span>的海森堡结构，向量<span class="math-inline">e_m^* Q</span>的前<span class="math-inline">k-1</span>个条目为零。这意味着方程(<a href="node222.html#aaupd">7.13</a>)中的前<span class="math-inline">k</span>列保持在Arnoldi关系中。将(<a href="node222.html#aaupd">7.13</a>)两边的第一个<span class="math-inline">k</span>列等式化，提供了一个更新的<span class="math-inline">k</span>步Arnoldi分解
 
-<span class="math-inline">A V_k^+ = V_k^+ H_k^+ + f_k^+ e_k^</span>，
+<span class="math-inline">A V_k^+ = V_k^+ H_k^+ + f_k^+ e_k^T</span>，
 
-其中更新后的残差形式为
+其更新后的残差形式为
 
-<span class="math-inline">f_k^+ = V_m^+ e_{k+1} \hbeta_k + f_m \sigma</span>。
+<span class="math-inline">f_k^+ = V_m^+ e_{k+1} \beta_k + f_m \sigma</span>。
 
-以此为起点，可以应用 <span class="math-inline">p</span> 次额外的 Arnoldi 步骤返回到原始的 <span class="math-inline">m</span> 步形式。
+以此为起点，可以应用<span class="math-inline">p</span>个额外的Arnoldi步骤返回到原始的<span class="math-inline">m</span>步形式。
 
 <p>
-隐式重启的 <span class="math-inline">k</span> 步 Arnoldi 分解计算模板在算法 <a href="node222.html#fig:iram">7.7</a> 中给出。
-<a name="23413"></a> 
+隐式重启的<span class="math-inline">k</span>步Arnoldi分解计算模板在算法<a href="node222.html#fig:iram">7.7</a>中给出。
 
 <p>
 <br>
-<a name="fig:iram"></a><IMG
- width="598" height="431" align="bottom" border="0"
+<a name="fig:iram"></a><img
+ width="598" height="431" align="BOTTOM" border="0"
  src="img1993.png"
  alt="\begin{algorithm}
 {IRAM for NHEP
@@ -145,84 +132,90 @@ Karush [<a href="node421.html#karu51">258</a>] 在 Lanczos 原始算法出现后
 {
 \begin{tabbing}
 (nr)ss\=ijkl\=bbb\=ccc\=dd...
-..._m^{\ast} $\ \\
+..._m^{\ast} <span class="math-inline">\ \\
 {\rm (15)} \&gt; \&gt;{\bf end repeat}
 \end{tabbing}}
 \end{algorithm}">
 <br> 
 
 <p>
-现在我们将描述一些实现细节，参考算法 <a href="node222.html#fig:iram">7.7</a> 中的相应阶段。
+现在我们将描述一些实现细节，参考算法<a href="node222.html#fig:iram">7.7</a>中的相应阶段。
 
 <p>
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>选择初始起始向量 <span class="math-inline">v</span>，归一化并计算初始的 <span class="math-inline">(m = k+p)</span> 步 Arnoldi 分解。理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的 <span class="math-inline">v</span>。如果有一系列密切相关的特征值问题，这个向量应取自前一个问题的感兴趣的特征向量（或 Schur 向量）的线性组合。在没有其他考虑的情况下，随机向量是一个合理的选择。
+<dd>选择初始起始向量</span>v<span class="math-inline">，归一化并计算初始</span>(m = k+p)<span class="math-inline">步Arnoldi分解。理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的</span>v<span class="math-inline">。如果有一系列密切相关的特征值问题，此向量应取自前一个问题的感兴趣的特征向量（或Schur向量）的线性组合。在没有其他考虑的情况下，随机向量是一个合理的选择。
 
 <p>
 </dd>
 <dt><strong>(3)</strong></dt>
-<dd>Ritz 对 <span class="math-inline">(x, \theta)</span> 被认为是“收敛的”，如果
+<dd>Ritz对</span>(x, \theta)<span class="math-inline">被认为是“收敛的”，如果
 
-<span class="math-inline">\Vert f_k\Vert\vert e_k^*y\vert < \Vert H_k\Vert\epsilon_D</span>
+</span>\Vert f_k\Vert\vert e_k^*y\vert < \Vert H_k\Vert\epsilon_D<span class="math-inline">
 
-其中 <span class="math-inline">x = V_k y</span> 且 <span class="math-inline">\theta</span> 是“想要的”。一旦收敛，这个对应该被缩减。参见关于缩减的讨论，见第 <a href="node226.html#sec:deflation">7.6.6</a> 节。
+其中</span>x = V_k y<span class="math-inline">且</span>\theta<span class="math-inline">是“想要的”。收敛后，这一对应进行收缩。参见关于收缩的讨论，见第<a href="node226.html#sec:deflation">7.6.6</a>节。
 
 <p>
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>移位选择：移位 <span class="math-inline">\mu_j</span> 根据用户的“想要集”规范以及当前和可能过去的关于 <span class="math-inline">H_m</span> 的谱的信息来选择。一个成功的策略是将 <span class="math-inline">H_m</span> 的特征值排序为“想要集”
+<dd>移位选择：移位</span>\mu_j<span class="math-inline">根据用户的“想要集”规范以及当前和可能过去的</span>H_m<span class="math-inline">的谱信息进行选择。一个成功的策略是将</span>H_m<span class="math-inline">的特征值排序为一个“想要集”
 
-<span class="math-inline">\theta_1, \theta_2, \ldots, \theta_k</span> 和“不想要集”
+</span>\theta_1, \theta_2, \ldots, \theta_k<span class="math-inline">和一个“不想要集”
 
-<span class="math-inline">\mu_1, \mu_2, \ldots, \mu_p</span>，并将后者作为选定的移位集。这被称为<em>精确移位</em>策略。其他策略将在下面讨论。
+</span>\mu_1, \mu_2, \ldots, \mu_p<span class="math-inline">，并将后者作为选定的移位集。这被称为<em>精确移位</em>策略。其他策略将在下面讨论。
 
 <p>
 “想要集”规范的例子包括
 <dl COMPACT>
 <dt></dt>
-<dd>具有最大实部的 <span class="math-inline">k</span> 个特征值，
-
+<dd>具有最大实部的</span>k<span class="math-inline">个特征值，
+ 
 </dd>
 <dt></dt>
-<dd>具有最大幅值的 <span class="math-inline">k</span> 个特征值，
-
+<dd>具有最大幅值的</span>k<span class="math-inline">个特征值，
+ 
 </dd>
 <dt></dt>
-<dd>具有最小实部的 <span class="math-inline">k</span> 个特征值，
-
+<dd>具有最小实部的</span>k<span class="math-inline">个特征值，
+ 
 </dd>
 <dt></dt>
-<dd>具有最小幅值的 <span class="math-inline">k</span> 个特征值。
+<dd>具有最小幅值的</span>k<span class="math-inline">个特征值。
 </dd>
 </dl>
 
 <p>
 </dd>
 <dt><strong>(6)-(10)</strong></dt>
-<dd>使用
+<dd>使用移位</span>\mu_1, \mu_2, \ldots, \mu_p<span class="math-inline">对</span>H_m<span class="math-inline">应用</span>p<span class="math-inline">步移位QR迭代。这应使用隐式移位QR变体完成。如果使用精确移位，
 
-<span class="math-inline">\mu_1, \mu_2, \ldots, \mu_p</span> 作为移位，对 <span class="math-inline">H_m</span> 应用 <span class="math-inline">p</span> 步移位 QR 迭代。这应该使用隐式移位 QR 变体来完成。如果使用精确移位，那么在完成 <span class="math-inline">p</span> 步 QR 后，<span class="math-inline">\beta_{k} = H_m(k+1,k)</span> 应该为零，并且前导子矩阵 <span class="math-inline">H_m(1:k,1:k)</span> 应该具有 <span class="math-inline">\theta_1, \theta_2, \ldots, \theta_k</span> 作为其特征值。
+那么</span>\beta_k = H_m(k+1,k)<span class="math-inline">应在</span>p<span class="math-inline">步QR完成后为零，且领先子矩阵</span>H_m(1:k,1:k)<span class="math-inline">应具有
+
+</span>\theta_1, \theta_2, \ldots, \theta_k<span class="math-inline">作为其特征值。
 
 <p>
 </dd>
 <dt><strong>(12)</strong></dt>
-<dd>当使用精确移位时，通常在有限精度下，(6)-(10) 中提到的性质近似为真。然而，由于舍入误差，它们可能无法实现。因此，在更新残差向量时，包含两个项
+<dd>当使用精确移位时，通常在有限精度下这些性质是近似正确的。然而，由于舍入误差，它们可能无法实现。因此，在更新残差向量时，
 
-<span class="math-inline">f_k \leftarrow v_{k+1}\beta_{k} + f_m \sigma_k</span> 是很重要的，即使在精确算术中，项 <span class="math-inline">v_{k+1}\beta_{k}</span> 应该为零。注意，使用精确移位，更新后的 <span class="math-inline">V_k</span> 和 <span class="math-inline">H_k</span> 将提供一个新的 <span class="math-inline">k</span> 步 Arnoldi 分解，其 Ritz 值和向量是迄今为止产生的最佳近似，符合用户规范。
+</span>f_k \leftarrow v_{k+1}\beta_k + f_m \sigma_k<span class="math-inline">，
+
+即使项
+
+</span>v_{k+1}\beta_k<span class="math-inline">在精确算术中应为零，也包括两项是很重要的。请注意，使用精确移位，更新后的</span>V_k<span class="math-inline">和</span>H_k<span class="math-inline">将提供一个新的</span>k<span class="math-inline">步Arnoldi分解，其Ritz值和向量是迄今为止产生的最佳近似，符合用户规范。
 
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
-<dd>这一步需要对之前讨论的 Arnoldi 分解进行轻微修改。它简单地从通常方案的第 <span class="math-inline">k</span> 步开始。
+<dd>这一步骤需要对先前讨论的Arnoldi分解进行轻微修改。它简单地从通常方案的第</span>k<span class="math-inline">步开始。
 </dd>
 </dl>
 
 <p>
-有许多方法可以选择通过 QR 步骤应用的移位 <span class="math-inline">\{ \mu_j \}</span>。几乎任何显式多项式重启方案都可以通过这种隐式机制应用。选择<em>精确移位</em>取得了相当大的成功。这种选择是通过将 <span class="math-inline">H_m</span> 的特征值排序为 <span class="math-inline">k</span> 个“想要”和 <span class="math-inline">p</span> 个“不想要”的特征值，并使用后者作为移位。通过这种选择，<span class="math-inline">p</span> 次移位应用导致 <span class="math-inline">H_k^+</span> 具有 <span class="math-inline">k</span> 个想要的特征值作为其谱。
+有许多方法可以选择QR步骤应用的移位</span>\{\mu_j\}<span class="math-inline">。几乎任何显式多项式重启方案都可以通过这种隐式机制应用。已经取得了相当成功的选择是<em>精确移位</em>。这种选择是通过将</span>H_m<span class="math-inline">的特征值排序为</span>k<span class="math-inline">个“想要”和</span>p<span class="math-inline">个“不想要”的特征值，并使用后者作为移位集。通过这种选择，</span>p<span class="math-inline">次移位应用结果是</span>H_k^+<span class="math-inline">具有</span>k<span class="math-inline">个想要的特征值作为其谱。
 
 <p>
-其他有趣的策略包括 Chebyshev 多项式的根 [<a href="node421.html#saad84">383</a>]、调和 Ritz 值 [<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]、Leja 多项式的根 [<a href="node421.html#bacr98">23</a>]、最小二乘多项式的根 [<a href="node421.html#saad87">384</a>] 和精细移位 [<a href="node421.html#jia98c">244</a>]。特别是，Leja 和调和 Ritz 值已被用于估计 <span class="math-inline">A</span> 的内部特征值。
+其他有趣的策略包括Chebyshev多项式的根[383]、调和Ritz值[331,337,349,411]、Leja多项式的根[23]、最小二乘多项式的根[384]和精细移位[244]。特别是，Leja和调和Ritz值已被用于估计</span>A$的内部特征值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -242,16 +235,11 @@ Karush [<a href="node421.html#karu51">258</a>] 在 Lanczos 原始算法出现后
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4171"
-  href="node223.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html4165"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4159"
-  href="node221.html">Arnoldi Procedure in GEMV</a>
- &nbsp <b>  <a name="tex2html4167"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4169"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4171" href="node223.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html4165" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4159" href="node221.html">Arnoldi Procedure in GEMV</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Deflation</title>
-<meta name="description" content="Deflation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Deflation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node218.html">
-<link rel="up" href="node215.html">
-<link rel="next" href="node220.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4114"
   href="node220.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4115"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Up:</b> <a name="tex2html4109"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b> Previous:</b> <a name="tex2html4105"
-  href="node218.html">Explicit Restarts</a>
- &nbsp <b>  <a name="tex2html4111"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4113"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4115" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>上一节：</b><a name="tex2html4105" href="node218.html">显式重启</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001654000000000000000"></a>
@@ -97,30 +86,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 收缩法
 </h2>
-我们现在考虑以下包含收缩过程的实现方法。到目前为止，我们已经描述了仅计算一对特征值和特征向量的算法。如果需要计算多对特征值和特征向量，有两种可能的选择。
+我们现在考虑引入收缩过程的以下实现方式。迄今为止，我们已经描述了仅计算一个特征对（eigenpair）的算法。若需计算多个特征对，则有两种可能的选择。
 <br>
 <br>
-第一种选择是在重新启动时，将<span class="math-inline">v_1</span>取为近似特征向量的线性组合。例如，如果我们需要计算<span class="math-inline">p</span>个最右边的特征向量，我们可以取
+第一种选择是在重启时将<span class="math-inline">v_1</span>取为近似特征向量的线性组合。例如，如果我们需要计算<span class="math-inline">p</span>个最右侧的特征向量，我们可以取
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\hat v_1 = \sum_{i=1}^p \rho_i \tilde u_i, </div>
 </div>
 <br clear="ALL">
 <p></p>
-其中特征值按其实部的递减顺序编号。然后通过归一化<span class="math-inline">\hat v_1</span>得到向量<span class="math-inline">v_1</span>。系数<span class="math-inline">\rho_i</span>的最简单选择是取<span class="math-inline">\rho_i = 1, i=1,\ldots,p</span>。这种方法有几个缺点，最重要的是没有简单的方法以系统的方式选择系数<span class="math-inline">\rho_i</span>。结果是对于难题，收敛很难实现。
+其中特征值按其实部的递减顺序编号。然后通过归一化<span class="math-inline">\hat v_1</span>得到向量<span class="math-inline">v_1</span>。系数<span class="math-inline">\rho_i</span>的最简单选择是取<span class="math-inline">\rho_i = 1, i=1,\ldots,p</span>。这种方法有几个缺点，其中最重要的是无法以系统的方式选择系数<span class="math-inline">\rho_i</span>。结果是对于难题，收敛性难以实现。
 
 <p>
-一个更可靠的替代方法是逐对计算特征值和特征向量并使用收缩法。矩阵<span class="math-inline">A</span>可以通过逐步构造前<span class="math-inline">k</span>个舒尔向量来显式收缩。如果已经计算了不变子空间的前一个正交基
-<span class="math-inline">U_{k-1} = [u_1,\ldots,u_{k-1}]</span>，那么为了计算特征值<span class="math-inline">\lambda_{k}</span>，我们可以使用矩阵
+一个更可靠的替代方法是逐个计算特征对并使用收缩法。矩阵<span class="math-inline">A</span>可以通过逐步构建前<span class="math-inline">k</span>个舒尔向量来显式收缩。如果已经计算出不变子空间的前<span class="math-inline">k-1</span>个正交基<span class="math-inline">U_{k-1} = [u_1,\ldots,u_{k-1}]</span>，那么在计算特征值<span class="math-inline">\lambda_{k}</span>时，我们可以使用矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\tilde A = A - U_{k-1} \Sigma U_{k-1}^{\ast}, </div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">\Sigma = \diag(\sigma_i)</span>是一个对角矩阵。<span class="math-inline">\tilde A</span>的特征值由两组组成。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值将移动到<span class="math-inline">\tilde \lambda_i = \lambda_i - \sigma_i</span>，而其他特征值保持不变。如果寻求具有最大实部的特征值，则选择移动量使得<span class="math-inline">\lambda_k</span>成为<span class="math-inline">\tilde A</span>的下一个具有最大实部的特征值。也可以通过简单地投影出与由<span class="math-inline">U_{k-1}</span>张成的不变子空间相关的分量来进行收缩；这将导致使用矩阵
+其中<span class="math-inline">\Sigma = \diag(\sigma_i)</span>是一个位移的对角矩阵。<span class="math-inline">\tilde A</span>的特征值由两组组成。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值将位移至<span class="math-inline">\tilde \lambda_i = \lambda_i - \sigma_i</span>，而其余特征值保持不变。如果寻求具有最大实部的特征值，则选择位移使得<span class="math-inline">\lambda_k</span>成为<span class="math-inline">\tilde A</span>中具有最大实部的下一个特征值。也可以通过简单地投影出与由<span class="math-inline">U_{k-1}</span>张成的不变子空间相关的分量来进行收缩；这将导致操作矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\tilde A = A (I - U_{k-1} U_{k-1}^{\ast}).</div>
 </div>
 <br clear="ALL">
@@ -128,21 +116,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 注意，如果<span class="math-inline">A U_{k-1} = U_{k-1} R_{k-1}</span>是与前<span class="math-inline">k-1</span>个里兹值相关的部分舒尔分解，那么<span class="math-inline">\tilde A = A - U_{k-1} R_{k-1} U_{k-1}^{\ast}</span>。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值现在都将移动到零。
 
 <p>
-一个更好的收缩实现方法，与Arnoldi过程很好地结合，是使用单个基<span class="math-inline">v_1, v_2, \ldots , v_m</span>，其前几个向量是已经收敛的舒尔向量。假设已经有<span class="math-inline">k-1</span>个这样的向量收敛，并称它们为<span class="math-inline">v_1, v_2,\ldots,v_{k-1}</span>。然后我们选择一个向量<span class="math-inline">v_k</span>，它与<span class="math-inline">v_1,\ldots,v_{k-1}</span>正交且范数为1。接下来，我们执行<span class="math-inline">m-k</span>步Arnoldi过程，其中向量<span class="math-inline">v_j</span>与所有之前的<span class="math-inline">v_i</span>，包括<span class="math-inline">v_1,\ldots,v_{k-1}</span>保持正交。这生成子空间的正交基
+一个更好的收缩实现方式，与Arnoldi过程很好地结合，是使用单个基<span class="math-inline">v_1, v_2, \ldots , v_m</span>，其前几个向量是已经收敛的舒尔向量。假设已有<span class="math-inline">k-1</span>个这样的向量收敛，记为<span class="math-inline">v_1, v_2,\ldots,v_{k-1}</span>。然后我们选择一个与<span class="math-inline">v_1,\ldots,v_{k-1}</span>正交且范数为1的向量<span class="math-inline">v_k</span>。接下来执行<span class="math-inline">m-k</span>步Arnoldi过程，其中向量<span class="math-inline">v_j</span>相对于所有之前的<span class="math-inline">v_i</span>，包括<span class="math-inline">v_1,\ldots,v_{k-1}</span>保持正交。这将生成子空间的正交基
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><div class="math-display">{\rm span}\{ v_1,\ldots, v_{k-1} , v_k, A v_k, \ldots, A^{m-k} v_k \} \ .</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">{\rm span}\{ v_1,\ldots, v_{k-1} , v_k, A v_k, \ldots, A^{m-k} v_k \} \ .</div></td>
+<td WIDTH=10 align="RIGHT">
 (125)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-因此，这个修改的Krylov子空间的维数通常是恒定的，等于<span class="math-inline">m</span>。这种隐式收缩过程与Arnoldi方法的结合在下文中进行了概述。
+因此，这个修改的Krylov子空间的维数通常是恒定的，等于<span class="math-inline">m</span>。结合Arnoldi方法的隐式收缩过程的概要如下。
 
 <p>
 <br>
-<a name="alg:defl"></a><IMG
- width="598" height="435" align="bottom" border="0"
+<a name="alg:defl"></a><img
+ width="598" height="435" align="BOTTOM" border="0"
  src="img1940.png"
  alt="\begin{algorithm}{Explicitly Restarted Arnoldi Method with
 Deflation for NHEP
@@ -157,33 +145,33 @@ Deflation for NHEP
 <p>
 注意，在循环中，与特征值<span class="math-inline">\lambda_1,\ldots,\lambda_{k-1}</span>相关的舒尔向量在后续步骤中不会被触及。它们有时被称为“锁定向量”。同样，与这些向量对应的上三角矩阵也被锁定。
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\underbrace{\left[v_1, v_2, \ldots, v_{k-1}\right.}_{Locked},\underbrace{\left. v_k, v_{k+1}, \ldots v_m \right] }_{Active}</div>
 </div>
 <br clear="ALL">
 <p></p>
 
 <p>
-当一个新的舒尔向量收敛时，步骤(10)计算与这个新基向量相关的<span class="math-inline">R</span>的第<span class="math-inline">k</span>列。在后续步骤中，近似特征值是算法中定义的<span class="math-inline">m \times m</span>海森伯格矩阵<span class="math-inline">H_m</span>的特征值，其<span class="math-inline">k \times k</span>主子矩阵是上三角的。例如，当<span class="math-inline">m=6</span>并且在第二个舒尔向量<span class="math-inline">k=2</span>收敛后，矩阵<span class="math-inline">H_m</span>将具有以下形式
+当一个新的舒尔向量收敛时，步骤(10)计算与这个新基向量相关的<span class="math-inline">R</span>的第<span class="math-inline">k</span>列。在后续步骤中，近似特征值是算法中定义的<span class="math-inline">m \times m</span>海森堡矩阵<span class="math-inline">H_m</span>的特征值，其<span class="math-inline">k \times k</span>主子矩阵是上三角的。例如，当<span class="math-inline">m=6</span>且第二个舒尔向量<span class="math-inline">k=2</span>收敛后，矩阵<span class="math-inline">H_m</span>将具有以下形式
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><div class="math-display">H_m ~ = ~\left[ \begin{array}{cccccc}* &amp; * &amp; * &amp; * &amp; * &amp;...... &amp; &amp; &amp; * &amp; * &amp; * \\&amp; &amp; &amp; &amp; * &amp; * \\\end{array} \right].</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">H_m ~ = ~\left[ \begin{array}{cccccc}* &amp; * &amp; * &amp; * &amp; * &amp;...... &amp; &amp; &amp; * &amp; * &amp; * \\&amp; &amp; &amp; &amp; * &amp; * \\\end{array} \right].</div></td>
+<td WIDTH=10 align="RIGHT">
 (126)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-在后续步骤中，只需要考虑与<span class="math-inline">2 \times 2</span>上三角矩阵不相关的特征值。
+在后续步骤中，只需考虑与<span class="math-inline">2 \times 2</span>上三角矩阵无关的特征值。
 
 <p>
-可以证明，在精确算术中，下<span class="math-inline">2 \times 2</span>块中的<span class="math-inline">(n-k) \times (n-k)</span>海森伯格矩阵是应用于矩阵
+可以证明，在精确算术中，下部<span class="math-inline">(2 \times 2)</span>块中的<span class="math-inline">(n-k) \times (n-k)</span>海森堡矩阵与应用于矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\tilde A = (I-U_{k-1} U_{k-1}^{\ast} ) A.</div>
 </div>
 <br clear="ALL">
 <p></p>
-的Arnoldi运行所得到的相同矩阵。因此，我们隐式地从<span class="math-inline">A</span>的范围中投影出已经计算的不变子空间。
+的Arnoldi运行所得到的矩阵相同。因此，我们隐式地从<span class="math-inline">A</span>的范围中投影出已经计算出的不变子空间。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -203,16 +191,11 @@ Deflation for NHEP
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4115"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Up:</b> <a name="tex2html4109"
-  href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b> Previous:</b> <a name="tex2html4105"
-  href="node218.html">Explicit Restarts</a>
- &nbsp <b>  <a name="tex2html4111"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4113"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4115" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>上一节：</b><a name="tex2html4105" href="node218.html">显式重启</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

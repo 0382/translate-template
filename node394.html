@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Matrix-Vector Products.</title>
-<meta name="description" content="Matrix-Vector Products.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Matrix-Vector Products.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node395.html">
-<link rel="previous" href="node393.html">
-<link rel="up" href="node391.html">
-<link rel="next" href="node395.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6803"
   href="node395.html">
@@ -80,43 +73,38 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6804"
-  href="node395.html">Solvers.</a>
-<b> Up:</b> <a name="tex2html6798"
-  href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
-<b> Previous:</b> <a name="tex2html6792"
-  href="node393.html">Vector Updates.</a>
- &nbsp <b>  <a name="tex2html6800"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6802"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6804" href="node395.html">Solvers.</a>
+<b>上一级：</b><a name="tex2html6798" href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
+<b>上一节：</b><a name="tex2html6792" href="node393.html">Vector Updates.</a>
+  
+  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001950000000000000000"></a>
+<!--End of Navigation Panel--><h4><a name="SECTION001950030000000000000"></a>
 <a name="46536"></a>
 <br>
 矩阵-向量乘积
 </h4>
-矩阵-向量乘积在共享内存机器上通常很容易并行化，方法是将矩阵按行分割成与向量段相对应的条带。每个处理器随后计算一个条带的矩阵-向量乘积。
-对于分布式内存机器，如果每个处理器仅在其内存中拥有向量的一部分，可能会出现问题。根据矩阵的带宽，我们可能需要为向量的其他元素进行通信，这可能导致通信瓶颈。然而，许多稀疏矩阵问题源于一个网络，其中只有相邻节点相连。例如，源于有限差分或有限元问题的矩阵通常只涉及局部连接：矩阵元素 <span class="math-inline">a_{i,j}</span> 仅在变量 <span class="math-inline">i</span> 和 <span class="math-inline">j</span> 物理上接近时才非零。
-在这种情况下，自然地将网络或网格细分为合适的块，并将它们分布在处理器上。在计算 <span class="math-inline">Ap^{(i)}</span> 时，每个处理器需要相邻块中某些节点的 <span class="math-inline">p^{(i)}</span> 值。如果与这些相邻块的连接数远小于内部节点数，则通信时间可以与计算工作重叠。
+矩阵-向量乘积通常在共享内存机器上很容易并行化，方法是将矩阵按行分割成对应向量段的小条带。每个处理器随后计算其中一个条带的矩阵-向量乘积。
+对于分布式内存机器，如果每个处理器仅在其内存中拥有向量的一部分段，可能会出现问题。根据矩阵的带宽，我们可能需要为向量的其他元素进行通信，这可能导致通信瓶颈。然而，许多稀疏矩阵问题源于仅相邻节点连接的网络。例如，有限差分或有限元问题产生的矩阵通常只涉及局部连接：矩阵元素<span class="math-inline">a_{i,j}</span>仅在变量<span class="math-inline">i</span>和<span class="math-inline">j</span>物理上接近时才非零。
+在这种情况下，将网络或网格自然地细分为合适的块并将其分布在处理器上似乎是合理的。在计算<span class="math-inline">Ap^{(i)}</span>时，每个处理器需要相邻块中某些节点的<span class="math-inline">p^{(i)}</span>值。如果与这些相邻块的连接数远小于内部节点数，则通信时间可以与计算工作重叠。
 
 <p>
-最近，<em>图划分</em>已被用作处理具有非局部连接的一般问题的强大工具。考虑 <span class="math-inline">y \leftarrow Ax</span> 和矩阵 <span class="math-inline">A</span> 的无向图 <span class="math-inline">G</span>。假设顶点 <span class="math-inline">i</span> 存储 <span class="math-inline">x_i, y_i</span> 以及所有 <span class="math-inline">j</span> 的非零 <span class="math-inline">a_{i,j}</span>。让顶点 <span class="math-inline">i</span> 表示计算 <span class="math-inline">y_i = \sum_j a_{i,j} x_j</span> 的工作。我们可以将顶点 <span class="math-inline">i</span> 的权重设为计算 <span class="math-inline">y_i</span> 的操作数，将边 <span class="math-inline">(i, j)</span> 的权重设为 1，表示如果顶点 <span class="math-inline">i</span> 和 <span class="math-inline">j</span> 映射到不同处理器，发送 <span class="math-inline">x_j</span> 到顶点 <span class="math-inline">i</span> 的成本。一个好的图划分启发式算法会将 <span class="math-inline">G</span> 划分为与 <span class="math-inline">P</span> 个处理器相对应的 <span class="math-inline">P</span> 个子集，使得：
+更近期的方法中，**图划分**已成为处理具有非局部连接的一般问题的一种强大工具。考虑<span class="math-inline">y \leftarrow Ax</span>和矩阵<span class="math-inline">A</span>的（对称）无向图<span class="math-inline">G</span>。假设顶点<span class="math-inline">i</span>存储<span class="math-inline">x_i, y_i</span>以及所有<span class="math-inline">j</span>的非零<span class="math-inline">a_{i,j}</span>。让顶点<span class="math-inline">i</span>表示计算任务
+
+<span class="math-inline">y_i = \sum_j a_{i,j} x_j</span>。我们可以将顶点<span class="math-inline">i</span>的权重设为计算<span class="math-inline">y_i</span>的操作数，边<span class="math-inline">(i, j)</span>的权重设为1，表示如果顶点<span class="math-inline">i</span>和<span class="math-inline">j</span>映射到不同处理器时发送<span class="math-inline">x_j</span>到顶点<span class="math-inline">i</span>的成本。一个好的图划分启发式算法会将<span class="math-inline">G</span>划分为对应于<span class="math-inline">P</span>个处理器的<span class="math-inline">P</span>个子集，使得：
 
 <ul>
-<li>各子集的顶点权重和近似相等，
-</li>
-<li>跨子集的边割和最小化。
-</li>
+<li>各子集的顶点权重和近似相等，</li>
+<li>跨越子集的边切割和最小化。</li>
 </ul>
-这确保了良好的负载均衡并最小化了通信。优秀的图划分软件包括 Chaco [<a href="node421.html#chaco2.0">223</a>] 和 METIS [<a href="node421.html#metis4.0">259</a>]（还有并行版本的 ParMETIS）。
+这确保了良好的负载均衡并最小化了通信。优秀的图划分软件包括Chaco[<a href="node421.html#chaco2.0">223</a>]和METIS[<a href="node421.html#metis4.0">259</a>]（以及并行版本的ParMETIS）。
 
 <p>
-划分后，可以进行进一步的优化以减少通信。例如，如果一个顶点子集包含多个到另一个子集的边，则可以将向量的相应元素打包成一条消息，使得每个处理器向另一个处理器发送不超过一条消息。有关分布式内存系统实现方面的更详细讨论，请参见 De Sturler 和 van der Vorst [<a href="node421.html#stur91">111</a>,<a href="node421.html#dsvdv94">112</a>] 以及 Pommerell [<a href="node421.html#pomm92">369</a>]。
+划分后，可以进一步进行优化以减少通信。例如，如果一个顶点子集包含多个到另一个子集的边，则可以将向量的相应元素打包成一条消息，使得每个处理器向另一个处理器发送不超过一条消息。关于分布式内存系统的实现方面的更详细讨论，请参见De Sturler和van der Vorst[<a href="node421.html#stur91">111</a>,<a href="node421.html#dsvdv94">112</a>]以及Pommerell[<a href="node421.html#pomm92">369</a>]。
 
 <p>
-高质量的并行算法已在软件包中实现，如 Aztec [<a href="node421.html#aztec2.0">236</a>] 和 PETSc [<a href="node421.html#petsc2.0">38</a>]。这些软件可以通过本书的主页 ETHOME 获取。
+高质量的并行算法已在软件包中实现，如Aztec[<a href="node421.html#aztec2.0">236</a>]和PETSc[<a href="node421.html#petsc2.0">38</a>]。这些软件可以通过本书的主页ETHOME获取。
 <a name="46551"></a>
 
 <p>
@@ -137,16 +125,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6804"
-  href="node395.html">Solvers.</a>
-<b> Up:</b> <a name="tex2html6798"
-  href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
-<b> Previous:</b> <a name="tex2html6792"
-  href="node393.html">Vector Updates.</a>
- &nbsp <b>  <a name="tex2html6800"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6802"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6804" href="node395.html">Solvers.</a>
+<b>上一级：</b><a name="tex2html6798" href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
+<b>上一节：</b><a name="tex2html6792" href="node393.html">Vector Updates.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

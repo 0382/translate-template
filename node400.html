@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Inexact Matrix Transformations</title>
-<meta name="description" content="Inexact Matrix Transformations">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Inexact Matrix Transformations">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node401.html">
-<link rel="previous" href="node399.html">
-<link rel="up" href="node398.html">
-<link rel="next" href="node401.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6920"
   href="node401.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6921"
-  href="node401.html">Arnoldi Method with Inexact</a>
-<b> Up:</b> <a name="tex2html6915"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6909"
-  href="node399.html">Matrix Transformations</a>
- &nbsp <b>  <a name="tex2html6917"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6919"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6921" href="node401.html">Arnoldi Method with Inexact</a>
+<b>上一级：</b><a name="tex2html6915" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6909" href="node399.html">矩阵变换</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002022000000000000000"></a>
@@ -99,55 +87,47 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-本文仅对Cayley变换进行了分析，尽管移位-逆变换也可以使用。原因有三：首先，移位-逆Arnoldi方法和Cayley变换Arnoldi方法产生的Ritz向量相同；其次，这使得与（Jacobi）Davidson方法的联系更容易建立；第三，Cayley变换为解决问题提供了一种更自然的方法。
+这里仅对Cayley变换进行了分析，尽管移位-反演方法也可以使用。原因有三：首先，移位-反演Arnoldi方法和Cayley变换Arnoldi方法产生的Ritz向量相同。其次，这使得与(Jacobi)Davidson方法的联系更容易建立。第三，Cayley变换为问题提供了一种更自然的处理方式。
 
 <p>
-在应用于Cayley变换的Arnoldi方法中，<span class="math-inline">T_{\mathrm{C}}</span>，我们必须解决一系列线性系统
+在应用于Cayley变换的Arnoldi方法中，<span class="math-inline">T_{\mathrm{C}}</span>，我们必须解一系列线性系统
 <br><p></p>
-<div align="center">
-
-
+<div align="CENTER">
 <div class="math-display">(A - \mu B) w_j = (A - \nu B) v_j - s_j</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于<span class="math-inline">j=1,\ldots,k</span>，其中<span class="math-inline">s_j</span>是残差，<span class="math-inline">v_j</span>是最后一个Krylov基向量。结果<span class="math-inline">w_j</span>相对于<span class="math-inline">v_1,\ldots,v_j</span>进行正交化，得到<span class="math-inline">v_{j+1}</span>。我们也可以将Cayley变换应用于Krylov空间中的另一个向量，而不是<span class="math-inline">v_j</span>。在这种情况下，我们解决线性系统
+对于<span class="math-inline">j=1,\ldots,k</span>，其中<span class="math-inline">s_j</span>是残差，<span class="math-inline">v_j</span>是最后一个Krylov基向量。结果<span class="math-inline">w_j</span>相对于<span class="math-inline">v_1,\ldots,v_j</span>进行正交化，得到<span class="math-inline">v_{j+1}</span>。也可以将Cayley变换应用于Krylov空间中的另一个向量，而不是<span class="math-inline">v_j</span>。在这种情况下，我们解线性系统
 <br>
-<div align="right">
-
-
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:system"></a><div class="math-display">(A - \mu B) w_j = (A - \nu B) y_j - s_j,</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:system"></a><div class="math-display">(A - \mu B) w_j = (A - \nu B) y_j - s_j,</div></td>
+<td WIDTH=10 align="RIGHT">
 (273)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">y_j</span>的选择如下：它可以是一个Ritz向量（Jacobi-Davidson）或最后一个基向量（Arnoldi）或连续向量（有理Krylov）。残差范数<span class="math-inline">\Vert s_j\Vert</span>是向后误差的度量，因为我们可以将（<a href="node400.html#eq:system">11.2</a>）重写为
+其中<span class="math-inline">y_j</span>选择如下：它可以是一个Ritz向量(Jacobi-Davidson)或最后一个基向量(Arnoldi)或连续向量(有理Krylov)。残差范数<span class="math-inline">\Vert s_j\Vert</span>是后向误差的度量，因为我们可以将(<a href="node400.html#eq:system">11.2</a>)重写为
 <br><p></p>
-<div align="center">
-
-
+<div align="CENTER">
 <div class="math-display">(A - \mu B + s_j w_j^{\ast} / \Vert w_j\Vert^2 ) w_j= (A - \nu B) y_j \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
 当使用直接方法时，通常会发生
 
-<span class="math-inline">s_j/ \Vert A-\mu B\Vert \Vert w_j\Vert</span>是机器精度的适度倍数。我们称直接方法计算了线性系统的向后稳定解。由于<span class="math-inline">\Vert s_j\Vert</span>非常小，我们谈论的是精确的特征值求解器。通过迭代方法获得小的残差范数也是可能的，但通常非常昂贵。在本节中，我们研究<span class="math-inline">\Vert s_j\Vert</span>较大的情况。为了说明我们所说的“大”，需要对迭代线性系统求解器进行一些说明。线性系统<span class="math-inline">cx=b</span>在相对残差容差<span class="math-inline">\tau</span>下被求解，当解<span class="math-inline">x</span>满足<span class="math-inline">\Vert b-Cx\Vert \leq \tau\Vert b\Vert</span>时。Krylov方法[<a href="node421.html#saad96">388</a>]通常被使用。GMRES[<a href="node421.html#sasc86">389</a>]，<span class="math-inline">\mathrm{BiCGSTAB}(\ell)</span>[<a href="node421.html#slfv94">410</a>]，和QMR[<a href="node421.html#frna91">179</a>]是其中最广泛使用的。参见[<a href="node421.html#temp94">41</a>]了解所有这些求解器的模板。当使用合适的预处理器时，它们的性能显著提高。因此，我们所说的“大误差”是指
+<span class="math-inline">s_j/ \Vert A-\mu B\Vert \Vert w_j\Vert</span>是机器精度的适度倍数。我们称直接方法计算了线性系统的后向稳定解。由于<span class="math-inline">\Vert s_j\Vert</span>非常小，我们谈论的是精确的特征值求解器。通过迭代方法获得小的残差范数也是可能的，但通常非常昂贵。在本节中，我们研究<span class="math-inline">\Vert s_j\Vert</span>较大的情况。为了说明我们所说的“大”是什么意思，需要对迭代线性系统求解器说几句话。线性系统<span class="math-inline">Cx=b</span>被称为以相对残差容差<span class="math-inline">\tau</span>求解，当解<span class="math-inline">x</span>满足<span class="math-inline">\Vert b-Cx\Vert \leq \tau\Vert b\Vert</span>时。Krylov方法[<a href="node421.html#saad96">388</a>]通常被使用。GMRES[<a href="node421.html#sasc86">389</a>]，<span class="math-inline">\mathrm{BiCGSTAB}(\ell)</span>[<a href="node421.html#slfv94">410</a>]，和QMR[<a href="node421.html#frna91">179</a>]是其中最广泛使用的。参见[<a href="node421.html#temp94">41</a>]以获取所有这些求解器的模板。当使用合适的预处理器时，它们的性能显著提高。因此，我们所说的“大误差”是指
 
 <span class="math-inline">10^{-8} \leq \tau \leq 10^{-2}.</span>
 
 <p>
-通过将所有的<span class="math-inline">s_j</span>对于<span class="math-inline">j=1, \ldots,k-1</span>放在一起
+通过将所有<span class="math-inline">s_j</span>对于<span class="math-inline">j=1, \ldots,k-1</span>放在一起，
 
 <span class="math-inline">S_{k-1}=[s_{1},\ldots,s_{k-1}]</span>，<span class="math-inline">w_j</span>在<span class="math-inline">W_{k-1}</span>中，<span class="math-inline">y_j</span>在<span class="math-inline">Y_{k-1}</span>中，我们得到
 <br>
-<div align="right">
-
-
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:system-Sk"></a><div class="math-display">(A - \mu B)W_{k-1} = (A -\nu B) Y_{k-1} - S_{k-1} \ .</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:system-Sk"></a><div class="math-display">(A - \mu B)W_{k-1} = (A -\nu B) Y_{k-1} - S_{k-1} \ .</div></td>
+<td WIDTH=10 align="RIGHT">
 (274)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -155,47 +135,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">E_{k-1} = S_{k-1} W_{k-1}^{\dagger}</span>。我们可以将关系重写为
 <br>
-<div align="right">
-
-
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:system-Ek"></a><div class="math-display">(A - \mu B + E_{k-1}) W_{k-1} = (A - \nu B) Y_{k-1} \ .</div></td>
-<td width=10 align="right">
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:system-Ek"></a><div class="math-display">(A - \mu B + E_{k-1}) W_{k-1} = (A - \nu B) Y_{k-1} \ .</div></td>
+<td WIDTH=10 align="RIGHT">
 (275)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这是我们在<span class="math-inline">{k-1}</span>步后应该得到的“非精确”Cayley变换的关系
+这是我们在<span class="math-inline">{k-1}</span>步后应得到的“非精确”Cayley变换的关系
 <br><p></p>
-<div align="center">
-
-
+<div align="CENTER">
 <div class="math-display">T_{\mathrm{IC}} = (A - \mu B + E_{k-1})^{-1} (A - \nu B)\ .</div>
 </div>
 <br clear="ALL">
 <p></p>
 
 <p>
-注意，对于固定的<span class="math-inline">\nu</span>和<span class="math-inline">\mu</span>，<span class="math-inline">T_{\mathrm{IC}}</span>依赖于<span class="math-inline">k</span>以及每个线性系统（<a href="node400.html#eq:system">11.2</a>）的求解方式。当（<a href="node400.html#eq:system">11.2</a>）通过预处理器<span class="math-inline">M</span>或静态线性系统求解器求解时，即
+注意，对于固定的<span class="math-inline">\nu</span>和<span class="math-inline">\mu</span>，<span class="math-inline">T_{\mathrm{IC}}</span>依赖于<span class="math-inline">k</span>以及每个线性系统(<a href="node400.html#eq:system">11.2</a>)的求解方式。当(<a href="node400.html#eq:system">11.2</a>)通过预处理器<span class="math-inline">M</span>或静态线性系统求解器求解时，即
 
-<span class="math-inline">w_j = M^{-1} (A-\nu B) y_j</span> 对于<span class="math-inline">j=1, \ldots,k-1</span>，那么
+<span class="math-inline">w_j = M^{-1} (A-\nu B) y_j</span>对于<span class="math-inline">j=1, \ldots,k-1</span>，则
 
-<span class="math-inline">E_{k-1} = E \equiv M - (A-\mu B)</span>与<span class="math-inline">k</span>和<span class="math-inline">y_j</span>无关，因此<span class="math-inline">T_{\mathrm{IC}}</span>也是如此。
+<span class="math-inline">E_{k-1} = E \equiv M - (A-\mu B)</span>独立于<span class="math-inline">k</span>和<span class="math-inline">y_j</span>，因此<span class="math-inline">T_{\mathrm{IC}}</span>也是。
 
 <p>
-特征对从<span class="math-inline">{\rm span}\{v_1,v_2,\ldots,v_k\}</span>计算。在Arnoldi方法中，这是通过<span class="math-inline">W_{k-1}</span>的正交化产生的Hessenberg矩阵实现的；在Davidson方法中，使用<span class="math-inline">A</span>和<span class="math-inline">B</span>的投影，例如
+特征对从<span class="math-inline">{\rm span}\{v_1,v_2,\ldots,v_k\}</span>计算。在Arnoldi方法中，这是通过<span class="math-inline">W_{k-1}</span>的正交化产生的Hessenberg矩阵发生的；在Davidson方法中，使用<span class="math-inline">A</span>和<span class="math-inline">B</span>的投影，例如
 
 <span class="math-inline">V_k^{\ast} A V_k z = \theta V_k^{\ast} B V_k z</span>。
 
 <p>
 
-<span class="math-inline">{\rm Span}(v_1,\ldots,v_k)</span>包含与<span class="math-inline">T_{\mathrm{IC}}</span>的分离良好的极端特征值相关的特征向量。这是一个扰动的<span class="math-inline">T_{\mathrm{C}}</span>，因此与<span class="math-inline">Ax = \lambda Bx</span>的关系部分丢失，准确计算<span class="math-inline">Ax = \lambda Bx</span>的特征对可能很困难。为了了解哪些参数在这种扰动中起作用，从[<a href="node421.html#mero97">323</a>]中的定理4.3和4.4可以证明，如果<span class="math-inline">T_{\mathrm{IC}}</span>有不同的特征值，那么对于<span class="math-inline">T_{\mathrm{C}}</span>的每个特征对<span class="math-inline">(\zeta,x)</span>，存在<span class="math-inline">T_{\mathrm{IC}}</span>的特征对<span class="math-inline">(\eta,u)</span>，使得
+<span class="math-inline">{\rm Span}(v_1,\ldots,v_k)</span>包含与<span class="math-inline">T_{\mathrm{IC}}</span>的分离极值特征值相关的特征向量。这是一个扰动的<span class="math-inline">T_{\mathrm{C}}</span>，因此与<span class="math-inline">Ax = \lambda Bx</span>的关系部分丧失，准确计算<span class="math-inline">Ax = \lambda Bx</span>的特征对可能很困难。为了了解哪些参数在扰动中起作用，从[<a href="node421.html#mero97">323</a>]中的定理4.3和4.4可以证明，如果<span class="math-inline">T_{\mathrm{IC}}</span>有不同的特征值，那么对于<span class="math-inline">T_{\mathrm{C}}</span>的每个特征对<span class="math-inline">(\zeta,x)</span>，存在<span class="math-inline">T_{\mathrm{IC}}</span>的特征对<span class="math-inline">(\eta,u)</span>，使得
 <p></p>
-<div align="center">
-
-<IMG
- width="271" height="52" border="0"
- src="img3729.png"
- alt="\begin{eqnarray*}
+<div align="CENTER">
+<img width="271" height="52" border="0" src="img3729.png" alt="\begin{eqnarray*}
 \vert\zeta - \eta\vert &amp; \leq &amp; \kappa_1 \vert\zeta\vert \Vert...
 ...x\Vert &amp; \leq &amp; \kappa_2 \vert\zeta\vert \Vert E_{k-1}\Vert \, ,
 \end{eqnarray*}">
@@ -208,7 +180,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 本节可以总结如下。
 
 <ul>
-<li>非精确Cayley变换的行为类似于精确的Cayley变换。这意味着仍然针对极点<span class="math-inline">\mu</span>附近的特征值。
+<li>非精确Cayley变换表现得像精确Cayley变换。这意味着仍然针对极点<span class="math-inline">\mu</span>附近的特征值。
 
 <p>
 </li>
@@ -216,15 +188,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 </li>
-<li>序列（<a href="node400.html#eq:system">11.2</a>）对于<span class="math-inline">j=1, \ldots,k-1</span>定义了一个Krylov子空间<span class="math-inline">\mathcal{K}^k(T_{\mathrm{IC}}, y_1)</span>。
+<li>序列(<a href="node400.html#eq:system">11.2</a>)对于<span class="math-inline">j=1, \ldots,k-1</span>定义了一个Krylov子空间<span class="math-inline">\mathcal{K}^k(T_{\mathrm{IC}}, y_1)</span>。
 </li>
 </ul>
 
 <p>
-剩下的问题是现在如何计算<span class="math-inline">T_{\mathrm{IC}}</span>的特征对，或者如何利用它们来计算<span class="math-inline">Ax = \lambda Bx</span>的特征对。在§<a href="node401.html#sec:inexact-Arnoldi">11.2.3</a>和§<a href="node402.html#sec:davidson">11.2.4</a>中，我们讨论了Rayleigh-Ritz技术；即，特征对是从<span class="math-inline">Ax = \lambda Bx</span>在<span class="math-inline">{\rm span}(v_1,\ldots,v_k)</span>上的正交投影计算的。在§<a href="node407.html#sec:inexact-RKS">11.2.7</a>中，特征对直接从<span class="math-inline">T_{\mathrm{IC}}</span>的特征对通过有理Krylov递归关系计算。§<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>介绍了一种使用特征向量的递归关系和特征值的Rayleigh-Ritz投影的Lanczos算法。
+剩下的问题是现在如何计算<span class="math-inline">T_{\mathrm{IC}}</span>的特征对，或者如何利用它们计算<span class="math-inline">Ax = \lambda Bx</span>的特征对。在第<a href="node401.html#sec:inexact-Arnoldi">11.2.3</a>节和第<a href="node402.html#sec:davidson">11.2.4</a>节中，我们讨论Rayleigh-Ritz技术；即，特征对从<span class="math-inline">Ax = \lambda Bx</span>在<span class="math-inline">{\rm span}(v_1,\ldots,v_k)</span>上的正交投影计算。在第<a href="node407.html#sec:inexact-RKS">11.2.7</a>节中，特征对直接通过使用有理Krylov递推关系的<span class="math-inline">T_{\mathrm{IC}}</span>的特征对计算。第<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>节介绍了一种使用特征向量的递推关系和特征值的Rayleigh-Ritz投影的Lanczos算法。
 
 <p>
-注意，<span class="math-inline">\mu</span>和<span class="math-inline">\nu</span>不能选择得太远。假设想要特征值<span class="math-inline">\lambda</span>。从上面的结论来看，当<span class="math-inline">\mu</span>选择接近<span class="math-inline">\lambda</span>时，收敛速度更快，并且只有当<span class="math-inline">\nu</span>接近<span class="math-inline">\lambda</span>时，计算的特征值才能准确。理论上，可以选择<span class="math-inline">\mu=\nu</span>，这在Davidson方法中通常使用。由于在这种情况下<span class="math-inline">T_{\mathrm{C}}=I</span>，后一种方法存在停滞的高风险。在Jacobi-Davidson方法中使用了一种稳健的选择，我们将在§<a href="node405.html#sec:jd-cayley">11.2.5</a>中讨论。
+注意，<span class="math-inline">\mu</span>和<span class="math-inline">\nu</span>不能选择得太远。假设需要特征值<span class="math-inline">\lambda</span>。从上面的结论来看，当<span class="math-inline">\mu</span>选择接近<span class="math-inline">\lambda</span>时，收敛更快，并且计算的特征值只有在<span class="math-inline">\nu</span>接近<span class="math-inline">\lambda</span>时才能准确。理论上，可以选择<span class="math-inline">\mu=\nu</span>，这通常在Davidson方法中使用。由于在这种情况下<span class="math-inline">T_{\mathrm{C}}=I</span>，后一种方法存在停滞的高风险。在第<a href="node405.html#sec:jd-cayley">11.2.5</a>节中讨论的Jacobi-Davidson方法中使用了鲁棒选择。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -244,16 +216,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6921"
-  href="node401.html">Arnoldi Method with Inexact</a>
-<b> Up:</b> <a name="tex2html6915"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6909"
-  href="node399.html">Matrix Transformations</a>
- &nbsp <b>  <a name="tex2html6917"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6919"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6921" href="node401.html">Arnoldi Method with Inexact</a>
+<b>上一级：</b><a name="tex2html6915" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6909" href="node399.html">矩阵变换</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

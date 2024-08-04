@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Spectral Transformation</title>
-<meta name="description" content="Spectral Transformation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Spectral Transformation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node108.html">
-<link rel="previous" href="node105.html">
-<link rel="up" href="node103.html">
-<link rel="next" href="node108.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2367"
   href="node108.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2368"
-  href="node108.html">Reorthogonalization</a>
-<b> Up:</b> <a name="tex2html2362"
-  href="node103.html">Lanczos Method &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html2356"
-  href="node106.html">Multiple Eigenvalues.</a>
- &nbsp <b>  <a name="tex2html2364"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2366"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2368" href="node108.html">重新正交化</a>
+<b>上一级：</b><a name="tex2html2362" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html2356" href="node106.html">Multiple Eigenvalues.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001343000000000000000"></a><a name="subsec_stlm"></a><a name="7760"></a>
@@ -99,57 +87,57 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如果极值特征值没有很好地分离，并且当我们需要内部特征值时，用移位-逆变换算子替换<span class="math-inline">A</span>会非常有利。
+当极值特征值未充分分离，而我们希望求解内部特征值时，将矩阵 <span class="math-inline">A</span> 替换为移位-逆变换算子
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert"></a><div class="math-display">C=(A-\sigma I)^{-1}\,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="shift_invert"></a><div class="math-display">C=(A-\sigma I)^{-1}\,</div></td>
+<td WIDTH=10 align="RIGHT">
 (28)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-对于适当选择的移位<span class="math-inline">\sigma</span>，例如在区间<span class="math-inline">\alpha \le \sigma \le \beta</span>内，我们感兴趣的是了解特征值。移位-逆变换算子<span class="math-inline">C</span>具有特征值
+对于适当选择的移位 <span class="math-inline">\sigma</span>，例如在感兴趣的特征值区间 <span class="math-inline">\alpha \le \sigma \le \beta</span> 内，移位-逆变换算子 <span class="math-inline">C</span> 具有特征值
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert_eigenvalues"></a><div class="math-display">\theta_i=\frac{1}{\lambda_i-\sigma}\quad\mathrm{or}\quad\lambda_i=\sigma+\frac{1}{\theta_i}\;,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="shift_invert_eigenvalues"></a><div class="math-display">\theta_i=\frac{1}{\lambda_i-\sigma}\quad\mathrm{or}\quad\lambda_i=\sigma+\frac{1}{\theta_i}\;,</div></td>
+<td WIDTH=10 align="RIGHT">
 (29)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-现在，对应于接近移位<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda_i</span>的特征值<span class="math-inline">\theta_i</span>将位于谱的两端，并且与其他特征值很好地分离；参见[<a href="node421.html#erru80">162</a>]。
+现在，对应于接近移位 <span class="math-inline">\sigma</span> 的特征值 <span class="math-inline">\lambda_i</span> 的特征值 <span class="math-inline">\theta_i</span> 将位于谱的两端，并与其余部分充分分离；参见[<a href="node421.html#erru80">162</a>]。
 
 <p>
-如果我们使用移位-逆变换算子，我们从分解开始算法
+若使用移位-逆变换算子，算法首先通过分解
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma I)P\,,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma I)P\,,</div></td>
+<td WIDTH=10 align="RIGHT">
 (30)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-使用某种适当的稀疏高斯消去法。这里，<span class="math-inline">P</span>是置换矩阵，<span class="math-inline">L</span>是单位下三角矩阵。如果特征值<span class="math-inline">\lambda</span>在移位<span class="math-inline">\sigma</span>的两侧，我们不能使用标量对角矩阵<span class="math-inline">D</span>，而是必须进行对称不定分解，如Duff和Reid在MA47中的做法[<a href="node421.html#dure95">141</a>]。这里<span class="math-inline">D</span>是块对角矩阵，包含一阶和二阶块，并且我们作为副产品得到了<span class="math-inline">A-\sigma I</span>的惯性。通过记录区间两端两个值<span class="math-inline">\sigma</span>的<span class="math-inline">(A-\sigma I)</span>的惯性，我们可以得到区间内特征值的数量。获取这个计数是为了确保不会遗漏多重特征值。关于稀疏矩阵分解的更多信息，请参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>。
+采用某种适当的稀疏高斯消去法。此处，<span class="math-inline">P</span> 为置换矩阵，<span class="math-inline">L</span> 为单位下三角矩阵。若特征值 <span class="math-inline">\lambda</span> 位于移位 <span class="math-inline">\sigma</span> 的两侧，则不能使用标量对角矩阵 <span class="math-inline">D</span>，而需进行对称不定分解，如 Duff 和 Reid 在 MA47 中的处理[<a href="node421.html#dure95">141</a>]。这里，<span class="math-inline">D</span> 为块对角矩阵，包含一阶和二阶块，同时作为副产品获得 <span class="math-inline">A-\sigma I</span> 的惯性。通过记录区间两端 <span class="math-inline">\sigma</span> 值对应的 <span class="math-inline">(A-\sigma I)</span> 的惯性，可统计区间内的特征值数量，确保不遗漏多重特征值。更多关于稀疏矩阵分解的信息，参见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节。
 
 <p>
-在实际迭代过程中，我们使用因子<span class="math-inline">P</span>、<span class="math-inline">L</span>和<span class="math-inline">D</span>，计算
+在实际迭代过程中，利用因子 <span class="math-inline">P</span>、<span class="math-inline">L</span> 和 <span class="math-inline">D</span> 计算
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))\;,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))\;,</div></td>
+<td WIDTH=10 align="RIGHT">
 (31)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-按照括号中指示的顺序，在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的步骤(5)中进行。
+按照括号指示的顺序，在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的步骤(5)中进行。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -169,16 +157,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2368"
-  href="node108.html">Reorthogonalization</a>
-<b> Up:</b> <a name="tex2html2362"
-  href="node103.html">Lanczos Method &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html2356"
-  href="node106.html">Multiple Eigenvalues.</a>
- &nbsp <b>  <a name="tex2html2364"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2366"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2368" href="node108.html">重新正交化</a>
+<b>上一级：</b><a name="tex2html2362" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html2356" href="node106.html">Multiple Eigenvalues.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

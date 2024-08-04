@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Fast Matrix-Vector Multiplication for Structured Matrices</title>
-<meta name="description" content="Fast Matrix-Vector Multiplication for Structured Matrices">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Fast Matrix-Vector Multiplication for Structured Matrices">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node381.html">
-<link rel="up" href="node379.html">
-<link rel="next" href="node385.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6659"
   href="node385.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6660"
-  href="node385.html">A Brief Survey of</a>
-<b> Up:</b> <a name="tex2html6654"
-  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
-<b> Previous:</b> <a name="tex2html6650"
-  href="node383.html">CDS Matrix-Vector Product</a>
- &nbsp <b>  <a name="tex2html6656"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6658"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6660" href="node385.html">A Brief Survey of</a>
+<b>上一级：</b><a name="tex2html6654" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>上一节：</b><a name="tex2html6650" href="node383.html">CDS矩阵-向量乘积</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001923000000000000000"></a>
@@ -98,13 +87,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-实践中经常出现依赖于<span class="math-inline">O(n)</span>参数的密集矩阵。这些矩阵的例子包括
+实践中经常出现依赖于<span class="math-inline">O(n)</span>参数的稠密矩阵。这些矩阵的例子包括
 <br>
 
 <p>
 范德蒙矩阵：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">V = \bmat{cccc}1 &amp; 1 &amp; \ldots &amp; 1 \\x_1 &amp; x_2 &amp; \ldots......ddots &amp; \\x_1^{n-1} &amp; x_2^{n-1} &amp; \ldots &amp; x_n^{n-1} \emat,</div>
@@ -115,7 +104,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 托普利茨矩阵：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">T = \bmat{ccccc}t_0 &amp; t_{-1} &amp; \ldots &amp;t_{2-n}&amp; t_{1-n} \...... &amp; t_{-1} \\t_{n-1 } &amp; t_{n-2 } &amp; \ldots &amp; t_1 &amp; t_0 \emat,</div>
@@ -136,36 +125,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 
 <p>
-这些矩阵及其逆矩阵可以以<span class="math-inline">O(n\log^k n)</span>时间复杂度与向量相乘，其中<span class="math-inline">0 \leq k \leq 2</span>，而不是<span class="math-inline">O(n^2)</span>或<span class="math-inline">O(n^3)</span>时间，具体取决于结构。这对于使用这些矩阵的迭代求解器特别有用。迭代求解器在求解形如<span class="math-inline">(A+B)x=b</span>的系统时也很有用，其中<span class="math-inline">A</span>和<span class="math-inline">B</span>都是结构化的但属于不同的结构类别，或者如果<span class="math-inline">A</span>是结构化的而<span class="math-inline">B</span>是带状或稀疏的，等等。迭代方法在求解块系统时也很有用，当块是结构化矩阵但属于不同的结构类别，其中一些块也可能是稀疏的。例如，乘积
+这些矩阵及其逆矩阵可以以<span class="math-inline">O(n\log^k n)</span>时间复杂度与向量相乘，其中<span class="math-inline">0 \leq k \leq 2</span>，而不是<span class="math-inline">O(n^2)</span>或<span class="math-inline">O(n^3)</span>时间，具体取决于结构。这对于使用迭代求解器处理这些矩阵特别有用。迭代求解器在求解形如<span class="math-inline">(A+B)x=b</span>的系统时也很有用，其中<span class="math-inline">A</span>和<span class="math-inline">B</span>都是结构化的但属于不同的结构类别，或者如果<span class="math-inline">A</span>是结构化的而<span class="math-inline">B</span>是带状或稀疏的等。迭代方法在求解块系统时也很有用，当块是结构化矩阵但属于不同的结构类别，某些块也可能是稀疏的。例如，乘积
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\bmat{cc}A &amp; B \\C &amp; 0 \emat\bmat{c}x \\ y \emat =\bmat{c}Ax+By \\ Cx \emat,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">A</span>是对角线，<span class="math-inline">B</span>和<span class="math-inline">C</span>是托普利茨矩阵，可以在<span class="math-inline">O(n\log n)</span>时间内形成。
+其中<span class="math-inline">A</span>是对角的，<span class="math-inline">B</span>和<span class="math-inline">C</span>是托普利茨矩阵，可以在<span class="math-inline">O(n\log n)</span>时间内形成。
 
 <p>
 范德蒙矩阵及其逆矩阵可以以<span class="math-inline">O(n\log^2 n)</span>时间复杂度与向量相乘[<a
  href="node421.html#gool:94a">196</a>,<a
- href="node421.html#gool:94b">195</a>]。对于类似范德蒙矩阵及其逆矩阵也是如此，其中“-like”矩阵的定义如第&#167;<a href="node389.html#sec:DirectStructuredSolvers">10.3.4</a>节所述。托普利茨矩阵和类似托普利茨矩阵的矩阵-向量乘法使用快速傅里叶变换（FFT）需要<span class="math-inline">O(n\log n)</span>时间[<a
- href="node421.html#golo96">198</a>]。柯西矩阵-向量乘积<span class="math-inline">Cz</span>等价于在<span class="math-inline">n</span>个不同点<span class="math-inline">x_1,x_2,\ldots,x_n</span>上评估函数
+ href="node421.html#gool:94b">195</a>]。类似范德蒙矩阵及其逆矩阵也是如此，其中“-like”矩阵的定义见第&#167;<a href="node389.html#sec:DirectStructuredSolvers">10.3.4</a>节。托普利茨矩阵及其类似矩阵的矩阵-向量乘法使用快速傅里叶变换（FFT）需要<span class="math-inline">O(n\log n)</span>时间[<a
+ href="node421.html#golo96">198</a>]。柯西矩阵-向量乘积<span class="math-inline">Cz</span>相当于在<span class="math-inline">n</span>个不同点<span class="math-inline">x_1,x_2,\ldots,x_n</span>上评估函数
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\Phi(w)=\sum_{i=1}^n \frac{-z_i}{y_i-w}</div>
 </div>
 <br clear="ALL">
 <p></p>
-并且可以使用快速多极方法在<span class="math-inline">O(n)</span>时间内完成[<a
+可以通过使用快速多极方法在<span class="math-inline">O(n)</span>时间内完成[<a
  href="node421.html#cagrro88">76</a>,<a
  href="node421.html#grro87">205</a>]。
 
 <p>
-本节的其余部分展示了如何对托普利茨矩阵进行<span class="math-inline">O(n\log n)</span>矩阵-向量乘法[<a
+本节的其余部分展示了如何为托普利茨矩阵实现<span class="math-inline">O(n\log n)</span>的矩阵-向量乘法[<a
  href="node421.html#golo96">198</a>]。对于其他类别的结构化矩阵，我们参考[<a
  href="node421.html#gool:94a">196</a>]和[<a
  href="node421.html#gool:94b">195</a>]。
@@ -173,19 +162,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 循环矩阵是一种特殊的托普利茨矩阵，形式为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">C_n = \bmat{ccccc}a_0 &amp; a_{-1} &amp; \ldots &amp;a_{2-n}&amp; a_{1-n}......&amp; a_{-1} \\a_{n-1 } &amp; a_{n-2 } &amp; \ldots &amp; a_1 &amp; a_0 \emat,</div>
 </div>
 <br clear="ALL">
 <p></p>
-它具有<span class="math-inline">a_{-k}=a_{n-k}</span>的性质，其中<span class="math-inline">1\le k \le n-1</span>。循环矩阵通过FFT对角化，即
+其性质为<span class="math-inline">a_{-k}=a_{n-k}</span>，对于<span class="math-inline">1\le k \le n-1</span>。循环矩阵通过FFT对角化，即
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">c_n=F_n^* \cdot \diag(F_n a) \cdot F_n,</div>
+<div class="math-display">C_n=F_n^* \cdot \diag(F_n a) \cdot F_n,</div>
 </div>
 <br clear="ALL">
 <p></p>
@@ -205,16 +194,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 现在，如果<span class="math-inline">T_n</span>是一个托普利茨矩阵
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">T_n = \bmat{ccccc}t_0 &amp; t_{-1} &amp; \ldots &amp;t_{2-n}&amp; t_{1-n}...... &amp; t_{-1} \\t_{n-1 } &amp; t_{n-2 } &amp; \ldots &amp; t_1 &amp; t_0 \emat,</div>
 </div>
 <br clear="ALL">
 <p></p>
-那么乘积<span class="math-inline">T_nx</span>可以通过首先将<span class="math-inline">T_n</span>嵌入到一个<span class="math-inline">2n\times 2n</span>的循环矩阵<span class="math-inline">C_{2n}</span>中，在<span class="math-inline">O(n\log n)</span>时间内计算，因为
+那么乘积<span class="math-inline">T_nx</span>可以通过首先将<span class="math-inline">T_n</span>嵌入到一个<span class="math-inline">2n\times 2n</span>循环矩阵<span class="math-inline">C_{2n}</span>中，在<span class="math-inline">O(n\log n)</span>时间内计算，因为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">C_{2n} \cdot\bmat{c}y\\ 0\emat\equiv\bmat{cc}T_......\cdot\bmat{c}y\\ 0\emat= \bmat{c}T_ny\\ B_n y\emat</div>
@@ -223,7 +212,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p></p>
 并且
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">B_n = \bmat{ccccc}0 &amp; t_{n-1} &amp; \ldots &amp; t_2 &amp; t_1 \\t......ts &amp; t_{n-1} \\t_{-1} &amp; t_{-2} &amp; \ldots &amp; t_{1-n}&amp; 0 \emat.</div>
@@ -251,16 +240,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6660"
-  href="node385.html">A Brief Survey of</a>
-<b> Up:</b> <a name="tex2html6654"
-  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
-<b> Previous:</b> <a name="tex2html6650"
-  href="node383.html">CDS Matrix-Vector Product</a>
- &nbsp <b>  <a name="tex2html6656"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6658"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6660" href="node385.html">A Brief Survey of</a>
+<b>上一级：</b><a name="tex2html6654" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>上一节：</b><a name="tex2html6650" href="node383.html">CDS矩阵-向量乘积</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Transfer Residual Error to Backward Error.</title>
-<meta name="description" content="Transfer Residual Error to Backward Error.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Transfer Residual Error to Backward Error.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node187.html">
-<link rel="previous" href="node185.html">
-<link rel="up" href="node184.html">
-<link rel="next" href="node187.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3559"
   href="node187.html">
@@ -80,49 +73,49 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3560"
-  href="node187.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html3554"
-  href="node184.html">Some Combination of and</a>
-<b> Previous:</b> <a name="tex2html3548"
-  href="node185.html">Residual Vector.</a>
- &nbsp <b>  <a name="tex2html3556"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3558"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3560" href="node187.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html3554" href="node184.html">Some Combination of and</a>
+<b>上一节：</b><a name="tex2html3548" href="node185.html">Residual Vector.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001472020000000000000"></a>
 <a name="18323"></a>
 <br>
-将传递残差误差转化为后向误差
+将残差误差转化为后向误差
 </h4>
-可以证明存在厄米矩阵 <span class="math-inline">E</span> 和 <span class="math-inline">F</span>，例如：
+可以证明存在厄米矩阵 <span class="math-inline">E</span> 和 <span class="math-inline">F</span>，例如
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:E2-pdp"></a><div class="math-display">(E,F) = \left[-r\widetilde x^*-\widetilde x r^*+\left(\widetilde\beta\widetilde x^......\widetilde x^*\right]\cdot\left(\widetilde\beta I, -\widetilde\alpha I\right),</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:E2-pdp"></a><div class="math-display">(E,F) = \left[-r\widetilde x^*-\widetilde x r^*+\left(\widetilde\beta\widetilde x^......\widetilde x^*\right]\cdot\left(\widetilde\beta I, -\widetilde\alpha I\right),</div></td>
+<td WIDTH=10 align="RIGHT">
 (104)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征值及其对应的特征向量。我们感兴趣的是具有最小可能范数的这些矩阵 <span class="math-inline">(E,F)</span>。事实证明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span>，最佳可能的 <span class="math-inline">(E,F)=(E_2,F_2)</span> 和对于 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>，最佳可能的 <span class="math-inline">(E,F)=(E_{F},F_{F})</span> 满足：
+使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">\{A+E, B+F\}</span> 的一个精确特征值及其对应的特征向量。
+我们感兴趣的是那些范数尽可能小的矩阵 <span class="math-inline">(E,F)</span>。
+结果表明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span>，最佳的 <span class="math-inline">(E,F)=(E_2,F_2)</span> 和对于弗罗贝尼乌斯范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>，最佳的 <span class="math-inline">(E,F)=(E_{F},F_{F})</span> 满足
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:pdp-b2"></a><div class="math-display">\Vert(E_2, F_2)\Vert _2={\Vert r\Vert _2}, \quad\Vert(E_{F}......- (\widetilde\beta\widetilde x^* A\widetilde x-\widetilde\alpha\widetilde x^* B\widetilde x)^2}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:pdp-b2"></a><div class="math-display">\Vert(E_2, F_2)\Vert _2={\Vert r\Vert _2}, \quad\Vert(E_{F}......- (\widetilde\beta\widetilde x^* A\widetilde x-\widetilde\alpha\widetilde x^* B\widetilde x)^2}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (105)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<a name="tex2html31" href="footnode.html#foot18417"><sup><button class="footnote"></button></sup></a> 实际上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是附近矩阵的精确特征值和特征向量。这种类型的误差分析称为<em>后向误差分析</em>，矩阵 <span class="math-inline">(E,F)</span> 是<em>后向误差</em>。
+参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<a name="tex2html31" href="footnode.html#foot18417"><sup><button class="footnote"></button></sup></a>事实上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。
+因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是附近矩阵的精确特征值和特征向量。这种误差分析称为<em>后向误差分析</em>，矩阵 <span class="math-inline">(E,F)</span> 是<em>后向误差</em>。
 
 <p>
-我们称一个算法在范数 <span class="math-inline">\Vert\cdot\Vert</span> 下对于特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 是<em><span class="math-inline">\tau</span>-后向稳定</em>的，如果它是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征对，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>。考虑到这些，可以对计算特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 的算法的后向稳定性做出陈述。按照惯例，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，则称该算法是<em>后向稳定</em>的。
+我们称一个算法在范数 <span class="math-inline">\Vert\cdot\Vert</span> 下对于近似特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 是<em><span class="math-inline">\tau </span>-后向稳定</em>的，如果它是 <span class="math-inline">\{A+E, B+F\}</span> 的精确特征对，且 <span class="math-inline">\Vert(E,F)\Vert\le\tau</span>。
+考虑到这些，可以对计算特征对 <span class="math-inline">((\widetilde\alpha,\widetilde\beta),\widetilde x)</span> 的算法的后向稳定性做出说明。
+按照惯例，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，算法被称为<em>后向稳定</em>。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -142,16 +135,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3560"
-  href="node187.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html3554"
-  href="node184.html">Some Combination of and</a>
-<b> Previous:</b> <a name="tex2html3548"
-  href="node185.html">Residual Vector.</a>
- &nbsp <b>  <a name="tex2html3556"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3558"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3560" href="node187.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html3554" href="node184.html">Some Combination of and</a>
+<b>上一节：</b><a name="tex2html3548" href="node185.html">Residual Vector.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

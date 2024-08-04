@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Symmetric Indefinite Lanczos Method &nbsp;Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski </title>
-<meta name="description" content="Symmetric Indefinite Lanczos Method &nbsp;Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Symmetric Indefinite Lanczos Method &nbsp;Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node307.html">
-<link rel="previous" href="node295.html">
-<link rel="up" href="node280.html">
-<link rel="next" href="node297.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5283"
   href="node297.html">
@@ -80,44 +73,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5284"
-  href="node297.html">Some Properties of Symmetric</a>
-<b> Up:</b> <a name="tex2html5278"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5272"
-  href="node295.html">Rational Krylov Subspace Method</a>
- &nbsp <b>  <a name="tex2html5280"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5282"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5284" href="node297.html">Some Properties of Symmetric</a>
+<b>上一级：</b><a name="tex2html5278" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5272" href="node295.html">Rational Krylov Subspace Method</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001760000000000000000"></a> <a name="sec:idlanczos"></a><a name="36639"></a>
 <br>
-对称不定兰索斯方法 
-<br>&nbsp;<em>Z. Bai, T. Ericsson, 和 T. Kowalski </em> 
+对称不定Lanczos方法
+<br>&nbsp;<em>Z. 白(Z. Bai), T. 埃里克森(T. Ericsson), 和 T. 科瓦尔斯基(T. Kowalski)</em>
 </h1>
 
 <p>
-在本节中，我们介绍一种用于解决广义特征值问题的兰索斯方法  
+在本节中，我们介绍一种用于求解广义特征值问题的Lanczos方法
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:gsymep"></a><div class="math-display">A x = \lambda B x,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:gsymep"></a><div class="math-display">A x = \lambda B x,</div></td>
+<td WIDTH=10 align="RIGHT">
 (234)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是实数或复数对称矩阵，但 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 以及它们的线性组合 <span class="math-inline">\alpha A + \beta B</span>（对于标量 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>）都不是正定矩阵。<span class="math-inline">A - \lambda B</span> 被称为<em>对称不定矩阵束</em>。   
+其中矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>为实数或复数对称矩阵，但<span class="math-inline">A</span>、<span class="math-inline">B</span>或任意标量<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>组合的<span class="math-inline">\alpha A + \beta B</span>均非正定。<span class="math-inline">A - \lambda B</span>被称为<em>对称不定矩阵束</em>。
 <a name="36644"></a>
 
 <p>
-这类特征值问题源自各种应用，例如某些二次特征值问题的线性化，这在阻尼结构系统的建模中经常出现；参见第&#167;<a href="node331.html#sec:qep">9.2</a>节。  
+此类特征值问题源自多种应用领域，例如某些二次特征值问题的线性化，这在阻尼结构系统的建模中经常出现；参见第&#167;<a href="node331.html#sec:qep">9.2</a>节。
 
 <p>
-形式上，对称兰索斯算法可以用来计算一些特征对，因为矩阵 <span class="math-inline">B^{-1}A</span> 关于 <span class="math-inline">B</span> 内积是对称的。<a name="tex2html50" href="footnode.html#foot37933"><sup><button class="footnote"></button></sup></a>在这种更普遍的情况下，三项递归关系仍然关于 <span class="math-inline">B</span> 内积成立。该算法被称为<em>对称不定兰索斯方法</em>。这种方法的主要问题是基向量关于不定内积是正交的，因此无法保证它们是线性独立的。算法可能会因分解失败而偶尔失效。尽管如此，由于可能显著节省内存需求和浮点运算，这种方法仍然是解决问题的有吸引力途径。 
+从形式上看，对称Lanczos算法可用于计算部分特征对，因为矩阵<span class="math-inline">B^{-1}A</span>关于<span class="math-inline">B</span>内积是对称的。<a name="tex2html50" href="footnode.html#foot37933"><sup><button class="footnote"></button></sup></a>在这种更普遍的情况下，三项递推关系仍然关于<span class="math-inline">B</span>内积成立。该算法被称为<em>对称不定Lanczos方法</em>。此方法的主要问题在于基向量关于不定内积正交，因此无法保证它们线性独立。算法可能会因解体而偶尔失败。尽管如此，由于可能在内存需求和浮点运算方面带来显著节省，这种方法仍是解决问题的诱人途径。
 
 <p>
 <br><hr>
@@ -127,16 +115,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <ul>
 <li><a name="tex2html5285" href="node297.html">对称不定矩阵对的一些性质</a>
 <li><a name="tex2html5286" href="node298.html">算法</a>
-<li><a name="tex2html5287" href="node299.html">停止准则和精度评估</a>
-<li><a name="tex2html5288" href="node300.html">奇异 <span class="math-inline">B</span></a>
+<li><a name="tex2html5287" href="node299.html">停止准则与精度评估</a>
+<li><a name="tex2html5288" href="node300.html">奇异<span class="math-inline">B</span></a>
 <li><a name="tex2html5289" href="node301.html">软件可用性</a>
 <li><a name="tex2html5290" href="node302.html">数值示例</a>
 <ul>
-<li><a name="tex2html5291" href="node303.html">例 8.6.1.</a>
-<li><a name="tex2html5292" href="node304.html">例 8.6.2.</a>
-<li><a name="tex2html5293" href="node305.html">例 8.6.3.</a>
+<li><a name="tex2html5291" href="node303.html">例8.6.1.</a>
+<li><a name="tex2html5292" href="node304.html">例8.6.2.</a>
+<li><a name="tex2html5293" href="node305.html">例8.6.3.</a>
 </ul>
-<li><a name="tex2html5294" href="node306.html">注释和参考文献</a>
+<li><a name="tex2html5294" href="node306.html">注释与参考文献</a>
 </ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
@@ -156,16 +144,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5284"
-  href="node297.html">Some Properties of Symmetric</a>
-<b> Up:</b> <a name="tex2html5278"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5272"
-  href="node295.html">Rational Krylov Subspace Method</a>
- &nbsp <b>  <a name="tex2html5280"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5282"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5284" href="node297.html">Some Properties of Symmetric</a>
+<b>上一级：</b><a name="tex2html5278" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5272" href="node295.html">Rational Krylov Subspace Method</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

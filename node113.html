@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Numerical Examples</title>
-<meta name="description" content="Numerical Examples">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Numerical Examples">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node112.html">
-<link rel="up" href="node103.html">
-<link rel="next" href="node114.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2450"
   href="node114.html">
@@ -79,29 +73,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2451"
-  href="node114.html">Results for L-Shaped Membrane.</a>
-<b> Up:</b> <a name="tex2html2445"
-  href="node103.html">Lanczos Method &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html2441"
-  href="node112.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2447"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2449"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2451" href="node114.html">Results for L-Shaped Membrane.</a>
+<b>上一级：</b><a name="tex2html2445" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html2441" href="node112.html">可用的软件</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001346000000000000000"></a>  <a name="sec:laneg"></a>
 <br>
 数值示例
 </h2> 
-我们考虑将Lanczos算法应用于两个简单但典型的例子，使用LANSO软件进行计算。
+我们将考虑应用于两个简单但典型的示例的Lanczos算法，使用的是LANSO软件。
 
 <p>
-第一个例子是计算L形薄膜的一些特征模态。采用标准五点有限差分近似法，网格间距<span class="math-inline">h=1/64</span>，得到一个阶数为<span class="math-inline">n=2945</span>的稀疏对称正定矩阵。该矩阵具有非常规则的稀疏带状结构，每行最多有五个非零元素。其特征值将位于区间<span class="math-inline">0<\lambda_i<8</span>内，对称分布在<span class="math-inline">\lambda=4</span>周围，且越接近谱的两端分布越密集。
+第一个示例是计算L形膜的一些特征模态。采用网格间距<span class="math-inline">h=1/64</span>的标准五点有限差分近似，得到一个阶数为<span class="math-inline">n=2945</span>的稀疏对称正定矩阵。它将具有非常规则的稀疏带状结构，每行最多有五个非零元素。其特征值将位于区间<span class="math-inline">0<\lambda_i<8</span>内，对称分布在<span class="math-inline">\lambda=4</span>周围，并且在谱的两端分布更密集。
 
 <p>
-第二个测试例子来自信息检索应用，涉及一个术语-文档矩阵，其中每列代表一个文档，每行代表一个术语。元素<span class="math-inline">x_{i,j}</span>为1，表示术语<span class="math-inline">i</span>出现在文档<span class="math-inline">j</span>中，否则为零。一组主要奇异值的空间可用于发现某些文档之间的联系。具体矩阵M<small>EDLINE</small>是大小为<span class="math-inline">7014\times 1033</span>的矩形矩阵，中等稀疏，包含53,287个填充元素，即每行约8个元素。直接形成乘积<span class="math-inline">A=X^TX</span>并不明智，因为该矩阵将几乎全满，包含910,755个非零元素（占85%）。我们通过先计算<span class="math-inline">z=Xx</span>，再计算<span class="math-inline">y=X^Tz</span>来实现乘积<span class="math-inline">y=Ax</span>。
+第二个测试示例来自信息检索应用，涉及一个术语-文档矩阵，其中每一列代表一个文档，每一行代表一个术语。元素<span class="math-inline">x_{i,j}</span>为1，如果术语<span class="math-inline">i</span>出现在文档<span class="math-inline">j</span>中，否则为零。一组主要奇异值的空间可用于发现某些文档之间的联系。具体的矩阵M<small>EDLINE</small>是大小为<span class="math-inline">7014\times 1033</span>的矩形矩阵，中等稀疏，填充了53,287个元素，即每行大约有8个元素。显式形成乘积<span class="math-inline">A=X^TX</span>不是一个好主意，因为这个矩阵将几乎全满，有910,755个元素（或<span class="math-inline">85\%</span>）非零。我们通过先计算<span class="math-inline">z=Xx</span>，然后计算<span class="math-inline">y=X^Tz</span>来实现乘积<span class="math-inline">y=Ax</span>。
 
 <p>
 <br><hr>
@@ -111,14 +100,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <ul>
 <li><ul>
 <li><a name="tex2html2452"
-  href="node114.html">L形薄膜的结果。</a>
+  href="node114.html">L形膜的结果</a>
 <li><a name="tex2html2453"
-  href="node115.html">Medline SVD的结果。</a>
+  href="node115.html">Medline SVD的结果</a>
 <li><a name="tex2html2454"
-  href="node116.html">L形薄膜与移位-逆变换的结果。</a>
+  href="node116.html">带位移-反转变换的L形膜结果</a>
 </ul></ul>
 <!--子链接表结束-->
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容介绍了两个数值示例，分别涉及L形膜的特征模态计算和信息检索中的术语-文档矩阵处理。通过这两个示例，展示了Lanczos算法在不同领域中的应用和处理方法。<!--Navigation Panel-->
 <a name="tex2html2450"
   href="node114.html">
 <button class="navigate">下一节</button></a> 
@@ -135,16 +126,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2451"
-  href="node114.html">Results for L-Shaped Membrane.</a>
-<b> Up:</b> <a name="tex2html2445"
-  href="node103.html">Lanczos Method &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html2441"
-  href="node112.html">Software Availability</a>
- &nbsp <b>  <a name="tex2html2447"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2449"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2451" href="node114.html">Results for L-Shaped Membrane.</a>
+<b>上一级：</b><a name="tex2html2445" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html2441" href="node112.html">可用的软件</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Convergence Properties.</title>
-<meta name="description" content="Convergence Properties.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Convergence Properties.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node173.html">
-<link rel="previous" href="node171.html">
-<link rel="up" href="node169.html">
-<link rel="next" href="node173.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3349"
   href="node173.html">
@@ -80,40 +73,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3350"
-  href="node173.html">Multiple Eigenvalues.</a>
-<b> Up:</b> <a name="tex2html3344"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3338"
-  href="node171.html">Lanczos Algorithm with SI.</a>
- &nbsp <b>  <a name="tex2html3346"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3348"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3350" href="node173.html">Multiple Eigenvalues.</a>
+<b>上一级：</b><a name="tex2html3344" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3338" href="node171.html">Lanczos Algorithm with SI.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001450030000000000000"></a> 
 <a name="17600"></a>
 <br>
-收敛性质
+收敛特性
 </h4>
-收敛性受标准情况下的正交多项式理论支配，例如，参见[<a href="node421.html#parl80">353</a>]。
+收敛性受标准情况下的同一正交多项式理论支配，例如，参见[<a href="node421.html#parl80">353</a>]。
 
 <p>
-该理论表明，我们能够收敛到初始向量所表示的那些特征值，并且对于谱线两端的特征值，收敛速度更快。这些特征值与剩余特征值的分离程度越高，它们收敛得就越快。
+该理论指出，我们能收敛到起始向量中表示的那些特征值，且在谱的两端的特征值收敛更快。这些特征值与剩余特征值的分离程度越好，它们的收敛速度就越快。
 
 <p>
-在实际应用中，我们通常只对最低的特征值感兴趣，而直接迭代算法[<a href="node170.html#Gen_Herm_Lanczos">5.4</a>]中，这些最低特征值往往是首批收敛的。另一方面，最低特征值之间的相对分离通常较差——记住，分离是相对于整个谱的分布，而非与原点的距离。
+在实际应用中，我们往往只对最低特征值感兴趣，而直接迭代算法[<a href="node170.html#Gen_Herm_Lanczos">5.4</a>]中这些特征值是首先收敛的，这是有益的。另一方面，最低特征值的相对分离度常常不佳——记住，分离度是相对于整个谱的分布，而非与原点的距离。
 
 <p>
-在这些情况下，当我们希望得到某个特定范围内的特征值，例如
+在这些情况下，当我们希望获得指定范围内的特征值，例如
 
-<span class="math-inline">\alpha \le \lambda \le \beta</span>，使用适当选择的位移<span class="math-inline">\sigma</span>的位移-反演算法[<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>]，例如在区间
+<span class="math-inline">\alpha \le \lambda \le \beta</span>，采用适当选择的位移<span class="math-inline">\sigma</span>的位移-反演算法[<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>]，例如在区间
 
 <span class="math-inline">\alpha \le \sigma \le \beta</span>内，具有极大的优势。
 
 <p>
-在广义情况下，位移-反演策略比标准情况下更具动机，因为我们无论如何都需要解一个系统，无论是在步骤4还是步骤9。位移-反演算子<span class="math-inline">C</span>（[<a href="node171.html#gen_shift_invert">5.16</a>]），通常具有更好分离的特征值，仅需<span class="math-inline">j=50</span>而非数百次迭代就能得到10个特征值。
+在广义情况下，位移-反演策略比标准情况更具动力，因为我们无论如何都需解一个系统，无论是在步骤4还是步骤9。位移-反演算子<span class="math-inline">C</span>（[<a href="node171.html#gen_shift_invert">5.16</a>]），通常具有远为更好的分离特征值，仅需<span class="math-inline">j=50</span>而非数百次迭代就能得到10个特征值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -133,16 +121,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3350"
-  href="node173.html">Multiple Eigenvalues.</a>
-<b> Up:</b> <a name="tex2html3344"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3338"
-  href="node171.html">Lanczos Algorithm with SI.</a>
- &nbsp <b>  <a name="tex2html3346"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3348"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3350" href="node173.html">Multiple Eigenvalues.</a>
+<b>上一级：</b><a name="tex2html3344" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3338" href="node171.html">Lanczos Algorithm with SI.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

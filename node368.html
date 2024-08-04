@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Getting Around </title>
-<meta name="description" content="Getting Around ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Getting Around ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node369.html">
-<link rel="previous" href="node367.html">
-<link rel="up" href="node364.html">
-<link rel="next" href="node369.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6406"
   href="node369.html">
@@ -80,34 +73,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6407"
-  href="node369.html">Covariant Differentiation</a>
-<b> Up:</b> <a name="tex2html6401"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6395"
-  href="node367.html">Inner Products, Gradients, and</a>
- &nbsp <b>  <a name="tex2html6403"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6405"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6407" href="node369.html">协变微分法</a>
+<b>上一级：</b><a name="tex2html6401" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6395" href="node367.html">Inner Products, Gradients, and</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846400000000000000">
-绕过约束
-<span class="math-inline">\mathrm{Stief}(n,k)</span></a>
+绕过<span class="math-inline">\mathrm{Stief}(n,k)</span></a>
 </h3>
 
 <p>
-我们已经为在约束流形环境下定义梯度奠定了基础。此时，人们可能会急于尝试进行最速下降搜索以最大化目标函数。然而，问题将出现在当人们发现没有合理的方法将一个点和位移结合起来产生一个新的点，因为对于有限的<span class="math-inline">s</span>，<span class="math-inline">Y+sH</span>违反了约束方程，因此并没有给出流形上的一个点。
+我们已经为在约束流形环境下定义梯度奠定了基础。此时，人们可能会急于尝试进行最速下降搜索以最大化目标函数。然而，当发现无法合理地将一个点和位移组合以产生新点时，问题就会出现，因为对于有限的<span class="math-inline">s</span>，<span class="math-inline">Y+sH</span>会违反约束方程，从而不在流形上。
 
 <p>
-对于任何流形，人们通过求解一组微分
-<em>运动方程</em>
-来更新<span class="math-inline">Y</span>，形式如下：
+对于任何流形，更新<span class="math-inline">Y</span>的方法是求解一组形式为的微分<em>运动方程</em>
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="149" height="78" border="0"
  src="img3524.png"
  alt="\begin{eqnarray*}
@@ -117,70 +102,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-<span class="math-inline">\Gamma</span>项的设计确保了<span class="math-inline">H</span>始终是一个切向量，从而使路径保持在流形上。它被称为<em>联络</em>。
-（联络项也依赖于<span class="math-inline">Y</span>。）
+其中<span class="math-inline">\Gamma</span>项的设计确保<span class="math-inline">H</span>始终保持为切向量，从而使路径保持在流形上。它被称为<em>联络</em>（联络项也依赖于<span class="math-inline">Y</span>）。
 
 <p>
-为了了解这些方程如何被满足，
-我们取<span class="math-inline">H</span>的无限小约束方程，
+为了了解如何满足这些方程，我们取<span class="math-inline">H</span>的无穷小约束方程
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">H^* Y + Y^* H = 0,</div>
 </div>
 <br clear="ALL">
 <p></p>
-并对其关于<span class="math-inline">t</span>求导，得到
+并对<span class="math-inline">t</span>求导，得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\Gamma(H,H)^*Y + Y^* \Gamma(H,H) = 2 H^*H.</div>
 </div>
 <br clear="ALL">
 <p></p>
-这通常可以通过
-<span class="math-inline">\Gamma(H,H) = Y(H^* H) + T(H,H)</span>来满足，其中
-<span class="math-inline">T(H,H)</span>是某个任意切向量。
+这通常可以通过<span class="math-inline">\Gamma(H,H) = Y(H^* H) + T(H,H)</span>来满足，其中<span class="math-inline">T(H,H)</span>是某个任意切向量。
 
 <p>
-在下一个小节中，我们将有理由考虑
-
-<span class="math-inline">\Gamma(H_1,H_2)</span>对于<span class="math-inline">H_1 \ne H_2</span>。
-出于技术原因，人们通常要求
+在下一个小节中，我们将有理由考虑<span class="math-inline">H_1 \ne H_2</span>时的<span class="math-inline">\Gamma(H_1,H_2)</span>。出于技术原因，通常要求
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\Gamma(H_1,H_2) = \Gamma(H_2,H_1)</div>
 </div>
 <br clear="ALL">
 <p></p> 
-（这被称为<em>无挠</em>性质）以及
+（这称为<em>无挠</em>性质）以及
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">ip(\Gamma(H_1,H_3),H_2)+ip(H_1,\Gamma(H_2,H_3))=0</div>
 </div>
 <br clear="ALL">
 <p></p> 
-（这被称为<em>度量兼容</em>性质）。
-这两个性质唯一地确定了<span class="math-inline">T(H_1,H_2)</span>项，从而唯一地指定了联络。在任何流形上，具有这些性质的唯一联络被称为<em>Levi-Civita</em>联络。
+（这称为<em>度量兼容</em>性质）。这两个性质唯一确定了<span class="math-inline">T(H_1,H_2)</span>项，从而唯一指定了联络。在任何流形上，具有这些性质的唯一联络称为<em>Levi-Civita</em>联络。
 
 <p>
-使用两种不同内积（欧几里得和典型）的Stiefel流形的联络可以在Edelman、Arias和Smith的工作中找到（参见[<a
+Edelman、Arias和Smith在他们的工作中（见[<a
  href="node421.html#edas99">151</a>,<a
  href="node421.html#edelman96a">155</a>,<a
- href="node421.html#smith94a">416</a>]）。函数<code>connection</code>
-在模板软件中计算
-<span class="math-inline">\Gamma(H_1,H_2)</span>。
+ href="node421.html#smith94a">416</a>]）找到了使用两种不同内积（欧几里得和典型）的Stiefel流形的联络。模板软件中的函数<code>connection</code>计算<span class="math-inline">\Gamma(H_1,H_2)</span>。
 
 <p>
-通常，在流形上求解运动方程非常困难。对于Stiefel流形，
-存在解析解，可以在上述文献中找到，尽管我们发现，只要位移较小，通过运动方程沿路径移动与简单地对<span class="math-inline">Y+sH</span>进行正交化分解之间几乎没有性能下降。函数<code>move</code>
-支持多种测地线运动方法，取决于所需的近似程度。
+通常，在流形上求解运动方程非常困难。对于Stiefel流形，存在解析解，可以在前述文献中找到，但我们发现，只要位移较小，通过运动方程沿路径移动与对<span class="math-inline">Y+sH</span>进行正交化分解之间性能下降很少。函数<code>move</code>支持多种测地线运动方法，取决于所需的近似程度。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -200,16 +173,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6407"
-  href="node369.html">Covariant Differentiation</a>
-<b> Up:</b> <a name="tex2html6401"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6395"
-  href="node367.html">Inner Products, Gradients, and</a>
- &nbsp <b>  <a name="tex2html6403"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6405"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6407" href="node369.html">协变微分法</a>
+<b>上一级：</b><a name="tex2html6401" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6395" href="node367.html">Inner Products, Gradients, and</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

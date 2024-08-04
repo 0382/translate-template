@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Inverting the Covariant Hessian (Technical Considerations)</title>
-<meta name="description" content="Inverting the Covariant Hessian (Technical Considerations)">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Inverting the Covariant Hessian (Technical Considerations)">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node369.html">
-<link rel="up" href="node364.html">
-<link rel="next" href="node371.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6432"
   href="node371.html">
@@ -79,45 +73,40 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6433"
-  href="node371.html">Common Issues</a>
-<b> Up:</b> <a name="tex2html6427"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6423"
-  href="node369.html">Covariant Differentiation</a>
- &nbsp <b>  <a name="tex2html6429"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6431"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6433" href="node371.html">常见问题</a>
+<b>上一级：</b><a name="tex2html6427" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6423" href="node369.html">协变微分法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846600000000000000">
-逆协变Hessian矩阵（技术考量）</a>
+逆变海森矩阵的求逆（技术考量）</a>
 </h3>
 
 <p>
-由于<span class="math-inline">\mathrm{Stief}(n,k)</span>的切空间是<span class="math-inline">{\mathcal R}^{n \times k}</span>的一个子空间，因此必须在稳定地在这个子空间上进行协变Hessian矩阵的逆运算。这意味着，设计来求解<span class="math-inline">D_H G = V</span>以得到<span class="math-inline">H</span>的任何算法，实际上必须是一种最小二乘法或其他意义上的伪逆运算器。
+由于<span class="math-inline">\mathrm{Stief}(n,k)</span>的切空间是<span class="math-inline">{\mathcal R}^{n \times k}</span>的一个子空间，因此必须在该子空间上稳定地求逆变海森矩阵。这要求设计来求解<span class="math-inline">D_H G = V</span>以得到<span class="math-inline">H</span>的任何算法，实际上在最小二乘或其他某种意义上必须是伪逆变换器。
 
 <p>
-第二个考量是，许多有用的函数<span class="math-inline">f(Y)</span>具有这样的性质：对于所有块对角正交的<span class="math-inline">Q</span>，<span class="math-inline">f(YQ) = f(Y)</span>（即，<br><p></p>
-<div align="center">
+第二个考虑因素是，许多有用的函数<span class="math-inline">f(Y)</span>具有以下性质：对于所有块对角正交矩阵<span class="math-inline">Q</span>，<span class="math-inline">f(YQ) = f(Y)</span>（即，<br><p></p>
+<div align="CENTER">
 
 <div class="math-display">Q =\left[\begin{array}{cccc}Q_1 &amp; 0 &amp; \cdots &amp; 0 \cr0 &amp; ......dotfill &amp; \dotfill \cr0 &amp; 0 &amp; \cdots &amp; Q_p\end{array}\right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">Q_i</span>是正交矩阵）。在这种情况下，所有形式为
+其中<span class="math-inline">Q_i</span>是正交矩阵）。在这种情况下，所有形式如下的切向量
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">H = Y\left[\begin{array}{cccc}H_1 &amp; 0 &amp; \cdots &amp; 0 \cr0 &amp;......dotfill &amp; \dotfill \cr0 &amp; 0 &amp; \cdots &amp; H_p\end{array}\right],</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">H_i</span>是反对称的，具有性质<span class="math-inline">D_H f = 0</span>。这些额外的对称向量随后成为线性系统<span class="math-inline">D_H G = V</span>的零向量。由于这些零方向的存在，切空间的有效维度被这个零空间的维度所减少（这就是由<code>dimension</code>函数返回的维度）。
+其中<span class="math-inline">H_i</span>是反对称的，具有性质<span class="math-inline">D_H f = 0</span>。这些额外的对称向量随后成为线性系统<span class="math-inline">D_H G = V</span>的零向量。由于这些零方向，切空间的有效维度降低了零空间的维度（这是由<code>dimension</code>函数返回的维度）。
 
 <p>
-因此，我们看到，为了逆协变Hessian矩阵，我们必须谨慎使用一个稳定的逆运算方案，该方案将投影出那些不满足无穷小约束方程的<span class="math-inline">H</span>分量，以及那些处于<span class="math-inline">f</span>的额外对称方向上的分量。<code>invdgrad</code>函数通过共轭梯度程序执行协变Hessian矩阵的稳定逆运算，其中<code>dgrad</code>函数调用<code>nosym</code>函数来投影出任何额外的对称分量。
+因此，我们看到为了求逆变海森矩阵，我们必须小心使用一个稳定的求逆方案，该方案将投影出不符合无穷小约束方程的<span class="math-inline">H</span>分量以及那些在<span class="math-inline">f</span>的附加对称性方向上的分量。<code>invdgrad</code>函数通过共轭梯度程序执行逆变海森矩阵的稳定求逆，其中<code>dgrad</code>函数调用<code>nosym</code>函数来投影出任何额外的对称性分量。
 
 <p>
 
@@ -141,16 +130,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6433"
-  href="node371.html">Common Issues</a>
-<b> Up:</b> <a name="tex2html6427"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6423"
-  href="node369.html">Covariant Differentiation</a>
- &nbsp <b>  <a name="tex2html6429"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6431"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6433" href="node371.html">常见问题</a>
+<b>上一级：</b><a name="tex2html6427" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6423" href="node369.html">协变微分法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

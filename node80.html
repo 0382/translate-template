@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Orthogonal Projection Methods.</title>
-<meta name="description" content="Orthogonal Projection Methods.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Orthogonal Projection Methods.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node81.html">
-<link rel="previous" href="node79.html">
-<link rel="up" href="node79.html">
-<link rel="next" href="node81.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1901"
   href="node81.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1902"
-  href="node81.html">Oblique Projection Methods.</a>
-<b> Up:</b> <a name="tex2html1896"
-  href="node79.html">Basic Ideas Y. Saad</a>
-<b> Previous:</b> <a name="tex2html1890"
-  href="node79.html">Basic Ideas Y. Saad</a>
- &nbsp <b>  <a name="tex2html1898"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1900"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1902" href="node81.html">Oblique Projection Methods.</a>
+<b>上一级：</b><a name="tex2html1896" href="node79.html">Basic Ideas Y. Saad</a>
+<b>上一节：</b><a name="tex2html1890" href="node79.html">Basic Ideas Y. Saad</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001220010000000000000"></a> 
@@ -97,86 +85,85 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 正交投影方法
 </h4> 
-设 <span class="math-inline">A</span> 是一个 <span class="math-inline">n \times n</span> 的复矩阵，<span class="math-inline">\mathcal{K}</span> 是 <span class="math-inline">{\mathcal C}^n</span> 的一个 <span class="math-inline">m</span> 维子空间，考虑寻找属于 <span class="math-inline">{\mathcal C}^n</span> 的 <span class="math-inline">u</span> 和属于 <span class="math-inline">{\mathcal C}</span> 的 <span class="math-inline">\lambda</span> 使得
+设 <span class="math-inline">A</span> 是一个 <span class="math-inline">n \times n</span> 的复矩阵，<span class="math-inline">\mathcal{K}</span> 是一个 <span class="math-inline">m</span> 维的子空间，考虑寻找属于 <span class="math-inline">{\mathcal C}^n</span> 的 <span class="math-inline">u</span> 和属于 <span class="math-inline">{\mathcal C}</span> 的 <span class="math-inline">\lambda</span> 使得
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:4.12"></a><div class="math-display">A u\ = \ \lambda u .</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4.12"></a><div class="math-display">A u\ = \ \lambda u .</div></td>
+<td WIDTH=10 align="RIGHT">
 (7)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-一种基于子空间 <span class="math-inline">\mathcal{K}</span> 的正交投影技术寻求上述问题的近似特征对 <span class="math-inline">\tilde \lambda, \tilde{u}</span>，其中 <span class="math-inline">\tilde{\lambda}</span> 属于 <span class="math-inline">{\mathcal C}</span>，<span class="math-inline">\tilde{u}</span> 属于 <span class="math-inline">\mathcal{K}</span>。这个近似特征对是通过施加以下 Galerkin 条件获得的：<a name="6443"></a>
-<a name="6444"></a> 
+一种基于子空间 <span class="math-inline">\mathcal{K}</span> 的正交投影技术寻求上述问题的近似特征对 <span class="math-inline">(\tilde \lambda, \tilde{u})</span>，其中 <span class="math-inline">\tilde \lambda</span> 属于 <span class="math-inline">{\mathcal C}</span>，<span class="math-inline">\tilde{u}</span> 属于 <span class="math-inline">\mathcal{K}</span>。通过施加以下 Galerkin 条件来获得此近似特征对：
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:4.13"></a><div class="math-display">A \tilde{u} - \tilde \lambda \tilde{u} \ \bot\ \mathcal{K} ,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4.13"></a><div class="math-display">A \tilde{u} - \tilde \lambda \tilde{u} \ \bot\ \mathcal{K} ,</div></td>
+<td WIDTH=10 align="RIGHT">
 (8)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-或者，等价地，
+或等价地，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:4.14"></a><div class="math-display">v^{\ast} ( A \tilde{u} - \tilde \lambda \tilde{u} )\ =\ 0 \ \ \ \forall \ v \in \mathcal{K}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4.14"></a><div class="math-display">v^{\ast} ( A \tilde{u} - \tilde \lambda \tilde{u} )\ =\ 0 \ \ \ \forall \ v \in \mathcal{K}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (9)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-为了将其转化为矩阵问题，假设 <span class="math-inline">\mathcal{K}</span> 的一个标准正交基 <span class="math-inline">\{ v_1, v_2, \ldots, v_m \}</span> 可用。记 <span class="math-inline">V</span> 为列向量 <span class="math-inline">v_1, v_2, \ldots, v_m</span> 组成的矩阵，即 <span class="math-inline">V = [v_1, v_2, \ldots, v_m]</span>。由于我们寻求 <span class="math-inline">\tilde{u} \in \mathcal{K}</span>，它可以写成
+为了将其转化为矩阵问题，假设 <span class="math-inline">\mathcal{K}</span> 的一个标准正交基 <span class="math-inline">\{ v_1, v_2, \ldots, v_m \}</span> 可用。记 <span class="math-inline">V</span> 为包含列向量 <span class="math-inline">v_1, v_2, \ldots, v_m</span> 的矩阵，即 <span class="math-inline">V = [v_1, v_2, \ldots, v_m]</span>。由于我们寻求 <span class="math-inline">\tilde{u} \in \mathcal{K}</span>，它可以表示为
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:4.16"></a><div class="math-display">\tilde{u}\ =\ V y .</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4.16"></a><div class="math-display">\tilde{u}\ =\ V y .</div></td>
+<td WIDTH=10 align="RIGHT">
 (10)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 于是，方程 eq:4.16 变为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">v^{\ast}_j ( A V y - \tilde \lambda V y )= 0 , \quad j=1,\ldots, m .</div>
+<div class="math-display">v^{\ast}_j ( A V y - \tilde \lambda V y )= 0 , \quad j=1,\ldots , m .</div>
 </div>
 <br clear="ALL">
 <p></p>
 因此，<span class="math-inline">y</span> 和 <span class="math-inline">\tilde \lambda</span> 必须满足
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:4.18"></a><div class="math-display">B_m y\ =\ \tilde \lambda y</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4.18"></a><div class="math-display">B_m y\ =\ \tilde \lambda y</div></td>
+<td WIDTH=10 align="RIGHT">
 (11)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 <span class="math-inline">B_m = V^ A V</span>。<a name="eq:Bm"></a> 
+其中 <span class="math-inline">B_m = V^ A V</span>。
 
 投影过程得到的近似特征值 <span class="math-inline">\tilde{\lambda}_i</span> 是矩阵 <span class="math-inline">B_m</span> 的所有特征值。相关的特征向量是 <span class="math-inline">Vy_i</span>，其中 <span class="math-inline">y_i</span> 是与 <span class="math-inline">\tilde{\lambda}_i</span> 相关的 <span class="math-inline">B_m</span> 的特征向量。
 
 <p>
-这种用于数值计算 <span class="math-inline">A</span> 的特征值/特征向量的 Galerkin 近似的方法称为 Rayleigh-Ritz 过程。<a name="6462"></a> 
+这种用于数值计算 <span class="math-inline">A</span> 的特征值/特征向量的 Galerkin 近似的方法称为 Rayleigh-Ritz 过程。
 <blockquote>
 R<small>AYLEIGH-</small>R<small>ITZ </small>P<small>ROCEDURE</small>
 </blockquote>
- 
+
 <ol>
-<li>计算子空间 <span class="math-inline">\mathcal{K}</span> 的标准正交基 <span class="math-inline">\{ v_i \}_{i=1, \ldots, m}</span>。设 <span class="math-inline">V = [v_1, v_2, \ldots, v_m]</span>。</li>
+<li>计算子空间 <span class="math-inline">\mathcal{K}</span> 的一个标准正交基 <span class="math-inline">\{ v_i \}_{i=1, \ldots, m}</span>。设 <span class="math-inline">V = [v_1, v_2, \ldots, v_m]</span>。</li>
 <li>计算 <span class="math-inline">B_m = V^{\ast} A V</span>。</li>
-<li>计算 <span class="math-inline">B_m</span> 的特征值并选择所需的 <span class="math-inline">k</span> 个特征值 <span class="math-inline">\tilde \lambda_i ,i=1,2,\ldots,k</span>，其中 <span class="math-inline">k \leq m</span>（例如最大的那些）。</li>
-<li>计算与 <span class="math-inline">\tilde \lambda_i , i=1,\ldots,k</span> 相关的 <span class="math-inline">B_m</span> 的特征向量 <span class="math-inline">y_i , i=1,\ldots,k</span>，以及相应的 <span class="math-inline">A</span> 的近似特征向量 <span class="math-inline">\tilde{u}_i = V y_i ,i=1,\ldots,k</span>。</li>
+<li>计算 <span class="math-inline">B_m</span> 的特征值并选择所需的 <span class="math-inline">k</span> 个（例如最大的 <span class="math-inline">k</span> 个），其中 <span class="math-inline">k \leq m</span>。</li>
+<li>计算与 <span class="math-inline">\tilde \lambda_i</span> 相关的 <span class="math-inline">B_m</span> 的特征向量 <span class="math-inline">y_i</span>，以及相应的 <span class="math-inline">A</span> 的近似特征向量 <span class="math-inline">\tilde{u}_i = V y_i</span>。</li>
 </ol> 
 
 <p>
-在实现这种方法时，通常不会为每组生成的基向量计算 <span class="math-inline">B_m</span> 的特征对。通过此过程计算的值 <span class="math-inline">\tilde{\lambda}_i</span> 称为 Ritz 值，向量 <span class="math-inline">\tilde{u}_i</span> 是相关的 Ritz 向量。<a name="6472"></a> <a name="6473"></a>
-步骤 3 和 4 中的 <span class="math-inline">m \times m</span> 特征值问题的数值解可以通过 LAPACK 等标准库子程序处理。[<a href="node421.html#lapack">12</a>]  
-另一个重要注意事项是，在步骤 4 中，可以用 Schur 向量代替特征向量来获得近似 Schur 向量 <span class="math-inline">\tilde{u}_i</span>。Schur 向量 <span class="math-inline">y_i</span> 可以以数值稳定的方式获得，通常，特征向量比 Schur 向量对舍入误差更敏感。
+在实现这种方法时，通常不会为每组生成的基向量计算 <span class="math-inline">B_m</span> 的特征对。通过此过程计算的值 <span class="math-inline">\tilde{\lambda}_i</span> 称为 Ritz 值，向量 <span class="math-inline">\tilde{u}_i</span> 是相关的 Ritz 向量。
+
+数值求解步骤 3 和 4 中的 <span class="math-inline">m \times m</span> 特征值问题可以使用 LAPACK 等标准库子程序处理。另一个重要提示是，在步骤 4 中可以用 Schur 向量代替特征向量，以获得近似的 Schur 向量 <span class="math-inline">\tilde{u}_i</span>。Schur 向量 <span class="math-inline">y_i</span> 可以以数值稳定的方式获得，通常，特征向量比 Schur 向量对舍入误差更敏感。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -196,16 +183,11 @@ R<small>AYLEIGH-</small>R<small>ITZ </small>P<small>ROCEDURE</small>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1902"
-  href="node81.html">Oblique Projection Methods.</a>
-<b> Up:</b> <a name="tex2html1896"
-  href="node79.html">Basic Ideas Y. Saad</a>
-<b> Previous:</b> <a name="tex2html1890"
-  href="node79.html">Basic Ideas Y. Saad</a>
- &nbsp <b>  <a name="tex2html1898"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1900"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1902" href="node81.html">Oblique Projection Methods.</a>
+<b>上一级：</b><a name="tex2html1896" href="node79.html">Basic Ideas Y. Saad</a>
+<b>上一节：</b><a name="tex2html1890" href="node79.html">Basic Ideas Y. Saad</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

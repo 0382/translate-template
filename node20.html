@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Numerical Stability and Conditioning</title>
-<meta name="description" content="Numerical Stability and Conditioning">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Numerical Stability and Conditioning">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node19.html">
-<link rel="up" href="node19.html">
-<link rel="next" href="node21.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1007"
   href="node21.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1008"
-  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b> Up:</b> <a name="tex2html1002"
-  href="node19.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html998"
-  href="node19.html">Introduction</a>
- &nbsp <b>  <a name="tex2html1004"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1006"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1008" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1002" href="node19.html">引言</a>
+<b>上一节：</b><a name="tex2html998" href="node19.html">引言</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001111000000000000000"></a>
@@ -98,27 +87,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-这里我们将详细阐述如何利用条件数来获得误差界限。为简化起见，假设我们只是尝试计算一个标量函数 <span class="math-inline">f(x)</span>，使用算法 <span class="math-inline">alg(x)</span>，并且我们希望限定误差 <span class="math-inline">alg(x) - f(x)</span>。进一步假设我们可以证明 <span class="math-inline">alg(x) = f(x+e)</span>，其中 <span class="math-inline">e</span> 是一个“小”的扰动。如果算法具有这一特性，即对于稍微扰动的参数 <span class="math-inline">x+e</span>，它能准确地得到正确答案 <span class="math-inline">f(x+e)</span>，那么该算法被称为<em>数值稳定的</em>，或简称为<em>稳定的</em>。在这种情况下，我们可以如下估计误差：
+这里我们将详细阐述如何利用条件数来获得误差界限。为简化讨论，假设我们仅尝试计算一个标量函数 \( f(x) \)，使用算法 \( alg(x) \)，并希望限定误差 \( alg(x) - f(x) \)。进一步假设我们可以证明 \( alg(x) = f(x+e) \) 对于某个“小”的 \( e \)。如果算法具有这一特性，即对于略微扰动的参数 \( x+e \) 能准确得到 \( f(x+e) \)，那么该算法被称为<em>数值稳定</em>，或简称为<em>稳定</em>。在这种情况下，我们可以如下估计误差：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">{\rm error} = alg(x) - f(x) = f(x+e) - f(x) \approx f'(x) \cdot e,</div>
 </div>
 <br clear="ALL">
 <p></p>
-这里我们假设 <span class="math-inline">f(x)</span> 是可微的。在这种简单情况下，我们可以因此限定 <span class="math-inline">\vert{\rm error}\vert \leq \vert f'(x)\vert \cdot \vert e\vert</span>，其中 <span class="math-inline">\vert f'(x)\vert</span> 是<em>条件数</em> <a name="1083"></a>，而 <span class="math-inline">e</span> 是所谓的<em>后向误差</em>。<a name="1085"></a> 注意 <span class="math-inline">f'(x)</span> 仅依赖于函数 <span class="math-inline">f()</span> 及其参数 <span class="math-inline">x</span>，而 <span class="math-inline">e</span> 还依赖于算法。
+这里我们假设 \( f(x) \) 是可微的。在这种简单情况下，我们可以限定 \( \vert{\rm error}\vert \leq \vert f'(x)\vert \cdot \vert e\vert \)，其中 \( \vert f'(x)\vert \) 是<em>条件数</em> <a name="1083"></a>，而 \( e \) 是所谓的<em>后向误差</em>。<a name="1085"></a> 注意 \( f'(x) \) 仅依赖于函数 \( f() \) 及其参数 \( x \)，而 \( e \) 还依赖于算法本身。
 
 <p>
-同样的思路也适用于获得特征值问题的误差界限。在这种情况下，<span class="math-inline">x</span> 将是一个矩阵，<span class="math-inline">x+e</span> 是一个扰动矩阵，而 <span class="math-inline">f(x+e)</span> 可能是一个特征值、一组特征值、一组特征值/特征向量对或其他量。此外，<span class="math-inline">\vert e\vert</span> 将被矩阵 <span class="math-inline">e</span> 的范数所替代。
+同样的思路也适用于求解特征值问题的误差界限。在这种情况下，\( x \) 是一个矩阵，\( x+e \) 是扰动后的矩阵，而 \( f(x+e) \) 可能是一个特征值、一组特征值、一组特征值/特征向量对或其他量。此外，\( \vert e\vert \) 将被矩阵 \( e \) 的范数所替代。
 
 <p>
-因此，要获得误差界限，我们需要一个条件数和一个后向误差 <span class="math-inline">e</span> 的界限。有两种方法来获得 <span class="math-inline">e</span> 的界限。第一种方法是证明算法 <span class="math-inline">alg(x)</span><em>总是</em>具有小的后向误差 <span class="math-inline">e</span>。对于本书中讨论的变换方法，情况确实如此，后向误差矩阵 <span class="math-inline">e</span> 的范数大致被机器精度 <span class="math-inline">\epsilon_M</span> 乘以输入矩阵 <span class="math-inline">x</span> 的范数所限定。这种保证的稳定性<em>不适用于</em>迭代方法。
+因此，要获得误差界限，我们需要一个条件数和一个后向误差 \( e \) 的界限。有两种方法来获得 \( e \) 的界限。第一种方法是证明算法 \( alg(x) \) <em>始终</em> 具有小的后向误差 \( e \)。对于本书中讨论的变换方法，这是成立的，后向误差矩阵 \( e \) 的范数大致被机器精度 \( \epsilon_M \) 乘以输入矩阵 \( x \) 的范数所限定。这种保证的稳定性<em>不适用于</em>迭代方法。
 
 <p>
-对于迭代方法，情况更为复杂。这里是一个概述，详细内容留给第<a href="node85.html#chap:heig">4</a>章到第<a href="node329.html#chap:nlep">9</a>章。假设 <span class="math-inline">\mu</span> 和单位向量 <span class="math-inline">x</span> 形成一个近似的特征值和特征向量对，即残差向量 <span class="math-inline">Ax - \mu x \equiv r</span> 很小。那么很容易证明，使得 <span class="math-inline">(A+E)x = \mu x</span> 成立的最小矩阵 <span class="math-inline">E</span> 是 <span class="math-inline">E = -r x^*</span>，其范数为 <span class="math-inline">\Vert E\Vert _2 = \Vert r\Vert _2</span>。因此，要限定后向误差，我们只需计算残差的2-范数 <span class="math-inline">\Vert r\Vert _2 = \Vert Ax - \mu x\Vert _2</span>。因此，限定单个特征值和特征向量对的后向误差非常简单。对于一组特征值/特征向量对 <span class="math-inline">A x_i \approx \mu_i x_i</span>，<span class="math-inline">i=1,\ldots,m</span>，情况更为复杂。即使每个 <span class="math-inline">A x_i - \mu_i x_i</span> 都很小，这并不意味着 <span class="math-inline">\mu_i,x_i</span> 是 <span class="math-inline">m</span> 个不同特征对的近似（有些可能近似于同一个真实特征对），或者特征向量在它们应该正交时（当 <span class="math-inline">A</span> 是厄米矩阵时）是正交的，或其他任何期望的性质。一些迭代方法比其他方法更有效地保证这些性质（例如，参见第<a href="node117.html#sec:irlm">4.5</a>节和第<a href="node220.html#sec:nsymiram">7.6</a>节中描述的隐式重启Lanczos和Arnoldi方法）。
+对于迭代方法，情况更为复杂。这里简要概述，详细内容留待第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章。假设 \( \mu \) 和单位向量 \( x \) 形成一个近似的特征值和特征向量对，即残差向量 \( Ax - \mu x \equiv r \) 很小。那么容易证明，使得 \( (A+E)x = \mu x \) 成立的最小矩阵 \( E \) 为 \( E = -r x^* \)，其范数为 \( \Vert E\Vert _2 = \Vert r\Vert _2 \)。因此，要限定后向误差，我们只需计算残差的2-范数 \( \Vert r\Vert _2 = \Vert Ax - \mu x\Vert _2 \)。对于单个特征值和特征向量对，限定后向误差非常简单。但对于一组特征值/特征向量对 \( A x_i \approx \mu_i x_i \)，\( i=1,\ldots,m \)，情况更为复杂。即使每个 \( A x_i - \mu_i x_i \) 都很小，这并不意味着 \( \mu_i,x_i \) 是 \( m \) 个不同特征对的近似（某些可能近似于同一个真实特征对），或者特征向量在应该是正交时是正交的（当 \( A \) 是厄米矩阵时），或其他期望的性质。某些迭代方法比其他方法更有效地保证这些性质（例如，参见第<a href="node117.html#sec:irlm">4.5</a>节和第<a href="node220.html#sec:nsymiram">7.6</a>节中描述的隐式重启的Lanczos和Arnoldi方法）。
 
 <p>
-读者可以参考Golub和Van Loan的教科书[<a href="node421.html#golo96">198</a>]以及Demmel的教科书[<a href="node421.html#demmelbook">114</a>]进行数值稳定性的入门学习。Higham的书籍[<a href="node421.html#high96">228</a>]和Stewart与Sun的书籍[<a href="node421.html#stsu90">425</a>]是分别针对线性方程组和特征值问题的数值稳定性和条件数进行深入研究的优秀资源。
+读者可参考Golub和Van Loan的教材[<a href="node421.html#golo96">198</a>]以及Demmel的教材[<a href="node421.html#demmelbook">114</a>]作为数值稳定性的入门学习。Higham的教材[<a href="node421.html#high96">228</a>]和Stewart与Sun的教材[<a href="node421.html#stsu90">425</a>]则是深入研究线性方程组和特征值问题数值稳定性与条件数的优秀资源。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -138,16 +127,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1008"
-  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b> Up:</b> <a name="tex2html1002"
-  href="node19.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html998"
-  href="node19.html">Introduction</a>
- &nbsp <b>  <a name="tex2html1004"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1006"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1008" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1002" href="node19.html">引言</a>
+<b>上一节：</b><a name="tex2html998" href="node19.html">引言</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

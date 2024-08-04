@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Eigenvalues and Eigenvectors</title>
-<meta name="description" content="Eigenvalues and Eigenvectors">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Eigenvalues and Eigenvectors">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node50.html">
-<link rel="previous" href="node48.html">
-<link rel="up" href="node48.html">
-<link rel="next" href="node50.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1439"
   href="node50.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1440"
-  href="node50.html">Invariant Subspaces</a>
-<b> Up:</b> <a name="tex2html1434"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b> Previous:</b> <a name="tex2html1428"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
- &nbsp <b>  <a name="tex2html1436"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1438"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1440" href="node50.html">不变子空间</a>
+<b>上一级：</b><a name="tex2html1434" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一节：</b><a name="tex2html1428" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001151000000000000000"></a>
@@ -100,34 +88,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 多项式 
-<span class="math-inline">p(\lambda) = {\rm det}(\lambda I-A)</span> 被称为矩阵 <span class="math-inline">A</span> 的
+<span class="math-inline">p(\lambda) = {\rm det}(\lambda I-A)</span> 被称为
 <em>特征多项式</em> 
-<a name="1524"></a>。<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A</span> 的 <em>特征值</em>。由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个特征值。实矩阵的特征值可能是实数，也可能成对出现为复数。
+<a name="1524"></a>
+矩阵 <span class="math-inline">A</span> 的特征多项式。<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A</span> 的<em>特征值</em>。
+由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个特征值。实矩阵的特征值可以是实数或成对出现的复数。
 
 <p>
-满足 <span class="math-inline">Ax = \lambda x</span> 的非零向量 <span class="math-inline">x</span> 是特征值 <span class="math-inline">\lambda</span> 对应的 <em>（右）特征向量</em>。满足 <span class="math-inline">y^*A = \lambda y^*</span> 的非零向量 <span class="math-inline">y</span> 是特征值 <span class="math-inline">\lambda</span> 对应的 <em>左特征向量</em>。
+一个非零向量 <span class="math-inline">x</span> 满足 
+<span class="math-inline">Ax = \lambda x</span> 是特征值 <span class="math-inline">\lambda</span> 的<em>（右）特征向量</em>。
+一个非零向量 <span class="math-inline">y</span> 满足 
+<span class="math-inline">y^*A = \lambda y^*</span> 是特征值 <span class="math-inline">\lambda</span> 的<em>左特征向量</em>。
 
 <p>
-一个 <span class="math-inline">n \times n</span> 的矩阵不一定有 <span class="math-inline">n</span> 个独立的特征向量。最简单的例子是
+一个 <span class="math-inline">n</span> 阶矩阵不一定有 <span class="math-inline">n</span> 个独立的特征向量。
+最简单的例子是
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eqn_chap2_nHep_1"></a><div class="math-display">A (\epsilon) = \bmat{cc} 0 &amp; 1 \\ \epsilon^2 &amp; 0 \emat,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn_chap2_nHep_1"></a><div class="math-display">A (\epsilon) = \bmat{cc} 0 &amp; 1 \\ \epsilon^2 &amp; 0 \emat,</div></td>
+<td WIDTH=10 align="RIGHT">
 (3)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 其特征值为 
 <span class="math-inline">\lambda_{\pm} = \pm \epsilon</span>。
 当 
-<span class="math-inline">\epsilon \neq 0</span> 时，有两个右特征向量，
+<span class="math-inline">\epsilon \neq 0</span> 时，存在两个右特征向量，
 
-<span class="math-inline">x_{\pm} = [ 1, \pm \epsilon ]^T</span>。随着 <span class="math-inline">\epsilon</span> 趋近于 0，这两个特征向量逐渐接近。当 <span class="math-inline">\epsilon = 0</span> 时，两个特征值都等于 0，并且有一个独立的右特征向量平行于 <span class="math-inline">[1,0]^T</span>。<span class="math-inline">n</span> 个独立的特征向量可能不存在（尽管每个不同的特征值至少有一个特征向量），这一事实必然会使非线性特征值问题（NHEP）的理论和算法变得复杂。
+<span class="math-inline">x_{\pm} = [ 1, \pm \epsilon ]^T</span>。随着 <span class="math-inline">\epsilon</span> 趋近于 0，这两个特征向量逐渐趋同。
+当 <span class="math-inline">\epsilon = 0</span> 时，两个特征值都等于 0，
+并且存在一个独立的右特征向量，平行于 <span class="math-inline">[1,0]^T</span>。
+<span class="math-inline">n</span> 个独立的特征向量可能不存在的事实
+（尽管每个不同的特征值至少有一个特征向量）将不可避免地使NHEP的理论和算法变得复杂。
 
 <p>
-由于特征值可能是复数，因此没有固定的方法来排序它们。尽管如此，为了方便，我们通常将它们编号为 
+由于特征值可能是复数，因此没有固定的方法来排序。
+尽管如此，为了方便，我们通常将它们编号为 
 <span class="math-inline">\lambda_1 ,\ldots,\lambda_n</span>，
 对应的右特征向量为 
 <span class="math-inline">x_1,\ldots,x_n</span>
@@ -152,16 +151,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1440"
-  href="node50.html">Invariant Subspaces</a>
-<b> Up:</b> <a name="tex2html1434"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b> Previous:</b> <a name="tex2html1428"
-  href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
- &nbsp <b>  <a name="tex2html1436"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1438"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1440" href="node50.html">不变子空间</a>
+<b>上一级：</b><a name="tex2html1434" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一节：</b><a name="tex2html1428" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

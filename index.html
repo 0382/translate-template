@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>book</title>
-<meta name="description" content="book">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="book">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,10 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node1.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html78"
   href="node1.html">
@@ -73,17 +69,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html79"
-  href="node1.html">List of Contributors</a>
- &nbsp <b>  <a name="tex2html75"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html77"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html79" href="node1.html">贡献者名单</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<div align="center">
+<div align="CENTER">
 <font size="+2"><b>Templates for the Solution of 
 Algebraic Eigenvalue Problems: <br>
 &nbsp; <br>
@@ -93,477 +86,481 @@ Algebraic Eigenvalue Problems: <br>
 <p>
 </center>
 
-<center><span class="math-inline">B</span></a>
-<li><a name="tex2html200"
-  href="node184.html">Some Combination of <span class="math-inline">A</span> and <span class="math-inline">B</span> is Positive Definite</a>
-</ul>
-</ul>
-<li><a name="tex2html201"
-  href="node190.html">Singular Value Decomposition</a>
+<center><img src="icon/etbookcover.jpg"></center>
+<p> 
+<br>
+<p><font size="+2">
+<div align="CENTER">
+<em>Edited by</em> 
+Zhaojun Bai,
+James Demmel,
+Jack Dongarra, 
+Axel Ruhe, and 
+Henk van der Vorst 
+</div> 
+</font>
+<p>
+<p>
+<div align="LEFT">
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"></a>
+
 <ul>
-<li><a name="tex2html202"
-  href="node191.html">Introduction</a>
-<li><a name="tex2html203"
-  href="node193.html">Direct Methods</a>
-<li><a name="tex2html204"
-  href="node194.html">Iterative Algorithms 
-<br>&nbsp; <em>J. Demmel</em> </a>
+<li><a name="tex2html80" href="node1.html">贡献者名单</a>
+<li><a name="tex2html81" href="node2.html">如何使用本书</a>
+<li><a name="tex2html82" href="node3.html">如何引用此书</a>
+<li><a name="tex2html83" href="node4.html">致谢</a>
+<li><a name="tex2html84" href="node5.html">目录</a>
+<li><a name="tex2html85" href="node6.html">符号和缩略语列表</a>
 <ul>
-<li><a name="tex2html205"
-  href="node195.html">What Operations Can One Afford to Perform?</a>
-<li><a name="tex2html206"
-  href="node196.html">Which Singular Values and Vectors Are Desired?</a>
-<li><a name="tex2html207"
-  href="node197.html">Golub-Kahan-Lanczos Method</a>
-<li><a name="tex2html208"
-  href="node200.html">Software Availability</a>
-<li><a name="tex2html209"
-  href="node201.html">Numerical Example</a>
+<li><a name="tex2html86" href="node7.html">符号</a>
+<li><a name="tex2html87" href="node8.html">缩略词</a>
 </ul>
-<li><a name="tex2html210"
-  href="node202.html">Related Problems 
-<br>&nbsp; <em>J. Demmel</em> </a>
-</ul>
-<li><a name="tex2html211"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
+<li><a name="tex2html88" href="node9.html">直接算法清单</a>
+<li><a name="tex2html89" href="node10.html">图片清单</a>
+<li><a name="tex2html90" href="node11.html">表格清单</a>
+<li><a name="tex2html91" href="node12.html">引言</a>
 <ul>
-<li><a name="tex2html212"
-  href="node204.html">Introduction</a>
-<li><a name="tex2html213"
-  href="node205.html">Balancing Matrices 
-<br>&nbsp; <em>T.&nbsp;Chen and J.&nbsp;Demmel</em> </a>
-<ul>
-<li><a name="tex2html214"
-  href="node206.html">Direct Balancing</a>
-<li><a name="tex2html215"
-  href="node207.html">Krylov Balancing Algorithms</a>
-<li><a name="tex2html216"
-  href="node208.html">Accuracy of Eigenvalues Computed after Balancing</a>
+<li><a name="tex2html92" href="node13.html">为什么是特征值模板？</a>
+<li><a name="tex2html93" href="node14.html">目标读者群</a>
+<li><a name="tex2html94" href="node15.html">使用决策树选择模板</a>
+<li><a name="tex2html95" href="node16.html">什么是模板？</a>
+<li><a name="tex2html96" href="node17.html">书籍的组织结构</a>
 </ul>
-<li><a name="tex2html217"
-  href="node209.html">Direct Methods</a>
-<li><a name="tex2html218"
-  href="node210.html">Single- and Multiple-Vector Iterations 
-<br>&nbsp; <em>M.&nbsp;Gu</em> </a>
+<li><a name="tex2html97" href="node18.html">特征问题简述</a>
 <ul>
-<li><a name="tex2html219"
-  href="node211.html">Power Method</a>
-<li><a name="tex2html220"
-  href="node212.html">Inverse Iteration</a>
-<li><a name="tex2html221"
-  href="node213.html">Subspace Iteration</a>
-<li><a name="tex2html222"
-  href="node214.html">Software Availability</a>
-</ul>
-<li><a name="tex2html223"
-  href="node215.html">Arnoldi Method 
-<br>&nbsp; <em>Y.&nbsp;Saad</em> </a>
+<li><a name="tex2html98" href="node19.html">引言</a>
 <ul>
-<li><a name="tex2html224"
-  href="node216.html">Basic Algorithm</a>
-<li><a name="tex2html225"
-  href="node217.html">Variants </a>
-<li><a name="tex2html226"
-  href="node218.html">Explicit Restarts</a>
-<li><a name="tex2html227"
-  href="node219.html">Deflation</a>
+<li><a name="tex2html99" href="node20.html">数值稳定性和条件数</a>
 </ul>
-<li><a name="tex2html228"
-  href="node220.html">Implicitly Restarted Arnoldi Method 
-<br>&nbsp; <em>R.&nbsp;Lehoucq and D.&nbsp;Sorensen</em></a>
+<li><a name="tex2html100" href="node21.html">厄米特征问题
+<br>&nbsp; <i>J. Demmel</i></a>
 <ul>
-<li><a name="tex2html229"
-  href="node221.html">Arnoldi Procedure in GEMV Form</a>
-<li><a name="tex2html230"
-  href="node222.html">Implicit Restart</a>
-<li><a name="tex2html231"
-  href="node223.html">Convergence Properties</a>
-<li><a name="tex2html232"
-  href="node224.html">Numerical Stability</a>
-<li><a name="tex2html233"
-  href="node225.html">Computational Costs and Tradeoffs</a>
-<li><a name="tex2html234"
-  href="node226.html">Deflation and Stopping Rules</a>
-<li><a name="tex2html235"
-  href="node227.html">Orthogonal Deflating Transformation</a>
-<li><a name="tex2html236"
-  href="node233.html">Eigenvector Computation with Spectral Transformation</a>
-<li><a name="tex2html237"
-  href="node234.html">Software Availability</a>
+<li><a name="tex2html101" href="node22.html">特征值与特征向量</a>
+<li><a name="tex2html102" href="node23.html">不变子空间</a>
+<li><a name="tex2html103" href="node24.html">等价关系（相似性）</a>
+<li><a name="tex2html104" href="node25.html">特征分解</a>
+<li><a name="tex2html105" href="node26.html">条件数</a>
+<li><a name="tex2html106" href="node27.html">特征问题的具体化</a>
+<li><a name="tex2html107" href="node28.html">相关的特征问题</a>
+<li><a name="tex2html108" href="node29.html">示例</a>
 </ul>
-<li><a name="tex2html238"
-  href="node235.html">Block Arnoldi Method 
-<br>&nbsp; <em>R.&nbsp;Lehoucq and K.&nbsp;Maschhoff</em> </a>
+<li><a name="tex2html109" href="node30.html">广义厄米特征问题
+<br>&nbsp; <i>J. Demmel</i></a>
 <ul>
-<li><a name="tex2html239"
-  href="node236.html">Block Arnoldi Reductions</a>
-<li><a name="tex2html240"
-  href="node237.html">Practical Algorithm</a>
-<li><a name="tex2html241"
-  href="node242.html">Software Availability</a>
-<li><a name="tex2html242"
-  href="node243.html">Notes and References</a>
+<li><a name="tex2html110" href="node31.html">特征值与特征向量</a>
+<li><a name="tex2html111" href="node32.html">特征空间</a>
+<li><a name="tex2html112" href="node33.html">等价关系（合同关系）</a>
+<li><a name="tex2html113" href="node34.html">特征分解</a>
+<li><a name="tex2html114" href="node35.html">条件数</a>
+<li><a name="tex2html115" href="node36.html">特征问题的具体化</a>
+<li><a name="tex2html116" href="node37.html">相关的特征问题</a>
+<li><a name="tex2html117" href="node38.html">示例</a>
 </ul>
-<li><a name="tex2html243"
-  href="node244.html">Lanczos Method 
-<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em> </a>
+<li><a name="tex2html118" href="node39.html">奇异值分解
+<br>&nbsp; <i>J. Demmel</i></a>
 <ul>
-<li><a name="tex2html244"
-  href="node245.html">Algorithm</a>
-<li><a name="tex2html245"
-  href="node246.html">Convergence Properties</a>
-<li><a name="tex2html246"
-  href="node248.html">Software Availability</a>
-<li><a name="tex2html247"
-  href="node249.html">Notes and References</a>
+<li><a name="tex2html119" href="node40.html">奇异值与奇异向量</a>
+<li><a name="tex2html120" href="node41.html">奇异子空间</a>
+<li><a name="tex2html121" href="node42.html">等价关系</a>
+<li><a name="tex2html122" href="node43.html">分解</a>
+<li><a name="tex2html123" href="node44.html">条件数</a>
+<li><a name="tex2html124" href="node45.html">奇异值问题的具体化</a>
+<li><a name="tex2html125" href="node46.html">相关的奇异值问题</a>
+<li><a name="tex2html126" href="node47.html">示例</a>
 </ul>
-<li><a name="tex2html248"
-  href="node250.html">Block Lanczos Methods 
-<br>&nbsp; <em>Z.&nbsp;Bai and D.&nbsp;Day</em></a>
+<li><a name="tex2html127" href="node48.html">非厄米特征问题
+<br>&nbsp;<i>J. Demmel</i></a>
 <ul>
-<li><a name="tex2html249"
-  href="node251.html">Basic Algorithm</a>
-<li><a name="tex2html250"
-  href="node252.html">An Adaptively Blocked Lanczos Method</a>
-<li><a name="tex2html251"
-  href="node254.html">Software Availability</a>
-<li><a name="tex2html252"
-  href="node255.html">Notes and References</a>
+<li><a name="tex2html128" href="node49.html">特征值与特征向量</a>
+<li><a name="tex2html129" href="node50.html">不变子空间</a>
+<li><a name="tex2html130" href="node51.html">等价关系（相似性）</a>
+<li><a name="tex2html131" href="node52.html">特征分解</a>
+<li><a name="tex2html132" href="node53.html">条件数</a>
+<li><a name="tex2html133" href="node54.html">特征问题的具体化</a>
+<li><a name="tex2html134" href="node55.html">相关的特征问题</a>
+<li><a name="tex2html135" href="node56.html">示例</a>
 </ul>
-<li><a name="tex2html253"
-  href="node256.html">Band Lanczos Method 
+<li><a name="tex2html136" href="node57.html">广义非厄米特征问题
+<br>&nbsp; <i>J. Demmel</i></a>
+<ul>
+<li><a name="tex2html137" href="node58.html">特征值与特征向量</a>
+<li><a name="tex2html138" href="node59.html">收缩子空间</a>
+<li><a name="tex2html139" href="node60.html">等价关系</a>
+<li><a name="tex2html140" href="node61.html">特征分解</a>
+<li><a name="tex2html141" href="node62.html">条件数</a>
+<li><a name="tex2html142" href="node63.html">特征问题的具体化</a>
+<li><a name="tex2html143" href="node64.html">相关的特征问题</a>
+<li><a name="tex2html144" href="node65.html">示例</a>
+<li><a name="tex2html145" href="node66.html">奇异情况</a>
+</ul>
+<li><a name="tex2html146" href="node75.html">更多的广义特征问题</a>
+<li><a name="tex2html147" href="node76.html">非线性特征问题
+<br>&nbsp; <i>J. Demmel</i></a>
+</ul>
+<li><a name="tex2html148" href="node77.html">迭代投影方法简介</a>
+<ul>
+<li><a name="tex2html149" href="node78.html">引言</a>
+<li><a name="tex2html150" href="node79.html">基本概念
+<br><i>Y. Saad</i></a>
+<li><a name="tex2html151" href="node84.html">谱变换
+<br>&nbsp; <i>R. Lehoucq 和 D. Sorensen</i></a>
+</ul>
+<li><a name="tex2html152" href="node85.html">厄米特征值问题</a>
+<ul>
+<li><a name="tex2html153" href="node86.html">引言</a>
+<li><a name="tex2html154" href="node93.html">直接方法</a>
+<li><a name="tex2html155" href="node94.html">单向量与多向量迭代
+<br>&nbsp; <em>M. Gu</em></a>
+<ul>
+<li><a name="tex2html156" href="node95.html">幂法</a>
+<li><a name="tex2html157" href="node96.html">逆迭代法</a>
+<li><a name="tex2html158" href="node97.html">瑞利商迭代法</a>
+<li><a name="tex2html159" href="node98.html">子空间迭代法</a>
+<li><a name="tex2html160" href="node102.html">可用的软件</a>
+</ul>
+<li><a name="tex2html161" href="node103.html">Lanczos方法
+<br>&nbsp; <em>A. Ruhe</em></a>
+<ul>
+<li><a name="tex2html162" href="node104.html">算法</a>
+<li><a name="tex2html163" href="node105.html">收敛性质</a>
+<li><a name="tex2html164" href="node107.html">谱变换</a>
+<li><a name="tex2html165" href="node108.html">重新正交化</a>
+<li><a name="tex2html166" href="node112.html">可用的软件</a>
+<li><a name="tex2html167" href="node113.html">数值示例</a>
+</ul>
+<li><a name="tex2html168" href="node117.html">隐式重启Lanczos方法
+<br>&nbsp; <em>R. Lehoucq 和 D. Sorensen</em></a>
+<ul>
+<li><a name="tex2html169" href="node118.html">隐式重启</a>
+<li><a name="tex2html170" href="node119.html">位移的选择</a>
+<li><a name="tex2html171" href="node120.html">GEMV形式的Lanczos方法</a>
+<li><a name="tex2html172" href="node121.html">收敛性质</a>
+<li><a name="tex2html173" href="node122.html">计算成本与权衡</a>
+<li><a name="tex2html174" href="node123.html">收缩与停止规则</a>
+<li><a name="tex2html175" href="node124.html">正交收缩变换</a>
+<li><a name="tex2html176" href="node129.html">锁和清洗的实施</a>
+<li><a name="tex2html177" href="node130.html">可用的软件</a>
+</ul>
+<li><a name="tex2html178" href="node131.html">带状Lanczos方法
+<br>&nbsp; <em>R. Freund</em></a>
+<ul>
+<li><a name="tex2html179" href="node132.html">收缩的必要性</a>
+<li><a name="tex2html180" href="node133.html">基本性质</a>
+<li><a name="tex2html181" href="node134.html">算法</a>
+<li><a name="tex2html182" href="node135.html">变体</a>
+</ul>
+<li><a name="tex2html183" href="node136.html">Jacobi-Davidson方法
+<br>&nbsp; <em>G. Sleijpen 和 H. van der Vorst</em></a>
+<ul>
+<li><a name="tex2html184" href="node137.html">基本理论</a>
+<li><a name="tex2html185" href="node138.html">基本算法</a>
+<li><a name="tex2html186" href="node140.html">重启与收缩</a>
+<li><a name="tex2html187" href="node145.html">计算内部特征值</a>
+<li><a name="tex2html188" href="node146.html">可用的软件</a>
+<li><a name="tex2html189" href="node147.html">数值示例</a>
+</ul>
+<li><a name="tex2html190" href="node148.html">稳定性与准确性评估
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em></a>
+</ul>
+<li><a name="tex2html191" href="node155.html">广义厄米特征值问题</a>
+<ul>
+<li><a name="tex2html192" href="node156.html">引言</a>
+<li><a name="tex2html193" href="node163.html">转换为标准问题</a>
+<li><a name="tex2html194" href="node164.html">直接方法</a>
+<li><a name="tex2html195" href="node165.html">单向量与多向量迭代  
+<br>&nbsp;&nbsp;&nbsp;&nbsp; <em>M. Gu</em></a>
+<li><a name="tex2html196" href="node169.html">Lanczos方法
+<br>&nbsp; <em>A. Ruhe</em></a>
+<li><a name="tex2html197" href="node176.html">Jacobi-Davidson方法
+<br>&nbsp;<em>G. Sleijpen和H. van der Vorst</em></a>
+<li><a name="tex2html198" href="node177.html">稳定性与准确性评估
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em></a>
+<ul>
+<li><a name="tex2html199" href="node178.html">正定矩阵 <span class="math-inline">B</span></a>
+<li><a name="tex2html200" href="node184.html">某些<span class="math-inline">A</span>与<span class="math-inline">B</span>的组合是正定矩阵</a>
+</ul>
+</ul>
+<li><a name="tex2html201" href="node190.html">奇异值分解</a>
+<ul>
+<li><a name="tex2html202" href="node191.html">引言</a>
+<li><a name="tex2html203" href="node193.html">直接方法</a>
+<li><a name="tex2html204" href="node194.html">迭代算法
+<br>&nbsp; <em>J. Demmel</em></a>
+<ul>
+<li><a name="tex2html205" href="node195.html">什么操作是可以承受的？</a>
+<li><a name="tex2html206" href="node196.html">哪些奇异值和奇异向量是我们所期望的？</a>
+<li><a name="tex2html207" href="node197.html">Golub-Kahan-Lanczos 方法</a>
+<li><a name="tex2html208" href="node200.html">可用的软件</a>
+<li><a name="tex2html209" href="node201.html">数值示例</a>
+</ul>
+<li><a name="tex2html210" href="node202.html">相关问题
+<br>&nbsp; <em>J. Demmel</em></a>
+</ul>
+<li><a name="tex2html211" href="node203.html">非厄米特特征值问题</a>
+<ul>
+<li><a name="tex2html212" href="node204.html">引言</a>
+<li><a name="tex2html213" href="node205.html">平衡矩阵
+<br>&nbsp; <em>T.&nbsp;Chen and J.&nbsp;Demmel</em></a>
+<ul>
+<li><a name="tex2html214" href="node206.html">直接平衡法</a>
+<li><a name="tex2html215" href="node207.html">Krylov平衡算法</a>
+<li><a name="tex2html216" href="node208.html">平衡后特征值计算的准确性</a>
+</ul>
+<li><a name="tex2html217" href="node209.html">直接方法</a>
+<li><a name="tex2html218" href="node210.html">单向量与多向量迭代
+<br>&nbsp; <em>M.&nbsp;Gu</em></a>
+<ul>
+<li><a name="tex2html219" href="node211.html">幂法</a>
+<li><a name="tex2html220" href="node212.html">逆迭代法</a>
+<li><a name="tex2html221" href="node213.html">子空间迭代法</a>
+<li><a name="tex2html222" href="node214.html">可用的软件</a>
+</ul>
+<li><a name="tex2html223" href="node215.html">Arnoldi方法
+<br>&nbsp; <em>Y.&nbsp;Saad</em></a>
+<ul>
+<li><a name="tex2html224" href="node216.html">基本算法</a>
+<li><a name="tex2html225" href="node217.html">变体</a>
+<li><a name="tex2html226" href="node218.html">显式重启</a>
+<li><a name="tex2html227" href="node219.html">收缩</a>
+</ul>
+<li><a name="tex2html228" href="node220.html">隐式重启Arnoldi方法
+<br>&nbsp; <em>R. Lehoucq 和 D. Sorensen</em></a>
+<ul>
+<li><a name="tex2html229" href="node221.html">GEMV形式的Arnoldi过程</a>
+<li><a name="tex2html230" href="node222.html">隐式重启</a>
+<li><a name="tex2html231" href="node223.html">收敛性质</a>
+<li><a name="tex2html232" href="node224.html">数值稳定性</a>
+<li><a name="tex2html233" href="node225.html">计算成本与权衡</a>
+<li><a name="tex2html234" href="node226.html">收缩与停止规则</a>
+<li><a name="tex2html235" href="node227.html">正交收缩变换</a>
+<li><a name="tex2html236" href="node233.html">特征向量计算与谱变换</a>
+<li><a name="tex2html237" href="node234.html">可用的软件</a>
+</ul>
+<li><a name="tex2html238" href="node235.html">块Arnoldi方法  
+<br>&nbsp; <em>R. Lehoucq 和 K. Maschhoff</em></a>
+<ul>
+<li><a name="tex2html239" href="node236.html">块Arnoldi收缩法</a>
+<li><a name="tex2html240" href="node237.html">实用算法</a>
+<li><a name="tex2html241" href="node242.html">可用的软件</a>
+<li><a name="tex2html242" href="node243.html">注释与参考文献</a>
+</ul>
+<li><a name="tex2html243" href="node244.html">Lanczos方法
+<br>&nbsp; <em>Z. Bai 和 D. Day</em></a>
+<ul>
+<li><a name="tex2html244" href="node245.html">算法</a>
+<li><a name="tex2html245" href="node246.html">收敛性质</a>
+<li><a name="tex2html246" href="node248.html">可用的软件</a>
+<li><a name="tex2html247" href="node249.html">注释与参考文献</a>
+</ul>
+<li><a name="tex2html248" href="node250.html">块Lanczos方法
+<br>&nbsp; <em>Z. Bai 和 D. Day</em></a>
+<ul>
+<li><a name="tex2html249" href="node251.html">基本算法</a>
+<li><a name="tex2html250" href="node252.html">自适应分块Lanczos方法</a>
+<li><a name="tex2html251" href="node254.html">可用的软件</a>
+<li><a name="tex2html252" href="node255.html">注释与参考文献</a>
+</ul>
+<li><a name="tex2html253" href="node256.html">带状Lanczos方法
 <br>&nbsp; <em>R.&nbsp;Freund</em></a>
 <ul>
-<li><a name="tex2html254"
-  href="node257.html">Deflation</a>
-<li><a name="tex2html255"
-  href="node258.html">Basic Properties</a>
-<li><a name="tex2html256"
-  href="node259.html">Algorithm</a>
-<li><a name="tex2html257"
-  href="node260.html">Application to Reduced-Order Modeling</a>
-<li><a name="tex2html258"
-  href="node261.html">Variants</a>
+<li><a name="tex2html254" href="node257.html">收缩</a>
+<li><a name="tex2html255" href="node258.html">基本性质</a>
+<li><a name="tex2html256" href="node259.html">算法</a>
+<li><a name="tex2html257" href="node260.html">应用至降阶模型</a>
+<li><a name="tex2html258" href="node261.html">变体</a>
 </ul>
-<li><a name="tex2html259"
-  href="node262.html">Lanczos Method for Complex Symmetric Eigenproblems 
-<br>&nbsp; <em>R.&nbsp;Freund</em> </a>
+<li><a name="tex2html259" href="node262.html">复对称特征问题中的Lanczos方法
+<br>&nbsp; <em>R. Freund</em></a>
 <ul>
-<li><a name="tex2html260"
-  href="node263.html">Properties of Complex Symmetric Matrices</a>
-<li><a name="tex2html261"
-  href="node264.html">Properties of the Algorithm</a>
-<li><a name="tex2html262"
-  href="node265.html">Algorithm</a>
-<li><a name="tex2html263"
-  href="node266.html">Solving the Reduced Eigenvalue Problems</a>
-<li><a name="tex2html264"
-  href="node267.html">Software Availability</a>
-<li><a name="tex2html265"
-  href="node268.html">Notes and References</a>
+<li><a name="tex2html260" href="node263.html">复对称矩阵的性质</a>
+<li><a name="tex2html261" href="node264.html">算法性质</a>
+<li><a name="tex2html262" href="node265.html">算法</a>
+<li><a name="tex2html263" href="node266.html">解决简化的特征值问题</a>
+<li><a name="tex2html264" href="node267.html">可用的软件</a>
+<li><a name="tex2html265" href="node268.html">注释与参考文献</a>
 </ul>
-<li><a name="tex2html266"
-  href="node269.html">Jacobi-Davidson Methods 
-<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em></a>
+<li><a name="tex2html266" href="node269.html">Jacobi-Davidson方法
+<br>&nbsp; <em>G. Sleijpen 和 H. van der Vorst</em></a>
 <ul>
-<li><a name="tex2html267"
-  href="node270.html">Generalization of Hermitian Case</a>
-<li><a name="tex2html268"
-  href="node271.html">Schur Form and Restart</a>
-<li><a name="tex2html269"
-  href="node272.html">Computing Interior Eigenvalues</a>
-<li><a name="tex2html270"
-  href="node273.html">Software Availability</a>
-<li><a name="tex2html271"
-  href="node274.html">Numerical Example</a>
+<li><a name="tex2html267" href="node270.html">Hermitian情形的推广</a>
+<li><a name="tex2html268" href="node271.html">Schur 形式与重启</a>
+<li><a name="tex2html269" href="node272.html">计算内部特征值</a>
+<li><a name="tex2html270" href="node273.html">可用的软件</a>
+<li><a name="tex2html271" href="node274.html">数值示例</a>
 </ul>
-<li><a name="tex2html272"
-  href="node275.html">Stability and Accuracy Assessments 
-<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+<li><a name="tex2html272" href="node275.html">稳定性与准确性评估
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em></a>
 </ul>
-<li><a name="tex2html273"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
+<li><a name="tex2html273" href="node280.html">广义非厄米特征值问题</a>
 <ul>
-<li><a name="tex2html274"
-  href="node281.html">Introduction</a>
-<li><a name="tex2html275"
-  href="node282.html">Direct Methods</a>
-<li><a name="tex2html276"
-  href="node283.html">Transformation to Standard Problems</a>
-<li><a name="tex2html277"
-  href="node287.html">Jacobi-Davidson Method 
-<br>&nbsp;<em>G.&nbsp;Sleijpen and H.&nbsp;van&nbsp;der&nbsp;Vorst</em> </a>
+<li><a name="tex2html274" href="node281.html">引言</a>
+<li><a name="tex2html275" href="node282.html">直接方法</a>
+<li><a name="tex2html276" href="node283.html">转换为标准问题</a>
+<li><a name="tex2html277" href="node287.html">Jacobi-Davidson方法  
+<br>&nbsp;<em>G. 斯莱延彭 和 H. 范德沃斯特</em></a>
 <ul>
-<li><a name="tex2html278"
-  href="node288.html">Basic Theory</a>
-<li><a name="tex2html279"
-  href="node289.html">Deflation and Restart</a>
-<li><a name="tex2html280"
-  href="node292.html">Algorithm</a>
-<li><a name="tex2html281"
-  href="node293.html">Software Availability</a>
-<li><a name="tex2html282"
-  href="node294.html">Numerical Example</a>
+<li><a name="tex2html278" href="node288.html">基本理论</a>
+<li><a name="tex2html279" href="node289.html">收缩与重启</a>
+<li><a name="tex2html280" href="node292.html">算法</a>
+<li><a name="tex2html281" href="node293.html">可用的软件</a>
+<li><a name="tex2html282" href="node294.html">数值示例</a>
 </ul>
-<li><a name="tex2html283"
-  href="node295.html">Rational Krylov Subspace Method 
-<br>&nbsp;<em>A.&nbsp;Ruhe</em> </a>
-<li><a name="tex2html284"
-  href="node296.html">Symmetric Indefinite Lanczos Method 
-<br>&nbsp;<em>Z.&nbsp;Bai, T.&nbsp;Ericsson, and T.&nbsp;Kowalski </em> </a>
+<li><a name="tex2html283" href="node295.html">分数Krylov子空间方法
+<br>&nbsp;<em>A.&nbsp;Ruhe</em></a>
+<li><a name="tex2html284" href="node296.html">对称不定Lanczos方法
+<br>&nbsp;<em>Z. Bai, T. Ericsson, 和 T. Kowalski </em></a>
 <ul>
-<li><a name="tex2html285"
-  href="node297.html">Some Properties of Symmetric Indefinite Matrix Pairs</a>
-<li><a name="tex2html286"
-  href="node298.html">Algorithm</a>
-<li><a name="tex2html287"
-  href="node299.html">Stopping Criteria and Accuracy Assessment</a>
-<li><a name="tex2html288"
-  href="node300.html">Singular <span class="math-inline">B</span></a>
-<li><a name="tex2html289"
-  href="node301.html">Software Availability</a>
-<li><a name="tex2html290"
-  href="node302.html">Numerical Examples</a>
-<li><a name="tex2html291"
-  href="node306.html">Notes and References</a>
+<li><a name="tex2html285" href="node297.html">对称不定矩阵对的一些性质</a>
+<li><a name="tex2html286" href="node298.html">算法</a>
+<li><a name="tex2html287" href="node299.html">停止准则与精度评估</a>
+<li><a name="tex2html288" href="node300.html">奇异的 <span class="math-inline">B</span></a>
+<li><a name="tex2html289" href="node301.html">可用的软件</a>
+<li><a name="tex2html290" href="node302.html">数值示例</a>
+<li><a name="tex2html291" href="node306.html">注释与参考文献</a>
 </ul>
-<li><a name="tex2html292"
-  href="node307.html">Singular Matrix Pencils 
-<br>&nbsp; <em>B.&nbsp;K&#229;gstr&#246;m</em> </a>
+<li><a name="tex2html292" href="node307.html">奇异矩阵束
+<br>&nbsp; <em>B.&nbsp;K&#229;gstr&#246;m</em></a>
 <ul>
-<li><a name="tex2html293"
-  href="node308.html">Regular Versus Singular Problems</a>
-<li><a name="tex2html294"
-  href="node309.html">Kronecker Canonical Form</a>
-<li><a name="tex2html295"
-  href="node310.html">Generic and Nongeneric Kronecker Structures</a>
-<li><a name="tex2html296"
-  href="node311.html">Ill-Conditioning</a>
-<li><a name="tex2html297"
-  href="node312.html">Generalized Schur-Staircase Form</a>
-<li><a name="tex2html298"
-  href="node313.html">GUPTRI Algorithm</a>
-<li><a name="tex2html299"
-  href="node317.html">Software Availability</a>
-<li><a name="tex2html300"
-  href="node318.html">More on GUPTRI and Numerical Examples</a>
-<li><a name="tex2html301"
-  href="node323.html">Notes and References</a>
+<li><a name="tex2html293" href="node308.html">常规问题与奇异问题</a>
+<li><a name="tex2html294" href="node309.html">Kronecker标准型</a>
+<li><a name="tex2html295" href="node310.html">通用与非通用Kronecker结构</a>
+<li><a name="tex2html296" href="node311.html">病态条件</a>
+<li><a name="tex2html297" href="node312.html">广义Schur-阶梯形式</a>
+<li><a name="tex2html298" href="node313.html">GUPTRI算法</a>
+<li><a name="tex2html299" href="node317.html">可用的软件</a>
+<li><a name="tex2html300" href="node318.html">更多关于GUPTRI及数值示例</a>
+<li><a name="tex2html301" href="node323.html">注释与参考文献</a>
 </ul>
-<li><a name="tex2html302"
-  href="node324.html">Stability and Accuracy Assessments 
-<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> </a>
+<li><a name="tex2html302" href="node324.html">稳定性与准确性评估
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em></a>
 </ul>
-<li><a name="tex2html303"
-  href="node329.html">Nonlinear Eigenvalue Problems</a>
+<li><a name="tex2html303" href="node329.html">非线性特征值问题</a>
 <ul>
-<li><a name="tex2html304"
-  href="node330.html">Introduction</a>
-<li><a name="tex2html305"
-  href="node331.html">Quadratic Eigenvalue Problems 
-<br><em>Z.&nbsp;Bai, G.&nbsp;Sleijpen, and H.&nbsp;van der Vorst</em> </a>
+<li><a name="tex2html304" href="node330.html">引言</a>
+<li><a name="tex2html305" href="node331.html">二次特征值问题
+<br><em>Z. Bai, G. Sleijpen, 和 H. van der Vorst</em></a>
 <ul>
-<li><a name="tex2html306"
-  href="node332.html">Introduction</a>
-<li><a name="tex2html307"
-  href="node333.html">Transformation to Linear Form</a>
-<li><a name="tex2html308"
-  href="node334.html">Spectral Transformations for QEP</a>
-<li><a name="tex2html309"
-  href="node339.html">Numerical Methods for Solving Linearized Problems</a>
-<li><a name="tex2html310"
-  href="node340.html">Jacobi-Davidson Method</a>
-<li><a name="tex2html311"
-  href="node341.html">Notes and References</a>
+<li><a name="tex2html306" href="node332.html">引言</a>
+<li><a name="tex2html307" href="node333.html">转换为线性形式</a>
+<li><a name="tex2html308" href="node334.html">谱变换在二次特征值问题中的应用</a>
+<li><a name="tex2html309" href="node339.html">数值方法在解决线性化问题中的应用</a>
+<li><a name="tex2html310" href="node340.html">Jacobi-Davidson方法</a>
+<li><a name="tex2html311" href="node341.html">注释与参考文献</a>
 </ul>
-<li><a name="tex2html312"
-  href="node342.html">Higher Order Polynomial Eigenvalue  Problems</a>
-<li><a name="tex2html313"
-  href="node343.html">Nonlinear Eigenvalue Problems with Orthogonality Constraints 
-<br>&nbsp; <em>R.&nbsp;Lippert and A.&nbsp;Edelman</em> </a>
+<li><a name="tex2html312" href="node342.html">高阶多项式特征值问题</a>
+<li><a name="tex2html313" href="node343.html">正交性约束下的非线性特征值问题
+<br>&nbsp; <em>R.&nbsp;Lippert and A.&nbsp;Edelman</em></a>
 <ul>
-<li><a name="tex2html314"
-  href="node344.html">Introduction</a>
-<li><a name="tex2html315"
-  href="node345.html">MATLAB Templates</a>
-<li><a name="tex2html316"
-  href="node346.html">Sample Problems and Their Differentials</a>
+<li><a name="tex2html314" href="node344.html">引言</a>
+<li><a name="tex2html315" href="node345.html">MATLAB模板</a>
+<li><a name="tex2html316" href="node346.html">示例问题及其微分</a>
 <ul>
-<li><a name="tex2html317"
-  href="node347.html">The Procrustes Problem</a>
-<li><a name="tex2html318"
-  href="node348.html">Nearest-Jordan Structure</a>
-<li><a name="tex2html319"
-  href="node349.html">Trace Minimization</a>
-<li><a name="tex2html320"
-  href="node350.html">Trace Minimization with a Nonlinear Term</a>
-<li><a name="tex2html321"
-  href="node351.html">Simultaneous Schur Decomposition Problem</a>
-<li><a name="tex2html322"
-  href="node352.html">Simultaneous Diagonalization</a>
+<li><a name="tex2html317" href="node347.html">Procrustes问题</a>
+<li><a name="tex2html318" href="node348.html">最近-约当结构</a>
+<li><a name="tex2html319" href="node349.html">迹最小化</a>
+<li><a name="tex2html320" href="node350.html">带非线性项的迹最小化</a>
+<li><a name="tex2html321" href="node351.html">同时舒尔分解问题</a>
+<li><a name="tex2html322" href="node352.html">同时对角化</a>
 </ul>
-<li><a name="tex2html323"
-  href="node353.html">Numerical Examples</a>
+<li><a name="tex2html323" href="node353.html">数值示例</a>
 <ul>
-<li><a name="tex2html324"
-  href="node354.html">A Sample Procrustes Problem</a>
-<li><a name="tex2html325"
-  href="node355.html">A Sample Jordan Block Problem</a>
-<li><a name="tex2html326"
-  href="node356.html">A Sample Trace Minimization Problem</a>
-<li><a name="tex2html327"
-  href="node357.html">A Sample LDA Toy Problem 
-(Trace Minimization with Nonlinear Term)</a>
-<li><a name="tex2html328"
-  href="node358.html">A Sample Simultaneous Schur Decomposition Problem</a>
-<li><a name="tex2html329"
-  href="node359.html">A Sample Diagonalization Problem</a>
+<li><a name="tex2html324" href="node354.html">一个Procrustes问题的示例</a>
+<li><a name="tex2html325" href="node355.html">约当块问题示例</a>
+<li><a name="tex2html326" href="node356.html">迹最小化问题示例</a>
+<li><a name="tex2html327" href="node357.html">LDA玩具问题示例（含非线性项的迹最小化）</a>
+<li><a name="tex2html328" href="node358.html">同时Schur分解问题示例</a>
+<li><a name="tex2html329" href="node359.html">一个对角化问题的示例</a>
 </ul>
-<li><a name="tex2html330"
-  href="node360.html">Modifying the Templates</a>
+<li><a name="tex2html330" href="node360.html">修改模板</a>
 <ul>
-<li><a name="tex2html331"
-  href="node361.html">Subroutine Dependencies</a>
-<li><a name="tex2html332"
-  href="node362.html">Under the Hood</a>
-<li><a name="tex2html333"
-  href="node363.html">What to Modify</a>
+<li><a name="tex2html331" href="node361.html">子程序依赖关系</a>
+<li><a name="tex2html332" href="node362.html">揭秘内幕</a>
+<li><a name="tex2html333" href="node363.html">修改内容</a>
 </ul>
-<li><a name="tex2html334"
-  href="node364.html">Geometric Technicalities</a>
+<li><a name="tex2html334" href="node364.html">几何技术细节</a>
 <ul>
-<li><a name="tex2html335"
-  href="node365.html">Manifolds</a>
-<li><a name="tex2html336"
-  href="node366.html">The Difference Between a Tangent and a Differential</a>
-<li><a name="tex2html337"
-  href="node367.html">Inner Products, Gradients, and Differentials</a>
-<li><a name="tex2html338"
-  href="node368.html">Getting Around 
+<li><a name="tex2html335" href="node365.html">流形</a>
+<li><a name="tex2html336" href="node366.html">切线与微分的区别</a>
+<li><a name="tex2html337" href="node367.html">内积、梯度与微分</a>
+<li><a name="tex2html338" href="node368.html">绕过
 <span class="math-inline">\mathrm{Stief}(n,k)</span></a>
-<li><a name="tex2html339"
-  href="node369.html">Covariant Differentiation</a>
-<li><a name="tex2html340"
-  href="node370.html">Inverting the Covariant Hessian (Technical Considerations)</a>
+<li><a name="tex2html339" href="node369.html">协变微分法</a>
+<li><a name="tex2html340" href="node370.html">反转协变Hessian矩阵（技术考量）</a>
 </ul>
 </ul>
 </ul>
-<li><a name="tex2html341"
-  href="node371.html">Common Issues</a>
+<li><a name="tex2html341" href="node371.html">常见问题</a>
 <ul>
-<li><a name="tex2html342"
-  href="node372.html">Sparse Matrix Storage Formats 
-<br>&nbsp; <em>J.&nbsp;Dongarra</em>
-</a>
+<li><a name="tex2html342" href="node372.html">稀疏矩阵存储格式
+<br>&nbsp; <em>J.&nbsp;Dongarra</em></a>
 <ul>
-<li><a name="tex2html343"
-  href="node373.html">Compressed Row Storage</a>
-<li><a name="tex2html344"
-  href="node374.html">Compressed Column Storage</a>
-<li><a name="tex2html345"
-  href="node375.html">Block Compressed Row Storage</a>
-<li><a name="tex2html346"
-  href="node376.html">Compressed Diagonal Storage</a>
-<li><a name="tex2html347"
-  href="node377.html">Jagged Diagonal Storage</a>
-<li><a name="tex2html348"
-  href="node378.html">Skyline Storage</a>
+<li><a name="tex2html343" href="node373.html">压缩行存储</a>
+<li><a name="tex2html344" href="node374.html">压缩列存储</a>
+<li><a name="tex2html345" href="node375.html">块压缩行存储</a>
+<li><a name="tex2html346" href="node376.html">压缩对角存储</a>
+<li><a name="tex2html347" href="node377.html">锯齿对角存储</a>
+<li><a name="tex2html348" href="node378.html">天际线存储</a>
 </ul>
-<li><a name="tex2html349"
-  href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications
-<br>&nbsp; <em>J.&nbsp;Dongarra, P. Koev, and X. Li</em> </a>
+<li><a name="tex2html349" href="node379.html">矩阵向量与矩阵矩阵乘法
+<br>&nbsp; <em>J. Dongarra, P. Koev, 与 X. Li</em></a>
 <ul>
-<li><a name="tex2html350"
-  href="node380.html">BLAS</a>
-<li><a name="tex2html351"
-  href="node381.html">Sparse BLAS</a>
+<li><a name="tex2html350" href="node380.html">BLAS（基础线性代数子程序）</a>
+<li><a name="tex2html351" href="node381.html">稀疏BLAS</a>
 <ul>
-<li><a name="tex2html352"
-  href="node382.html">CRS Matrix-Vector Product</a>
-<li><a name="tex2html353"
-  href="node383.html">CDS Matrix-Vector Product</a>
+<li><a name="tex2html352" href="node382.html">CRS矩阵-向量乘积</a>
+<li><a name="tex2html353" href="node383.html">CDS矩阵-向量乘积</a>
 </ul>
-<li><a name="tex2html354"
-  href="node384.html">Fast Matrix-Vector Multiplication for Structured Matrices</a>
+<li><a name="tex2html354" href="node384.html">快速矩阵-向量乘法在结构化矩阵中的应用</a>
 </ul>
-<li><a name="tex2html355"
-  href="node385.html">A Brief Survey of Direct Linear Solvers 
-<br>&nbsp; <em>J.&nbsp;Demmel, P.&nbsp;Koev, and X.&nbsp;Li</em> </a>
+<li><a name="tex2html355" href="node385.html">直接线性求解器简述
+<br>&nbsp; <em>J.&nbsp;Demmel, P.&nbsp;Koev, and X.&nbsp;Li</em></a>
 <ul>
-<li><a name="tex2html356"
-  href="node386.html">Direct Solvers for Dense Matrices</a>
-<li><a name="tex2html357"
-  href="node387.html">Direct Solvers for Band Matrices</a>
-<li><a name="tex2html358"
-  href="node388.html">Direct Solvers for Sparse Matrices</a>
-<li><a name="tex2html359"
-  href="node389.html">Direct Solvers for Structured Matrices</a>
+<li><a name="tex2html356" href="node386.html">密集矩阵的直接求解器</a>
+<li><a name="tex2html357" href="node387.html">带状矩阵的直接求解器</a>
+<li><a name="tex2html358" href="node388.html">稀疏矩阵的直接求解器</a>
+<li><a name="tex2html359" href="node389.html">结构化矩阵的直接求解器</a>
 </ul>
-<li><a name="tex2html360"
-  href="node390.html">A Brief Survey of Iterative Linear Solvers 
-<br>&nbsp; <em>H.&nbsp;van&nbsp;der&nbsp;Vorst </em> </a>
-<li><a name="tex2html361"
-  href="node391.html">Parallelism 
-<br>&nbsp; <em>J.&nbsp;Dongarra and X. Li</em> </a>
+<li><a name="tex2html360" href="node390.html">迭代线性求解器简述
+<br>&nbsp; <em>H.&nbsp;van&nbsp;der&nbsp;Vorst </em></a>
+<li><a name="tex2html361" href="node391.html">并行计算
+<br>&nbsp; <em>J.&nbsp;Dongarra and X. Li</em></a>
 </ul>
-<li><a name="tex2html362"
-  href="node396.html">Preconditioning Techniques</a>
+<li><a name="tex2html362" href="node396.html">预处理技术</a>
 <ul>
-<li><a name="tex2html363"
-  href="node397.html">Introduction</a>
-<li><a name="tex2html364"
-  href="node398.html">Inexact Methods 
-<br>&nbsp; <em>K.&nbsp;Meerbergen and R.&nbsp;Morgan</em> </a>
+<li><a name="tex2html363" href="node397.html">引言</a>
+<li><a name="tex2html364" href="node398.html">不精确方法  
+<br>&nbsp; <em>K.&nbsp;Meerbergen and R.&nbsp;Morgan</em></a>
 <ul>
-<li><a name="tex2html365"
-  href="node399.html">Matrix Transformations</a>
-<li><a name="tex2html366"
-  href="node400.html">Inexact Matrix Transformations</a>
-<li><a name="tex2html367"
-  href="node401.html">Arnoldi Method with Inexact Cayley Transform</a>
-<li><a name="tex2html368"
-  href="node402.html">Davidson Method</a>
-<li><a name="tex2html369"
-  href="node405.html">Jacobi-Davidson Method with Cayley Transform</a>
-<li><a name="tex2html370"
-  href="node406.html">Preconditioned Lanczos Method</a>
-<li><a name="tex2html371"
-  href="node407.html">Inexact Rational Krylov Method</a>
-<li><a name="tex2html372"
-  href="node409.html">Inexact Shift-and-Invert</a>
+<li><a name="tex2html365" href="node399.html">矩阵变换</a>
+<li><a name="tex2html366" href="node400.html">不精确矩阵变换</a>
+<li><a name="tex2html367" href="node401.html">Arnoldi方法与不完全Cayley变换</a>
+<li><a name="tex2html368" href="node402.html">Davidson方法</a>
+<li><a name="tex2html369" href="node405.html">Jacobi-Davidson方法与Cayley变换</a>
+<li><a name="tex2html370" href="node406.html">预处理Lanczos方法</a>
+<li><a name="tex2html371" href="node407.html">非精确有理Krylov方法</a>
+<li><a name="tex2html372" href="node409.html">不精确位移反演法</a>
 </ul>
-<li><a name="tex2html373"
-  href="node410.html">Preconditioned Eigensolvers 
-<br>&nbsp; <em>A.&nbsp;Knyazev</em> </a>
+<li><a name="tex2html373" href="node410.html">预条件特征值求解器
+<br>&nbsp; <em>A.&nbsp;Knyazev</em></a>
 <ul>
-<li><a name="tex2html374"
-  href="node411.html">Introduction</a>
-<li><a name="tex2html375"
-  href="node412.html">General Framework of Preconditioning</a>
-<li><a name="tex2html376"
-  href="node413.html">Preconditioned Shifted Power Method</a>
-<li><a name="tex2html377"
-  href="node414.html">Preconditioned Steepest Ascent/Descent Methods</a>
-<li><a name="tex2html378"
-  href="node415.html">Preconditioned Lanczos Methods</a>
-<li><a name="tex2html379"
-  href="node416.html">Davidson Method</a>
-<li><a name="tex2html380"
-  href="node417.html">Methods with Preconditioned Inner Iterations</a>
-<li><a name="tex2html381"
-  href="node418.html">Preconditioned Conjugate Gradient Methods</a>
-<li><a name="tex2html382"
-  href="node419.html">Preconditioned Simultaneous Iterations</a>
-<li><a name="tex2html383"
-  href="node420.html">Software Availability</a>
+<li><a name="tex2html374" href="node411.html">引言</a>
+<li><a name="tex2html375" href="node412.html">预处理的一般框架</a>
+<li><a name="tex2html376" href="node413.html">预条件转移幂法</a>
+<li><a name="tex2html377" href="node414.html">预处理最速上升/下降法</a>
+<li><a name="tex2html378" href="node415.html">预处理Lanczos方法</a>
+<li><a name="tex2html379" href="node416.html">Davidson方法</a>
+<li><a name="tex2html380" href="node417.html">带有预处理内迭代的方法</a>
+<li><a name="tex2html381" href="node418.html">预处理共轭梯度法</a>
+<li><a name="tex2html382" href="node419.html">预处理同时迭代法</a>
+<li><a name="tex2html383" href="node420.html">可用的软件</a>
 </ul>
 </ul>
-<li><a name="tex2html384"
-  href="node421.html">Bibliography</a>
-<li><a name="tex2html385"
-  href="node422.html">Index</a>
-<li><a name="tex2html386"
-  href="node423.html">About this document ...</a>
+<li><a name="tex2html384" href="node421.html">参考文献</a>
+<li><a name="tex2html385" href="node422.html">索引</a>
+<li><a name="tex2html386" href="node423.html">关于本文档...</a>
 </ul>
 <!--End of Table of Child-Links-->
 <br><hr>

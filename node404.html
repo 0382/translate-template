@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Example 11.2.2.</title>
-<meta name="description" content="Example 11.2.2.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Example 11.2.2.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node403.html">
-<link rel="up" href="node402.html">
-<link rel="next" href="node405.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6976"
   href="node405.html">
@@ -79,99 +73,93 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6977"
-  href="node405.html">Jacobi-Davidson Method with Cayley</a>
-<b> Up:</b> <a name="tex2html6971"
-  href="node402.html">Davidson Method</a>
-<b> Previous:</b> <a name="tex2html6967"
-  href="node403.html">Example 11.2.1.</a>
- &nbsp <b>  <a name="tex2html6973"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6975"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6977" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>
+<b>上一节：</b><a name="tex2html6967" href="node403.html">Example 11.2.1.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION002024020000000000000">
-例 11.2.2.</a>
+例11.2.2.</a>
 </h4>  
-考虑一个有限差分离散化泊松方程在单位正方形上的模型问题。主对角线是常数（全为4），因此对角线预处理无效。它仅改变特征值的相对分离，而不改变谱的相对分离。然而，不完全分解技术[<a href="node421.html#mevo77">326</a>]已被证明对预处理相应的线性方程有效，并且已证明了一些理论结果。在没有预处理的情况下，共轭梯度法在<span class="math-inline">O(n^{1/2})</span>次迭代中收敛。采用不完全分解IC(0)，收敛速度更快，但仍约为<span class="math-inline">O(n^{1/2})</span>。然而，采用改进的不完全分解MIC(0)[<a href="node421.html#gust78">212</a>]，收敛速度为<span class="math-inline">O(n^{1/4})</span>。在[<a href="node421.html#morg90">330</a>]中表明，计算最小特征值时情况相同。改进的不完全分解是针对<span class="math-inline">A</span>，而不是<span class="math-inline">A-\theta I</span>。这一理论结果可通过计算得到验证。
+考虑单位正方形上泊松方程的有限差分离散化模型问题。主对角线是常数（均为4），因此对角预处理无效。它仅改变特征值的相对间隔，而不改变其分布。然而，不完全分解技术[<a href="node421.html#mevo77">326</a>]已被证明对预处理相应线性方程有效，并有一些理论结果支持。无预处理时，共轭梯度法需<span class="math-inline">O(n^{1/2})</span>次迭代收敛。采用不完全分解IC(0)预处理，收敛速度加快，但仍约为<span class="math-inline">O(n^{1/2})</span>。而使用改进不完全分解MIC(0)[<a href="node421.html#gust78">212</a>]，收敛速度达到<span class="math-inline">O(n^{1/4})</span>。文献[<a href="node421.html#morg90">330</a>]表明，计算最小特征值时情况相同。改进不完全分解针对的是矩阵<span class="math-inline">A</span>，而非<span class="math-inline">A-\theta I</span>。理论结果可通过计算验证。
+
+表<a href="node404.html#tab:iemethods:model-problem">11.1</a>列出了随着问题规模增大，不同预处理方法下的迭代次数。使用了Lanczos算法（对应无预处理和仅对角预处理）、IC(0)和MIC(0)预处理。初始向量在区间(-1,1)内随机取值，收敛标准为残差范数小于<span class="math-inline">10^{-8}</span>。未采用重启策略。对于大规模问题，MIC(0)预处理效果显著更优。在双对数图中，Lanczos和IC(0)的斜率分别约为0.56和0.43，均接近预期的0.5，IC(0)略优。MIC(0)预处理的斜率约0.23，接近<span class="math-inline">O(n^{1/4})</span>预测的0.25。
 
 <p>
-表<a href="node404.html#tab:iemethods:model-problem">11.1</a>给出了随着问题规模增加的迭代次数。使用了Lanczos算法（对应于无预处理和对角线预处理）以及IC(0)和MIC(0)预处理。初始向量包含区间(-1,1)内的随机值，收敛测试为残差范数小于<span class="math-inline">10^{-8}</span>。未使用重启。对于大规模问题，MIC(0)预处理效果更好。在双对数图中，Lanczos的斜率约为0.56，IC(0)的斜率约为0.43。两者都接近预期的0.5，尽管IC(0)明显更好。采用MIC(0)预处理时，斜率约为0.23，接近<span class="math-inline">O(n^{1/4})</span>收敛结果预测的0.25值。
-
-<p>
-在计算多个特征值时，MIC的效果不如预期。我们来看计算<span class="math-inline">n=1600</span>时的最小五个特征值。预处理器来自<span class="math-inline">A</span>的不完全分解，未针对特定特征值进行调整。这次我们重启Davidson方法，最大子空间维度为20，但不重启Lanczos（如果需要特征向量，Lanczos也可能需要重启）。相对而言，Lanczos在计算多个特征值时表现更好，因为Davidson方法一次只针对一个特征值。IC(0)需要159次迭代，MIC(0)需要158次，而Lanczos需要172次。但需要注意的是，Lanczos未发现其中一个小的特征值是双重的，而Davidson方法则计算出了两个特征值。
+计算多个特征值时，MIC效果不佳。以计算<span class="math-inline">n=1600</span>时的最小五个特征值为例，预处理基于<span class="math-inline">A</span>的不完全分解，未针对特定特征值调整。此次重启Davidson方法，最大子空间维度为20，但不重启Lanczos（若需特征向量，Lanczos也可能需重启）。相对而言，Lanczos在计算多个特征值时表现更好，因Davidson方法每次仅针对一个特征值。IC(0)需159次迭代，MIC(0)需158次，Lanczos需172次。但需注意，Lanczos未识别出其中一个小的特征值为双重的，而Davidson方法则正确计算出两个特征值。
 
 <p>
 <br>
-<div align="center">
+<div align="CENTER">
 <a name="tab:iemethods:model-problem"></a></div>
 <p>
 <br>
-<div align="center"><a name="48156"></a>
-<table cellpadding=3 border="1" align="center">
-<caption><strong>表 11.1:</strong>
+<div align="CENTER"><a name="48156"></a>
+<table CELLPADDING=3 border="1" align="CENTER">
+<caption><strong>表11.1：</strong>
 模型问题的预处理</caption>
-<tr><td align="left"><span class="math-inline">n</span></td>
-<td align="center">Lanczos</td>
-<td align="center">IC(0)</td>
-<td align="center">MIC(0)</td>
+<tr><td align="LEFT"><span class="math-inline">n</span></td>
+<td align="CENTER">Lanczos</td>
+<td align="CENTER">IC(0)</td>
+<td align="CENTER">MIC(0)</td>
 </tr>
-<tr><td align="left">25</td>
-<td align="center">13</td>
-<td align="center">11</td>
-<td align="center">12</td>
+<tr><td align="LEFT">25</td>
+<td align="CENTER">13</td>
+<td align="CENTER">11</td>
+<td align="CENTER">12</td>
 </tr>
-<tr><td align="left">49</td>
-<td align="center">25</td>
-<td align="center">14</td>
-<td align="center">15</td>
+<tr><td align="LEFT">49</td>
+<td align="CENTER">25</td>
+<td align="CENTER">14</td>
+<td align="CENTER">15</td>
 </tr>
-<tr><td align="left">100</td>
-<td align="center">36</td>
-<td align="center">17</td>
-<td align="center">17</td>
+<tr><td align="LEFT">100</td>
+<td align="CENTER">36</td>
+<td align="CENTER">17</td>
+<td align="CENTER">17</td>
 </tr>
-<tr><td align="left">196</td>
-<td align="center">51</td>
-<td align="center">24</td>
-<td align="center">20</td>
+<tr><td align="LEFT">196</td>
+<td align="CENTER">51</td>
+<td align="CENTER">24</td>
+<td align="CENTER">20</td>
 </tr>
-<tr><td align="left">400</td>
-<td align="center">69</td>
-<td align="center">27</td>
-<td align="center">22</td>
+<tr><td align="LEFT">400</td>
+<td align="CENTER">69</td>
+<td align="CENTER">27</td>
+<td align="CENTER">22</td>
 </tr>
-<tr><td align="left">784</td>
-<td align="center">99</td>
-<td align="center">40</td>
-<td align="center">26</td>
+<tr><td align="LEFT">784</td>
+<td align="CENTER">99</td>
+<td align="CENTER">40</td>
+<td align="CENTER">26</td>
 </tr>
-<tr><td align="left">1600</td>
-<td align="center">137</td>
-<td align="center">49</td>
-<td align="center">30</td>
+<tr><td align="LEFT">1600</td>
+<td align="CENTER">137</td>
+<td align="CENTER">49</td>
+<td align="CENTER">30</td>
 </tr>
-<tr><td align="left">3136</td>
-<td align="center">182</td>
-<td align="center">64</td>
-<td align="center">34</td>
+<tr><td align="LEFT">3136</td>
+<td align="CENTER">182</td>
+<td align="CENTER">64</td>
+<td align="CENTER">34</td>
 </tr>
-<tr><td align="left">6400</td>
-<td align="center">287</td>
-<td align="center">101</td>
-<td align="center">40</td>
+<tr><td align="LEFT">6400</td>
+<td align="CENTER">287</td>
+<td align="CENTER">101</td>
+<td align="CENTER">40</td>
 </tr>
 </table>
 </div>
 <br> 
 
 <p>
-对于例11.2.2中的稀疏矩阵，除了迭代次数外，还需考虑其他因素。Lanczos算法每次迭代的成本可能远低于Davidson方法。这促使开发了利用预处理的Lanczos方法，同时保留了Lanczos方法的高效性。这将在§<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>中讨论。效率问题还导致了与Jacobi-Davidson方法的联系。减少Davidson方法所需迭代次数的一种方法是开发一个极好的预处理器。迭代方法可用于近似求解算法<a href="node402.html#alg:gdavidson">11.2</a>中步骤(3)的<span class="math-inline">(A-\theta B)w_j = r</span>。该解可以尽可能精确。在对称情况下，共轭梯度法可用于迭代方法，并可进行预处理。与预处理的Lanczos方法一样，我们在计算上具有高效的内循环。但在存储需求上也是高效的。然而，开发过于精确的预处理器存在风险。精确求解<span class="math-inline">(A-\theta B)w_j = r</span>会得到<span class="math-inline">w_j=y</span>，即已经在子空间中的近似特征向量。这可以通过求解<span class="math-inline">(A-\mu B)w = r</span>（<span class="math-inline">\mu \ne\theta</span>）来处理，如不完全Cayley变换。然而，在Jacobi-Davidson方法中采用了不同的方法；近似特征向量从<span class="math-inline">(A-\theta B)w_j = r</span>的解中被降解。下一小节将继续讨论与Jacobi-Davidson的联系。
+对于例11.2.2中的稀疏矩阵，除了迭代次数外，还需考虑每步迭代成本。Lanczos算法每步可能远比Davidson方法经济。这促使发展了利用预处理的Lanczos方法，既利用预处理优势，又保持Lanczos的高效性。此内容将在§<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>讨论。效率问题也与Jacobi-Davidson方法有关。减少Davidson方法迭代次数、降低Rayleigh-Ritz过程开销的一种方法是开发极佳的预处理。可在算法<a href="node402.html#alg:gdavidson">11.2</a>的第(3)步，用迭代法近似求解<span class="math-inline">(A-\theta B)w_j = r</span>得到新向量<span class="math-inline">w_j</span>，并可精确至所需程度。对称情况下，可使用预处理的共轭梯度法。与预处理Lanczos类似，这形成了一个计算高效的内部循环，且存储需求也高效。但过度精确的预处理有风险，精确解<span class="math-inline">(A-\theta B)w_j = r</span>会得到已在子空间中的近似特征向量<span class="math-inline">w_j=y</span>。可通过求解<span class="math-inline">(A-\mu B)w = r</span>（<span class="math-inline">\mu \ne \theta</span>）处理，如同不完全Cayley变换。但在Jacobi-Davidson方法中，采用从<span class="math-inline">(A-\theta B)w_j = r</span>解中降维近似特征向量的方法。Jacobi-Davidson方法的联系将在下一小节继续讨论。
 
 <br>
 <p>
-当起始向量或起始子空间不够准确时，Davidson方法可能会遇到困难。在[<a href="node421.html#mosc86">335</a>]和[<a href="node421.html#fosv98">172</a>]中，建议最初将<span class="math-inline">M</span>设置为<span class="math-inline">P - \mu I</span>，其中<span class="math-inline">P</span>是<span class="math-inline">A</span>的近似，<span class="math-inline">\mu</span>接近所需特征值。如§<a href="node397.html#sec:introduction">11.1</a>所述，另一种可能性是在初始阶段使用Krylov子空间方法为Davidson方法生成起始向量。
+Davidson方法在初始向量或子空间不准确时可能遇到困难。文献[<a href="node421.html#mosc86">335</a>]和[<a href="node421.html#fosv98">172</a>]建议初始时设<span class="math-inline">M</span>为<span class="math-inline">P - \mu I</span>，其中<span class="math-inline">P</span>是<span class="math-inline">A</span>的近似，<span class="math-inline">\mu</span>接近目标特征值。如§<a href="node397.html#sec:introduction">11.1</a>所述，另一种可能是先用Krylov子空间方法生成初始向量供Davidson方法使用。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -191,16 +179,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6977"
-  href="node405.html">Jacobi-Davidson Method with Cayley</a>
-<b> Up:</b> <a name="tex2html6971"
-  href="node402.html">Davidson Method</a>
-<b> Previous:</b> <a name="tex2html6967"
-  href="node403.html">Example 11.2.1.</a>
- &nbsp <b>  <a name="tex2html6973"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6975"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6977" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>
+<b>上一节：</b><a name="tex2html6967" href="node403.html">Example 11.2.1.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

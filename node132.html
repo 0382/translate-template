@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>The Need for Deflation</title>
-<meta name="description" content="The Need for Deflation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="The Need for Deflation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node133.html">
-<link rel="previous" href="node131.html">
-<link rel="up" href="node131.html">
-<link rel="next" href="node133.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2734"
   href="node133.html">
@@ -80,42 +73,37 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2735"
-  href="node133.html">Basic Properties</a>
-<b> Up:</b> <a name="tex2html2729"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html2723"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
- &nbsp <b>  <a name="tex2html2731"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2733"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2735" href="node133.html">基本性质</a>
+<b>上一级：</b><a name="tex2html2729" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html2723" href="node131.html">Band Lanczos Method &nbsp;</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001361000000000000000"></a> <a name="rwf:bandsym_defl"></a><a name="8317"></a>
 <br>
-关于缩减的必要性
+关于收缩的必要性
 </h2>
 
 <p>
-使用 <span class="math-inline">p>1</span> 的多重初始向量会带来一个在单向量情况 <span class="math-inline">p=1</span> 下不会出现的额外难题。对于单个初始向量 <span class="math-inline">b</span>，标准的Lanczos算法在经过 <span class="math-inline">j</span> 次迭代后会终止，如果下一个Krylov向量 <span class="math-inline">A^j b</span> 与之前的Krylov向量线性相关，即
+使用 <span class="math-inline">p>1</span> 个初始向量会带来一个额外的难题，这是在单个向量 <span class="math-inline">p=1</span> 情况下不会出现的。对于单个初始向量 <span class="math-inline">b</span>，标准Lanczos算法在经过 <span class="math-inline">j</span> 次迭代后终止，如果下一个Krylov向量 <span class="math-inline">A^j b</span> 与之前的Krylov向量线性相关，即
 
-<span class="math-inline">A^j b \in {\mathcal K}^j(A,b)</span>。
-在这种情况下，Lanczos向量构成了 <span class="math-inline">A</span>-不变子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span> 的一个基，并且Lanczos三对角矩阵的所有特征值也是 <span class="math-inline">A</span> 的特征值。子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span> 是 <span class="math-inline">A</span>-不变的，意味着Krylov序列已经被完全耗尽，因此再增加更多的Krylov向量也不会扩展Krylov子空间。因此，经过 <span class="math-inline">j</span> 次迭代后的终止是自然而然的。
+<span class="math-inline">A^j b \in {\mathcal K}^j(A,b)</span>.  
+在这种情况下，Lanczos向量构成了 <span class="math-inline">A</span> 不变子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span> 的一组基，并且Lanczos三对角矩阵的所有特征值也是 <span class="math-inline">A</span> 的特征值。子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span> 是 <span class="math-inline">A</span> 不变的，意味着Krylov序列已被完全耗尽，因此再增加更多的Krylov向量也不会扩展Krylov子空间。这种在 <span class="math-inline">j</span> 次迭代后的终止是自然而然的。
 
 <p>
-然而，在 <span class="math-inline">p>1</span> 的情况下，在公式 (<a href="node131.html#rwf:ABA">4.27</a>) 中首次出现线性相关的向量并不意味着块Krylov序列已被耗尽。它仅仅意味着该线性相关的向量及其所有后续的 <span class="math-inline">A</span> 倍数不包含任何新信息，因此，这些向量应该从公式 (<a href="node131.html#rwf:ABA">4.27</a>) 中移除。这种检测并删除线性相关向量的过程被称为<i>精确缩减</i>。例如，假设初始向量 (<a href="node131.html#rwf:AAB">4.26</a>) 使得向量 <span class="math-inline">A b_1</span> 是 <span class="math-inline">b_1, b_2, \ldots, b_p</span> 的线性组合。那么 <span class="math-inline">A b_1</span> 肯定与公式 (<a href="node131.html#rwf:ABA">4.27</a>) 中 <span class="math-inline">A b_1</span> 左侧的Krylov向量线性相关；实际上，每个向量 <span class="math-inline">A^i b_1</span> 对于 <span class="math-inline">i \geq 1</span> 都是与公式 (<a href="node131.html#rwf:ABA">4.27</a>) 中 <span class="math-inline">A^i b_1</span> 左侧的向量线性相关。在这种情况下，所有向量 <span class="math-inline">A^i b_1</span>，<span class="math-inline">i \geq 1</span>，都需要从公式 (<a href="node131.html#rwf:ABA">4.27</a>) 中删除，从而得到缩减后的块Krylov序列
+然而，在 <span class="math-inline">p>1</span> 的情况下，首次出现的线性相关向量在(<a href="node131.html#rwf:ABA">4.27</a>)中并不意味着块Krylov序列已被耗尽。它仅仅意味着该线性相关向量及其后续的 <span class="math-inline">A</span> 倍数不包含任何新信息，因此，这些向量应从(<a href="node131.html#rwf:ABA">4.27</a>)中移除。这种检测并删除线性相关向量的过程称为<i>精确收缩</i>。例如，假设初始向量(<a href="node131.html#rwf:AAB">4.26</a>)使得向量 <span class="math-inline">A b_1</span> 是 <span class="math-inline">b_1, b_2, \ldots, b_p</span> 的线性组合。那么 <span class="math-inline">A b_1</span> 肯定与(<a href="node131.html#rwf:ABA">4.27</a>)中 <span class="math-inline">A b_1</span> 左侧的Krylov向量线性相关；实际上，每个向量 <span class="math-inline">A^i b_1</span> 且 <span class="math-inline">i \geq 1</span> 都与(<a href="node131.html#rwf:ABA">4.27</a>)中 <span class="math-inline">A^i b_1</span> 左侧的向量线性相关。在这种情况下，所有向量 <span class="math-inline">A^i b_1</span>，<span class="math-inline">i \geq 1</span>，都需要从(<a href="node131.html#rwf:ABA">4.27</a>)中删除，从而得到收缩后的块Krylov序列
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">b_1, b_2, \ldots, b_p, A b_2, A b_3, \ldots, A b_{p}, \ldots, A^{k-1} b_2, A^{k-1} b_3, \ldots, A^{k-1} b_{p}, \ldots.</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于 <span class="math-inline">p>1</span>，与 <span class="math-inline">p=1</span> 的情况相反，首次出现精确缩减并不意味着由带状Lanczos方法产生的Lanczos矩阵的任何特征值也是 <span class="math-inline">A</span> 的特征值。然而，在发生了 <span class="math-inline">p</span> 次精确缩减之后，就像 <span class="math-inline">p=1</span> 的情况一样，Lanczos向量跨越了一个 <span class="math-inline">A</span>-不变子空间，并且Lanczos矩阵的所有特征值也是 <span class="math-inline">A</span> 的特征值。
+对于 <span class="math-inline">p>1</span>，与 <span class="math-inline">p=1</span> 的情况相反，首次出现精确收缩并不意味着由带状Lanczos方法生成的Lanczos矩阵的任何特征值也是 <span class="math-inline">A</span> 的特征值。然而，在发生了 <span class="math-inline">p</span> 次精确收缩之后，就像 <span class="math-inline">p=1</span> 的情况一样，Lanczos向量跨越了一个 <span class="math-inline">A</span> 不变子空间，并且Lanczos矩阵的所有特征值也是 <span class="math-inline">A</span> 的特征值。
 
 <p>
-当然，在有限精度算术中，无法区分完全线性相关和几乎线性相关的向量。因此，在实践中，几乎线性相关的向量也需要被检测并删除。在下文中，我们将检测并删除线性相关和几乎线性相关向量的过程称为<i>缩减</i>。
+当然，在有限精度算术中，无法区分完全线性相关和几乎线性相关的向量。因此，在实践中，几乎线性相关的向量也需要被检测和删除。在下文中，我们将检测和删除线性相关及几乎线性相关向量的过程称为<i>收缩</i>。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -135,16 +123,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2735"
-  href="node133.html">Basic Properties</a>
-<b> Up:</b> <a name="tex2html2729"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html2723"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
- &nbsp <b>  <a name="tex2html2731"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2733"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2735" href="node133.html">基本性质</a>
+<b>上一级：</b><a name="tex2html2729" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html2723" href="node131.html">Band Lanczos Method &nbsp;</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Remarks on Clustered Eigenvalues.</title>
-<meta name="description" content="Remarks on Clustered Eigenvalues.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Remarks on Clustered Eigenvalues.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node154.html">
-<link rel="previous" href="node152.html">
-<link rel="up" href="node148.html">
-<link rel="next" href="node154.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3040"
   href="node154.html">
@@ -80,38 +73,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3041"
-  href="node154.html">Remarks on Eigenvalue Computations</a>
-<b> Up:</b> <a name="tex2html3035"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3029"
-  href="node152.html">Error Bound for Computed</a>
- &nbsp <b>  <a name="tex2html3037"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3039"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3041" href="node154.html">Remarks on Eigenvalue Computations</a>
+<b>上一级：</b><a name="tex2html3035" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3029" href="node152.html">Error Bound for Computed</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001380050000000000000">
-关于聚集特征值的评述</a>
+关于聚类特征值的评述</a>
 </h4>
-在特征值 <span class="math-inline">\lambda</span> 附近存在一个或多个 <span class="math-inline">A</span> 的其他特征值的情况下，换句话说，当 <span class="math-inline">\lambda</span> 属于聚集特征值时，根据（<a href="node151.html#ineq:err-1-ev">4.54</a>），只要 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">\widetilde\lambda</span> 仍然是准确的，但由于（<a href="node152.html#ineq:err-1-evt">4.56</a>）中分母出现了间隙 <span class="math-inline">\delta</span>，计算得到的特征向量 <span class="math-inline">\widetilde x</span> 可能不准确。事实证明，与聚集特征值相关的每个单独特征向量对扰动非常敏感，但由所有这些特征向量张成的特征空间则不然。因此，对于聚集特征值，我们应该计算整个特征空间。可以建立如上所述的理论，从残差矩阵开始
+当特征值 <span class="math-inline">\lambda</span> 与矩阵 <span class="math-inline">A</span> 的一个或多个其他特征值非常接近时，换句话说，当 <span class="math-inline">\lambda</span> 属于聚类特征值时，根据（<a href="node151.html#ineq:err-1-ev">4.54</a>）的保证，只要 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">\widetilde\lambda</span> 仍然是准确的，但由于（<a href="node152.html#ineq:err-1-evt">4.56</a>）中分母出现的间隙 <span class="math-inline">\delta</span>，计算得到的特征向量 <span class="math-inline">\widetilde x</span> 可能不准确。事实证明，与聚类特征值相关的每个单独特征向量对扰动非常敏感，但由所有这些特征向量张成的特征空间则不然。因此，对于聚类特征值，我们应该计算整个特征空间。
+基于上述思路的理论可以建立，从残差矩阵开始
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 <div class="math-display">R=A\widetilde X-\widetilde X\widetilde\Lambda,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中 <span class="math-inline">\widetilde\Lambda</span> 是对角矩阵，其对角元素是集群中所有特征值的近似值，<span class="math-inline">\widetilde X</span> 的列是对应的近似特征向量。假设 <span class="math-inline">\widetilde X</span> 的列是正交的，并且 <span class="math-inline">\widetilde\Lambda</span> 比 <span class="math-inline">\Lambda</span> 更接近，<span class="math-inline">\Lambda</span> 是对角矩阵，其对角元素是集群中所有特征值。设 <span class="math-inline">X</span> 是与 <span class="math-inline">\Lambda</span> 相关的特征向量矩阵，<span class="math-inline">\delta</span> 是 <span class="math-inline">\widetilde\Lambda</span> 对角线上任何近似特征值与 <span class="math-inline">A</span> 的未出现在 <span class="math-inline">\Lambda</span> 对角线上的特征值之间的最小差值。那么 [<a href="node421.html#daka:70">101</a>]
+其中 <span class="math-inline">\widetilde\Lambda</span> 是对角矩阵，其对角元素是聚类中所有特征值的近似值，而 <span class="math-inline">\widetilde X</span> 的列是对应的近似特征向量。假设 <span class="math-inline">\widetilde X</span> 的列是正交的，并且 <span class="math-inline">\widetilde\Lambda</span> 比 <span class="math-inline">\Lambda</span> 更接近，<span class="math-inline">\Lambda</span> 是对角矩阵，其对角元素是聚类中的所有特征值。设 <span class="math-inline">X</span> 是与 <span class="math-inline">\Lambda</span> 相关的特征向量矩阵，<span class="math-inline">\delta</span> 是 <span class="math-inline">\widetilde\Lambda</span> 对角线上任意近似特征值与 <span class="math-inline">A</span> 中未出现在 <span class="math-inline">\Lambda</span> 对角线上的特征值之间的最小差值。那么 [<a href="node421.html#daka:70">101</a>]
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 <div class="math-display">\Vert\sin\Theta(X,\widetilde X)\Vert _{F}\le\frac {\Vert R\Vert _{F}}{\delta},</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中 <span class="math-inline">\Theta(X,\widetilde X)</span> 是对角矩阵，其对角元素是 <span class="math-inline">X^*\widetilde X</span> 的奇异值的反余弦。由于其定义方式，预计这个间隙会很大，因此只要 <span class="math-inline">\Vert R\Vert _{F}</span> 很小，<span class="math-inline">\Vert\sin\Theta(X,\widetilde X)\Vert _{F}</span> 也会很小。
+其中 <span class="math-inline">\Theta(X,\widetilde X)</span> 是对角矩阵，其对角元素是 <span class="math-inline">X^*\widetilde X</span> 的奇异值的反余弦值。由于其定义方式，预计这个间隙会很大，因此只要 <span class="math-inline">\Vert R\Vert _{F}</span> 很小，<span class="math-inline">\Vert\sin\Theta(X,\widetilde X)\Vert _{F}</span> 也会很小。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -131,16 +118,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3041"
-  href="node154.html">Remarks on Eigenvalue Computations</a>
-<b> Up:</b> <a name="tex2html3035"
-  href="node148.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3029"
-  href="node152.html">Error Bound for Computed</a>
- &nbsp <b>  <a name="tex2html3037"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3039"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3041" href="node154.html">Remarks on Eigenvalue Computations</a>
+<b>上一级：</b><a name="tex2html3035" href="node148.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3029" href="node152.html">Error Bound for Computed</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

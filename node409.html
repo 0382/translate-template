@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Inexact Shift-and-Invert</title>
-<meta name="description" content="Inexact Shift-and-Invert">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Inexact Shift-and-Invert">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node407.html">
-<link rel="up" href="node398.html">
-<link rel="next" href="node410.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html7043"
   href="node410.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7044"
-  href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b> Up:</b> <a name="tex2html7038"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html7034"
-  href="node408.html">Example 11.2.3.</a>
- &nbsp <b>  <a name="tex2html7040"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7042"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7044" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一级：</b><a name="tex2html7038" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html7034" href="node408.html">Example 11.2.3.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -111,7 +100,7 @@ are solved with a relative error tolerance <span class="math-inline">\tau </span
 <p>
 When the Cayley transform is used, the linear system
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(A -\mu B) w = (A - \theta B) x - s</div>
@@ -122,7 +111,7 @@ is solved, where
 <span class="math-inline">\Vert s\Vert \leq \tau \Vert(A - \theta B) x\Vert</span>.
 This linear system can be written as
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(A -\mu B) (w - x) = (\mu - \theta) B x - s \ .</div>
@@ -135,7 +124,7 @@ So, with
 obtain the
 shift-and-invert linear system
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">(A -\mu B) z = B x - t,</div>

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Numerical Methods for Solving Linearized Problems</title>
-<meta name="description" content="Numerical Methods for Solving Linearized Problems">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Numerical Methods for Solving Linearized Problems">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node340.html">
-<link rel="previous" href="node334.html">
-<link rel="up" href="node331.html">
-<link rel="next" href="node340.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5964"
   href="node340.html">
@@ -80,51 +73,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5965"
-  href="node340.html">Jacobi-Davidson Method</a>
-<b> Up:</b> <a name="tex2html5959"
-  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
-<b> Previous:</b> <a name="tex2html5953"
-  href="node338.html">QEP with Cayley Transform.</a>
- &nbsp <b>  <a name="tex2html5961"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5963"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5965" href="node340.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html5959" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b>上一节：</b><a name="tex2html5953" href="node338.html">QEP with Cayley Transform.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001824000000000000000">
-线性化问题的数值解法</a>
+线性化问题求解的数值方法</a>
 </h2>
 
 <p>
 如第&#167;<a href="node333.html#sec-qred">9.2.2</a>节所述，
-我们可以使用广义特征值问题&nbsp;(<a href="node333.html#gep1">9.4</a>)
+可以使用广义特征值问题&nbsp;(<a href="node333.html#gep1">9.4</a>)
 与&nbsp;(<a href="node333.html#matrixpencil1">9.5</a>)，或者广义特征值
-问题&nbsp;(<a href="node333.html#gep1K">9.9</a>) 与&nbsp;(<a href="node333.html#matrixpencil2">9.10</a>)
+问题&nbsp;(<a href="node333.html#gep1K">9.9</a>)与&nbsp;(<a href="node333.html#matrixpencil2">9.10</a>)
 来求解相应的二次特征值问题&nbsp;(<a href="node332.html#qep">9.1</a>)。
 
 <p>
-如果所有矩阵 <span class="math-inline">M</span>、<span class="math-inline">C</span> 和 <span class="math-inline">K</span> 都是厄米特矩阵，并且 <span class="math-inline">M</span> 是正定的，
-如同特殊情况&nbsp;(<a href="node332.html#scase">9.2</a>) 中那样，
-那么选择就归结为：要么采用本质上
-非厄米特广义特征值问题&nbsp;(<a href="node333.html#gep1">9.4</a>)
-与&nbsp;(<a href="node333.html#matrixpencil1">9.5</a>)，其中 <span class="math-inline">B</span> 矩阵是厄米特正定的，
-要么采用广义特征值问题&nbsp;(<a href="node333.html#gep1K">9.9</a>) 与 (<a href="node333.html#matrixpencil2">9.10</a>)，
-其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 矩阵都是厄米特的，但两者都不是正定的。
+如果所有矩阵 <span class="math-inline">M</span>、<span class="math-inline">C</span> 和 <span class="math-inline">K</span> 都是厄米的，并且 <span class="math-inline">M</span> 是正定的，
+正如特殊情况&nbsp;(<a href="node332.html#scase">9.2</a>)所示，
+那么选择就归结为采用本质上非厄米的广义特征值问题&nbsp;(<a href="node333.html#gep1">9.4</a>)
+与&nbsp;(<a href="node333.html#matrixpencil1">9.5</a>)，其中 <span class="math-inline">B</span> 矩阵是厄米正定的，
+或者采用广义特征值问题&nbsp;(<a href="node333.html#gep1K">9.9</a>)与 (<a href="node333.html#matrixpencil2">9.10</a>)，
+其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 矩阵都是厄米的，但它们都不是正定的。
 
 <p>
-第&nbsp;<a href="node280.html#chap:gnsym">8</a>章讨论的数值方法
-可以用来求解这些广义的“线性”特征值问题。例如，在MSC/NASTRAN&nbsp;[<a
+第<a href="node280.html#chap:gnsym">8</a>章讨论的数值方法
+可以用于求解这些广义的“线性”特征值问题。例如，在MSC/NASTRAN&nbsp;[<a
  href="node421.html#nastran">274</a>]中，
-采用了非厄米特形式&nbsp;(<a href="node333.html#gep1">9.4</a>) 与&nbsp;(<a href="node333.html#matrixpencil1">9.5</a>)。
+采用了非厄米形式&nbsp;(<a href="node333.html#gep1">9.4</a>)与&nbsp;(<a href="node333.html#matrixpencil1">9.5</a>)。
 
 <p>
-第&#167;<a href="node296.html#sec:idlanczos">8.6</a>节讨论的对称不定Lanczos方法
-专门针对广义对称不定特征值问题&nbsp;(<a href="node333.html#gep1K">9.9</a>)。
-潜在的问题是，在对称不定Lanczos方法中，基向量是相对于一个不定内积正交的。因此，
-这些基向量可能不是线性独立的，算法可能会崩溃并出现数值不稳定。
-尽管如此，由于潜在的内存需求和浮点运算节省，这通常是求解原始QEP的一种有吸引力的方法。
-更多细节请参见第&#167;<a href="node296.html#sec:idlanczos">8.6</a>节。
+第&#167;<a href="node296.html#sec:idlanczos">8.6</a>节讨论的对称不定Lanczos方法专门针对
+广义对称不定特征值问题&nbsp;(<a href="node333.html#gep1K">9.9</a>)。
+潜在的问题是在对称不定Lanczos方法中，基向量是相对于不定内积正交的。因此，
+这些基向量可能不是线性独立的，算法可能会崩溃并导致数值不稳定。
+尽管如此，由于潜在的内存需求和浮点运算节省，这通常是求解原始QEP的一种吸引人的方法。
+详见第&#167;<a href="node296.html#sec:idlanczos">8.6</a>节。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -144,16 +131,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5965"
-  href="node340.html">Jacobi-Davidson Method</a>
-<b> Up:</b> <a name="tex2html5959"
-  href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
-<b> Previous:</b> <a name="tex2html5953"
-  href="node338.html">QEP with Cayley Transform.</a>
- &nbsp <b>  <a name="tex2html5961"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5963"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5965" href="node340.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html5959" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b>上一节：</b><a name="tex2html5953" href="node338.html">QEP with Cayley Transform.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

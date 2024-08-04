@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Local Reorthogonalization and Detecting Spurious Ritz Values.</title>
-<meta name="description" content="Local Reorthogonalization and Detecting Spurious Ritz Values.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Local Reorthogonalization and Detecting Spurious Ritz Values.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node110.html">
-<link rel="up" href="node108.html">
-<link rel="next" href="node112.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2424"
   href="node112.html">
@@ -79,26 +73,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2425"
-  href="node112.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2419"
-  href="node108.html">Reorthogonalization</a>
-<b> Previous:</b> <a name="tex2html2415"
-  href="node110.html">Selective Reorthogonalization.</a>
- &nbsp <b>  <a name="tex2html2421"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2423"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2425" href="node112.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2419" href="node108.html">重新正交化</a>
+<b>上一节：</b><a name="tex2html2415" href="node110.html">Selective Reorthogonalization.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001344030000000000000">
-局部再正交化与伪里兹值的检测</a>
+局部重正交化与伪瑞利值的检测</a>
 </h4>
-如果我们选择或被迫只能使用局部再正交化，
-那么三对角矩阵 <span class="math-inline">T</span> 的一些特征值将是已经收敛特征值的新副本，并且我们还会得到 <span class="math-inline">T</span> 的<i>伪</i>特征值。这种特征值会在某个步骤 <span class="math-inline">j</span> 突然出现，然后在下一步骤消失。
+如果我们选择或被迫只能使用局部重正交化，
+那么三对角矩阵 <span class="math-inline">T</span> 的一些特征值将是
+已经收敛特征值的新副本，并且我们还会得到
+<span class="math-inline">T</span> 的<i>伪</i>特征值。这样的特征值会突然出现在某个步骤 <span class="math-inline">j</span>，
+仅在下一步骤消失。
 
 <p>
-Cullum [<a href="node421.html#cuwi81">90</a>] 设计了一种方法来剔除这些多余的副本和伪值。她取三对角矩阵 <span class="math-inline">T_j</span> 和另一个 <span class="math-inline">\hat{T}_2</span>，后者是通过删除 <span class="math-inline">T_j</span> 的第一行和第一列得到的。所有与 <span class="math-inline">\hat{T}_2</span> 的特征值非常接近的 <span class="math-inline">T_j</span> 的特征值需要特别考虑。如果这样的特征值是 <span class="math-inline">T_j</span> 的多个特征值之一，则保留其中一个，其余的作为副本丢弃，记住未约化的三对角矩阵根据定义只有单重特征值。如果 <span class="math-inline">T_j</span> 的一个单重特征值也是 <span class="math-inline">\hat{T}_2</span> 的特征值，那么它就是伪特征值，应该丢弃。
+卡勒姆(Cullum) [<a href="node421.html#cuwi81">90</a>] 设计了一种方法来剔除这些多余的副本和伪值。她取三对角矩阵 <span class="math-inline">T_j</span> 和另一个
+<span class="math-inline">\hat{T}_2</span>，后者是通过删除 <span class="math-inline">T_j</span> 的第一行和第一列得到的。
+所有非常接近 <span class="math-inline">\hat{T}_2</span> 特征值的 <span class="math-inline">T_j</span> 特征值需要特别考虑。
+如果这样的特征值是 <span class="math-inline">T_j</span> 的多个特征值，保留其中一个，
+其余的作为副本丢弃，记住未约化的三对角矩阵根据定义只有简单特征值。
+如果 <span class="math-inline">T_j</span> 的简单特征值也是 <span class="math-inline">\hat{T}_2</span> 的特征值，它就是伪值，应该丢弃。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -118,16 +115,11 @@ Cullum [<a href="node421.html#cuwi81">90</a>] 设计了一种方法来剔除这�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2425"
-  href="node112.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html2419"
-  href="node108.html">Reorthogonalization</a>
-<b> Previous:</b> <a name="tex2html2415"
-  href="node110.html">Selective Reorthogonalization.</a>
- &nbsp <b>  <a name="tex2html2421"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2423"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2425" href="node112.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html2419" href="node108.html">重新正交化</a>
+<b>上一节：</b><a name="tex2html2415" href="node110.html">Selective Reorthogonalization.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

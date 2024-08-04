@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Davidson Method</title>
-<meta name="description" content="Davidson Method">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Davidson Method">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node405.html">
-<link rel="previous" href="node401.html">
-<link rel="up" href="node398.html">
-<link rel="next" href="node403.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6948"
   href="node403.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6949"
-  href="node403.html">Example 11.2.1.</a>
-<b> Up:</b> <a name="tex2html6943"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6937"
-  href="node401.html">Arnoldi Method with Inexact</a>
- &nbsp <b>  <a name="tex2html6945"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6947"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6949" href="node403.html">Example 11.2.1.</a>
+<b>上一级：</b><a name="tex2html6943" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6937" href="node401.html">Arnoldi Method with Inexact</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002024000000000000000"></a>
@@ -99,17 +87,17 @@ Davidson方法
 </h2>
 
 <p>
-如前所述，算法<a href="node401.html#alg:Inexact-Cayley-Arnoldi">11.1</a>不允许在无需完全重启的情况下更新Cayley变换的零点。我们现在介绍Davidson方法，该方法在每次迭代中都会更新零点。
+如前所述，算法<a href="node401.html#alg:Inexact-Cayley-Arnoldi">11.1</a>不允许在无需完全重启的情况下更新Cayley变换的零点。我们现在介绍Davidson方法，该方法与之相反，在每次迭代中更新零点。
 
 <p>
-Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学问题而开发的，这些问题中的矩阵具有大小不一的较大对角元素。它最初是作为一种扰动方法推导出来的。给定一个近似特征向量，会发展出一个修正项。在[<a href="node421.html#mosc86">335</a>]中，Davidson方法被视为一种对角预处理方法，并被推广到其他预处理方法。我们现在给出一个算法。向量<span class="math-inline">w_j</span>是对近似特征向量<span class="math-inline">y</span>的修正。预处理器的具体形式未指定，但对于Davidson的原始方法，选择是<span class="math-inline">M=(D-\theta I)^{-1}</span>。
+Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学问题而开发的，其中矩阵的对角元素既大且在幅度上变化。它最初是作为微扰方法推导出来的。给定一个近似特征向量，发展出一个修正。在[<a href="node421.html#mosc86">335</a>]中，Davidson方法被视为一种对角预处理方法，并被推广到其他预处理方法。我们现在给出一个算法。向量<span class="math-inline">w_j</span>是对近似特征向量<span class="math-inline">y</span>的修正。预处理器的具体形式未指定，但对于Davidson的原始方法，选择是<span class="math-inline">M=(D-\theta I)^{-1}</span>。
 
 <p>
 
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<p><a name="alg:gdavidson"></a></p><IMG
+<p><a name="alg:gdavidson"></a></p><img
  width="598" height="202" border="0"
  src="img3744.png"
  alt="\begin{figure}\begin{algorithm}{Generalized Davidson Method for GNHEP\index{Davi...
@@ -122,12 +110,12 @@ Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学�
 <p></p>
 
 <p>
-接下来我们讨论Davidson方法的渐近收敛性。<a name="48129"></a>观察到，如果<span class="math-inline">\theta</span>和<span class="math-inline">M</span>固定，Davidson方法将生成由算子<span class="math-inline">M^{-1}(A-\theta B)</span>生成的Krylov子空间。因此，一旦一个Ritz对开始收敛到一个特征对，比如说<span class="math-inline">(\lambda,x)</span>，那么从那时起生成的子空间与由<span class="math-inline">T_{\mathrm{IC}} \equiv M^{-1}(A-\lambda B)</span>生成的Krylov子空间大致相同。
+接下来我们讨论Davidson方法的渐近收敛性。注意到，如果<span class="math-inline">\theta</span>和<span class="math-inline">M</span>固定，Davidson方法将发展出一个由算子<span class="math-inline">M^{-1}(A-\theta B)</span>生成的Krylov子空间。因此，一旦一个Ritz对开始收敛到一个特征对，比如说<span class="math-inline">(\lambda,x)</span>，那么从那时起生成的子空间大约与由<span class="math-inline">T_{\mathrm{IC}} \equiv M^{-1}(A-\lambda B)</span>生成的Krylov子空间相同。
 
-<span class="math-inline">T_{\mathrm{IC}}</span>具有正确的特征向量，即<span class="math-inline">x</span>，并且<span class="math-inline">T_{\mathrm{IC}}</span>的相应特征值为0。如果<span class="math-inline">T_{\mathrm{IC}}</span>的其他特征值通过预处理被压缩在1附近，那么0将被很好地分离，收敛速度将加快。
+<span class="math-inline">T_{\mathrm{IC}}</span>具有正确的特征向量，即<span class="math-inline">x</span>，并且<span class="math-inline">T_{\mathrm{IC}}</span>对应的特征值为0。如果<span class="math-inline">T_{\mathrm{IC}}</span>的其他特征值通过预处理被压缩在1附近，那么0将被很好地分离，收敛速度将很快。
 
 <p>
-一个重要的问题是，在实践中，<span class="math-inline">T_{\mathrm{IC}}</span>的谱是否真的比原始特征值问题的谱有所改进。有这种可能性，因为在最好的情况下，当<span class="math-inline">M=(A-\mu B)</span>时，我们得到了精确的Cayley变换。此外，我们知道在线性方程的迭代求解中，谱通过预处理得到了改进。另一方面，特征值问题的预处理可能比线性方程更困难，因为渐近地，正在近似奇异矩阵<span class="math-inline">(A-\lambda B)</span>。如果<span class="math-inline">\lambda</span>不是外部特征值，这个矩阵也是不定矩阵。我们将看两个例子，说明预处理如何在特征值问题中起作用。
+一个重要的问题是，在实践中，<span class="math-inline">T_{\mathrm{IC}}</span>的谱是否真的比原始特征值问题的谱有所改进。有这种可能性，因为在最好的情况下，如果<span class="math-inline">M=(A-\mu B)</span>，我们就有了精确的Cayley变换。此外，我们知道在线性方程组的迭代求解中，预处理可以改善谱。另一方面，特征值问题的预处理可能比线性方程组更困难，因为渐近地，正在近似一个奇异矩阵<span class="math-inline">(A-\lambda B)</span>。如果<span class="math-inline">\lambda</span>不是一个外部特征值，这个矩阵也是不定的。我们将看两个例子，说明预处理如何适用于特征值问题。
 
 <p>
 <br><hr>
@@ -161,16 +149,11 @@ Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6949"
-  href="node403.html">Example 11.2.1.</a>
-<b> Up:</b> <a name="tex2html6943"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6937"
-  href="node401.html">Arnoldi Method with Inexact</a>
- &nbsp <b>  <a name="tex2html6945"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6947"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6949" href="node403.html">Example 11.2.1.</a>
+<b>上一级：</b><a name="tex2html6943" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6937" href="node401.html">Arnoldi Method with Inexact</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

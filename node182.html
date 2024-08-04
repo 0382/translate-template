@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Error Bounds for Computed Eigenvectors.</title>
-<meta name="description" content="Error Bounds for Computed Eigenvectors.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Error Bounds for Computed Eigenvectors.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node183.html">
-<link rel="previous" href="node181.html">
-<link rel="up" href="node178.html">
-<link rel="next" href="node183.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3502"
   href="node183.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3503"
-  href="node183.html">Remarks on Clustered Eigenvalues.</a>
-<b> Up:</b> <a name="tex2html3497"
-  href="node178.html">Positive Definite</a>
-<b> Previous:</b> <a name="tex2html3491"
-  href="node181.html">Error Bounds for Computed</a>
- &nbsp <b>  <a name="tex2html3499"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3501"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3503" href="node183.html">Remarks on Clustered Eigenvalues.</a>
+<b>上一级：</b><a name="tex2html3497" href="node178.html">Positive Definite</a>
+<b>上一节：</b><a name="tex2html3491" href="node181.html">Error Bounds for Computed</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -104,24 +92,24 @@ let <span class="math-inline">x</span> be the eigenvector  of <span class="math-
 The error bound for the computed eigenvector <span class="math-inline">\widetilde x</span> and the
 true eigenvector <span class="math-inline">x</span> are 
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ineq:pdpBdef-err-1-evt"></a><div class="math-display">\sin\theta_B(x,\widetilde x)\le\frac 1{\delta}\cdot\frac {\Vert r\Vert _{B^{-1}}}{\Vert\widetilde x\Vert _B}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:pdpBdef-err-1-evt"></a><div class="math-display">\sin\theta_B(x,\widetilde x)\le\frac 1{\delta}\cdot\frac {\Vert r\Vert _{B^{-1}}}{\Vert\widetilde x\Vert _B}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (97)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 This, (<a href="node178.html#ineq:M-2-nrm">5.27</a>), and (<a href="node178.html#ineq:aglM-agl">5.28</a>)
 yield
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ineq:evt-pdpBdef-theta"></a><div class="math-display">\sin\theta(x,\widetilde x)\le\Vert B^{-1}\Vert _2\frac {\sqrt{2\kappa(B)}}{\delta}\Vert r\Vert _2.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:evt-pdpBdef-theta"></a><div class="math-display">\sin\theta(x,\widetilde x)\le\Vert B^{-1}\Vert _2\frac {\sqrt{2\kappa(B)}}{\delta}\Vert r\Vert _2.</div></td>
+<td WIDTH=10 align="RIGHT">
 (98)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>

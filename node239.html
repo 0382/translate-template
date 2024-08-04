@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Stopping Criterion.</title>
-<meta name="description" content="Stopping Criterion.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Stopping Criterion.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node240.html">
-<link rel="previous" href="node238.html">
-<link rel="up" href="node237.html">
-<link rel="next" href="node240.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4421"
   href="node240.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4422"
-  href="node240.html">Deflation.</a>
-<b> Up:</b> <a name="tex2html4416"
-  href="node237.html">Practical Algorithm</a>
-<b> Previous:</b> <a name="tex2html4410"
-  href="node238.html">Block Size.</a>
- &nbsp <b>  <a name="tex2html4418"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4420"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4422" href="node240.html">Deflation.</a>
+<b>上一级：</b><a name="tex2html4416" href="node237.html">实用算法</a>
+<b>上一节：</b><a name="tex2html4410" href="node238.html">Block Size.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -102,17 +90,17 @@ Stopping Criterion.</a>
 Suppose that <span class="math-inline">(s,\theta)</span> is an eigenpair of <span class="math-inline">H_{[m]}.</span> 
 It follows easily from equation&nbsp;(<a href="node236.html#blk_arn_red">7.29</a>) that
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:ritzest"></a><div class="math-display">A V_{[m]} s - \theta V_{[m]} s = F_m E^{\ast}_m s,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:ritzest"></a><div class="math-display">A V_{[m]} s - \theta V_{[m]} s = F_m E^{\ast}_m s,</div></td>
+<td WIDTH=10 align="RIGHT">
 (136)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 and so 
-<span class="math-inline"> \Vert A V_{[m]} s - \theta V_{[m]} s \Vert = \Vert F_m \Vert \, \Vert E^{\ast}_m s \vert= \Vert H_{m+1,m} \Vert \, \Vert E^T_m s \Vert.</span>
+<span class="math-inline"> \Vert A V_{[m]} s - \theta V_{[m]} s \Vert = \Vert F_m \Vert \, \Vert E^{\ast}_m s \Vert= \Vert H_{m+1,m} \Vert \, \Vert E^T_m s \Vert.</span>
 Thus, if the last <span class="math-inline">b</span> components of <span class="math-inline">s</span> are small relative to the size of
 
 <span class="math-inline"> \Vert H_{m+1,m} \Vert</span>, then the Ritz pair 

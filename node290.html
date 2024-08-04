@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Deflation.</title>
-<meta name="description" content="Deflation.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Deflation.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node291.html">
-<link rel="previous" href="node289.html">
-<link rel="up" href="node289.html">
-<link rel="next" href="node291.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5203"
   href="node291.html">
@@ -80,91 +73,95 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5204"
-  href="node291.html">Restart.</a>
-<b> Up:</b> <a name="tex2html5198"
-  href="node289.html">Deflation and Restart</a>
-<b> Previous:</b> <a name="tex2html5192"
-  href="node289.html">Deflation and Restart</a>
- &nbsp <b>  <a name="tex2html5200"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5202"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5204" href="node291.html">Restart.</a>
+<b>上一级：</b><a name="tex2html5198" href="node289.html">收缩与重启</a>
+<b>上一节：</b><a name="tex2html5192" href="node289.html">收缩与重启</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001742010000000000000">
-通货紧缩。</a>
+缩减</a>
 </h4>
-可以通过一系列连续步骤获得部分广义Schur形式。假设我们已经有了部分广义Schur形式
+部分广义Schur形式可以通过多个连续步骤获得。假设我们已经有了部分广义Schur形式
 
 <span class="math-inline">AQ_{k-1}={Z}_{k-1}R^A_{k-1}</span> 和
 
-<span class="math-inline">BQ_{k-1}={Z}_{k-1}R^B_{k-1}</span>。我们希望用新的右Schur向量 <span class="math-inline">{q}</span> 和左Schur向量 <span class="math-inline">{z}</span> 来扩展这个部分广义Schur形式
+<span class="math-inline">BQ_{k-1}={Z}_{k-1}R^B_{k-1}</span>。我们希望用新的右Schur向量 <span class="math-inline">{q}</span> 和左Schur向量 <span class="math-inline">{z}</span> 来扩展这个部分广义Schur形式，得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">A\onebytwo{Q_{k-1}}{{q}}=\onebytwo{{Z}_{k-1}}{{z}}\left[\begin{array}{@{\,}cc@{\,}}R^A_{k-1}&amp; {a}\\0&amp; \alpha\end{array}\right]</div>
+
+<div class="math-display">A\onebytwo{Q_{k-1}}{{q}}=\onebytwo{{Z}_{k-1}}{{z}}\left[\b......{@{\,}cc@{\,}}R^A_{k-1}&amp; {a}\\0&amp; \alpha\end{array}\right]</div>
 </div>
 <br clear="ALL">
 <p></p>
 以及
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">B\onebytwo{Q_{k-1}}{q}=\onebytwo{{Z}_{k-1}}{{z}}\left[\begin{array}{@{\,}cc@{\,}}R^B_{k-1}&amp; {b}\\0&amp; \beta \end{array}\right].</div>
+
+<div class="math-display">B\onebytwo{Q_{k-1}}{q}=\onebytwo{{Z}_{k-1}}{{z}}\left[\be......@{\,}cc@{\,}}R^B_{k-1}&amp; {b}\\0&amp; \beta \end{array}\right].</div>
 </div>
 <br clear="ALL">
 <p></p>
 新的广义Schur对 <span class="math-inline">((\alpha,\beta), {q})</span> 满足
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">Q^\ast_{k-1}{q}=0\quad \mathrm{且} \quad(\beta A-\alpha B){q}-{Z}_{k-1}(\beta {a} - \alpha {b})=0,</div>
+
+<div class="math-display">Q^\ast_{k-1}{q}=0\quad \mathrm{并且} \quad(\beta A-\alpha B){q}-{Z}_{k-1}(\beta {a} - \alpha {b})=0,</div>
 </div>
 <br clear="ALL">
 <p></p>
-或者，由于
+或者，因为
 
 <span class="math-inline">\beta {a} - \alpha {b}={Z}^\ast_{k-1}(\beta A-\alpha B)q</span>,
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">Q^\ast_{k-1}q=0\quad\mathrm{且}\quad\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right)(\beta A-\alpha B)\left(I-Q_{k-1}Q_{k-1}^\ast\right)q=0.</div>
+
+<div class="math-display">Q^\ast_{k-1}q=0\quad\mathrm{并且}\quad\left(I-{Z}_{k-1}{Z}_{k-......ight)(\beta A-\alpha B)\left(I-Q_{k-1}Q_{k-1}^\ast\right)q=0.</div>
 </div>
 <br clear="ALL">
 <p></p>
 向量 <span class="math-inline">{a}</span> 和 <span class="math-inline">{b}</span> 可以从以下公式计算得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">{a}={Z}_{k-1}^\ast Aq\quad\mathrm{且}\quad {b}={Z}_{k-1}^\ast Bq.</div>
+
+<div class="math-display">{a}={Z}_{k-1}^\ast Aq\quad\mathrm{并且}\quad {b}={Z}_{k-1}^\ast Bq.</div>
 </div>
 <br clear="ALL">
 <p></p>
-因此，广义Schur对 <span class="math-inline">((\alpha,\beta),q)</span> 是通缩矩阵对的特征对
+因此，广义Schur对 <span class="math-inline">((\alpha,\beta),q)</span> 是缩减矩阵对的一个特征对
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD7-defl"></a><div class="math-display">\begin{array}{l}\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right)A\left(I-Q_{k-1}Q_{k-1}^\ast\right),\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)\right).\end{array}</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:JD7-defl"></a><div class="math-display">\begin{array}{l}\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\rig......ight)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)\right).\end{array}</div></td>
+<td WIDTH=10 align="RIGHT">
 (228)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这个问题可以再次用我们在第&#167;<a href="node288.html#ss:JD7-intro">8.4.1</a>节中概述的Jacobi-Davidson过程来解决。在这个过程中，我们构造了与<span class="math-inline">Q_{k-1}</span>正交的向量<span class="math-inline">v_i</span>和与<span class="math-inline">{Z}_{k-1}</span>正交的向量<span class="math-inline">w_i</span>。这简化了与通缩算子相关的交互矩阵<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>的计算：
+这个特征问题可以再次用我们在第&#167;<a href="node288.html#ss:JD7-intro">8.4.1</a>节中概述的Jacobi-Davidson过程来解决。在这个过程中，我们构造了与<span class="math-inline">Q_{k-1}</span>正交的向量<span class="math-inline">v_i</span>和与<span class="math-inline">{Z}_{k-1}</span>正交的向量<span class="math-inline">w_i</span>。这简化了与缩减算子相关的交互矩阵<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>的计算：
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:JD7-deflIM"></a><div class="math-display">\left\{\begin{array}{l}M^A\equiv W^\ast\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right) V=W^\ast A V,\rule{0pt}{3.5ex}\\M^B\equiv W^\ast\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right) V=W^\ast B V,\rule{0pt}{3.5ex}\end{array}\right.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:JD7-deflIM"></a><div class="math-display">\left\{\begin{array}{l}M^A\equiv W^\ast\left(I-{Z}_{k-1}{......\ast\right) V=W^\ast B V,\rule{0pt}{3.5ex}\end{array}\right.</div></td>
+<td WIDTH=10 align="RIGHT">
 (229)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-<span class="math-inline">M^A</span> 和 <span class="math-inline">M^B</span> 可以简单地分别计算为 <span class="math-inline">W^\ast A V</span> 和 <span class="math-inline">W^\ast B V</span>。
+并且<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>可以简单地计算为<span class="math-inline">W^\ast A V</span>和<span class="math-inline">W^\ast B V</span>。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html5203"
   href="node291.html">
 <button class="navigate">下一节</button></a> 
@@ -181,16 +178,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5204"
-  href="node291.html">Restart.</a>
-<b> Up:</b> <a name="tex2html5198"
-  href="node289.html">Deflation and Restart</a>
-<b> Previous:</b> <a name="tex2html5192"
-  href="node289.html">Deflation and Restart</a>
- &nbsp <b>  <a name="tex2html5200"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5202"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5204" href="node291.html">Restart.</a>
+<b>上一级：</b><a name="tex2html5198" href="node289.html">收缩与重启</a>
+<b>上一节：</b><a name="tex2html5192" href="node289.html">收缩与重启</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Subroutine Dependencies</title>
-<meta name="description" content="Subroutine Dependencies">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Subroutine Dependencies">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node362.html">
-<link rel="previous" href="node360.html">
-<link rel="up" href="node360.html">
-<link rel="next" href="node362.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6306"
   href="node362.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6307"
-  href="node362.html">Under the Hood</a>
-<b> Up:</b> <a name="tex2html6301"
-  href="node360.html">Modifying the Templates</a>
-<b> Previous:</b> <a name="tex2html6295"
-  href="node360.html">Modifying the Templates</a>
- &nbsp <b>  <a name="tex2html6303"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6305"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6307" href="node362.html">揭秘内幕</a>
+<b>上一级：</b><a name="tex2html6301" href="node360.html">修改模板</a>
+<b>上一节：</b><a name="tex2html6295" href="node360.html">修改模板</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001845100000000000000">
@@ -103,8 +91,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <br>
-<a name="sgmintreefig"></a><IMG
- width="598" height="754" align="bottom" border="0"
+<a name="sgmintreefig"></a><img
+ width="598" height="754" align="BOTTOM" border="0"
  src="img3480.png"
  alt="\begin{algorithm}{SG\_MIN
 }
@@ -122,7 +110,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 
 <ul>
-<li><i>目标函数。</i> 这些子程序实现了目标函数及其导数。这一组是唯一一组用户只需关注基本功能时可能需要修改以适应模板的。该组中的函数被几何化目标函数组和高层次算法组中的函数所使用。
+<li><i>目标函数。</i> 这些子程序实现了目标函数及其导数。这一组是唯一一组用户只需关注基本功能时需要修改以适应模板的。该组中的函数被几何化目标函数组和高层次算法组中的函数所使用。
 
 <p>
 </li>
@@ -130,24 +118,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 </li>
-<li><i>几何化目标函数。</i> 该组使用几何实现中的子程序将<span class="math-inline">F(Y)</span>的微分和二阶微分投影到约束（即切线）表面上，生成几何协变梯度（<code>grad</code>）和Hessian（<code>dgrad</code>）。此外，这里还包含两个用于求逆协变Hessian的子程序（<code>invdgrad_CG</code>和<code>invdgrad_MINRES</code>）。该组提供了构建高层次算法组实现所需的原始工具。最后，检测（<code>partition</code>）和移除（<code>nosym</code>）块对角正交对称性的函数也位于该组中。
+<li><i>几何化目标函数。</i> 该组使用几何实现中的子程序将<span class="math-inline">F(Y)</span>的微分和二阶微分投影到约束（即切线）表面上，生成几何协变梯度（<code>grad</code>）和Hessian（<code>dgrad</code>）。此外，还包括两个用于求逆协变Hessian的子程序（<code>invdgrad_CG</code>和<code>invdgrad_MINRES</code>）。该组提供了构建高层次算法组实现所需的原始工具。最后，检测（<code>partition</code>）和移除（<code>nosym</code>）块对角正交对称性的函数也位于该组。
 
 <p>
 </li>
 <li><i>高层次算法。</i>
-该组实现了各种优化算法的有约束版本。在这里，选择搜索方向、执行线性最小化（使用<code>Fline</code>、<code>dFline</code>和<code>gradline</code>）以及定义收敛准则。
+该组实现了各种优化算法的有约束版本。在这里选择搜索方向，执行线性最小化（使用<code>Fline</code>、<code>dFline</code>和<code>gradline</code>），并定义收敛准则。
 
 <p>
 </li>
 </ul>
 
 <p>
-最后，每个函数都从包含有关流形和计算信息的全局<code>SGParameters</code>结构中读取数据。在我们的示例中，我们使用了一个单独的全局<code>FParameters</code>来存储与计算<span class="math-inline">F(Y)</span>相关的信息。<code>SGParameters</code>的字段在<code>sg_min</code>中设置。
+最后，每个函数都从包含有关流形和计算信息的<code>SGParameters</code>全局结构中读取数据。在我们的示例中，我们使用了一个单独的全局<code>FParameters</code>来存储与计算<span class="math-inline">F(Y)</span>相关的信息。<code>SGParameters</code>的字段在<code>sg_min</code>中设置。
 
 <p>
-<hr>
-
-这段内容详细介绍了子程序之间的依赖关系，并根据功能将其分为四个组别，每个组别负责不同的任务，共同构成了整个优化算法的框架。<!--Navigation Panel-->
+<hr><!--Navigation Panel-->
 <a name="tex2html6306"
   href="node362.html">
 <button class="navigate">下一节</button></a> 
@@ -164,16 +150,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6307"
-  href="node362.html">Under the Hood</a>
-<b> Up:</b> <a name="tex2html6301"
-  href="node360.html">Modifying the Templates</a>
-<b> Previous:</b> <a name="tex2html6295"
-  href="node360.html">Modifying the Templates</a>
- &nbsp <b>  <a name="tex2html6303"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6305"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6307" href="node362.html">揭秘内幕</a>
+<b>上一级：</b><a name="tex2html6301" href="node360.html">修改模板</a>
+<b>上一节：</b><a name="tex2html6295" href="node360.html">修改模板</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

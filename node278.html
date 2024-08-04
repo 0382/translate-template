@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Error Bound for Computed Eigenvalues.</title>
-<meta name="description" content="Error Bound for Computed Eigenvalues.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Error Bound for Computed Eigenvalues.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node279.html">
-<link rel="previous" href="node277.html">
-<link rel="up" href="node275.html">
-<link rel="next" href="node279.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4979"
   href="node279.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4980"
-  href="node279.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html4974"
-  href="node275.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html4968"
-  href="node277.html">Transfer Residual Errors to</a>
- &nbsp <b>  <a name="tex2html4976"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4978"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4980" href="node279.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html4974" href="node275.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html4968" href="node277.html">Transfer Residual Errors to</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION0016130030000000000000"></a>
@@ -97,28 +85,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 计算特征值的误差界限
 </h4>
-从<a href="node277.html#eq:std-NHx-b1">7.105</a>和特征值与特征向量的扰动理论中，可以证明，在残差范数<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下，存在一个矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>满足
+从(<a href="node277.html#eq:std-NHx-b1">7.105</a>)以及特征值和特征向量的扰动理论中，可以证明，在残差范数<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下，存在一个矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>满足
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:std-NH"></a><div class="math-display">\vert\lambda - \widetilde\lambda \vert\simle \frac{1}{\vert\widetilde ...... \max\left\{\Vert r\Vert _2, \Vert s^{\ast} \Vert _2 \right\},</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:std-NH"></a><div class="math-display">\vert\lambda - \widetilde\lambda \vert\lesssim \frac{1}{\vert\widetilde ...... \max\left\{\Vert r\Vert _2, \Vert s^{\ast} \Vert _2 \right\},</div></td>
+<td WIDTH=10 align="RIGHT">
 (212)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中“<span class="math-inline">\simle</span>”表示“小于”，在<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下。需要注意的是，<em>单个条件数</em> <span class="math-inline">c_{\lambda}</span> <a name="27023"></a> 定义为
+其中“<span class="math-inline">\lesssim</span>”表示“小于”在残差范数<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下。注意，<em>个体条件数</em> <span class="math-inline">c_{\lambda}</span> <a name="27023"></a> 定义为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">c_{\lambda}\equiv \frac {1}{\vert y^{\ast} x\vert}=\sec\theta(x,y),</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">x</span>和<span class="math-inline">y</span>分别是矩阵<span class="math-inline">A</span>的特征向量和左特征向量，并且被归一化使得<span class="math-inline">\Vert x\Vert _2 = \Vert y\Vert _2 = 1</span>。由于精确的<span class="math-inline">x</span>和<span class="math-inline">y</span>通常是未知的，在实际应用中，可以简单地通过<span class="math-inline">1/\vert\widetilde y^{\ast} \widetilde x\vert</span>来估计这个条件数<span class="math-inline">c_{\lambda}</span>。注意到<span class="math-inline">c_{\lambda}\ge 1</span>，当且仅当<span class="math-inline">A</span>是厄米矩阵时取等号。
+其中<span class="math-inline">x</span>和<span class="math-inline">y</span>分别是矩阵<span class="math-inline">A</span>的特征向量和左特征向量，并且归一化使得
+
+<span class="math-inline">\Vert x\Vert _2 = \Vert y\Vert _2 = 1</span>。由于精确的<span class="math-inline">x</span>和<span class="math-inline">y</span>通常是未知的，实际上，我们可以简单地通过<span class="math-inline">1/\vert\widetilde y^{\ast} \widetilde x\vert</span>来估计这个条件数<span class="math-inline">c_{\lambda}</span>。注意到<span class="math-inline">c_{\lambda}\ge 1</span>，当且仅当<span class="math-inline">A</span>是厄米矩阵时取等号。
 
 <p>
-如果近似的左特征向量<span class="math-inline">\widetilde y</span>不可用，通常不存在直接关于<span class="math-inline">\vert\lambda - \widetilde\lambda \vert</span>的界限。方程<a href="node277.html#eq:std-NH-b1">7.104</a>将是唯一可用来解释计算出的特征值<span class="math-inline">\widetilde\lambda</span>和<span class="math-inline">\widetilde x</span>的精度的依据。
+如果近似的左特征向量<span class="math-inline">\widetilde y</span>不可用，一般来说，不存在直接关于<span class="math-inline">\vert\lambda - \widetilde\lambda \vert</span>的界限。方程(<a href="node277.html#eq:std-NH-b1">7.104</a>)将是唯一可用来解释计算得到的特征值<span class="math-inline">\widetilde\lambda</span>和特征向量<span class="math-inline">\widetilde x</span>的精度的依据。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -138,16 +130,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4980"
-  href="node279.html">Error Bound for Computed</a>
-<b> Up:</b> <a name="tex2html4974"
-  href="node275.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html4968"
-  href="node277.html">Transfer Residual Errors to</a>
- &nbsp <b>  <a name="tex2html4976"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4978"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4980" href="node279.html">Error Bound for Computed</a>
+<b>上一级：</b><a name="tex2html4974" href="node275.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html4968" href="node277.html">Transfer Residual Errors to</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

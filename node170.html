@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Algorithm.</title>
-<meta name="description" content="Algorithm.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Algorithm.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node171.html">
-<link rel="previous" href="node169.html">
-<link rel="up" href="node169.html">
-<link rel="next" href="node171.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3321"
   href="node171.html">
@@ -80,61 +73,62 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3322"
-  href="node171.html">Lanczos Algorithm with SI.</a>
-<b> Up:</b> <a name="tex2html3316"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3310"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
- &nbsp <b>  <a name="tex2html3318"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3320"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3322" href="node171.html">Lanczos Algorithm with SI.</a>
+<b>上一级：</b><a name="tex2html3316" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3310" href="node169.html">Lanczos Methods &nbsp; A.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001450010000000000000">
-算法.</a>
+算法</a>
 </h4>
 在直接迭代变体中，
 我们用<span class="math-inline">A</span>进行乘法运算并解<span class="math-inline">B</span>的线性系统；
-这对应于<span class="math-inline">C=B^{-1}A</span>。它计算一个基<span class="math-inline">V_j</span>，其中矩阵束<span class="math-inline">\{A,B\}</span>由一个
+这对应于<span class="math-inline">C=B^{-1}A</span>。它计算一个
+基<span class="math-inline">V_j</span>，其中矩阵束<span class="math-inline">\{A,B\}</span>由一个
 实对称三对角矩阵表示，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_tridia"></a><div class="math-display">T_{j}=\left[\begin{array}{cccc}\alpha_1 &amp; \beta_1 &amp;&amp;\\\beta_1 &amp; \alpha_2 &amp; \beta_2 &amp;&amp;\\\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp;&amp;\\\beta_{j-1} &amp; &amp; \beta_{j-1} &amp; \alpha_j\\\end{array} \right]\;,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_tridia"></a><div class="math-display">T_{j}=\left[\begin{array}{cccc}\alpha_1 &amp; \beta_1 &amp;&amp;\\\be......beta_{j-1}\\&amp;&amp;\beta_{j-1}&amp;\alpha_j\\\end{array} \right]\;,</div></td>
+<td WIDTH=10 align="RIGHT">
 (72)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 满足基本递归关系，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen-herm-recursion"></a><div class="math-display">av_j=BV_{j}T_{j}+re_j^{\ast}\;.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen-herm-recursion"></a><div class="math-display">AV_j=BV_{j}T_{j}+re_j^{\ast}\;.</div></td>
+<td WIDTH=10 align="RIGHT">
 (73)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-与标准Hermitian情况（<a href="node103.html#herm-recursion">4.10</a>）相比。现在基<span class="math-inline">V_j</span>是<span class="math-inline">B</span>-正交的，
+与标准厄米特情况（<a href="node103.html#herm-recursion">4.10</a>）相比较。
+现在基<span class="math-inline">V_j</span>是<span class="math-inline">B</span>-正交的，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="B-ortho"></a><div class="math-display">V_j^{\ast}bv_j=I_{j}\,,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="B-ortho"></a><div class="math-display">V_j^{\ast}BV_j=I_{j}\,,</div></td>
+<td WIDTH=10 align="RIGHT">
 (74)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-并且矩阵<span class="math-inline">T</span>与<span class="math-inline">A</span>的一个截面是相合的，
+且矩阵<span class="math-inline">T</span>与<span class="math-inline">A</span>的一个截面是相合的，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="T_section"></a><div class="math-display">V_j^{\ast}av_j=T_{j}\,.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="T_section"></a><div class="math-display">V_j^{\ast}AV_j=T_{j}\,.</div></td>
+<td WIDTH=10 align="RIGHT">
 (75)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -142,50 +136,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 我们通过引入一个辅助基来简化<span class="math-inline">B</span>-正交化的描述，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="w-basis"></a><div class="math-display">w_j=BV_j\,,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="w-basis"></a><div class="math-display">W_j=BV_j\,,</div></td>
+<td WIDTH=10 align="RIGHT">
 (76)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 它是<span class="math-inline">B^{-1}</span>-正交的，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="B-w-ortho"></a><div class="math-display">W_j^{\ast}B^{-1}w_j=I_{j}\,,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="B-w-ortho"></a><div class="math-display">W_j^{\ast}B^{-1}W_j=I_{j}\,,</div></td>
+<td WIDTH=10 align="RIGHT">
 (77)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 并且对于它，<span class="math-inline">W^{\ast}V=I</span>。
 
 <p>
-正如标准情况一样，计算<span class="math-inline">T_{j}</span>的特征解，
+正如标准情况一样，
+计算<span class="math-inline">T_{j}</span>的特征解，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)},</div>
 </div>
 <br clear="ALL">
 <p></p>
-并得到一个Ritz值<span class="math-inline">\theta_i^{(j)}</span>和一个Ritz向量，
+并得到一个
+Ritz 值
+<span class="math-inline">\theta_i^{(j)}</span> 和一个 Ritz 向量，
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_eigenvector"></a><div class="math-display">x_i^{(j)}=V_js_i^{(j)},</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_eigenvector"></a><div class="math-display">x_i^{(j)}=V_js_i^{(j)},</div></td>
+<td WIDTH=10 align="RIGHT">
 (78)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-近似于束（<a href="node156.html#gsymeig">5.1</a>）的一个特征对。其残差，
+近似于束的特征对（<a href="node156.html#gsymeig">5.1</a>）。
+其残差，
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="373" height="58" border="0"
  src="img1539.png"
  alt="\begin{eqnarray*}
@@ -200,21 +202,32 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
 是<span class="math-inline">B</span>-正交于由<span class="math-inline">V_j</span>张成的Krylov空间。
 
 <p>
-我们可以像标准Hermitian情况（<a href="node103.html#estimate_residual">4.13</a>）那样估计残差的范数，但现在使用<span class="math-inline">B^{-1}</span>-范数更好，
+我们可以像在标准厄米特情况中那样估计残差的范数（<a href="node103.html#estimate_residual">4.13</a>），但现在使用<span class="math-inline">B^{-1}</span>-范数会更好，得到
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_estimate_residual"></a><div class="math-display">\Vert r_i^{(j)}\Vert _{B^{-1}}=\vert\beta_js_{j,i}^{(j)}\vert\;,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_estimate_residual"></a><div class="math-display">\Vert r_i^{(j)}\Vert _{B^{-1}}=\vert\beta_js_{j,i}^{(j)}\vert\;,</div></td>
+<td WIDTH=10 align="RIGHT">
 (79)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-利用了<span class="math-inline">(Bv_{j+1})^{\ast}B^{-1}(Bv_{j+1})=v_{j+1}^{\ast}Bv_{j+1}</span>这一事实。在衡量收敛性时，使用<span class="math-inline">B^{-1}</span>-范数是自然的；参见[<a
+利用了事实
+<span class="math-inline">(Bv_{j+1})^{\ast}B^{-1}(Bv_{j+1})=v_{j+1}^{\ast}Bv_{j+1}</span>。
+在衡量收敛性时自然使用<span class="math-inline">B^{-1}</span>-范数；
+参见[<a
  href="node421.html#parl80">353</a>, Chap.&nbsp;15]。
 
 <p>
-与标准情况一样，我们需要监控<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{j,i}^{(j)}</span>。一旦这个乘积变小，我们就可以标记一个特征值为收敛，而不必实际执行矩阵向量乘法（<a href="node170.html#gen_eigenvector">5.14</a>）。我们将这一操作保留到步骤<span class="math-inline">j</span>，直到估计（<a href="node170.html#gen_estimate_residual">5.15</a>）指示收敛。
+与标准情况一样，我们需要
+监控<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>，
+以及其特征向量的最后一个元素<span class="math-inline">s_{j,i}^{(j)}</span>。一旦这个
+乘积变小，我们就可以标记一个特征值为收敛，
+而不必实际执行矩阵-向量
+乘法（<a href="node170.html#gen_eigenvector">5.14</a>）。我们保存这个
+操作直到步骤<span class="math-inline">j</span>，那时估计（<a href="node170.html#gen_estimate_residual">5.15</a>）
+指示收敛。
 
 <p>
 
@@ -226,8 +239,8 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
 
 <p>
 <br>
-<a name="gen_approximate_eigenvectors"></a><a name="gen_convergence"></a><a name="gen_approximate_eigenvalues"></a><a name="B_solve"></a><a name="gen_Reorthogonalize"></a><a name="gen_Operate"></a><a name="gen_h_starting_vector"></a><a name="Gen_Herm_Lanczos"></a><IMG
- width="598" height="318" align="bottom" border="0"
+<a name="gen_approximate_eigenvectors"></a><a name="gen_convergence"></a><a name="gen_approximate_eigenvalues"></a><a name="B_solve"></a><a name="gen_Reorthogonalize"></a><a name="gen_Operate"></a><a name="gen_h_starting_vector"></a><a name="Gen_Herm_Lanczos"></a><img
+ width="598" height="318" align="BOTTOM" border="0"
  src="img1543.png"
  alt="\begin{algorithm}{Lanczos Method for GHEP
 }
@@ -242,67 +255,103 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
 让我们一步一步地评论这个算法：
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>如果有一个好的特征向量猜测，就用它作为初始<span class="math-inline">q</span>。否则，选择一个由正态分布随机数组成的随机方向。注意<span class="math-inline">\alpha_1=q^{\ast}Aq/(q^{\ast}Bq)</span>是初始向量的Rayleigh商，而<span class="math-inline">\beta_1</span>测量其残差的<span class="math-inline">B^{-1}</span>-范数（<a href="node170.html#gen_estimate_residual">5.15</a>）。
+<dd>如果有一个好的想要的特征向量的猜测，就用它作为
+起始<span class="math-inline">q</span>。在其他情况下选择一个随机方向，例如，
+由正态分布的随机数组成。注意
+
+<span class="math-inline">\alpha_1=q^{\ast}Aq/(q^{\ast}Bq)</span>是起始向量的Rayleigh商，而<span class="math-inline">\beta_1</span>测量其
+残差的<span class="math-inline">B^{-1}</span>-范数（<a href="node170.html#gen_estimate_residual">5.15</a>）。
 
 <p>
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>这是大型矩阵<span class="math-inline">A</span>发挥作用的地方。任何执行矩阵向量乘法的例程都可以使用。
+<dd>这是大矩阵<span class="math-inline">A</span>出现的地方。
+任何执行矩阵-向量乘法的例程都可以使用。
 
 <p>
 </dd>
 <dt><strong>(8)</strong></dt>
-<dd>只需重新正交化基<span class="math-inline">V</span>或<span class="math-inline">W</span>中的一个，而不是两者。选择与标准情况相同：
+<dd>只需重新正交化基<span class="math-inline">V</span>或<span class="math-inline">W</span>中的一个，
+而不是两者。
+选择与标准情况相同：
 <a name="17420"></a>
 
 <ol>
-<li><em>完全：</em> 现在我们希望使<span class="math-inline">v</span>基向量<span class="math-inline">B</span>-正交，计算
+<li><em>完全：</em>
+现在我们希望使<span class="math-inline">v</span>基向量<span class="math-inline">B</span>-正交，
+计算
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">r=r-B(V_j(V_j^{\ast}r))</div>
 </div>
 <br clear="ALL">
 <p></p>
-并重复直到向量<span class="math-inline">r</span>与基<span class="math-inline">V_j</span>正交。我们必须为每次重新正交化应用一次<span class="math-inline">B</span>的矩阵向量乘法，并且必须使用经典Gram-Schmidt过程。
+并重复直到向量<span class="math-inline">r</span>与基<span class="math-inline">V_j</span>正交。
+我们必须为每次重新正交化应用一次<span class="math-inline">B</span>的矩阵-向量乘法，并且必须使用经典
+的Gram-Schmidt过程。
 
 <p>
-如果我们保存两个基<span class="math-inline">V_j</span>和<span class="math-inline">W_j</span>，并减去<span class="math-inline">W_j</span>的列的倍数，
+如果我们保存两个基<span class="math-inline">V_j</span>和<span class="math-inline">W_j</span>并减去<span class="math-inline">W_j</span>的列的倍数，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">r=r-W_j(V_j^{\ast}r)\,,</div>
 </div>
 <br clear="ALL">
 <p></p>
-直到正交性获得，通常只需一次。现在我们可以使用改进的Gram-Schmidt正交化。
+直到正交性获得，几乎总是只需一次。
+现在我们可以使用改进的Gram-Schmidt正交化。
 
 <p>
 </li>
-<li><em>选择性：</em> 仅在必要时重新正交化，必须监控正交性，如第&#167;<a href="node108.html#select-ort">4.4.4</a>节所述。注意现在涉及对称矩阵<span class="math-inline">V_j^{\ast}w_j=V_j^{\ast}BV_j</span>，并且一些向量<span class="math-inline">v_k</span>必须由相应的向量<span class="math-inline">w_k</span>替换。
+<li><em>选择性：</em>仅在必要时重新正交化，
+必须监控正交性，如
+§<a href="node108.html#select-ort">4.4.4</a>中所述
+对于标准情况。注意现在对称矩阵
+
+<span class="math-inline">V_j^{\ast}W_j=V_j^{\ast}BV_j</span>涉及其中，一些向量<span class="math-inline">v_k</span>
+必须由相应的向量<span class="math-inline">w_k</span>替换。
 </li>
-<li><em>局部：</em> 用于巨大的矩阵，当存储整个基<span class="math-inline">V_j</span>很困难时。仅在寻找一两个极端特征值时才建议使用。我们确保<span class="math-inline">w_{j+1}</span>与<span class="math-inline">v_{j-1}</span>和<span class="math-inline">v_j</span>正交，通过减去
-<span class="math-inline">r=r-w_{j-1}(v_{j-1}^{\ast}r); r=r-w_j(v_j^{\ast}r)</span>一次。
+<li><em>局部：</em>用于巨大的矩阵，当存储
+整个基<span class="math-inline">V_j</span>很困难时。仅在寻找一个或两个极端特征值时才建议使用。我们确保<span class="math-inline">w_{j+1}</span>与<span class="math-inline">v_{j-1}</span>和
+<span class="math-inline">v_j</span>正交，通过减去
+<span class="math-inline">r=r-w_{j-1}(v_{j-1}^{\ast}r); r=r-w_j(v_j^{\ast}r)</span>一次
+在这一步。
 </li>
 </ol>
 </dd>
 <dt><strong>(9)</strong></dt>
-<dd>这里我们需要解一个正定矩阵<span class="math-inline">B</span>的线性系统。这在标准情况（<a href="node86.html#symeig">4.1</a>）中是不需要的。
+<dd>在这里我们需要解一个正定矩阵<span class="math-inline">B</span>的系统。这在标准情况中
+（<a href="node86.html#symeig">4.1</a>）是不需要的。
 </dd>
 <dt><strong>(11)</strong></dt>
-<dd>对于每个步骤<span class="math-inline">j</span>，或在适当的间隔，计算对称三对角矩阵<span class="math-inline">T_{j}</span>（<a href="node170.html#gen_tridia">5.8</a>）的特征值<span class="math-inline">\theta_i^{(j)}</span>和特征向量<span class="math-inline">s_i^{(j)}</span>。与标准情况相同的过程。
+<dd>对于每个步骤<span class="math-inline">j</span>，或在适当的间隔，
+计算对称三对角矩阵
+<span class="math-inline">T_{j}</span>（<a href="node170.html#gen_tridia">5.8</a>）的特征值
+<span class="math-inline">\theta_i^{(j)}</span>和特征向量<span class="math-inline">s_i^{(j)}</span>。与标准情况相同的过程。
 
 <p>
 </dd>
 <dt><strong>(12)</strong></dt>
-<dd>当找到足够大的基<span class="math-inline">V_j</span>时，算法停止，使得三对角矩阵<span class="math-inline">T_{j}</span>（<a href="node170.html#gen_tridia">5.8</a>）的特征值<span class="math-inline">\theta_i^{(j)}</span>给出束（<a href="node156.html#gsymeig">5.1</a>）的所有寻求特征值的良好近似。
+<dd>当找到一个足够大的基<span class="math-inline">V_j</span>时，算法停止，
+使得三对角矩阵<span class="math-inline">T_{j}</span>（<a href="node170.html#gen_tridia">5.8</a>）的特征值
+<span class="math-inline">\theta_i^{(j)}</span>给出束（<a href="node156.html#gsymeig">5.1</a>）的所有
+特征值的良好近似。
 
 <p>
-如果基<span class="math-inline">V_j</span>不是完全<span class="math-inline">B</span>-正交的，估计（<a href="node170.html#gen_estimate_residual">5.15</a>）对于残差可能过于乐观。然后Ritz向量<span class="math-inline">x_i^{(j)}</span>（<a href="node170.html#gen_eigenvector">5.14</a>）的范数可能小于1，我们必须将估计替换为，
+如果基
+<span class="math-inline">V_j</span>不是完全<span class="math-inline">B</span>-正交的，估计（<a href="node170.html#gen_estimate_residual">5.15</a>）对于残差
+可能过于乐观。
+那么Ritz向量<span class="math-inline">x_i^{(j)}</span>（<a href="node170.html#gen_eigenvector">5.14</a>）可能具有范数
+小于<span class="math-inline">1</span>，我们必须用以下估计替换，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">\Vert r_i^{(j)}\vert=\vert\beta_js_{j,i}^{(j)}\vert/\Vert V_js_i^{(j)}\Vert _B\;.</div>
+
+<div class="math-display">\Vert r_i^{(j)}\Vert=\vert\beta_js_{j,i}^{(j)}\vert/\Vert V_js_i^{(j)}\Vert _B\;.</div>
 </div>
 <br clear="ALL">
 <p></p>
@@ -310,9 +359,13 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
-<dd>仅当步骤（<a href="node170.html#gen_convergence">5.4</a>）中的测试表明它们已经收敛时，才计算原始矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征向量。然后使用基<span class="math-inline">V_j</span>进行矩阵向量乘法以获得特征向量（<a href="node170.html#gen_eigenvector">5.14</a>），
+<dd>只有在步骤（<a href="node170.html#gen_convergence">5.4</a>）中的测试指示它们
+已经收敛时，才计算原始矩阵束（<a href="node156.html#gsymeig">5.1</a>）的特征向量。然后基<span class="math-inline">V_j</span>用于矩阵-向量
+乘法以得到
+特征向量（<a href="node170.html#gen_eigenvector">5.14</a>），
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">x_i^{(j)}=V_js_i^{(j)},</div>
 </div>
@@ -342,16 +395,11 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3322"
-  href="node171.html">Lanczos Algorithm with SI.</a>
-<b> Up:</b> <a name="tex2html3316"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3310"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
- &nbsp <b>  <a name="tex2html3318"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3320"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3322" href="node171.html">Lanczos Algorithm with SI.</a>
+<b>上一级：</b><a name="tex2html3316" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3310" href="node169.html">Lanczos Methods &nbsp; A.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

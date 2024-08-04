@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Simultaneous Schur Decomposition Problem</title>
-<meta name="description" content="Simultaneous Schur Decomposition Problem">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Simultaneous Schur Decomposition Problem">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node352.html">
-<link rel="previous" href="node350.html">
-<link rel="up" href="node346.html">
-<link rel="next" href="node352.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6161"
   href="node352.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6162"
-  href="node352.html">Simultaneous Diagonalization</a>
-<b> Up:</b> <a name="tex2html6156"
-  href="node346.html">Sample Problems and Their</a>
-<b> Previous:</b> <a name="tex2html6150"
-  href="node350.html">Trace Minimization with a</a>
- &nbsp <b>  <a name="tex2html6158"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6160"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6162" href="node352.html">同时对角化</a>
+<b>上一级：</b><a name="tex2html6156" href="node346.html">Sample Problems and Their</a>
+<b>上一节：</b><a name="tex2html6150" href="node350.html">Trace Minimization with a</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001843500000000000000"></a>
@@ -101,22 +89,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h3>
 
 <p>
-考虑两个矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span>，在无误差的情况下它们具有相同的舒尔向量；即存在一个 <span class="math-inline">Y \in {\mathcal O}(n)</span>，使得 <span class="math-inline">Y^*AY</span> 和 <span class="math-inline">Y^*BY</span> 都是块上三角矩阵，其中 <span class="math-inline">{\mathcal O}(n)</span> 表示 <span class="math-inline">n</span> 阶正交矩阵的集合。现在假设 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 由于测量误差或其他类型的有损滤波而存在一定噪声。在这种情况下，将 <span class="math-inline">A</span> 上三角化的 <span class="math-inline">Y</span> 可能无法同样地将 <span class="math-inline">B</span> 上三角化。如何找到最佳的 <span class="math-inline">Y</span> 呢？
+考虑两个矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span>，在无误差的情况下它们具有相同的舒尔向量；即存在一个 <span class="math-inline">Y \in {\mathcal O}(n)</span>，使得 <span class="math-inline">Y^*AY</span> 和 <span class="math-inline">Y^*BY</span> 均为块上三角矩阵，其中 <span class="math-inline">{\mathcal O}(n)</span> 表示 <span class="math-inline">n</span> 阶正交矩阵的集合。现在假设 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 由于测量误差或其他类型的有损滤波而存在一定噪声。在这种情况下，将 <span class="math-inline">A</span> 上三角化的 <span class="math-inline">Y</span> 可能无法同样地将 <span class="math-inline">B</span> 上三角化。如何找到最佳的 <span class="math-inline">Y</span> 呢？
 
 <p>
-这个问题是由 Schilders [<a href="node421.html#Schilders:97">396</a>] 提出的，他将问题表述为最小二乘法的最小化：
+这个问题是由舒尔德斯(Schilders) [<a href="node421.html#Schilders:97">396</a>] 提出的，他将问题表述为最小二乘法的最小化：
 
-<span class="math-inline">F(Y) = \frac{1}{2} (\vert\vert\mathrm{low}(Y^*AY)\vert\vert _F^2 + \vert\vert\mathrm{low}(Y^*BY)\vert\vert _F^2 )</span>，其中 <span class="math-inline">\mathrm{low}(M)</span> 是一个掩码，返回 <span class="math-inline">M</span> 的块下三角部分，<span class="math-inline">M</span> 被分解为 <span class="math-inline">2 \times 2</span> 的块。
+<span class="math-inline">F(Y) = \frac{1}{2} (\vert\vert\mathrm{low}(Y^*AY)\vert\vert _F^2 + \vert\vert\mathrm{low}(Y^*BY)\vert\vert _F^2 )</span>，其中 <span class="math-inline">\mathrm{low}(M)</span> 是一个掩码，返回 <span class="math-inline">M</span> 的块下三角部分，<span class="math-inline">M</span> 被划分为 <span class="math-inline">2 \times 2</span> 的块。
 
 <p>
-对于这个问题，微分有点棘手，但其推导过程很有启发性：
+对于这个问题，微分有些棘手，但其推导过程富有启发性：
  <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
- width="408" height="212" border="0"
- src="img3460.png"
- alt="\begin{eqnarray*}
+<img width="408" height="212" border="0" src="img3460.png" alt="\begin{eqnarray*}
 \tr(V^* dF(Y)) &amp;=&amp; \tr( \mbox{low}(Y^*AY)^*\mbox{low}(Y^*AV + ...
 ... \\
 [1.5pt]
@@ -125,17 +110,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-其中第二个等式源于观察到 <span class="math-inline">\tr(\mathrm{low}(M)^*\mathrm{low}(N)) = \tr(\mathrm{low}(M)^*N)</span>，第三个等式源于迹的性质。
+其中，第二等式源于观察到 <span class="math-inline">\tr(\mathrm{low}(M)^*\mathrm{low}(N)) = \tr(\mathrm{low}(M)^*N)</span>，第三等式则基于迹的性质。
 
 <p>
 二阶导数由以下公式给出：
  <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
- width="568" height="136" border="0"
- src="img3462.png"
- alt="\begin{eqnarray*}
+<img width="568" height="136" border="0" src="img3462.png" alt="\begin{eqnarray*}
 \frac{d}{dt} dF(Y(t))\vert _{t=0} &amp;=&amp;
 AH\mbox{low}(Y^*AY)^*+A...
 ...Y)}{dt}\right)^*+B^*Y\mbox{low}\left(\frac{d(Y^*BY)}{dt}\right),
@@ -163,16 +145,11 @@ AH\mbox{low}(Y^*AY)^*+A...
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6162"
-  href="node352.html">Simultaneous Diagonalization</a>
-<b> Up:</b> <a name="tex2html6156"
-  href="node346.html">Sample Problems and Their</a>
-<b> Previous:</b> <a name="tex2html6150"
-  href="node350.html">Trace Minimization with a</a>
- &nbsp <b>  <a name="tex2html6158"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6160"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6162" href="node352.html">同时对角化</a>
+<b>上一级：</b><a name="tex2html6156" href="node346.html">Sample Problems and Their</a>
+<b>上一节：</b><a name="tex2html6150" href="node350.html">Trace Minimization with a</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

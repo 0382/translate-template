@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Lanczos Methods &nbsp; A. Ruhe</title>
-<meta name="description" content="Lanczos Methods &nbsp; A. Ruhe">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Lanczos Methods &nbsp; A. Ruhe">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node176.html">
-<link rel="previous" href="node165.html">
-<link rel="up" href="node155.html">
-<link rel="next" href="node170.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3301"
   href="node170.html">
@@ -80,34 +73,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3302"
-  href="node170.html">Algorithm.</a>
-<b> Up:</b> <a name="tex2html3296"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3290"
-  href="node168.html">Rayleigh Quotient Iteration.</a>
- &nbsp <b>  <a name="tex2html3298"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3300"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3302" href="node170.html">Algorithm.</a>
+<b>上一级：</b><a name="tex2html3296" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3290" href="node168.html">Rayleigh Quotient Iteration.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001450000000000000000"></a> <a name="sec:lan_gsym"></a><a name="17271"></a>
 <br>
 Lanczos方法
-<br>&nbsp; <em>A. Ruhe</em>
+<br>&nbsp; <em>A. 鲁赫(A. Ruhe)</em>
 </h1>
 
 <p>
-Lanczos算法有多种变体，用于广义特征值问题（GHEP，见<a href="node156.html#gsymeig">5.1节</a>）。理论上，这些变体对应于将（<a href="node156.html#gsymeig">5.1节</a>）重新表述为标准问题<span class="math-inline">cy=\theta y</span>，其中矩阵<span class="math-inline">C</span>可以选择为<span class="math-inline">C=B^{-1}A</span>，对应于直接迭代，或者<span class="math-inline">C=BA^{-1}</span>，对应于逆迭代。我们实际上将研究稍微更一般的公式<span class="math-inline">C=B(A-\sigma B)^{-1}</span>，即移位-逆迭代。在大多数实际情况下，这种变体是首选的，因为它可以快速收敛到接近目标值<span class="math-inline">\sigma</span>的特征值，前提是我们能够求解移位矩阵的线性系统。
+对于广义厄米特征值问题(GHEP，见<a href="node156.html#gsymeig">5.1节</a>)，Lanczos算法有多种变体。理论上，这些变体对应于将(见<a href="node156.html#gsymeig">5.1节</a>)重新表述为标准问题<span class="math-inline">Cy=\theta y</span>，其中矩阵<span class="math-inline">C</span>可选择为<span class="math-inline">C=B^{-1}A</span>（对应于直接迭代）或<span class="math-inline">C=BA^{-1}</span>（对应于逆迭代）。我们实际上将研究稍微更一般的公式<span class="math-inline">C=B(A-\sigma B)^{-1}</span>，即移位-逆迭代。在大多数实际情况下，这种变体是首选的，因为它能快速收敛到接近目标值<span class="math-inline">\sigma</span>的特征值，前提是我们能够求解移位矩阵的线性系统。
 
 <p>
-在广义情况下（<a href="node156.html#gsymeig">5.1节</a>），使用移位-逆迭代的理由比标准情况（<a href="node86.html#symeig">4.1节</a>）更强，因为在每一步中，直接迭代也需要求解线性系统，现在使用<span class="math-inline">B</span>作为矩阵。即使<span class="math-inline">B</span>通常比<span class="math-inline">A</span>条件更好，例如在振动问题中<span class="math-inline">B</span>代表质量矩阵时，也只有当<span class="math-inline">B</span>具有简单得多的结构（如对角矩阵）时，直接迭代在每一步中所需的工作量才会明显少于移位-逆迭代。
+在广义情况(见<a href="node156.html#gsymeig">5.1节</a>)中，使用移位-逆迭代的理由比标准情况(见<a href="node86.html#symeig">4.1节</a>)更强，因为直接迭代也需要在每一步中求解线性系统，现在矩阵为<span class="math-inline">B</span>。即使<span class="math-inline">B</span>通常比<span class="math-inline">A</span>更良态，例如在振动问题中<span class="math-inline">B</span>代表质量矩阵时，也只有当<span class="math-inline">B</span>具有更简单的结构（如对角矩阵）时，直接迭代在每一步中所需的工作量才会明显少于移位-逆迭代。
 
 <p>
 在所有变体中，Krylov子空间的基
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">{\mathcal K}^j(C,x)=\mathrm{span}\{x,Cx,C^2x,\dots,C^{j-1}x\}\;,</div>
 </div>
@@ -126,9 +115,9 @@ Lanczos算法有多种变体，用于广义特征值问题（GHEP，见<a href="
 <li><a name="tex2html3303"
   href="node170.html">算法</a>
 <li><a name="tex2html3304"
-  href="node171.html">带移位-逆的Lanczos算法</a>
+  href="node171.html">带SI的Lanczos算法</a>
 <li><a name="tex2html3305"
-  href="node172.html">收敛性</a>
+  href="node172.html">收敛性质</a>
 <li><a name="tex2html3306"
   href="node173.html">多重特征值</a>
 <li><a name="tex2html3307"
@@ -156,16 +145,11 @@ Lanczos算法有多种变体，用于广义特征值问题（GHEP，见<a href="
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3302"
-  href="node170.html">Algorithm.</a>
-<b> Up:</b> <a name="tex2html3296"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3290"
-  href="node168.html">Rayleigh Quotient Iteration.</a>
- &nbsp <b>  <a name="tex2html3298"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3300"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3302" href="node170.html">Algorithm.</a>
+<b>上一级：</b><a name="tex2html3296" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3290" href="node168.html">Rayleigh Quotient Iteration.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

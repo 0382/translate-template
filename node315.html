@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Criterion for Determining the Numerical Rank.</title>
-<meta name="description" content="Criterion for Determining the Numerical Rank.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Criterion for Determining the Numerical Rank.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node316.html">
-<link rel="previous" href="node314.html">
-<link rel="up" href="node313.html">
-<link rel="next" href="node316.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5577"
   href="node316.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5578"
-  href="node316.html">The GUPTRI Form of</a>
-<b> Up:</b> <a name="tex2html5572"
-  href="node313.html">GUPTRI Algorithm</a>
-<b> Previous:</b> <a name="tex2html5566"
-  href="node314.html">A Singular Pencil in</a>
- &nbsp <b>  <a name="tex2html5574"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5576"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5578" href="node316.html">The GUPTRI Form of</a>
+<b>上一级：</b><a name="tex2html5572" href="node313.html">GUPTRI算法</a>
+<b>上一节：</b><a name="tex2html5566" href="node314.html">A Singular Pencil in</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001776020000000000000"></a>
@@ -99,19 +87,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h4>
 
 <p>
-GUPTRI算法利用奇异值分解（SVD）来确定矩阵的数值秩。设<span class="math-inline"> A = U \Sigma V^{\ast} </span> 是一个<span class="math-inline">n \times n</span>矩阵<span class="math-inline">A</span>的SVD，其中<span class="math-inline">U</span>和<span class="math-inline">V</span>是酉矩阵，且<span class="math-inline">\Sigma = {\rm diag}(\sigma_1,\ldots,\sigma_n)</span>，满足<span class="math-inline"> 0 \leq \sigma_1 \leq \cdots \leq \sigma_n </span>。
+GUPTRI算法利用奇异值分解（SVD）来确定矩阵的数值秩。设<span class="math-inline"> A = U \Sigma V^{\ast} </span> 是一个<span class="math-inline">n \times n</span>矩阵<span class="math-inline">A</span>的SVD，其中<span class="math-inline">U</span>和<span class="math-inline">V</span>是酉矩阵，<span class="math-inline">\Sigma = {\rm diag}(\sigma_1,\ldots,\sigma_n)</span>，且<span class="math-inline"> 0 \leq \sigma_1 \leq \cdots \leq \sigma_n </span>。
 
 <p>
-给定一个容差<span class="math-inline">\epsilon</span>，矩阵的数值秩是满足<span class="math-inline"> \sigma_{n-k+1} &gt; \epsilon \cdot \sigma_n </span>的最大<span class="math-inline">k</span>值。<a name="37625"></a>
-这一定义并不能保证秩的稳定性，即相对于<span class="math-inline">\epsilon</span>的微小扰动可能导致矩阵秩的变化。当<span class="math-inline">\sigma_{n-k+1}</span>仅略大于<span class="math-inline">\sigma_{n-k}</span>时，秩对扰动敏感。给定一个常数<span class="math-inline">gap</span>，<a name="37628"></a>要求选择最大的<span class="math-inline">k</span>，使得
+给定一个容差<span class="math-inline">\epsilon</span>，矩阵的数值秩是满足<span class="math-inline"> \sigma_{n-k+1} &gt; \epsilon \cdot \sigma_n </span>的最大<span class="math-inline">k</span>值。这种定义并不能保证秩的稳定性，即相对于<span class="math-inline">\epsilon</span>的微小扰动可能导致矩阵秩的变化。如果<span class="math-inline">\sigma_{n-k+1}</span>仅略大于<span class="math-inline">\sigma_{n-k}</span>，则秩对扰动敏感。给定一个常数<span class="math-inline">gap</span>，要求选择<span class="math-inline">k</span>为满足以下条件的最大数：
 
 <span class="math-inline"> \sigma_{n-k+1} &gt; \epsilon \cdot \sigma_n </span> 且
 
 <span class="math-inline"> \sigma_{n-k+1} &gt; gap \cdot \sigma_{n-k}</span>
-这一条件被添加[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]。在实际应用中，使用<span class="math-inline">\sigma_{n-k+1} &gt; \epsilon \Vert A\Vert _F</span>，即用<span class="math-inline">\Vert A \Vert _F</span>替代<span class="math-inline">\Vert A\Vert _2</span>。如果间隙准则失败，<span class="math-inline">\sigma_{n-k}</span>也被视为零。这一过程重复进行，直到满足间隙准则。如果无法满足，则对于容差参数<span class="math-inline">\epsilon</span>和<span class="math-inline">gap</span>，数值秩未定义。
+（参考文献[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]）。在实际应用中，使用<span class="math-inline">\sigma_{n-k+1} &gt; \epsilon \Vert A\Vert _F</span>，即用<span class="math-inline">\Vert A \Vert _F</span>替代<span class="math-inline">\Vert A\Vert _2</span>。如果gap准则失败，<span class="math-inline">\sigma_{n-k}</span>也被视为零。此过程重复进行，直到gap准则得到满足。如果无法满足，则对于容差参数<span class="math-inline">\epsilon</span>和<span class="math-inline">gap</span>，数值秩未定义。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容详细介绍了如何通过GUPTRI算法和奇异值分解来确定矩阵的数值秩，并讨论了相关的稳定性和敏感性问题。<!--Navigation Panel-->
 <a name="tex2html5577"
   href="node316.html">
 <button class="navigate">下一节</button></a> 
@@ -128,16 +117,11 @@ GUPTRI算法利用奇异值分解（SVD）来确定矩阵的数值秩。设<span
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5578"
-  href="node316.html">The GUPTRI Form of</a>
-<b> Up:</b> <a name="tex2html5572"
-  href="node313.html">GUPTRI Algorithm</a>
-<b> Previous:</b> <a name="tex2html5566"
-  href="node314.html">A Singular Pencil in</a>
- &nbsp <b>  <a name="tex2html5574"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5576"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5578" href="node316.html">The GUPTRI Form of</a>
+<b>上一级：</b><a name="tex2html5572" href="node313.html">GUPTRI算法</a>
+<b>上一节：</b><a name="tex2html5566" href="node314.html">A Singular Pencil in</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

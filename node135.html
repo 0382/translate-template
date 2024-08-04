@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Variants</title>
-<meta name="description" content="Variants">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Variants">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node134.html">
-<link rel="up" href="node131.html">
-<link rel="next" href="node136.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2774"
   href="node136.html">
@@ -79,100 +73,90 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2775"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Up:</b> <a name="tex2html2769"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html2765"
-  href="node134.html">Algorithm</a>
- &nbsp <b>  <a name="tex2html2771"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2773"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一级：</b><a name="tex2html2769" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html2765" href="node134.html">算法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001364000000000000000"></a> <a name="rwf:bandsym_var"></a>
 <br>
-变体
+变种
 </h2>
 
 <p>
-针对厄米矩阵的带状Lanczos方法最初在[<a href="node421.html#ruhe79">375</a>]中提出。然而，这里描述的厄米带状Lanczos算法<a href="node134.html#rwf:alg1">4.12</a>有所不同，因为它同时使用了前<span class="math-inline">j</span>个Lanczos向量（<a href="node131.html#rwf:ABB">4.28</a>）和候选向量（<a href="node133.html#rwf:ABY">4.30</a>）来构建接下来的<span class="math-inline">p_c</span>个Lanczos向量。这使得我们只需构建<span class="math-inline">j \times j</span>矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>。而[<a href="node421.html#ruhe79">375</a>]中的算法则构建了前<span class="math-inline">j+p_c</span>个Lanczos向量，因此需要构建一个稍大的<span class="math-inline">(j+p_c) \times j</span>矩阵，而非<span class="math-inline">T_j^{\rm {(pr)}}</span>。这里描述的带状Lanczos方法版本最初在[<a href="node421.html#fref98">177</a>]中作为一般非对称带状Lanczos方法（在[<a href="node421.html#felf95">166</a>]中提出）的一个特例被推导出来。
+针对厄米矩阵的带状Lanczos方法最初在[<a href="node421.html#ruhe79">375</a>]中提出。然而，这里描述的厄米带状Lanczos算法<a href="node134.html#rwf:alg1">4.12</a>有所不同，它同时使用了前<span class="math-inline">j</span>个Lanczos向量（<a href="node131.html#rwf:ABB">4.28</a>）和候选向量（<a href="node133.html#rwf:ABY">4.30</a>）来生成接下来的<span class="math-inline">p_c</span>个Lanczos向量。这使得我们只需构建<span class="math-inline">j \times j</span>矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>。而[<a href="node421.html#ruhe79">375</a>]中的算法则构造了前<span class="math-inline">j+p_c</span>个Lanczos向量，因此需要构建一个稍大的<span class="math-inline">(j+p_c) \times j</span>矩阵，而非<span class="math-inline">T_j^{\rm {(pr)}}</span>。这里描述的带状Lanczos方法版本最初在[<a href="node421.html#fref98">177</a>]中作为一般非对称带状Lanczos方法（在[<a href="node421.html#felf95">166</a>]中提出）的一个特例被推导出来。
 
 <p>
-如算法<a href="node134.html#rwf:alg1">4.12</a>所述的带状Lanczos方法版本，在所有乘法运算中，<span class="math-inline">A</span>都是以单个向量的矩阵-向量乘积形式进行。然而，在算法的任何阶段，也可以预先计算下一个<span class="math-inline">p_c</span>个矩阵-向量乘积，这些将在接下来的<span class="math-inline">p_c</span>次迭代中需要，作为单个矩阵-矩阵乘积<span class="math-inline">AV</span>，其中<span class="math-inline">V</span>是一个包含<span class="math-inline">p_c</span>个向量的块。具体步骤如下。我们不是执行算法<a href="node134.html#rwf:alg1">4.12</a>中的步骤(7)，而是计算矩阵-矩阵乘积
+如算法<a href="node134.html#rwf:alg1">4.12</a>所述的带状Lanczos方法版本，在进行所有与<span class="math-inline">A</span>的乘法运算时，都是以矩阵-向量乘积的形式进行，且每次只涉及单一向量。然而，在算法的任何阶段，也可以预先计算接下来<span class="math-inline">p_c</span>次迭代所需的<span class="math-inline">p_c</span>个矩阵-向量乘积，这可以通过一次矩阵-矩阵乘积<span class="math-inline">AV</span>来实现，其中<span class="math-inline">V</span>是一个包含<span class="math-inline">p_c</span>个向量的块矩阵。具体步骤如下：我们不执行算法<a href="node134.html#rwf:alg1">4.12</a>中的步骤(7)，而是计算矩阵-矩阵乘积：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">A \left[ \begin{array}{ccccc}v_j & \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{v}_{j+p_c-1}\end{array} \right].</div>
 </div>
 <br clear="ALL">
 <p></p>
-这为我们提供了向量<span class="math-inline">\hat{v}_{j+p_c} = A v_j</span>，该向量在迭代<span class="math-inline">j</span>的剩余步骤中使用，以及向量
+这样我们得到了向量<span class="math-inline">\hat{v}_{j+p_c} = A v_j</span>，它用于迭代<span class="math-inline">j</span>的剩余步骤，以及向量：
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AXB"></a><div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+p_c-1}.</div></td>
-<td width=10 align="right">
-(52)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXB"></a><div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+p_c-1}.</div></td>
+<td WIDTH=10 align="RIGHT">(52)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-在接下来的<span class="math-inline">p_c-1</span>次迭代中，我们将需要向量
+在接下来的<span class="math-inline">p_c-1</span>次迭代中，我们将需要这些向量：
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AXC"></a><div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+p_c^{\prime}-1}.</div></td>
-<td width=10 align="right">
-(53)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXC"></a><div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+p_c^{\prime}-1}.</div></td>
+<td WIDTH=10 align="RIGHT">(53)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这里，<span class="math-inline">p_c^{\prime}</span>定义为<span class="math-inline">p_c</span>减去在这些接下来的<span class="math-inline">p_c-1</span>次迭代中将发生的缩减次数。特别是，如果没有任何缩减发生，<span class="math-inline">p_c^{\prime}=p_c</span>。我们需要的矩阵-向量乘积（<a href="node135.html#rwf:AXC">4.44</a>）与我们之前计算的（<a href="node135.html#rwf:AXB">4.43</a>）不完全相同。然而，向量（<a href="node135.html#rwf:AXB">4.43</a>）和（<a href="node135.html#rwf:AXC">4.44</a>）通过关系相连
+这里，<span class="math-inline">p_c^{\prime}</span>定义为<span class="math-inline">p_c</span>减去在这接下来的<span class="math-inline">p_c-1</span>次迭代中将发生的缩减次数。特别地，如果没有任何缩减发生，则<span class="math-inline">p_c^{\prime}=p_c</span>。我们所需的矩阵-向量乘积（<a href="node135.html#rwf:AXC">4.44</a>）与我们之前计算的（<a href="node135.html#rwf:AXB">4.43</a>）并不完全相同。然而，向量（<a href="node135.html#rwf:AXB">4.43</a>）和（<a href="node135.html#rwf:AXC">4.44</a>）通过以下关系相连：
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AXD"></a><div class="math-display">\begin{array}{rl}&\!\!\!\!\! \left[ \begin{array}{cccc}A \cdots \end{array} \right]T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}.\end{array}</div></td>
-<td width=10 align="right">
-(54)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXD"></a><div class="math-display">\begin{array}{rl}&\!\!\!\!\! \left[ \begin{array}{cccc}A ......ray} \right]T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}.\end{array}</div></td>
+<td WIDTH=10 align="RIGHT">(54)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这里，<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>是<span class="math-inline">T_{j+p_c^{\prime}-1}</span>的子矩阵，由行<span class="math-inline">j+1,\ldots,j+p_c^{\prime}-1</span>和列<span class="math-inline">j-p_c+1,\ldots,j-1</span>的元素组成。如果<span class="math-inline">p_c^{\prime}<p_c</span>，（<a href="node135.html#rwf:AXD">4.45</a>）中的一些<span class="math-inline">\hat{v}_k</span>将导致缩减向量。设<span class="math-inline">\hat{v}_{j_1}, \hat{v}_{j_2},\ldots, \hat{v}_{j_{p_c^{\prime}-1}}</span>为未缩减的向量。进一步，设<span class="math-inline">\tilde{T}</span>是从<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>中删除对应于（<a href="node135.html#rwf:AXD">4.45</a>）中缩减<span class="math-inline">\hat{v}_k</span>向量的列得到的矩阵。根据（<a href="node135.html#rwf:AXD">4.45</a>），我们有
+这里，<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>是<span class="math-inline">T_{j+p_c^{\prime}-1}</span>的子矩阵，包含行<span class="math-inline">j+1,\ldots,j+p_c^{\prime}-1</span>和列<span class="math-inline">j-p_c+1,\ldots,j-1</span>的元素。如果<span class="math-inline">p_c^{\prime}<p_c</span>，（<a href="node135.html#rwf:AXD">4.45</a>）中的一些<span class="math-inline">\hat{v}_k</span>会导致缩减向量。设<span class="math-inline">\hat{v}_{j_1}, \hat{v}_{j_2},\ldots, \hat{v}_{j_{p_c^{\prime}-1}}</span>为未缩减的向量。进一步，设<span class="math-inline">\tilde{T}</span>是从<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>中删除对应于（<a href="node135.html#rwf:AXD">4.45</a>）中缩减向量的列得到的矩阵。根据（<a href="node135.html#rwf:AXD">4.45</a>），我们有：
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:AXM"></a><div class="math-display">\!\!\!\!\left[ \begin{array}{cccc}A \hat{v}_{j_1} & A \hat{v}_{j_2} & \cdots & A v_{j+p_c^{\prime}-1}\end{array} \right] \tilde{T}.</div></td>
-<td width=10 align="right">
-(55)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXM"></a><div class="math-display">\!\!\!\!\left[ \begin{array}{cccc}A \hat{v}_{j_1} & A \ha......cdots & A v_{j+p_c^{\prime}-1}\end{array} \right] \tilde{T}.</div></td>
+<td WIDTH=10 align="RIGHT">(55)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-矩阵<span class="math-inline">\tilde{T}</span>是非奇异的且上三角的。因此，利用（<a href="node135.html#rwf:AXM">4.46</a>），我们可以得到（<a href="node135.html#rwf:AXC">4.44</a>）中的每个向量<span class="math-inline">A v_{j+k}</span>，<span class="math-inline">k=1,2,\ldots,p_c^{\prime}-1</span>，作为预计算向量（<a href="node135.html#rwf:AXB">4.43</a>）的适当线性组合。
+矩阵<span class="math-inline">\tilde{T}</span>是非奇异的且为上三角矩阵。因此，利用（<a href="node135.html#rwf:AXM">4.46</a>），我们可以通过预计算向量（<a href="node135.html#rwf:AXB">4.43</a>）的适当线性组合来获得（<a href="node135.html#rwf:AXC">4.44</a>）中的每个向量<span class="math-inline">A v_{j+k}</span>，<span class="math-inline">k=1,2,\ldots,p_c^{\prime}-1</span>。
 
 <p>
-对于厄米正定矩阵<span class="math-inline">A</span>，基于耦合递归的算法<a href="node134.html#rwf:alg1">4.12</a>的另一种变体在[<a href="node421.html#baif98">35</a>]中提出。这一变体的动机是观察到对于条件数差的厄米正定矩阵<span class="math-inline">A</span>，从Lanczos矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>得到的最小特征值可能变为负值；参见[<a href="node421.html#baff98">34</a>,<a href="node421.html#baif98">35</a>]中的例子。在精确算术中，这是不可能的，因为<span class="math-inline">A</span>的正定性意味着<span class="math-inline">T_j^{\rm {(pr)}}=V_j^{\ast} A V_j</span>也是正定的。然而，在有限精度算术中，舍入误差可能导致算法<a href="node134.html#rwf:alg1">4.12</a>生成的矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>略微不定。这可以通过使用耦合递归来生成<span class="math-inline">T_j^{\rm {(pr)}}</span>的Cholesky因子来轻松避免，而不是<span class="math-inline">T_j^{\rm {(pr)}}</span>本身。更确切地说，（<a href="node133.html#rwf:ABD">4.32</a>）中总结的递归被形式为
+对于厄米正定矩阵<span class="math-inline">A</span>，还有一种基于耦合递归的算法<a href="node134.html#rwf:alg1">4.12</a>的变种在[<a href="node421.html#baif98">35</a>]中被提出。这一变种的动机是观察到对于病态的厄米正定矩阵<span class="math-inline">A</span>，从Lanczos矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>得到的最小特征值可能会变为负值；参见[<a href="node421.html#baff98">34</a>,<a href="node421.html#baif98">35</a>]中的例子。在精确算术中，这是不可能的，因为<span class="math-inline">A</span>的正定性意味着<span class="math-inline">T_j^{\rm {(pr)}}=V_j^{\ast} A V_j</span>也是正定的。然而，在有限精度算术中，舍入误差可能导致算法<a href="node134.html#rwf:alg1">4.12</a>生成的矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>略微非定。这可以通过使用耦合递归来生成<span class="math-inline">T_j^{\rm {(pr)}}</span>的Cholesky因子而不是<span class="math-inline">T_j^{\rm {(pr)}}</span>本身来轻松避免。更确切地说，（<a href="node133.html#rwf:ABD">4.32</a>）中总结的递归被替换为以下形式的耦合递归：
 <br>
-<div align="right">
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:APA"></a><div class="math-display">\begin{array}{rl}A P_j & \!\!\! = V_j L_j D_j + \left[ \begin{array}{c}0 \\ \hat{v}_j^{\rm {(dl)}}\end{array} \right],\\ [4pt]V_j & \!\!\! = P_j U_j.\end{array}</div></td>
-<td width=10 align="right">
-(56)</td></tr>
+<div align="RIGHT">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:APA"></a><div class="math-display">\begin{array}{rl}A P_j & \!\!\! = V_j L_j D_j + \left[ \beg......}_j^{\rm {(dl)}},\\ [4pt]V_j & \!\!\! = P_j U_j.\end{array}</div></td>
+<td WIDTH=10 align="RIGHT">(56)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-的耦合递归所取代。这里，<span class="math-inline">P_j</span>是第二个基矩阵，其列跨越与<span class="math-inline">V_j</span>相同的子空间，并且被构造为<span class="math-inline">A</span>-正交的：
+这里，<span class="math-inline">P_j</span>是另一个基矩阵，其列跨越与<span class="math-inline">V_j</span>相同的子空间，并且被构造为<span class="math-inline">A</span>-正交的：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">P_j^{\ast} A P_j = D_j,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">D_j</span>是一个正定对角矩阵。此外，在（<a href="node135.html#rwf:APA">4.47</a>）中，矩阵<span class="math-inline">L_j</span>是单位下三角的，矩阵<span class="math-inline">U_j</span>是单位上三角的。经过<span class="math-inline">j</span>次迭代后，<span class="math-inline">A</span>的近似特征对通过计算厄米正定矩阵
+其中<span class="math-inline">D_j</span>是一个正定对角矩阵。此外，在（<a href="node135.html#rwf:APA">4.47</a>）中，矩阵<span class="math-inline">L_j</span>是单位下三角的，矩阵<span class="math-inline">U_j</span>是单位上三角的。经过<span class="math-inline">j</span>次迭代后，<span class="math-inline">A</span>的近似特征对通过计算厄米正定矩阵的特征解得到：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">V_j^{\ast} A V_j = U_j^{\ast} D_j U_j,</div>
 </div>
 <br clear="ALL">
 <p></p>
-的特征解来获得，该矩阵由<span class="math-inline">D_j</span>和<span class="math-inline">U_j</span>给出。
+这是以<span class="math-inline">D_j</span>和<span class="math-inline">U_j</span>表示的。
 
 <p>
-最后，我们注意到块状Lanczos方法是扩展单一起始向量的标准Lanczos算法以适应多个起始向量的更传统方法。当块状Lanczos方法与缩减（如[<a href="node421.html#cudo74">89</a>]中所述）结合时，所得到的算法在数学上等价于这里描述的带状Lanczos方法。然而，带状Lanczos方法相对于块状Lanczos方法有两个明显的优势。首先，缩减非常简单，因为它只需要检查单个向量的范数。相比之下，在块状Lanczos方法中，需要检查整个<span class="math-inline">p_c</span>向量块是否具有满秩，如果没有，则找到线性相关的列。通常，这需要计算每个块的QR分解。其次，带状Lanczos方法实际上执行了稍微少一些的显式正交化，导致生成的Lanczos矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>比块状Lanczos方法生成的矩阵稍微稀疏一些。
+最后，我们注意到块Lanczos方法是扩展单一起始向量的标准Lanczos算法到多起始向量的更传统方法。当块Lanczos方法与缩减（如[<a href="node421.html#cudo74">89</a>]中所述）结合时，所得到的算法在数学上等价于这里描述的带状Lanczos方法。然而，带状Lanczos方法相对于块Lanczos方法有两个明显的优势。首先，缩减非常简单，因为它只需要检查单个向量的范数。相比之下，在块Lanczos方法中，需要检查整个<span class="math-inline">p_c</span>向量块是否满秩，如果不是，则需要找到线性相关的列。通常，这需要计算每个块的QR分解。其次，带状Lanczos方法实际上执行的显式正交化次数略少，从而生成的Lanczos矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>比块Lanczos方法产生的矩阵略稀疏。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -192,16 +176,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2775"
-  href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Up:</b> <a name="tex2html2769"
-  href="node131.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html2765"
-  href="node134.html">Algorithm</a>
- &nbsp <b>  <a name="tex2html2771"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2773"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一级：</b><a name="tex2html2769" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html2765" href="node134.html">算法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

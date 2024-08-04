@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Balancing</title>
-<meta name="description" content="Direct Balancing">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Balancing">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node207.html">
-<link rel="previous" href="node205.html">
-<link rel="up" href="node205.html">
-<link rel="next" href="node207.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3930"
   href="node207.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3931"
-  href="node207.html">Krylov Balancing Algorithms</a>
-<b> Up:</b> <a name="tex2html3925"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b> Previous:</b> <a name="tex2html3919"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
- &nbsp <b>  <a name="tex2html3927"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3929"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3931" href="node207.html">Krylov平衡算法</a>
+<b>上一级：</b><a name="tex2html3925" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一节：</b><a name="tex2html3919" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001621000000000000000"></a>
@@ -99,15 +87,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-我们将参考LAPACK中传统的密集平衡算法，称为xGEBAL。它包含两个阶段，详细描述见[<a href="node421.html#ParlettRe69">361</a>]。<a name="22787"></a> 
-第一阶段对矩阵<span class="math-inline">A</span>的行和列进行置换，使得能够孤立一个特征值的行位于矩阵底部，能够孤立一个特征值的列位于矩阵左侧。由于该算法假设平衡操作旨在提高计算特征值的精度，因此没有必要对这些已经可以精确确定特征值的行和列进行平衡。第二阶段通过迭代剩余的行和列来平衡矩阵——每一对行/列依次进行平衡，直到无法再取得显著进展为止。
+我们将传统密集平衡算法，即LAPACK中的xGEBAL，分为两个阶段，详细描述见[<a href="node421.html#ParlettRe69">361</a>]。<a name="22787"></a> 
+第一阶段对矩阵<span class="math-inline">A</span>的行和列进行置换，使得能够单独分离出一个特征值的行位于矩阵底部，而能够单独分离出一个特征值的列位于矩阵左侧。由于该算法假设平衡操作旨在提高计算特征值的准确性，因此没有必要对这些已经可以精确确定特征值的行和列进行平衡。第二阶段通过迭代剩余的行和列对矩阵进行平衡——每对行/列依次进行平衡，直到无法再取得显著进展为止。
 
 <p>
-稀疏实现SPBALANCE以列压缩格式输入矩阵；参见第<a href="node372.html#sec:data-structures">10.1</a>节。<a name="22789"></a> 
-SPBALANCE不是将矩阵置换为尽可能上三角的形式，而是寻找一个置换<span class="math-inline">P</span>，使得<span class="math-inline">PAP^T</span>尽可能块上三角化，即最大化对角块的数量。这将对特征值问题的求解简化为更容易的求解每个对角块特征值的问题。由于SPBALANCE找到的块可能比GEBAL找到的块小得多，因此特征值问题可能更容易解决。例如，在2000乘2000的tolosa矩阵[<a href="node421.html#bddd97">28</a>]上，SPBALANCE找到了1529个最大尺寸为90的块，而GEBAL找到了1146个最大尺寸为854的块。除了LAPACK的xGEBAL返回的置换和缩放数组外，SPBALANCE还返回找到的对角块数量及其索引。
+稀疏实现SPBALANCE的输入是一个采用列压缩格式的矩阵；详见第<a href="node372.html#sec:data-structures">10.1</a>节。<a name="22789"></a> 
+与将矩阵置换为尽可能上三角形式不同，SPBALANCE寻找一个置换<span class="math-inline">P</span>，使得<span class="math-inline">PAP^T</span>尽可能块上三角化，即最大化对角块的数量。这使得特征值问题简化为寻找每个对角块特征值的较易问题。由于SPBALANCE找到的块可能远小于GEBAL找到的块，因此特征值问题可能更为简单。例如，在2000 x 2000的tolosa矩阵[<a href="node421.html#bddd97">28</a>]上，SPBALANCE找到了1529个最大尺寸为90的块，而GEBAL找到了1146个最大尺寸为854的块。除了LAPACK的xGEBAL返回的置换和缩放数组外，SPBALANCE还返回找到的对角块数量及其索引。
 
 <p>
-SPBALANCE的平衡阶段，在置换阶段找到的各个对角块上进行，执行与GEBAL相同的平衡算法，但在稀疏矩阵数据结构上运行，时间复杂度为<span class="math-inline">O(N_z)</span>，其中<span class="math-inline">N_z</span>是非零元素的数量。在我们的实验中，SPBALANCE的成本远低于后续的特征值计算。当矩阵元素明确给出时，SPBALANCE是首选算法。
+SPBALANCE的平衡阶段，针对置换阶段发现的对角块进行，采用与GEBAL相同的平衡算法，但在稀疏矩阵数据结构上运行，时间复杂度为<span class="math-inline">O(N_z)</span>，其中<span class="math-inline">N_z</span>为非零元素的数量。在我们的实验中，SPBALANCE比后续的特征值计算成本低得多。当矩阵元素明确给出时，SPBALANCE是首选算法。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -127,16 +115,11 @@ SPBALANCE的平衡阶段，在置换阶段找到的各个对角块上进行，�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3931"
-  href="node207.html">Krylov Balancing Algorithms</a>
-<b> Up:</b> <a name="tex2html3925"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b> Previous:</b> <a name="tex2html3919"
-  href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
- &nbsp <b>  <a name="tex2html3927"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3929"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3931" href="node207.html">Krylov平衡算法</a>
+<b>上一级：</b><a name="tex2html3925" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一节：</b><a name="tex2html3919" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

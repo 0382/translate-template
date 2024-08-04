@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Positive Definite </title>
-<meta name="description" content="Positive Definite ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Positive Definite ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node184.html">
-<link rel="previous" href="node177.html">
-<link rel="up" href="node177.html">
-<link rel="next" href="node179.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3441"
   href="node179.html">
@@ -80,59 +73,52 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3442"
-  href="node179.html">Residual Vector.</a>
-<b> Up:</b> <a name="tex2html3436"
-  href="node177.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3430"
-  href="node177.html">Stability and Accuracy Assessments</a>
- &nbsp <b>  <a name="tex2html3438"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3440"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3442" href="node179.html">Residual Vector.</a>
+<b>上一级：</b><a name="tex2html3436" href="node177.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3430" href="node177.html">Stability and Accuracy Assessments</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001471000000000000000">
 正定矩阵 <span class="math-inline">B</span></a>
 </h2>
-我们将其简化为一个等价的标准高阶特征值问题（HEP）。
-具体步骤如下：选择 <span class="math-inline">B</span> 的一个分解：
+我们将其转化为一个等价的标准厄米特征值问题(HEP)。具体步骤如下：选择 <span class="math-inline">B</span> 的一个分解：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:B_GG"></a><div class="math-display">B=GG^*.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:B_GG"></a><div class="math-display">B=GG^*.</div></td>
+<td WIDTH=10 align="RIGHT">
 (90)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 于是，<span class="math-inline">A - \lambda B</span> 的广义特征值问题等价于 <span class="math-inline">G^{-1}AG^{-*}</span> 的标准HEP。两者共享相同的特征值，因为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">ax=\lambda B x\quad\Leftrightarrow\quadG^{-1}AG^{-*} (G^* x)=\lambda (G^* x),</div>
+<div class="math-display">Ax=\lambda B x\quad\Leftrightarrow\quadG^{-1}AG^{-*} (G^* x)=\lambda (G^* x),</div>
 </div>
 <br clear="ALL">
 <p></p>
-这也表明，如果 <span class="math-inline">x</span> 是这对矩阵的特征向量，那么 <span class="math-inline">G^* x</span> 是矩阵 <span class="math-inline">G^{-1}AG^{-*}</span> 的特征向量；反之，如果 <span class="math-inline">y</span> 是 <span class="math-inline">G^{-1}AG^{-*}</span> 的特征向量，那么 <span class="math-inline">G^{-*}y</span> 是这对矩阵的特征向量。
+这也意味着，如果 <span class="math-inline">x</span> 是这对矩阵的特征向量，<span class="math-inline">G^* x</span> 就是矩阵 <span class="math-inline">G^{-1}AG^{-*}</span> 的特征向量；反之，如果 <span class="math-inline">y</span> 是 <span class="math-inline">G^{-1}AG^{-*}</span> 的特征向量，<span class="math-inline">G^{-*}y</span> 就是这对矩阵的特征向量。
 <span class="math-inline">G</span> 的常见选择包括：
 
 <ol>
-<li><span class="math-inline">G=B^{1/2}</span>，即 <span class="math-inline">B</span> 的唯一正定平方根。在这种情况下，<span class="math-inline">G^*=G</span>。这种选择适用于理论研究。
+<li><span class="math-inline">G=B^{1/2}</span>，即 <span class="math-inline">B</span> 的唯一正定平方根。在这种情况下，<span class="math-inline">G^*=G</span>。这种选择在理论研究中足够好。
 </li>
-<li><span class="math-inline">G</span> 是 Cholesky 因子；可选地，带有旋转，即 <span class="math-inline">G</span> 是下三角矩阵且对角线元素为正。这种选择在数值计算中更受欢迎。
+<li><span class="math-inline">G</span> 是乔列斯基(Cholesky)因子；可选地带有枢轴变换，即 <span class="math-inline">G</span> 是下三角矩阵且对角线元素为正。这种选择在数值计算中更受欢迎。
 </li>
-<li>类似地，<span class="math-inline">G</span> 是上三角矩阵且对角线元素为正。它与第二种选择具有相同的优势。
+<li>类似地，<span class="math-inline">G</span> 是上三角矩阵且对角线元素为正。它与第二种选择具有相同的优点。
 </li>
 </ol>
-接下来，有时使用由正定矩阵 <span class="math-inline">M</span> 诱导的内积 <span class="math-inline">(\cdot\,,\,\cdot)_M</span>、相应的向量范数 <span class="math-inline">\Vert\cdot\Vert _M</span> 以及两向量间夹角函数（更准确地说，是两向量所张成子空间的夹角）<span class="math-inline">\theta_M(\,\cdot\,,\,\cdot\,)</span> 更为方便。
-在我们的例子中，<span class="math-inline">M=B</span> 或 <span class="math-inline">B^{-1}</span>。它们的定义如下：
+接下来，有时使用由正定矩阵 <span class="math-inline">M</span> 诱导的内积 <span class="math-inline">(\cdot\,,\,\cdot)_M</span>、相应的向量范数 <span class="math-inline">\Vert\cdot\Vert _M</span> 以及两向量间角度函数（更准确地说，是两个由向量张成的子空间之间的角度）<span class="math-inline">\theta_M(\,\cdot\,,\,\cdot\,)</span> 更为方便。在我们的情况下，<span class="math-inline">M=B</span> 或 <span class="math-inline">B^{-1}</span>。它们的定义如下：
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="276" height="98" border="0"
  src="img1628.png"
  alt="\begin{eqnarray*}
@@ -143,25 +129,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-当 <span class="math-inline">M=I</span> 时，这三者都简化为通常的定义。不难看出，
+当 <span class="math-inline">M=I</span> 时，这三者都简化为通常的定义。不难看出
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ineq:M-2-nrm"></a><div class="math-display">\Vert M^{-1}\Vert _2^{-1/2} \Vert x\Vert _2\le\Vert x\Vert _M\le\Vert M\Vert _2^{1/2} \Vert x\Vert _2.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:M-2-nrm"></a><div class="math-display">\Vert M^{-1}\Vert _2^{-1/2} \Vert x\Vert _2\le\Vert x\Vert _M\le\Vert M\Vert _2^{1/2} \Vert x\Vert _2.</div></td>
+<td WIDTH=10 align="RIGHT">
 (91)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-通过一些额外的工作，我们可以将 <span class="math-inline">\theta_M</span> 与通常的夹角函数联系起来，例如，当 <span class="math-inline">M=I</span> 时，如下所示：
+通过一些额外的工作，我们可以将 <span class="math-inline">\theta_M</span> 与通常的角度函数联系起来，例如，当 <span class="math-inline">M=I</span> 时，如下所示：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ineq:aglM-agl"></a><div class="math-display">(2\kappa(M))^{-1/2} \sin\theta(x,y)\le\sin\theta_M(x,y)\le (2\kappa(M))^{1/2}\sin\theta(x,y).</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:aglM-agl"></a><div class="math-display">(2\kappa(M))^{-1/2} \sin\theta(x,y)\le\sin\theta_M(x,y)\le (2\kappa(M))^{1/2}\sin\theta(x,y).</div></td>
+<td WIDTH=10 align="RIGHT">
 (92)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -176,7 +162,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li><a name="tex2html3443"
   href="node179.html">残差向量</a>
 <li><a name="tex2html3444"
-  href="node180.html">将残差误差转换为后向误差</a>
+  href="node180.html">将残差误差转化为向后误差</a>
 <li><a name="tex2html3445"
   href="node181.html">计算特征值的误差界限</a>
 <li><a name="tex2html3446"
@@ -185,9 +171,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node183.html">关于聚类特征值的备注</a>
 </ul></ul>
 <!--End of Table of Child-Links-->
-<hr>
-
-这段内容详细介绍了如何通过矩阵分解将广义特征值问题简化为标准高阶特征值问题，并讨论了相关的内积、范数和夹角函数。这些概念在数值线性代数和特征值问题求解中具有重要应用。<!--Navigation Panel-->
+<hr><!--Navigation Panel-->
 <a name="tex2html3441"
   href="node179.html">
 <button class="navigate">下一节</button></a> 
@@ -204,16 +188,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3442"
-  href="node179.html">Residual Vector.</a>
-<b> Up:</b> <a name="tex2html3436"
-  href="node177.html">Stability and Accuracy Assessments</a>
-<b> Previous:</b> <a name="tex2html3430"
-  href="node177.html">Stability and Accuracy Assessments</a>
- &nbsp <b>  <a name="tex2html3438"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3440"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3442" href="node179.html">Residual Vector.</a>
+<b>上一级：</b><a name="tex2html3436" href="node177.html">Stability and Accuracy Assessments</a>
+<b>上一节：</b><a name="tex2html3430" href="node177.html">Stability and Accuracy Assessments</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

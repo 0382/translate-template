@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Inner Products, Gradients, and Differentials</title>
-<meta name="description" content="Inner Products, Gradients, and Differentials">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Inner Products, Gradients, and Differentials">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node368.html">
-<link rel="previous" href="node366.html">
-<link rel="up" href="node364.html">
-<link rel="next" href="node368.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6392"
   href="node368.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6393"
-  href="node368.html">Getting Around</a>
-<b> Up:</b> <a name="tex2html6387"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6381"
-  href="node366.html">The Difference Between a</a>
- &nbsp <b>  <a name="tex2html6389"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6391"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6393" href="node368.html">Getting Around</a>
+<b>上一级：</b><a name="tex2html6387" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6381" href="node366.html">The Difference Between a</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846300000000000000"></a>
@@ -100,29 +88,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h3>
 
 <p>
-在平坦空间中，我们通常将函数的微分与其梯度等同起来。然而，在处理更一般的情况时，这样的定义可能会让人难以理解。
+在平坦空间中，我们通常将函数的微分与其梯度等同起来。然而，在更一般的情境下，这样的定义可能会让人难以理解。
 
 <p>
-例如，梯度是一个向量，我们应该可以将向量视为点的无穷小位移。在<span class="math-inline">\mathrm{Stief}(n,k)</span>中，任何无穷小位移<span class="math-inline">\delta Y</span>必须满足<span class="math-inline">\delta Y^* Y + Y^* \delta Y = 0</span>。因此，<span class="math-inline">df</span>可能并不总是一个向量，因为它不一定满足这个方程。梯度应该是一个无穷小位移，指向将使<span class="math-inline">f</span>增加最大的位移方向。
+例如，梯度是一个向量，我们应该可以将向量视为点的无穷小位移。在
+
+<span class="math-inline">\mathrm{Stief}(n,k)</span>中，任何无穷小位移<span class="math-inline">\delta Y</span>必须满足
+
+<span class="math-inline">\delta Y^* Y + Y^* \delta Y = 0</span>。因此，<span class="math-inline">df</span>不一定总是向量，因为它不一定满足这个方程。梯度应该是一个无穷小位移，指向将使<span class="math-inline">f</span>增加最大的位移方向。
 
 <p>
-然而，如果切空间具有内积，我们可以找到一种有用的方法，将<span class="math-inline">df</span>唯一地与切向量对应起来。设<span class="math-inline">ip(H_1,H_2)</span>是<span class="math-inline">\mathrm{Stief}(n,k)</span>在<span class="math-inline">Y</span>处的切空间上的对称非退化双线性形式。然后，我们可以通过以下方式隐式定义梯度<span class="math-inline">G</span>：
+然而，如果切空间具有内积，我们可以找到一种有用的方式将<span class="math-inline">df</span>唯一地与切向量对应起来。设<span class="math-inline">ip(H_1,H_2)</span>是
+<span class="math-inline">\mathrm{Stief}(n,k)</span>在<span class="math-inline">Y</span>处的切空间上的对称非退化双线性形式。然后可以通过以下方式隐式定义梯度<span class="math-inline">G</span>：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 <div class="math-display">ip(G,H) = \tr ( H^* df) = D_H f.</div>
 </div>
 <br clear="ALL">
 <p></p>
-由于<span class="math-inline">ip</span>是非退化形式，这足以定义<span class="math-inline">G</span>。函数<code>tangent</code>执行从微分到切向量的投影（如图<a href="node367.html#gradientfig">9.7</a>所示）。这个操作由<code>grad</code>执行，以生成目标函数的梯度。
+由于<span class="math-inline">ip</span>是非退化形式，这足以定义<span class="math-inline">G</span>。函数<code>tangent</code>执行从微分到切向量的投影（如图<a href="node367.html#gradientfig">9.7</a>所示）。这一操作由<code>grad</code>执行，以产生目标函数的梯度。
 
 <p>
 
 <p></p>
-<div align="center"><a name="gradientfig"></a><a name="43821"></a>
+<div align="CENTER"><a name="gradientfig"></a><a name="43821"></a>
 <table>
-<caption align="bottom"><strong>图9.7：</strong>
+<caption align="BOTTOM"><strong>图9.7：</strong>
 <span class="math-inline">F(Y)</span>的无约束微分可以投影到切空间，以获得<span class="math-inline">F</span>的协变梯度<span class="math-inline">G</span>。</caption>
-<tr><td><IMG
+<tr><td><img
  width="460" height="184" border="0"
  src="img3522.png"
  alt="\begin{figure}\begin{center}
@@ -150,16 +144,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6393"
-  href="node368.html">Getting Around</a>
-<b> Up:</b> <a name="tex2html6387"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6381"
-  href="node366.html">The Difference Between a</a>
- &nbsp <b>  <a name="tex2html6389"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6391"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6393" href="node368.html">Getting Around</a>
+<b>上一级：</b><a name="tex2html6387" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6381" href="node366.html">The Difference Between a</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

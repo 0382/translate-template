@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Storage and Computational Costs.</title>
-<meta name="description" content="Storage and Computational Costs.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Storage and Computational Costs.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node138.html">
-<link rel="up" href="node138.html">
-<link rel="next" href="node140.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2840"
   href="node140.html">
@@ -79,75 +73,70 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2841"
-  href="node140.html">Restart and Deflation</a>
-<b> Up:</b> <a name="tex2html2835"
-  href="node138.html">Basic Algorithm</a>
-<b> Previous:</b> <a name="tex2html2831"
-  href="node138.html">Basic Algorithm</a>
- &nbsp <b>  <a name="tex2html2837"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2839"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2841" href="node140.html">重启与收缩</a>
+<b>上一级：</b><a name="tex2html2835" href="node138.html">基本算法</a>
+<b>上一节：</b><a name="tex2html2831" href="node138.html">基本算法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001372010000000000000">
 存储与计算成本</a>
 </h4>
-我们已经整理了简单Jacobi-Davidson方法的主要成本，包括存储需求和浮点运算，并将其汇总在两张表格中。这些成本是针对算法的第<span class="math-inline">{m}</span>次迭代给出的：
+我们已经整理了简单Jacobi-Davidson方法的主要成本，包括存储和浮点运算，并将其列在两张表格中。这些成本是针对算法的第<span class="math-inline">{m}</span>次迭代给出的：
 
 <p>
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="left">项目</td>
-<td align="left">存储需求</td>
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="LEFT">项目</td>
+<td align="LEFT">存储</td>
 </tr>
-<tr><td align="left">搜索空间</td>
-<td align="left"><span class="math-inline">2{m}</span>个<span class="math-inline">n</span>维向量</td>
+<tr><td align="LEFT">搜索空间</td>
+<td align="LEFT"><span class="math-inline">2{m}</span>个<span class="math-inline">n</span>维向量</td>
 </tr>
-<tr><td align="left">残差</td>
-<td align="left"><span class="math-inline">2</span>个<span class="math-inline">n</span>维向量</td>
+<tr><td align="LEFT">残差</td>
+<td align="LEFT"><span class="math-inline">2</span>个<span class="math-inline">n</span>维向量</td>
 </tr>
-<tr><td align="left">近似特征向量</td>
-<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
+<tr><td align="LEFT">近似特征向量</td>
+<td align="LEFT"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
 </tr>
-<tr><td align="left">投影系统</td>
-<td align="left"><span class="math-inline">0.5</span>个<span class="math-inline">{m}</span>阶矩阵</td>
+<tr><td align="LEFT">投影系统</td>
+<td align="LEFT">阶数为<span class="math-inline">{m}</span>的<span class="math-inline">.5</span>矩阵</td>
 </tr>
-<tr><td align="left">投影系统的特征向量</td>
-<td align="left"><span class="math-inline">1</span>个<span class="math-inline">{m}</span>阶矩阵</td>
+<tr><td align="LEFT">投影系统的特征向量</td>
+<td align="LEFT">阶数为<span class="math-inline">{m}</span>的<span class="math-inline">1</span>矩阵</td>
 </tr>
-<tr><td align="left">校正方程</td>
-<td align="left">取决于所选求解器</td>
+<tr><td align="LEFT">校正方程</td>
+<td align="LEFT">取决于所选求解器</td>
 </tr>
 </table>
 </div>
 <p>
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="left">操作</td>
-<td align="left">工作量</td>
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="LEFT">操作</td>
+<td align="LEFT">工作量</td>
 </tr>
-<tr><td align="left">搜索基</td>
-<td align="left"><span class="math-inline">{m}+1</span>次点积，<span class="math-inline">{m}</span>次迭代中的<span class="math-inline">{m}</span>次更新</td>
+<tr><td align="LEFT">搜索基</td>
+<td align="LEFT"><span class="math-inline">{m}+1</span>次点积，<span class="math-inline">{m}</span>次迭代中的<span class="math-inline">{m}</span>次更新</td>
 </tr>
-<tr><td align="left">投影系统</td>
-<td align="left"><span class="math-inline">{m}</span>次点积</td>
+<tr><td align="LEFT">投影系统</td>
+<td align="LEFT"><span class="math-inline">{m}</span>次点积</td>
 </tr>
-<tr><td align="left">投影系统的特征系统</td>
-<td align="left"><span class="math-inline">O({m}^3)</span></td>
+<tr><td align="LEFT">投影系统的特征系统</td>
+<td align="LEFT"><span class="math-inline">O({m}^3)</span></td>
 </tr>
-<tr><td align="left">残差</td>
-<td align="left"><span class="math-inline">1</span>次矩阵向量乘积，<span class="math-inline">1</span>次更新</td>
+<tr><td align="LEFT">残差</td>
+<td align="LEFT"><span class="math-inline">1</span>次矩阵向量乘积，<span class="math-inline">1</span>次更新</td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="left">或<span class="math-inline">{m}</span>次更新</td>
+<tr><td align="LEFT">&nbsp;</td>
+<td align="LEFT">或<span class="math-inline">{m}</span>重更新</td>
 </tr>
-<tr><td align="left">近似特征向量</td>
-<td align="left"><span class="math-inline">{m}</span>次更新</td>
+<tr><td align="LEFT">近似特征向量</td>
+<td align="LEFT"><span class="math-inline">{m}</span>重更新</td>
 </tr>
-<tr><td align="left">校正方程</td>
-<td align="left">取决于求解器的选择</td>
+<tr><td align="LEFT">校正方程</td>
+<td align="LEFT">取决于求解器的选择</td>
 </tr>
 </table>
 </div>
@@ -170,16 +159,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2841"
-  href="node140.html">Restart and Deflation</a>
-<b> Up:</b> <a name="tex2html2835"
-  href="node138.html">Basic Algorithm</a>
-<b> Previous:</b> <a name="tex2html2831"
-  href="node138.html">Basic Algorithm</a>
- &nbsp <b>  <a name="tex2html2837"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2839"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2841" href="node140.html">重启与收缩</a>
+<b>上一级：</b><a name="tex2html2835" href="node138.html">基本算法</a>
+<b>上一节：</b><a name="tex2html2831" href="node138.html">基本算法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

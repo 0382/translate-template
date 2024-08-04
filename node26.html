@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Conditioning</title>
-<meta name="description" content="Conditioning">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Conditioning">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node27.html">
-<link rel="previous" href="node25.html">
-<link rel="up" href="node21.html">
-<link rel="next" href="node27.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1099"
   href="node27.html">
@@ -80,59 +73,60 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1100"
-  href="node27.html">Specifying an Eigenproblem</a>
-<b> Up:</b> <a name="tex2html1094"
-  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b> Previous:</b> <a name="tex2html1088"
-  href="node25.html">Eigendecompositions</a>
- &nbsp <b>  <a name="tex2html1096"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1098"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1100" href="node27.html">特征问题的具体化</a>
+<b>上一级：</b><a name="tex2html1094" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一节：</b><a name="tex2html1088" href="node25.html">特征分解</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001125000000000000000"></a> 
 <a name="sec_chap2_HepCond"></a>
 <br>
-条件性
+良态与病态
 </h2>
 
 <p>
 <a name="1141"></a>
 
 <p>
-矩阵 <span class="math-inline">A</span> 的特征值总是条件良好的，
-这意味着在范数上最多改变 <span class="math-inline">\epsilon</span> 的情况下，
-任何特征值最多只能改变 <span class="math-inline">\epsilon</span>。
+矩阵 <span class="math-inline">A</span> 的特征值总是处于良态，
+这意味着在范数上将 <span class="math-inline">A</span> 改变最多 <span class="math-inline">\epsilon</span> 时，
+任何特征值的变化也不会超过 <span class="math-inline">\epsilon</span>。
 我们参考第&#167;<a href="node148.html#sec:pert-H">4.8</a>节中的技术定义。
 
 <p>
-这对大多数目的来说已经足够了，除非用户对小特征值的前几位数字感兴趣，
-这些特征值的幅值小于或等于 <span class="math-inline">\epsilon</span>。例如，计算
+这对于大多数目的来说已经足够了，除非用户对小特征值的前几位有效数字感兴趣，
+即特征值的大小不超过 <span class="math-inline">\epsilon</span>。例如，计算
 
-<span class="math-inline">\lambda_i = 10^{-5}</span> 到正负 <span class="math-inline">\epsilon = 10^{-4}</span> 的范围内，
-意味着计算出的 <span class="math-inline">\lambda_i</span> 的前几位数字可能都不正确。
-参见 [<a href="node421.html#demmelbook">114</a>,<a href="node421.html#dgesvd:99">118</a>] 以讨论小特征值的敏感性以及何时可以准确计算其前几位数字。
+<span class="math-inline">\lambda_i = 10^{-5}</span> 的误差范围在正负 
+<span class="math-inline">\epsilon = 10^{-4}</span> 内意味着
+计算出的 <span class="math-inline">\lambda_i</span> 的前几位有效数字可能都不正确。
+参见[<a
+ href="node421.html#demmelbook">114</a>,<a
+ href="node421.html#dgesvd:99">118</a>]关于小特征值敏感性及其前几位有效数字何时能准确计算的讨论。
 
 <p>
-另一方面，特征向量和特征空间可能是条件不良的。
+另一方面，特征向量和特征空间可能是病态的。
 例如，改变
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-<div class="math-display">A_0 = \bmat{ccc} 2 & 0 & 0 \\ 0 & 1 & \epsilon \\ 0 & \epsilon & 1 \emat \text{ 为 } \bmat{ccc} 2 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1+\epsilon \emat</div>
+
+<div class="math-display">A_0 = \bmat{ccc} 2 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; \epsilon \\ 0 &amp; \epsilon &amp; 1 \emat \quad \text{到} \quad A_1 = \bmat{ccc} 2 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1+\epsilon \emat</div>
 </div>
 <br clear="ALL">
 <p></p>
-会使对应于两个接近1的特征值的两个特征向量旋转 <span class="math-inline">\pi/4</span>，无论 <span class="math-inline">\epsilon</span> 有多小。因此，它们对微小变化非常敏感。
-特征向量的条件数取决于其特征值与最近其他特征值之间的 <em>间隙</em> <a name="1150"></a>：间隙越小，特征向量越敏感。
-在这个例子中，接近1的两个特征值非常接近，因此它们的间隙很小，特征向量也很敏感。
-但它们所张成的二维不变子空间对 <span class="math-inline">A</span> 的变化非常不敏感（因为它们的特征值，都接近1，与下一个最近的特征值2相距很远）。
-因此，当对应于一组接近特征值的特征向量条件太差时，用户可能希望计算它们所张成的不变子空间的基，而不是单个特征向量。
+会使对应于接近1的两个特征值的两个特征向量旋转<span class="math-inline">\pi/4</span>，无论<span class="math-inline">\epsilon</span>有多小。因此它们对微小变化非常敏感。
+特征向量的条件数取决于其特征值与最近其他特征值之间的<em>间隔</em><a name="1150"></a>：间隔越小，特征向量越敏感。
+在这个例子中，接近1的两个特征值非常接近，因此它们的间隔很小，对应的特征向量也很敏感。
+但它们所张成的二维不变子空间对<span class="math-inline">A</span>的变化非常不敏感（因为它们的特征值都接近1，与下一个最近的特征值2相距甚远）。
+因此，当对应于一组接近特征值的特征向量过于病态时，用户可能希望计算它们所张成的不变子空间的基，而不是单个特征向量。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容主要讨论了矩阵特征值的稳定性问题，包括特征值、特征向量以及特征空间的良态与病态特性。特征值通常是良态的，但特征向量和特征空间可能因特征值之间的间隔小而变得病态，对微小变化非常敏感。<!--Navigation Panel-->
 <a name="tex2html1099"
   href="node27.html">
 <button class="navigate">下一节</button></a> 
@@ -149,16 +143,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1100"
-  href="node27.html">Specifying an Eigenproblem</a>
-<b> Up:</b> <a name="tex2html1094"
-  href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b> Previous:</b> <a name="tex2html1088"
-  href="node25.html">Eigendecompositions</a>
- &nbsp <b>  <a name="tex2html1096"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1098"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1100" href="node27.html">特征问题的具体化</a>
+<b>上一级：</b><a name="tex2html1094" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一节：</b><a name="tex2html1088" href="node25.html">特征分解</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Introduction</title>
-<meta name="description" content="Introduction">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Introduction">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node282.html">
-<link rel="previous" href="node280.html">
-<link rel="up" href="node280.html">
-<link rel="next" href="node282.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5067"
   href="node282.html">
@@ -80,67 +73,65 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5068"
-  href="node282.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html5062"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5056"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
- &nbsp <b>  <a name="tex2html5064"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5066"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5068" href="node282.html">直接方法</a>
+<b>上一级：</b><a name="tex2html5062" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5056" href="node280.html">广义非厄米特征值问题</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001710000000000000000">
 引言</a>
 </h1>
-本章专注于（右）广义非厄米特征值问题（GNHEP）的数值解法
+本章致力于解决广义非厄米特征值问题（GNHEP）的数值解法，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:gnsym"></a><div class="math-display">A x = \lambda B x,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:gnsym"></a><div class="math-display">A x = \lambda B x,</div></td>
+<td WIDTH=10 align="RIGHT">
 (214)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是 <span class="math-inline">n</span> 阶矩阵。有时，我们也会寻求（左）广义非厄米特征值问题的解
+其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是 <span class="math-inline">n</span> 阶矩阵。
+有时，我们也会寻求左广义非厄米特征值问题的解，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:gnsymleft"></a><div class="math-display">y^{\ast} A = \lambda y^{\ast} B.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:gnsymleft"></a><div class="math-display">y^{\ast} A = \lambda y^{\ast} B.</div></td>
+<td WIDTH=10 align="RIGHT">
 (215)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 
 <p>
-广义特征值问题的代数和分析理论比标准特征值问题的相应理论要复杂得多。这在第&#167;<a href="node57.html#sec_chap2_GnHep">2.6</a>节中已有讨论。本章涵盖了处理不同类型广义特征值问题的多种数值技术。
+广义特征值问题的代数和分析理论比标准特征值问题复杂得多。
+这一点在第<a href="node57.html#sec_chap2_GnHep">2.6</a>节中已有讨论。
+本章涵盖了处理不同类型广义特征值问题的多种数值技术。
 
 <p>
-在第&#167;<a href="node282.html#sec:qzalg">8.2</a>节中，简要介绍了针对广义特征值问题的QZ算法。这是目前处理密集问题的最强大方法，类似于QR算法。然而，由于需要<span class="math-inline">O(n^3)</span>次浮点运算和<span class="math-inline">O(n^2)</span>个内存位置，QZ方法仅适用于中小规模问题。
+在第<a href="node282.html#sec:qzalg">8.2</a>节中，简要介绍了广义特征值问题的QZ算法。这是目前最强大的密集问题解决方法，类似于QR算法。然而，由于需要 <span class="math-inline">O(n^3)</span> 次浮点运算和 <span class="math-inline">O(n^2)</span> 个内存位置，QZ方法仅适用于中小规模问题。
 
 <p>
-对于大规模广义特征值问题，常见的方法是将问题（<a href="node281.html#eq:gnsym">8.1</a>）或（<a href="node281.html#eq:gnsymleft">8.2</a>）简化为标准特征值问题，然后应用迭代方法，如第<a href="node203.html#chap:nep">7</a>章所述。我们将这种技术称为简化为标准形式。这种简化在每次迭代中需要求解一个以<span class="math-inline">A</span>或<span class="math-inline">B</span>或其组合为系数的线性系统。详细内容将在第&#167;<a href="node283.html#sec:rtsf">8.3</a>节中讨论。
+对于大规模广义特征值问题，常见的方法是将问题（<a href="node281.html#eq:gnsym">8.1</a>）或（<a href="node281.html#eq:gnsymleft">8.2</a>）转化为标准特征值问题，然后应用迭代法，如第<a href="node203.html#chap:nep">7</a>章所述。我们将这种技术称为“转化为标准形式”。这种转化在每次迭代中需要求解一个线性系统，涉及 <span class="math-inline">A</span> 或 <span class="math-inline">B</span> 或它们的组合。详细内容将在第<a href="node283.html#sec:rtsf">8.3</a>节讨论。
 
 <p>
-第&#167;<a href="node287.html#sec:jd_gnsym">8.4</a>节介绍的Jacobi-Davidson方法避免了将<span class="math-inline">A{x}=\lambda B {x}</span>转换为标准特征问题。它不需要精确求解线性系统，只需对矩阵<span class="math-inline">A-\sigma B</span>的系统进行预处理迭代，从而提高整体效率。
+第<a href="node287.html#sec:jd_gnsym">8.4</a>节介绍的Jacobi-Davidson方法避免了将 <span class="math-inline">A{x}=\lambda B {x}</span> 转化为标准特征问题。它不需要精确求解线性系统，只需对矩阵 <span class="math-inline">A-\sigma B</span> 进行预条件迭代，从而提高整体效率。
 
 <p>
-第&#167;<a href="node295.html#sec:rks">8.5</a>节引入的Rational Krylov算法是移位和逆Arnoldi方法的进一步发展。它结合多个移位的基来寻找复平面上指定区域内的所有特征值。当需要了解线性动态系统在宽频率范围内的响应时，这一方法尤为重要。
+第<a href="node295.html#sec:rks">8.5</a>节引入的Rational Krylov算法是移位和逆Arnoldi方法的进一步发展。它结合多个移位的基底，在复平面上指定区域内寻找所有特征值。这对于了解线性动态系统在宽频范围内的响应特别感兴趣。
 
 <p>
-第&#167;<a href="node296.html#sec:idlanczos">8.6</a>节介绍了针对特殊类型广义特征值问题（<a href="node281.html#eq:gnsym">8.1</a>）的伪对称Lanczos方法，即矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>为实对称，但<span class="math-inline">A</span>、<span class="math-inline">B</span>或其组合<span class="math-inline">\alpha A + \beta B</span>（<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>为实数）均非正定。<span class="math-inline">A - \lambda B</span>被称为对称不定矩阵束。由于<span class="math-inline">A</span>和<span class="math-inline">B</span>的对称性不足以确保任何特殊数学性质，我们不能直接使用第<a href="node155.html#chap:ghep">5</a>章描述的算法。伪对称Lanczos算法可节省约一半的内存需求和浮点运算，但若无特殊预防措施，该技术可能数值不稳定。
+第<a href="node296.html#sec:idlanczos">8.6</a>节介绍了针对特殊类型广义特征值问题（<a href="node281.html#eq:gnsym">8.1</a>）的伪对称Lanczos方法，即矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 为实对称，但 <span class="math-inline">A</span>、<span class="math-inline">B</span> 或它们的组合 <span class="math-inline">\alpha A + \beta B</span>（<span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span> 为实数）均非正定。<span class="math-inline">A - \lambda B</span> 被称为对称不定矩阵束。对称性是代数性质，不足以保证任何特殊数学性质，因此不能直接使用第<a href="node155.html#chap:ghep">5</a>章中的算法。第<a href="node296.html#sec:idlanczos">8.6</a>节描述的伪对称Lanczos算法可节省约一半的内存需求和浮点运算，但若无特殊预防措施，可能存在数值不稳定性。
 
 <p>
-第&#167;<a href="node307.html#sec:singularpencil">8.7</a>节介绍了名为GUPTRI的软件包，专为奇异广义特征值问题设计，即特征多项式<span class="math-inline">p(\lambda) = \mathrm{det}(A - \lambda B)</span>对所有<span class="math-inline">\lambda</span>恒为零。例如，当<span class="math-inline">A</span>和<span class="math-inline">B</span>有公共零空间时会出现这种情况。本节描述的算法适用于小规模密集问题，算法成本为<span class="math-inline">O(n^4)</span>。
+第<a href="node307.html#sec:singularpencil">8.7</a>节介绍了名为GUPTRI的软件包，专为奇异广义特征值问题设计，即特征多项式 <span class="math-inline">p(\lambda) = \mathrm{det}(A - \lambda B)</span> 对所有 <span class="math-inline">\lambda</span> 恒为零。例如，当 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 有共同零空间时会发生这种情况。本节描述的算法对小型密集问题有效，算法成本为 <span class="math-inline">O(n^4)</span> 阶。
 
 <p>
-最后一节，第<a href="node324.html#sec:errbds_gnsym">8.8</a>节，讨论了评估常规GNHEP计算特征值及其对应特征向量精度的工具。
+最后一节，第<a href="node324.html#sec:errbds_gnsym">8.8</a>节，讨论了评估规则GNHEP计算特征值及其对应特征向量精度的工具。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -160,16 +151,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5068"
-  href="node282.html">Direct Methods</a>
-<b> Up:</b> <a name="tex2html5062"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html5056"
-  href="node280.html">Generalized Non-Hermitian Eigenvalue Problems</a>
- &nbsp <b>  <a name="tex2html5064"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5066"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5068" href="node282.html">直接方法</a>
+<b>上一级：</b><a name="tex2html5062" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5056" href="node280.html">广义非厄米特征值问题</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Kronecker Canonical Form</title>
-<meta name="description" content="Kronecker Canonical Form">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Kronecker Canonical Form">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node310.html">
-<link rel="previous" href="node308.html">
-<link rel="up" href="node307.html">
-<link rel="next" href="node310.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5490"
   href="node310.html">
@@ -80,148 +73,142 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5491"
-  href="node310.html">Generic and Nongeneric Kronecker</a>
-<b> Up:</b> <a name="tex2html5485"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5479"
-  href="node308.html">Regular Versus Singular Problems</a>
- &nbsp <b>  <a name="tex2html5487"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5489"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5491" href="node310.html">Generic and Nongeneric Kronecker</a>
+<b>上一级：</b><a name="tex2html5485" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5479" href="node308.html">常规问题与奇异问题</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001772000000000000000"></a>
 <a name="37218"></a>
 <br>
-克罗内克标准型
+克罗内克标准形
 </h2>
 
 <p>
-正如约旦标准型（JCF）详细描述了方阵<span class="math-inline">A</span>的不变子空间和特征值一样，存在一种<em>克罗内克标准型</em>（KCF），它详细描述了矩阵束<span class="math-inline">A - \lambda B</span>的广义特征值和广义特征空间。除了针对有限和无限特征值的约旦块外，克罗内克形式还包含与奇异矩阵束的最小指数相对应的奇异块（见下文）。
+正如约旦标准形(JCF)详细描述了方阵<span class="math-inline">A</span>的不变子空间和特征值一样，存在一种<em>克罗内克标准形</em>(KCF)，它详细描述了矩阵束<span class="math-inline">A - \lambda B</span>的广义特征值和广义特征空间。除了对应有限和无限特征值的约旦块外，克罗内克形式还包含与奇异矩阵束的最小指标相对应的奇异块（见下文）。
 
 <p>
-<span class="math-inline">A - \lambda B</span>的KCF展示了精细结构元素，包括初等因子（约旦块）和最小指数（奇异块），其定义如下[<a href="node421.html#gant59">187</a>]。假设<span class="math-inline">A, B \in {\mathcal C}^{m \times n}</span>。那么存在非奇异的<span class="math-inline">P \in {\mathcal C}^{m \times m}</span>和<span class="math-inline">Q \in {\mathcal C}^{n \times n}</span>，使得
-<a name="eq.kcf1"></a>
+<span class="math-inline">A - \lambda B</span>的KCF展示了精细结构元素，包括初等因子（约旦块）和最小指标（奇异块），其定义如下[<a href="node421.html#gant59">187</a>]。假设<span class="math-inline">A, B \in {\mathcal C}^{m \times n}</span>。那么存在非奇异矩阵<span class="math-inline">P \in {\mathcal C}^{m \times m}</span>和<span class="math-inline">Q \in {\mathcal C}^{n \times n}</span>使得
+<a name="eq.kcf1"></a> 
 <span class="math-inline">P^{-1}(A - B)Q = \tilde{A} - \tilde{B} = \text{diag}(A_1 - B_1, \ldots, A_b - B_b)</span>，
-其中<span class="math-inline">A_i - \lambda B_i</span>是<span class="math-inline">m_i \times n_i</span>。我们可以将<span class="math-inline">P</span>和<span class="math-inline">Q</span>的列划分为与<span class="math-inline">\tilde{A} - \lambda \tilde{B}</span>的对角块相对应的块：
+其中<span class="math-inline">A_i - \lambda B_i</span>是<span class="math-inline">m_i \times n_i</span>的矩阵。我们可以将<span class="math-inline">P</span>和<span class="math-inline">Q</span>的列划分为对应于<span class="math-inline">\tilde{A} - \lambda \tilde{B}</span>的<span class="math-inline">b</span>个对角块的块：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">P = [P_1, \ldots, P_b] \quad \text{和} \quad Q = [Q_1, \ldots, Q_b],</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中<span class="math-inline">P_i</span>是<span class="math-inline">m \times m_i</span>，<span class="math-inline">Q_i</span>是<span class="math-inline">n \times n_i</span>，使得
+其中<span class="math-inline">P_i</span>是<span class="math-inline">m \times m_i</span>的矩阵，<span class="math-inline">Q_i</span>是<span class="math-inline">n \times n_i</span>的矩阵，使得
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">(A - \lambda B)Q_i = P_i(A_i - \lambda B_i).</div>
 </div>
 <br clear="ALL">
 <p></p>
 每个块<span class="math-inline">M_i \equiv A_i - \lambda B_i</span>必须是以下形式之一：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">J_j(\alpha), \quad N_j, \quad L_j, \quad \text{或} \quad L_j^T.</div>
 </div>
 <br clear="ALL">
 <p></p>
 首先我们考虑
 <a name="eq.kcf2"></a>
-$J_j(\alpha) = \begin{bmatrix}
+<span class="math-inline">J_j(\alpha) = \begin{bmatrix}
 \alpha & 1 & & \\
 & \alpha & \ddots & \\
 & & \ddots & 1 \\
 & & & \alpha
-\end{bmatrix}$
+\end{bmatrix}</span>
 和
-$N_j = \begin{bmatrix}
+<span class="math-inline">N_j = \begin{bmatrix}
 1 & & & \\
 & \ddots & & \\
 & & \ddots & \\
 & & & 1
-\end{bmatrix}$。
+\end{bmatrix}.</span>
 
-<span class="math-inline">J_j(\alpha)</span>是一个简单的<span class="math-inline">j \times j</span>约旦块，<span class="math-inline">\alpha</span>被称为<em>有限特征值</em>。约旦块<span class="math-inline">J_j(\alpha)</span>是一个循环变换。其范围由<span class="math-inline">j</span>阶单位向量<span class="math-inline">e_j</span>生成——即克雷洛夫序列的向量
+<span class="math-inline">J_j(\alpha)</span>是一个简单的<span class="math-inline">j \times j</span>约旦块，<span class="math-inline">\alpha</span>被称为<em>有限特征值</em>。约旦块<span class="math-inline">J_j(\alpha)</span>是一个循环变换。其范围由第<span class="math-inline">j</span>个单位向量<span class="math-inline">e_j</span>生成——克雷洛夫序列的向量
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\{e_j, J_j(\alpha)e_j, J_j(\alpha)^2e_j, \ldots, J_j(\alpha)^{j-1}e_j\}</div>
 </div>
 <br clear="ALL">
 <p></p>
-从变换的循环性我们得到向量链关系
+张成范围。从变换的循环性我们得到向量链关系
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">(J_j(\alpha) - (\alpha - \lambda)I)e_{k+1} = e_k \quad \text{对于} \quad 1 \leq k \leq j-1.</div>
 </div>
 <br clear="ALL">
 <p></p>
-向量<span class="math-inline">e_{k+1}</span>被称为<em>第<span class="math-inline">k+1</span>级主向量</em>。顺序<span class="math-inline">j</span>通常被称为链的<em>高度</em>。特征向量是第1级主向量。
+向量<span class="math-inline">e_{k+1}</span>被称为<em>等级为<span class="math-inline">k+1</span>的主向量</em>。顺序<span class="math-inline">j</span>通常被称为链的<em>高度</em>。特征向量是等级为1的主向量。
 
 <p>
 <span class="math-inline">N_j</span>是一个<span class="math-inline">j \times j</span>块，对应于多重性为<span class="math-inline">j</span>的<em>无限特征值</em>：
 <br><p></p>
-<div align="center">
-$$N_j = \begin{bmatrix}
+<div align="CENTER">
+<div class="math-display">N_j = \begin{bmatrix}
 1 & & & \\
 & \ddots & & \\
 & & \ddots & \\
 & & & 1
-\end{bmatrix}.$$
+\end{bmatrix}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-通过交换<span class="math-inline">N_j</span>的<span class="math-inline">A</span>部分和<span class="math-inline">B</span>部分，我们得到一个<span class="math-inline">J_j(0)</span>块。因此，如果<span class="math-inline">\{A,B\}</span>的KCF中有一个<span class="math-inline">N_j</span>块，那么<span class="math-inline">\{B,A\}</span>的KCF中有一个<span class="math-inline">J_j(0)</span>块，反之亦然。这一事实在计算矩阵束标准结构的算法中得到利用。
+通过交换<span class="math-inline">N_j</span>的<span class="math-inline">A</span>部分和<span class="math-inline">B</span>部分，我们得到一个<span class="math-inline">J_j(0)</span>块。因此，如果<span class="math-inline">\{A, B\}</span>的KCF中有一个<span class="math-inline">N_j</span>块，那么<span class="math-inline">\{B, A\}</span>的KCF中有一个<span class="math-inline">J_j(0)</span>块，反之亦然。这一事实在计算矩阵束标准结构的算法中得到利用。
 
 <p>
-<span class="math-inline">J_j(\alpha)</span>和<span class="math-inline">N_j</span>块共同构成了矩阵束的<em>规则结构</em>。所有<span class="math-inline">A_i - \lambda B_i</span>都是规则块当且仅当<span class="math-inline">A - \lambda B</span>是规则矩阵束。<span class="math-inline">\lambda(A, B)</span>表示<span class="math-inline">A - \lambda B</span>的规则部分的特征值（按多重性计），被称为<span class="math-inline">A - \lambda B</span>的<em>谱</em>。
+<span class="math-inline">J_j(\alpha)</span>和<span class="math-inline">N_j</span>块共同构成了矩阵束的<em>规则结构</em>。所有<span class="math-inline">A_i - \lambda B_i</span>都是规则块当且仅当<span class="math-inline">A - \lambda B</span>是一个规则矩阵束。<span class="math-inline">\lambda(A, B)</span>表示<span class="math-inline">A - \lambda B</span>的规则部分的特征值（按多重性计），被称为<span class="math-inline">A - \lambda B</span>的<em>谱</em>。
 
 <p>
 另外两种对角块类型是
 <a name="eq.kcf3"></a>
-$L_j = \begin{bmatrix}
+<span class="math-inline">L_j = \begin{bmatrix}
 - & 1 & & \\
 & - & \ddots & \\
 & & \ddots & 1 \\
 & & & -
-\end{bmatrix}$
+\end{bmatrix}</span>
 和
-$L_j^T = \begin{bmatrix}
+<span class="math-inline">L_j^T = \begin{bmatrix}
 - & & \\
-1 & & \\
-& - & \\
+1 & - & \\
+& \ddots & - \\
 & & 1
-\end{bmatrix}$。
+\end{bmatrix}.</span>
 
-<span class="math-inline">j \times (j+1)</span>块<span class="math-inline">L_j</span>被称为<em>右（或列）最小指数<span class="math-inline">j</span>的奇异块</em>。它有一个一维的右零空间，对于任何<span class="math-inline">\lambda</span>，即
+<span class="math-inline">j \times (j+1)</span>块<span class="math-inline">L_j</span>被称为<em>右（或列）最小指标<span class="math-inline">j</span>的奇异块</em>。它有一个一维的右零空间，
+<span class="math-inline">[1, \lambda, \ldots, \lambda^j]^T</span>，对于任何<span class="math-inline">\lambda</span>，即
 <br><p></p>
-<div align="center">
-$$\begin{bmatrix}
+<div align="CENTER">
+<div class="math-display">\begin{bmatrix}
 - \lambda & 1 & & & \\
 & - \lambda & 1 & & \\
 & & \ddots & \ddots & \\
 & & & - \lambda & 1 \\
-& & & & - \lambda
-\end{bmatrix} \begin{bmatrix}
-1 \\
-\lambda \\
+\end{bmatrix}
+\begin{bmatrix}
+\lambda^j \\
 \vdots \\
-\lambda^j
+0
 \end{bmatrix} = \begin{bmatrix}
-0 \\
 0 \\
 \vdots \\
 0
-\end{bmatrix}.$$
+\end{bmatrix}.</div>
 </div>
 <br clear="ALL">
 <p></p>
 
 <p>
-类似地，<span class="math-inline">(j+1) \times j</span>块<span class="math-inline">L_j^T</span>是一个<em>左（或行）最小指数<span class="math-inline">j</span>的奇异块</em>，对于任何<span class="math-inline">\lambda</span>，它有一个一维的左零空间。左和右奇异块共同构成了矩阵束的<em>奇异结构</em>，并且只有在矩阵束是奇异的情况下才会出现在KCF中。规则和奇异结构定义了奇异矩阵束的<em>克罗内克结构</em>。
+类似地，<span class="math-inline">(j+1) \times j</span>块<span class="math-inline">L_j^T</span>是一个<em>左（或行）最小指标<span class="math-inline">j</span>的奇异块</em>，并且对于任何<span class="math-inline">\lambda</span>有一个一维的左零空间。左和右奇异块共同构成了矩阵束的<em>奇异结构</em>，并且仅当矩阵束是奇异的时出现在KCF中。规则和奇异结构定义了奇异矩阵束的<em>克罗内克结构</em>。
 
 <p>
-我们通过简要指出KCF的结构信息与GUPTRI形式（<a href="node307.html#eq.guptri0">8.28</a>）之间的关系来结束这一介绍性描述。块<span class="math-inline">A_r - \lambda B_r</span>包含所有关于右奇异块的信息，<span class="math-inline">A_l - \lambda B_l</span>包含所有关于左奇异块的信息。规则部分对应于<span class="math-inline">A_{reg} - \lambda B_{reg}</span>。
+我们通过简要指出KCF的结构信息与GUPTRI形式（<a href="node307.html#eq.guptri0">8.28</a>）之间的关系来结束这一介绍性描述。块<span class="math-inline">A_r - \lambda B_r</span>包含所有关于右奇异块的信息，而<span class="math-inline">A_l - \lambda B_l</span>包含所有关于左奇异块的信息。规则部分对应于<span class="math-inline">A_{reg} - \lambda B_{reg}</span>。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -241,16 +228,11 @@ $$\begin{bmatrix}
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5491"
-  href="node310.html">Generic and Nongeneric Kronecker</a>
-<b> Up:</b> <a name="tex2html5485"
-  href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b> Previous:</b> <a name="tex2html5479"
-  href="node308.html">Regular Versus Singular Problems</a>
- &nbsp <b>  <a name="tex2html5487"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5489"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5491" href="node310.html">Generic and Nongeneric Kronecker</a>
+<b>上一级：</b><a name="tex2html5485" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一节：</b><a name="tex2html5479" href="node308.html">常规问题与奇异问题</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Band Lanczos Method &nbsp; R.&nbsp;Freund</title>
-<meta name="description" content="Band Lanczos Method &nbsp; R.&nbsp;Freund">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Band Lanczos Method &nbsp; R.&nbsp;Freund">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node262.html">
-<link rel="previous" href="node250.html">
-<link rel="up" href="node203.html">
-<link rel="next" href="node257.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4659"
   href="node257.html">
@@ -80,103 +73,98 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4660"
-  href="node257.html">Deflation</a>
-<b> Up:</b> <a name="tex2html4654"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4648"
-  href="node255.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html4656"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4658"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4660" href="node257.html">收缩</a>
+<b>上一级：</b><a name="tex2html4654" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4648" href="node255.html">注释与参考文献</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION0016100000000000000000"></a> <a name="sec:nsymbandlanczos"></a>
 <br>
 带状Lanczos方法
-<br>&nbsp; <em>R.&nbsp;Freund</em>
+<br>&nbsp; <em>R. 弗伦(R. Freund)</em>
 </h1>
 
 <p>
 <a name="24977"></a> 
-在第<a href="node244.html#sec:nsymlanczos">7.8</a>节中介绍的标准非Hermitian Lanczos算法使用由矩阵<span class="math-inline">A</span>和一对单右左初始向量<span class="math-inline">b</span>和<span class="math-inline">c</span>生成的Krylov子空间，来产生非Hermitian特征值问题（NHEP）的近似解，
+在第<a href="node244.html#sec:nsymlanczos">7.8</a>节中介绍的标准非厄米Lanczos算法使用由矩阵<span class="math-inline">A</span>和一对单右左初始向量<span class="math-inline">b</span>和<span class="math-inline">c</span>生成的Krylov子空间，来产生非厄米特征值问题的近似解，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:MAA"></a><div class="math-display">Ax = \lambda x.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:MAA"></a><div class="math-display">Ax = \lambda x.</div></td>
+<td WIDTH=10 align="RIGHT">
 (164)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这里，<span class="math-inline">A</span>是一个一般情况下的非Hermitian方阵。
+这里，<span class="math-inline">A</span>是一个一般非厄米的方阵。
 
 <p>
 在某些情况下，使用右左初始向量块，而不是一对单初始向量，更为可取。
-一个典型的例子是具有多重或紧密聚集特征值的矩阵的特征值计算。
-另一个重要的应用是线性动力系统的降阶建模。
-在这里，右左初始向量块作为问题的一部分给出，详情见第<a href="node260.html#rwf:reduced_order">7.10.4</a>节。
-最后，在计算矩阵-矩阵乘积<span class="math-inline">AV</span>和<span class="math-inline">A^T W</span>（其中<span class="math-inline">V</span>和<span class="math-inline">W</span>是向量块）比依次计算矩阵-向量乘积<span class="math-inline">Av</span>和<span class="math-inline">A^T w</span>（对于<span class="math-inline">V</span>和<span class="math-inline">W</span>的所有列）更便宜的情况下，使用初始向量块也是有利的。
-关于等大小块的块Lanczos方法，在第<a href="node250.html#sec:nsymblocklanczos">7.9</a>节中进行了讨论。
+一个例子是具有多重或紧密聚类特征值的矩阵的特征值计算。
+另一个重要应用是线性动力系统的降阶建模。
+在这里，右左初始向量块作为问题的一部分给出，详见第<a href="node260.html#rwf:reduced_order">7.10.4</a>节。
+最后，在计算矩阵-矩阵乘积<span class="math-inline">AV</span>和<span class="math-inline">A^T W</span>时，其中<span class="math-inline">V</span>和<span class="math-inline">W</span>是向量块，如果比逐次计算矩阵-向量乘积<span class="math-inline">Av</span>和<span class="math-inline">A^T w</span>更便宜，使用初始向量块也是有利的。
+关于等大小块的块Lanczos方法，已在第<a href="node250.html#sec:nsymblocklanczos">7.9</a>节中讨论。
 
 <p>
-在本节中，我们描述非Hermitian带状Lanczos方法，该方法将标准非Hermitian Lanczos算法从单初始向量扩展到<span class="math-inline">m</span>个右初始向量和<span class="math-inline">p</span>个左初始向量块，
+本节描述非厄米带状Lanczos方法，该方法将标准非厄米Lanczos算法从单初始向量扩展到<span class="math-inline">m</span>个右和<span class="math-inline">p</span>个左初始向量块，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:MAB"></a><div class="math-display">b_1,b_2,\ldots,b_m\quad \mathrm{和}\quad c_1,c_2,\ldots,c_p.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:MAB"></a><div class="math-display">b_1,b_2,\ldots,b_m\quad \mathrm{和}\quad c_1,c_2,\ldots,c_p.</div></td>
+<td WIDTH=10 align="RIGHT">
 (165)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-矩阵<span class="math-inline">A</span>和向量（<a href="node256.html#rwf:MAB">7.59</a>）可以是实数或复数。
+矩阵<span class="math-inline">A</span>和向量(<a href="node256.html#rwf:MAB">7.59</a>)可以是实数或复数。
 然而，即使它们是复数，我们也将算法表述为<span class="math-inline">A</span>和<span class="math-inline">A^T</span>，而不是<span class="math-inline">A</span>和<span class="math-inline">A^{H}</span>，因为这样可以避免算法中递推关系中不必要的复共轭。
 我们强调这两种表述是等价的。
 
 <p>
-矩阵<span class="math-inline">A</span>和初始向量（<a href="node256.html#rwf:MAB">7.59</a>）生成了右块Krylov序列
+矩阵<span class="math-inline">A</span>和初始向量(<a href="node256.html#rwf:MAB">7.59</a>)生成了右块Krylov序列
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:MBA1"></a><div class="math-display">b_1,b_2,\ldots,b_m,A b_1, A b_2, \ldots, A b_m,\ldots,A^{k-1} b_1, \ldots, A^{k-1} b_m, \ldots,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:MBA1"></a><div class="math-display">b_1,b_2,\ldots,b_m,A b_1, A b_2, \ldots, A b_m,\ldots,A^{k-1} b_1, \ldots, A^{k-1} b_m, \ldots,</div></td>
+<td WIDTH=10 align="RIGHT">
 (166)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 和左块Krylov序列
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:MBA2"></a><div class="math-display">c_1,c_2,\ldots,c_p,A^T c_1, A^T c_2, \ldots, A^T c_p,\ldots,(A^T)^{k-1} c_1, \ldots, (A^T)^{k-1} c_p, \ldots.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:MBA2"></a><div class="math-display">c_1,c_2,\ldots,c_p,A^T c_1, A^T c_2, \ldots, A^T c_p,\ldots,(A^T)^{k-1} c_1, \ldots, (A^T)^{k-1} c_p, \ldots.</div></td>
+<td WIDTH=10 align="RIGHT">
 (167)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-带状Lanczos算法的目标是构造合适的右左Lanczos向量，
+带状Lanczos算法的目标是构建合适的右左Lanczos向量，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:MBB"></a><div class="math-display">v_1,v_2,\ldots,v_j \quad \mathrm{和}\quad w_1,w_2,\ldots,w_j,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:MBB"></a><div class="math-display">v_1,v_2,\ldots,v_j \quad \mathrm{和}\quad w_1,w_2,\ldots,w_j,</div></td>
+<td WIDTH=10 align="RIGHT">
 (168)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这些向量分别构成了由块Krylov序列（<a href="node256.html#rwf:MBA1">7.60</a>）和（<a href="node256.html#rwf:MBA2">7.61</a>）的前<span class="math-inline">j</span>个线性独立向量所张成的子空间的基。
+它们分别为块Krylov序列(<a href="node256.html#rwf:MBA1">7.60</a>)和(<a href="node256.html#rwf:MBA2">7.61</a>)的前<span class="math-inline">j</span>个线性独立向量所张成的子空间构建基。
 
 <p>
-本节讨论的非Hermitian带状Lanczos方法也可以看作是第<a href="node131.html#rwf:bandsym">4.6</a>节中描述的Hermitian带状Lanczos方法向一般非Hermitian方阵的扩展。
+本节讨论的非厄米带状Lanczos方法也可以看作是将第<a href="node131.html#rwf:bandsym">4.6</a>节中描述的厄米带状Lanczos方法扩展到一般的非厄米方阵。
 对于右左初始向量块大小相同的特殊情况，即<span class="math-inline">m=p</span>，带状Lanczos方法也与第<a href="node250.html#sec:nsymblocklanczos">7.9</a>节中描述的块Lanczos方法相关。
-然而，带状Lanczos方法更为通用，因为它可以处理任意块大小<span class="math-inline">m,\, p\geq 1</span>的情况。
+然而，带状Lanczos方法更一般，因为它可以处理任意块大小<span class="math-inline">m,\, p\geq 1</span>的情况。
 即使在特殊情况<span class="math-inline">m=p</span>下，带状方法相对于块Lanczos方法也有优势；详见第<a href="node261.html#rwf:bandnsym_var">7.10.5</a>节。
 
 <p>
@@ -186,7 +174,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <ul>
 <li><a name="tex2html4661"
-  href="node257.html">缩约</a>
+  href="node257.html">缩减</a>
 <li><a name="tex2html4662"
   href="node258.html">基本性质</a>
 <li><a name="tex2html4663"
@@ -197,9 +185,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node261.html">变体</a>
 </ul>
 <!--End of Table of Child-Links-->
-<hr>
-
-<!--Navigation Panel-->
+<hr><!--Navigation Panel-->
 <a name="tex2html4659"
   href="node257.html">
 <button class="navigate">下一节</button></a> 
@@ -216,16 +202,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4660"
-  href="node257.html">Deflation</a>
-<b> Up:</b> <a name="tex2html4654"
-  href="node203.html">Non-Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html4648"
-  href="node255.html">Notes and References</a>
- &nbsp <b>  <a name="tex2html4656"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4658"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4660" href="node257.html">收缩</a>
+<b>上一级：</b><a name="tex2html4654" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4648" href="node255.html">注释与参考文献</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

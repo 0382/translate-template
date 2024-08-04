@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Solvers for Structured Matrices</title>
-<meta name="description" content="Direct Solvers for Structured Matrices">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Solvers for Structured Matrices">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node388.html">
-<link rel="up" href="node385.html">
-<link rel="next" href="node390.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6731"
   href="node390.html">
@@ -79,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6732"
-  href="node390.html">A Brief Survey of</a>
-<b> Up:</b> <a name="tex2html6726"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6722"
-  href="node388.html">Direct Solvers for Sparse</a>
- &nbsp <b>  <a name="tex2html6728"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6730"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6732" href="node390.html">A Brief Survey of</a>
+<b>上一级：</b><a name="tex2html6726" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6722" href="node388.html">Direct Solvers for Sparse</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001934000000000000000"></a>
@@ -99,63 +88,68 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-在&#167;<a href="node384.html#sec:structure-matvec">10.2.3</a>中描述的涉及结构化矩阵的线性方程组具有一个吸引人的特性，即可以在<span class="math-inline">O(n^2)</span>时间内求解，而不是<span class="math-inline">O(n^3)</span>时间。
+在第&#167;<a href="node384.html#sec:structure-matvec">10.2.3</a>节中描述的涉及结构化矩阵的线性方程组具有一个吸引人的特性，即可以在<span class="math-inline">O(n^2)</span>时间内求解，而不是<span class="math-inline">O(n^3)</span>时间。
 
 <p>
-使得这类系统能够快速（在<span class="math-inline">O(n^2)</span>时间内）求解的共同特性是它们具有<em>低位移秩</em>[<a href="node421.html#kasa:99">257</a>]。
+使得这些系统能够快速（在<span class="math-inline">O(n^2)</span>时间内）求解的共同特性是它们具有<em>低位移秩</em>[<a href="node421.html#kasa:99">257</a>]。
 
 <p>
 位移秩可以定义如下：对于给定的矩阵<span class="math-inline">A</span>和<span class="math-inline">F</span>以及矩阵<span class="math-inline">T</span>，我们定义运算符
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\Delta_{A,F}(T)=A\cdot T-T\cdot F</div>
 </div>
 <br clear="ALL">
 <p></p>
-并记<span class="math-inline">\alpha={\rm rank}(\Delta_{A,F}(T))</span>。我们称<span class="math-inline">\alpha</span>是<span class="math-inline">T</span>相对于运算符<span class="math-inline">\Delta_{A,F}</span>的“位移秩”。如果<span class="math-inline">\alpha</span>很小（通常为<span class="math-inline">O(1)</span>），我们称矩阵<span class="math-inline">T</span>具有“低位移秩”。由于
+并记<span class="math-inline">\alpha={\rm rank}(\Delta_{A,F}(T))</span>。我们称<span class="math-inline">\alpha</span>为<span class="math-inline">T</span>相对于运算符<span class="math-inline">\Delta_{A,F}</span>的“位移秩”。如果<span class="math-inline">\alpha</span>很小（通常为<span class="math-inline">O(1)</span>），我们称矩阵<span class="math-inline">T</span>具有“低位移秩”。由于
 
 <span class="math-inline">{\rm rank}(\Delta_{A,F}(T))=\alpha</span>，存在
 
-<span class="math-inline">n\times \alpha</span>矩阵<span class="math-inline">G</span>和<span class="math-inline">B</span>，使得<span class="math-inline">\Delta_{A,F}(T)=G\cdot B^T</span>。矩阵<span class="math-inline">G</span>和<span class="math-inline">B</span>被称为<span class="math-inline">T</span>的<em>生成元</em>。我们将具有低位移秩的矩阵称为具有<em>位移结构</em>。
+<span class="math-inline">n\times \alpha</span>矩阵<span class="math-inline">G</span>和<span class="math-inline">B</span>，使得
+<span class="math-inline">\Delta_{A,F}(T)=G\cdot B^T</span>。矩阵<span class="math-inline">G</span>和<span class="math-inline">B</span>被称为<span class="math-inline">T</span>的<em>生成元</em>。我们将具有低位移秩的矩阵称为具有<em>位移结构</em>。
 
 <p>
 以Cauchy矩阵为例
 
 <span class="math-inline">C = (C_{ij})=(1/(x_i-y_j))</span>，我们有
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 <div class="math-display">\Delta_{\diag(x),\diag(y)}(C)=\diag(x) \cdot C-C \cdot \diag(y)=(1,1,\ldots,1)^T\cdot (1,1,\ldots,1).</div>
 </div>
 <br clear="ALL">
 <p></p>
-因此，Cauchy矩阵的位移秩为1，生成元为<span class="math-inline">G=B=(1,1,\ldots,1)^T</span>。
+因此，Cauchy矩阵的位移秩为1，生成元为
+<span class="math-inline">G=B=(1,1,\ldots,1)^T</span>。
 
 <p>
-具有低位移秩<span class="math-inline">\alpha</span>（不一定等于1）的矩阵相对于运算符<span class="math-inline">\Delta_{{\rm diag}(x),{\rm diag}(y)}</span>被称为Cauchy-like矩阵。类似地，可以定义Vandermonde-like矩阵、Toeplitz-like矩阵等。这些高位移秩系统的求解时间为<span class="math-inline">O(\alpha n^2)</span>。
+对于具有低位移秩<span class="math-inline">\alpha</span>（不一定等于1）的矩阵，相对于运算符
+<span class="math-inline">\Delta_{{\rm diag}(x),{\rm diag}(y)}</span>，称为Cauchy-like矩阵。类似地，可以定义Vandermonde-like矩阵、Toeplitz-like矩阵等。这些高位移秩系统的求解时间为<span class="math-inline">O(\alpha n^2)</span>。
 
 <p>
 快速算法利用位移方程来生成矩阵<span class="math-inline">F</span>的LU分解。这些算法在矩阵的生成元上工作，而不是矩阵本身，这使得它们能够更快地运行。
 
 <p>
-块Toeplitz矩阵和类型为<span class="math-inline">T^TT</span>的矩阵，其中<span class="math-inline">T</span>是Toeplitz矩阵，也具有低位移秩[<a href="node421.html#kasa:99">257</a>]。
+块Toeplitz矩阵和类型为<span class="math-inline">T^TT</span>的矩阵（其中<span class="math-inline">T</span>是Toeplitz矩阵）也具有低位移秩[<a href="node421.html#kasa:99">257</a>]。
 
 <p>
-如果<span class="math-inline">A</span>和<span class="math-inline">B</span>具有位移结构，那么类型为<span class="math-inline">(A+\sigma B)x=b</span>的系统可以使用快速低位移秩方法求解，仅当<span class="math-inline">A+\sigma B</span>也具有位移结构（相对于可能不同的位移运算符）。例如，如果<span class="math-inline">A</span>是Hankel矩阵且<span class="math-inline">B=I</span>，那么<span class="math-inline">A+\sigma B</span>是Toeplitz-plus-Hankel矩阵，也具有位移结构。如果<span class="math-inline">A+\sigma B</span>不具有位移结构，那么只能使用零移位<span class="math-inline">\sigma=0</span>或仅需要快速矩阵-向量乘积的快速迭代方法[<a href="node421.html#kasa:99">257</a>]。
+如果<span class="math-inline">A</span>和<span class="math-inline">B</span>具有位移结构，那么类型为
+
+<span class="math-inline">(A+\sigma B)x=b</span>的系统可以使用快速低位移秩方法求解，前提是<span class="math-inline">A+\sigma B</span>也具有位移结构（相对于可能不同的位移运算符）。例如，如果<span class="math-inline">A</span>是Hankel矩阵且<span class="math-inline">B=I</span>，则<span class="math-inline">A+\sigma B</span>是Toeplitz-plus-Hankel矩阵，也具有位移结构。如果<span class="math-inline">A+\sigma B</span>不具有位移结构，那么只能使用零移位<span class="math-inline">\sigma=0</span>或仅需快速矩阵向量乘积的快速迭代方法[<a href="node421.html#kasa:99">257</a>]。
 
 <p>
-一些方法对矩阵施加额外的限制，要求它们对称（Toeplitz）或正定。这可能导致对移位选择的额外限制。
+一些方法对矩阵施加了额外的限制，要求其对称（Toeplitz）或正定。这可能导致对移位选择的额外限制。
 
 <p>
-在使用结构化矩阵的快速算法时应特别注意，因为速度往往以精度为代价。一些位移秩算法通过在生成元上工作来模拟高斯消元法（带有部分、完全或无枢轴）[<a href="node421.html#goka:95">193</a>]。即便如此，这些算法由于可能的“生成元增长”[<a href="node421.html#kasa:99">257</a>]而不一定具有与高斯消元法相同的数值特性，这种情况虽不常见，但即使在条件非常好的矩阵中也可能出现。
+在使用结构化矩阵的快速算法时应特别注意，因为速度通常以精度为代价。一些位移秩算法通过在生成元上工作来模拟高斯消元法（带部分、完全或无枢轴）[<a href="node421.html#goka:95">193</a>]。即便如此，这些算法由于可能的“生成元增长”[<a href="node421.html#kasa:99">257</a>]，不一定具有与高斯消元法相同的数值特性，这种情况虽不常见，但即使在非常良态的矩阵中也可能出现。
 
 <p>
 有许多方法可以稳定快速算法，包括生成元增长问题[<a href="node421.html#kasa:99">257</a>, p. 111]，尽管偶尔会出现不稳定性，但这些方法非常吸引人。
 
 <p>
-快速算法在文献中有很好的描述，但可靠的软件库尚不可用。人们还应该注意<span class="math-inline">O(n^2)</span>符号中隐藏的常数，这些常数使得快速方法在<span class="math-inline">n</span>足够大（通常至少几百，取决于结构）时比传统的<span class="math-inline">O(n^3)</span>方法更快。传统的<span class="math-inline">O(n^3)</span>算法通常经过优化以使用BLAS 3，并有效地利用计算机的内存层次结构，以使代码接近处理器的全速运行（参见&#167;<a href="node380.html#sec:dense_blas">10.2.1</a>）。快速算法通常只能使用BLAS 2，并且可能很难或不可能优化快速算法以有效利用计算机的缓存和快速内存。这意味着，即使一个快速的<span class="math-inline">O(n^2)</span>算法和一个慢速的<span class="math-inline">O(n^3)</span>算法执行相同数量的浮点运算，由于这些优化问题，“慢”算法很可能更快。
+快速算法在文献中有很好的描述，但可靠的软件库尚不可用。人们还应注意<span class="math-inline">O(n^2)</span>符号中隐藏的常数，这些常数使得快速方法仅在<span class="math-inline">n</span>足够大（通常至少几百，取决于结构）时比传统的<span class="math-inline">O(n^3)</span>方法更快。传统的<span class="math-inline">O(n^3)</span>算法通常经过优化以使用BLAS 3，并有效利用计算机的内存层次结构，以使代码接近处理器的全速运行（参见第&#167;<a href="node380.html#sec:dense_blas">10.2.1</a>节）。快速算法通常只能使用BLAS 2，并且可能难以或无法优化快速算法以有效利用计算机的缓存和快速内存。这意味着，即使快速<span class="math-inline">O(n^2)</span>算法和慢速<span class="math-inline">O(n^3)</span>算法执行相同数量的浮点运算，由于这些优化问题，“慢”算法很可能更快。
 
 <p>
-我们还应该提到用于求解Vandermonde和三项Vandermonde系统的Bjorck-Pereyra型算法[<a href="node421.html#bjpe:70">51</a>,<a href="node421.html#high90v">230</a>]。这些<span class="math-inline">O(n^2)</span>方法具有显著的数值特性。在Vandermonde矩阵中节点顺序和右侧符号模式的某些额外限制下，可以以全机器精度求解这些系统。
+我们还应提及用于求解Vandermonde和三项Vandermonde系统的Bjorck-Pereyra型算法[<a href="node421.html#bjpe:70">51</a>,<a href="node421.html#high90v">230</a>]。这些<span class="math-inline">O(n^2)</span>方法具有显著的数值特性。在Vandermonde矩阵中节点顺序和右侧符号模式的某些额外限制下，可以完全达到机器精度求解这些系统。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -175,16 +169,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6732"
-  href="node390.html">A Brief Survey of</a>
-<b> Up:</b> <a name="tex2html6726"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6722"
-  href="node388.html">Direct Solvers for Sparse</a>
- &nbsp <b>  <a name="tex2html6728"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6730"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6732" href="node390.html">A Brief Survey of</a>
+<b>上一级：</b><a name="tex2html6726" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6722" href="node388.html">Direct Solvers for Sparse</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Purging .</title>
-<meta name="description" content="Purging .">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Purging .">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node128.html">
-<link rel="previous" href="node126.html">
-<link rel="up" href="node124.html">
-<link rel="next" href="node128.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html2664"
   href="node128.html">
@@ -80,45 +73,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2665"
-  href="node128.html">Stability of .</a>
-<b> Up:</b> <a name="tex2html2659"
-  href="node124.html">Orthogonal Deflating Transformation</a>
-<b> Previous:</b> <a name="tex2html2653"
-  href="node126.html">Locking .</a>
- &nbsp <b>  <a name="tex2html2661"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2663"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2665" href="node128.html">Stability of .</a>
+<b>上一级：</b><a name="tex2html2659" href="node124.html">正交收缩变换</a>
+<b>上一节：</b><a name="tex2html2653" href="node126.html">Locking .</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001357030000000000000">
-清除 <span class="math-inline">\theta </span>。</a>
-</h4> 如果 <span class="math-inline">\theta </span> 是“不需要的”，我们可能希望从投影矩阵 <span class="math-inline">T</span> 的谱中移除 <span class="math-inline">\theta </span>。
-然而，使用精确位移的隐式重启策略有时会无法清除一个已收敛的不需要的 Ritz 值 [<a
- href="node421.html#leso96">294</a>]。
+剔除 <span class="math-inline">\theta </span>。</a>
+</h4> 如果 <span class="math-inline">\theta </span> 是“不受欢迎的”，我们可能希望将其从投影矩阵 <span class="math-inline">T</span> 的谱中移除。然而，使用精确位移的隐式重启策略有时会无法剔除一个已收敛的不受欢迎的 Ritz 值[<a href="node421.html#leso96">294</a>]。
 
 <p>
-在对称情况下，清除过程本质上与刚刚描述的锁定过程相同。
-然而，我们不是保留被缩放的 Ritz 向量和值，而是直接丢弃它们。
-在此之后，我们得到一个 <span class="math-inline">(k-1)</span> 步的分解
+在对称情况下，剔除过程本质上与刚才描述的锁定过程相同。然而，我们不是保留被收缩的 Ritz 向量和值，而是直接丢弃它们。之后，我们得到一个 <span class="math-inline">(k-1)</span> 步的分解
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">A V_2 = V_2 T_2 + r\tau e_{k-1}^*,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中 <span class="math-inline">[v_1 , V_2] = V Q</span>。
-除了可接受的舍入误差水平外，清除过程不会引入其他误差。
+其中 <span class="math-inline">[v_1 , V_2] = V Q</span>。通过剔除引入的误差仅限于可接受的舍入误差水平。
 
 <p>
-需要注意的是，并不要求 <span class="math-inline">y</span> 是 <span class="math-inline">T</span> 的精确特征向量。
-只需满足残差 <span class="math-inline">y^* T Q = \theta e_1^* </span> 的逐分量精度条件，我们将在下一小节讨论这一点。
-此外，在清除情况下，不需要特征向量的最后一个元素 <span class="math-inline">\eta</span> 很小。
-然而，当它不小的时候，使用精确位移的隐式重启机制足以清除 <span class="math-inline">\theta </span>。
-最后，这一过程在复数运算中仍然有效，只需进行一些符号上的小修改。
+需要注意的是，并不要求 <span class="math-inline">y</span> 是 <span class="math-inline">T</span> 的精确特征向量。只需满足残差 <span class="math-inline">y^* T Q = \theta e_1^* </span> 达到我们将在下一小节讨论的逐分量精度条件即可。此外，在剔除情况下，不需要特征向量的最后一个元素 <span class="math-inline">\eta</span> 很小。然而，当它不小的时候，带有精确位移的隐式重启机制足以剔除 <span class="math-inline">\theta </span>。最后，这一过程在复数运算中通过轻微的符号修改也是有效的。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -138,16 +116,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html2665"
-  href="node128.html">Stability of .</a>
-<b> Up:</b> <a name="tex2html2659"
-  href="node124.html">Orthogonal Deflating Transformation</a>
-<b> Previous:</b> <a name="tex2html2653"
-  href="node126.html">Locking .</a>
- &nbsp <b>  <a name="tex2html2661"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html2663"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html2665" href="node128.html">Stability of .</a>
+<b>上一级：</b><a name="tex2html2659" href="node124.html">正交收缩变换</a>
+<b>上一节：</b><a name="tex2html2653" href="node126.html">Locking .</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

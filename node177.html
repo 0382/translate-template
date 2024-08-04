@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li </title>
-<meta name="description" content="Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node176.html">
-<link rel="up" href="node155.html">
-<link rel="next" href="node178.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3415"
   href="node178.html">
@@ -79,42 +73,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3416"
-  href="node178.html">Positive Definite</a>
-<b> Up:</b> <a name="tex2html3410"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3406"
-  href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
- &nbsp <b>  <a name="tex2html3412"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3414"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3416" href="node178.html">Positive Definite</a>
+<b>上一级：</b><a name="tex2html3410" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3406" href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001470000000000000000"></a><a name="sec:gsym_pert"></a><a name="18145"></a>
 <a name="18146"></a>
 <br>
 稳定性与精度评估
-<br>&nbsp; <em>Z. Bai 和 R. Li</em>
+<br>&nbsp; <em>Z. 白(Z. Bai) 和 R. 李(R. Li)</em>
 </h1>
 
 <p>
-对于一个厄米矩阵对 <span class="math-inline">\{A,B\}</span> 的广义特征值问题，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 之一或它们的某个线性组合是正定的，这种情况在所有矩阵对广义特征值问题中占据独特地位，因为它在许多方面与第<a href="node85.html#chap:heig">4</a>章讨论的标准厄米特征值问题相似。这样的矩阵对被称为<em>厄米正定对</em>。我们将分别考虑以下两种情况：
+对于一个厄米矩阵对 <span class="math-inline">\{A,B\}</span> 的广义特征值问题，其中 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 之一或它们的某种线性组合是正定的，这种情况在所有矩阵对广义特征值问题中占据独特地位，因为它在许多方面与第四章<a href="node85.html#chap:heig">4</a>讨论的标准厄米特征值问题相似。此类矩阵对被称为<em>厄米正定对</em>。我们将分别考虑以下两种情况：
 
 <ol>
-<li><span class="math-inline">B</span> 是正定的且条件良好，即
+<li><span class="math-inline">B</span> 是正定且良态的，这意味着
          
-<span class="math-inline">\kappa(B)\equiv \Vert B\Vert _2\Vert B^{-1}\Vert _2</span> 不是太大。<a name="tex2html30"
+<span class="math-inline">\kappa(B)\equiv \Vert B\Vert _2\Vert B^{-1}\Vert _2</span> 不太大。<a name="tex2html30"
   href="footnode.html#foot18151"><sup><button class="footnote"></button></sup></a>
 </li>
-<li>某些 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的组合是正定的且条件良好。
+<li>某些 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的组合是正定且良态的。
 </li>
 </ol>
-在本节中，我们仅回顾一些基本结果，这些结果可直接用于评估计算得到的特征值和特征向量的精度。我们假设在成功计算结束后，残差向量通常是可用的。如果不可用，它们可以在之后以边际成本计算。
+在本节中，我们仅回顾一些基本结果，这些结果可直接用于评估计算得到的特征值和特征向量的准确性。我们假设在成功计算结束后通常可获得残差向量，如果不可获得，之后也可以较低成本计算。
 
 <p>
-关于稠密广义厄米特征问题的计算特征值和特征向量的误差估计处理，请参见《LAPACK 用户指南》第 4 章[<a
- href="node421.html#lapack">12</a>]。
+关于稠密广义厄米特征问题的计算特征值和特征向量的误差估计处理，请参见《LAPACK用户指南》第四章[<a href="node421.html#lapack">12</a>]。
 
 <p>
 <br><hr>
@@ -128,13 +116,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li><a name="tex2html3418"
   href="node179.html">残差向量。</a>
 <li><a name="tex2html3419"
-  href="node180.html">将残差误差转换为后向误差。</a>
+  href="node180.html">将残差误差转化为后向误差。</a>
 <li><a name="tex2html3420"
   href="node181.html">计算特征值的误差界限。</a>
 <li><a name="tex2html3421"
   href="node182.html">计算特征向量的误差界限。</a>
 <li><a name="tex2html3422"
-  href="node183.html">关于聚集特征值的备注。</a>
+  href="node183.html">关于聚类特征值的备注。</a>
 </ul>
 <li><a name="tex2html3423"
   href="node184.html">某些 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的组合是正定的</a>
@@ -142,13 +130,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li><a name="tex2html3424"
   href="node185.html">残差向量。</a>
 <li><a name="tex2html3425"
-  href="node186.html">将残差误差转换为后向误差。</a>
+  href="node186.html">将残差误差转化为后向误差。</a>
 <li><a name="tex2html3426"
   href="node187.html">计算特征值的误差界限。</a>
 <li><a name="tex2html3427"
   href="node188.html">计算特征向量的误差界限。</a>
 <li><a name="tex2html3428"
-  href="node189.html">关于聚集特征值的备注。</a>
+  href="node189.html">关于聚类特征值的备注。</a>
 </ul></ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
@@ -168,16 +156,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3416"
-  href="node178.html">Positive Definite</a>
-<b> Up:</b> <a name="tex2html3410"
-  href="node155.html">Generalized Hermitian Eigenvalue Problems</a>
-<b> Previous:</b> <a name="tex2html3406"
-  href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
- &nbsp <b>  <a name="tex2html3412"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3414"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3416" href="node178.html">Positive Definite</a>
+<b>上一级：</b><a name="tex2html3410" href="node155.html">广义厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html3406" href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

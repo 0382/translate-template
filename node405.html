@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Jacobi-Davidson Method with Cayley Transform</title>
-<meta name="description" content="Jacobi-Davidson Method with Cayley Transform">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Jacobi-Davidson Method with Cayley Transform">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node406.html">
-<link rel="previous" href="node402.html">
-<link rel="up" href="node398.html">
-<link rel="next" href="node406.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6990"
   href="node406.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6991"
-  href="node406.html">Preconditioned Lanczos Method</a>
-<b> Up:</b> <a name="tex2html6985"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6979"
-  href="node404.html">Example 11.2.2.</a>
- &nbsp <b>  <a name="tex2html6987"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6989"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6991" href="node406.html">预处理Lanczos方法</a>
+<b>上一级：</b><a name="tex2html6985" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6979" href="node404.html">Example 11.2.2.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002025000000000000000"></a>
@@ -99,38 +87,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-雅可比-戴维森方法在第&#167;<a href="node269.html#sec:jacdnonh">7.12</a>节中进行了讨论。
-雅可比-戴维森方法与戴维森方法的不同之处在于，需要求解的线性系统被投影到与当前Ritz向量正交的空间上。
-这导致了修正方程的求解
+雅可比-戴维森方法在第&#167;<a href="node269.html#sec:jacdnonh">7.12</a>节中进行了讨论。与戴维森方法不同的是，雅可比-戴维森方法将待解的线性系统投影到与当前里兹向量正交的空间上。这导致了解决校正方程的问题
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:correction"></a><div class="math-display">\left( I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)......_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j,</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:correction"></a><div class="math-display">\left( I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)......_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j,</div></td>
+<td WIDTH=10 align="RIGHT">
 (276)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 其中
-<span class="math-inline">(\theta_j,x_j)</span> 是第 <span class="math-inline">j</span> 次迭代的 Ritz 对。
-（注意通常在右侧残差前会有一个负号。）
-假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，即
+<span class="math-inline">(\theta_j,x_j)</span> 是第 <span class="math-inline">j</span> 次迭代的里兹对。（注意通常在右侧残差前放置一个减号。）假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，即
 
 <span class="math-inline">( I - x_j x_j^{\ast} / x_j^{\ast} x_j) w_j = w_j</span>。
 当使用不精确求解器时，我们有一个满足以下条件的残差 <span class="math-inline">s_j</span>
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">s_j = (A - \theta_j B) x_j- \left( I - \frac{B x_j x_j^{\ast} }{x_j^{\ast} B x_j}\right)(A - \theta_j B) w_j \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
-注意，由于假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，投影在 <span class="math-inline">w_j</span> 前的部分被省略了。
-我们可以将其改写为
+注意，由于假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，投影在 <span class="math-inline">w_j</span> 之前的部分被省略了。我们可以将其改写为
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="324" height="52" border="0"
  src="img3768.png"
  alt="\begin{eqnarray*}
@@ -145,32 +130,32 @@ s_j \\
 <span class="math-inline">\epsilon_j = -(x_j^{\ast} (A -\theta_j B) w_j) / ( x_j^{\ast} B x_j)</span>。
 
 <p>
-换句话说，修正方程的解 <span class="math-inline">w_j</span> 是通过凯莱变换
+换句话说，校正方程的解 <span class="math-inline">w_j</span> 是通过凯莱变换
 
-<span class="math-inline">T_{\mathrm{C}} = (A-\theta_j B)^{-1} (A-(\theta_j+\epsilon_j)B)</span> 作用于最近的 Ritz 向量得到的。
-示例 11.2.1 在 [<a href="node421.html#slvo96">411</a>] 中表明，随着收敛，<span class="math-inline">\epsilon_j</span> 趋向于零。
-凯莱变换的极点和零点都接近所需的特征值。
-这满足了 <span class="math-inline">Ax = \lambda Bx</span> 和 <span class="math-inline">T_{\mathrm{IC}} u = \eta u</span> 的特征向量之间良好匹配的条件，
-这在第&#167;<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>节的末尾有所阐述。
+<span class="math-inline">T_{\mathrm{C}} = (A-\theta_j B)^{-1} (A-(\theta_j+\epsilon_j)B)</span> 作用于最新的里兹向量得到的。
+示例 11.2.1 在 [<a
+ href="node421.html#slvo96">411</a>] 中显示，当收敛时，<span class="math-inline">\epsilon_j</span> 趋于零。凯莱变换的极点和零点都接近所需的特征值。这满足了在第&#167;<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>节末尾提到的 <span class="math-inline">Ax = \lambda Bx</span> 和 <span class="math-inline">T_{\mathrm{IC}} u = \eta u</span> 的特征向量之间良好匹配的条件。
 
 <p>
 以下观察有点有趣。
 由于
 <span class="math-inline">w_j = -\epsilon_j (A-\theta_j B)^{-1} B x_j + x_j</span>，
-当 <span class="math-inline">s_j=0</span> 时，我们从 <span class="math-inline">x_j^{\ast} w_j=0</span> 得到
+当 <span class="math-inline">s_j=0</span> 时，我们从
+<span class="math-inline">x_j^{\ast} w_j=0</span> 得到
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 
 <div class="math-display">\theta_j + \epsilon_j = \theta_j+ \frac{x_j^{\ast} x_j}{x_j^{\ast} (A-\theta_j B)^{-1} B x_j} \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
-因此，凯莱变换的极点是 <span class="math-inline">x_j</span> 的瑞利-里兹商，零点是目标为 <span class="math-inline">\theta_j</span> 的调和瑞利-里兹商。
+因此，凯莱变换的极点是 <span class="math-inline">x_j</span> 的瑞利-里兹商，零点是以 <span class="math-inline">\theta_j</span> 为目标的调和瑞利-里兹商。
 
 <p>
 <hr>
 
-</p><!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html6990"
   href="node406.html">
 <button class="navigate">下一节</button></a> 
@@ -187,16 +172,11 @@ s_j \\
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6991"
-  href="node406.html">Preconditioned Lanczos Method</a>
-<b> Up:</b> <a name="tex2html6985"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6979"
-  href="node404.html">Example 11.2.2.</a>
- &nbsp <b>  <a name="tex2html6987"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6989"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6991" href="node406.html">预处理Lanczos方法</a>
+<b>上一级：</b><a name="tex2html6985" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6979" href="node404.html">Example 11.2.2.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

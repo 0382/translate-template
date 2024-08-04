@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Lanczos Algorithm with SI.</title>
-<meta name="description" content="Lanczos Algorithm with SI.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Lanczos Algorithm with SI.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node172.html">
-<link rel="previous" href="node170.html">
-<link rel="up" href="node169.html">
-<link rel="next" href="node172.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3335"
   href="node172.html">
@@ -80,58 +73,54 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3336"
-  href="node172.html">Convergence Properties.</a>
-<b> Up:</b> <a name="tex2html3330"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3324"
-  href="node170.html">Algorithm.</a>
- &nbsp <b>  <a name="tex2html3332"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3334"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3336" href="node172.html">Convergence Properties.</a>
+<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3324" href="node170.html">Algorithm.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001450020000000000000">
-带移位反转的Lanczos算法</a>
+带位移反转的Lanczos算法</a>
 </h4>
-在许多实际应用中，移位反转变体是一种自然的选择。
+在许多实际应用中，位移反转变体是一种自然选择。
 它对应于以下选择：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_shift_invert"></a><div class="math-display">C=B(A-\sigma B)^{-1}\,.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_shift_invert"></a><div class="math-display">C=B(A-\sigma B)^{-1}\,.</div></td>
+<td WIDTH=10 align="RIGHT">
 (80)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这给出了接近选定移位点<span class="math-inline">\sigma</span>的特征值，并且在较少的步骤<span class="math-inline">j</span>后就能达到收敛。即使带有移位矩阵<span class="math-inline">(A-\sigma B)</span>的系统比直接变体中需要的<span class="math-inline">B</span>更麻烦，较少的步骤<span class="math-inline">j</span>通常会弥补这一点。
+这给出了接近所选位移点<span class="math-inline">\sigma</span>的特征值，并且我们可以在更少的步骤<span class="math-inline">j</span>后获得收敛。即使带有位移矩阵<span class="math-inline">(A-\sigma B)</span>的系统比直接变体中所需的<span class="math-inline">B</span>更难以解决，所需的较少步骤<span class="math-inline">j</span>通常会弥补这一点。
 
 <p>
-基本递归（<a href="node170.html#gen-herm-recursion">5.9</a>）被替换为
+基本递归公式（<a href="node170.html#gen-herm-recursion">5.9</a>）被替换为
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="si-gen-herm-recursion"></a><div class="math-display">B(A-\sigma B)^{-1}v_j=V_{j}T_{j}+re_j^{\ast}\;,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen-herm-recursion"></a><div class="math-display">B(A-\sigma B)^{-1}V_j=V_{j}T_{j}+re_j^{\ast}\;,</div></td>
+<td WIDTH=10 align="RIGHT">
 (81)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-现在使用<span class="math-inline">B^{-1}</span>-正交（<a href="node170.html#B-ortho">5.10</a>）基<span class="math-inline">V_j</span>和<span class="math-inline">B</span>正交辅助基<span class="math-inline">W_j</span>，其中<span class="math-inline">v_j=BW_j</span>。这两个基是双正交的，<span class="math-inline">V_j^{\ast}w_j=I_{j}</span>，与非对称双侧Lanczos算法（如第<a href="node244.html#sec:nsymlanczos">7.8</a>节所述）相比。
+现在使用<span class="math-inline">B^{-1}</span>-正交（<a href="node170.html#B-ortho">5.10</a>）基<span class="math-inline">V_j</span>和<span class="math-inline">B</span>正交辅助基<span class="math-inline">W_j</span>，其中<span class="math-inline">V_j=BW_j</span>。这两个基是双正交的，
+<span class="math-inline">V_j^{\ast}W_j=I_{j}</span>，与非对称双侧Lanczos算法（如第<a href="node244.html#sec:nsymlanczos">7.8</a>节所述）相比。
 
 <p>
 矩阵<span class="math-inline">T</span>是对称的，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="si-T-section"></a><div class="math-display">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j\,.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-T-section"></a><div class="math-display">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j\,.</div></td>
+<td WIDTH=10 align="RIGHT">
 (82)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -139,32 +128,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 <span class="math-inline">T_{j}</span>的特征解，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)},</div>
 </div>
 <br clear="ALL">
 <p></p>
-用于得到近似特征值
+用于获得近似特征值
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="si-appr-lambda"></a><div class="math-display">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}}</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-appr-lambda"></a><div class="math-display">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}}</div></td>
+<td WIDTH=10 align="RIGHT">
 (83)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 和近似特征向量
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="si-gen_eigenvector"></a><div class="math-display">x_i^{(j)}=W_js_i^{(j)}\,.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen_eigenvector"></a><div class="math-display">x_i^{(j)}=W_js_i^{(j)}\,.</div></td>
+<td WIDTH=10 align="RIGHT">
 (84)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
@@ -172,9 +161,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="388" height="140" border="0"
  src="img1561.png"
  alt="\begin{eqnarray*}
@@ -185,31 +174,31 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-其范数在以下量小时也很小
+其范数在以下量小时也小
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="si-gen_estimate_residual"></a><div class="math-display">\beta_js_{j,i}^{(j)}/\theta_i^{(j)}</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen_estimate_residual"></a><div class="math-display">\beta_js_{j,i}^{(j)}/\theta_i^{(j)}</div></td>
+<td WIDTH=10 align="RIGHT">
 (85)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这个近似不是标准的，而是原始特征问题的调和Ritz值（参见第<a href="node79.html#sec:algbasics">3.2</a>节的讨论）。
+这个近似不是标准的，而是原特征问题的调和Ritz值（参见第<a href="node79.html#sec:algbasics">3.2</a>节的讨论）。
 
 <p>
-与标准情况一样，我们可以监测
+与标准情况一样，我们可以监控
 <span class="math-inline">\beta_js_{j,i}^{(j)}/\theta_i^{(j)}</span>
-并在其变小时标记特征值<span class="math-inline">\lambda_i</span>为收敛，而无需实际执行矩阵向量乘法（<a href="node171.html#si-gen_eigenvector">5.20</a>）。我们保存这一操作，直到步骤<span class="math-inline">j</span>时估计表明收敛。
+并在其变小时标记特征值<span class="math-inline">\lambda_i</span>为收敛，而无需实际执行矩阵向量乘法（<a href="node171.html#si-gen_eigenvector">5.20</a>）。我们保存这一操作，直到步骤<span class="math-inline">j</span>时估计指示收敛。
 
 <p>
 我们得到以下算法。
 
 <p>
 <br>
-<a name="si-gen_approximate_eigenvectors"></a><a name="si-gen_convergence"></a><a name="si-gen_approximate_eigenvalues"></a><a name="si-gen_Reorthogonalize"></a><a name="si-gen_Operate"></a><a name="si-gen_h_starting_vector"></a><a name="si-Gen_Herm_Lanczos"></a><IMG
- width="598" height="318" align="bottom" border="0"
+<a name="si-gen_approximate_eigenvectors"></a><a name="si-gen_convergence"></a><a name="si-gen_approximate_eigenvalues"></a><a name="si-gen_Reorthogonalize"></a><a name="si-gen_Operate"></a><a name="si-gen_h_starting_vector"></a><a name="si-Gen_Herm_Lanczos"></a><img
+ width="598" height="318" align="BOTTOM" border="0"
  src="img1564.png"
  alt="\begin{algorithm}{Shift-and-Invert Lanczos Method for GHEP
 }
@@ -221,24 +210,24 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <br>
 
 <p>
-我们注意到，只有少数几个步骤与之前的直接迭代算法不同。在实际实现中，可以使用相同的程序进行这两种计算。让我们评论那些不同的步骤：
+我们注意到，只有少数步骤与之前的直接迭代算法不同。在实际实现中，可以使用相同的程序进行这两种计算。让我们评论那些不同的步骤：
 <dl COMPACT>
 <dt>(8)</dt>
-<dd>现在我们期望在较少的向量<span class="math-inline">j</span>数量上收敛，建议使用完全重正交化，即使选择性重正交化给出的结果足够准确。应用Gram-Schmidt正交化过程，
+<dd>现在我们期望对于相当少的向量<span class="math-inline">j</span>收敛，建议使用完全再正交化，即使选择性再正交化给出的结果足够准确。应用Gram-Schmidt正交化过程，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">r=r-W_j(W_j^{\ast}(Br))\,,</div>
 </div>
 <br clear="ALL">
 <p></p>
-直到<span class="math-inline">r</span>对基<span class="math-inline">W_j</span>是<span class="math-inline">B</span>-正交的。每次重正交化需要额外的一次<span class="math-inline">B</span>矩阵向量乘法，并且必须使用经典的Gram-Schmidt正交化过程。
+直到<span class="math-inline">r</span>对基<span class="math-inline">W_j</span>是<span class="math-inline">B</span>-正交的。我们需要每次再正交化额外进行一次<span class="math-inline">B</span>的矩阵向量乘法，并且必须使用经典的Gram-Schmidt正交化过程。
 
 <p>
-我们可以保存并使用辅助基<span class="math-inline">V_j</span>来节省额外的<span class="math-inline">B</span>操作，
+我们可以保存并使用辅助基<span class="math-inline">V_j</span>以节省额外的<span class="math-inline">B</span>操作，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">r=r-W_j(V_j^{\ast}r)\,.</div>
@@ -249,9 +238,9 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <p>
 </dd>
 <dt>(14)</dt>
-<dd>现在使用基<span class="math-inline">W_j</span>来得到特征向量（<a href="node171.html#si-gen_eigenvector">5.20</a>），
+<dd>现在使用基<span class="math-inline">W_j</span>来获取特征向量（<a href="node171.html#si-gen_eigenvector">5.20</a>），
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">x_i^{(j)}=W_js_i^{(j)}\;,</div>
@@ -265,41 +254,43 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 </dl> 
 
 <p>
-当我们运行移位反转算子（<a href="node171.html#gen_shift_invert">5.16</a>）时，我们分解
+当我们运行位移反转算子（<a href="node171.html#gen_shift_invert">5.16</a>）时，我们因子化
  <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma B)P</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma B)P</div></td>
+<td WIDTH=10 align="RIGHT">
 (86)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-对于适当的保持稀疏性的排列<span class="math-inline">P</span>，在开始时使用稀疏高斯消元法进行一次。
+对于适当的稀疏保持排列<span class="math-inline">P</span>，在开始时使用稀疏高斯消去法。
 
 <p>
 在实际迭代过程中，我们使用因子<span class="math-inline">L</span>和<span class="math-inline">U</span>，计算
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="gen_ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))</div></td>
+<td WIDTH=10 align="RIGHT">
 (87)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 在算法<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>的步骤(4)中。
 
 <p>
-如果特征值<span class="math-inline">\lambda</span>在移位<span class="math-inline">\sigma</span>的两侧，矩阵<span class="math-inline">A-\sigma B</span>是不定的，我们不能使用简单的Cholesky分解，而必须进行对称不定分解，例如Duff和Reid的MA47（参见第<a href="node385.html#sec:directsolvers">10.3</a>节）。这种类型的算法使得<span class="math-inline">D</span>块对角化，包含1x1和2x2块。很容易确定这种矩阵的惯性，这给出了关于移位<span class="math-inline">\sigma</span>两侧有多少特征值的信息。我们可以通过在端点处进行两次分解来确定区间内的特征值数量。这用于确保基于[<a href="node421.html#erru80">162</a>]和[<a href="node421.html#grls94">206</a>]的软件中计算了区间内的所有特征值。
+如果特征值<span class="math-inline">\lambda</span>在位移<span class="math-inline">\sigma</span>的两侧，矩阵<span class="math-inline">A-\sigma B</span>是不定的，我们不能使用简单的Cholesky分解，而必须进行对称不定分解，例如Duff和Reid的MA47（参见第<a href="node385.html#sec:directsolvers">10.3</a>节）。这种类型的算法使<span class="math-inline">D</span>块对角化，包含1x1和2x2块。很容易确定这种矩阵的惯性，这给出了关于位移<span class="math-inline">\sigma</span>两侧有多少特征值的信息。我们可以通过在端点进行两次因子化来确定区间内的特征值数量。这在基于[<a href="node421.html#erru80">162</a>]和[<a href="node421.html#grls94">206</a>]的软件中用于确保计算了区间内的所有特征值。
 
 <p>
-我们注意到，算法<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>不需要对矩阵<span class="math-inline">B</span>进行任何分解，并且当<span class="math-inline">B</span>是奇异矩阵时也可以应用。这在实际情况下并不罕见，但必须采取特殊预防措施以防止<span class="math-inline">B</span>的零空间分量进入计算；参见[<a href="node421.html#eric86">161</a>]或[<a href="node421.html#npej87">340</a>]。
+我们注意到，算法<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>不需要对矩阵<span class="math-inline">B</span>进行任何因子化，并且可以在<span class="math-inline">B</span>奇异时应用。这在实际情况下并不罕见，但必须采取特殊预防措施，以防止<span class="math-inline">B</span>的零空间分量进入计算；参见[<a href="node421.html#eric86">161</a>]或[<a href="node421.html#npej87">340</a>]。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+</dl><!--Navigation Panel-->
 <a name="tex2html3335"
   href="node172.html">
 <button class="navigate">下一节</button></a> 
@@ -316,16 +307,11 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3336"
-  href="node172.html">Convergence Properties.</a>
-<b> Up:</b> <a name="tex2html3330"
-  href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b> Previous:</b> <a name="tex2html3324"
-  href="node170.html">Algorithm.</a>
- &nbsp <b>  <a name="tex2html3332"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3334"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3336" href="node172.html">Convergence Properties.</a>
+<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos Methods &nbsp; A.</a>
+<b>上一节：</b><a name="tex2html3324" href="node170.html">Algorithm.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

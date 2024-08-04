@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Deflation</title>
-<meta name="description" content="Deflation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Deflation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node258.html">
-<link rel="previous" href="node256.html">
-<link rel="up" href="node256.html">
-<link rel="next" href="node258.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4678"
   href="node258.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4679"
-  href="node258.html">Basic Properties</a>
-<b> Up:</b> <a name="tex2html4673"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html4667"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
- &nbsp <b>  <a name="tex2html4675"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4677"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4679" href="node258.html">基本性质</a>
+<b>上一级：</b><a name="tex2html4673" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html4667" href="node256.html">Band Lanczos Method &nbsp;</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016101000000000000000"></a>
@@ -99,23 +87,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-正如在厄米特带状Lanczos方法中一样，使用多个初始向量需要一个合适的<i>缩减</i>过程，以删除块Krylov序列中线性及近似线性相关的向量。
-我们参考&#167;<a href="node132.html#rwf:bandsym_defl">4.6.1</a>节中关于厄米特情况下的缩减讨论。
+如同厄米带状Lanczos方法的情况，使用多个初始向量需要一个合适的<i>缩减</i>过程，以删除块Krylov序列中线性及近似线性相关的向量。关于厄米情况下的缩减讨论，请参见第<a href="node132.html#rwf:bandsym_defl">4.6.1节</a>。
 
 <p>
-在非厄米特情况下，缩减通常在右和左块Krylov序列中独立发生。
-右块Krylov序列中的<i>精确缩减</i>（参见<a href="node256.html#rwf:MBA1">7.60</a>）意味着序列中的某个向量，例如<span class="math-inline">A^i b_j</span>，
-在序列<a href="node256.html#rwf:MBA1">7.60</a>中与左侧的向量线性相关，并且该向量及其所有<span class="math-inline">A</span>倍数都从<a href="node256.html#rwf:MBA1">7.60</a>中移除。
-类似地，左块Krylov序列中的<i>精确缩减</i>（参见<a href="node256.html#rwf:MBA2">7.61</a>）意味着序列<a href="node256.html#rwf:MBA2">7.61</a>中的某个向量与之前的Krylov向量线性相关，并且该向量及其所有<span class="math-inline">A^T</span>倍数都从<a href="node256.html#rwf:MBA2">7.61</a>中移除。
-在右块Krylov序列<a href="node256.html#rwf:MBA1">7.60</a>中发生<span class="math-inline">m</span>次精确缩减后，剩余的未缩减向量跨越一个<span class="math-inline">A</span>不变子空间。
-此外，右Lanczos向量在<a href="node256.html#rwf:MBB">7.62</a>中构建了这个<span class="math-inline">A</span>不变子空间的一个合适基，并且Lanczos矩阵<span class="math-inline">T_j^{\rm (pr)}</span>（定义见&#167;<a href="node258.html#rwf:bandnsym_prop">7.10.2</a>）的所有特征值也是<span class="math-inline">A</span>的特征值。
-类似地，在左块Krylov序列<a href="node256.html#rwf:MBA2">7.61</a>中发生<span class="math-inline">p</span>次精确缩减后，剩余的未缩减向量跨越一个<span class="math-inline">A^T</span>不变子空间。
-左Lanczos向量在<a href="node256.html#rwf:MBB">7.62</a>中构建了这个<span class="math-inline">A^T</span>不变子空间的一个合适基，并且Lanczos矩阵<span class="math-inline">T_j^{\rm (pr)}</span>的所有特征值也是<span class="math-inline">A</span>的特征值。
+在非厄米情况下，缩减通常在右和左块Krylov序列中独立发生。右块Krylov序列中的<i>精确缩减</i>（参见<a href="node256.html#rwf:MBA1">7.60</a>）意味着序列中的某个向量，例如<span class="math-inline">A^i b_j</span>，与序列中<span class="math-inline">A^i b_j</span>左侧的向量线性相关，并且该向量及其所有<span class="math-inline">A</span>倍数从序列中移除。类似地，左块Krylov序列中的<i>精确缩减</i>（参见<a href="node256.html#rwf:MBA2">7.61</a>）意味着序列中的某个向量与之前的Krylov向量线性相关，并且该向量及其所有<span class="math-inline">A^T</span>倍数从序列中移除。在右块Krylov序列中发生<span class="math-inline">m</span>次精确缩减后，剩余的未缩减向量张成一个<span class="math-inline">A</span>不变子空间。此外，右Lanczos向量（参见<a href="node256.html#rwf:MBB">7.62</a>）为此<span class="math-inline">A</span>不变子空间构建了一个合适的基，并且Lanczos矩阵<span class="math-inline">T_j^{\rm (pr)}</span>（定义见第<a href="node258.html#rwf:bandnsym_prop">7.10.2节</a>）的所有特征值也是<span class="math-inline">A</span>的特征值。类似地，在左块Krylov序列中发生<span class="math-inline">p</span>次精确缩减后，剩余的未缩减向量张成一个<span class="math-inline">A^T</span>不变子空间。左Lanczos向量（参见<a href="node256.html#rwf:MBB">7.62</a>）为此<span class="math-inline">A^T</span>不变子空间构建了一个合适的基，并且Lanczos矩阵<span class="math-inline">T_j^{\rm (pr)}</span>的所有特征值也是<span class="math-inline">A</span>的特征值。
 
 <p>
-当然，在有限精度算术中，无法区分完全线性相关和近似线性相关的向量。
-因此，在实践中，近似线性相关的向量也必须被检测和删除。
-在下文中，我们将检测和删除线性相关及近似线性相关向量的过程称为<i>缩减</i>。
+当然，在有限精度算法中，无法区分完全线性相关和近似线性相关的向量。因此，在实践中，近似线性相关的向量也必须被检测和删除。后续我们将把检测和删除线性相关及近似线性相关向量的过程称为<i>缩减</i>。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -135,16 +113,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4679"
-  href="node258.html">Basic Properties</a>
-<b> Up:</b> <a name="tex2html4673"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html4667"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
- &nbsp <b>  <a name="tex2html4675"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4677"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4679" href="node258.html">基本性质</a>
+<b>上一级：</b><a name="tex2html4673" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html4667" href="node256.html">Band Lanczos Method &nbsp;</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

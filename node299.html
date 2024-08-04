@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Stopping Criteria and Accuracy Assessment</title>
-<meta name="description" content="Stopping Criteria and Accuracy Assessment">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Stopping Criteria and Accuracy Assessment">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node300.html">
-<link rel="previous" href="node298.html">
-<link rel="up" href="node296.html">
-<link rel="next" href="node300.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5335"
   href="node300.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5336"
-  href="node300.html">Singular</a>
-<b> Up:</b> <a name="tex2html5330"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5324"
-  href="node298.html">Algorithm</a>
- &nbsp <b>  <a name="tex2html5332"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5334"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5336" href="node300.html">Singular</a>
+<b>上一级：</b><a name="tex2html5330" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5324" href="node298.html">算法</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001763000000000000000"></a> <a name="subsec:accuracy"></a>
@@ -98,58 +86,53 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-由于对称不定线性束的特征问题不具备任何特殊的数学性质，我们可以借鉴针对一般非厄米矩阵开发的技术来评估不定线性束近似特征三元组的品质。尽管如此，我们可以利用对称性来简化分析，进而简化误差界限。这种简化的基础在于右特征向量和左特征向量之间的简单关系，即 <span class="math-inline">H^{-1} B</span> 的右特征向量 <span class="math-inline">x</span> 对应的左特征向量为 <span class="math-inline">y = B\bar{x}</span>。
+由于对称不定矩阵束的特征问题不具备任何特殊的数学性质，我们可以借鉴针对一般非厄米矩阵开发的技术来评估不定矩阵束近似特征三元组的品质。尽管如此，我们可以利用对称性来简化分析并随后确定误差界限。这种简化的基础在于右和左特征向量之间的简单关系，即 <span class="math-inline">H^{-1} B</span> 的右特征向量 <span class="math-inline">x</span> 对应的左特征向量为 <span class="math-inline">y = B\bar{x}</span>。
 
 <p>
-为了评估一个Ritz三元组
+为了评估 Ritz 三元组
 
 <span class="math-inline">\{ \theta^{(j)}_i,{x}^{(j)}_i,{y}^{(j)}_i \}</span> 的精度，根据第&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>节的讨论，已知存在一个矩阵 <span class="math-inline">E^{(j)}_i</span> 使得
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">(H^{-1} B - E^{(j)}_i ) {x}^{(j)}_i =\theta^{(j)}_i {x}^{......^{-1} B - E^{(j)}_i ) =\theta^{(j)}_i ({y}^{(j)}_i)^{\ast},</div>
+<div class="math-display">(H^{-1} B - E^{(j)}_i ) {x}^{(j)}_i =\theta^{(j)}_i {x}^{(j)}_i,</div>
+<div class="math-display">(H^{-1} B - E^{(j)}_i ) =\theta^{(j)}_i ({y}^{(j)}_i)^{\ast},</div>
 </div>
 <br clear="ALL">
 <p></p>
 其中
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">\Vert E^{(j)}_i\Vert _2 = \max \left\{\frac{\Vert r^{(j)}......Vert s^{(j)}_i\Vert _2}{\Vert{y}^{(j)}_i\Vert _2}\right\}.</div>
+<div class="math-display">\Vert E^{(j)}_i\Vert _2 = \max \left\{\frac{\Vert r^{(j)}_i\Vert _2}{\Vert{x}^{(j)}_i\Vert _2}, \frac{\Vert s^{(j)}_i\Vert _2}{\Vert{y}^{(j)}_i\Vert _2}\right\}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-实际上，<span class="math-inline">\Vert E^{(j)}_i\Vert _2</span> 是最优的向后误差。根据标准的一阶扰动展开或第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节中提出的误差界限，存在一个 <span class="math-inline">H^{-1} B</span> 的特征值 <span class="math-inline">\mu</span>，使得
+事实上，<span class="math-inline">\Vert E^{(j)}_i\Vert _2</span> 是最优的后向误差。根据标准的一阶扰动展开或第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节中提出的误差界限，存在 <span class="math-inline">H^{-1} B</span> 的一个特征值 <span class="math-inline">\mu</span>，使得
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<a name="directerrest"></a><IMG
+<a name="directerrest"></a><img
  width="512" height="147" border="0"
  src="img2957.png"
  alt="\begin{eqnarray*}
 \vert \mu - \theta^{(j)}_i \vert &amp; \lapproxeq &amp;
-\frac{\Vert{...
-... _2,
-\Vert{x}^{(j)}_i\Vert _2 \Vert Bq_{j+1}\Vert _2 \right\},
+\frac{\Vert{x}^{(j)}_i\Vert _2 \Vert Bq_{j+1}\Vert _2}{\vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert},
 \end{eqnarray*}">
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-这里我们利用了方程(<a href="node298.html#normRk">8.24</a>)、(<a href="node298.html#normSk">8.25</a>)以及等式
+我们利用了方程 (<a href="node298.html#normRk">8.24</a>)、(<a href="node298.html#normSk">8.25</a>) 以及等式
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">({y}^{(j)}_i)^{\ast} {x}^{(j)}_i =(u^{(j)}_i)^T Q^T_j B Q_j u^{(j)}_i = (u^{(j)}_i)^T \Omega_j u^{(j)}_i.</div>
 </div>
 <br clear="ALL">
 <p></p>
-此外，为了避免界限明确涉及Ritz向量 <span class="math-inline">{x}^{(j)}_i</span>，我们注意到
+此外，为了避免界限中显式涉及 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>，我们注意到
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\Vert{x}^{(j)}_i\Vert _2 = \Vert Q_j u^{(j)}_i\Vert _2 \leq \Vert Q_j\Vert _F \leq \sqrt{j}</div>
 </div>
@@ -157,60 +140,53 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p></p>
 以及
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\Vert{y}^{(j)}_i\Vert _2 = \Vert B Q_j \bar{u}^{(j)}_i\Vert _2 \leq \Vert B Q_j \Vert _F,</div>
 </div>
 <br clear="ALL">
 <p></p>
-这里假设 <span class="math-inline">\Vert u^{(j)}_i\Vert = 1</span>。回想一下，<span class="math-inline">Q_j</span> 的列向量被归一化为1。
+假设 <span class="math-inline">\Vert u^{(j)}_i\Vert = 1</span>。回想一下，<span class="math-inline">Q_j</span> 的列被归一化为 1。
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\Vert B Q_j \Vert^2_F = \sum^j_{i=1} \Vert Bq_i\Vert^2_2</div>
 </div>
 <br clear="ALL">
 <p></p>
-的值可以在每次Lanczos迭代中更新。因此，误差 <span class="math-inline">\vert \mu - \theta^{(j)}_i \vert</span> 也可以被界限为
+可以在每次 Lanczos 迭代中更新。因此，误差 <span class="math-inline">\vert \mu - \theta^{(j)}_i \vert</span> 也可以被界限为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">\vert \mu - \theta^{(j)}_i \vert \lapproxeq\frac{1}{ \ver......\Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\},</div>
+<div class="math-display">\vert \mu - \theta^{(j)}_i \vert \lapproxeq\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\},</div>
 </div>
 <br clear="ALL">
 <p></p>
-这并不明确使用Ritz向量 <span class="math-inline">{x}^{(j)}_i</span>。总之，可以使用
+这并不显式使用 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。综上所述，可以在算法 <a href="node298.html#alg:jsymlan">8.4</a> 的内循环中（即步骤 (19)）使用
 <br>
-<div align="right">
+<div align="RIGHT">
 
-
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="eq:proverrest"></a><div class="math-display">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \cd......{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\}</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:proverrest"></a><div class="math-display">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\}</div></td>
+<td WIDTH=10 align="RIGHT">
 (239)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-作为算法<a href="node298.html#alg:jsymlan">8.4</a>（即步骤(19)）内循环中的临时误差估计。只有在所需数量的Ritz值 <span class="math-inline">\theta^{(j)}_i</span> 通过了此测试后，才能计算Ritz向量 <span class="math-inline">{x}^{(j)}_i</span>。此时，可以额外计算更精确的因子，
+作为临时误差估计。只有在所需数量的 Ritz 值 <span class="math-inline">\theta^{(j)}_i</span> 通过此测试后，才可以计算 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。此时，可以以形成 <span class="math-inline">B{x}_i^{(j)}</span> 的额外成本计算更精确的因子，
 <br><p></p>
-<div align="center">
-
+<div align="CENTER">
 
 <div class="math-display">\max\left\{ \Vert B\bar{{x}}^{(j)}_i\Vert _2,\Vert{x}^{(j)}_i\Vert _2 \Vert Bq_{j+1}\Vert _2 \right\},</div>
 </div>
 <br clear="ALL">
 <p></p>
-这需要额外的成本来形成 <span class="math-inline">B{x}_i^{(j)}</span>。
 
 <p>
-Ritz值 <span class="math-inline">\theta_i^{(j)}</span> 近似于 <span class="math-inline">H^{-1} B</span> 的特征值，而量 <span class="math-inline">\sigma+1/\theta_i^{(j)}</span> 近似于原始问题<a href="node296.html#eq:gsymep">8.21</a>的特征值 <span class="math-inline">\lambda</span>。我们可以使用上述界限来估计
+Ritz 值 <span class="math-inline">\theta_i^{(j)}</span> 近似于 <span class="math-inline">H^{-1} B</span> 的特征值，而量 <span class="math-inline">\sigma+1/\theta_i^{(j)}</span> 近似于原问题 (<a href="node296.html#eq:gsymep">8.21</a>) 的特征值 <span class="math-inline">\lambda</span>。我们可以使用上述界限估计
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
-
-<div class="math-display">\left\vert\lambda-\left(\sigma+\frac{1}{\theta_i^{(j)}} \rig......c{\vert\mu - \theta_i^{(j)}\vert}{\vert\theta_i^{(j)}\vert^2}.</div>
+<div class="math-display">\left\vert\lambda-\left(\sigma+\frac{1}{\theta_i^{(j)}} \right)\right\vert \lapproxeq\frac{\vert\mu - \theta_i^{(j)}\vert}{\vert\theta_i^{(j)}\vert^2}.</div>
 </div>
 <br clear="ALL">
 <p></p>
@@ -233,16 +209,11 @@ Ritz值 <span class="math-inline">\theta_i^{(j)}</span> 近似于 <span class="m
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5336"
-  href="node300.html">Singular</a>
-<b> Up:</b> <a name="tex2html5330"
-  href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b> Previous:</b> <a name="tex2html5324"
-  href="node298.html">Algorithm</a>
- &nbsp <b>  <a name="tex2html5332"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5334"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5336" href="node300.html">Singular</a>
+<b>上一级：</b><a name="tex2html5330" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>上一节：</b><a name="tex2html5324" href="node298.html">算法</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

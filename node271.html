@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Schur Form and Restart</title>
-<meta name="description" content="Schur Form and Restart">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Schur Form and Restart">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node272.html">
-<link rel="previous" href="node270.html">
-<link rel="up" href="node269.html">
-<link rel="next" href="node272.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4881"
   href="node272.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4882"
-  href="node272.html">Computing Interior Eigenvalues</a>
-<b> Up:</b> <a name="tex2html4876"
-  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html4870"
-  href="node270.html">Generalization of Hermitian Case</a>
- &nbsp <b>  <a name="tex2html4878"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4880"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4882" href="node272.html">计算内部特征值</a>
+<b>上一级：</b><a name="tex2html4876" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html4870" href="node270.html">Hermitian情形的推广</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016122000000000000000"></a><a name="sec:jdrsf"></a><a name="26169"></a>
@@ -98,31 +86,33 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如果我们希望包含重启和缩减机制，那么情况会变得更加复杂，因为非厄米矩阵通常不具备正交的特征系统。由于我们倾向于至少在测试子空间中使用正交基，因此我们计算缩减矩阵的舒尔形式。我们不是计算矩阵 <span class="math-inline">A</span> 的特征向量，而是计算其部分舒尔形式 <span class="math-inline">A{Q}_{k}={Q}_{k}{R}_{k}</span>，其中 <span class="math-inline">{Q}_{k}</span> 是一个 <span class="math-inline">n</span> 乘 <span class="math-inline">{k}</span> 的正交矩阵，而 <span class="math-inline">{R}_{k}</span> 是一个 <span class="math-inline">{k}</span> 乘 <span class="math-inline">{k}</span> 的上双对角矩阵。一个适应舒尔形式的方案在算法&nbsp;<a href="node271.html#alg:jdqrasym">7.18</a> 中给出。该方案包括当当前子空间的维度超过 <span class="math-inline">{m}_{\max}</span> 时进行重启的可能性。
+如果我们希望结合重启和缩减技术，情况会变得更加复杂，因为非厄米矩阵通常不具备正交的特征系统。由于我们倾向于至少在测试子空间中使用正交基，因此我们计算缩减矩阵的舒尔形式。我们不是计算矩阵 <span class="math-inline">A</span> 的特征向量，而是计算其部分舒尔形式 
+<span class="math-inline">A{Q}_{k}={Q}_{k}{R}_{k}</span>，其中 <span class="math-inline">{Q}_{k}</span> 是一个 <span class="math-inline">n</span> 乘 <span class="math-inline">{k}</span> 的正交矩阵，而 <span class="math-inline">{R}_{k}</span> 是一个 <span class="math-inline">{k}</span> 乘 <span class="math-inline">{k}</span> 的上三对角矩阵。一个适应舒尔形式的方案在算法&nbsp;<a href="node271.html#alg:jdqrasym">7.18</a> 中给出。该方案包括当当前子空间的维度超过 <span class="math-inline">{m}_{\max}</span> 时进行重启的可能性。
 
 <p>
-该方案计算复平面上接近目标 <span class="math-inline">\tau </span> 的 <span class="math-inline">{k}_{\max}</span> 个特征值。在这里我们必须采用不精确的方法，因为一般非厄米矩阵的特征值在复平面上是无序的。哪些里兹值被作为接近的特征值传递，取决于多种因素，包括相应特征向量的角度。通常，如果 <span class="math-inline">\tau </span> 选择在特征值分布的外部，那么从里兹值中进行选择是合适的。如果我们希望计算接近某个内部点的 <span class="math-inline">{M}</span> 的特征值，那么该方案可能效果不佳，我们建议在这种情况下使用调和里兹值。内部特征值的方案将在&#167;<a href="node272.html#sec:unsymhar">7.12.3</a> 中介绍。
+该方案计算复平面上接近目标 <span class="math-inline">\tau </span> 的 <span class="math-inline">{k}_{\max}</span> 个特征值。在这里我们必须采取不精确的方法，因为一般非厄米矩阵的特征值在复平面上是无序的。哪些 Ritz 值被选为接近的特征值，除了其他因素外，还取决于相应特征向量的角度。通常，如果 <span class="math-inline">\tau </span> 选在特征值分布的外部，从 Ritz 值中进行选择是合适的。如果我们希望计算接近某个内部点的 <span class="math-inline">{M}</span> 的特征值，那么该方案可能效果不佳，我们建议在这种情况下使用调和 Ritz 值。计算内部特征值的方案将在 &#167;<a href="node272.html#sec:unsymhar">7.12.3</a> 中介绍。
 
 <p>
 <br>
-<a name="alg:jdqrasym"></a><IMG
- width="598" height="671" align="bottom" border="0"
+<a name="alg:jdqrasym"></a><img
+ width="598" height="671" align="BOTTOM" border="0"
  src="img2530.png"
  alt="\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">k_{\max}</span>Exterior Eigenvalues for...
-...widetilde{r}$\ \\
+...widetilde{r}<span class="math-inline">\ \\
 {\rm (28)} \&gt; {\bf end while}
 \end{tabbing}}
 \end{algorithm}">
 <br>
 
 <p>
-要应用此算法，我们需要指定一个初始向量 <span class="math-inline">{v}_0</span>，一个容差 <span class="math-inline">\epsilon</span>，一个目标值 <span class="math-inline">\tau </span>，以及一个指定应计算多少个接近 <span class="math-inline">\tau </span> 的特征对的数字 <span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span> 的值表示搜索子空间的最大维度。如果超过此值，则以指定维度的子空间 <span class="math-inline">{m}_{\min}</span> 进行重启。
+要应用此算法，我们需要指定一个初始向量 </span>{v}_0<span class="math-inline">，一个容差 </span>\epsilon<span class="math-inline">，一个目标值 </span>\tau <span class="math-inline">，以及一个指定应计算多少个接近 </span>\tau <span class="math-inline"> 的特征对的数字 </span>{k}_{\max}<span class="math-inline">。</span>{m}_{\max}<span class="math-inline"> 的值表示搜索子空间的最大维度。如果超过此值，则以指定维度 </span>{m}_{\min}<span class="math-inline"> 的子空间进行重启。
 
 <p>
-完成后，将传递接近 <span class="math-inline">\tau </span> 的 <span class="math-inline">{k}_{\max}</span> 个特征值，以及相应的缩减舒尔形式 <span class="math-inline">aq=QR</span>，其中 <span class="math-inline">Q</span> 是 <span class="math-inline">n</span> 乘 <span class="math-inline">k_{\max}</span> 的正交矩阵，<span class="math-inline">R</span> 是 <span class="math-inline">k_{\max}</span> 乘 <span class="math-inline">k_{\max}</span> 的上三角矩阵。特征值位于 <span class="math-inline">R</span> 的对角线上。计算的舒尔形式满足 <span class="math-inline">\Vert A q_{j}- {Q} R e_{j}\Vert _2\leq j \epsilon</span>，其中 <span class="math-inline">q_j</span> 是 <span class="math-inline">Q</span> 的第 <span class="math-inline">j</span> 列。
+完成后，将提供接近 </span>\tau <span class="math-inline"> 的 </span>{k}_{\max}<span class="math-inline"> 个特征值，以及相应的缩减舒尔形式 </span>AQ=QR<span class="math-inline">，其中 </span>Q<span class="math-inline"> 是 </span>n<span class="math-inline"> 乘 </span>k_{\max}<span class="math-inline"> 的正交矩阵，</span>R<span class="math-inline"> 是 </span>k_{\max}<span class="math-inline"> 乘 </span>k_{\max}<span class="math-inline"> 的上三角矩阵。特征值位于 </span>R<span class="math-inline"> 的对角线上。计算的舒尔形式满足 
+</span>\Vert A q_{j}- {Q} R e_{j}\Vert _2\leq j \epsilon<span class="math-inline">，其中 </span>q_j<span class="math-inline"> 是 </span>Q<span class="math-inline"> 的第 </span>j<span class="math-inline"> 列。
 
 <p>
-现在我们将讨论算法的各个组成部分。
+现在我们将讨论算法的组成部分。
 
 <p>
 <dl>
@@ -134,84 +124,85 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(3)-(4)</strong></dt>
 <dd><p>
-新向量 <span class="math-inline">{t}</span> 通过修正的 Gram-Schmidt 方法与当前搜索子空间正交化。为了提高数值稳定性，可以使用算法&nbsp;<a href="node138.html#alg:rgs">4.14</a> 中给出的迭代修正 Gram-Schmidt 模板来替换此步骤。
+新向量 </span>{t}<span class="math-inline"> 通过改进的 Gram-Schmidt 方法与当前搜索子空间正交。为了提高数值稳定性，可以使用算法&nbsp;<a href="node138.html#alg:rgs">4.14</a> 中给出的迭代改进的 Gram-Schmidt 模板进行替换。
 
 <p>
-如果 <span class="math-inline">{m}=0</span>，那么这是一个空循环。
+如果 </span>{m}=0<span class="math-inline">，则这是一个空循环。
 
 <p>
-如果新向量 <span class="math-inline">{t}</span> 与搜索子空间之间的角度非常小，那么得到的向量 <span class="math-inline">{v}_j</span> 几乎没有意义，方法实际上会停滞不前。一个随机向量 <span class="math-inline">{t}</span> 有助于克服这种停滞。更复杂的策略可以在 [<a href="node421.html#gesl98">190</a>] 中找到。
+如果新向量 </span>{t}<span class="math-inline"> 与搜索子空间之间的角度非常小，则生成的向量 </span>{v}_j<span class="math-inline"> 几乎没有意义，方法实际上会停滞。一个随机向量 </span>{t}<span class="math-inline"> 有助于克服这种停滞。更复杂的策略可以在 [<a href="node421.html#gesl98">190</a>] 中找到。
 
 <p>
 </dd>
 <dt><strong>(6)-(8)</strong></dt>
 <dd><p>
-我们计算密集矩阵的最后一列和行
+我们计算稠密矩阵的最后一列和行
 
-<span class="math-inline">{M}\equiv V^\ast av=V^\ast V^A</span>（阶数为 <span class="math-inline">m</span>）；
-<span class="math-inline">{V^A}\equiv A{V}</span>。矩阵 <span class="math-inline">{V}</span> 表示列向量为 <span class="math-inline">{v}_j</span> 的 <span class="math-inline">n</span> 乘 <span class="math-inline">{m}</span> 矩阵，<span class="math-inline">{V^A}</span> 同样。
+</span>{M}\equiv V^\ast AV=V^\ast V^A<span class="math-inline">（阶数为 </span>m<span class="math-inline">）；
+</span>{V^A}\equiv A{V}<span class="math-inline">。矩阵 </span>{V}<span class="math-inline"> 表示列向量为 </span>{v}_j<span class="math-inline"> 的 </span>n<span class="math-inline"> 乘 </span>{m}<span class="math-inline"> 矩阵，</span>{V^A}<span class="math-inline"> 同样。
 
 <p>
 </dd>
 <dt><strong>(9)</strong></dt>
 <dd><p>
-<span class="math-inline">{m}</span> 乘 <span class="math-inline">{m}</span> 矩阵 <span class="math-inline">{M}</span> 的舒尔约简可以通过标准稠密特征问题求解器解决。我们选择计算标准里兹值，这使得算法适合于计算接近指定 <span class="math-inline">\tau </span> 的 <span class="math-inline">A</span> 的 <span class="math-inline">{k}_{\max}</span> 个外部特征值。如果需要计算谱内部部分的特征值，则建议使用调和里兹值；参见&#167;<a href="node272.html#sec:unsymhar">7.12.3</a>。
+</span>{m}<span class="math-inline"> 乘 </span>{m}<span class="math-inline"> 矩阵 </span>{M}<span class="math-inline"> 的舒尔约简可以通过标准稠密特征问题求解器解决。我们选择计算标准 Ritz 值，这使得算法适合计算接近指定 </span>\tau <span class="math-inline"> 的 </span>{k}_{\max}<span class="math-inline"> 个外部特征值。如果必须计算谱内部部分的特征值，则建议使用调和 Ritz 值；参见 &#167;<a href="node272.html#sec:unsymhar">7.12.3</a>。
 
 <p>
-在每一步中，舒尔形式必须进行排序，使得 <span class="math-inline">{T}_{1,1}</span> 最接近 <span class="math-inline">\tau </span>。只有当 <span class="math-inline">{m}\geq {m}_{\max}</span> 时，舒尔形式的排序才必须使得 <span class="math-inline">{T}</span> 的所有 <span class="math-inline">{m}_{\max}</span> 个前导对角元素最接近 <span class="math-inline">\tau </span>。为了便于展示，我们在这里对所有对角元素进行了排序。
+在每一步中，舒尔形式必须排序，使得 </span>{T}_{1,1}<span class="math-inline"> 最接近 </span>\tau <span class="math-inline">。只有当 </span>{m}\geq {m}_{\max}<span class="math-inline"> 时，舒尔形式的排序才必须使得 </span>{T}<span class="math-inline"> 的所有 </span>{m}_{\max}<span class="math-inline"> 个前导对角元素最接近 </span>\tau <span class="math-inline">。为了便于表示，我们在这里对所有对角元素进行了排序。
 
 <p>
 有关舒尔形式排序算法的模板，请参见 [<a href="node421.html#vand81">448</a>,<a href="node421.html#vand82">449</a>,<a href="node421.html#BDe93b">33</a>,<a href="node421.html#fokk96">171</a>, Chap.&nbsp;6B]。
 
 <p>
-<span class="math-inline">S</span> 是列向量为 <span class="math-inline">s_j</span> 的 <span class="math-inline">m</span> 乘 <span class="math-inline">m</span> 矩阵。
+</span>S<span class="math-inline"> 是一个 </span>m<span class="math-inline"> 乘 </span>m<span class="math-inline"> 的矩阵，列向量为 </span>s_j<span class="math-inline">。
 
 <p>
 </dd>
 <dt><strong>(11)</strong></dt>
-<dd>停止准则是在归一化舒尔向量近似的残差范数低于 <span class="math-inline">\epsilon</span> 时接受舒尔向量近似。这意味着我们接受计算特征值中的 <span class="math-inline">\epsilon</span> 量级的误差，以及舒尔向量中 <span class="math-inline">O(\epsilon)</span> 量级的角度误差（前提是所涉及的特征值是简单的且与其他特征值充分分离）。有关更定量的分析和比例常数，请参见&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>。
+<dd>停止准则是当残差范数（对于归一化舒尔向量近似）低于 </span>\epsilon<span class="math-inline"> 时接受舒尔向量近似。这意味着我们接受计算特征值中的不精确度在 </span>\epsilon<span class="math-inline"> 数量级，舒尔向量中的不精确度（在角度上）为 </span>O(\epsilon)<span class="math-inline">（前提是所关注的特征值是简单的且与其他特征值充分分离）。
+对于更定量的分析和比例常数，参见 &#167;<a href="node275.html#sec:errbds_nsym">7.13</a>。
 
 <p>
 无法保证检测到所有所需的特征值；参见算法&nbsp;<a href="node144.html#alg:jdqr">4.17</a> 的注释 (13)（第&nbsp;<a href="node144.html#alg:jdqr"><button class="crossref"></button></a> 页）。
 
 <p>
-如果矩阵是实的，那么所有特征对要么是实的，要么以复共轭对出现。如果检测到复共轭特征对，那么其共轭对也是已知的，并且可以一起进行缩减，这使得算法更加高效。
+如果矩阵是实的，则所有特征对要么是实的，要么以复共轭对出现。如果检测到复特征对，则其共轭已知，也可以进行缩减。这使得算法更高效。
 
 <p>
 </dd>
 <dt><strong>(15)-(16)</strong></dt>
 <dd><p>
-在接受一个里兹对之后，我们继续搜索下一个对，使用剩余的里兹向量作为初始搜索空间的基。
+在接受一个 Ritz 对后，我们继续搜索下一个对，剩余的 Ritz 向量作为初始搜索空间的基。
 
 <p>
 </dd>
 <dt><strong>(20)</strong></dt>
 <dd><p>
-一旦当前舒尔向量的搜索空间维度超过 <span class="math-inline">{m}_{\max}</span>，我们就进行重启。重启过程使用与目标值 <span class="math-inline">\tau </span> 最接近的 <span class="math-inline">{m}_{\min}</span> 个里兹向量张成的子空间。
+一旦当前舒尔向量的搜索空间维度超过 </span>{m}_{\max}<span class="math-inline">，我们就进行重启。重启过程以最接近目标值 </span>\tau <span class="math-inline"> 的 </span>{m}_{\min}<span class="math-inline"> 个 Ritz 向量所张成的子空间进行。
 
 <p>
 </dd>
 <dt><strong>(27)</strong></dt>
 <dd><p>
-我们将已锁定的（已计算的）舒尔向量收集在 <span class="math-inline">{Q}</span> 中，矩阵 <span class="math-inline">\tilde{Q}</span> 是 <span class="math-inline">{Q}</span> 扩展了当前舒尔向量近似 <span class="math-inline">{u}</span>。这样做是为了获得更紧凑的表述；校正方程等价于 (<a href="node142.html#eq:jddefl">4.50</a>) 中的方程。新校正 <span class="math-inline">{t}</span> 必须与 <span class="math-inline">{Q}</span> 的列以及 <span class="math-inline">{u}</span> 正交。
+我们将锁定的（已计算的）舒尔向量收集在 </span>{Q}<span class="math-inline"> 中，矩阵 </span>\tilde{Q}<span class="math-inline"> 是 </span>{Q}<span class="math-inline"> 扩展了当前舒尔向量近似 </span>{u}<span class="math-inline">。这样做是为了获得更紧凑的公式；校正方程等价于 (<a href="node142.html#eq:jddefl">4.50</a>) 中的方程。新校正 </span>{t}<span class="math-inline"> 必须与 </span>{Q}<span class="math-inline"> 的列以及 </span>{u}<span class="math-inline"> 正交。
 
 <p>
-当然，校正方程可以通过任何合适的进程来求解，例如设计用于求解非对称系统的预处理 Krylov 子空间方法。由于 <span class="math-inline">\widetilde{Q}</span> 的出现，在使用预处理矩阵 <span class="math-inline">A-\theta I</span> 时必须小心。预处理器的包含可以遵循与单向量 Jacobi-Davidson 算法相同的原则；参见算法&nbsp;<a href="node144.html#alg:corrit2">4.18</a> 的模板。确保迭代求解器的初始向量 <span class="math-inline">{t}_0</span> 满足正交约束 <span class="math-inline">\widetilde{Q}^\ast {t}_0=0</span>。请注意，如果在几次 Jacobi-Davidson 迭代中保持 <span class="math-inline">{K}</span> 不变，算法&nbsp;<a href="node144.html#alg:corrit2">4.18</a> 可以在每一步中节省大量计算。在这种情况下，可以从前一步中保存 <span class="math-inline">\widehat{Q}</span> 的列。同样，矩阵 <span class="math-inline">{\mathcal M}</span> 及其 <span class="math-inline">{\mathcal L}{\mathcal U}</span> 分解也可以从前一步更新。
+当然，校正方程可以通过任何合适的流程来求解，例如设计用于求解非对称系统的预处理 Krylov 子空间方法。由于 </span>\widetilde{Q}<span class="math-inline"> 的出现，在使用预处理矩阵 </span>A-\theta I<span class="math-inline"> 时必须小心。预处理器的包含可以遵循与单向量 Jacobi-Davidson 算法相同的原则；参见算法&nbsp;<a href="node144.html#alg:corrit2">4.18</a> 的模板。确保迭代求解器的初始向量 </span>{t}_0<span class="math-inline"> 满足正交约束 </span>\widetilde{Q}^\ast {t}_0=0<span class="math-inline">。注意，如果 </span>{K}<span class="math-inline"> 在几次 Jacobi-Davidson 迭代中保持不变，算法&nbsp;<a href="node144.html#alg:corrit2">4.18</a> 可以在每一步中节省显著的计算量。在这种情况下，可以从先前步骤中保存 </span>\widehat{Q}<span class="math-inline"> 的列。同样，矩阵 </span>{\mathcal M}<span class="math-inline"> 及其 </span>{\mathcal L}{\mathcal U}<span class="math-inline"> 分解也可以从先前步骤中更新。
 
 <p>
-没有必要非常精确地求解校正方程。一种常用于不精确牛顿方法的策略 [<a href="node421.html#dees83">113</a>]，在这里也很有效：随着 Jacobi-Davidson 迭代步骤增加精度，例如在校正方程中实现残差减少 <span class="math-inline">2^{-\ell}</span> 在第 <span class="math-inline">\ell</span> 次 Jacobi-Davidson 迭代中（当检测到舒尔向量时，<span class="math-inline">\ell</span> 重置为 0）。
+没有必要非常精确地求解校正方程。一种常用于不精确牛顿方法的策略 [<a href="node421.html#dees83">113</a>]，在这里也很有效：随着 Jacobi-Davidson 迭代步骤增加精度，例如在校正方程中实现残差减少 </span>2^{-\ell}<span class="math-inline"> 在第 </span>\ell<span class="math-inline"> 次 Jacobi-Davidson 迭代中（当检测到舒尔向量时，</span>\ell<span class="math-inline"> 重置为 0）。
 
 <p>
-特别是，在最初的几个初始步骤中，近似特征值 <span class="math-inline">\theta </span> 可能非常不准确，此时精确求解校正方程没有意义。在这个阶段，暂时将 <span class="math-inline">\theta </span> 替换为 <span class="math-inline">\tau </span> 或在校正方程中取 <span class="math-inline">{t}=-r</span> 可能更有效 [<a href="node421.html#mosc86">335</a>,<a href="node421.html#fosv98">172</a>]。
+特别是在最初的几次初始步骤中，近似特征值 </span>\theta <span class="math-inline"> 可能非常不准确，此时精确求解校正方程没有意义。在这个阶段，暂时将 </span>\theta <span class="math-inline"> 替换为 </span>\tau <span class="math-inline"> 或在搜索子空间扩展中取 </span>{t}=-r<span class="math-inline"> 可能更有效 [<a href="node421.html#mosc86">335</a>,<a href="node421.html#fosv98">172</a>]。
 
 <p>
 </dd>
 </dl>
 
 <p>
-关于缩减，参见&#167;<a href="node289.html#sec:jd_gnsym_defl">8.4.2</a>，其中 <span class="math-inline">Z_j</span> 替换为 <span class="math-inline">Q_j</span>，<span class="math-inline">B</span> 替换为 <span class="math-inline">I</span>。
+关于缩减，参见 &#167;<a href="node289.html#sec:jd_gnsym_defl">8.4.2</a>，其中 </span>Z_j<span class="math-inline"> 替换为 </span>Q_j<span class="math-inline">，</span>B<span class="math-inline"> 替换为 </span>I$。
 <a name="26454"></a>
-有关该方法的完整理论背景以及使用舒尔向量的缩减技术细节，请参见 [<a href="node421.html#fosv98">172</a>]。
+关于该方法的完整理论背景以及舒尔向量的缩减技术细节，参见 [<a href="node421.html#fosv98">172</a>]。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -231,16 +222,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4882"
-  href="node272.html">Computing Interior Eigenvalues</a>
-<b> Up:</b> <a name="tex2html4876"
-  href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b> Previous:</b> <a name="tex2html4870"
-  href="node270.html">Generalization of Hermitian Case</a>
- &nbsp <b>  <a name="tex2html4878"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4880"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4882" href="node272.html">计算内部特征值</a>
+<b>上一级：</b><a name="tex2html4876" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一节：</b><a name="tex2html4870" href="node270.html">Hermitian情形的推广</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

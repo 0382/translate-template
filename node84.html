@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Spectral Transformations &nbsp; R. Lehoucq and D. Sorensen </title>
-<meta name="description" content="Spectral Transformations &nbsp; R. Lehoucq and D. Sorensen ">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Spectral Transformations &nbsp; R. Lehoucq and D. Sorensen ">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node79.html">
-<link rel="up" href="node77.html">
-<link rel="next" href="node85.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1953"
   href="node85.html">
@@ -79,58 +73,55 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1954"
-  href="node85.html">Hermitian Eigenvalue Problems</a>
-<b> Up:</b> <a name="tex2html1948"
-  href="node77.html">An Introduction to Iterative</a>
-<b> Previous:</b> <a name="tex2html1944"
-  href="node83.html">Refined Projection Methods.</a>
- &nbsp <b>  <a name="tex2html1950"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1952"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1954" href="node85.html">厄米特征值问题</a>
+<b>上一级：</b><a name="tex2html1948" href="node77.html">An Introduction to Iterative</a>
+<b>上一节：</b><a name="tex2html1944" href="node83.html">Refined Projection Methods.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001230000000000000000"></a> <a name="spec_trans"></a><a name="6603"></a>
 <br>
 谱变换
-<br>&nbsp; <i>R. Lehoucq 和 D. Sorensen</i>
+<br>&nbsp; <i>R. 勒胡克(Lehoucq) 和 D. 索伦森(Sorensen)</i> 
 </h1>
 
 <p>
-众所周知，上一节中概述的迭代投影方法能迅速提供分离良好的极值特征值的近似值。然而，很多时候，所需的特征值可能并不分离良好，或者位于特征值凸包的内部。在这些情况下，迭代投影方法需要许多步骤才能生成可接受的近似值，如果它们能收敛的话。另一种选择是对<span class="math-inline">A</span>进行谱变换，使得这些分离不良的特征值转化为分离良好的极值特征值。当然，<span class="math-inline">A</span>的特征值应能从变换问题的特征值中轻易恢复，且变换在计算时间和存储方面应高效适用。
+众所周知，前一节概述的迭代投影方法能迅速提供良态分离极值特征值的近似值。然而，往往所需的特征值可能不是良态分离的，或者位于特征值凸包的内部。在这些情况下，迭代投影方法需要许多步骤才能生成可接受的近似值，如果它们能收敛的话。另一种方法是采用<span class="math-inline">A</span>的谱变换，使得这些病态分离的特征值被转换为良态分离的极值特征值。当然，<span class="math-inline">A</span>的特征值应能从变换问题的特征值中轻易恢复，且变换在计算时间和存储方面应是高效的。
 
 <p>
-分离良好（或非聚集）的特征值的概念可以粗略解释如下。一个分离良好的特征值<span class="math-inline">\lambda_i</span>满足<span class="math-inline">\vert\lambda_i - \lambda_j \vert > \tau \vert\lambda_n - \lambda_1\vert</span>，对于所有<span class="math-inline">j \ne i</span>且<span class="math-inline">\tau \gg\epsilon_M</span>。对于厄米矩阵，我们假设<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>，而对于非厄米矩阵，<span class="math-inline">\mathfrak{Re}(\lambda_1) \leq \mathfrak{Re}(\lambda_2) \leq \cdots \leq\mathfrak{Re}(\lambda_n)</span>。
+良态分离（或非聚集）特征值的概念可以粗略解释如下。一个良态分离的特征值<span class="math-inline">\lambda_i</span>满足<span class="math-inline">\vert\lambda_i - \lambda_j \vert &gt; \tau \vert\lambda_n - \lambda_1\vert</span>，对所有<span class="math-inline">j \ne i</span>且<span class="math-inline">\tau \gg\epsilon_M</span>。对于厄米矩阵，我们假设<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>，而对于非厄米矩阵，<span class="math-inline">\mathfrak{Re}(\lambda_1) \leq \mathfrak{Re}(\lambda_2) \leq \cdots \leq\mathfrak{Re}(\lambda_n)</span>。
 
 <p>
-通常使用的是移位-反演谱变换（SI）。如果<span class="math-inline">(\lambda,x)</span>是<span class="math-inline">A</span>的一个特征对，<span class="math-inline">Ax = \lambda x</span>，且<span class="math-inline">\sigma \ne \lambda</span>，那么移位-反演特征值问题<a name="6604"></a>为
+位移-逆变换（SI）是通常使用的谱变换。如果<span class="math-inline">(\lambda,x)</span>是<span class="math-inline">A</span>的特征对，<span class="math-inline">Ax = \lambda x</span>，且<span class="math-inline">\sigma \ne \lambda</span>，那么位移-逆特征值问题<a name="6604"></a>为
 <br>
-<div align="right">
+<div align="RIGHT">
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="spec"></a><div class="math-display">(A - \sigma I)^{-1} x = \nu x, \quad\mathrm{其中} \quad \nu = \frac{1}{\lambda - \sigma }.</div></td>
-<td width=10 align="right">
+
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="spec"></a><div class="math-display">(A - \sigma I)^{-1} x = \nu x, \quad\mathrm{其中} \quad \nu = \frac{1}{\lambda - \sigma }.</div></td>
+<td WIDTH=10 align="RIGHT">
 (15)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这种SI对于寻找接近<span class="math-inline">\sigma</span>的特征值非常有效，因为<span class="math-inline">C \equiv (A - \sigma I)^{-1}</span>中幅度最大的近邻特征值<span class="math-inline">\nu_j</span>对应于最接近移位<span class="math-inline">\sigma</span>的近邻特征值<span class="math-inline">\lambda_j</span>。这些变换后幅度最大的特征值正是最容易计算的特征值。一旦找到它们，就可以将它们转换回原始问题的特征值。直接关系为<br><p></p>
-<div align="center">
+这种SI变换对于寻找接近<span class="math-inline">\sigma</span>的特征值是有效的，因为<span class="math-inline">C \equiv (A - \sigma I)^{-1}</span>的接近<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\nu_j</span>中幅值最大的对应于最接近位移<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda_j</span>。这些变换后幅值最大的特征值正是最容易计算的特征值。一旦找到它们，就可以将它们转换回原始问题的特征值。直接关系为<br><p></p>
+<div align="CENTER">
+
 
 <div class="math-display">\lambda_j = \sigma +\frac{1}{\nu_j},</div>
 </div>
 <br clear="ALL">
 <p></p>
-并且与变换问题中的<span class="math-inline">\nu_j</span>相关联的特征向量<span class="math-inline">x_j</span>也是原始问题中对应于<span class="math-inline">\lambda_j</span>的（广义）特征向量。其他谱变换技术包括广义凯莱变换；详见[<a href="node421.html#mesr94">324</a>]。
+并且与变换问题中<span class="math-inline">\nu_j</span>相关的特征向量<span class="math-inline">x_j</span>也是原始问题对应于<span class="math-inline">\lambda_j</span>的（广义）特征向量。其他谱变换技术包括广义凯莱变换；详见[<a href="node421.html#mesr94">324</a>]。
 
 <p>
-SI在迭代步骤（即子空间的维度）方面极其有效，应尽可能使用。特别是在寻找内部特征值，或者所需特征值的幅度明显小于幅度最大的特征值，或者所需特征值聚集的情况下。
+SI在迭代步骤（即子空间维度）方面极其有效，应尽可能使用。特别是在寻找内部特征值，或者所需特征值在幅值上明显小于最大幅值特征值，或者所需特征值聚集的情况下。
 
 <p>
-谱变换的一个潜在缺点是必须求解涉及<span class="math-inline">A-\sigma I</span>的线性系统。这可以通过矩阵分解或迭代方法来完成。用户应在可行的情况下使用稀疏直接方法对适当的矩阵进行分解。如果使用迭代方法求解线性系统，解的精度必须与特征值求解器的收敛容差相匹配。一种启发式方法是，相对于所需的特征值计算精度，迭代线性系统求解需要稍严格的容差。详见[<a href="node421.html#lall97">283</a>,<a href="node421.html#leme98">291</a>,<a href="node421.html#smpa98">414</a>]。
+谱变换的一个潜在缺点是必须求解涉及<span class="math-inline">A-\sigma I</span>的线性系统。这可以通过矩阵分解或迭代方法来实现。用户应尽可能使用稀疏直接方法对适当的矩阵进行分解。如果使用迭代方法求解线性系统，解的精度必须与特征值求解器的收敛容差相匹配。一个启发式方法是，相对于所需的特征值计算精度，迭代线性系统求解需要稍严格的容差。详见[<a href="node421.html#lall97">283</a>,<a href="node421.html#leme98">291</a>,<a href="node421.html#smpa98">414</a>]。
 
 <p>
-也可以以近似方式进行变换，并使用不再具有Krylov结构的子空间。这是几种算法背后的思想，包括Jacobi-Davidson方法。后者及其他方法将在本书的其余部分详细讨论。
+也可以通过近似方式进行变换，并使用不再具有Krylov结构的子空间。这是包括Jacobi-Davidson方法在内的几种算法的思想基础。后者及其他方法将在本书的其余部分详细讨论。
 
 <p>
 
@@ -152,16 +143,11 @@ SI在迭代步骤（即子空间的维度）方面极其有效，应尽可能使
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1954"
-  href="node85.html">Hermitian Eigenvalue Problems</a>
-<b> Up:</b> <a name="tex2html1948"
-  href="node77.html">An Introduction to Iterative</a>
-<b> Previous:</b> <a name="tex2html1944"
-  href="node83.html">Refined Projection Methods.</a>
- &nbsp <b>  <a name="tex2html1950"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1952"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1954" href="node85.html">厄米特征值问题</a>
+<b>上一级：</b><a name="tex2html1948" href="node77.html">An Introduction to Iterative</a>
+<b>上一节：</b><a name="tex2html1944" href="node83.html">Refined Projection Methods.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

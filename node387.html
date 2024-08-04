@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Direct Solvers for Band Matrices</title>
-<meta name="description" content="Direct Solvers for Band Matrices">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Direct Solvers for Band Matrices">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node388.html">
-<link rel="previous" href="node386.html">
-<link rel="up" href="node385.html">
-<link rel="next" href="node388.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6705"
   href="node388.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6706"
-  href="node388.html">Direct Solvers for Sparse</a>
-<b> Up:</b> <a name="tex2html6700"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6694"
-  href="node386.html">Direct Solvers for Dense</a>
- &nbsp <b>  <a name="tex2html6702"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6704"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6706" href="node388.html">Direct Solvers for Sparse</a>
+<b>上一级：</b><a name="tex2html6700" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6694" href="node386.html">Direct Solvers for Dense</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001932000000000000000"></a>
@@ -99,42 +87,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-本节类似于稠密矩阵的&nbsp;&#167;<a href="node386.html#sec_chap10_DirectSolvers_Dense">10.3.1</a>部分：
+本节类似于稠密矩阵的&#167;<a href="node386.html#sec_chap10_DirectSolvers_Dense">10.3.1</a>部分：
 
 <p>
 <dl>
-<dt><strong><i><span class="math-inline">A-\sigma I</span> 是 Hermitian 正定的。</i></strong></dt>
-<dd>在这种情况下，首选算法是 Cholesky 分解。它在 LAPACK 计算例程中实现，
-xPBTRF 用于计算分解，
-xPBTRS 用于使用分解进行求解
-（两者在 LAPACK 驱动例程 xPBSVX 中结合）。
-Cholesky 分解在类似的 ScaLAPACK 例程中实现，
-包括 PxPBTRF、PxPBTRS 和 PxPBSV。
+<dt><strong><i><span class="math-inline">A-\sigma I</span> 是厄米正定矩阵。</i></strong></dt>
+<dd>在这种情况下，Cholesky分解是首选算法。它在LAPACK计算例程中实现，
+xPBTRF用于计算分解，xPBTRS用于使用分解求解（两者在LAPACK驱动例程xPBSVX中结合）。
+Cholesky分解在类似的ScaLAPACK例程中实现，包括PxPBTRF、PxPBTRS和PxPBSV。
 
 <p>
 </dd>
-<dt><strong><i><span class="math-inline">A-\sigma I</span> 是非 Hermitian 的。</i></strong></dt>
-<dd>在这种情况下，首选算法是高斯消去法。它在 LAPACK 计算例程中实现，
-xGBTRF 用于计算分解，
-xGBTRS 用于使用分解进行求解
-（两者在 LAPACK 驱动例程 xGBSVX 中结合）。
-它在类似的 ScaLAPACK 例程中实现，
-包括带部分主元消去的 PxGBTRF、PxGBTRS 和 PxGBSV，以及
-不带主元消去的 PxDBTRF、PxDBTRS 和 PxDBSV（风险较大但速度较快）。
+<dt><strong><i><span class="math-inline">A-\sigma I</span> 是非厄米矩阵。</i></strong></dt>
+<dd>在这种情况下，高斯消去法是首选算法。它在LAPACK计算例程中实现，
+xGBTRF用于计算分解，xGBTRS用于使用分解求解（两者在LAPACK驱动例程xGBSVX中结合）。
+它在类似的ScaLAPACK例程中实现，包括带部分主元消去的PxGBTRF、PxGBTRS和PxGBSV，
+以及不带主元消去的PxDBTRF、PxDBTRS和PxDBSV（风险较大但速度比使用主元消去快）。
 
 <p>
 </dd>
 </dl>
 
 <p>
-没有利用 Hermitian 不定结构的例程可用
-（因为没有简单的方法来界定因主元消去导致的带宽增长）。
-MATLAB 中没有带状矩阵的例程。
-如果 <span class="math-inline">A-\sigma I</span> 是 Hermitian 且带宽足够窄
-（如三对角矩阵），应使用&nbsp;&#167;<a href="node93.html#sec:dense">4.2</a>中的直接特征值求解方法。
+没有利用厄米不定结构的例程可用（因为没有关于带宽因主元消去而增长多少的简单界限）。
+MATLAB中没有带状矩阵的例程。如果<span class="math-inline">A-\sigma I</span>是厄米矩阵且带宽足够窄（如三对角矩阵），
+应使用&#167;<a href="node93.html#sec:dense">4.2</a>中的直接特征值求解方法。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+这段内容讨论了针对带状矩阵的直接求解方法，特别是针对厄米正定矩阵和非厄米矩阵的情况，分别介绍了Cholesky分解和高斯消去法的实现。同时指出，由于缺乏简单的带宽增长界限，目前没有利用厄米不定结构的例程，并且在MATLAB中也没有相应的带状矩阵例程。<!--Navigation Panel-->
 <a name="tex2html6705"
   href="node388.html">
 <button class="navigate">下一节</button></a> 
@@ -151,16 +133,11 @@ MATLAB 中没有带状矩阵的例程。
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6706"
-  href="node388.html">Direct Solvers for Sparse</a>
-<b> Up:</b> <a name="tex2html6700"
-  href="node385.html">A Brief Survey of</a>
-<b> Previous:</b> <a name="tex2html6694"
-  href="node386.html">Direct Solvers for Dense</a>
- &nbsp <b>  <a name="tex2html6702"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6704"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6706" href="node388.html">Direct Solvers for Sparse</a>
+<b>上一级：</b><a name="tex2html6700" href="node385.html">A Brief Survey of</a>
+<b>上一节：</b><a name="tex2html6694" href="node386.html">Direct Solvers for Dense</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

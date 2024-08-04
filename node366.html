@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>The Difference Between a Tangent and a Differential</title>
-<meta name="description" content="The Difference Between a Tangent and a Differential">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="The Difference Between a Tangent and a Differential">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node367.html">
-<link rel="previous" href="node365.html">
-<link rel="up" href="node364.html">
-<link rel="next" href="node367.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6378"
   href="node367.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6379"
-  href="node367.html">Inner Products, Gradients, and</a>
-<b> Up:</b> <a name="tex2html6373"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6367"
-  href="node365.html">Manifolds</a>
- &nbsp <b>  <a name="tex2html6375"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6377"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6379" href="node367.html">Inner Products, Gradients, and</a>
+<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6367" href="node365.html">流形</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846200000000000000">
@@ -97,58 +85,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h3>
 
 <p>
-给定任意流形上的一个光滑点 <span class="math-inline">x</span> 以及流形上的一条光滑路径 <span class="math-inline">p(s)</span>，使得 <span class="math-inline">p(0) = x</span>，我们可以通过以下规则构造一个在 <span class="math-inline">x</span> 附近定义的 <span class="math-inline">C^\infty</span> 函数上的微分算子：
+给定任意流形上的一个光滑点<span class="math-inline">x</span>和一个在该流形内的光滑路径<span class="math-inline">p(s)</span>，使得<span class="math-inline">p(0) = x</span>，我们可以通过以下规则在<span class="math-inline">x</span>附近定义的<span class="math-inline">C^\infty</span>函数上构造一个微分算子：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">D_p f = \frac{d}{ds} f(p(s)) \vert _{s=0}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-这些在 <span class="math-inline">x</span> 处的微分算子构成一个有限维向量空间，该向量空间的维数等于流形的维数。这个向量空间被称为 <span class="math-inline">M</span> 在 <span class="math-inline">x</span> 处的<em>切空间</em>，通常记作 <span class="math-inline">T_x(M)</span>。
+这些在<span class="math-inline">x</span>点的微分算子构成一个有限维向量空间，该向量空间的维数等于流形的维数。这个向量空间被称为<span class="math-inline">M</span>在<span class="math-inline">x</span>点的<em>切空间</em>，通常记为<span class="math-inline">T_x(M)</span>。
 
 <p>
-对于斯蒂弗尔流形，以及一般而言的所有光滑约束流形，任意点处的切空间很容易描述。约束方程 <span class="math-inline">Y^*Y=I</span> 可以看作是 <span class="math-inline">\mathrm{Stief}(n,k)</span> 上的 <span class="math-inline">k(k+1)/2</span> 个独立函数，这些函数必须都取常数值。如果 <span class="math-inline">H</span> 是 <span class="math-inline">\mathrm{Stief}(n,k)</span> 在 <span class="math-inline">Y</span> 处的切向量，那么必须满足以下条件：
+对于Stiefel流形，以及一般而言所有光滑约束流形，任意点的切空间很容易描述。约束方程<span class="math-inline">Y^*Y=I</span>可以看作是<span class="math-inline">\mathrm{Stief}(n,k)</span>上的<span class="math-inline">k(k+1)/2</span>个独立函数，这些函数必须都具有恒定值。如果<span class="math-inline">H</span>是<span class="math-inline">Y</span>点在<span class="math-inline">\mathrm{Stief}(n,k)</span>上的切向量，那么必须满足：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">H^* Y + Y^* H = 0,</div>
 </div>
 <br clear="ALL">
 <p></p>
-这一条件是通过取 <span class="math-inline">\frac{d}{dt} Y(t)^* Y(t) = 0 \vert _{t=0}</span>（其中 <span class="math-inline">\dot{Y}(0) = H</span>）得到的。在约束流形中，<span class="math-inline">Y</span> 处的切向量可以等价地视为那些保持约束方程至一阶的无穷小位移。
+这是通过取<span class="math-inline">\frac{d}{dt} Y(t)^* Y(t) = 0 \vert _{t=0}</span>（其中<span class="math-inline">\dot{Y}(0) = H</span>）得到的。在约束流形中，<span class="math-inline">Y</span>点的切线也可以等价地识别为那些保持约束方程至一阶的无穷小位移。
 
 <p>
-对于 <span class="math-inline">H</span> 成为切向量，其分量必须满足 <span class="math-inline">k(k+1)/2</span> 个独立方程。这些方程在 <span class="math-inline">H</span> 的分量中都是线性的，因此所有切向量的集合是向量空间 <span class="math-inline">{\mathcal R}^{n \times k}</span> 的一个 <span class="math-inline">(nk-k(k+1)/2)</span> 维子空间。
+对于<span class="math-inline">H</span>要成为切线，其分量必须满足<span class="math-inline">k(k+1)/2</span>个独立方程。这些方程在<span class="math-inline">H</span>的分量中都是线性的，因此所有切线构成向量空间<span class="math-inline">{\mathcal R}^{n \times k}</span>的一个<span class="math-inline">(nk-k(k+1)/2)</span>维子空间。
 
 <p>
-一个微分算子 <span class="math-inline">D_H</span> 可以与一个 <span class="math-inline">n \times k</span> 矩阵 <span class="math-inline">H</span> 相关联，定义为：
+一个微分算子<span class="math-inline">D_H</span>可以与一个<span class="math-inline">n \times k</span>矩阵<span class="math-inline">H</span>相关联，由以下公式给出：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">D_H f = \frac{d}{dt} f(Y+tH) \vert _{t=0}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-<span class="math-inline">D_H</span> 是 <span class="math-inline">H</span> 方向的方向导数算子。可以观察到，对于 <span class="math-inline">H</span> 成为切向量，切线条件等价于 <span class="math-inline">D_H (Y^*Y) = 0</span>。
+<span class="math-inline">D_H</span>是<span class="math-inline">H</span>方向的方向导数算子。可以观察到，对于<span class="math-inline">H</span>要成为切向量，切线条件等价于<span class="math-inline">D_H (Y^*Y) = 0</span>。
 
 <p>
-虽然切线是 <span class="math-inline">n \times k</span> 矩阵，因此有相关的微分算子，但<em>微分</em>则是另一回事。给定一个 <span class="math-inline">C^\infty</span> 函数 <span class="math-inline">f</span> 和一个点 <span class="math-inline">Y</span>，可以考虑对于 <span class="math-inline">H \in {\mathcal R}^{n \times k}</span>（<span class="math-inline">H</span> 不一定是切向量）的方程 <span class="math-inline">D_H f</span>。这个表达式在 <span class="math-inline">H</span> 中线性，并取某个实数值。因此可以将其表示为向量空间 <span class="math-inline">{\mathcal R}^{n \times k}</span> 上的线性函数，
+虽然切线是<span class="math-inline">n \times k</span>矩阵，因此有相关的微分算子，但<em>微分</em>是另一回事。给定一个<span class="math-inline">C^\infty</span>函数<span class="math-inline">f</span>和一个点<span class="math-inline">Y</span>，可以考虑<span class="math-inline">H \in {\mathcal R}^{n \times k}</span>（<span class="math-inline">H</span>不一定是切线）的方程<span class="math-inline">D_H f</span>。这个表达式在<span class="math-inline">H</span>中线性，并取某个实数值。因此，可以将其表示为向量空间<span class="math-inline">{\mathcal R}^{n \times k}</span>上的线性函数，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">D_H f = \tr( H^* Z),</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于某个适当的 <span class="math-inline">n \times k</span> 矩阵 <span class="math-inline">Z</span>，其值取决于 <span class="math-inline">f</span> 在 <span class="math-inline">Y</span> 附近的一阶行为。我们将这个 <span class="math-inline">Z</span> 矩阵与 <span class="math-inline">f</span> 在 <span class="math-inline">Y</span> 处的微分 <span class="math-inline">df</span> 等同起来。这与样本问题中 <code>dF</code> 函数计算的微分相同。
+对于某个适当的<span class="math-inline">n \times k</span>矩阵<span class="math-inline">Z</span>，其值取决于<span class="math-inline">f</span>在<span class="math-inline">Y</span>附近的一阶行为。我们将这个<span class="math-inline">Z</span>矩阵识别为<span class="math-inline">f</span>在<span class="math-inline">Y</span>点的微分<span class="math-inline">df</span>。这与样本问题中<code>dF</code>函数计算的微分相同。
 
 <p>
-对于任何约束流形，光滑函数 <span class="math-inline">f</span> 的微分可以在不涉及流形本身的情况下计算。可以直接使用环境空间（在我们的例子中是无约束的 <span class="math-inline">{\mathcal R}^{n \times k}</span> 导数）中的微分。如果将微分算子限制为仅在切线方向上，那么仍然可以使用无约束的 <span class="math-inline">df</span> 在 <span class="math-inline">\tr ( H^* df )</span> 中计算 <span class="math-inline">D_H f</span>，其中 <span class="math-inline">H \in T_Y(\mathrm{Stief}(n,k))</span>。这就是为什么无需几何知识就能生成 <code>dF</code> 函数的原因。
+对于任何约束流形，光滑函数<span class="math-inline">f</span>的微分可以在不需了解流形本身的情况下计算。可以直接使用环境空间（在我们情况下是无约束的<span class="math-inline">{\mathcal R}^{n \times k}</span>导数）中的微分。如果将微分算子限制为仅在切线方向上，那么仍然可以使用无约束的<span class="math-inline">df</span>在<span class="math-inline">\tr ( H^* df )</span>中计算<span class="math-inline">D_H f</span>，其中<span class="math-inline">H \in T_Y(\mathrm{Stief}(n,k))</span>。这就是为什么生成<code>dF</code>函数不需要几何知识的原因。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -168,16 +156,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6379"
-  href="node367.html">Inner Products, Gradients, and</a>
-<b> Up:</b> <a name="tex2html6373"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6367"
-  href="node365.html">Manifolds</a>
- &nbsp <b>  <a name="tex2html6375"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6377"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6379" href="node367.html">Inner Products, Gradients, and</a>
+<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6367" href="node365.html">流形</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

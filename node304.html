@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Example 8.6.2.</title>
-<meta name="description" content="Example 8.6.2.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Example 8.6.2.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node305.html">
-<link rel="previous" href="node303.html">
-<link rel="up" href="node302.html">
-<link rel="next" href="node305.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5408"
   href="node305.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5409"
-  href="node305.html">Example 8.6.3.</a>
-<b> Up:</b> <a name="tex2html5403"
-  href="node302.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html5397"
-  href="node303.html">Example 8.6.1.</a>
- &nbsp <b>  <a name="tex2html5405"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5407"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5409" href="node305.html">Example 8.6.3.</a>
+<b>上一级：</b><a name="tex2html5403" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5397" href="node303.html">Example 8.6.1.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -105,47 +93,47 @@ same shaft as in Example 8.6.1, but with a coarser grid so that the order of
 orthogonality was
 maintained.  The following table shows that the postprocessing step improves
 the direct residuals by up to four orders of magnitude.
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="center">Ritz value</td>
-<td align="center">
+<tr><td align="CENTER">Ritz value</td>
+<td align="CENTER">
 <span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
-<td align="center">
+<td align="CENTER">
 <span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">\tilde{\lambda}</span></td>
-<td align="center">(with postprocessing)</td>
-<td align="center">(no postprocessing)</td>
+<td align="CENTER">(with postprocessing)</td>
+<td align="CENTER">(no postprocessing)</td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">-1.96e\!-\!04 + 1.03e\!+\!05i</span></td>
-<td align="center"><span class="math-inline">5.04e\!-\!08</span></td>
-<td align="center"><span class="math-inline">5.04e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">5.04e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">5.04e\!-\!08</span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">-1.30e\!-\!02 + 1.06e\!+\!05i</span></td>
-<td align="center"><span class="math-inline">4.11e\!-\!08</span></td>
-<td align="center"><span class="math-inline">4.11e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">4.11e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">4.11e\!-\!08</span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">-7.16e\!-\!03 + 9.28e\!+\!04i</span></td>
-<td align="center"><span class="math-inline">4.15e\!-\!08</span></td>
-<td align="center"><span class="math-inline">4.18e\!-\!08 </span></td>
+<td align="CENTER"><span class="math-inline">4.15e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">4.18e\!-\!08 </span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">-7.60e\!-\!02 + 1.11e\!+\!05i</span></td>
-<td align="center"><span class="math-inline">8.41e\!-\!08</span></td>
-<td align="center"><span class="math-inline">8.51e\!-\!05 </span></td>
+<td align="CENTER"><span class="math-inline">8.41e\!-\!08</span></td>
+<td align="CENTER"><span class="math-inline">8.51e\!-\!05 </span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">-1.01e\!-\!01 + 8.66e\!+\!04i</span></td>
-<td align="center"><span class="math-inline">1.09e\!-\!07</span></td>
-<td align="center"><span class="math-inline">5.06e\!-\!03 </span></td>
+<td align="CENTER"><span class="math-inline">1.09e\!-\!07</span></td>
+<td align="CENTER"><span class="math-inline">5.06e\!-\!03 </span></td>
 </tr>
 </table>
 </div> 

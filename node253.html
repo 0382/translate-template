@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Storage Requirements and Floating Point Operations.</title>
-<meta name="description" content="Storage Requirements and Floating Point Operations.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Storage Requirements and Floating Point Operations.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,12 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="previous" href="node252.html">
-<link rel="up" href="node252.html">
-<link rel="next" href="node254.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4619"
   href="node254.html">
@@ -79,130 +73,124 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4620"
-  href="node254.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html4614"
-  href="node252.html">An Adaptively Blocked Lanczos</a>
-<b> Previous:</b> <a name="tex2html4610"
-  href="node252.html">An Adaptively Blocked Lanczos</a>
- &nbsp <b>  <a name="tex2html4616"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4618"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4620" href="node254.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html4614" href="node252.html">An Adaptively Blocked Lanczos</a>
+<b>上一节：</b><a name="tex2html4610" href="node252.html">An Adaptively Blocked Lanczos</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001692010000000000000">
-存储需求与浮点运算</a>
+存储需求与浮点运算。</a>
 </h4>
 下表总结了ABLE在不同级别的存储需求。
 为清晰起见，我们假设块大小为常数<span class="math-inline">p</span>。
-要获得可变块情况下的存储需求上限，请将<span class="math-inline">p</span>替换为允许的最大块大小<span class="math-inline">p_{\max}</span>。
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="center">级别</td>
-<td align="center">功能</td>
-<td align="center">存储需求</td>
+为了在可变块情况下获得存储需求的上限，请将<span class="math-inline">p</span>替换为允许的最大块大小<span class="math-inline">p_{\max}</span>。
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="CENTER">级别</td>
+<td align="CENTER">功能</td>
+<td align="CENTER">存储需求</td>
 </tr>
-<tr><td align="center">1</td>
-<td align="center">基本三项递归</td>
-<td align="center">
+<tr><td align="CENTER">1</td>
+<td align="CENTER">基本三项递归</td>
+<td align="CENTER">
 <span class="math-inline">matrix+6pn+3p^2 j^2 + 4pj</span></td>
 </tr>
-<tr><td align="center">2</td>
-<td align="center">完全双正交性</td>
-<td align="center">额外<span class="math-inline">2jpn</span></td>
+<tr><td align="CENTER">2</td>
+<td align="CENTER">完全双正交性</td>
+<td align="CENTER">额外<span class="math-inline">2jpn</span></td>
 </tr>
-<tr><td align="center">3</td>
-<td align="center">半双正交性</td>
-<td align="center">额外<span class="math-inline">2jpn+4p^2 j</span></td>
+<tr><td align="CENTER">3</td>
+<td align="CENTER">半双正交性</td>
+<td align="CENTER">额外<span class="math-inline">2jpn+4p^2 j</span></td>
 </tr>
-<tr><td align="center">4</td>
-<td align="center">处理崩溃或聚类</td>
-<td align="center">无额外需求</td>
+<tr><td align="CENTER">4</td>
+<td align="CENTER">处理崩溃或聚类</td>
+<td align="CENTER">无额外需求</td>
 </tr>
 </table>
 </div>
 注意，<em>matrix</em>表示计算乘积<span class="math-inline">AZ</span>和<span class="math-inline">A^{\ast}Z</span>所需的存储空间。
 
 <p>
-为保持完全或半双正交性，
-需要存储所有计算出的Lanczos向量<span class="math-inline">\{ Q_i \}</span>和<span class="math-inline">\{ P_i \}</span>。
+为了维持完全或半双正交性，必须存储所有计算出的Lanczos向量<span class="math-inline">\{ Q_i \}</span>和<span class="math-inline">\{ P_i \}</span>。
 用户必须为此目的分配两个维度为<span class="math-inline">n</span>乘<span class="math-inline">m</span>的矩形数组的内存。如果内存有限，最佳补救措施是按照[<a
  href="node421.html#gsvd96">207</a>,<a
- href="node421.html#desa98">110</a>]中所述重新启动，但在ABLE的当前版本中不可用。
+ href="node421.html#desa98">110</a>]中所述重新启动，但在ABLE的当前版本中无法实现。
 
 <p>
-现在，让我们总结一下每个Lanczos步骤中执行的浮点运算成本。忽略了低阶浮点运算成本。下表总结了ABLE实现中所需的不同类型的操作。
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="left">&nbsp;</td>
-<td align="center">矩阵-</td>
-<td align="center">m-内积</td>
-<td align="center">m-saxpy</td>
-<td align="center">m-缩放</td>
-<td align="center">&nbsp;</td>
+现在，让我们总结一下每个Lanczos步骤执行的浮点运算成本。忽略低阶浮点运算成本。下表总结了ABLE实现中所需的不同类型的操作。
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">矩阵-</td>
+<td align="CENTER">m-内积</td>
+<td align="CENTER">m-saxpy</td>
+<td align="CENTER">m-缩放</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="left">功能</td>
-<td align="center">m-向量</td>
-<td align="center">乘积</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">QR分解</td>
+<tr><td align="LEFT">功能</td>
+<td align="CENTER">m-向量</td>
+<td align="CENTER">乘积</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">QR分解</td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="center">乘积</td>
-<td align="center">(<span class="math-inline">X^{\ast} Y</span>)</td>
-<td align="center">(<span class="math-inline">Y+Xa</span>)</td>
-<td align="center">(<span class="math-inline">X a</span>)</td>
-<td align="center">&nbsp;</td>
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">乘积</td>
+<td align="CENTER">(<span class="math-inline">X^{\ast} Y</span>)</td>
+<td align="CENTER">(<span class="math-inline">Y+Xa</span>)</td>
+<td align="CENTER">(<span class="math-inline">X a</span>)</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="left">基本三项</td>
-<td align="center">2</td>
-<td align="center">6</td>
-<td align="center">8</td>
-<td align="center">2</td>
-<td align="center">2</td>
+<tr><td align="LEFT">基本三项</td>
+<td align="CENTER">2</td>
+<td align="CENTER">6</td>
+<td align="CENTER">8</td>
+<td align="CENTER">2</td>
+<td align="CENTER">2</td>
 </tr>
-<tr><td align="left"><em>完全双正交</em></td>
-<td align="center">&nbsp;</td>
-<td align="center"><span class="math-inline">2j</span></td>
-<td align="center"><span class="math-inline">2j</span></td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
+<tr><td align="LEFT"><em>完全双正交</em></td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER"><span class="math-inline">2j</span></td>
+<td align="CENTER"><span class="math-inline">2j</span></td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="left"><em>半双正交</em></td>
-<td align="center">&nbsp;</td>
-<td align="center">2</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
+<tr><td align="LEFT"><em>半双正交</em></td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">2</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
 </table>
 </div>
-这里的m-内积、m-saxpy和m-缩放表示将相应的一级BLAS内积、saxpy和缩放操作推广到多向量操作。
-与存储需求一样，为简单起见，我们假设块大小是常数。
+这里的m-内积、m-saxpy和m-缩放表示将相应的Level 1 BLAS内积、saxpy和缩放操作推广到多向量操作。
+与存储需求一样，为简单起见，我们假设块大小是恒定的。
 多向量的维度为<span class="math-inline">n\times p</span>。
 m-内积、m-saxpy和m-缩放分别涉及<span class="math-inline">2p^2 n</span>、<span class="math-inline">2p(p+1)n</span>和<span class="math-inline">2p^2 n</span>次浮点运算。
-<span class="math-inline">n\times p</span> (<span class="math-inline">p\ll n</span>)矩阵的QR分解（QRD）成本为<span class="math-inline">2p^2 n</span>次浮点运算。
+<span class="math-inline">n\times p</span>（<span class="math-inline">p\ll n</span>）矩阵的QR分解（QRD）需要<span class="math-inline">2p^2 n</span>次浮点运算。
 请注意，对于特定的问题和数据结构，某些操作可以更高效地执行。
 
 <p>
-以下偶尔事件需要额外的浮点运算：
+以下偶发事件需要额外的浮点运算：
 
 <ul>
-<li>如果在迭代<span class="math-inline">j</span>时发生校正以保持半双正交性，则需要额外<span class="math-inline">(4j+2)</span>次m-内积和<span class="math-inline">(4j+2)</span>次m-saxpy。
+<li>如果在第<span class="math-inline">j</span>次迭代时进行校正以维持半双正交性，则这需要额外<span class="math-inline">(4j+2)</span>次m-内积和<span class="math-inline">(4j+2)</span>次m-saxpy。
 
 <p>
 </li>
-<li>如果执行程序以适应收敛Ritz值的较大聚类（<em>group</em>）和/或治疗崩溃（<em>treatbd</em>），则成本增加<span class="math-inline">(2j+5)</span>次m-内积和<span class="math-inline">(2j+4)</span>次m-saxpy，涉及<span class="math-inline">n \times \delta</span>多向量。
+<li>如果执行调整块大小以适应收敛Ritz值的较大聚类（<em>group</em>）和/或治疗崩溃（<em>treatbd</em>）的过程，则成本增加<span class="math-inline">(2j+5)</span>次m-内积和<span class="math-inline">(2j+4)</span>次m-saxpy，涉及<span class="math-inline">n \times \delta</span>多向量。
 
 <p>
 </li>
-<li>如果块中的Lanczos向量<em>秩不足</em>，则TSMGS程序的成本增加<span class="math-inline">2j</span>次m-内积和<span class="math-inline">2j</span>次m-saxpy。
+<li>如果块中的Lanczos向量<em>秩不足</em>，则TSMGS过程的成本增加<span class="math-inline">2j</span>次m-内积和<span class="math-inline">2j</span>次m-saxpy。
 
 <p>
 </li>
-<li>计算块三对角矩阵<span class="math-inline">T_{[j]}</span>的所有特征三元组的成本约为<span class="math-inline">30(jp)^3</span>。
+<li>计算块三对角矩阵<span class="math-inline">T_{[j]}</span>的所有特征三元组大约需要<span class="math-inline">30(jp)^3</span>次运算。
 
 <p>
 </li>
@@ -226,16 +214,11 @@ m-内积、m-saxpy和m-缩放分别涉及<span class="math-inline">2p^2 n</span>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4620"
-  href="node254.html">Software Availability</a>
-<b> Up:</b> <a name="tex2html4614"
-  href="node252.html">An Adaptively Blocked Lanczos</a>
-<b> Previous:</b> <a name="tex2html4610"
-  href="node252.html">An Adaptively Blocked Lanczos</a>
- &nbsp <b>  <a name="tex2html4616"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4618"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4620" href="node254.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html4614" href="node252.html">An Adaptively Blocked Lanczos</a>
+<b>上一节：</b><a name="tex2html4610" href="node252.html">An Adaptively Blocked Lanczos</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

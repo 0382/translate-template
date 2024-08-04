@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Example</title>
-<meta name="description" content="Example">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Example">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node66.html">
-<link rel="previous" href="node64.html">
-<link rel="up" href="node57.html">
-<link rel="next" href="node66.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1678"
   href="node66.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1679"
-  href="node66.html">Singular Case</a>
-<b> Up:</b> <a name="tex2html1673"
-  href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-<b> Previous:</b> <a name="tex2html1667"
-  href="node64.html">Related Eigenproblems</a>
- &nbsp <b>  <a name="tex2html1675"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1677"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1679" href="node66.html">奇异情况</a>
+<b>上一级：</b><a name="tex2html1673" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一节：</b><a name="tex2html1667" href="node64.html">相关的特征问题</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -111,7 +99,7 @@ of motion
 <span class="math-inline">M \ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>. 
 We solve them by changing variables to 
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">y(t) = \bmat{c} \dot{x}(t) \\ x(t) \emat,</div>
@@ -120,7 +108,7 @@ We solve them by changing variables to
 <p></p>
 yielding
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\bmat{cc} M &amp; 0 \\ 0 &amp; I \emat \dot{y}(t)= \bmat{c} M \dd......ot{x}(t) \emat= \bmat{cc} -B &amp; -K \\ I &amp; 0 \emat \cdot y(t)</div>
@@ -134,7 +122,7 @@ We solve this by substituting
 a constant vector and <span class="math-inline">\lambda</span> is a constant scalar to be determined.
 This yields 
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">Cy = \lambda Ay.</div>

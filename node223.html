@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Convergence Properties</title>
-<meta name="description" content="Convergence Properties">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Convergence Properties">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node224.html">
-<link rel="previous" href="node222.html">
-<link rel="up" href="node220.html">
-<link rel="next" href="node224.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4184"
   href="node224.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4185"
-  href="node224.html">Numerical Stability</a>
-<b> Up:</b> <a name="tex2html4179"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4173"
-  href="node222.html">Implicit Restart</a>
- &nbsp <b>  <a name="tex2html4181"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4183"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4185" href="node224.html">数值稳定性</a>
+<b>上一级：</b><a name="tex2html4179" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4173" href="node222.html">隐式重启</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001663000000000000000"></a>
@@ -99,44 +87,46 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-随着收敛的进行，矩阵 <span class="math-inline">H_k</span> 的副对角线元素趋向于零，而最期望的特征值近似值作为矩阵 <span class="math-inline">A</span> 的 Schur 分解中前 <span class="math-inline">k \times k</span> 块的特征值出现。基向量 <span class="math-inline">V_k</span> 趋向于正交的 Schur 向量。
+随着收敛的发生，<span class="math-inline">H_k</span> 的副对角线元素趋向于零，并且最期望的特征值近似值作为 <span class="math-inline">A</span> 的舒尔分解中 <span class="math-inline">R</span> 的前 <span class="math-inline">k \times k</span> 块的特征值出现。基向量 <span class="math-inline">V_k</span> 趋向于正交的舒尔向量。
 
 <p>
-另一种解释源于以下事实：每个这样的移位周期都隐含地应用了一个以 <span class="math-inline">A</span> 为变量的次数为 <span class="math-inline">p</span> 的多项式到初始向量上。
+另一种解释源于以下事实：每个这样的移位周期都会隐式地应用一个以 <span class="math-inline">A</span> 为变量的次数为 <span class="math-inline">p</span> 的多项式到初始向量上。
 
- v_1 (A) v_1  其中 () = _j=1^p (- _j ).
+ v_1 (A) v_1  其中 () = _j=1^p (- _j )。
      <a name="filtpoly2"></a>
-这个多项式的根是 QR 过程中使用的移位，这些移位可以选择来增强初始向量在所需特征值对应的本征向量方向上的分量，并抑制在不需要的方向上的分量。当然，这是可取的，因为它迫使初始向量进入与所需特征值相关的不变子空间。这反过来迫使 <span class="math-inline">f_k</span> 变小，从而产生收敛结果。详细信息可以在 [<a href="node421.html#sore92">419</a>] 中找到。
+这个多项式的根是 QR 过程中使用的移位，这些移位可以选择来增强初始向量在期望特征值对应的本征向量方向上的分量，并抑制不希望方向上的分量。当然，这是可取的，因为它迫使初始向量进入与期望特征值相关联的不变子空间。这反过来迫使 <span class="math-inline">f_k</span> 变小，从而导致收敛。详细信息可以在 [<a href="node421.html#sore92">419</a>] 中找到。
 
 <p>
-有一个相当直观的解释，说明通过隐式重启对初始向量 <span class="math-inline">v_1</span> 的这种重复更新是如何导致收敛的。如果 <span class="math-inline">v_1</span> 表示为矩阵 <span class="math-inline">A</span> 的特征向量 <span class="math-inline">\{q_j\}</span> 的线性组合，那么
+有一个相当直观的解释来说明这种通过隐式重启对初始向量 <span class="math-inline">v_1</span> 的重复更新是如何导致收敛的。如果 <span class="math-inline">v_1</span> 表示为 <span class="math-inline">A</span> 的特征向量 <span class="math-inline">\{q_j\}</span> 的线性组合，那么
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">v_1 = \sum_{j=1}^n q_j \gamma_j \quad \Rightarrow \quad\psi(A)v_1 = \sum_{j=1}^n q_j \psi(\lambda_j) \gamma_j .</div>
 </div>
 <br clear="ALL">
 <p></p>
-对相同的 <span class="math-inline">\ell</span> 次迭代应用相同的多项式（即使用相同的移位）将导致第 <span class="math-inline">j</span> 个原始展开系数的衰减因子为
+对相同的（即使用相同的移位）多项式重复应用 <span class="math-inline">\ell</span> 次迭代将导致第 <span class="math-inline">j</span> 个原始展开系数的衰减因子为
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\left( \frac{\psi(\lambda_j)}{\psi(\lambda_1)} \right)^{\ell} \ ,</div>
 </div>
 <br clear="ALL">
 <p></p>
-其中特征值已根据 <span class="math-inline">\vert\psi(\lambda_j)\vert</span> 的递减值排序。前 <span class="math-inline">k</span> 个特征值在这个展开中变得占主导地位，而其余的特征值随着迭代的进行变得越来越不重要。因此，初始向量 <span class="math-inline">v_1</span> 被强制进入一个不变子空间，正如所期望的那样。精确移位机制提供的自适应选择进一步增强了这种展开中所需分量的隔离。因此，随着迭代的进行，所需特征值的近似值越来越好。
+其中特征值按照 <span class="math-inline">\vert\psi(\lambda_j)\vert</span> 的递减值排序。前 <span class="math-inline">k</span> 个特征值在这个展开中变得占主导地位，而其余的特征值随着迭代的进行变得越来越不重要。因此，初始向量 <span class="math-inline">v_1</span> 被强制进入一个不变子空间，正如所期望的那样。由精确移位机制提供的自适应选择进一步增强了在这个展开中对所需分量的隔离。因此，随着迭代的进行，所需的特征值被更好地近似。
 
 <p>
-值得注意的是，如果 <span class="math-inline">m = n</span>，那么 <span class="math-inline">f_{m} = 0</span>，这个迭代与隐式移位 QR 迭代完全相同。即使对于 <span class="math-inline">m < n</span>，矩阵 <span class="math-inline">V_m</span> 的前 <span class="math-inline">k</span> 列和 Hessenberg 子矩阵 <span class="math-inline">H_m(1:k,1:k)</span> 在数学上等价于使用相同移位 <span class="math-inline">\mu_j</span> 的全隐式移位 QR 迭代中出现的矩阵。从这个意义上说，隐式重启 Arnoldi 方法可以看作是隐式移位 QR 迭代的截断。根本的区别在于，标准的隐式移位 QR 迭代选择移位来从底部开始将 <span class="math-inline">H_n</span> 的副对角线元素驱动为零，而隐式重启 Arnoldi 方法中的移位选择是为了从顶部开始将 <span class="math-inline">H_m</span> 的副对角线元素驱动为零。将获得类似于移位幂方法的收敛性。
+值得注意的是，如果 <span class="math-inline">m = n</span>，那么 <span class="math-inline">f_{m} = 0</span>，这个迭代过程与隐式移位 QR 迭代完全相同。即使对于 <span class="math-inline">m < n</span>，<span class="math-inline">V_m</span> 的前 <span class="math-inline">k</span> 列和海森堡子矩阵 <span class="math-inline">H_m(1:k,1:k)</span> 在数学上等价于使用相同移位 <span class="math-inline">\mu_j</span> 的全隐式移位 QR 迭代中出现的矩阵。从这个意义上说，隐式重启 Arnoldi 方法可以看作是隐式移位 QR 迭代的截断。根本的区别在于，标准的隐式移位 QR 迭代选择移位来从底部开始驱动 <span class="math-inline">H_n</span> 的副对角线元素为零，而隐式重启 Arnoldi 方法中的移位选择是为了从顶部开始驱动 <span class="math-inline">H_m</span> 的副对角线元素为零。将获得类似于移位幂方法的收敛性。
 
 <p>
-当使用精确移位策略时，隐式重启可以被视为一种从初始向量中抑制不需要的分量的手段，也可以直接迫使初始向量成为所需特征向量的线性组合。关于 IRAM 的收敛性的信息，请参见 [<a href="node421.html#sore92">419</a>]，关于 Hermitian <span class="math-inline">A</span> 的其他可能的移位策略，请参见 [<a href="node421.html#bacr96">22</a>,<a href="node421.html#stsw98">421</a>]。读者可以参考 [<a href="node421.html#lesc95">292</a>,<a href="node421.html#morg96">333</a>] 来比较隐式重启与其他方案的研究。
+当使用精确移位策略时，隐式重启可以被视为一种从初始向量中抑制不希望分量的手段，也可以直接迫使初始向量成为所需本征向量的线性组合。有关 IRAM 收敛性的信息，请参见 [<a href="node421.html#sore92">419</a>]；有关厄米矩阵 <span class="math-inline">A</span> 的其他可能移位策略，请参见 [<a href="node421.html#bacr96">22</a>,<a href="node421.html#stsw98">421</a>]；有关将隐式重启与其他方案进行比较的研究，请参见 [<a href="node421.html#lesc95">292</a>,<a href="node421.html#morg96">333</a>]。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html4184"
   href="node224.html">
 <button class="navigate">下一节</button></a> 
@@ -153,16 +143,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4185"
-  href="node224.html">Numerical Stability</a>
-<b> Up:</b> <a name="tex2html4179"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4173"
-  href="node222.html">Implicit Restart</a>
- &nbsp <b>  <a name="tex2html4181"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4183"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4185" href="node224.html">数值稳定性</a>
+<b>上一级：</b><a name="tex2html4179" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4173" href="node222.html">隐式重启</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Algorithm</title>
-<meta name="description" content="Algorithm">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node260.html">
-<link rel="previous" href="node258.html">
-<link rel="up" href="node256.html">
-<link rel="next" href="node260.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4706"
   href="node260.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4707"
-  href="node260.html">Application to Reduced-Order Modeling</a>
-<b> Up:</b> <a name="tex2html4701"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html4695"
-  href="node258.html">Basic Properties</a>
- &nbsp <b>  <a name="tex2html4703"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4705"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4707" href="node260.html">应用至降阶模型</a>
+<b>上一级：</b><a name="tex2html4701" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html4695" href="node258.html">基本性质</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016103000000000000000">
@@ -101,8 +89,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <br>
-<a name="rwf:alg2"></a><IMG
- width="598" height="780" align="bottom" border="0"
+<a name="rwf:alg2"></a><img
+ width="598" height="780" align="BOTTOM" border="0"
  src="img2426.png"
  alt="\begin{algorithm}{Band Lanczos Method for NHEP
 }
@@ -117,21 +105,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 
 <p>
-我们强调，非厄米特带状Lanczos方法可以通过直接遵循算法<a href="node259.html#rwf:alg2">7.16</a>中的描述来实现，并结合下面给出的某些步骤的进一步细节。为了将描述长度限制在一页内，在算法<a href="node259.html#rwf:alg2">7.16</a>中，<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>的带状部分的所有潜在非零条目都计算为内积。
+我们强调，非厄米带状Lanczos方法可以直接按照算法<a href="node259.html#rwf:alg2">7.16</a>的描述来实现，并结合下面给出的进一步细节。为了将描述长度控制在一页内，在算法<a href="node259.html#rwf:alg2">7.16</a>中，<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>的带状部分的所有可能非零项都计算为内积。
 <br>
 <br>
-然而，这些条目中只有大约一半需要显式计算为内积。其余条目可以通过以下关系获得：
+然而，实际上大约只有这些项的一半需要明确计算为内积。其余的项可以通过以下关系获得：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:SAV"></a><div class="math-display">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i,</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:SAV"></a><div class="math-display">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i,</div></td>
+<td WIDTH=10 align="RIGHT">
 (185)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-这源于<span class="math-inline">T_j^{\rm (pr)}</span>和<span class="math-inline">\tilde{T}_j^{\rm (pr)}</span>的连接<a href="node258.html#rwf:XAA">7.71</a>。特别是，在以下对步骤(10)、(12)、(13)和(14)的讨论中，我们给出了使用<a href="node259.html#rwf:SAV">7.79</a>的<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>条目的公式。采用这些公式可以最小化内积的数量，但会牺牲一些数值稳定性。
+这一关系源自<span class="math-inline">T_j^{\rm (pr)}</span>和<span class="math-inline">\tilde{T}_j^{\rm (pr)}</span>的连接<a href="node258.html#rwf:XAA">7.71</a>。特别是，在步骤(10)、(12)、(13)和(14)的讨论中，我们给出了使用<a href="node259.html#rwf:SAV">7.79</a>尽可能多的<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>项的公式。采用这些公式可以最小化内积的数量，但会牺牲一些数值稳定性。
 
 <p>
 接下来，我们将更详细地讨论算法<a href="node259.html#rwf:alg2">7.16</a>的一些步骤。
@@ -139,41 +127,41 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 <dl>
 <dt><strong>(4)</strong></dt>
-<dd>通常，是否需要对<span class="math-inline">\hat{v}_j</span>进行收缩的决定应基于检查是否
+<dd>通常，是否需要对<span class="math-inline">\hat{v}_j</span>进行收缩的决策应基于检查是否
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:WGA"></a><div class="math-display">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol},</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WGA"></a><div class="math-display">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol},</div></td>
+<td WIDTH=10 align="RIGHT">
 (186)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-其中<span class="math-inline">{\tt dtol}</span>是一个适当选择的小收缩容差。如果满足<a href="node259.html#rwf:WGA">7.80</a>，则向量<span class="math-inline">\hat{v}_j</span>被收缩。在这种情况下，如果正值<span class="math-inline">j-m_c</span>被添加到索引集<span class="math-inline">{\mathcal I}_w</span>中，该索引集包含<span class="math-inline">\tilde{T}_j</span>的部分<span class="math-inline">\tilde{T}_j^{\rm {(d)}}</span>中非零行的索引，并且当前右块大小更新为<span class="math-inline">m_c=m_c-1</span>。如果<span class="math-inline">m_c=0</span>，则左块Krylov序列<a href="node256.html#rwf:MBA1">7.60</a>耗尽，算法自然终止。如果<span class="math-inline">m_c>0</span>，向量<span class="math-inline">\hat{v_j}</span>被删除，每个剩余右候选向量<span class="math-inline">\hat{v}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(3)。如果不满足<a href="node259.html#rwf:WGA">7.80</a>，则不需要收缩，算法继续步骤(5)。
+其中<span class="math-inline">{\tt dtol}</span>是一个适当选择的小收缩容差。如果<a href="node259.html#rwf:WGA">7.80</a>满足，则对<span class="math-inline">\hat{v}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-m_c</span>，则添加到包含<span class="math-inline">\tilde{T}_j</span>的<span class="math-inline">\tilde{T}_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_w</span>中，并且当前右块大小更新为<span class="math-inline">m_c=m_c-1</span>。如果<span class="math-inline">m_c=0</span>，则右块Krylov序列<a href="node256.html#rwf:MBA1">7.60</a>耗尽，算法自然终止。如果<span class="math-inline">m_c>0</span>，删除向量<span class="math-inline">\hat{v_j}</span>，剩余右候选向量<span class="math-inline">\hat{v}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(3)。如果不满足<a href="node259.html#rwf:WGA">7.80</a>，则不需要收缩，算法继续步骤(5)。
 
 <p>
 </dd>
 <dt><strong>(6)</strong></dt>
-<dd>类似于<a href="node259.html#rwf:WGA">7.80</a>，是否需要对<span class="math-inline">\hat{w}_j</span>进行收缩的决定基于检查是否
+<dd>类似于<a href="node259.html#rwf:WGA">7.80</a>，是否需要对<span class="math-inline">\hat{w}_j</span>进行收缩的决策基于检查是否
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:WGB"></a><div class="math-display">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WGB"></a><div class="math-display">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (187)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-如果满足<a href="node259.html#rwf:WGB">7.81</a>，则向量<span class="math-inline">\hat{w}_j</span>被收缩。在这种情况下，如果正值<span class="math-inline">j-p_c</span>被添加到索引集<span class="math-inline">{\mathcal I}_v</span>中，该索引集包含<span class="math-inline">T_j</span>的部分<span class="math-inline">T_j^{\rm {(d)}}</span>中非零行的索引，并且当前左块大小更新为<span class="math-inline">p_c=p_c-1</span>。如果<span class="math-inline">p_c=0</span>，则左块Krylov序列<a href="node256.html#rwf:MBA2">7.61</a>耗尽，算法自然终止。如果<span class="math-inline">p_c>0</span>，向量<span class="math-inline">\hat{w}_j</span>被删除，每个剩余左候选向量<span class="math-inline">\hat{w}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(5)。如果不满足<a href="node259.html#rwf:WGB">7.81</a>，则不需要收缩，算法继续步骤(7)。
+如果<a href="node259.html#rwf:WGB">7.81</a>满足，则对<span class="math-inline">\hat{w}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-p_c</span>，则添加到包含<span class="math-inline">T_j</span>的<span class="math-inline">T_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_v</span>中，并且当前左块大小更新为<span class="math-inline">p_c=p_c-1</span>。如果<span class="math-inline">p_c=0</span>，则左块Krylov序列<a href="node256.html#rwf:MBA2">7.61</a>耗尽，算法自然终止。如果<span class="math-inline">p_c>0</span>，删除向量<span class="math-inline">\hat{w}_j</span>，剩余左候选向量<span class="math-inline">\hat{w}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(5)。如果不满足<a href="node259.html#rwf:WGB">7.81</a>，则不需要收缩，算法继续步骤(7)。
 
 <p>
 </dd>
 <dt><strong>(7)</strong></dt>
-<dd>向量<span class="math-inline">\hat{v}_j</span>和<span class="math-inline">\hat{w}_j</span>都通过了收缩检查，现在被归一化为成为下一个右和左Lanczos向量<span class="math-inline">v_j</span>和<span class="math-inline">w_j</span>。归一化使得
+<dd>向量<span class="math-inline">\hat{v}_j</span>和<span class="math-inline">\hat{w}_j</span>都通过了收缩检查，现在被归一化以成为下一个右和左Lanczos向量<span class="math-inline">v_j</span>和<span class="math-inline">w_j</span>。归一化使得
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">\left\Vert v_j \right\Vert _2 = \left\Vert w_j \right\Vert _2 = 1\quad \mathrm{for all}\quad j.</div>
@@ -189,39 +177,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong>(9)</strong></dt>
-<dd>在这一步中，我们通过计算新的候选向量<span class="math-inline">\hat{v}_{j+m_c}</span>作为最新右Lanczos向量<span class="math-inline">v_j</span>的<span class="math-inline">A</span>倍数来推进右块Krylov序列。
+<dd>在这一步中，我们通过计算新的候选向量<span class="math-inline">\hat{v}_{j+m_c}</span>，作为最新右Lanczos向量<span class="math-inline">v_j</span>的<span class="math-inline">A</span>倍数，来推进右块Krylov序列。
 
 <p>
 </dd>
 <dt><strong>(10)</strong></dt>
-<dd>向量<span class="math-inline">\hat{v}_{j+m_c}</span>与左Lanczos向量<span class="math-inline">w_k</span>，<span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>进行双正交化。注意，使用TSMGS过程进行这种双正交化。通过使用<a href="node259.html#rwf:SAV">7.79</a>，可以节省计算<span class="math-inline">t_{kj}</span>所需的一个内积。更确切地说，应使用以下<span class="math-inline">t_{kj}</span>的公式：
+<dd>向量<span class="math-inline">\hat{v}_{j+m_c}</span>与左Lanczos向量<span class="math-inline">w_k</span>，<span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。通过使用<a href="node259.html#rwf:SAV">7.79</a>，可以在计算<span class="math-inline">t_{kj}</span>时节省一个内积。更确切地说，应使用以下<span class="math-inline">t_{kj}</span>的公式：
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="rwf:SAV1"></a><div class="math-display">t_{kj}= \cases{\displaystyle{\tilde{t}_{jk}\, \delta_j/\d......playstyle{{w_k^T \hat{v}_{j+m_c}}/{\delta_k}}&amp; \ otherwise.}</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:SAV1"></a><div class="math-display">t_{kj}= \cases{\displaystyle{\tilde{t}_{jk}\, \delta_j/\delta_k}&amp; \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{{w_k^T \hat{v}_{j+m_c}}/{\delta_k}}&amp; \ otherwise.}</div></td>
+<td WIDTH=10 align="RIGHT">
 (188)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-注意，<a href="node259.html#rwf:SAV1">7.82</a>中所需的条目<span class="math-inline">\tilde{t}_{jk}</span>在步骤(7)中可用。
+注意，<a href="node259.html#rwf:SAV1">7.82</a>中所需的项<span class="math-inline">\tilde{t}_{jk}</span>可从步骤(7)获得。
 <a name="25715"></a> 
 
 <p>
 </dd>
 <dt><strong>(11)</strong></dt>
-<dd>在这一步中，我们通过计算新的候选向量<span class="math-inline">\hat{w}_{j+p_c}</span>作为最新左Lanczos向量<span class="math-inline">w_j</span>的<span class="math-inline">A^T</span>倍数来推进左块Krylov序列。
+<dd>在这一步中，我们通过计算新的候选向量<span class="math-inline">\hat{w}_{j+p_c}</span>，作为最新左Lanczos向量<span class="math-inline">w_j</span>的<span class="math-inline">A^T</span>倍数，来推进左块Krylov序列。
 
 <p>
 </dd>
 <dt><strong>(12)</strong></dt>
-<dd>向量<span class="math-inline">\hat{w}_{j+p_c}</span>与右Lanczos向量<span class="math-inline">v_k</span>，<span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>进行双正交化。注意，这种双正交化是通过TSMGS过程完成的。同样，为了节省一个内积，应使用以下<span class="math-inline">\tilde{t}_{kj}</span>的公式：
+<dd>向量<span class="math-inline">\hat{w}_{j+p_c}</span>与右Lanczos向量<span class="math-inline">v_k</span>，<span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。同样，为了节省一个内积，应使用以下<span class="math-inline">\tilde{t}_{kj}</span>的公式：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">\tilde{t}_{kj} = \cases{\displaystyle{t_{jk}\, \delta_j/\......playstyle{{\hat{w}_{j+p_c}^T v_k}/{\delta_k}}&amp; \ otherwise.}</div>
+<div class="math-display">\tilde{t}_{kj} = \cases{\displaystyle{t_{jk}\, \delta_j/\delta_k}&amp; \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{{\hat{w}_{j+p_c}^T v_k}/{\delta_k}}&amp; \ otherwise.}</div>
 </div>
 <br clear="ALL">
 <p></p>
@@ -231,43 +219,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dt><strong>(13)</strong></dt>
 <dd>右候选向量<span class="math-inline">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}</span>与最新左Lanczos向量<span class="math-inline">w_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">t_{j,k-m_c}</span>的公式：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">t_{j,k-m_c} = \cases{\displaystyle{{w_j^T \hat{v}_{k}}/{\d......lde{t}_{k-m_c,j}\, \delta_{k-m_c}/{\delta_j}}&amp; \ otherwise.}</div>
+<div class="math-display">t_{j,k-m_c} = \cases{\displaystyle{{w_j^T \hat{v}_{k}}/{\delta_j}}&amp; \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{\tilde{t}_{k-m_c,j}\, \delta_{k-m_c}/{\delta_j}}&amp; \ otherwise.}</div>
 </div>
 <br clear="ALL">
 <p></p>
-然而，使用这个公式会牺牲一些数值稳定性。<a name="tex2html44"
+然而，使用这一公式会牺牲一些数值稳定性。
+<a name="tex2html44"
   href="footnode.html#foot27226"><sup><button class="footnote"></button></sup></a>
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
 <dd>左候选向量<span class="math-inline">\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}</span>与最新右Lanczos向量<span class="math-inline">v_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">\tilde{t}_{j,k-p_c}</span>的公式：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">\tilde{t}_{j,k-p_c} = \cases{\displaystyle{{\hat{w}_{k}^T ......tyle{t_{k-p_c,j}\, \delta_{k-p_c}/{\delta_j}}&amp; \ otherwise.}</div>
+<div class="math-display">\tilde{t}_{j,k-p_c} = \cases{\displaystyle{{\hat{w}_{k}^T v_j}/{\delta_j}}&amp; \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{t_{k-p_c,j}\, \delta_{k-p_c}/{\delta_j}}&amp; \ otherwise.}</div>
 </div>
 <br clear="ALL">
 <p></p>
-然而，使用这个公式会牺牲一些数值稳定性。
+然而，使用这一公式会牺牲一些数值稳定性。
 
 <p>
 </dd>
 <dt><strong>(15)</strong></dt>
-<dd>在这一步中计算的条目<span class="math-inline">t_{jk}</span>是由于<span class="math-inline">\hat{v}_k</span>向量收缩引起的垂直尖峰导致的<span class="math-inline">T_j^{\rm {(pr)}}</span>的第<span class="math-inline">j</span>行的潜在非零条目。注意，再次使用了公式<a href="node259.html#rwf:SAV">7.79</a>。
+<dd>在这一步中计算的<span class="math-inline">t_{jk}</span>项是由于<span class="math-inline">\hat{v}_k</span>向量收缩引起的垂直尖刺导致的<span class="math-inline">T_j^{\rm {(pr)}}</span>的第<span class="math-inline">j</span>行中的潜在非零项。注意，再次使用公式<a href="node259.html#rwf:SAV">7.79</a>。
 
 <p>
 </dd>
 <dt><strong>(16)</strong></dt>
-<dd>现在，<span class="math-inline">T_j^{\rm {(pr)}}</span>的第<span class="math-inline">j</span>行和第<span class="math-inline">j</span>列的所有潜在非零元素都已计算完毕，并被添加到前一次迭代<span class="math-inline">j-1</span>的矩阵<span class="math-inline">T_{j-1}^{(\rm pr)}</span>中，以产生当前矩阵<span class="math-inline">T_{j}^{(\rm pr)}</span>。这里，我们约定在算法<a href="node259.html#rwf:alg2">7.16</a>中未明确定义的条目<span class="math-inline">t_{ik}</span>被设置为零。我们注意到，在初始迭代中，即只要<span class="math-inline">j\leq m_c</span>，分别<span class="math-inline">j\leq p_c</span>，算法<a href="node259.html#rwf:alg2">7.16</a>也会产生具有负索引<span class="math-inline">k\leq 0</span>的条目<span class="math-inline">t_{jk}</span>，分别<span class="math-inline">\tilde{t}_{jk}</span>。这些条目来自起始向量的双正交化，它们不是矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>的一部分。特别是，在进行特征值计算时，这些条目不需要算法<a href="node259.html#rwf:alg2">7.16</a>。然而，当算法<a href="node259.html#rwf:alg2">7.16</a>应用于降阶建模时，这些条目至关重要，我们将在下面的§<a href="node260.html#rwf:reduced_order">7.10.4</a>中讨论。
+<dd>现在，<span class="math-inline">T_j^{\rm {(pr)}}</span>的第<span class="math-inline">j</span>行和第<span class="math-inline">j</span>列中的所有潜在非零元素都已计算完毕，并将其添加到前一次迭代<span class="math-inline">j-1</span>的矩阵<span class="math-inline">T_{j-1}^{(\rm pr)}</span>中，以产生当前矩阵<span class="math-inline">T_{j}^{(\rm pr)}</span>。这里，我们约定在算法<a href="node259.html#rwf:alg2">7.16</a>中未明确定义的<span class="math-inline">t_{ik}</span>项设置为零。我们注意到，在初始迭代中，即只要<span class="math-inline">j\leq m_c</span>，分别<span class="math-inline">j\leq p_c</span>，算法<a href="node259.html#rwf:alg2">7.16</a>还产生负索引<span class="math-inline">k\leq 0</span>的<span class="math-inline">t_{jk}</span>项，分别<span class="math-inline">\tilde{t}_{jk}</span>项。这些项来自起始向量的双正交化，它们不是矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>的一部分。特别是，在进行特征值计算时，这些项不需要。然而，当算法<a href="node259.html#rwf:alg2">7.16</a>应用于降阶建模时，这些项至关重要，我们将在下面的§<a href="node260.html#rwf:reduced_order">7.10.4</a>中讨论。
 
 <p>
 </dd>
 <dt><strong>(17)</strong></dt>
-<dd>对于特征值计算，通过计算<span class="math-inline">j\times j</span>矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>，<span class="math-inline">i=1,2,\ldots,j</span>，来测试收敛性。如果某些<span class="math-inline">\theta_i^{(j)}</span>足够接近<span class="math-inline">A</span>的期望特征值，则算法停止。对于降阶建模，如果算法生成的第<span class="math-inline">j</span>阶模型足够接近原始线性动力系统，则算法停止。
+<dd>对于特征值计算，通过计算<span class="math-inline">j\times j</span>矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>，<span class="math-inline">i=1,2,\ldots,j</span>，来测试收敛性。如果某些<span class="math-inline">\theta_i^{(j)}</span>足够好地近似于<span class="math-inline">A</span>的期望特征值，则停止算法。对于降阶建模，如果算法生成的<span class="math-inline">j</span>阶模型足够好地近似于原始线性动力系统，则停止算法。
 </dd>
 </dl>
 
@@ -289,16 +278,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4707"
-  href="node260.html">Application to Reduced-Order Modeling</a>
-<b> Up:</b> <a name="tex2html4701"
-  href="node256.html">Band Lanczos Method &nbsp;</a>
-<b> Previous:</b> <a name="tex2html4695"
-  href="node258.html">Basic Properties</a>
- &nbsp <b>  <a name="tex2html4703"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4705"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4707" href="node260.html">应用至降阶模型</a>
+<b>上一级：</b><a name="tex2html4701" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一节：</b><a name="tex2html4695" href="node258.html">基本性质</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

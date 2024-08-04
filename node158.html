@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Summary of Choices.</title>
-<meta name="description" content="Summary of Choices.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Summary of Choices.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node159.html">
-<link rel="previous" href="node157.html">
-<link rel="up" href="node156.html">
-<link rel="next" href="node159.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html3148"
   href="node159.html">
@@ -80,99 +73,94 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3149"
-  href="node159.html">Application.</a>
-<b> Up:</b> <a name="tex2html3143"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3137"
-  href="node157.html">Overview of Available Algorithms.</a>
- &nbsp <b>  <a name="tex2html3145"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3147"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3149" href="node159.html">Application.</a>
+<b>上一级：</b><a name="tex2html3143" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3137" href="node157.html">Overview of Available Algorithms.</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001410020000000000000">
-选择概述</a>
+算法选择总结</a>
 </h4>
 现在让我们转向表
-<a href="node158.html#gsym_alg_choice">5.1</a>，在其中我们列出了这些算法，并添加了一些信息，这些信息可能有助于在特定情况下决定使用哪种算法。
+<a href="node158.html#gsym_alg_choice">5.1</a>，在其中我们列出了这些算法，并添加了一些有助于在特定情况下决定使用哪种算法的信息。
 
 <p>
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
  <a name="gsym_alg_choice"></a>
 <p>
 <br>
 <a name="17045"></a>
-<table cellpadding=3 border="1">
-<caption><strong>表 5.1：</strong>
-广义特征值问题算法总结</caption>
-<tr><td align="left">&nbsp;</td>
-<td align="center">应用</td>
-<td align="center">正交性</td>
-<td align="center">IE</td>
-<td align="center">CE</td>
-<td align="center">M</td>
-<td align="center">向量数</td>
-<td align="center">分解</td>
+<table CELLPADDING=3 border="1">
+<caption><strong>表5.1：</strong>
+广义厄米特征值问题(GHEPs)算法总结</caption>
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">应用</td>
+<td align="CENTER">正交</td>
+<td align="CENTER">IE</td>
+<td align="CENTER">CE</td>
+<td align="CENTER">M</td>
+<td align="CENTER"># 向量</td>
+<td align="CENTER">分解</td>
 </tr>
-<tr><td align="left">幂法</td>
-<td align="center">直接</td>
-<td align="center">&nbsp;</td>
-<td align="center">是</td>
-<td align="center">慢</td>
-<td align="center">否</td>
-<td align="center">2</td>
-<td align="center"><span class="math-inline">B=LL^{\ast}</span></td>
+<tr><td align="LEFT">幂法</td>
+<td align="CENTER">直接</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">是</td>
+<td align="CENTER">慢</td>
+<td align="CENTER">否</td>
+<td align="CENTER">2</td>
+<td align="CENTER"><span class="math-inline">B=LL^{\ast}</span></td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="center">SI</td>
-<td align="center">&nbsp;</td>
-<td align="center">-</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">3</td>
-<td align="center">
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">SI</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">-</td>
+<td align="CENTER">是</td>
+<td align="CENTER">是</td>
+<td align="CENTER">3</td>
+<td align="CENTER">
 <span class="math-inline">A-\sigma B=LDL^{\ast}</span></td>
 </tr>
-<tr><td align="left">Lanczos</td>
-<td align="center">直接</td>
-<td align="center">局部</td>
-<td align="center">是</td>
-<td align="center">否</td>
-<td align="center">否</td>
-<td align="center">6</td>
-<td align="center"><span class="math-inline">B=LL^{\ast}</span></td>
+<tr><td align="LEFT">Lanczos法</td>
+<td align="CENTER">直接</td>
+<td align="CENTER">局部</td>
+<td align="CENTER">是</td>
+<td align="CENTER">否</td>
+<td align="CENTER">否</td>
+<td align="CENTER">6</td>
+<td align="CENTER"><span class="math-inline">B=LL^{\ast}</span></td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="center">直接</td>
-<td align="center">选择 <span class="math-inline">B</span> 正交</td>
-<td align="center">是</td>
-<td align="center">慢</td>
-<td align="center">否</td>
-<td align="center">许多</td>
-<td align="center"><span class="math-inline">B=LL^{\ast}</span></td>
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">直接</td>
+<td align="CENTER">选择 <span class="math-inline">B</span>正交</td>
+<td align="CENTER">是</td>
+<td align="CENTER">慢</td>
+<td align="CENTER">否</td>
+<td align="CENTER">多</td>
+<td align="CENTER"><span class="math-inline">B=LL^{\ast}</span></td>
 </tr>
-<tr><td align="left">&nbsp;</td>
-<td align="center">SI</td>
-<td align="center">完全 <span class="math-inline">B</span> 正交</td>
-<td align="center">-</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">中等</td>
-<td align="center">
+<tr><td align="LEFT">&nbsp;</td>
+<td align="CENTER">SI</td>
+<td align="CENTER">完全 <span class="math-inline">B</span>正交</td>
+<td align="CENTER">-</td>
+<td align="CENTER">是</td>
+<td align="CENTER">是</td>
+<td align="CENTER">中等</td>
+<td align="CENTER">
 <span class="math-inline">A-\sigma B=LDL^{\ast}</span></td>
 </tr>
-<tr><td align="left">Jac-Dav</td>
-<td align="center">预处理</td>
-<td align="center">完全 <span class="math-inline">B</span> 正交</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">慢</td>
-<td align="center">少数</td>
-<td align="center"><span class="math-inline">A-\theta B</span> 的 ILU</td>
+<tr><td align="LEFT">Jacobi-Davidson算法</td>
+<td align="CENTER">预处理</td>
+<td align="CENTER">完全 <span class="math-inline">B</span>正交</td>
+<td align="CENTER">是</td>
+<td align="CENTER">是</td>
+<td align="CENTER">慢</td>
+<td align="CENTER">少</td>
+<td align="CENTER"><span class="math-inline">A-\theta B</span>的ILU分解</td>
 </tr>
 </table>
 </div>
@@ -196,16 +184,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html3149"
-  href="node159.html">Application.</a>
-<b> Up:</b> <a name="tex2html3143"
-  href="node156.html">Introduction</a>
-<b> Previous:</b> <a name="tex2html3137"
-  href="node157.html">Overview of Available Algorithms.</a>
- &nbsp <b>  <a name="tex2html3145"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html3147"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html3149" href="node159.html">Application.</a>
+<b>上一级：</b><a name="tex2html3143" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3137" href="node157.html">Overview of Available Algorithms.</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

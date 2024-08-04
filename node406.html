@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Preconditioned Lanczos Method</title>
-<meta name="description" content="Preconditioned Lanczos Method">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Preconditioned Lanczos Method">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node407.html">
-<link rel="previous" href="node405.html">
-<link rel="up" href="node398.html">
-<link rel="next" href="node407.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html7004"
   href="node407.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7005"
-  href="node407.html">Inexact Rational Krylov Method</a>
-<b> Up:</b> <a name="tex2html6999"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6993"
-  href="node405.html">Jacobi-Davidson Method with Cayley</a>
- &nbsp <b>  <a name="tex2html7001"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7003"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
+<b>上一级：</b><a name="tex2html6999" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6993" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002026000000000000000"></a>
@@ -100,22 +88,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2> 
 
 <p>
-假设 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是对称的，并且我们有一个正定的预处理器 <span class="math-inline">M</span> 用于 <span class="math-inline">A - \mu B</span>，即，<span class="math-inline">M \approx A - \mu B</span>。我们可以使用应用于 <span class="math-inline">M^{-1} (A-\nu B)</span> 的Arnoldi方法来计算接近 <span class="math-inline">\mu</span> 的特征值。（再次，我们使用Ritz值 <span class="math-inline">\theta</span> 作为零。）这导致递归关系
+假设<span class="math-inline">A</span>和<span class="math-inline">B</span>是对称的，并且我们有一个正定的预处理器<span class="math-inline">M</span>用于<span class="math-inline">A - \mu B</span>，即<span class="math-inline">M \approx A - \mu B</span>。我们可以对<span class="math-inline">M^{-1} (A-\nu B)</span>应用Arnoldi方法来计算接近<span class="math-inline">\mu</span>的特征值。（再次使用Ritz值<span class="math-inline">\theta</span>作为零。）这导致递推关系
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">M^{-1} (A - \nu B) V_k = V_k H_k + f_k e_k^T \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
-由于 <span class="math-inline">M</span> 是正定的，我们有 <span class="math-inline">x^{\ast} M y</span> 是一个有效的内积。当我们使用 <span class="math-inline">M</span> 内积 <span class="math-inline">x^{\ast} M y</span> 而不是标准内积 <span class="math-inline">x^{\ast}y</span> 时，我们有 <span class="math-inline">V_k^{\ast} M V_k = I</span> 和 <span class="math-inline">V_k^{\ast} M f_k = 0</span>，因此 <span class="math-inline">H_k = V_k^{\ast} (A-\nu B) V_k</span> 是一个对称矩阵。这意味着使用 <span class="math-inline">M</span> 内积的Arnoldi方法简化为应用于非对称矩阵 <span class="math-inline">M^{-1} (A-\nu B)</span> 的Lanczos方法。从前面的讨论中，我们得出结论，使用 <span class="math-inline">M</span> 内积的预处理Lanczos方法具有与应用于扰动问题的谱变换Lanczos方法类似的收敛行为。
+由于<span class="math-inline">M</span>是正定的，我们有<span class="math-inline">x^{\ast} M y</span>是一个有效的内积。当我们在Arnoldi方法中使用<span class="math-inline">M</span>内积<span class="math-inline">x^{\ast} M y</span>而不是标准内积<span class="math-inline">x^{\ast}y</span>时，我们有<span class="math-inline">V_k^{\ast} M V_k = I</span>和
+
+<span class="math-inline">V_k^{\ast} M f_k = 0</span>，
+因此<span class="math-inline">H_k = V_k^{\ast} (A-\nu B) V_k</span>是一个对称矩阵。这意味着使用<span class="math-inline">M</span>内积的Arnoldi方法简化为对非对称矩阵<span class="math-inline">M^{-1} (A-\nu B)</span>应用<span class="math-inline">M</span>内积的Lanczos方法。从前面的讨论中，我们得出结论，使用<span class="math-inline">M</span>内积的预处理Lanczos方法与应用于扰动问题的谱变换Lanczos方法具有类似的收敛行为。
 
 <p>
-设 <span class="math-inline">(\zeta,z)</span> 满足 <span class="math-inline">H_k z = \zeta z</span> 并定义Ritz向量 <span class="math-inline">x = V_k z</span>。这个向量是从Lanczos（Arnoldi）递归关系中获得的，而不是从Galerkin投影中获得的。另一方面，Ritz值可以通过Rayleigh商计算，即，
+设<span class="math-inline">(\zeta,z)</span>满足<span class="math-inline">H_k z = \zeta z</span>，并定义Ritz向量<span class="math-inline">x = V_k z</span>。这个向量是从Lanczos（Arnoldi）递推关系中获得的，而不是从Galerkin投影中获得的。另一方面，Ritz值可以通过Rayleigh商计算，即
 <p></p>
-<div align="center">
+<div align="CENTER">
 
-<IMG
+<img
  width="253" height="123" border="0"
  src="img3788.png"
  alt="\begin{eqnarray*}
@@ -127,46 +118,50 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL"></div><p></p>
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
-这在计算上很廉价，例如当 <span class="math-inline">B</span> 是一个对角矩阵时。
+这在<span class="math-inline">B</span>是对角矩阵时计算成本较低。
 
 <p>
-回想一下，不精确Cayley变换的Lanczos递归关系
+回想一下，对于不精确的Cayley变换
 
-<span class="math-inline">T_{\mathrm{IC}} = M^{-1} (A - \nu B)</span> 是
+<span class="math-inline">T_{\mathrm{IC}} = M^{-1} (A - \nu B)</span>，Lanczos递推关系是
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">T_{\mathrm{IC}} V_k - V_k H_k = f_k e_k^T \ .</div>
 </div>
 <br clear="ALL">
 <p></p>
-递归关系也可以写成
+递推关系也可以写成
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 <div class="math-display">T_{\mathrm{C}} V_k - V_k H_k = f_k e_k^T + (T_{\mathrm{C}} - T_{\mathrm{IC}}) V_k.</div>
 </div>
 <br clear="ALL">
 <p></p>
-我们知道对于Ritz对 <span class="math-inline">(x, \theta)</span>，当 <span class="math-inline">\theta \approx \nu</span> 时，<span class="math-inline">(T_{\mathrm{C}} - T_{\mathrm{IC}}) x</span> 可能很小。因此，如果 <span class="math-inline">x</span> 接近 <span class="math-inline">T_{\mathrm{IC}}</span> 的特征向量并且 <span class="math-inline">\theta</span> 接近 <span class="math-inline">\nu</span>，那么 <span class="math-inline">x</span> 接近 <span class="math-inline">T_{\mathrm{C}}</span> 的特征向量，因此Ritz值 <span class="math-inline">\theta</span> 接近 <span class="math-inline">Ax = \lambda Bx</span> 的特征值。
+我们知道对于一个Ritz对<span class="math-inline">(x, \theta)</span>，当<span class="math-inline">\theta \approx \nu</span>时，<span class="math-inline">(T_{\mathrm{C}} - T_{\mathrm{IC}}) x</span>可能很小。因此，如果<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{IC}}</span>的特征向量，并且<span class="math-inline">\theta</span>接近<span class="math-inline">\nu</span>，那么<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{C}}</span>的特征向量，因此Ritz值<span class="math-inline">\theta</span>接近<span class="math-inline">Ax = \lambda Bx</span>的特征值。
 
 <p>
-Morgan和Scott [336] 证明了以下算法的收敛性，用于计算 <span class="math-inline">Ax = \lambda x</span> 的特征值，即，<span class="math-inline">B=I</span>。
+Morgan和Scott[<a
+ href="node421.html#mosc93">336</a>]证明了以下算法的收敛性，用于计算<span class="math-inline">Ax = \lambda x</span>的特征值，即<span class="math-inline">B=I</span>。
 <br>
-<IMG
- width="598" height="224" align="bottom" border="0"
+<img
+ width="598" height="224" align="BOTTOM" border="0"
  src="img3794.png"
  alt="\begin{algorithm}{Preconditioned Lanczos Method for GHEP}
 {
 \begin{tabbing}
 (nr)...
-...heta_l B x_l \Vert \leq \mathrm{TOL}$, {\bf stop}
+...heta_l B x_l \Vert \leq \mathrm{TOL}<span class="math-inline">, {\bf stop}
 \end{tabbing}}
 \end{algorithm}">
 <br> 
 
 <p>
-注意，如果 <span class="math-inline">\mu=\nu</span>，那么预处理器不能是对 <span class="math-inline">A - \mu B</span> 的太好的近似；否则 <span class="math-inline">T_{\mathrm{IC}} \approx I</span>。<span class="math-inline">k</span> 的值可能对每个 <span class="math-inline">l</span> 都不同。Morgan和Scott建议停止测试 <span class="math-inline">-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert</span>，这在Lanczos方法中很廉价。在 [336] 中显示，如果 <span class="math-inline">M_l</span> 和 <span class="math-inline">M_l^{-1}</span> 在范数上一致有界，<span class="math-inline">\theta_l</span> 收敛到 <span class="math-inline">A</span> 的一个特征值。此外，渐近收敛是二次的。
+注意，如果</span>\mu=\nu<span class="math-inline">，那么预处理器不能太好地近似</span>A - \mu B<span class="math-inline">；否则</span>T_{\mathrm{IC}} \approx I<span class="math-inline">。</span>k<span class="math-inline">的值可能对每个</span>l<span class="math-inline">都不同。Morgan和Scott建议停止测试
+
+</span>-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert<span class="math-inline">，这在Lanczos方法中计算成本较低。在[<a
+ href="node421.html#mosc93">336</a>]中显示，如果</span>M_l<span class="math-inline">和</span>M_l^{-1}<span class="math-inline">在范数上一致有界，</span>\theta_l<span class="math-inline">收敛到</span>A$的一个特征值。此外，渐近收敛是二次的。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -186,16 +181,11 @@ Morgan和Scott [336] 证明了以下算法的收敛性，用于计算 <span clas
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html7005"
-  href="node407.html">Inexact Rational Krylov Method</a>
-<b> Up:</b> <a name="tex2html6999"
-  href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b> Previous:</b> <a name="tex2html6993"
-  href="node405.html">Jacobi-Davidson Method with Cayley</a>
- &nbsp <b>  <a name="tex2html7001"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html7003"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
+<b>上一级：</b><a name="tex2html6999" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一节：</b><a name="tex2html6993" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

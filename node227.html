@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Orthogonal Deflating Transformation</title>
-<meta name="description" content="Orthogonal Deflating Transformation">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Orthogonal Deflating Transformation">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node233.html">
-<link rel="previous" href="node226.html">
-<link rel="up" href="node220.html">
-<link rel="next" href="node228.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4240"
   href="node228.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4241"
-  href="node228.html">Locking or Purging a</a>
-<b> Up:</b> <a name="tex2html4235"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4229"
-  href="node226.html">Deflation and Stopping Rules</a>
- &nbsp <b>  <a name="tex2html4237"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4239"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4241" href="node228.html">Locking or Purging a</a>
+<b>上一级：</b><a name="tex2html4235" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4229" href="node226.html">收缩与停止规则</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001667000000000000000"></a> <a name="orth_sec_nsym"></a>
@@ -98,80 +86,85 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-我们将利用一种特殊的正交变换来实现这些缩减方案。这些缩减方案与一个与待缩减（锁定或清除）的Ritz值相关的特征向量有关。给定一个单位长度的向量<span class="math-inline">y</span>，算法<a href="node227.html#fig:orthQ3">7.8</a>计算一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q e_1 = y</span>（因此<span class="math-inline">y = Q^* e_1</span>）。以下正交缩减变换算法<a href="node227.html#fig:orthQ3">7.8</a>与在IRLM中使用的算法<a href="node124.html#fig:orthQ">4.9</a>（参见第<a href="node117.html#sec:irlm">4.5</a>节）相同，但为了完整性，我们再次呈现它。
+我们将利用一种特殊的正交变换来实现这些缩减方案。这些缩减方案与一个与待缩减（锁定或清除）的 Ritz 值相关的特征向量有关。给定一个单位长度的向量 <span class="math-inline">y</span>，算法<a href="node227.html#fig:orthQ3">7.8</a>计算一个正交矩阵 <span class="math-inline">Q</span>，使得 <span class="math-inline">Q e_1 = y</span>（因此 <span class="math-inline">y = Q^* e_1</span>）。下面的正交缩减变换算法<a href="node227.html#fig:orthQ3">7.8</a>与在 IRLM 中使用的算法<a href="node124.html#fig:orthQ">4.9</a>（参见第<a href="node117.html#sec:irlm">4.5</a>节）相同，但为了完整性，我们再次呈现它。
 
 <p>
 <br>
-<a name="fig:orthQ3"></a><IMG
- width="598" height="316" align="bottom" border="0"
+<a name="fig:orthQ3"></a><img
+ width="598" height="316" align="BOTTOM" border="0"
  src="img2035.png"
  alt="\begin{algorithm}{Orthogonal Deflating Transformation for IRAM
 }
 {
 \begin{tabb...
-... \tau_o = \tau$\\
+... \tau_o = \tau<span class="math-inline">\\
 {\rm (14)} \&gt; \&gt;{\bf end for}
 \end{tabbing}}
 \end{algorithm}">
 <br> 
 
 <p>
-根据算法<a href="node227.html#fig:orthQ3">7.8</a>构建的正交矩阵<span class="math-inline">Q</span>具有非常特殊的形式，可以写成
-<a name="upform2"></a>   Q = R + y e_1^*,   其中    
+按照算法<a href="node227.html#fig:orthQ3">7.8</a>构造的正交矩阵 </span>Q<span class="math-inline"> 具有非常特殊的形式，可以写成
+<a name="upform2"></a>   Q = R + y e_1^*,    with    
                        R e_1 = 0 ,  R^* y = 0,
 
-其中<span class="math-inline">R</span>是上三角矩阵。它也可以写成
+其中 </span>R<span class="math-inline"> 是上三角矩阵。它也可以写成
 
-<a name="loform2"></a>          Q = L + y g^* ,  其中    
+<a name="loform2"></a>          Q = L + y g^* ,   with    
                        L e_1 = 0 ,  L^* y = e_1 - g,
 
-其中<span class="math-inline">L</span>是下三角矩阵，
+其中 </span>L<span class="math-inline"> 是下三角矩阵，
 并且
-<span class="math-inline">g^* \equiv e_1^* + \frac{1}{\eta_1} e_1^* R </span>。
+</span>g^* \equiv e_1^* + \frac{1}{\eta_1} e_1^* R <span class="math-inline">。
 
 <p>
-现在，考虑矩阵<span class="math-inline">Q^* H Q</span>。从
-<span class="math-inline"> Q^* = (L + y g^* )^*</span>,
+现在，考虑矩阵 </span>Q^* H Q<span class="math-inline">。从
+</span> Q^* = (L + y g^* )^*<span class="math-inline">,
 
-<span class="math-inline"> Q = (R + y e_1^* )</span> 来自(<a href="node227.html#loform2">7.19</a>)和(<a href="node227.html#upform2">7.18</a>)将给出
+</span> Q = (R + y e_1^* )<span class="math-inline"> 来自（<a href="node227.html#loform2">7.19</a>）和（<a href="node227.html#upform2">7.18</a>）将得到
 
-Q^* H Q  &=& Q^* H ( R + y e_1^*)
-<br>               &=& (L^* + g y^*) H R + Q^*Hy e_1^*
-<br>               &=& L^*HR + g y^*H R + Q^*Hy e_1^*.
+Q^* H Q  &amp;=&amp; Q^* H ( R + y e_1^*)
+<br>               &amp;=&amp; (L^* + g y^*) H R + Q^*Hy e_1^*
+<br>               &amp;=&amp; L^*HR + g y^*H R + Q^*Hy e_1^*.
 
-由于<span class="math-inline">L^*</span>和<span class="math-inline">R</span>都是上三角矩阵，因此<span class="math-inline">L^*HR</span>是上Hessenberg矩阵，其第一行和第一列均为零，因为
-<span class="math-inline">Le_1 = Re_1 = 0</span>。
+由于 </span>L^*<span class="math-inline"> 和 </span>R<span class="math-inline"> 都是上三角矩阵，因此 </span>L^*HR<span class="math-inline">
+是上海森堡矩阵，其第一行和第一列均为零
+由于
+</span>Le_1 = Re_1 = 0<span class="math-inline">。
 
 <p>
-从这一讨论中，我们可以看到，当<span class="math-inline">y</span>是<span class="math-inline">H</span>的右特征向量且<span class="math-inline">Hy = y \theta</span>时，则
-<span class="math-inline">H_+ \equiv Q^* H Q</span>的形式为
+从这一讨论中，我们看到当 </span>y<span class="math-inline"> 是 </span>H<span class="math-inline"> 的右特征向量
+且 </span>Hy = y \theta<span class="math-inline"> 时，则
+</span>H_+ \equiv Q^* H Q<span class="math-inline"> 具有以下形式
 
 <a name="lckform"></a>  H_+ =         [
                       cc
-                          & h^*  
+                          &amp; h^*  
 <br>
-0 & H_2  
-<br>                       ]。
+0 &amp; H_2  
+<br>                       ].
 
 <p>
-另一方面，当<span class="math-inline">y</span>是<span class="math-inline">H</span>的左特征向量且
-<span class="math-inline">y^*H = \theta y^*</span>时，则
-<span class="math-inline">H_+ \equiv Q^* H Q</span>的形式为
+另一方面，当 </span>y<span class="math-inline"> 是 </span>H<span class="math-inline"> 的左特征向量
+且
+</span>y^*H = \theta y^*<span class="math-inline"> 时，则
+</span>H_+ \equiv Q^* H Q<span class="math-inline"> 具有以下形式
 
 <a name="prgform"></a>  H_+ =         [
                       cc
-                          & 0  
+                          &amp; 0  
 <br>
-h & H_2  
-<br>                       ]，
+h &amp; H_2  
+<br>                       ],
 
-其中<span class="math-inline">H_2</span>是上Hessenberg矩阵。
-
-<p>
-我们将使用(<a href="node227.html#lckform">7.20</a>)来锁定一个收敛的Ritz值，并使用(<a href="node227.html#prgform">7.21</a>)来清除一个不想要的但已收敛的Ritz值。
+其中 </span>H_2<span class="math-inline"> 是上海森堡矩阵。
 
 <p>
-需要注意的是，根据算法<a href="node227.html#fig:orthQ3">7.8</a>计算的<span class="math-inline">Q</span>将具有与机器精度<span class="math-inline">\epsilon_M</span>相当的相对误差，且没有元素增长。此外，扩展到复数运算非常直接（不像Givens或Householder变换）。
+我们将使用（<a href="node227.html#lckform">7.20</a>）来锁定一个已收敛的 Ritz 值，并使用（<a href="node227.html#prgform">7.21</a>）来清除一个不想要的但已收敛的 Ritz 值。
+
+<p>
+需要注意的是，如算法<a href="node227.html#fig:orthQ3">7.8</a>计算的那样，
+</span>Q<span class="math-inline"> 将具有与机器精度 </span>\epsilon_M<span class="math-inline"> 相当的逐元素相对误差，且没有元素增长。此外，扩展到复数运算非常直接（不像 Givens 或 Householder 变换）。
 
 <p>
 <br><hr>
@@ -181,15 +174,15 @@ h & H_2
 <ul>
 <li><ul>
 <li><a name="tex2html4242"
-  href="node228.html">锁定或清除单个特征值</a>
+  href="node228.html">锁定或清除单个特征值。</a>
 <li><a name="tex2html4243"
-  href="node229.html">锁定<span class="math-inline">\theta</span></a>
+  href="node229.html">锁定 </span>\theta <span class="math-inline">。</a>
 <li><a name="tex2html4244"
-  href="node230.html">清除<span class="math-inline">\theta</span></a>
+  href="node230.html">清除 </span>\theta <span class="math-inline">。</a>
 <li><a name="tex2html4245"
-  href="node231.html"><span class="math-inline">Q^{\ast } H Q</span>的稳定性</a>
+  href="node231.html"></span>Q^{\ast } H Q$ 的稳定性。</a>
 <li><a name="tex2html4246"
-  href="node232.html">在IRAM中的锁定和清除</a>
+  href="node232.html">在 IRAM 中的锁定和清除。</a>
 </ul></ul>
 <!--End of Table of Child-Links-->
 <hr>
@@ -211,16 +204,11 @@ h & H_2
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4241"
-  href="node228.html">Locking or Purging a</a>
-<b> Up:</b> <a name="tex2html4235"
-  href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b> Previous:</b> <a name="tex2html4229"
-  href="node226.html">Deflation and Stopping Rules</a>
- &nbsp <b>  <a name="tex2html4237"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4239"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4241" href="node228.html">Locking or Purging a</a>
+<b>上一级：</b><a name="tex2html4235" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一节：</b><a name="tex2html4229" href="node226.html">收缩与停止规则</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

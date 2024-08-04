@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Example 8.6.1.</title>
-<meta name="description" content="Example 8.6.1.">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Example 8.6.1.">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node304.html">
-<link rel="previous" href="node302.html">
-<link rel="up" href="node302.html">
-<link rel="next" href="node304.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html5394"
   href="node304.html">
@@ -80,75 +73,67 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5395"
-  href="node304.html">Example 8.6.2.</a>
-<b> Up:</b> <a name="tex2html5389"
-  href="node302.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html5383"
-  href="node302.html">Numerical Examples</a>
- &nbsp <b>  <a name="tex2html5391"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5393"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5395" href="node304.html">Example 8.6.2.</a>
+<b>上一级：</b><a name="tex2html5389" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5383" href="node302.html">数值示例</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001766010000000000000">
-示例 8.6.1.</a>
+例8.6.1.</a>
 </h4>
-第一个示例展示了当矩阵 <span class="math-inline">B</span> 奇异时，初始向量选择的重要性。本示例中使用的矩阵来自采用精细网格的轴模型，矩阵 <span class="math-inline">\{A,B\}</span> 的阶数为 800。使用了 <span class="math-inline">\sigma=100i</span> 的移位，并采用了完全再正交化。
+第一个例子展示了当矩阵<span class="math-inline">B</span>为奇异矩阵时，初始向量选择的重要性。本例中使用的矩阵来自采用细网格的轴模型，矩阵<span class="math-inline">\{A,B\}</span>的阶数为800。使用了<span class="math-inline">\sigma=100i</span>的位移，并采用了完全重正交化。
 
-下表说明了当 Lanczos 向量不属于 <span class="math-inline">H^{-1} B</span> 的范围时可能产生的一个不良影响。对称不定 Lanczos 过程被执行了两次，初始向量均为全一。第一次运行时，初始向量通过乘以 <span class="math-inline">H^{-1} B</span> 进行预处理，而在第二次运行中，未使用预处理。预处理步骤显著提高了 Ritz 对的品质，如残差
-
-<span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span> 所示，
-通过确保 Lanczos 向量，进而 Ritz 向量，属于 <span class="math-inline">H^{-1} B</span> 的范围。
+下表说明了当Lanczos向量不属于<span class="math-inline">H^{-1} B</span>的范围时可能产生的一个不良影响。对称不定Lanczos过程被执行了两次，初始向量均为全一。第一次运行中，初始向量预处理为乘以<span class="math-inline">H^{-1} B</span>，而第二次运行中未进行预处理。预处理步骤显著提高了Ritz对的品质，如残差<span class="math-inline">\Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span>所示，确保了Lanczos向量，进而Ritz向量，属于<span class="math-inline">H^{-1} B</span>的范围。
 
 <p>
-<div align="center">
-<table cellpadding=3 border="1">
-<tr><td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
-<td align="center">&nbsp;</td>
+<div align="CENTER">
+<table CELLPADDING=3 border="1">
+<tr><td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
+<td align="CENTER">&nbsp;</td>
 </tr>
-<tr><td align="center">Ritz 值</td>
-<td align="center">
-<span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
-<td align="center">
-<span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
+<tr><td align="CENTER">Ritz值</td>
+<td align="CENTER">
+<span class="math-inline">\Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
+<td align="CENTER">
+<span class="math-inline">\Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
 </tr>
-<tr><td align="center">
+<tr><td align="CENTER">
 <span class="math-inline">\tilde{\lambda}</span></td>
-<td align="center">（预处理初始向量）</td>
-<td align="center">（无预处理）</td>
+<td align="CENTER">(预处理初始向量)</td>
+<td align="CENTER">(无预处理)</td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -4.09e\!-\!06 + 5.63e\!+\!01</span></td>
-<td align="center"><span class="math-inline"> 1.88e\!-\!08</span></td>
-<td align="center"><span class="math-inline"> 3.05e\!-\!03 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-4.09e-06 + 5.63e+01</span></td>
+<td align="CENTER"><span class="math-inline">1.88e-08</span></td>
+<td align="CENTER"><span class="math-inline">3.05e-03</span></td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -4.15e\!-\!06 - 5.63e\!+\!01</span></td>
-<td align="center"><span class="math-inline"> 1.45e\!-\!07</span></td>
-<td align="center"><span class="math-inline"> 1.10e\!-\!02 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-4.15e-06 - 5.63e+01</span></td>
+<td align="CENTER"><span class="math-inline">1.45e-07</span></td>
+<td align="CENTER"><span class="math-inline">1.10e-02</span></td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -1.30e\!-\!04 + 3.55e\!+\!02</span></td>
-<td align="center"><span class="math-inline"> 6.09e\!-\!07</span></td>
-<td align="center"><span class="math-inline"> 5.48e\!-\!02 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-1.30e-04 + 3.55e+02</span></td>
+<td align="CENTER"><span class="math-inline">6.09e-07</span></td>
+<td align="CENTER"><span class="math-inline">5.48e-02</span></td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -1.31e\!-\!04 - 3.55e\!+\!02</span></td>
-<td align="center"><span class="math-inline"> 5.24e\!-\!07</span></td>
-<td align="center"><span class="math-inline"> 9.72e\!-\!02 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-1.31e-04 - 3.55e+02</span></td>
+<td align="CENTER"><span class="math-inline">5.24e-07</span></td>
+<td align="CENTER"><span class="math-inline">9.72e-02</span></td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -8.58e\!-\!04 + 1.00e\!+\!03</span></td>
-<td align="center"><span class="math-inline"> 8.57e\!-\!07</span></td>
-<td align="center"><span class="math-inline"> 2.85e\!-\!01 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-8.58e-04 + 1.00e+03</span></td>
+<td align="CENTER"><span class="math-inline">8.57e-07</span></td>
+<td align="CENTER"><span class="math-inline">2.85e-01</span></td>
 </tr>
-<tr><td align="center">
-<span class="math-inline"> -8.65e\!-\!04 - 1.00e\!+\!03</span></td>
-<td align="center"><span class="math-inline"> 8.12e\!-\!07 </span></td>
-<td align="center"><span class="math-inline"> 3.50e\!-\!01 </span></td>
+<tr><td align="CENTER">
+<span class="math-inline">-8.65e-04 - 1.00e+03</span></td>
+<td align="CENTER"><span class="math-inline">8.12e-07</span></td>
+<td align="CENTER"><span class="math-inline">3.50e-01</span></td>
 </tr>
 </table>
 </div> 
@@ -171,16 +156,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html5395"
-  href="node304.html">Example 8.6.2.</a>
-<b> Up:</b> <a name="tex2html5389"
-  href="node302.html">Numerical Examples</a>
-<b> Previous:</b> <a name="tex2html5383"
-  href="node302.html">Numerical Examples</a>
- &nbsp <b>  <a name="tex2html5391"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html5393"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html5395" href="node304.html">Example 8.6.2.</a>
+<b>上一级：</b><a name="tex2html5389" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5383" href="node302.html">数值示例</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

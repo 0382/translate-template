@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Algorithm</title>
-<meta name="description" content="Algorithm">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Algorithm">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node246.html">
-<link rel="previous" href="node244.html">
-<link rel="up" href="node244.html">
-<link rel="next" href="node246.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html4506"
   href="node246.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4507"
-  href="node246.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html4501"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b> Previous:</b> <a name="tex2html4495"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
- &nbsp <b>  <a name="tex2html4503"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4505"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4507" href="node246.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001681000000000000000"></a> <a name="zbdd:algorithm"></a>
@@ -98,35 +86,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-非厄米特兰索兹方法，如算法<a href="node245.html#bd:lanalg">7.13</a>所示，是一种双侧迭代算法，起始向量为<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>。它可以被视为通过双侧格拉姆-施密特过程对两个克雷洛夫序列进行双正交化：
+下面介绍的非厄米Lanczos方法（参见算法<a href="node245.html#bd:lanalg">7.13</a>）是一种双侧迭代算法，起始向量为<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>。它可以看作是通过双侧Gram-Schmidt过程对两个Krylov序列进行双正交化：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">\{ q_1, Aq_1, A^2q_1, \ldots \} \quad \mathrm{和} \quad \{ p_1, A^{\ast}p_1, (A^{\ast})^2 p_1, \ldots \}.</div>
+<div class="math-display">\{ q_1, Aq_1, A^2q_1, \ldots \} \quad \text{和} \quad \{ p_1, A^{\ast}p_1, (A^{\ast})^2 p_1, \ldots \}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-生成的两个向量序列<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>使用三项递归公式：
+生成的两个向量序列<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>使用三项递归关系：
 <br>
-<div align="center"><a name="right_recursion"></a><a name="left_recursion"></a>
+<div align="CENTER"><a name="right_recursion"></a><a name="left_recursion"></a>
 
-<table align="center" cellpadding="0" width="100%">
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle \beta_{j+1} q_{j+1}</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle Aq_j - \alpha_j q_j - \gamma_j q_{j-1},</span></td>
-<td width=10 align="right">
+<table align="CENTER" cellpadding="0" width="100%">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle \beta_{j+1} q_{j+1}</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Aq_j - \alpha_j q_j - \gamma_j q_{j-1},</span></td>
+<td WIDTH=10 align="RIGHT">
 (139)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle \bar{\gamma}_{j+1} p_{j+1}</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle A^{\ast} p_j - \bar{\alpha}_j p_j - \bar{\beta}_j p_{j-1}.</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle \bar{\gamma}_{j+1} p_{j+1}</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle A^{\ast} p_j - \bar{\alpha}_j p_j - \bar{\beta}_j p_{j-1}.</span></td>
+<td WIDTH=10 align="RIGHT">
 (140)</td></tr>
 </table></div>
 <br clear="ALL"><p></p>
-向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>被称为<em>兰索兹向量</em>，分别张成<span class="math-inline">{\mathcal K}^j(A, q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast}, p_1)</span>，并且是双正交的，即<span class="math-inline">p^{\ast}_{k} q_{\ell} = 0</span>如果<span class="math-inline">k \neq \ell</span>，以及<span class="math-inline">w^{\ast}_{k} v_{k} = 1</span>。在矩阵表示中，第<span class="math-inline">j</span>步，兰索兹方法生成两个<span class="math-inline">n \times j</span>矩阵<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>：
+向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>被称为Lanczos向量，分别张成<span class="math-inline">{\mathcal K}^j(A, q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast}, p_1)</span>，并且是双正交的，即<span class="math-inline">p^{\ast}_{k} q_{\ell} = 0</span>如果<span class="math-inline">k \neq \ell</span>，以及<span class="math-inline">w^{\ast}_{k} v_{k} = 1</span>。用矩阵表示，在第<span class="math-inline">j</span>步，Lanczos方法生成两个<span class="math-inline">n \times j</span>矩阵<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>：
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
 <div class="math-display">Q_j = [ q_1, q_2, \ldots, q_j ], \quad P_j = [ p_1, p_2, \ldots, p_j ]</div>
@@ -135,114 +123,114 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p></p>
 以及
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">t_j = \left[ \begin{array}{ccccc} \alpha_1 & \gamma_2 & & & \\ \vdots & \ddots & \ddots & & \\ & \gamma_{j-1} & \alpha_{j-1} & \gamma_j & \\ & & \beta_j & \alpha_j \\ \end{array} \right].</div>
+<div class="math-display">T_j = \left[ \begin{array}{ccccc} \alpha_1 & \gamma_2 & & & \\ \vdots & \ddots & \ddots & & \\ & \gamma_{j-1} & \alpha_{j-1} & \gamma_j & \\ & & \beta_j & \alpha_j \\ \end{array} \right].</div>
 </div>
 <br clear="ALL">
 <p></p>
-计算的量满足称为<em>兰索兹分解</em>的控制关系：
+计算得到的量满足称为Lanczos分解的控制关系：
 <br>
-<div align="center"><a name="rightgoverneq"></a><a name="leftgoverneq"></a><a name="biorthogonal"></a>
+<div align="CENTER"><a name="rightgoverneq"></a><a name="leftgoverneq"></a><a name="biorthogonal"></a>
 
-<table align="center" cellpadding="0" width="100%">
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle AQ_j</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle Q_j T_j + \beta_{j+1} q_{j+1} e_{j}^{\ast},</span></td>
-<td width=10 align="right">
+<table align="CENTER" cellpadding="0" width="100%">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle AQ_j</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Q_j T_j + \beta_{j+1} q_{j+1} e_{j}^{\ast},</span></td>
+<td WIDTH=10 align="RIGHT">
 (141)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle A^{\ast} P_j</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle P_j T_j^{\ast} + \bar{\gamma}_{j+1} p_{j+1} e_j^{\ast},</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle A^{\ast} P_j</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle P_j T_j^{\ast} + \bar{\gamma}_{j+1} p_{j+1} e_j^{\ast},</span></td>
+<td WIDTH=10 align="RIGHT">
 (142)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle P_j^{\ast} Q_j</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle I_j.</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle P_j^{\ast} Q_j</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle I_j.</span></td>
+<td WIDTH=10 align="RIGHT">
 (143)</td></tr>
 </table></div>
 <br clear="ALL"><p></p>
-此外，<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>和<span class="math-inline">p_{j+1}^{\ast} Q_j = 0</span>。关系式(<a href="node245.html#biorthogonal">7.37</a>)表明兰索兹向量（基）是双正交的。但请注意，<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>都不是酉矩阵。在兰索兹基中，矩阵<span class="math-inline">A</span>由一个非厄米特三对角矩阵表示，
+此外，<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>和<span class="math-inline">p_{j+1}^{\ast} Q_j = 0</span>。关系式(<a href="node245.html#biorthogonal">7.37</a>)表明Lanczos向量（基）是双正交的。但注意<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>都不是酉矩阵。在Lanczos基下，矩阵<span class="math-inline">A</span>由一个非厄米三对角矩阵表示，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="nstridia"></a><div class="math-display">P_j^{\ast} AQ_j = T_j.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nstridia"></a><div class="math-display">P_j^{\ast} AQ_j = T_j.</div></td>
+<td WIDTH=10 align="RIGHT">
 (144)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_j</span>的特征解，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
 
 
-<div class="math-display">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)} \quad \mathrm{和} \quad (w_i^{(j)})^{\ast} T_j = \theta_i^{(j)} (w_i^{(j)})^{\ast}.</div>
+<div class="math-display">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)} \quad \text{和} \quad (w_i^{(j)})^{\ast} T_j = \theta_i^{(j)} (w_i^{(j)})^{\ast}.</div>
 </div>
 <br clear="ALL">
 <p></p>
-矩阵<span class="math-inline">A</span>的特征值由<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>近似，这些特征值被称为里兹值。
+矩阵<span class="math-inline">A</span>的特征值由<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>近似，这些特征值称为Ritz值。
 
 <p>
-对于每个里兹值<span class="math-inline">\theta_i^{(j)}</span>，存在相应的右和左里兹向量，
+对于每个Ritz值<span class="math-inline">\theta_i^{(j)}</span>，存在相应的右和左Ritz向量，
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="ritz_vectors"></a><div class="math-display">x_i^{(j)} = Q_j z_i^{(j)} \quad \mathrm{和} \quad y_i^{(j)} = P_j w_i^{(j)}.</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ritz_vectors"></a><div class="math-display">x_i^{(j)} = Q_j z_i^{(j)} \quad \text{和} \quad y_i^{(j)} = P_j w_i^{(j)}.</div></td>
+<td WIDTH=10 align="RIGHT">
 (145)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-里兹值和向量的收敛性可以通过比较残差的范数与<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的范数来评估，
+Ritz值和向量收敛到原始矩阵<span class="math-inline">A</span>的特征值和特征向量的程度可以通过比较残差的范数与<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的范数来评估，
 <br>
-<div align="center"><a name="bnhlrr"></a><a name="bnhllr"></a>
+<div align="CENTER"><a name="bnhlrr"></a><a name="bnhllr"></a>
 
-<table align="center" cellpadding="0" width="100%">
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle r_i^{(j)}</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle Ax_i^{(j)} - \theta_i^{(j)} x_i^{(j)},</span></td>
-<td width=10 align="right">
+<table align="CENTER" cellpadding="0" width="100%">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle r_i^{(j)}</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)},</span></td>
+<td WIDTH=10 align="RIGHT">
 (146)</td></tr>
-<tr valign="middle"><td NOWRAP align="right"><span class="math-inline">\displaystyle (s_i^{(j)})^{\ast}</span></td>
-<td align="center" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="left" NOWRAP><span class="math-inline">\displaystyle (y_i^{(j)})^{\ast} A - \theta_i^{(j)} (y_i^{(j)})^{\ast}</span></td>
-<td width=10 align="right">
+<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle (s_i^{(j)})^{\ast}</span></td>
+<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
+<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle (y_i^{(j)})^{\ast} A - \theta_i^{(j)} (y_i^{(j)})^{\ast}</span></td>
+<td WIDTH=10 align="RIGHT">
 (147)</td></tr>
 </table></div>
 <br clear="ALL"><p></p>
 此外，根据方程(<a href="node245.html#rightgoverneq">7.35</a>)，右残差向量变为
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="bnhlrr2"></a><div class="math-display">r_i^{(j)} = \beta_{j+1} q_{j+1} (e_j^{\ast} z_i^{(j)}),</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="bnhlrr2"></a><div class="math-display">r_i^{(j)} = \beta_{j+1} q_{j+1} (e_j^{\ast} z_i^{(j)}),</div></td>
+<td WIDTH=10 align="RIGHT">
 (148)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
 根据方程(<a href="node245.html#leftgoverneq">7.36</a>)，左残差向量变为
 <br>
-<div align="right">
+<div align="RIGHT">
 
 
-<table width="100%" align="center">
-<tr valign="middle"><td align="center" NOWRAP><a name="bnhllr2"></a><div class="math-display">(s_i^{(j)})^{\ast} = \gamma_{j+1} p_{j+1}^{\ast} ((w_i^{(j)})^{\ast} e_j).</div></td>
-<td width=10 align="right">
+<table width="100%" align="CENTER">
+<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="bnhllr2"></a><div class="math-display">(s_i^{(j)})^{\ast} = \gamma_{j+1} p_{j+1}^{\ast} ((w_i^{(j)})^{\ast} e_j).</div></td>
+<td WIDTH=10 align="RIGHT">
 (149)</td></tr>
 </table>
 <br clear="ALL"></div><p></p>
-因此，与厄米特情况（参见第<a href="node103.html#sec:lan">4.4</a>节）一样，残差范数可以在不显式计算里兹向量<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的情况下获得，尽管<span class="math-inline">\Vert x_i^{(j)} \Vert _2</span>和<span class="math-inline">\Vert y_i^{(j)} \Vert _2</span>是不可用的。有关此主题的更详细讨论，请参见第<a href="node246.html#zbdd:convergence">7.8.2</a>节。
+因此，与厄米情况（参见§<a href="node103.html#sec:lan">4.4</a>）一样，残差范数可以在不显式计算Ritz向量<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的情况下获得，尽管<span class="math-inline">\|x_i^{(j)}\|_2</span>和<span class="math-inline">\|y_i^{(j)}\|_2</span>是不可用的。有关此主题的更详细讨论，请参见§<a href="node246.html#zbdd:convergence">7.8.2</a>。
 
 <p>
 <br>
-<a name="bd:lanalg"></a><IMG
- width="598" height="497" align="bottom" border="0"
+<a name="bd:lanalg"></a><img
+ width="598" height="497" align="BOTTOM" border="0"
  src="img2199.png"
  alt="\begin{algorithm}{Lanczos Method for NHEP
 }
@@ -252,55 +240,55 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 ...ximate eigenvectors <span class="math-inline">x^{(j)}_i</span>\ and <span class="math-inline">y^{(j)}_i</span>\end{tabbing}
 }
 \end{algorithm}">
-<br> 
+<br>
 
 <p>
 我们现在对算法<a href="node245.html#bd:lanalg">7.13</a>的某些步骤进行评论：
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>初始起始向量<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>最好由用户根据关于<span class="math-inline">A</span>所需特征向量的任何可用知识来选择。在没有此类知识的情况下，可以选择具有随机分布条目的<span class="math-inline">q_1</span>，并让<span class="math-inline">p_1 = q_1</span>。
+<dd>初始起始向量<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>最好由用户根据关于<span class="math-inline">A</span>的所需特征向量的任何可用知识来选择。在没有此类知识的情况下，可以选择具有随机分布条目的<span class="math-inline">q_1</span>，并令<span class="math-inline">p_1 = q_1</span>。
 
 <p>
 </dd>
 <dt><strong>(2), (3), (18), (19)</strong></dt>
-<dd>在这些步骤中需要矩阵-向量乘法例程来乘以<span class="math-inline">A</span>和<span class="math-inline">A^{\ast}</span>与任意向量。这通常是计算瓶颈。有关移位-反演情况下的实现注释，请参见下面的收敛性讨论。
+<dd>在这些步骤中需要矩阵-向量乘法例程来乘以<span class="math-inline">A</span>和<span class="math-inline">A^{\ast}</span>与任意向量。这通常是计算瓶颈。有关移位-逆情况下的实现注释，请参见下面的收敛性讨论。
 
 <p>
 </dd>
 <dt><strong>(8)</strong></dt>
-<dd>这是方法可能崩溃的两种情况之一。实际上，这是一种理想的崩溃。如果<span class="math-inline">r</span>为零，则兰索兹向量<span class="math-inline">\{q_1, q_2, \ldots, q_j\}</span>张成<span class="math-inline">A</span>的一个（右）不变子空间；每个里兹值和相应的右里兹向量是<span class="math-inline">A</span>的精确特征值和特征向量。如果需要，可以通过选择任何满足<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>的向量<span class="math-inline">q_{j+1}</span>并设置<span class="math-inline">\beta_{j+1} = 0</span>来继续兰索兹算法。当<span class="math-inline">s</span>或<span class="math-inline">r</span>和<span class="math-inline">s</span>都消失时，可以采取类似的行动。
+<dd>这是方法可能崩溃的两种情况之一。实际上，这是一种理想的崩溃。如果<span class="math-inline">r</span>为零，则Lanczos向量<span class="math-inline">\{q_1, q_2, \ldots, q_j\}</span>张成<span class="math-inline">A</span>的一个（右）不变子空间；每个Ritz值和相应的右Ritz向量是<span class="math-inline">A</span>的一个精确特征值和特征向量。如果需要，可以通过选择任何满足<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>的<span class="math-inline">q_{j+1}</span>并设置<span class="math-inline">\beta_{j+1} = 0</span>来继续Lanczos算法。当<span class="math-inline">s</span>或<span class="math-inline">r</span>和<span class="math-inline">s</span>都消失时，可以采取类似的行动。
 
 <p>
-在实践中，精确的零向量是罕见的。<span class="math-inline">r</span>和/或<span class="math-inline">s</span>的范数可能会变得非常小。应给出一个容差值来检测相对于<span class="math-inline">\Vert Q \Vert _2 \Vert T \Vert _2</span>或<span class="math-inline">\Vert P \Vert _2 \Vert T \Vert _2</span>的微小<span class="math-inline">\Vert r \Vert _2</span>，或相对于<span class="math-inline">\Vert s \Vert _2</span>的微小<span class="math-inline">\Vert s \Vert _2</span>。默认容差值是机器精度<span class="math-inline">\epsilon</span>的小倍数。
+在实践中，精确的零向量很少见。<span class="math-inline">r</span>和/或<span class="math-inline">s</span>的范数可能会变得很小。应该给出一个容差值来检测相对于<span class="math-inline">\|Q\|_2 \|T\|_2</span>或<span class="math-inline">\|P\|_2 \|T\|_2</span>的微小<span class="math-inline">\|r\|_2</span>，以及相对于<span class="math-inline">\|P\|_2 \|T\|_2</span>的微小<span class="math-inline">\|s\|_2</span>。默认容差值是机器精度<span class="math-inline">\epsilon</span>的小倍数。
 
 <p>
 </dd>
 <dt><strong>(10)</strong></dt>
-<dd>如果<span class="math-inline">\omega_j = r^{\ast} s = 0</span>在<span class="math-inline">r</span>或<span class="math-inline">s</span>消失之前，方法会发生本质崩溃。在大多数情况下，我们可以继续在克雷洛夫子空间<span class="math-inline">{\mathcal K}^{j+k}(A, r)</span>和<span class="math-inline">{\mathcal K}^{j+k}(A^{\ast}, s)</span>中寻找新向量，对于某个整数<span class="math-inline">k > 0</span>，并在<span class="math-inline">T_j</span>的三对角线之外添加一个块；这种所谓的向前看过程在[<a href="node421.html#frgn93">178</a>]中描述，并在QMRPACK中实现（参见第<a href="node248.html#subsec:nsymlansoftware">7.8.3</a>节）。然而，如果我们的起始向量<span class="math-inline">q_1</span>和<span class="math-inline">p_1</span>具有不同的最小多项式（或者，例如，<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>是不同特征向量集的复合），即使这也不起作用，我们会有一个<i>不匹配</i>，也称为<em>不可治愈的崩溃</em>。参见[<a href="node421.html#parl92">354</a>]进一步讨论。另一种处理崩溃的方法在第<a href="node250.html#sec:nsymblocklanczos">7.9</a>节中讨论。
+<dd>如果<span class="math-inline">\omega_j = r^{\ast} s = 0</span>在<span class="math-inline">r</span>或<span class="math-inline">s</span>消失之前，方法会出现本质崩溃。在大多数情况下，我们可以继续在Krylov子空间<span class="math-inline">{\mathcal K}^{j+k}(A, r)</span>和<span class="math-inline">{\mathcal K}^{j+k}(A^{\ast}, s)</span>中寻找新向量，对于某个整数<span class="math-inline">k > 0</span>，并在<span class="math-inline">T_j</span>的三对角线之外添加一个块；这种所谓的向前看过程在[<a href="node421.html#frgn93">178</a>]中有描述，并在QMRPACK中实现（参见§<a href="node248.html#subsec:nsymlansoftware">7.8.3</a>）。然而，如果我们的起始向量<span class="math-inline">q_1</span>和<span class="math-inline">p_1</span>具有不同的最小多项式（或者，例如，<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>是不同特征向量集的复合），即使这也不起作用，我们会有一个不匹配，也称为不可治愈的崩溃。有关进一步讨论，请参见[<a href="node421.html#parl92">354</a>]。在§<a href="node250.html#sec:nsymblocklanczos">7.9</a>中讨论了崩溃的不同处理方法。
 
 <p>
-在实践中，精确的崩溃是罕见的。接近崩溃的情况更常见；即，<span class="math-inline">\omega_j</span>是非零但绝对值极小。接近崩溃会导致停滞和不稳定。检测接近崩溃的任何标准要么在某些情况下停止得太早，要么在其他情况下停止得太晚。检测特征值问题中接近崩溃的合理折衷标准是，如果<span class="math-inline">\vert \omega_j \vert \leq \sqrt{\epsilon} \Vert r \Vert _2 \Vert s \Vert _2</span>，则停止。
+在实践中，精确的崩溃很少见。接近崩溃的情况更常见；即，<span class="math-inline">\omega_j</span>是非零的，但绝对值非常小。接近崩溃会导致停滞和不稳定。任何检测接近崩溃的准则要么在某些情况下过早停止，要么在其他情况下过晚停止。检测特征值问题中接近崩溃的合理折中准则是，如果<span class="math-inline">\vert\omega_j\vert \leq \sqrt{\epsilon} \|r\|_2 \|s\|_2</span>，则停止。
 
 <p>
 </dd>
 <dt><strong>(15)</strong></dt>
-<dd>通过QR算法计算三对角矩阵<span class="math-inline">T_j</span>的特征分解（参见第<a href="node209.html#sec:nsymeigdirect">7.3</a>节）的成本大约是每迭代<span class="math-inline">30j^3</span>次浮点运算，累积成本从步骤1到<span class="math-inline">j</span>是<span class="math-inline">15j^4</span>次浮点运算。定期解决特征问题，例如每10步一次，可以降低这一成本。
+<dd>通过QR算法（参见§<a href="node209.html#sec:nsymeigdirect">7.3</a>）计算三对角矩阵<span class="math-inline">T_j</span>的特征分解的成本大约是每次迭代<span class="math-inline">30j^3</span>次浮点运算，累积成本从步骤1到<span class="math-inline">j</span>是<span class="math-inline">15j^4</span>次浮点运算。定期解决特征问题，例如每10步一次，可以降低这一成本。
 
 <p>
-尚未发现任何稳定的算法可以在<span class="math-inline">j^2</span>次浮点运算中近似一般三对角矩阵的特征值，尽管最近提出了条件稳定的算法，如[<a href="node421.html#cuwi96">94</a>,<a href="node421.html#watk99">189</a>]。据作者所知，没有兰索兹算法的软件实现采用快速条件稳定特征求解器。
+尚未找到在<span class="math-inline">j^2</span>次浮点运算中近似一般三对角矩阵特征值的稳定算法，尽管最近提出了条件稳定算法，如[<a href="node421.html#cuwi96">94</a>, <a href="node421.html#watk99">189</a>]。据作者所知，没有Lanczos算法的软件实现使用快速条件稳定特征求解器。
 
 <p>
 </dd>
 <dt><strong>(16)</strong></dt>
-<dd>一旦确定了基<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>，使得<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>（参见(<a href="node245.html#nstridia">7.38</a>)）近似于<span class="math-inline">A</span>的所有所需特征值，且残差足够小，计算就会停止，这些残差根据方程(<a href="node245.html#bnhlrr2">7.42</a>)和(<a href="node245.html#bnhllr2">7.43</a>)计算。收敛性在第<a href="node246.html#zbdd:convergence">7.8.2</a>节中有更详细的讨论。
+<dd>一旦确定了基<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>，使得<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>（参见(<a href="node245.html#nstridia">7.38</a>)）近似于<span class="math-inline">A</span>的所有所需特征值，且残差足够小，计算就会停止，这些残差根据方程(<a href="node245.html#bnhlrr2">7.42</a>)和(<a href="node245.html#bnhllr2">7.43</a>)计算。有关收敛性的更详细讨论，请参见§<a href="node246.html#zbdd:convergence">7.8.2</a>。
 
 <p>
-如果没有重新双正交化（参见[<a href="node421.html#day97">105</a>]），那么在有限精度算术中，一旦里兹值收敛到<span class="math-inline">A</span>的一个特征值，这个里兹值将在后续的兰索兹步骤中出现副本。例如，减少的三对角矩阵<span class="math-inline">T_j</span>的一组里兹值可能近似于原始矩阵<span class="math-inline">A</span>的一个单一特征值。伪值[<a href="node421.html#cuwi86">93</a>]是一个简单的里兹值，也是从<span class="math-inline">T_j</span>中删除第一行和第一列得到的<span class="math-inline">j-1</span>阶矩阵的特征值。这样的伪值应从考虑中剔除。<span class="math-inline">T_j</span>的特征值，如果不是伪值，则被识别为原始矩阵<span class="math-inline">A</span>的特征值的近似值，并进行收敛性测试。
+如果没有重新双正交化（参见[<a href="node421.html#day97">105</a>]），那么在有限精度算术中，一旦Ritz值收敛到<span class="math-inline">A</span>的特征值，这个Ritz值将在后续的Lanczos步骤中出现副本。例如，缩减三对角矩阵<span class="math-inline">T_j</span>的Ritz值集群可能近似于原始矩阵<span class="math-inline">A</span>的单个特征值。伪值[<a href="node421.html#cuwi86">93</a>]是一个简单的Ritz值，也是从<span class="math-inline">T_j</span>中删除第一行和第一列得到的<span class="math-inline">j-1</span>阶矩阵的特征值。这样的伪值应从考虑中剔除。<span class="math-inline">T_j</span>的非伪特征值被识别为原始矩阵<span class="math-inline">A</span>的特征值近似，并进行收敛性测试。
 
 <p>
 </dd>
 <dt><strong>(17)</strong></dt>
-<dd>与厄米特情况一样，在有限精度算术的存在下，计算的兰索兹向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>的双正交性会恶化。可以使用双侧修正格拉姆-施密特（TSMGS）过程[<a href="node421.html#parl92">354</a>]来重新双正交化第<span class="math-inline">(j+1)</span>个兰索兹向量；
+<dd>与厄米情况一样，在有限精度算术中，计算的Lanczos向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>的双正交性会恶化。可以使用双侧修正Gram-Schmidt（TSMGS）过程[<a href="node421.html#parl92">354</a>]重新双正交化第<span class="math-inline">(j+1)</span>个Lanczos向量；
 
 <p>
 for <span class="math-inline">i=1,2,\ldots,j</span>
@@ -310,7 +298,7 @@ for <span class="math-inline">i=1,2,\ldots,j</span>
 end for
 
 <p>
-在每一步应用TSMGS过程非常耗时，并成为计算瓶颈。在[<a href="node421.html#day97">105</a>]中，提出了一个有效的替代方案。这一主题在第<a href="node250.html#sec:nsymblocklanczos">7.9</a>节中重新讨论。
+在每一步应用TSMGS过程非常耗时，并成为计算瓶颈。在[<a href="node421.html#day97">105</a>]中，提出了一种有效的替代方案。这一主题在§<a href="node250.html#sec:nsymblocklanczos">7.9</a>中重新讨论。
 </dd>
 </dl>
 
@@ -332,16 +320,11 @@ end for
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html4507"
-  href="node246.html">Convergence Properties</a>
-<b> Up:</b> <a name="tex2html4501"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b> Previous:</b> <a name="tex2html4495"
-  href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
- &nbsp <b>  <a name="tex2html4503"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html4505"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html4507" href="node246.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Eigenvalues and Eigenvectors</title>
-<meta name="description" content="Eigenvalues and Eigenvectors">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Eigenvalues and Eigenvectors">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node32.html">
-<link rel="previous" href="node30.html">
-<link rel="up" href="node30.html">
-<link rel="next" href="node32.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html1175"
   href="node32.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1176"
-  href="node32.html">Eigenspaces</a>
-<b> Up:</b> <a name="tex2html1170"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
-<b> Previous:</b> <a name="tex2html1164"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
- &nbsp <b>  <a name="tex2html1172"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1174"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1176" href="node32.html">特征空间</a>
+<b>上一级：</b><a name="tex2html1170" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一节：</b><a name="tex2html1164" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001131000000000000000"></a>
@@ -99,41 +87,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-多项式 
-<span class="math-inline">p(\lambda) = {\rm det}(\lambda B-A)</span> 被称为
-<em>特征多项式</em> 
-<a name="1190"></a> 
-of <span class="math-inline">A - \lambda B</span>。<span class="math-inline">p(\lambda)=0</span> 的根是 <span class="math-inline">A - \lambda B</span> 的
-<em>特征值</em>。
-由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此
-<span class="math-inline">A - \lambda B</span> 有 <span class="math-inline">n</span> 个特征值。
+多项式 <span class="math-inline">p(\lambda) = {\rm det}(\lambda B-A)</span> 被称为 <span class="math-inline">A - \lambda B</span> 的<em>特征多项式</em>。<span class="math-inline">p(\lambda)=0</span> 的根即为 <span class="math-inline">A - \lambda B</span> 的<em>特征值</em>。由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A - \lambda B</span> 有 <span class="math-inline">n</span> 个特征值。
 
 <p>
-满足 <span class="math-inline">Ax = \lambda Bx</span> 的非零向量 <span class="math-inline">x</span> 是特征值 <span class="math-inline">\lambda</span> 的
-<em>（右）特征向量</em>。特征对 <span class="math-inline">(\lambda,x)</span> 也满足
-
-<span class="math-inline">x^* A = \lambda x^* B</span>，因此我们也可以称 <span class="math-inline">x</span> 为 <em>左特征向量</em>。
+满足 <span class="math-inline">Ax = \lambda Bx</span> 的非零向量 <span class="math-inline">x</span> 是特征值 <span class="math-inline">\lambda</span> 对应的<em>(右)特征向量</em>。特征对 <span class="math-inline">(\lambda,x)</span> 也满足 <span class="math-inline">x^* A = \lambda x^* B</span>，因此我们也可以称 <span class="math-inline">x</span> 为<em>左特征向量</em>。
 
 <p>
-确定性矩阵束 <span class="math-inline">A - \lambda B</span> 的所有特征值都是实数。
-这使得我们可以将它们按排序顺序写成
-<span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。
-如果所有 <span class="math-inline">\lambda_i > 0</span>，则 <span class="math-inline">A - \lambda B</span> 被称为
-<em>正定</em>，
-而如果所有
-<span class="math-inline">\lambda_i \geq 0</span>，则 <span class="math-inline">A - \lambda B</span> 被称为
-<em>半正定</em>。
-<em>负定</em> 和 <em>半负定</em> 的定义
-与之类似。如果既有正特征值又有负特征值，
-<span class="math-inline">A - \lambda B</span> 被称为 <em>不定</em>。
+确定性矩阵束 <span class="math-inline">A - \lambda B</span> 的所有特征值都是实数。这使得我们可以将它们按排序后的顺序表示为 <span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。如果所有 <span class="math-inline">\lambda_i > 0</span>，则称 <span class="math-inline">A - \lambda B</span> 为<em>正定</em>；如果所有 <span class="math-inline">\lambda_i \geq 0</span>，则称 <span class="math-inline">A - \lambda B</span> 为<em>半正定</em>。<em>负定</em>和<em>半负定</em>的定义类似。如果既有正特征值又有负特征值，则称 <span class="math-inline">A - \lambda B</span> 为<em>不定</em>。
 
 <p>
-如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 都是实数，则每个 <span class="math-inline">x_i</span> 都是实数。
-尽管 <span class="math-inline">x_i</span> 可能不唯一，
-但可以选择它们全部相互 <em><span class="math-inline">B</span> 正交</em>：
-<span class="math-inline">x_i^* B x_j=0</span> 如果 <span class="math-inline">i \neq j</span>。这也被称为 <em>关于由 Hermitian 正定矩阵 <span class="math-inline">B</span> 诱导的内积的正交性</em>。
-当一个特征值与其他所有特征值都不同时，
-其特征向量是唯一的（直至乘以标量）。
+每个 <span class="math-inline">x_i</span> 在 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 为实数时也是实数。尽管 <span class="math-inline">x_i</span> 可能不唯一，但可以选择它们彼此<em><span class="math-inline">B</span> 正交</em>，即 <span class="math-inline">x_i^* B x_j=0</span>（当 <span class="math-inline">i \neq j</span> 时）。这也被称为<em>相对于由厄米正定矩阵 <span class="math-inline">B</span> 诱导的内积的正交性</em>。当一个特征值与其他所有特征值都不同时，其特征向量是唯一的（直到乘以标量）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -153,16 +116,11 @@ of <span class="math-inline">A - \lambda B</span>。<span class="math-inline">p(
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html1176"
-  href="node32.html">Eigenspaces</a>
-<b> Up:</b> <a name="tex2html1170"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
-<b> Previous:</b> <a name="tex2html1164"
-  href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
- &nbsp <b>  <a name="tex2html1172"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html1174"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html1176" href="node32.html">特征空间</a>
+<b>上一级：</b><a name="tex2html1170" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一节：</b><a name="tex2html1164" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

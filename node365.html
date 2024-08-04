@@ -8,12 +8,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <html>
 <head>
 <title>Manifolds</title>
-<meta name="description" content="Manifolds">
-<meta name="keywords" content="book">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
-
 <meta charset="utf-8">
+<meta name="description" content="Manifolds">
+<meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
@@ -31,16 +28,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </script>
 <style>
     .navigate {
-        background-color: #f0f0f0;
-        border: 1px;
+        background-color: #ffffff;
+        border: 1px solid black;
         color: black;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .crossref {
         width: 10pt;
@@ -56,13 +53,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         transform: rotate(45deg);
     }
 </style>
-<link rel="next" href="node366.html">
-<link rel="previous" href="node364.html">
-<link rel="up" href="node364.html">
-<link rel="next" href="node366.html">
 </head>
 
-<body>
+<body >
 <!--Navigation Panel-->
 <a name="tex2html6364"
   href="node366.html">
@@ -80,16 +73,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6365"
-  href="node366.html">The Difference Between a</a>
-<b> Up:</b> <a name="tex2html6359"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6353"
-  href="node364.html">Geometric Technicalities</a>
- &nbsp <b>  <a name="tex2html6361"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6363"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6365" href="node366.html">The Difference Between a</a>
+<b>上一级：</b><a name="tex2html6359" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6353" href="node364.html">几何技术细节</a>
+  
+  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846100000000000000"></a> 
@@ -99,30 +87,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h3>
 
 <p>
-流形 <span class="math-inline">M</span> 是<em>具有微分结构的点集</em>。简单来说，这意味着我们能够在 <span class="math-inline">M</span> 上定义的某些合理类别的函数，即 <span class="math-inline">C^\infty</span> 函数，进行求导。这些可微函数的类别可能有些随意，但必须满足一些技术上的相容性条件。在本节中，我们不讨论这些条件。
+流形，记作 <span class="math-inline">M</span>，是<em>具有微分结构的点的集合</em>。简而言之，这意味着我们能够在 <span class="math-inline">M</span> 上定义的某些合理类别的函数，即 <span class="math-inline">C^\infty</span> 函数，进行求导。这种可微函数的类别可能有些随意，但必须满足一些技术上的相容性条件。在本节中，我们不讨论这些条件。
 
 <p>
-我们考虑流形 <span class="math-inline">\mathrm{Stief}(n,k)</span>（为了更清晰地解释，我们仅讨论实数版本的施蒂费尔流形），其点集表示为满足约束条件 <span class="math-inline">Y^*Y=I</span> 的 <span class="math-inline">n \times k</span> 矩阵。我们将选择那些实值函数作为 <span class="math-inline">C^\infty</span> 函数，这些函数是关于 <span class="math-inline">nk</span> 个变量的函数在 <span class="math-inline">\mathrm{Stief}(n,k)</span> 上的限制，并且在 <span class="math-inline">\mathcal{R}^{n \times k}</span> 的意义上，这些函数在 <span class="math-inline">\mathrm{Stief}(n,k)</span> 附近是 <span class="math-inline">C^\infty</span> 的。不难说服自己，这样的函数集合必定满足任何可能的技术相容性条件。
+我们考虑流形 <span class="math-inline">\mathrm{Stief}(n,k)</span>（为了更清晰地解释，我们仅讨论实数版本的施蒂费尔流形），其点表示为满足约束条件 <span class="math-inline">Y^*Y=I</span> 的 <span class="math-inline">n \times k</span> 矩阵。我们将选择那些限制在 <span class="math-inline">\mathrm{Stief}(n,k)</span> 上的实值函数作为我们的 <span class="math-inline">C^\infty</span> 函数集合，这些函数是关于 <span class="math-inline">\mathrm{Stief}(n,k)</span> 在 <span class="math-inline">\mathcal{R}^{n \times k}</span> 意义上的 <span class="math-inline">C^\infty({\mathcal R}^{n \times k})</span> 函数。不难说服自己，这样的函数集合必然满足任何技术上的相容性条件。
 
 <p>
-此外，<span class="math-inline">M = \mathrm{Stief}(n,k)</span> 是一个光滑流形。这意味着在 <span class="math-inline">\mathrm{Stief}(n,k)</span> 的每一个点附近，我们都可以构建一个 <span class="math-inline">C^\infty</span> 的局部坐标系。例如，考虑点
+此外，<span class="math-inline">M = \mathrm{Stief}(n,k)</span> 是一个光滑流形。这意味着对于 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的每一个点，我们都可以构建一个 <span class="math-inline">C^\infty</span> 的局部坐标系。例如，考虑点
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 <div class="math-display">Y = \left[ \begin{array}{c} I \cr 0 \end{array} \right]</div>
 </div>
 <br clear="ALL">
 <p></p>
 以及 <span class="math-inline">Y</span> 附近的一个点，
 <br><p></p>
-<div align="center">
+<div align="CENTER">
+
 <div class="math-display">\tilde{Y} = \left[ \begin{array}{c} A \cr B \end{array} \right].</div>
 </div>
 <br clear="ALL">
 <p></p>
-对于小的 <span class="math-inline">B</span>，我们可以通过求解对称矩阵 <span class="math-inline">S</span> 使得 <span class="math-inline">S^*S = I - B^*B</span>，并令 <span class="math-inline">A = e^{\Delta} S</span>，从而用 <span class="math-inline">B</span> 的分量和任意小的反对称矩阵 <span class="math-inline">\Delta</span> 的分量来表示 <span class="math-inline">A</span>。对于足够小的 <span class="math-inline">B</span> 和 <span class="math-inline">\Delta</span>，这总是可以平滑且局部一对一地完成。由于 <span class="math-inline">B</span> 的分量都是平滑函数（作为环境空间 <span class="math-inline">\mathcal{R}^{n \times k}</span> 的坐标函数的限制），并且由于 <span class="math-inline">A</span> 的解对于足够小的 <span class="math-inline">B</span> 和 <span class="math-inline">\Delta</span> 是 <span class="math-inline">C^\infty(\mathcal{R}^{(n-k) \times k} \oplus \mathcal{R}^{k \times k})</span>，我们已经证明了 <span class="math-inline">\mathrm{Stief}(n,k)</span> 的任何点都可以平滑地表示为 <span class="math-inline">(n-k)k+k(k-1)/2 = nk - k(k+1)/2</span> 个变量的函数。<span class="math-inline">\left[ \begin{array}{c} I \cr 0 \end{array} \right]</span> 与 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的其他点之间的唯一区别是欧几里得刚性运动；因此，这一陈述适用于 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的所有点。
+对于小的 <span class="math-inline">B</span>，我们可以通过求解对称矩阵 <span class="math-inline">S</span> 使得 <span class="math-inline">S^*S = I -B^*B</span>，并令 <span class="math-inline">A = e^{\Delta} S</span>，从而用 <span class="math-inline">B</span> 的分量和任意小的反对称矩阵 <span class="math-inline">\Delta</span> 的分量来表示 <span class="math-inline">A</span>。对于足够小的 <span class="math-inline">B</span> 和 <span class="math-inline">\Delta</span>，这总是可以平滑且局部一对一地完成。由于 <span class="math-inline">B</span> 的分量都是平滑函数（作为周围 <span class="math-inline">\mathcal{R}^{n \times k}</span> 空间的坐标函数的限制），并且 <span class="math-inline">A</span> 的解对于足够小的 <span class="math-inline">B</span> 和 <span class="math-inline">\Delta</span> 是 <span class="math-inline">C^\infty({\mathcal R}^{(n-k) \times k} \oplus {\mathcal R}^{k \times k})</span>，我们已经证明了 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的任何点都可以平滑地表示为 <span class="math-inline">(n-k)k+k(k-1)/2 = nk -k(k+1)/2</span> 个变量的函数。<span class="math-inline">\left[ \begin{array}{c} I \cr 0 \end{array} \right]</span> 与 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的其他点的唯一区别仅在于欧几里得刚性运动；因此，这一陈述适用于 <span class="math-inline">\mathrm{Stief}(n,k)</span> 中的所有点。
 
 <p>
-总结一下，流形是一组点，其上定义了一组可微函数，以及局部坐标化的概念，其中依赖坐标可以表示为独立坐标的平滑函数。具体来说，我们看到总是需要 <span class="math-inline">nk - k(k+1)/2</span> 个独立坐标来坐标化 <span class="math-inline">\mathrm{Stief}(n,k)</span> 的点的邻域。这个数字称为流形的<em>维数</em>，对于流形的每个点来说应该是相同的（如果不是，那么流形要么是不连通的，要么实际上并不光滑）。
+总结一下，流形是一个具有一组可微函数定义的点集，以及局部坐标化的概念，其中依赖坐标可以表示为独立坐标的平滑函数。具体来说，我们发现总是需要 <span class="math-inline">nk - k(k+1)/2</span> 个独立坐标来坐标化 <span class="math-inline">\mathrm{Stief}(n,k)</span> 点的邻域。这个数被称为流形的<em>维数</em>，并且对于流形的每个点都应该是相同的（如果不是，那么流形要么是不连通的，要么实际上不是光滑的）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -142,16 +132,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b> Next:</b> <a name="tex2html6365"
-  href="node366.html">The Difference Between a</a>
-<b> Up:</b> <a name="tex2html6359"
-  href="node364.html">Geometric Technicalities</a>
-<b> Previous:</b> <a name="tex2html6353"
-  href="node364.html">Geometric Technicalities</a>
- &nbsp <b>  <a name="tex2html6361"
-  href="node5.html">Contents</a></b> 
- &nbsp <b>  <a name="tex2html6363"
-  href="node422.html">Index</a></b> 
+<b>下一节：</b><a name="tex2html6365" href="node366.html">The Difference Between a</a>
+<b>上一级：</b><a name="tex2html6359" href="node364.html">几何技术细节</a>
+<b>上一节：</b><a name="tex2html6353" href="node364.html">几何技术细节</a>
+  
+  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
