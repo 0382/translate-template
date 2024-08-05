@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Organization of the Book</title>
+<title>书籍的组织结构</title>
 <meta charset="utf-8">
-<meta name="description" content="Organization of the Book">
+<meta name="description" content="书籍的组织结构">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -73,17 +73,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html909" href="node18.html">A Brief Tour of</a>
+<b>下一节：</b><a name="tex2html909" href="node18.html">特征问题简述</a>
 <b>上一级：</b><a name="tex2html903" href="node12.html">引言</a>
 <b>上一节：</b><a name="tex2html899" href="node16.html">什么是模板？</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001050000000000000000"></a>
+<!--End of Navigation Panel-->
+<h1>
+<a name="SECTION001050000000000000000"></a>
 <a name="sec:OrganizationOfTheBook"></a>
-<br>
-本书结构
+书籍的组织结构
 </h1>
 
 <p>
@@ -92,25 +91,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们将在正文中自由使用那里列出的符号。
 
 <p>
-第<a href="node12.html#chap:introduction">1</a>章旨在激发并概述本书其余部分。
+<a href="node12.html#chap:introduction">第1章</a>旨在阐述动机以及概述本书的其余章节。
 
 <p>
-第<a href="node18.html#chap:eigentour">2</a>章对本书讨论的所有特征值问题进行了全面介绍。
+<a href="node18.html#chap:eigentour">第2章</a>对本书讨论的所有特征值问题进行了全面介绍。
 如果你是首次阅读，请先读这一章！
 它介绍了描述特征值问题所用的基本术语和定义，并将所有特征值问题分为六类。
 这是决策树的顶端。
-第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章分别详细阐述了这六类问题。
+<a href="node85.html#chap:heig">第4章</a>至<a href="node329.html#chap:nlep">第9章</a>分别详细阐述了这六类问题。
 
 <p>
-第<a href="node77.html#chap:overview">3</a>章总结了大多数大型特征值问题算法所依据的两个数学原理：
+<a href="node77.html#chap:overview">第3章</a>总结了大多数大型特征值问题算法所依据的两个数学原理：
 投影到子空间和谱变换。
 
 <p>
-第<a href="node85.html#chap:heig">4</a>章涵盖了厄米特征值问题，
-
-<span class="math-inline">Ax = \lambda x</span>。这里 <span class="math-inline">A = A^*</span> 是一个厄米矩阵
+<a href="node85.html#chap:heig">第4章</a>涵盖了厄米特征值问题
+<span class="math-inline">Ax = \lambda x</span>。其中 <span class="math-inline">A = A^*</span> 是一个厄米矩阵
 （如果 <span class="math-inline">A</span> 是实数，这意味着 <span class="math-inline">A</span> 是对称的）。
-第<a href="node85.html#chap:heig">4</a>章至第<a href="node329.html#chap:nlep">9</a>章均以
+<a href="node85.html#chap:heig">第4章</a>至<a href="node329.html#chap:nlep">第9章</a>均以
 如何选择算法及简要讨论变换方法（适用于中小规模稠密矩阵的标准方法）开始。
 随后详细介绍了每种主要迭代方法的模板。
 对于理解最为透彻的厄米特征值问题，这些方法包括幂法、
@@ -120,29 +118,25 @@ Lanczos方法、隐式重启Lanczos方法、
 每章末尾都对稳定性和精度评估进行了总结。
 
 <p>
-第<a href="node155.html#chap:ghep">5</a>章涵盖了广义厄米特征值问题
-
+<a href="node155.html#chap:ghep">第5章</a>涵盖了广义厄米特征值问题
 <span class="math-inline">Ax = \lambda Bx</span>，其中 <span class="math-inline">A = A^*</span> 和 <span class="math-inline">B = B^*</span> 都是厄米的，且 <span class="math-inline">B</span> 还是正定的。
-讨论的方法与第<a href="node85.html#chap:heig">4</a>章类似。
+讨论的方法与<a href="node85.html#chap:heig">第4章</a>类似。
 
 <p>
-第<a href="node190.html#chap:svd">6</a>章涵盖了奇异值分解
+<a href="node190.html#chap:svd">第6章</a>涵盖了奇异值分解
 <span class="math-inline">A = U \Sigma V^*</span>。
 本章重点介绍计算大型稀疏矩阵部分分解的方法。
-讨论的方法与第<a href="node85.html#chap:heig">4</a>章类似。
+讨论的方法与<a href="node85.html#chap:heig">第4章</a>类似。
 
 <p>
-第<a href="node203.html#chap:nep">7</a>章涵盖了非厄米特征值问题
-
+<a href="node203.html#chap:nep">第7章</a>涵盖了非厄米特征值问题
 <span class="math-inline">Ax = \lambda x</span>，其中 <span class="math-inline">A</span> 是一个一般的方阵。
-本章核心部分涉及Arnoldi方法、非厄米Lanczos方法
-以及Jacobi-Davidson方法，包括隐式重启、块状和带状变体。
+本章核心部分涉及Arnoldi方法、非厄米Lanczos方法以及Jacobi-Davidson方法，包括隐式重启、块状和带状变体。
 
 <p>
-第<a href="node280.html#chap:gnsym">8</a>章涵盖了广义非厄米特征值问题，
-
+<a href="node280.html#chap:gnsym">第8章</a>涵盖了广义非厄米特征值问题
 <span class="math-inline">Ax = \lambda Bx</span>。这包括<em>常规情况</em>，
-即 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是 <span class="math-inline">n</span> 阶矩阵且有 <span class="math-inline">n</span> 个连续特征值，
+即 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是 <span class="math-inline">n</span> 阶矩阵且有 <span class="math-inline">n</span> 个连续特征值（指特征值是<span class="math-inline">A</span> 和 <span class="math-inline">B</span>矩阵元的连续函数）；
 以及<em>奇异情况</em>，
 可能特征值少于 <span class="math-inline">n</span> 个，特征值不连续，
 或者（当 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 不是方阵时）根本没有特征值。
@@ -150,35 +144,29 @@ Lanczos方法、隐式重启Lanczos方法、
 有理Krylov以及对称不定对的一种特殊Lanczos方法变体。
 
 <p>
-第<a href="node329.html#chap:nlep">9</a>章涵盖了两类非线性特征值问题。
+<a href="node329.html#chap:nlep">第9章</a>涵盖了两类非线性特征值问题。
 首先，我们讨论了由三个或更多矩阵定义的多项式特征值问题。
 其次，我们讨论了带有正交约束的非线性特征值问题。
 
 <p>
-第<a href="node371.html#chap:commonissues">10</a>章
+<a href="node371.html#chap:commonissues">第10章</a>
 描述了所有算法共有的稀疏矩阵表示和计算的常见问题，
-包括顺序计算和并行计算。
-这包括标准稀疏矩阵格式的列表、
-快速矩阵向量乘法的算法（“BLAS”）、
+包括串行计算和并行计算。
+这包括标准稀疏矩阵格式的清单、
+快速矩阵向量乘法的算法（BLAS）、
 直接线性求解器的概述、
 迭代线性求解器的概述，
 以及简要讨论了如何利用并行性。
 
 <p>
-第<a href="node396.html#chap:precond">11</a>章专注于当前研究中的非精确方法和预处理技术。
+<a href="node396.html#chap:precond">第11章</a>专注于当前研究中的非精确方法和预处理技术。
 许多迭代方法部分依赖于预处理来提高性能和确保快速收敛。
 
 <p>
-不可避免地，大量重要材料需要从本书中排除。
+不可避免地，大量重要材料并未包含在本书中。
 在附录中，我们列出了本书未涵盖的一些主题，
 并为有兴趣深入研究特定主题的读者提供了参考资料。
 
-<p>
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-<p>
-
-<p>
 <hr><!--Navigation Panel-->
 <a name="tex2html908"
   href="node18.html">
@@ -196,11 +184,9 @@ Lanczos方法、隐式重启Lanczos方法、
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html909" href="node18.html">A Brief Tour of</a>
+<b>下一节：</b><a name="tex2html909" href="node18.html">特征问题简述</a>
 <b>上一级：</b><a name="tex2html903" href="node12.html">引言</a>
 <b>上一节：</b><a name="tex2html899" href="node16.html">什么是模板？</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
