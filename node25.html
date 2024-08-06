@@ -45,13 +45,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
-    .footnote {
-        width: 10pt;
-        height: 10pt;
-        border: 1px solid black;
-        padding: 0;
-        transform: rotate(45deg);
-    }
 </style>
 </head>
 
@@ -74,15 +67,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1086" href="node26.html">条件数</a>
-<b>上一级：</b><a name="tex2html1080" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1080" href="node21.html">厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1074" href="node24.html">等价关系（相似性）</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001124000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001124000000000000000"></a>
 <a name="sec_chap2_HepED"></a>
-<br>
 特征分解
 </h2>
 
@@ -92,23 +84,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 定义 
 <span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n )</span> 和
-
 <span class="math-inline">X = [x_1,\ldots,x_n]</span>。<span class="math-inline">X</span> 被称为 <span class="math-inline">A</span> 的<em>特征向量矩阵</em>。
-由于 <span class="math-inline">x_i</span> 是正交单位向量，我们可以看到 <span class="math-inline">X^*X=I</span>；即，
-<span class="math-inline">X</span> 是一个<em>酉（正交）矩阵</em>。
-这 <span class="math-inline">n</span> 个等式 
-<span class="math-inline">A x_i = \lambda_i x_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span> 也可以写成
+由于 <span class="math-inline">x_i</span> 是正交单位向量，我们可以看到 <span class="math-inline">X^*X=I</span>；
+即，<span class="math-inline">X</span> 是一个<em>酉（正交）矩阵</em>。
+<span class="math-inline">n</span> 个等式 
+<span class="math-inline">A x_i = \lambda_i x_i</span> （<span class="math-inline">i=1,\ldots,n</span>） 也可以写成
 
 <span class="math-inline">AX = X \Lambda</span> 或 
 <span class="math-inline">A = X \Lambda X^*</span>。这种因式分解
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A = X \Lambda X^*</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 被称为 <span class="math-inline">A</span> 的<em>特征分解</em>。换句话说，
 <span class="math-inline">A</span> 与对角矩阵 <span class="math-inline">\Lambda</span> 相似，相似变换为 <span class="math-inline">X</span>。
 
@@ -116,24 +102,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果我们取 <span class="math-inline">X</span> 的 <span class="math-inline">k</span> 列（比如说 
 <span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 
 第2、3和5列），那么这些列张成 <span class="math-inline">A</span> 的一个不变子空间。
-如果我们取对应的子矩阵 
 
+如果我们取对应的子矩阵 
 <span class="math-inline">\hat{\Lambda}= {\rm diag}(\lambda_2 , \lambda_3 , \lambda_5 )</span>
 的 <span class="math-inline">\Lambda</span>，那么我们可以写出对应的 
 <em>部分特征分解</em> 为 <span class="math-inline">A \hat{X}= \hat{X}\hat{\Lambda}</span> 或
-
-<span class="math-inline">\hat{X}^* A \hat{X}= \hat{\Lambda}</span>。如果 <span class="math-inline">\hat{X}</span> 中的列被
-<span class="math-inline">k</span> 个不同的向量替换，这些向量张成相同的不变子空间，那么我们得到
-一个不同的部分特征分解 
+<span class="math-inline">\hat{X}^* A \hat{X}= \hat{\Lambda}</span>。
+如果 <span class="math-inline">\hat{X}</span> 中的列被<span class="math-inline">k</span> 个不同的向量替换，
+这些向量张成相同的不变子空间，那么我们得到一个不同的部分特征分解 
 <span class="math-inline">A \check{X}= \check{X}\check{A}</span>，
 其中 <span class="math-inline">\check{A}</span> 是
-一个 <span class="math-inline">k</span>-by-<span class="math-inline">k</span> 矩阵，其特征值与 <span class="math-inline">\hat{\Lambda}</span> 相同，尽管
-<span class="math-inline">\check{A}</span> 可能不是对角矩阵。
+一个 <span class="math-inline">k \times k</span> 矩阵，其特征值与 <span class="math-inline">\hat{\Lambda}</span> 相同，
+尽管<span class="math-inline">\check{A}</span> 可能不是对角矩阵。
 
 <p>
 <hr>
 
-特征分解是线性代数中的一个重要概念，它将一个矩阵分解为其特征值和特征向量的组合。通过特征分解，我们可以更好地理解矩阵的性质和行为，特别是在处理大规模数据和复杂系统时。部分特征分解则是在特征分解的基础上，进一步提取和处理矩阵的部分信息，这在实际应用中尤为重要。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html1085"
   href="node26.html">
 <button class="navigate">下一节</button></a> 
@@ -151,10 +136,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1086" href="node26.html">条件数</a>
-<b>上一级：</b><a name="tex2html1080" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1080" href="node21.html">厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1074" href="node24.html">等价关系（相似性）</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

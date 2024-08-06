@@ -45,13 +45,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
-    .footnote {
-        width: 10pt;
-        height: 10pt;
-        border: 1px solid black;
-        padding: 0;
-        transform: rotate(45deg);
-    }
 </style>
 </head>
 
@@ -74,20 +67,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1114" href="node28.html">相关的特征问题</a>
-<b>上一级：</b><a name="tex2html1108" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1108" href="node21.html">厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1102" href="node26.html">条件数</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001126000000000000000"></a> 
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001126000000000000000"></a> 
 <a name="sec_chap2_HepSpec"></a>
-<br>
-特征问题的指定
+特征问题的具体化
 </h2>
 
 <p>
-以下特征问题因其自然出现在应用中且我们对其拥有良好的算法而具有典型性：
+下面是一些典型的特征问题，因为它们在应用中自然出现，而且我们对它们有很好的算法：
 
 <p>
 
@@ -95,7 +87,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li>计算所有特征值至指定精度。
 </li>
 <li>计算某些指定下标集合的特征值 <span class="math-inline">\lambda_i</span>，
-
 其中 <span class="math-inline">i \in {\mathcal I} = \{1,2,\ldots,n\}</span>，
 包括特殊情况下的最大 <span class="math-inline">m</span> 个特征值
 
@@ -104,15 +95,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 同样，所需精度可指定。
 </li>
 <li>计算给定实轴子集内的所有特征值，
-例如
-区间
-<span class="math-inline">[\alpha, \beta]</span>。同样，所需精度可指定。
+例如区间<span class="math-inline">[\alpha, \beta]</span>。同样，所需精度可指定。
 </li>
-<li>统计区间
-<span class="math-inline">[\alpha, \beta]</span> 内的所有特征值数量。
-这不需要计算区间
-<span class="math-inline">[\alpha, \beta]</span> 内的特征值，
-因此成本可能低得多。
+<li>统计区间<span class="math-inline">[\alpha, \beta]</span> 内的所有特征值数量。
+这不需要计算区间<span class="math-inline">[\alpha, \beta]</span> 内的特征值，因此成本可能低得多。
 </li>
 <li>计算最接近给定值 <span class="math-inline">\mu</span> 的若干特征值。
 </li>
@@ -121,11 +107,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 对于上述每种可能性（第4项除外），用户还可以计算相应的特征向量。
 对于聚集在一起的特征值，
-用户可能选择计算相关的不可约子空间，
+用户可能选择计算对应的不变子空间，
 因为在这种情况下，单个特征向量可能非常病态，
 而不可约子空间可能较为良态。
-最后，对于这些量中的任何一个，用户可能还希望
-计算其条件数。
+最后，对于这些量中的任何一个，用户可能还希望计算其条件数。
 
 <p>
 尽管我们拥有解决这些问题的有效算法，
@@ -133,8 +118,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <hr>
-
-以上内容为特征问题的指定部分，详细介绍了五种典型的特征问题及其相关计算需求和注意事项。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html1113"
   href="node28.html">
 <button class="navigate">下一节</button></a> 
@@ -152,10 +136,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1114" href="node28.html">相关的特征问题</a>
-<b>上一级：</b><a name="tex2html1108" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
+<b>上一级：</b><a name="tex2html1108" href="node21.html">厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1102" href="node26.html">条件数</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -45,13 +45,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
-    .footnote {
-        width: 10pt;
-        height: 10pt;
-        border: 1px solid black;
-        padding: 0;
-        transform: rotate(45deg);
-    }
 </style>
 </head>
 
@@ -74,15 +67,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1044" href="node23.html">不变子空间</a>
-<b>上一级：</b><a name="tex2html1038" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b>上一节：</b><a name="tex2html1032" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-  
-  
+<b>上一级：</b><a name="tex2html1038" href="node21.html">厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1032" href="node21.html">厄米特征问题</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001121000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001121000000000000000"></a>
 <a name="sec_chap2_HepEE"></a>
-<br>
 特征值与特征向量
 </h2>
 
@@ -100,18 +92,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 厄米矩阵 <span class="math-inline">A</span> 的所有特征值都是实数。这使得我们可以按排序顺序写出它们，
 <span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。
-如果所有 <span class="math-inline">\lambda_i > 0</span>，则称 <span class="math-inline">A</span> 为 <em>正定</em>，
-如果所有 <span class="math-inline">\lambda_i \geq 0</span>，则称 <span class="math-inline">A</span> 为 <em>半正定</em>。
-<em>负定</em> 和 <em>半负定</em> 的定义类似。如果既有正特征值又有负特征值，
-则称 <span class="math-inline">A</span> 为 <em>不定</em>。
+如果所有 <span class="math-inline">\lambda_i > 0</span>，则称 <span class="math-inline">A</span> 为 <em>正定</em>（positive semidefinite），
+如果所有 <span class="math-inline">\lambda_i \geq 0</span>，则称 <span class="math-inline">A</span> 为 <em>半正定</em>（positive semidefinite）。
+<em>负定</em>（negative definite）和 <em>半负定</em>（negative semidefinite）的定义类似。
+如果既有正特征值又有负特征值，则称 <span class="math-inline">A</span> 为 <em>不定</em>（indefinite）。
 
 <p>
-每个特征值 <span class="math-inline">\lambda_i</span> 都有一个特征向量 <span class="math-inline">x_i</span>。
+每个特征值 <span class="math-inline">\lambda_i</span> 都有一个对应的特征向量 <span class="math-inline">x_i</span>。
 我们可以不失一般性地假设 <span class="math-inline">\Vert x_i\Vert _2=1</span>。
-如果 <span class="math-inline">A</span> 是实矩阵，每个 <span class="math-inline">x_i</span> 也是实数。
+如果 <span class="math-inline">A</span> 是实矩阵，则每个 <span class="math-inline">x_i</span> 也是实数。
 尽管 <span class="math-inline">x_i</span> 可能不唯一（例如，任何向量都是单位矩阵的特征向量），
-但可以选择它们相互正交：<span class="math-inline">x_i^*x_j=0</span> 如果 <span class="math-inline">i \neq j</span>。
-当一个特征值与其他所有特征值都不同时，其特征向量是唯一的（直到乘以标量）。
+但可以选择使它们相互正交：<span class="math-inline">x_i^*x_j=0</span> 如果 <span class="math-inline">i \neq j</span>。
+当一个特征值与其他所有特征值都不同时，其特征向量是唯一的（最多乘以一个标量）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -132,10 +124,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1044" href="node23.html">不变子空间</a>
-<b>上一级：</b><a name="tex2html1038" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-<b>上一节：</b><a name="tex2html1032" href="node21.html">Hermitian Eigenproblems &nbsp; J.</a>
-  
-  
+<b>上一级：</b><a name="tex2html1038" href="node21.html">厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1032" href="node21.html">厄米特征问题</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
