@@ -66,43 +66,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1272" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b>上一级：</b><a name="tex2html1266" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>下一节：</b><a name="tex2html1272" href="node39.html">奇异值分解</a>
+<b>上一级：</b><a name="tex2html1266" href="node30.html">广义厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1262" href="node37.html">相关的特征问题</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001138000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001138000000000000000"></a>
 <a name="sec_chap2_GHepEx"></a>
-<br>
 示例
 </h2>
 
 <p>
-我们继续使用在第&#167;<a href="node19.html#sec:introchap2">2.1</a>节和图&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>中介绍的例子。现在我们考虑任意正质量<span class="math-inline">m_i>0</span>的情况，但阻尼常数<span class="math-inline">b_i</span>为零。这将运动方程简化为<span class="math-inline">M \ddot{x}(t) = -K x(t)</span>。我们再次通过代入<span class="math-inline">x(t) = e^{\lambda t} x</span>来求解，其中<span class="math-inline">x</span>是一个常数向量，<span class="math-inline">\lambda</span>是一个待确定的常数标量。这得到：
-<br><p></p>
-<div align="CENTER">
+我们继续使用在第<a href="node19.html#sec:introchap2">2.1</a>节和图&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>中介绍的例子。现在我们考虑任意正质量<span class="math-inline">m_i>0</span>的情况，但阻尼常数<span class="math-inline">b_i</span>为零。这将运动方程简化为<span class="math-inline">M \ddot{x}(t) = -K x(t)</span>。我们再次通过代入<span class="math-inline">x(t) = e^{\lambda t} x</span>来求解，其中<span class="math-inline">x</span>是一个常数向量，<span class="math-inline">\lambda</span>是一个待确定的常数标量。这得到：
 
 <div class="math-display">Kx = -\lambda^2 M x.</div>
-</div>
-<br clear="ALL">
-<p></p>
-因此，<span class="math-inline">x</span>是一个特征向量，<span class="math-inline">-\lambda^2</span>是广义厄米特征问题的特征值<span class="math-inline">Kx = \mu Mx</span>。由于<span class="math-inline">K</span>和<span class="math-inline">M</span>是正定的，特征值<span class="math-inline">-\lambda^2</span>为正，所以<span class="math-inline">\lambda</span>是纯虚数，我们发现<span class="math-inline">x(t)</span>是周期为<span class="math-inline">2 \pi/ \vert\lambda\vert</span>的周期函数。
+
+因此，<span class="math-inline">x</span>是一个特征向量，<span class="math-inline">-\lambda^2</span>是广义厄米特征问题的特征值<span class="math-inline">Kx = \mu Mx</span>。由于<span class="math-inline">K</span>和<span class="math-inline">M</span>是正定的，特征值<span class="math-inline">-\lambda^2</span>为正，所以<span class="math-inline">\lambda</span>是纯虚数，我们得到<span class="math-inline">x(t)</span>是周期为<span class="math-inline">2 \pi/ \vert\lambda\vert</span>的周期函数。
 
 <p>
-根据第&#167;<a href="node37.html#sec_chap2_GHepRE">2.3.7</a>节中的第3项，我们可以将其转换为标准的厄米特征问题，如下所示。设<span class="math-inline">M = LL^T</span>为<span class="math-inline">M</span>的Cholesky分解。因此，<span class="math-inline">L</span>仅仅是
+根据第<a href="node37.html#sec_chap2_GHepRE">2.3.7</a>节中的第3项，我们可以将其转换为标准的厄米特征问题，如下所示。设<span class="math-inline">M = LL^T</span>为<span class="math-inline">M</span>的Cholesky分解。可得 <span class="math-inline">L</span> 就是对角矩阵<span class="math-inline">{\rm diag}( m_1^{1/2} ,\ldots, m_n^{1/2} )</span>。那么，<span class="math-inline">Kx = \mu Mx</span>的特征值与如下对称三对角矩阵相同。
 
-对角矩阵<span class="math-inline">{\rm diag}( m_1^{1/2} ,\ldots, m_n^{1/2} )</span>。那么，<span class="math-inline">Kx = \mu Mx</span>的特征值与对称三对角矩阵
-<br>
-<div align="RIGHT">
+<div class="math-display" name="#eqn_MassSpring2">
+\hat{K} = L^{-1} K L^{-T} = \begin{bmatrix}
+\frac{k_1 + k_2}{m_1} &-\frac{k_2}{\sqrt{m_1m_2}} &0 &\cdots &0 \\
+-\frac{k_2}{\sqrt{m_1m_2}} &\frac{k_2 + k_3}{m_2} &-\frac{k_3}{\sqrt{m_2m_3}} &\cdots &0 \\
+0 &-\frac{k_3}{\sqrt{m_2m_3}} &\frac{k_3 + k_4}{m_3} &\cdots &0 \\
+\vdots &\vdots &\vdots &\ddots &\vdots \\
+0 &0 &0 &-\frac{k_{n-1}}{\sqrt{m_{n-2}m_{n-1}}} &\frac{k_{n-1} + k_n}{m_{n-1}} &-\frac{k_n}{\sqrt{m_{n-1}m_n}} \\
+0 &0 &0 &\cdots &-\frac{k_n}{\sqrt{m_{n-1}m_n}} &\frac{k_n}{m_n}
+\end{bmatrix}.
+</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn_MassSpring2"></a><div class="math-display">\hat{K} = L^{-1} K L^{-T} =\bmat{ccccc}\frac{k_1 + k_2}{m_1} &amp;-\frac{k_2}{m_1^{1/2}m_2^{1/2}} &amp;0 &amp;\cdots &amp;0 \\ -\frac{k_2}{m_1^{1/2}m_2^{1/2}} &amp;\frac{k_2 + k_3}{m_2} &amp;-\frac{k_3}{m_2^{1/2}m_3^{1/2}} &amp;\cdots &amp;0 \\ 0 &amp;-\frac{k_3}{m_2^{1/2}m_3^{1/2}} &amp;\frac{k_3 + k_4}{m_3} &amp;\cdots &amp;0 \\ \vdots &amp;\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\ 0 &amp;0 &amp;0 &amp;-\frac{k_{n-1}}{m_{n-2}^{1/2}m_{n-1}^{1/2}} &amp;\frac{k_{n-1} + k_n}{m_{n-1}} &amp;-\frac{k_n}{m_{n-1}^{1/2}m_n^{1/2}} \\ 0 &amp;0 &amp;0 &amp;\cdots &amp;-\frac{k_n}{m_{n-1}^{1/2}m_n^{1/2}} &amp;\frac{k_n}{m_n} \emat.</div></td>
-<td WIDTH=10 align="RIGHT">
-(2)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 对称三对角矩阵具有特别快速和高效的特征值算法。
 
 <p>
@@ -123,11 +119,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1272" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b>上一级：</b><a name="tex2html1266" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>下一节：</b><a name="tex2html1272" href="node39.html">奇异值分解</a>
+<b>上一级：</b><a name="tex2html1266" href="node30.html">广义厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1262" href="node37.html">相关的特征问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

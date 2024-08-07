@@ -83,7 +83,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在众多大规模科学或工程计算中，从计算电路的频率响应到建筑的地震响应，再到分子的能级，都需要求解矩阵的特征值和特征向量。特征值问题有多种数学表述方式，且在数值求解方面已有更多方法被提出。本书旨在指导读者为特征值问题找到最合适的数值方法。
 
 <p>
-目前，针对许多特征值问题，尤其是中小规模稠密矩阵，已存在优秀的方法。这些算法已在MATLAB[<a href="node421.html#matlab">319</a>]、LAPACK[<a href="node421.html#lapack">12</a>]等编程环境和库以及其他商业和公共软件包中得到应用。然而，对于超大规模且（通常）稀疏的特征值问题，尚无单一最佳方法。众多方法及其对矩阵数学特性的复杂依赖，以及在效率和精度间的权衡，使得专家乃至普通用户都难以找到最适合特定问题的方法。虽然GAMS（可用数学软件指南）[<a href="footnode.html#foot786">786</a>]和NETLIB[<a href="footnode.html#foot734">734</a>]等优秀在线搜索设施和软件库存在，允许基于库名、子程序名、关键词及数值计算主题分类进行搜索，但它们无法提供针对特定问题的最佳方法建议。因此，本书作者和其他专家常被咨询算法选择建议。这一现状促使我们将知识提炼成书，尽可能广泛传播。
+目前，针对许多特征值问题，尤其是中小规模稠密矩阵，已存在优秀的方法。这些算法已在MATLAB[<a href="node421.html#matlab">319</a>] <sup><a href="#footnote-matlab">1</a></sup>、LAPACK[<a href="node421.html#lapack">12</a>]等编程环境和库以及其他商业和公共软件包中得到应用。然而，对于超大规模且（通常）稀疏的特征值问题，尚无单一最佳方法。众多方法及其对矩阵数学特性的复杂依赖，以及在效率和精度间的权衡，使得专家乃至普通用户都难以找到最适合特定问题的方法。虽然GAMS（可用数学软件指南）<sup><a href="#footnote-gams">2</a></sup> 和NETLIB <sup><a href="#footnote-netlib">3</a></sup> 等优秀在线搜索设施和软件库存在，允许基于库名、子程序名、关键词及数值计算主题分类进行搜索，但它们无法提供针对特定问题的最佳方法建议。因此，本书作者和其他专家常被咨询算法选择建议。这一现状促使我们将知识提炼成书，尽可能广泛传播。
 
 <p>
 本书结构如下：首先，我们构建了一个<em>决策树</em>，引导用户找到最佳方法。树的每个节点针对问题的数学结构、待计算量及矩阵运算成本提出问题。其次，在决策树的叶节点，我们展示了推荐的算法<em>模板</em>，并提供相关软件指引。模板是对算法的高层次描述，便于理解其工作原理、用户可调整的参数以控制效率和精度，以及如何解读输出。我们将在下文详细讨论这一结构。
@@ -99,6 +99,12 @@ Systems: Building Blocks for Iterative Methods）[<a href="node421.html#temp94">
 在大多数章节中，我们明确列出了贡献作者。这不仅是为了表彰，也体现了对文本的个人责任。所有章节都提供了足够的参考资料，作为通往特征值问题更丰富细节和专业知识的窗口。
 
 <p>
+<hr>
+<ol>
+<li id="footnote-matlab">MATLAB是MathWorks公司的商标。</li>
+<li id="footnote-gams"><a href="http://gams.nist.gov/">http://gams.nist.gov/</a>，由NIST (National Institute of Standards and Technology)开发。</li>
+<li id="footnote-netlib"><a href="http://www.netlib.org/">http://www.netlib.org/</a>，由Oak Ridge National Laboratory维护。</li>
+</ol>
 <hr>
 <!--Navigation Panel-->
 <a name="tex2html854"

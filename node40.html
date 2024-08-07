@@ -67,29 +67,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1308" href="node41.html">奇异子空间</a>
-<b>上一级：</b><a name="tex2html1302" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b>上一节：</b><a name="tex2html1296" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-  
-  
+<b>上一级：</b><a name="tex2html1302" href="node39.html">奇异值分解</a>
+<b>上一节：</b><a name="tex2html1296" href="node39.html">奇异值分解</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001141000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001141000000000000000"></a>
 <a name="sec_chap2_SVDSS"></a>
-<br>
 奇异值与奇异向量
 </h2>
-
-<p>
-<a name="1321"></a> 
 
 <p>
 <span class="math-inline">A^* A</span>的<span class="math-inline">n</span>个特征值的平方根即为<span class="math-inline">A</span>的<em>奇异值</em>。由于<span class="math-inline">A^* A</span>是厄米且半正定的，奇异值均为实数且非负。因此，我们可以将它们按排序表示为<span class="math-inline">0 \leq \sigma_n \leq \cdots \leq \sigma_1</span>。
 
 <p>
-<span class="math-inline">A^* A</span>的<span class="math-inline">n</span>个特征向量被称为<em>（右）奇异向量</em>。我们用<span class="math-inline">v_1,\ldots,v_n</span>表示它们，其中<span class="math-inline">v_i</span>对应特征值<span class="math-inline">\sigma_i^2</span>。<span class="math-inline">m</span>阶矩阵<span class="math-inline">AA^*</span>同样为厄米且半正定。其最大的<span class="math-inline">n</span>个特征值与<span class="math-inline">AA^*</span>相同，其余为零。<span class="math-inline">AA^*</span>的<span class="math-inline">m</span>个特征向量被称为<em>（左）奇异向量</em>。我们用<span class="math-inline">u_1,\ldots,u_m</span>表示它们，其中<span class="math-inline">u_1</span>至<span class="math-inline">u_n</span>对应特征值<span class="math-inline">\sigma_1^2</span>至<span class="math-inline">\sigma_n^2</span>，而<span class="math-inline">u_{n+1}</span>至<span class="math-inline">u_{m}</span>对应零特征值。奇异向量可选择满足以下恒等式：<span class="math-inline">Av_i = \sigma_i u_i</span>和<span class="math-inline">A^* u_i = \sigma_i v_i</span>（对于<span class="math-inline">i=1,\ldots,n</span>），以及<span class="math-inline">A^*u_i = 0</span>（对于<span class="math-inline">i=n+1,\ldots,m</span>）。
+<span class="math-inline">A^* A</span>的<span class="math-inline">n</span>个特征向量被称为<em>（右）奇异向量</em>。我们用<span class="math-inline">v_1,\ldots,v_n</span>表示它们，其中<span class="math-inline">v_i</span>对应特征值<span class="math-inline">\sigma_i^2</span>。<span class="math-inline">m</span>阶矩阵<span class="math-inline">AA^*</span>同样为厄米且半正定。其最大的<span class="math-inline">n</span>个特征值与<span class="math-inline">AA^*</span>相同，其余为零。<span class="math-inline">AA^*</span>的<span class="math-inline">m</span>个特征向量被称为<em>（左）奇异向量</em>。我们用<span class="math-inline">u_1,\ldots,u_m</span>表示它们，其中<span class="math-inline">u_1</span>至<span class="math-inline">u_n</span>对应特征值<span class="math-inline">\sigma_1^2</span>至<span class="math-inline">\sigma_n^2</span>，而<span class="math-inline">u_{n+1}</span>至<span class="math-inline">u_{m}</span>对应零特征值。可选择奇异向量使其满足以下恒等式：<span class="math-inline">Av_i = \sigma_i u_i</span>和<span class="math-inline">A^* u_i = \sigma_i v_i</span>（对于<span class="math-inline">i=1,\ldots,n</span>），以及<span class="math-inline">A^*u_i = 0</span>（对于<span class="math-inline">i=n+1,\ldots,m</span>）。
 
 <p>
-我们可以不失一般性地假设每个<span class="math-inline">\Vert u_i\Vert _2=1</span>和<span class="math-inline">\Vert v_i\Vert _2=1</span>。若<span class="math-inline">A</span>为实数矩阵，则奇异向量为实数。尽管奇异向量可能不唯一（例如，单位矩阵的任意向量都是奇异向量），但它们均可选择为相互正交：<span class="math-inline">u_i^*u_j = v_i^*v_j = 0</span>（若<span class="math-inline">i \neq j</span>）。当某个奇异值与其他所有奇异值均不相同时，其奇异向量唯一（至多乘以标量）。
+我们可以不失一般性地假设每个<span class="math-inline">\Vert u_i\Vert _2=1</span>和<span class="math-inline">\Vert v_i\Vert _2=1</span>。若<span class="math-inline">A</span>为实数矩阵，则奇异向量为实数。尽管奇异向量可能不唯一（例如，单位矩阵的任意向量都是奇异向量），但它们均可选择为相互正交：<span class="math-inline">u_i^*u_j = v_i^*v_j = 0</span>（若<span class="math-inline">i \neq j</span>）。当某个奇异值与其他所有奇异值均不相同时，其奇异向量唯一（最多乘以标量）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -110,10 +106,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1308" href="node41.html">奇异子空间</a>
-<b>上一级：</b><a name="tex2html1302" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-<b>上一节：</b><a name="tex2html1296" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
-  
-  
+<b>上一级：</b><a name="tex2html1302" href="node39.html">奇异值分解</a>
+<b>上一节：</b><a name="tex2html1296" href="node39.html">奇异值分解</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -67,57 +67,42 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1218" href="node35.html">条件数</a>
-<b>上一级：</b><a name="tex2html1212" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1212" href="node30.html">广义厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1206" href="node33.html">等价关系（合同关系）</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001134000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001134000000000000000"></a>
 <a name="sec_chap2_GHepED"></a>
-<br>
 特征值分解
 </h2>
 
 <p>
-<a name="1219"></a> 
-
-<p>
 定义
-<span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n )</span> 和
-
-<span class="math-inline">X = [x_1,\ldots,x_n]</span>。<span class="math-inline">X</span> 被称为 <span class="math-inline">A - \lambda B</span> 的<em>特征向量矩阵</em>。
-由于 <span class="math-inline">x_i</span> 是关于由 <span class="math-inline">B</span> 诱导的内积的单位正交向量，我们可以看到
-<span class="math-inline">X^*BX=\Lambda_B</span>，一个非奇异的对角矩阵。
-这 <span class="math-inline">n</span> 个等式
-<span class="math-inline">A x_i = \lambda_i B x_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span> 也可以写成
+<span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n )</span> 和 <span class="math-inline">X = [x_1,\ldots,x_n]</span>。
+<span class="math-inline">X</span> 被称为 <span class="math-inline">A - \lambda B</span> 的<em>特征向量矩阵</em>。
+由于 <span class="math-inline">x_i</span> 是关于由 <span class="math-inline">B</span> 诱导的内积的单位正交向量，我们可以看到 <span class="math-inline">X^*BX=\Lambda_B</span>，是一个非奇异的对角矩阵。
+<span class="math-inline">n</span> 个等式
+<span class="math-inline">A x_i = \lambda_i B x_i</span> （<span class="math-inline">i=1,\ldots,n</span>） 也可以写成
 <span class="math-inline">AX = BX \Lambda</span> 或
 <span class="math-inline">X^*AX = X^*BX \Lambda = \Lambda_B \Lambda</span>。
 因此
 <span class="math-inline">X^*AX \equiv \Lambda_A</span> 也是对角矩阵。
-这种分解
-<br><p></p>
-<div align="CENTER">
-
+如下分解
 
 <div class="math-display">X^* A X = \Lambda_A \quad \mathrm{和} \quad X^* B X = \Lambda_B</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 （或
 <span class="math-inline">A = X^{-\ast} \Lambda_A X^{-1}</span> 和
 <span class="math-inline">B = X^{-\ast} \Lambda_B X^{-1}</span>）
 被称为 <span class="math-inline">A - \lambda B</span> 的<em>特征值分解</em>。
-换句话说，<span class="math-inline">A - \lambda B</span> 通过变换 <span class="math-inline">X</span> 与对角矩阵束
-
-<span class="math-inline">\Lambda_A - \lambda \Lambda_B</span> 相合。
+换句话说，<span class="math-inline">A - \lambda B</span> 通过变换 <span class="math-inline">X</span> 与对角矩阵束 <span class="math-inline">\Lambda_A - \lambda \Lambda_B</span> 相合。
 
 <p>
-如果我们取 <span class="math-inline">X</span> 的 <span class="math-inline">k</span> 列（例如
-<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> =
-第2、3和5列），那么这些列张成 <span class="math-inline">A - \lambda B</span> 的一个特征空间。如果我们取
-
-<span class="math-inline">\hat{\Lambda}_A = {\rm diag}(\hat{\Lambda}_{A,22} , \hat{\Lambda}_{A,33},\hat{\Lambda}_{A,55} )</span>
+如果我们取 <span class="math-inline">X</span> 的 <span class="math-inline">k</span> 列
+（例如 <span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 第2、3和5列），那么这些列张成 <span class="math-inline">A - \lambda B</span> 的一个特征空间。
+如果我们取 <span class="math-inline">\hat{\Lambda}_A = {\rm diag}(\hat{\Lambda}_{A,22} , \hat{\Lambda}_{A,33},\hat{\Lambda}_{A,55} )</span>
 的相应子矩阵，并类似地定义
 <span class="math-inline">\hat{\Lambda}_B</span>，
 那么我们可以写出相应的
@@ -162,10 +147,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1218" href="node35.html">条件数</a>
-<b>上一级：</b><a name="tex2html1212" href="node30.html">Generalized Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1212" href="node30.html">广义厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1206" href="node33.html">等价关系（合同关系）</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
