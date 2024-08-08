@@ -67,15 +67,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1350" href="node44.html">条件数</a>
-<b>上一级：</b><a name="tex2html1344" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一级：</b><a name="tex2html1344" href="node39.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html1338" href="node42.html">等价关系</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001144000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001144000000000000000"></a>
 <a name="sec_chap2_SVDSVD"></a>
-<br>
 分解
 </h2>
 
@@ -91,7 +89,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">V</span> 被称为 <span class="math-inline">A</span> 的<em>右奇异向量矩阵</em>。
 由于 <span class="math-inline">u_i</span> 是正交单位向量，我们可以看到 <span class="math-inline">U^*U=I</span>；即，
 <span class="math-inline">U</span> 是一个<em>酉矩阵</em>。如果 <span class="math-inline">A</span> 是实数矩阵，那么 <span class="math-inline">u_i</span> 也是实向量，
-因此 <span class="math-inline">U^TU = I</span>，我们也可以说 <span class="math-inline">U</span> 是一个<em>正交矩阵</em>。
+此时 <span class="math-inline">U^TU = I</span>，我们也可以说 <span class="math-inline">U</span> 是一个<em>正交矩阵</em>。
 同样的讨论适用于 <span class="math-inline">V</span>。
 <span class="math-inline">n+m</span> 个等式 
 <span class="math-inline">Av_i = \sigma_i u_i</span> 和 
@@ -101,15 +99,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">AV = U \Sigma</span> 和 
 <span class="math-inline">A^* U= V \Sigma^*</span>，或 
 <span class="math-inline">A = U \Sigma V^*</span>。
-这种分解
-<br><p></p>
-<div align="CENTER">
 
+如下分解
 
 <div class="math-display">A = U \Sigma V^*</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 被称为 <span class="math-inline">A</span> 的<em>奇异值分解（SVD）</em>。
 换句话说，<span class="math-inline">A</span> 在酉（或正交）变换下等价于对角矩阵 <span class="math-inline">\Sigma</span>。
 
@@ -124,7 +118,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\Sigma_t = {\rm diag}(\sigma_1 ,\ldots, \sigma_t)</span> 为一个 <span class="math-inline">t</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个奇异值。
 然后我们可以做如下定义。
 <dl>
-<dt><strong><i>瘦 SVD。</i></strong></dt>
+<dt><strong><i>瘦 SVD</i></strong></dt>
 <dd>
 <span class="math-inline">A = U_n \Sigma_n V_n^*</span> 是 <span class="math-inline">A</span> 的<em>瘦（或经济型）SVD</em>。
 当 <span class="math-inline">n \ll m</span> 时，瘦 SVD 比全 SVD 存储量小且计算速度快。
@@ -132,13 +126,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 </dd>
-<dt><strong><i>紧凑 SVD。</i></strong></dt>
+<dt><strong><i>紧凑 SVD</i></strong></dt>
 <dd>
 <span class="math-inline">A = U_{r} \Sigma_{r} V_{r}^*</span> 是 <span class="math-inline">A</span> 的<em>紧凑 SVD</em>。
-当 <span class="math-inline">r \ll n</span> 时，紧凑 SVD 比瘦 SVD 存储量小且计算速度快。
-<a name="1362"></a>
+当 <span class="math-inline">r \ll n</span> 时，紧凑 SVD 比瘦 SVD 存储量小且计算速度快。（译者注：这里的 <span class="math-inline">r</span> 应该是 <span class="math-inline">A</span> 的秩，即非零奇异值的个数，直到这里都是精确的分解。）
 </dd>
-<dt><strong><i>截断 SVD。</i></strong></dt>
+<dt><strong><i>截断 SVD</i></strong></dt>
 <dd>
 <span class="math-inline">A_t = U_{t} \Sigma_{t} V_{t}^*</span>
 是 <span class="math-inline">A</span> 的<em>秩-<span class="math-inline">t</span> 截断（或部分）SVD</em>，
@@ -147,7 +140,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\Vert A - B \Vert _F</span> 的矩阵，并且也最小化（可能不唯一）
 <span class="math-inline">\Vert A - B \Vert _2</span>。
 当 <span class="math-inline">t \ll r</span> 时，截断 SVD 比紧凑 SVD 存储量小且计算成本低，是实际应用中最常见的 SVD 形式。
-<a name="1367"></a>
 
 <p>
 </dd>
@@ -163,7 +155,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 （求和从 <span class="math-inline">i=1</span> 到 <span class="math-inline">r</span>，或 <span class="math-inline">i=1</span> 到 <span class="math-inline">t</span>）。
 
 <p>
-如果 <span class="math-inline">A</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵且 <span class="math-inline">m<n</span>，
+如果 <span class="math-inline">A</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵且 <span class="math-inline">m < n </span>，
 那么它的 SVD 是 
 <span class="math-inline">A = U \Sigma V^*</span>，其中
 <span class="math-inline">U</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的，<span class="math-inline">\Sigma</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的，
@@ -178,18 +170,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\hat{U}= U(:,[2,3,5])</span> = 
 第 2、3 和 5 列，以及 
 <span class="math-inline">\hat{V}= V(:,[2,3,5])</span>），
-那么这些列跨越 <span class="math-inline">A</span> 的一对奇异子空间。
-如果我们取相应的子矩阵 
-
+那么这些列张成 <span class="math-inline">A</span> 的一对奇异子空间。
+如果我们取对应的 <span class="math-inline">\Sigma</span> 的子矩阵 
 <span class="math-inline">\hat{\Sigma}= {\rm diag}(\sigma_2 , \sigma_3 , \sigma_5 )</span>
-of <span class="math-inline">\Sigma</span>，那么我们可以写出相应的 
-<em>部分 SVD</em> 
-<a name="1374"></a>
-
+，那么我们可以写出对应的 
+<em>部分 SVD</em> ：
 <span class="math-inline">\hat{U}^* A \hat{V}= \hat{\Sigma}</span>。如果 <span class="math-inline">\hat{U}</span> 和 <span class="math-inline">\hat{V}</span> 的列
-被替换为
-跨越相同不变子空间的 <span class="math-inline">k</span> 个不同的正交向量，
-那么我们得到一个不同的部分 SVD 
+被替换为张成相同不变子空间的 <span class="math-inline">k</span> 个不同的正交向量，
+那么我们得到一个不同的部分 SVD ：
 <span class="math-inline">\check{U}^* A \check{V}= \check{A}</span>，
 其中 <span class="math-inline">\check{A}</span> 是
 一个 <span class="math-inline">k</span> 行 <span class="math-inline">k</span> 列的矩阵，其奇异值与 <span class="math-inline">\hat{\Sigma}</span> 相同，尽管
@@ -214,10 +202,8 @@ of <span class="math-inline">\Sigma</span>，那么我们可以写出相应的
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1350" href="node44.html">条件数</a>
-<b>上一级：</b><a name="tex2html1344" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>上一级：</b><a name="tex2html1344" href="node39.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html1338" href="node42.html">等价关系</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

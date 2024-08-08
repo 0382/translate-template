@@ -48,7 +48,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
 <a name="tex2html1535"
   href="node57.html">
@@ -66,63 +66,66 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1536" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-<b>上一级：</b><a name="tex2html1530" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>下一节：</b><a name="tex2html1536" href="node57.html">广义非厄米特征问题</a>
+<b>上一级：</b><a name="tex2html1530" href="node48.html">非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1526" href="node55.html">相关的特征问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
-
-<h2><a name="SECTION001158000000000000000"></a>
+<h2>
+<a name="SECTION001158000000000000000"></a>
 <a name="sec_chap2_nHepEx"></a>
-<br>
-Example
+示例
 </h2>
 
 <p>
-We continue to use the example introduced in
-&#167;<a href="node19.html#sec:introchap2">2.1</a> and
-Figure&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>.
-We now consider the case of unit masses <span class="math-inline">m_i=1</span>
-but nonzero damping constants <span class="math-inline">b_i</span>. 
-(The case of nonunit masses is handled in &#167;<a href="node65.html#sec_chap2_GnHepEx">2.6.8</a>.)
-This simplifies the equations
-of motion to 
-<span class="math-inline">\ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>. 
-We solve them by changing variables to 
-<br><p></p>
-<div align="CENTER">
+我们继续使用在第<a href="node19.html#sec:introchap2">2.1</a>节和图<a href="node19.html#fig_MassSpring">2.1</a>中引入的例子。现在我们考虑单位质量<span class="math-inline">m_i=1</span>但非零阻尼常数<span class="math-inline">b_i</span>的情况。（非单位质量的情况在第<a href="node65.html#sec_chap2_GnHepEx">2.6.8</a>节处理。）这简化了运动方程为
+<span class="math-inline">\ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>。我们通过变量代换来求解这些方程：
 
+<div class="math-display">y(t) = \begin{bmatrix} \dot{x}(t) \\ x(t) \end{bmatrix},</div>
 
-<div class="math-display">y(t) = \bmat{c} \dot{x}(t) \\ x(t) \emat,</div>
+由此得到
+
+<div class="math-display" name="#eqn_EigenVibration3">
+\begin{aligned}
+\dot{y}(t) &= \begin{bmatrix} \dot{x}(t) \\ x(t) \end{bmatrix}
+= \begin{bmatrix} -B\dot{x}(t) - Kx(t) \\ \dot{x}(t)\end{bmatrix}
+= \begin{bmatrix} -B & -K \\ I & 0 \end{bmatrix} \begin{bmatrix} \dot{x}(t) \\ x(t) \end{bmatrix} \\
+&= \begin{bmatrix} -B & -K \\ I & 0 \end{bmatrix} y(t)
+\equiv A y(t).
+\end{aligned}
 </div>
-<br clear="ALL">
-<p></p>
-yielding
-<br>
-<div align="CENTER"><a name="eqn_EigenVibration3"></a>
 
-</div>
-<br clear="ALL"><p></p>
-We again solve by substituting 
-<span class="math-inline">y(t) = e^{\lambda t} y</span>, where <span class="math-inline">y</span> is
-a constant vector and <span class="math-inline">\lambda</span> is a constant scalar to be determined.
-This yields 
-<br><p></p>
-<div align="CENTER">
-
+我们再次通过代入<span class="math-inline">y(t) = e^{\lambda t} y</span>来求解，其中<span class="math-inline">y</span>是一个常向量，<span class="math-inline">\lambda</span>是一个待确定的常标量。这得到
 
 <div class="math-display">Ay = \lambda y.</div>
-</div>
-<br clear="ALL">
-<p></p>
-Thus <span class="math-inline">y</span> is an eigenvector
-and <span class="math-inline">\lambda</span> is an eigenvalue of the non-Hermitian matrix <span class="math-inline">A</span>.
+
+因此，<span class="math-inline">y</span>是矩阵<span class="math-inline">A</span>的一个特征向量，而<span class="math-inline">\lambda</span>是对应的特征值，其中<span class="math-inline">A</span>是一个非厄米矩阵。
+</p>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html1535"
+  href="node57.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html1529"
+  href="node48.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html1525"
+  href="node55.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html1531"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html1533"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html1536" href="node57.html">广义非厄米特征问题</a>
+<b>上一级：</b><a name="tex2html1530" href="node48.html">非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1526" href="node55.html">相关的特征问题</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

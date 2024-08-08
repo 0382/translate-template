@@ -67,31 +67,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1496" href="node54.html">特征问题的具体化</a>
-<b>上一级：</b><a name="tex2html1490" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一级：</b><a name="tex2html1490" href="node48.html">非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1484" href="node52.html">特征分解</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001155000000000000000"></a> 
-<a name="sec_chap2_nHepCond"></a><a name="1596"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001155000000000000000"></a> 
+<a name="sec_chap2_nHepCond"></a>
 条件数
 </h2>
 
 <p>
-一个普通矩阵<span class="math-inline">A</span>的特征值可以是良态的，也可以是病态的。
-例如，如果<span class="math-inline">A</span>实际上是厄米矩阵（或接近厄米矩阵），如第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节所述，其特征值是良态的。
+一个普通矩阵<span class="math-inline">A</span>的特征值可能是良态的，也可能是病态的。
+例如，如果<span class="math-inline">A</span>实际上是厄米矩阵（或接近厄米矩阵），如第<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节所述，其特征值是良态的。
 另一方面，如果<span class="math-inline">A</span>“远离厄米矩阵”，那么特征值可能是非常病态的。
-例如，矩阵<span class="math-inline">A(\epsilon)</span>在(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)中显示，改变一个矩阵元素<span class="math-inline">\epsilon^2</span>可以导致特征值变化<span class="math-inline">\epsilon</span>，这在<span class="math-inline">\vert\epsilon\vert \ll 1</span>时远大于<span class="math-inline">\epsilon^2</span>。
-例如，<span class="math-inline">\epsilon = 10^{-8}</span>比扰动<span class="math-inline">\epsilon^2 = 10^{-16}</span>大<span class="math-inline">10^8</span>倍，后者可能是由舍入误差引入的。换句话说，特征值可能比矩阵的扰动大得多。正如这个例子所示，这种病态往往发生在两个或多个特征值非常接近的情况下。
+例如，(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)式中的矩阵<span class="math-inline">A(\epsilon)</span>，改变一个矩阵元素<span class="math-inline">\epsilon^2</span>可以导致特征值变化<span class="math-inline">\epsilon</span>，这在<span class="math-inline">\vert\epsilon\vert \ll 1</span>时远大于<span class="math-inline">\epsilon^2</span>。
+例如，<span class="math-inline">\epsilon = 10^{-8}</span>比扰动<span class="math-inline">\epsilon^2 = 10^{-16}</span>大<span class="math-inline">10^8</span>倍，而这一扰动可能是由舍入误差引入的。换句话说，特征值可能比矩阵的扰动大得多。正如这个例子所示，这种病态往往发生在两个或多个特征值非常接近的情况下。
 
 <p>
 特征向量同样可能是良态的或病态的。
-从第&#167;<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节我们知道，即使对于厄米矩阵，接近的特征值也可能有病态的特征向量。在非厄米情况下，它们甚至可能更敏感，如矩阵<span class="math-inline">A(\epsilon)</span>在(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)中再次显示：对一个特征值间隔为<span class="math-inline">2 \epsilon</span>的矩阵进行<span class="math-inline">\epsilon^2</span>的扰动，可以使得特征向量旋转<span class="math-inline">\epsilon \gg \epsilon^2</span>，甚至完全消失一个。
+从第<a href="node26.html#sec_chap2_HepCond">2.2.5</a>节我们知道，即使对于厄米矩阵，接近的特征值也可能有病态的特征向量。在非厄米情况下，它们可能更敏感，继续以(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)式中的矩阵<span class="math-inline">A(\epsilon)</span>为例：对一个特征值间隔为<span class="math-inline">2 \epsilon</span>的矩阵进行<span class="math-inline">\epsilon^2</span>的扰动，可以使得特征向量旋转<span class="math-inline">\epsilon \gg \epsilon^2</span>，甚至完全消失一个。
 
 <p>
-我们参考第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节以获取更多细节。
+我们在第<a href="node275.html#sec:errbds_nsym">7.13</a>节阐述更多细节。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -112,7 +111,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1496" href="node54.html">特征问题的具体化</a>
-<b>上一级：</b><a name="tex2html1490" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一级：</b><a name="tex2html1490" href="node48.html">非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1484" href="node52.html">特征分解</a>
   
   

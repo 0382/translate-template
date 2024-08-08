@@ -66,26 +66,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1404" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b>上一级：</b><a name="tex2html1398" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>下一节：</b><a name="tex2html1404" href="node48.html">非厄米特征问题</a>
+<b>上一级：</b><a name="tex2html1398" href="node39.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html1394" href="node46.html">相关的奇异值问题</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001148000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001148000000000000000"></a>
 <a name="sec_chap2_SVDEx"></a>
-<br>
 示例
 </h2>
 
 <p>
 我们继续使用在
-&#167;<a href="node19.html#sec:introchap2">2.1</a>节和
+第<a href="node19.html#sec:introchap2">2.1</a>节和
 图&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>中介绍的示例。
 我们再次考虑任意质量<span class="math-inline">m_i>0</span>和零阻尼常数<span class="math-inline">b_i=0</span>的情况。这简化了运动方程为
 <span class="math-inline">M \ddot{x}(t) = -K x(t)</span>。
-如在&#167;<a href="node38.html#sec_chap2_GHepEx">2.3.8</a>节中，我们通过代入
+如在第<a href="node38.html#sec_chap2_GHepEx">2.3.8</a>节中，我们通过代入
 <span class="math-inline">x(t) = e^{\lambda t} x</span>来求解运动方程，其中<span class="math-inline">x</span>是常向量，<span class="math-inline">\lambda</span>是待确定的常标量。这导致
 <span class="math-inline">Kx = -\lambda^2 Mx</span>。设<span class="math-inline">M = LL^T</span>，其中
 Cholesky因子
@@ -96,40 +95,38 @@ Cholesky因子
 <p>
 现在我们注意到刚度矩阵<span class="math-inline">K</span>可以分解为<span class="math-inline">K = BD^2B^T</span>，
 其中
-<span class="math-inline">D = {\rm diag}(k_1^{1/2} ,\ldots, k_n^{1/2})</span>和
-<br><p></p>
-<div align="CENTER">
+<span class="math-inline">D = {\rm diag}(k_1^{1/2} ,\ldots, k_n^{1/2})</span> 以及
 
-
-<div class="math-display">B = \bmat{cccc} 1 &amp; -1 &amp; &amp; \\ &amp; \ddots &amp; \ddots &amp; \\ &amp; &amp; \ddots &amp; -1 \\ &amp; &amp; &amp;1 \emat.</div>
+<div class="math-display">
+B = \begin{bmatrix} 1 & -1 & & \\ 
+& \ddots & \ddots & \\ 
+& & \ddots & -1 \\
+& & &1 
+\end{bmatrix}.
 </div>
-<br clear="ALL">
-<p></p>
+
 这使我们可以写成
-<p></p>
-<div align="CENTER">
 
-<img
- width="453" height="52" border="0"
- src="img421.png"
- alt="\begin{eqnarray*}
-\hat{K} &amp; = &amp; L^{-1} K L^{-T} = L^{-1} B D^2 B^T L^{-T} \nonum...
-...^T L^{-T})
-= (L^{-1} B D) \cdot (L^{-1} B D)^T
+<div class="math-display">
+\begin{aligned}
+\hat{K} & = L^{-1} K L^{-T} = L^{-1} B D^2 B^T L^{-T} \\
+&= (L^{-1}BD)\cdot(DB^T L^{-T}) = (L^{-1} B D) \cdot (L^{-1} B D)^T
 \equiv GG^T.
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
-因此，双对角矩阵
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">G = L^{-1}BD =\bmat{ccccc}\sqrt{k_1/m_1} &amp; -\sqrt{k_2/m_1...... \ddots &amp; -\sqrt{k_n/m_{n-1}} \\&amp; &amp; &amp; &amp; \sqrt{k_n/m_n}\emat</div>
+\end{aligned}
 </div>
-<br clear="ALL">
-<p></p>
+
+因此，双对角矩阵
+
+<div class="math-display">
+G = L^{-1}BD = \begin{bmatrix}
+\sqrt{k_1/m_1} & -\sqrt{k_2/m_1} & & & \\
+& \sqrt{k_2/m_2} & -\sqrt{k_3/m_2} & & \\
+& & \ddots & \ddots & \\
+& & & \ddots & -\sqrt{k_n/m_{n-1}} \\
+& & & & \sqrt{k_n/m_n}
+\end{bmatrix}
+</div>
+
 的奇异值是<span class="math-inline">\hat{K}</span>的特征值的平方根，而<span class="math-inline">G</span>的左奇异向量是<span class="math-inline">\hat{K}</span>的特征向量。
 
 <p>
@@ -153,11 +150,9 @@ Cholesky因子
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1404" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b>上一级：</b><a name="tex2html1398" href="node39.html">Singular Value Decomposition &nbsp;J.</a>
+<b>下一节：</b><a name="tex2html1404" href="node48.html">非厄米特征问题</a>
+<b>上一级：</b><a name="tex2html1398" href="node39.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html1394" href="node46.html">相关的奇异值问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

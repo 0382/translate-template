@@ -67,16 +67,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1510" href="node55.html">相关的特征问题</a>
-<b>上一级：</b><a name="tex2html1504" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一级：</b><a name="tex2html1504" href="node48.html">非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1498" href="node53.html">条件数</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001156000000000000000"></a> 
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001156000000000000000"></a> 
 <a name="sec_chap2_nHepSpec"></a>
-<br>
-特征问题的指定
+特征问题的具体化
 </h2>
 
 <p>
@@ -90,24 +89,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li>计算复平面上某个区域的特征值 <span class="math-inline">\lambda_i</span>。这通常通过计算与所需区域特征值对应的近似右（以及可能的左）不变子空间来实现。我们拥有有效算法的平面区域包括：
    
 <ol>
-<li>最接近（或最远离）用户选定点 <span class="math-inline">\mu</span> 的特征值，
-</li>
-<li>实部（或虚部）最大（或最小）的特征值，
-</li>
-<li>最接近（或最远离）复平面上任意选定直线或圆的特征值。
-   
-</li>
+<li>最接近（或最远离）用户选定点 <span class="math-inline">\mu</span> 的特征值，</li>
+<li>实部（或虚部）最大（或最小）的特征值，</li>
+<li>最接近（或最远离）复平面上任意选定直线或圆的特征值。</li>
 </ol>
 </li>
 </ol>
 
 <p>
-对于这些可能性中的每一种，用户还可以计算矩阵在指定不变子空间上的<em>投影</em>；如果子空间是 <span class="math-inline">k</span> 维的，那么投影是一个 <span class="math-inline">k</span> 乘 <span class="math-inline">k</span> 矩阵，其特征分解可以计算。用户还可以计算所计算不变子空间中的右（以及可能的左）特征向量。对于聚集在一起的特征值，用户可能会选择计算相关的不变子空间，因为在这种情况下，单个特征向量可能非常病态，而不变子空间可能不那么病态。最后，对于这些量中的任何一个，用户可能还希望计算其条件数。
+对于这些可能性中的每一种，用户还可以计算矩阵在指定不变子空间上的<em>投影</em>；如果子空间是 <span class="math-inline">k</span> 维的，那么投影是一个 <span class="math-inline">k \times k</span> 矩阵，其特征分解可以计算。用户还可以计算所计算不变子空间中的右（以及可能的左）特征向量。对于聚集在一起的特征值，用户可能会选择计算相关的不变子空间，因为在这种情况下，单个特征向量可能非常病态，而不变子空间可能不那么病态。最后，对于这些量中的任何一个，用户可能还希望计算其条件数。
 
 <p>
-尽管我们拥有解决这些问题的有效算法，但我们不一定能在所有用户可接受的时间和空间内解决所有大规模问题。<a name="tex2html8"
-  href="footnode.html#foot1995"><sup><button class="footnote"></button></sup></a>
+尽管我们拥有解决这些问题的有效算法，但我们不一定能在所有用户可接受的时间和空间内解决所有大规模问题。<sup><a href="#footnote-nhep-count">1</a></sup>
 <p>
+<hr>
+<ol>
+<li id="footnote-nhep-count">在处理厄米特征值问题时，我们提到了计算区间<span class="math-inline">[\alpha, \beta]</span>内特征值数量的能力。对于稀疏厄米矩阵，这种计算有时比实际求解区间<span class="math-inline">[\alpha, \beta]</span>内的特征值要经济得多。尽管针对NHEP[<a href="node421.html#badg97">32</a>]存在此类计数算法，但其成本与实际计算特征值的变换方法相当，因此我们不对其进行深入探讨。</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html1509"
   href="node55.html">
@@ -126,7 +124,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1510" href="node55.html">相关的特征问题</a>
-<b>上一级：</b><a name="tex2html1504" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
+<b>上一级：</b><a name="tex2html1504" href="node48.html">非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1498" href="node53.html">条件数</a>
   
   

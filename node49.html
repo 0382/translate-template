@@ -67,25 +67,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1440" href="node50.html">不变子空间</a>
-<b>上一级：</b><a name="tex2html1434" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b>上一节：</b><a name="tex2html1428" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-  
-  
+<b>上一级：</b><a name="tex2html1434" href="node48.html">非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1428" href="node48.html">非厄米特征问题</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001151000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001151000000000000000"></a>
 <a name="sec_chap2_nHepEE"></a>
-<br>
 特征值与特征向量
 </h2>
 
 <p>
 多项式 
 <span class="math-inline">p(\lambda) = {\rm det}(\lambda I-A)</span> 被称为
-<em>特征多项式</em> 
-<a name="1524"></a>
-矩阵 <span class="math-inline">A</span> 的特征多项式。<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A</span> 的<em>特征值</em>。
-由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个特征值。实矩阵的特征值可以是实数或成对出现的复数。
+矩阵 <span class="math-inline">A</span> 的<em>特征多项式</em>。
+<span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A</span> 的<em>特征值</em>。
+由于 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">n</span>，它有 <span class="math-inline">n</span> 个根，因此 <span class="math-inline">A</span> 有 <span class="math-inline">n</span> 个特征值。实矩阵的特征值可能是实数或成对出现的复数。
 
 <p>
 一个非零向量 <span class="math-inline">x</span> 满足 
@@ -94,37 +92,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">y^*A = \lambda y^*</span> 是特征值 <span class="math-inline">\lambda</span> 的<em>左特征向量</em>。
 
 <p>
-一个 <span class="math-inline">n</span> 阶矩阵不一定有 <span class="math-inline">n</span> 个独立的特征向量。
+一个 <span class="math-inline">n</span> 阶方阵不一定有 <span class="math-inline">n</span> 个独立的特征向量。
 最简单的例子是
-<br>
-<div align="RIGHT">
 
+<span class="math-display" name="#eqn_chap2_nHep_1">
+A(\epsilon) = \begin{bmatrix} 0 & 1 \\ \epsilon^2 & 0 \end{bmatrix},
+</span>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn_chap2_nHep_1"></a><div class="math-display">A (\epsilon) = \bmat{cc} 0 &amp; 1 \\ \epsilon^2 &amp; 0 \emat,</div></td>
-<td WIDTH=10 align="RIGHT">
-(3)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-其特征值为 
-<span class="math-inline">\lambda_{\pm} = \pm \epsilon</span>。
-当 
-<span class="math-inline">\epsilon \neq 0</span> 时，存在两个右特征向量，
+其特征值为  <span class="math-inline">\lambda_{\pm} = \pm \epsilon</span>。
+当 <span class="math-inline">\epsilon \neq 0</span> 时，存在两个右特征向量，
 
 <span class="math-inline">x_{\pm} = [ 1, \pm \epsilon ]^T</span>。随着 <span class="math-inline">\epsilon</span> 趋近于 0，这两个特征向量逐渐趋同。
 当 <span class="math-inline">\epsilon = 0</span> 时，两个特征值都等于 0，
-并且存在一个独立的右特征向量，平行于 <span class="math-inline">[1,0]^T</span>。
+并且只有一个独立的右特征向量，平行于 <span class="math-inline">[1,0]^T</span>。
 <span class="math-inline">n</span> 个独立的特征向量可能不存在的事实
 （尽管每个不同的特征值至少有一个特征向量）将不可避免地使NHEP的理论和算法变得复杂。
 
 <p>
 由于特征值可能是复数，因此没有固定的方法来排序。
-尽管如此，为了方便，我们通常将它们编号为 
-<span class="math-inline">\lambda_1 ,\ldots,\lambda_n</span>，
-对应的右特征向量为 
-<span class="math-inline">x_1,\ldots,x_n</span>
-和左特征向量为 
-<span class="math-inline">y_1,\ldots,y_n</span>（如果它们存在）。
+尽管如此，为了方便，我们通常将它们编号为 <span class="math-inline">\lambda_1 ,\ldots,\lambda_n</span>，
+对应的右特征向量为 <span class="math-inline">x_1,\ldots,x_n</span>
+和左特征向量为 <span class="math-inline">y_1,\ldots,y_n</span>（如果它们存在）。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -145,10 +133,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1440" href="node50.html">不变子空间</a>
-<b>上一级：</b><a name="tex2html1434" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-<b>上一节：</b><a name="tex2html1428" href="node48.html">Non-Hermitian Eigenproblems &nbsp;J. Demmel</a>
-  
-  
+<b>上一级：</b><a name="tex2html1434" href="node48.html">非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1428" href="node48.html">非厄米特征问题</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
