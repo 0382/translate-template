@@ -67,26 +67,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1623" href="node62.html">条件数</a>
-<b>上一级：</b><a name="tex2html1617" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1617" href="node57.html">广义非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1611" href="node60.html">等价关系</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001164000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001164000000000000000"></a>
 <a name="sec_chap2_GnHepED"></a>
-<br>
 特征分解
 </h2>
-
-<p>
-<a name="1700"></a>
 
 <p>
 我们将讨论四种特征分解方法，或者说四种等价于<span class="math-inline">A - \lambda B</span>的矩阵束，这些方法在求解特征问题时更为简便。本节内容类似于第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节。
 
 <p>
-第一种特征分解，即<em>对角形式</em>，仅在存在<span class="math-inline">n</span>个独立特征向量时才存在。第二种，<em>Weierstrass形式</em>，将对角形式推广到所有特征多项式<span class="math-inline">p(\lambda)</span>不恒为零的矩阵束。我们也可以将Weierstrass形式描述为将Jordan形式矩阵推广到矩阵束。与Jordan形式类似，Weierstrass形式可能非常病态（实际上，它可能会不连续变化），因此在数值计算中我们通常使用第三种，<em>广义Schur形式</em>，它在计算上更经济且更稳定。我们简要提及第四种，我们称之为<em>Weierstrass-Schur形式</em><a name="tex2html10" href="footnode.html#foot1998"><sup><button class="footnote"></button></sup></a>，它与Schur形式一样稳定，但能计算出Weierstrass形式提供的关于压缩子空间的某些详细信息。
+第一种特征分解，即<em>对角形式</em>，仅在存在<span class="math-inline">n</span>个独立特征向量时才存在。
+第二种，<em>Weierstrass形式</em>，将对角形式推广到所有特征多项式<span class="math-inline">p(\lambda)</span>不恒为零的矩阵束。我们也可以将Weierstrass形式描述为将Jordan形式矩阵推广到矩阵束。
+与Jordan形式类似，Weierstrass形式可能非常病态（实际上，它可能会不连续变化），因此在数值计算中我们通常使用第三种，<em>广义Schur形式</em>，它在计算上更经济且更稳定。
+我们简要提及第四种，我们称之为<em>Weierstrass-Schur形式</em> <sup><a href="#footnote-Weierstrass-Schur">1</a></sup>，它与Schur形式一样稳定，但能计算出Weierstrass形式提供的关于收缩子空间的某些详细信息。
 
 <p>
 定义<span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n )</span>。如果存在<span class="math-inline">n</span>个独立的右特征向量<span class="math-inline">x_1,\ldots,x_n</span>，我们定义<span class="math-inline">X = [x_1,\ldots,x_n]</span>。<span class="math-inline">X</span>被称为<span class="math-inline">A</span>的<em>（右）特征向量矩阵</em>。类似地，令<span class="math-inline">Y = [y_1,\ldots,y_n]</span>为<em>左特征向量矩阵</em>。<span class="math-inline">2n</span>个等式<span class="math-inline">A x_i = \lambda_i B x_i</span>和<span class="math-inline">y_i^* A = \lambda_i y_i^* B</span>对于<span class="math-inline">i=1,\ldots,n</span>也可以写成
@@ -99,66 +98,65 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">Y^*BX = \Lambda_B</span>均为对角矩阵，并且
 
-<span class="math-inline">\Lambda = \Lambda_A \Lambda_B^{-1}</span>。<a name="tex2html11" href="footnode.html#foot1711"><sup><button class="footnote"></button></sup></a>分解
-<br><p></p>
-<div align="CENTER">
-
+<span class="math-inline">\Lambda = \Lambda_A \Lambda_B^{-1}</span> <sup><a href="#footnote-gnhep-diag">2</a></sup>。如下分解
 
 <div class="math-display">A - \lambda B = Y^{-*} ( \Lambda_A - \lambda \Lambda_B) X^{-1}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 被称为<span class="math-inline">A - \lambda B</span>的<em>对角形式</em>。<a name="1715"></a>在这种情况下，我们称<span class="math-inline">A - \lambda B</span>为<em>可对角化</em>的。
 
 <p>
-如果我们取<span class="math-inline">X</span>和<span class="math-inline">Y</span>的<span class="math-inline">k</span>列（例如<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 第2、3和5列，<span class="math-inline">\hat{Y}= Y(:,[2,3,5])</span>)，那么这些列张成了<span class="math-inline">A - \lambda B</span>的一对压缩子空间。如果我们取相应的子矩阵
+如果我们取<span class="math-inline">X</span>和<span class="math-inline">Y</span>的<span class="math-inline">k</span>列（例如<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 第2、3和5列，<span class="math-inline">\hat{Y}= Y(:,[2,3,5])</span>），那么这些列张成了<span class="math-inline">A - \lambda B</span>的一对收缩子空间。
 
-<span class="math-inline">\hat{\Lambda}_A = {\rm diag}(\lambda_{A,2} , \lambda_{A,3} , \lambda_{A,5} )</span>和
+如果我们取相应的子矩阵 <span class="math-inline">\hat{\Lambda}_A = {\rm diag}(\lambda_{A,2} , \lambda_{A,3} , \lambda_{A,5} )</span> 和 <span class="math-inline">\hat{\Lambda}_B = {\rm diag}(\lambda_{B,2} , \lambda_{B,3} , \lambda_{B,5} )</span>，那么我们可以写出相应的<em>部分对角形式</em>为
 
-<span class="math-inline">\hat{\Lambda}_B = {\rm diag}(\lambda_{B,2} , \lambda_{B,3} , \lambda_{B,5} )</span>，那么我们可以写出相应的<em>部分对角形式</em>为
+<span class="math-inline">\hat{Y}^* A \hat{X}= \hat{\Lambda}_A</span>和<span class="math-inline">\hat{Y}^* B \hat{X}= \hat{\Lambda}_B</span>。如果<span class="math-inline">\hat{X}</span>和<span class="math-inline">\hat{Y}</span>的列被<span class="math-inline">k</span>个不同的向量替换，这些向量张成了相同的收缩子空间，那么我们将得到一个不同的部分特征分解
 
-<span class="math-inline">\hat{Y}^* A \hat{X}= \hat{\Lambda}_A</span>和<span class="math-inline">\hat{Y}^* B \hat{X}= \hat{\Lambda}_B</span>。如果<span class="math-inline">\hat{X}</span>和<span class="math-inline">\hat{Y}</span>的列被<span class="math-inline">k</span>个不同的向量替换，这些向量张成了相同的压缩子空间，那么我们将得到一个不同的部分特征分解
-
-<span class="math-inline">\check{Y}^* A \check{X}= \check{A}</span>和<span class="math-inline">\check{Y}^* B \check{X}= \check{B}</span>，其中<span class="math-inline">\check{A}- \lambda \check{B}</span>是一个<span class="math-inline">k</span>乘<span class="math-inline">k</span>的矩阵束，其特征值是<span class="math-inline">\hat{\Lambda}= \Lambda_A \Lambda_B^{-1}</span>的特征值，尽管<span class="math-inline">\check{A}- \lambda \check{B}</span>可能不是对角的。类似的生成部分特征分解的方法也适用于下面讨论的其他特征分解。
+<span class="math-inline">\check{Y}^* A \check{X}= \check{A}</span>和<span class="math-inline">\check{Y}^* B \check{X}= \check{B}</span>，其中<span class="math-inline">\check{A}- \lambda \check{B}</span>是一个<span class="math-inline">k</span>乘<span class="math-inline">k</span>的矩阵束，其特征值是<span class="math-inline">\hat{\Lambda}= \hat{\Lambda}_A \hat{\Lambda}_B^{-1}</span>的特征值，尽管<span class="math-inline">\check{A}- \lambda \check{B}</span>可能不是对角的。类似的生成部分特征分解的方法也适用于下面讨论的其他特征分解。
 
 <p>
-如果所有的<span class="math-inline">\lambda_i</span>都是不同的，那么存在<span class="math-inline">n</span>个独立的特征向量，对角形式存在。这是最简单且最常见的情况。例如，如果随机选取<span class="math-inline">A</span>和<span class="math-inline">B</span>，<a name="tex2html12" href="footnode.html#foot1727"><sup><button class="footnote"></button></sup></a>特征值不同的概率为1。
+如果所有的<span class="math-inline">\lambda_i</span>都是不同的，那么存在<span class="math-inline">n</span>个独立的特征向量，对角形式存在。这是最简单且最常见的情况。例如，如果随机选取<span class="math-inline">A</span>和<span class="math-inline">B</span> <sup><a href="#footnote-random-matrix">3</a></sup>，特征值不同的概率为1。
 
 <p>
-在第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节中，矩阵束<span class="math-inline">A(0) - \lambda I</span>的对角形式不存在，因为它只有一个独立的特征向量。相反，我们可以计算它的<em>Weierstrass形式</em>，<a name="1731"></a>这是一个分解
-<br><p></p>
-<div align="CENTER">
-
+在第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节中，矩阵束<span class="math-inline">A(0) - \lambda I</span>的对角形式不存在，因为它只有一个独立的特征向量。相反，我们可以计算它的<em>Weierstrass形式</em>，它是如下分解
 
 <div class="math-display">A - \lambda B = Y^{-*}(J_A - \lambda J_B)X^{-1},</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中<span class="math-inline">J_A - \lambda J_B</span>是一个块对角矩阵束，每个特征值有一个或多个上三角对角块。当没有无限特征值时，这与第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节中讨论的Jordan形式相同。当存在无限特征值时，存在类似于Jordan块的块，具有单个无限特征值和一个右和左特征向量。<a name="tex2html13" href="footnode.html#foot1735"><sup><button class="footnote"></button></sup></a>可以证明，Weierstrass形式明确描述了<span class="math-inline">A - \lambda B</span>的所有可能压缩子空间，这些子空间由<span class="math-inline">X</span>和<span class="math-inline">Y</span>的某些列子集张成[<a href="node421.html#gant59">187</a>]。
+
+其中<span class="math-inline">J_A - \lambda J_B</span>是一个块对角矩阵束，每个特征值有一个或多个上三角对角块。当没有无限特征值时，这与第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节中讨论的Jordan形式相同。当存在无限特征值时，存在类似于Jordan块的块，具有单个无限特征值和一个右和左特征向量 <sup><a href="#footnote-Weierstrass-Jordan-block">4</a></sup>。可以证明，Weierstrass形式明确描述了<span class="math-inline">A - \lambda B</span>的所有可能收缩子空间，这些子空间由<span class="math-inline">X</span>和<span class="math-inline">Y</span>的某些列子集张成[<a href="node421.html#gant59">187</a>]。
 
 <p>
 不幸的是，Weierstrass形式通常不适合数值计算，原因与Jordan形式不适合相同。详见第<a href="node52.html#sec_chap2_nHepED">2.5.4</a>节。
 
 <p>
 因此，我们使用以下形式的特征分解
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A - \lambda B = Z(T_A - \lambda T_B)Q^*,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中<span class="math-inline">Q</span>和<span class="math-inline">Z</span>是酉（或正交）矩阵，<span class="math-inline">T_A - \lambda T_B</span>是三角（或拟三角）矩阵。这被称为<span class="math-inline">A - \lambda B</span>的<em>广义Schur形式</em><a name="1739"></a><a name="1740"></a>。当<span class="math-inline">A - \lambda B</span>是复矩阵，或者实矩阵且所有特征值都是实数或无限时，<span class="math-inline">T_A - \lambda T_B</span>是三角矩阵，其对角线上是<span class="math-inline">A - \lambda B</span>的特征值。当<span class="math-inline">A - \lambda B</span>是实矩阵且具有复特征值，且<span class="math-inline">Q</span>是实正交矩阵时，<span class="math-inline">T_A - \lambda T_B</span>不能是实三角矩阵。相反，我们允许<span class="math-inline">T_A - \lambda T_B</span>的对角线上出现具有复特征值的2乘2块，我们称之为<em>拟三角形式</em>。为了简化表述，我们将考虑复数情况，因此<span class="math-inline">T_A - \lambda T_B</span>是三角矩阵。设<span class="math-inline">\lambda_1 = T_{A,11}/T_{B,11} ,\ldots,\lambda_n = T_{A,nn}/T_{B,nn}</span>为对角线上特征值的顺序；每种顺序都有一个不同的广义Schur形式。<span class="math-inline">Q</span>和<span class="math-inline">Z</span>的列被称为<em>广义Schur向量</em>。广义Schur形式不像对角形式和Weierstrass形式那样明确给出特征向量和所有压缩子空间的基，但它可以相当稳定地计算。<span class="math-inline">Q</span>和<span class="math-inline">Z</span>的前<span class="math-inline">k</span>列张成了特征值<span class="math-inline">\lambda_1</span>到<span class="math-inline">\lambda_k</span>的右和左压缩子空间，但所有其他特征空间需要计算。例如，右特征向量可以通过从<span class="math-inline">T_A - \lambda T_B</span>解一个三角方程组并乘以<span class="math-inline">Q</span>来计算。
+
+其中<span class="math-inline">Q</span>和<span class="math-inline">Z</span>是酉（或正交）矩阵，<span class="math-inline">T_A - \lambda T_B</span>是三角（或准三角）矩阵。这被称为<span class="math-inline">A - \lambda B</span>的<em>广义Schur形式</em>。
+当<span class="math-inline">A - \lambda B</span>是复矩阵，或者实矩阵且所有特征值都是实数或无限时，<span class="math-inline">T_A - \lambda T_B</span>是三角矩阵，其对角线上是<span class="math-inline">A - \lambda B</span>的特征值。
+当<span class="math-inline">A - \lambda B</span>是实矩阵且具有复特征值，且<span class="math-inline">Q</span>是实正交矩阵时，<span class="math-inline">T_A - \lambda T_B</span>不能是实三角矩阵。
+不过，我们允许<span class="math-inline">T_A - \lambda T_B</span>的对角线上出现具有复特征值的2乘2块，我们称之为<em>准三角形式</em>。为了简化表述，我们仅考虑复数情况，此时<span class="math-inline">T_A - \lambda T_B</span>是三角矩阵。
+
+设<span class="math-inline">\lambda_1 = T_{A,11}/T_{B,11} ,\ldots,\lambda_n = T_{A,nn}/T_{B,nn}</span>为对角线上特征值的顺序；每种顺序都有一个不同的广义Schur形式。<span class="math-inline">Q</span>和<span class="math-inline">Z</span>的列被称为<em>广义Schur向量</em>。
+广义Schur形式不像对角形式和Weierstrass形式那样明确给出特征向量和所有收缩子空间的基，但它可以相当稳定地计算。
+<span class="math-inline">Q</span>和<span class="math-inline">Z</span>的前<span class="math-inline">k</span>列张成了特征值<span class="math-inline">\lambda_1</span>到<span class="math-inline">\lambda_k</span>的右和左收缩子空间，但所有其他特征空间需要计算。
+例如，右特征向量可以通过从<span class="math-inline">T_A - \lambda T_B</span>解一个三角方程组并乘以<span class="math-inline">Q</span>来计算。
 
 <p>
-最后，我们考虑<em>Weierstrass-Schur形式</em>。<a name="1748"></a>它相当复杂，因此我们在这里仅总结其特性。与Schur形式一样，它仅使用酉（正交）变换，因此可以稳定地计算。与Weierstrass形式一样，它明确显示了（Jordan）块的大小，并给出了比Schur形式更多的不变子空间的明确基。
+最后，我们考虑<em>Weierstrass-Schur形式</em>。它相当复杂，因此我们在这里仅总结其特性。与Schur形式一样，它仅使用酉（正交）变换，因此可以稳定地计算。与Weierstrass形式一样，它明确显示了（Jordan）块的大小，并给出了比Schur形式更多的不变子空间的明确基。
 
 <p>
 许多教科书给出了使用<span class="math-inline">A - \lambda B</span>的Weierstrass形式求解常微分方程<span class="math-inline">B \dot{x} (t) = A x(t)</span>的显式解[<a href="node421.html#demmelbook">114</a>]。这些方法在数值上应避免使用，因为计算Weierstrass形式很困难。几乎所有这些问题都有基于广义Schur形式或某些情况下的Weierstrass-Schur形式的替代解法。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+<ol>
+<li id="footnote-Weierstrass-Schur">在文献中，它通常被称为<em>阶梯形式（staircase form）</em>，但我们认为使用Weierstrass-Schur形式更为恰当。</li>
+<li id="footnote-gnhep-diag">在所有特征值均不相同的一般情况下，我们可以通过以下步骤来理解这一点：首先，将<span class="math-inline">AX = BX \Lambda</span>乘以<span class="math-inline">Y^*</span>，并将<span class="math-inline">Y^*A = \Lambda Y^* B</span>乘以<span class="math-inline">X</span>，得到<span class="math-inline">\Lambda Y^*BX = Y^*AX = Y^*BX \Lambda</span>。由此可得，<span class="math-inline">\Lambda Y^*BX = Y^*BX \Lambda</span>意味着<span class="math-inline">Y^*BX = \Lambda_B</span>必须是对角矩阵，因此<span class="math-inline">Y^*AX = \Lambda_A = \Lambda_B \Lambda</span>同样是对角矩阵。</li>
+<li id="footnote-random-matrix">例如，可以从 <span class="math-inline">(-1,1)</span> 或实数的其他开区间中，独立且随机地选择每一个元素。</li>
+<li id="footnote-Weierstrass-Jordan-block">这些块形如 <span class="math-inline">I - \lambda J(0)</span>，其中 <span class="math-inline">J(0)</span> 是特征值为零的 Jordan 块</li>
+</ol>
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html1622"
   href="node62.html">
 <button class="navigate">下一节</button></a> 
@@ -176,10 +174,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1623" href="node62.html">条件数</a>
-<b>上一级：</b><a name="tex2html1617" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1617" href="node57.html">广义非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1611" href="node60.html">等价关系</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -67,67 +67,66 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1679" href="node66.html">奇异情况</a>
-<b>上一级：</b><a name="tex2html1673" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1673" href="node57.html">广义非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1667" href="node64.html">相关的特征问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION001168000000000000000"></a>
 <a name="sec_chap2_GnHepEx"></a>
-<br>
-Example
+示例
 </h2>
 
 <p>
-We continue to use the example introduced in
-&#167;<a href="node19.html#sec:introchap2">2.1</a> and
-Figure&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>.
-We now consider the fully general case of nonzero masses <span class="math-inline">m_i</span>
-and damping constants <span class="math-inline">b_i</span>. 
-This leads to the  equations
-of motion 
-<span class="math-inline">M \ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>. 
-We solve them by changing variables to 
-<br><p></p>
-<div align="CENTER">
+我们继续使用在第<a href="node19.html#sec:introchap2">2.1</a>节和图&nbsp;<a href="node19.html#fig_MassSpring">2.1</a>中介绍的例子。现在我们考虑完全一般的情况，即非零质量<span class="math-inline">m_i</span>和阻尼常数<span class="math-inline">b_i</span>。这导致运动方程为
+<span class="math-inline">M \ddot{x}(t) = -B \dot{x} (t) -K x(t)</span>。
+我们通过变量代换来求解：
 
+<div class="math-display">y(t) = \begin{bmatrix} \dot{x}(t) \\ x(t) \end{bmatrix},</div>
 
-<div class="math-display">y(t) = \bmat{c} \dot{x}(t) \\ x(t) \emat,</div>
+得到
+
+<div class="math-display">
+\begin{bmatrix} M & 0 \\ 0 & I \end{bmatrix} \dot{y}(t)
+= \begin{bmatrix} M \ddot{x}(t) \\ \dot{x}(t) \end{bmatrix}
+= \begin{bmatrix} -B\dot{x}(t) - Kx(t) \\ \dot{x}(t) \end{bmatrix}
+= \begin{bmatrix} -B & -K \\ I & 0 \end{bmatrix} \cdot y(t).
 </div>
-<br clear="ALL">
-<p></p>
-yielding
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">\bmat{cc} M &amp; 0 \\ 0 &amp; I \emat \dot{y}(t)= \bmat{c} M \dd......ot{x}(t) \emat= \bmat{cc} -B &amp; -K \\ I &amp; 0 \emat \cdot y(t)</div>
-</div>
-<br clear="ALL">
-<p></p>
-or 
-<span class="math-inline">A \dot{y}(t) = C y(t)</span>.
-We solve this by substituting 
-<span class="math-inline">y(t) = e^{\lambda t} y</span>, where <span class="math-inline">y</span> is
-a constant vector and <span class="math-inline">\lambda</span> is a constant scalar to be determined.
-This yields 
-<br><p></p>
-<div align="CENTER">
-
+或简写为
+<span class="math-inline">A \dot{y}(t) = C y(t)</span>。
+我们通过代入<span class="math-inline">y(t) = e^{\lambda t} y</span>来求解，其中<span class="math-inline">y</span>是一个常数向量，<span class="math-inline">\lambda</span>是一个待确定的常数标量。由此可得
 
 <div class="math-display">Cy = \lambda Ay.</div>
-</div>
-<br clear="ALL">
-<p></p>
-Thus <span class="math-inline">y</span> is an eigenvector
-and <span class="math-inline">\lambda</span> is an eigenvalue of the generalized nonsymmetric
-eigenvalue problem.
+
+因此，<span class="math-inline">y</span>是一个特征向量，<span class="math-inline">\lambda</span>是广义非对称特征值问题的特征值。
+
+</p>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html1678"
+  href="node66.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html1672"
+  href="node57.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html1666"
+  href="node64.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html1674"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html1676"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html1679" href="node66.html">奇异情况</a>
+<b>上一级：</b><a name="tex2html1673" href="node57.html">广义非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1667" href="node64.html">相关的特征问题</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

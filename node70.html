@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Eigendecompositions.</title>
+<title>特征分解</title>
 <meta charset="utf-8">
-<meta name="description" content="Eigendecompositions.">
+<meta name="description" content="特征分解">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,57 +66,55 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1755" href="node71.html">Conditioning.</a>
+<b>下一节：</b><a name="tex2html1755" href="node71.html">条件数</a>
 <b>上一级：</b><a name="tex2html1749" href="node66.html">奇异情况</a>
-<b>上一节：</b><a name="tex2html1743" href="node69.html">Equivalences.</a>
-  
-  
+<b>上一节：</b><a name="tex2html1743" href="node69.html">等价关系</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h4><a name="SECTION001169040000000000000">
-Eigendecompositions.</a>
+<h4>
+<a name="SECTION001169040000000000000"></a>
+特征分解
 </h4>
 
 <p>
-<a name="1877"></a>
+我们讨论两种特征分解，或者说 <span class="math-inline">A - \lambda B</span> 的等价矩阵束，这些分解使得求解特征问题更为简便。关于这些分解的详细讨论，请参见第<a href="node307.html#sec:singularpencil">8.7</a>节。
 
 <p>
-We discuss two eigendecompositions, or pencils that are
-equivalent to <span class="math-inline">A - \lambda B</span>, and for which it is simpler
-to solve eigenproblems. The decompositions are discussed
-in more detail in &#167;<a href="node307.html#sec:singularpencil">8.7</a>.
+与<em>对角形式</em>不同，奇异矩阵束过于复杂，无法简化为这种形式。只有<em>Kronecker形式</em>和<em>广义Schur阶梯形式</em>，后者有时也称为<em>GUPTRI形式</em>（广义上三角形式）或<em>Kronecker-Schur形式</em>。Kronecker形式将Jordan形式和Weierstrass形式推广到奇异矩阵束。除了奇异矩阵束固有的不连续性及其他数值困难外，它还引入了自身特有的困难。广义Schur阶梯形式则同时推广了广义Schur形式和Weierstrass-Schur形式。它可以通过正交变换稳定地计算，但仍保留了奇异矩阵束固有的不连续性。
 
 <p>
-There is no analogy to the <em>diagonal form</em>; singular pencils
-are too complicated for this. There are only
-the <em>Kronecker form</em> and the <em>generalized  Schur-staircase form</em>,
-<a name="1882"></a> 
-<a name="1883"></a>
-which is sometimes also called the <em>GUPTRI form</em> (for
-generalized upper triangular form) or
-<em>Kronecker-Schur form</em>.
-The Kronecker form generalizes the Jordan and the Weierstrass forms
-to singular pencils. In addition to their 
-discontinuities and other numerical difficulties, it adds
-its own difficulties associated with singular pencils.
-The generalized Schur-staircase form generalized both
-the generalized Schur form and the Weierstrass-Schur form.
-It can be computed stably with 
-orthogonal transformations, but retains the discontinuities
-inherent in singular pencils.
-
-<p>
-Given the difficulty associated with singular pencils,
-partial eigendecompositions are usually not computed;
-all known algorithms compute essentially complete decompositions.
+鉴于奇异矩阵束带来的困难，通常不会计算部分特征分解；所有已知的算法基本上都计算完整的分解。
 
 <p>
 <br><hr>
 <address>
 Susan Blackford
 2000-11-20
+<!--Navigation Panel-->
+<a name="tex2html1754"
+  href="node71.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html1748"
+  href="node66.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html1742"
+  href="node69.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html1750"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html1752"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html1755" href="node71.html">条件数</a>
+<b>上一级：</b><a name="tex2html1749" href="node66.html">奇异情况</a>
+<b>上一节：</b><a name="tex2html1743" href="node69.html">等价关系</a>
+<br>
+<br>
+<!--End of Navigation Panel-->
 </address>
 </body>
 </html>

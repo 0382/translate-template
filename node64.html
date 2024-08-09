@@ -67,31 +67,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1665" href="node65.html">示例</a>
-<b>上一级：</b><a name="tex2html1659" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1659" href="node57.html">广义非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1653" href="node63.html">特征问题的具体化</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001167000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001167000000000000000"></a>
 <a name="sec_chap2_GnHepRE"></a>
-<br>
-相关特征值问题
+相关的特征值问题
 </h2>
 
 <p>
 
 <ol>
-<li>如果<span class="math-inline">B</span>是非奇异的，那么NHEP（非厄米特征值问题）
+<li>如果<span class="math-inline">B</span>是非奇异的，
+那么非厄米特征问题<span class="math-inline">B^{-1}A x = \lambda x</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的特征值<span class="math-inline">\lambda_i</span>和相应的右特征向量<span class="math-inline">x_i</span>。
+类似地，<span class="math-inline">AB^{-1}z = \lambda z</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的特征值<span class="math-inline">\lambda_i</span>和右特征向量<span class="math-inline">z_i = Bx_i</span>。
+如果<span class="math-inline">A</span>是非奇异的，<span class="math-inline">A^{-1}B x = \mu x</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的右特征向量<span class="math-inline">x_i</span>，其特征值为倒数
+<span class="math-inline">\mu_i = 1/\lambda_i</span>。
+类似地，如果<span class="math-inline">A</span>是非奇异的，<span class="math-inline">BA^{-1} z = \mu z</span>具有倒数特征值<span class="math-inline">\mu_i = 1/\lambda_i</span>和右特征向量<span class="math-inline">z_i = Ax_i</span>。
 
-<span class="math-inline">B^{-1}A x = \lambda x</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的特征值<span class="math-inline">\lambda_i</span>和相应的右特征向量<span class="math-inline">x_i</span>。类似地，
-<span class="math-inline">AB^{-1}z = \lambda z</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的特征值<span class="math-inline">\lambda_i</span>和右特征向量
-<span class="math-inline">z_i = Bx_i</span>。如果<span class="math-inline">A</span>是非奇异的，
-<span class="math-inline">A^{-1}B x = \mu x</span>具有与<span class="math-inline">Ax = \lambda Bx</span>相同的右特征向量<span class="math-inline">x_i</span>，其特征值为倒数
-<span class="math-inline">\mu_i = 1/\lambda_i</span>。最后，如果<span class="math-inline">A</span>是非奇异的，
-<span class="math-inline">BA^{-1} z = \mu z</span>具有倒数特征值
-
-<span class="math-inline">\mu_i = 1/\lambda_i</span>和右特征向量<span class="math-inline">z_i = Ax_i</span>。关于左特征向量可以做出类似的陈述。
+关于左特征向量可以做出类似的陈述。
 
 <p>
 </li>
@@ -105,25 +102,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\mu_i = (\alpha_1 \lambda_i + \beta_1)/(\alpha_2 \lambda_i + \beta_2)</span>。如果
 <span class="math-inline">\alpha_2 A + \beta_2 B</span>和
 <span class="math-inline">\alpha_1 A + \beta_1 B</span>
-之一或两者是非奇异的，则可以应用上述第1项中的方法。
+之一或两者都是非奇异的，则可以应用上述第1项中的方法。
 
 <p>
 </li>
 <li>设
 <span class="math-inline">p( \lambda ) = A_n \lambda_n - \sum_{i=0}^{n-1} A_i \lambda^i</span>为一个<span class="math-inline">m \times m</span>矩阵多项式，其中
-<span class="math-inline">{\rm det } p(\lambda)</span>不恒为零。
+<span class="math-inline">{\rm det }(p(\lambda))</span>不恒为零。
 <span class="math-inline">p(\lambda)</span>的特征对<span class="math-inline">(\lambda_i, x_i)</span>满足
 <span class="math-inline">p(\lambda_i)x_i = 0</span>。定义<span class="math-inline">p(\lambda)</span>的<span class="math-inline">mn \times mn</span>
 <em>块伴随矩阵束</em>为
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">A - \lambda B =\bmat{ccccc} 0-\lambda I &amp; I &amp; &amp; &amp; \\&amp; ......A_0 &amp; A_1 &amp; \cdots &amp; A_{n-2} &amp; A_{n-1}-\lambda A_n \emat,</div>
+<div class="math-display">
+A - \lambda B =\begin{bmatrix}
+0-\lambda I & I & & & \\
+& \ddots & \ddots & & \\
+& & \ddots & \ddots & \\
+& & & 0-\lambda I & I \\
+A_0 & A_1 & \cdots & A_{n-2} & A_{n-1}-\lambda A_n
+\end{bmatrix},
 </div>
-<br clear="ALL">
-<p></p>
-其中所有条目都是<span class="math-inline">m \times m</span>块，所有未明确显示的条目都是0。
+
+其中所有元素都是<span class="math-inline">m \times m</span>块，所有未明确显示的元素都是0。
 那么
 <span class="math-inline">Ax = \lambda Bx</span>是一个常规的广义特征值问题，
 <span class="math-inline">A - \lambda B</span>的特征值是<span class="math-inline">p(\lambda)</span>的特征值。
@@ -131,8 +131,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果
 <span class="math-inline">(\lambda_i, x_i)</span>是<span class="math-inline">p(\lambda)</span>的一个特征对，那么
 
-<span class="math-inline">[ x_i^T, \lambda_i x_i^T , \ldots , \lambda_i^{n-1} x_i^T]^T</span>是<span class="math-inline">C</span>的右特征向量[<a
- href="node421.html#gohberglancasterrodman82">194</a>]。
+<span class="math-inline">[ x_i^T, \lambda_i x_i^T , \ldots , \lambda_i^{n-1} x_i^T]^T</span>是<span class="math-inline">C</span>的右特征向量[<a href="node421.html#gohberglancasterrodman82">194</a>]。
 </li>
 </ol>
 
@@ -155,10 +154,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1665" href="node65.html">示例</a>
-<b>上一级：</b><a name="tex2html1659" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
+<b>上一级：</b><a name="tex2html1659" href="node57.html">广义非厄米特征问题</a>
 <b>上一节：</b><a name="tex2html1653" href="node63.html">特征问题的具体化</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

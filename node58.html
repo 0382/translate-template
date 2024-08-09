@@ -67,15 +67,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1581" href="node59.html">收缩子空间</a>
-<b>上一级：</b><a name="tex2html1575" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-<b>上一节：</b><a name="tex2html1569" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-  
-  
+<b>上一级：</b><a name="tex2html1575" href="node57.html">广义非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1569" href="node57.html">广义非厄米特征问题</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001161000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001161000000000000000"></a>
 <a name="sec_chap2_GnHepEE"></a>
-<br>
 特征值与特征向量
 </h2>
 
@@ -84,20 +83,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">p(\lambda) = {\rm det}(\lambda B-A)</span> 是 <span class="math-inline">A - \lambda B</span> 的特征多项式。
 <span class="math-inline">p(\lambda)</span> 的次数最多为 <span class="math-inline">n</span>。
 <span class="math-inline">p(\lambda)=0</span> 的根被称为 <span class="math-inline">A - \lambda B</span> 的<em>有限特征值</em>。
-如果 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">d<n</span>，我们称 <span class="math-inline">A - \lambda B</span> 还有 <span class="math-inline">n-d</span> 个<em>无穷特征值</em>。
+如果 <span class="math-inline">p(\lambda)</span> 的次数为 <span class="math-inline">d < n</span>，我们称 <span class="math-inline">A - \lambda B</span> 还有 <span class="math-inline">n-d</span> 个<em>无穷特征值</em>。
 例如，
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">A - \lambda B = \bmat{ccc} 1 &amp; &amp; \\ &amp; 1 &amp; \\ &amp; &amp; 0 \emat - \lambda\bmat{ccc} 2 &amp; &amp; \\ &amp; 0 &amp; \\ &amp; &amp; 1 \emat</div>
+<div class="math-display">
+A - \lambda B = \begin{bmatrix} 1 & & \\ & 1 & \\ & & 0 \end{bmatrix} - \lambda\begin{bmatrix} 2 & & \\ & 0 & \\ & & 1 \end{bmatrix}
 </div>
-<br clear="ALL">
-<p></p>
-的特征多项式为 
 
-<span class="math-inline">p( \lambda ) = (1 - 2 \cdot \lambda)(1 - 0 \cdot \lambda)(0 - 1 \cdot \lambda)= 2 \lambda^2 - \lambda</span>，
-因此其特征值为 <span class="math-inline">.5</span>、<span class="math-inline">\infty</span> 和 <span class="math-inline">0</span>。
+的特征多项式为 <span class="math-inline">p( \lambda ) = (1 - 2 \cdot \lambda)(1 - 0 \cdot \lambda)(0 - 1 \cdot \lambda)= 2 \lambda^2 - \lambda</span>，
+因此其特征值为 <span class="math-inline">0.5</span>、<span class="math-inline">\infty</span> 和 <span class="math-inline">0</span>。
 
 <p>
 如果 <span class="math-inline">\lambda</span> 是有限特征值，
@@ -109,8 +103,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一个 <span class="math-inline">n</span> 阶矩阵束 <span class="math-inline">A - \lambda B</span> 不一定有 <span class="math-inline">n</span> 个独立的特征向量。
-最简单的例子是 
-<span class="math-inline">A( \epsilon ) - \lambda I</span>，其定义见方程（<a href="node49.html#eqn_chap2_nHep_1">2.3</a>）并在第<a href="node49.html#sec_chap2_nHepEE">2.5.1</a>节中讨论。
+最简单的例子是第<a href="node49.html#sec_chap2_nHepEE">2.5.1</a>节中讨论的由(<a href="node49.html#eqn_chap2_nHep_1">2.3</a>)式构造的 <span class="math-inline">A( \epsilon ) - \lambda I</span>。
 这一事实（尽管每个不同的特征值至少有一个特征向量）必然会使 GNHEP 的理论和算法变得复杂。
 
 <p>
@@ -141,10 +134,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html1581" href="node59.html">收缩子空间</a>
-<b>上一级：</b><a name="tex2html1575" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-<b>上一节：</b><a name="tex2html1569" href="node57.html">Generalized Non-Hermitian Eigenproblems &nbsp;</a>
-  
-  
+<b>上一级：</b><a name="tex2html1575" href="node57.html">广义非厄米特征问题</a>
+<b>上一节：</b><a name="tex2html1569" href="node57.html">广义非厄米特征问题</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

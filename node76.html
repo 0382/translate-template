@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Nonlinear Eigenproblems &nbsp; J. Demmel </title>
+<title>非线性特征问题 J. Demmel</title>
 <meta charset="utf-8">
-<meta name="description" content="Nonlinear Eigenproblems &nbsp; J. Demmel ">
+<meta name="description" content="非线性特征问题 J. Demmel">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,18 +66,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1835" href="node77.html">An Introduction to Iterative</a>
-<b>上一级：</b><a name="tex2html1829" href="node18.html">A Brief Tour of</a>
+<b>下一节：</b><a name="tex2html1835" href="node77.html">迭代投影方法简介</a>
+<b>上一级：</b><a name="tex2html1829" href="node18.html">特征问题简述</a>
 <b>上一节：</b><a name="tex2html1825" href="node75.html">更多的广义特征问题</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001180000000000000000"></a>
+<!--End of Navigation Panel-->
+<h1>
+<a name="SECTION001180000000000000000"></a>
 <a name="sec_chap2_NLep"></a>
-<br>
-非线性特征值问题
-<br>&nbsp; <i>J. 德梅尔</i>
+非线性特征问题<br>&nbsp; <i>J. Demmel</i>
 </h1>
 
 <p>
@@ -87,25 +85,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 本章汇集了几个存在有效算法的非线性特征值问题的实例。由于没有一种单一的方法能应对所有非线性情况，因此每个实例都需采取不同的处理方式。
 
 <p>
-最简单的非线性特征值问题是<em>二次特征值问题</em>（QEP）
-<br><p></p>
-<div align="CENTER">
+最简单的非线性特征值问题是<em>二次特征值问题</em>（quadratic eigenvalue problem, QEP）
 
 <div class="math-display">L( \lambda )x = (\lambda^2 M + \lambda B + K)x=0.</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中，<span class="math-inline">\lambda</span>称为特征值，<span class="math-inline">x</span>是（右）特征向量。如果对于所有<span class="math-inline">\lambda</span>，<span class="math-inline">{\rm det}L( \lambda )</span>不为零，则称为<em>正则</em>的；否则称为<em>奇异</em>的。它可以通过转换为广义线性特征值问题来处理，如第<a href="node55.html#sec_chap2_nHepRE">2.5.7</a>节和第<a href="node64.html#sec_chap2_GnHepRE">2.6.7</a>节所示。QEP出现在第<a href="node29.html#sec_chap2_HepEx">2.2.8</a>节介绍的阻尼弹簧质量系统中：运动方程<span class="math-inline">M \ddot{x}(t) + B \dot{x}(t) + Kx(t) =0</span>可以通过代入<span class="math-inline">x(t) = e^{\lambda t} x</span>来求解，其中<span class="math-inline">x</span>是一个常数向量，<span class="math-inline">\lambda</span>是一个待确定的常数标量。由此得到如上的<span class="math-inline">\lambda^2 Mx + \lambda B x + Kx = 0</span>。详见第<a href="node331.html#sec:qep">9.2</a>节。
+
+其中，<span class="math-inline">\lambda</span>称为特征值，<span class="math-inline">x</span>是（右）特征向量。如果对于任意<span class="math-inline">\lambda</span>，<span class="math-inline">{\rm det}L( \lambda )</span>不恒为零，则称为<em>正则</em>的；否则称为<em>奇异</em>的。它可以通过转换为广义线性特征值问题来处理，如第<a href="node55.html#sec_chap2_nHepRE">2.5.7</a>节和第<a href="node64.html#sec_chap2_GnHepRE">2.6.7</a>节所示。QEP出现在第<a href="node29.html#sec_chap2_HepEx">2.2.8</a>节介绍的阻尼弹簧质量系统中：运动方程<span class="math-inline">M \ddot{x}(t) + B \dot{x}(t) + Kx(t) =0</span>可以通过代入<span class="math-inline">x(t) = e^{\lambda t} x</span>来求解，其中<span class="math-inline">x</span>是一个常数向量，<span class="math-inline">\lambda</span>是一个待确定的常数标量。由此得到如上的<span class="math-inline">\lambda^2 Mx + \lambda B x + Kx = 0</span>。详见第<a href="node331.html#sec:qep">9.2</a>节。
 
 <p>
 更高次的多项式特征值问题<span class="math-inline">(\sum_{i=0}^m \lambda^i A_i)x=0</span>也可以类似处理。详见第<a href="node342.html#sec:polyeig">9.3</a>节。
 
 <p>
-最后，第<a href="node343.html#sec:sgmin">9.4</a>节考虑了可以表示为在<span class="math-inline">n</span>乘<span class="math-inline">m</span>正交矩阵集合上最大化标量函数<span class="math-inline">F(Y)</span>的非线性特征值问题。最简单的情况是最大化<span class="math-inline">F(Y) = Y^* AY</span>，其中<span class="math-inline">A</span>是厄米矩阵且<span class="math-inline">m=1</span>；答案是<span class="math-inline">A</span>的最大特征值。如果<span class="math-inline">F(Y) = {\rm tr} Y^*AY</span>，即<span class="math-inline">Y^*AY</span>的对角线元素之和（迹），那么答案是厄米矩阵<span class="math-inline">A</span>的<span class="math-inline">m</span>个最大特征值之和。对于这些问题，存在比这里介绍的基于共轭梯度的优化方案更有效的算法，但其优势在于能推广到更广泛的函数<span class="math-inline">F</span>。我们再给出两个例子。首先，如果<span class="math-inline">A_1,\ldots,A_m</span>是<span class="math-inline">n</span>乘<span class="math-inline">n</span>的实对称矩阵，本应共享一组特征向量但因噪声干扰而不再共享，那么我们寻求一个正交矩阵<span class="math-inline">Y</span>，使得所有<span class="math-inline">Y^*A_iY</span>的非对角线元素的范数之和最小。其次，在使用局域密度近似的量子力学计算中，我们希望最大化<span class="math-inline">{\rm tr}Y^*AY + g(Y)</span>，其中<span class="math-inline">g(Y)</span>是一个复杂的非线性项，代表电子间相互作用的能量。这里介绍的优化方法能处理相当一般的函数<span class="math-inline">g(Y)</span>。
+最后，第<a href="node343.html#sec:sgmin">9.4</a>节考虑了可以表示为在<span class="math-inline">n</span>乘<span class="math-inline">m</span>正交矩阵集合上最大化标量函数<span class="math-inline">F(Y)</span>的非线性特征值问题。最简单的情况是最大化<span class="math-inline">F(Y) = Y^* AY</span>，其中<span class="math-inline">A</span>是厄米矩阵且<span class="math-inline">m=1</span>；答案是<span class="math-inline">A</span>的最大特征值。如果<span class="math-inline">F(Y) = {\rm tr} Y^*AY</span>，即<span class="math-inline">Y^*AY</span>的对角线元素之和（迹），那么答案是厄米矩阵<span class="math-inline">A</span>的<span class="math-inline">m</span>个最大特征值之和。对于这些问题，存在比这里介绍的基于共轭梯度的优化方案更有效的算法，但其优势在于能推广到更广泛的函数<span class="math-inline">F</span>。我们再给出两个例子。其一，如果<span class="math-inline">A_1,\ldots,A_m</span>是<span class="math-inline">n</span>乘<span class="math-inline">n</span>的实对称矩阵，本应共享一组特征向量但因噪声干扰而不再共享，那么我们寻求一个正交矩阵<span class="math-inline">Y</span>，使得所有<span class="math-inline">Y^*A_iY</span>的非对角线元素的范数之和最小。其二，在使用局域密度近似的量子力学计算中，我们希望最大化<span class="math-inline">{\rm tr}Y^*AY + g(Y)</span>，其中<span class="math-inline">g(Y)</span>是一个复杂的非线性项，代表电子间相互作用的能量。这里介绍的优化方法能处理相当一般的函数<span class="math-inline">g(Y)</span>。
 
-<p>
-
-<p>
 
 <p>
 <hr><!--Navigation Panel-->
@@ -125,11 +116,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1835" href="node77.html">An Introduction to Iterative</a>
-<b>上一级：</b><a name="tex2html1829" href="node18.html">A Brief Tour of</a>
+<b>下一节：</b><a name="tex2html1835" href="node77.html">迭代投影方法简介</a>
+<b>上一级：</b><a name="tex2html1829" href="node18.html">特征问题简述</a>
 <b>上一节：</b><a name="tex2html1825" href="node75.html">更多的广义特征问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
