@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Basic Ideas Y. Saad </title>
+<title>基本概念</title>
 <meta charset="utf-8">
-<meta name="description" content="Basic Ideas Y. Saad ">
+<meta name="description" content="基本概念">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,26 +66,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1884" href="node80.html">Orthogonal Projection Methods.</a>
-<b>上一级：</b><a name="tex2html1878" href="node77.html">An Introduction to Iterative</a>
+<b>下一节：</b><a name="tex2html1884" href="node80.html">正交投影法</a>
+<b>上一级：</b><a name="tex2html1878" href="node77.html">迭代投影方法简介</a>
 <b>上一节：</b><a name="tex2html1872" href="node78.html">引言</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001220000000000000000"></a> <a name="sec:algbasics"></a>
-<br>
-基本思想
+<!--End of Navigation Panel-->
+<h1>
+<a name="SECTION001220000000000000000"></a>
+<a name="sec:algbasics"></a>
+基本概念
 <br><i>Y. Saad</i>
 </h1>
 
 <p>
-大多数标准特征值算法利用投影过程<a name="6400"></a>从给定子空间中提取近似特征向量。投影方法的基本思想是从指定的低维子空间中提取一个近似特征向量。为了能够提取这些近似值，需要满足某些条件。一旦这些条件被表达出来，就会得到一个小的矩阵特征值问题。
+大多数标准特征值算法利用投影过程从给定子空间中提取近似特征向量。投影方法的基本思想是从指定的低维子空间中提取一个近似特征向量。为了能够提取这些近似值，需要满足某些条件。一旦这些条件被表达出来，就会得到一个小的矩阵特征值问题。
 
 <p>
 一个略显平凡但有趣的投影应用示例是通过以下<em>幂法</em>计算矩阵的主特征值：
 
-<p>
 <br>
 <br>
 <blockquote>
@@ -97,81 +96,53 @@ for <span class="math-inline">i=0, \ldots,</span> 直到收敛 do:
 <br>
 <span class="math-inline">u_{i+1} = u / \Vert u\Vert _2</span>
 <br>
-<span class="math-inline">\widetilde\lambda_{i+1} = u^T_{i+1} A u_{i+1}</span>
+<span class="math-inline">\tilde\lambda_{i+1} = u^T_{i+1} A u_{i+1}</span>
 
 </blockquote>
 <br>
-<br>
-
 <p>
-在最简单的情况下，当主特征值，即模最大的特征值，是实数且唯一时，在初始向量的温和假设下，对 <span class="math-inline">(u_{i+1}, \widetilde\lambda_{i+1})</span> 将收敛到特征向量及其对应的（模最大）特征值。如果该特征值是复数且使用实数运算，则算法将无法收敛。可以通过引入复数初始向量在复数运算中工作，从而恢复收敛。然而，也可以通过实数运算来提取这些特征向量。这是基于以下观察：两个连续的迭代 <span class="math-inline">u_{i}</span> 和 <span class="math-inline">u_{i+1}</span> 将倾向于属于由所需特征值相关的两个复共轭特征向量所张成的子空间。设 <span class="math-inline">u_{i}</span> 和 <span class="math-inline">u_{i+1}</span> 分别表示为 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span>。为了提取近似特征向量，我们将它们写成 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span> 的线性组合：
-<br><p></p>
-<div align="CENTER">
+在最简单的情况下，当主特征值，即模最大的特征值，是实数且唯一时，在初始向量的温和假设下， <span class="math-inline">(u_{i+1}, \tilde\lambda_{i+1})</span> 将收敛到特征向量及其对应的（模最大）特征值。
+如果该特征值是复数且只使用实数运算，则算法将无法收敛。可以通过引入复数初始向量在复数运算中工作，从而恢复收敛。
+不过，也可以通过实数运算来提取这些特征向量。这是基于以下观察：两个连续的迭代 <span class="math-inline">u_{i}</span> 和 <span class="math-inline">u_{i+1}</span> 将倾向于属于由所需特征值相关的两个复共轭特征向量所张成的子空间。设 <span class="math-inline">u_{i}</span> 和 <span class="math-inline">u_{i+1}</span> 分别表示为 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span>。为了提取近似特征向量，我们将它们写成 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span> 的线性组合：
 
 <div class="math-display">\tilde{u} = \eta_1 v_1 + \eta_2 v_2.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们寻求一个向量和一个标量 <span class="math-inline">\tilde{\lambda}</span> 使得
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">A \tilde{u} = \tilde{\lambda} \tilde{u}.</div>
-</div>
-<br clear="ALL">
-<p></p>
-这是一个欠定系统。除了 <span class="math-inline">\tilde{\lambda}</span> 外，还有两个自由度，即标量 <span class="math-inline">\eta_1</span> 和 <span class="math-inline">\eta_2</span>。它们可以通过施加两个约束来确定。最常见的是以正交性条件的形式表达这些约束。这些是<em>Galerkin条件</em>，要求残差 <span class="math-inline">r = A \tilde{u} - \tilde{\lambda} \tilde{u}</span> 与近似子空间，即 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span> 正交：
-<br><p></p>
-<div align="CENTER">
+
+这是一个欠定系统。除了 <span class="math-inline">\tilde{\lambda}</span> 外，还有两个自由度，即标量 <span class="math-inline">\eta_1</span> 和 <span class="math-inline">\eta_2</span>。它们可以通过施加两个约束来确定。最常见的是以正交性条件的形式表达这些约束。这即是<em>Galerkin条件</em>，要求残差 <span class="math-inline">r = A \tilde{u} - \tilde{\lambda} \tilde{u}</span> 与近似子空间，即 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span> 正交：
 
 <div class="math-display">A \tilde{u} - \tilde{\lambda} \tilde{u} \perp v_1 , \qquad A \tilde{u} - \tilde{\lambda} \tilde{u} \perp v_2 .</div>
-</div>
-<br clear="ALL">
-<p></p>
-定义 <span class="math-inline">n \times 2</span> 矩阵 <span class="math-inline">V \bydef [v_1,v_2]</span> 并称 <span class="math-inline">y</span> 为未知数 <span class="math-inline">\eta_1, \eta_2</span> 的 2 维向量，即 <span class="math-inline">y = (\eta_1, \eta_2)^T</span>。那么，显然 <span class="math-inline">\tilde{u} = V y</span>，上述方程产生
-<br><p></p>
-<div align="CENTER">
+
+定义 <span class="math-inline">n \times 2</span> 矩阵 <span class="math-inline">V \equiv [v_1,v_2]</span> 并称 <span class="math-inline">y</span> 为未知数 <span class="math-inline">\eta_1, \eta_2</span> 的 2 维向量，即 <span class="math-inline">y = (\eta_1, \eta_2)^T</span>。那么，显然 <span class="math-inline">\tilde{u} = V y</span>，上述方程给出
 
 <div class="math-display">( A - \tilde{\lambda} I ) V y \perp v_1 , \qquad ( A - \tilde{\lambda} I ) V y \perp v_2 </div>
-</div>
-<br clear="ALL">
-<p></p>
-或等价地，
-<br><p></p>
-<div align="CENTER">
+
+也即，
 
 <div class="math-display">V^{\ast} ( A - \tilde{\lambda} I ) V y = 0 . </div>
-</div>
-<br clear="ALL">
-<p></p>
-这产生了 <span class="math-inline">2 \times 2</span> 广义特征值问题：
-<br><p></p>
-<div align="CENTER">
+
+由此可得 <span class="math-inline">2 \times 2</span> 广义特征值问题：
 
 <div class="math-display">V^{\ast} A V y = \tilde{\lambda} \ V^{\ast} V y .</div>
-</div>
-<br clear="ALL">
-<p></p>
 
 <p>
-从这个问题中获得的（复数）共轭特征值近似对将在与实数情况相同的条件下收敛。迭代使用实数向量，但过程能够提取复数特征值。显然，近似特征向量是复数，但它们不需要在复数运算中计算。这是因为（实数）基 <span class="math-inline">[v_1, v_2]</span> 也是由 <span class="math-inline">v_1</span> 和 <span class="math-inline">v_2</span> 张成的复平面的合适基。
+从这个问题中获得的近似（复数）共轭特征对将在与实数情况相同的条件下收敛。迭代使用实数向量，但过程能够提取复数特征值。显然，近似特征向量是复数，但它们不需要在复数运算中计算。这是因为（实数）基 <span class="math-inline">[v_1, v_2]</span> 已经就可以张成对应的不变子空间。
 
 <p>
-<a name="6421"></a>
-上述思想现在可以从二维推广到 <span class="math-inline">m</span> 维。因此，投影方法包括通过属于某个子空间 <span class="math-inline">\mathcal{K}</span> 的向量 <span class="math-inline">\tilde{u}</span> 来近似精确特征向量 <span class="math-inline">u</span>，该子空间被称为近似子空间<a name="6422"></a>或右子空间。如果子空间具有维度 <span class="math-inline">m</span>，这将给出 <span class="math-inline">m</span> 个自由度，下一步是施加 <span class="math-inline">m</span> 个约束以能够提取唯一解。这是通过施加所谓的<em>Petrov-Galerkin条件</em><a name="6424"></a>来完成的，即 <span class="math-inline">\tilde{u}</span> 的残差向量与某个子空间 <span class="math-inline">\mathcal{L}</span> 正交，该子空间被称为左子空间。虽然这可能看起来是人为的，我们可以区分两种广泛的投影方法类别。在<i>正交投影</i>技术中，子空间 <span class="math-inline">\mathcal{L}</span> 与 <span class="math-inline">\mathcal{K}</span> 相同。在<i>斜交投影</i>方法中，<span class="math-inline">\mathcal{L}</span> 与 <span class="math-inline">\mathcal{K}</span> 不同，并且可以完全与之无关。<a name="6427"></a>
-<a name="6428"></a>
+上述思想可以从二维推广到 <span class="math-inline">m</span> 维。即，投影方法通常通过某个子空间 <span class="math-inline">\mathcal{K}</span> 内的向量 <span class="math-inline">\tilde{u}</span> 来近似精确特征向量 <span class="math-inline">u</span>，该子空间被称为近似子空间或右子空间。
+如果子空间是 <span class="math-inline">m</span> 维的，这产生了 <span class="math-inline">m</span> 个自由度，下一步是施加 <span class="math-inline">m</span> 个约束以能够提取唯一解。
+这通过施加所谓的<em>Petrov-Galerkin条件</em>来完成的，即 <span class="math-inline">\tilde{u}</span> 的残差向量与某个子空间 <span class="math-inline">\mathcal{L}</span> 正交，该子空间被称为左子空间。
+尽管这可能看起来是人为的，我们可以区分两种广泛的投影方法。在<i>正交投影</i>法中，子空间 <span class="math-inline">\mathcal{L}</span> 与 <span class="math-inline">\mathcal{K}</span> 相同。在<i>斜投影</i>法中，<span class="math-inline">\mathcal{L}</span> 与 <span class="math-inline">\mathcal{K}</span> 不同，并且可以完全不相关。
 
 <p>
-<span class="math-inline">\mathcal{K}</span> 的构造可以通过不同的方式完成。上述对幂法的推广，如果使用所有生成的向量，将导致Krylov子空间方法，即在子空间
-<br><p></p>
-<div align="CENTER">
+<span class="math-inline">\mathcal{K}</span> 的构造可以通过不同的方式完成。上述对幂法的推广，如果使用迭代过程中生成的所有向量，将得到Krylov子空间方法，在子空间
 
 <div class="math-display">{\mathcal K}^m(A,u_0) = {\rm span}\{ u_0, Au_0, \ldots , A^{m-1}u_0\},</div>
-</div>
-<br clear="ALL">
-<p></p>
-即所谓的<em>Krylov子空间</em>中寻求解的方法。<a name="6433"></a>
-还可以尝试通过不精确逆技术（预处理）迫使这些向量更接近所需特征向量的方向，这导致了Davidson型方法。或者，可以从一组（块）向量而不是单个向量开始，这导致了这些子空间方法的所谓块变体。
+
+即所谓的<em>Krylov子空间</em>中寻求解的方法。
+还可以尝试通过不精确逆技术（预处理）迫使这些向量更接近所需特征向量的方向，这就是Davidson型方法。或者，可以从一组（块）向量而不是单个向量开始，由此可以得到这些子空间方法的所谓块变体。
 
 <p>
 <br><hr>
@@ -179,13 +150,11 @@ for <span class="math-inline">i=0, \ldots,</span> 直到收敛 do:
 <a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
-<li><ul>
-<li><ul>
-<li><a name="tex2html1885" href="node80.html">正交投影方法。</a>
-<li><a name="tex2html1886" href="node81.html">斜交投影方法。</a>
-<li><a name="tex2html1887" href="node82.html">调和Ritz值。</a>
-<li><a name="tex2html1888" href="node83.html">改进的投影方法。</a>
-</ul></ul></ul>
+<li><a name="tex2html1885" href="node80.html">正交投影法</a>
+<li><a name="tex2html1886" href="node81.html">斜投影法</a>
+<li><a name="tex2html1887" href="node82.html">调和Ritz值</a>
+<li><a name="tex2html1888" href="node83.html">改进的投影方法</a>
+</ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
 <a name="tex2html1883"
@@ -204,11 +173,9 @@ for <span class="math-inline">i=0, \ldots,</span> 直到收敛 do:
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1884" href="node80.html">Orthogonal Projection Methods.</a>
-<b>上一级：</b><a name="tex2html1878" href="node77.html">An Introduction to Iterative</a>
+<b>下一节：</b><a name="tex2html1884" href="node80.html">正交投影法</a>
+<b>上一级：</b><a name="tex2html1878" href="node77.html">迭代投影方法简介</a>
 <b>上一节：</b><a name="tex2html1872" href="node78.html">引言</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Harmonic Ritz Values.</title>
+<title>调和Ritz值</title>
 <meta charset="utf-8">
-<meta name="description" content="Harmonic Ritz Values.">
+<meta name="description" content="调和Ritz值">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,131 +66,73 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1930" href="node83.html">Refined Projection Methods.</a>
-<b>上一级：</b><a name="tex2html1924" href="node79.html">Basic Ideas Y. Saad</a>
-<b>上一节：</b><a name="tex2html1918" href="node81.html">Oblique Projection Methods.</a>
-  
-  
+<b>下一节：</b><a name="tex2html1930" href="node83.html">改进的投影法</a>
+<b>上一级：</b><a name="tex2html1924" href="node79.html">基本概念</a>
+<b>上一节：</b><a name="tex2html1918" href="node81.html">斜投影法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001220030000000000000"></a> 
-<a name="6495"></a> <a name="6496"></a>
-<br>
+<!--End of Navigation Panel-->
+<h4>
+<a name="SECTION001220030000000000000"></a> 
 调和 Ritz 值
 </h4>
-我们引入 Ritz 值与 Krylov 子空间的关系时，已经指出它们往往能更好地逼近外侧特征值而非内侧特征值。这一观点既有理论支撑，也得到了实践验证。位于谱内部区域的 Ritz 值通常被视为某些外侧特征值的不良近似，相应的 Ritz 向量在其对应特征值附近的特征向量方向上的分量往往很小。可以说，这个 Ritz 值<em>正在向某个外侧特征值收敛</em>。这意味着，如果对内部特征对感兴趣，对应于内部特征值的 Ritz 向量通常也不适合用于重启目的。这些重启对于内部特征对尤为必要，以避免为 <span class="math-inline">V</span> 和 <span class="math-inline">W</span> 构建高维基底。
+
+我们引入 Ritz 值与 Krylov 子空间的关系时，已经指出它们往往能更好地逼近外侧特征值而非内侧特征值。这一观点既有理论支撑，也得到了实践验证。位于谱内部区域的 Ritz 值通常被视为某些外侧特征值的不良近似，相应的 Ritz 向量在其对应特征值附近的特征向量方向上的分量往往很小。可以说，这个 Ritz 值<em>正在向某个外侧特征值收敛</em>。这意味着，如果对内部特征对感兴趣，对应于内部特征值的 Ritz 向量通常也不适合用于重启目的。这些重启对于内部特征对尤为必要，以避免为 <span class="math-inline">V</span> 和 <span class="math-inline">W</span> 构建高维基底。（译者注：关于重启的概念要去后面的章节查看。）
 
 <p>
-一种有趣的斜投影方法特殊情况是选择 <span class="math-inline">\mathcal{L}</span> 为 <span class="math-inline">\mathcal{L} = A \mathcal{K}</span>。与之前的符号类似，设 <span class="math-inline">V</span> 是 <span class="math-inline">\mathcal{K}</span> 的基底。假设 <span class="math-inline">A</span> 是非奇异的，我们可以将 <span class="math-inline">\mathcal{L}</span> 的基底取为向量系统 <span class="math-inline">W = A V</span>。从子空间 <span class="math-inline">\mathcal{K}</span> 中提取的近似特征向量 <span class="math-inline">\tilde{u}</span> 可以表示为
-<br><p></p>
-<div align="CENTER">
+一种有趣的斜投影方法特殊情况是选择 <span class="math-inline">\mathcal{L}</span> 为 <span class="math-inline">\mathcal{L} = A \mathcal{K}</span>。与之前的符号约定类似，设 <span class="math-inline">V</span> 是 <span class="math-inline">\mathcal{K}</span> 的基底。假设 <span class="math-inline">A</span> 是非奇异的，我们可以将 <span class="math-inline">\mathcal{L}</span> 的基底取为向量系统 <span class="math-inline">W = A V</span>。从子空间 <span class="math-inline">\mathcal{K}</span> 中提取的近似特征向量 <span class="math-inline">\tilde{u}</span> 可以表示为
+
 <div class="math-display">\tilde{u} = V y,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中 <span class="math-inline">y</span> 是一个 <span class="math-inline">m</span> 维向量。近似特征值 <span class="math-inline">\tilde{\lambda}</span> 由 Petrov-Galerkin 条件获得，即
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">(A V)^{\ast} (A - \tilde{\lambda} I) V y = 0</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 或者
 
-V^ A^ A V y =  V^ A^ V y . <a name="eq:HarmGen"></a>
-这给出一个大小为 <span class="math-inline">m</span> 的广义特征值问题，其左侧矩阵是厄米正定的。通过要求 <span class="math-inline">AV</span> 为正交系统，可以得到一个标准的特征值问题。在这种情况下，eq:HarmGen 变为
+<div class="math-display" name="eq:HarmGen">V^{\ast} A^{\ast} A V y = \tilde{\lambda}V^{\ast} A^{\ast} V y.</div> 
 
- V^ A^ V y =  W^A^-1 W y =1  y .
- <a name="eq:HarmGen1"></a> 
+这给出一个大小为 <span class="math-inline">m</span> 的广义特征值问题，其左侧矩阵是厄米正定的。通过要求 <span class="math-inline">AV</span> 为正交系统，可以得到一个标准的特征值问题。在这种情况下，上式变为
 
-由于矩阵 <span class="math-inline">W</span> 是正交的，这导致了一个有趣的观察：该方法在数学上等价于使用正交投影过程来计算 <span class="math-inline">A^{-1}</span> 的特征值。在这种情况下，近似子空间是 <span class="math-inline"> A \mathcal{K}</span>。因此，近似特征值 <span class="math-inline">\tilde{\lambda}</span> 被称为<em>调和 Ritz 值</em>。
-注意，不需要对 <span class="math-inline">A</span> 进行求逆，但如果通过在 <span class="math-inline">W</span> 上进行正交变换的同时也在 <span class="math-inline">V</span> 上进行，从而保持形式关系 <span class="math-inline">W = A V</span>，那么可以使用 (<a href="node82.html#eq:HarmGen1">3.10</a>) 的左侧来进行降阶矩阵的计算。
-由于调和 Ritz 值是 <span class="math-inline">A^{-1}</span> 的 Ritz 值（尽管是针对 <span class="math-inline">A</span> 生成的子空间），它们往往能更好地逼近内部特征值（那些最接近原点的特征值）。可以证明，对于厄米矩阵 <span class="math-inline">A</span>，调和 Ritz 向量最大化 <span class="math-inline">A^{-1}</span> 的 Rayleigh 商，因此可以被解释为我们拥有的关于最小（绝对值）特征值的最佳信息。这使得调和 Ritz 向量适合用于重启，这一点由 Morgan [<a href="node421.html#morg91">331</a>] 在对称矩阵中提出。
+<div class="math-display" name="eq:HarmGen"> V^{\ast} A^{\ast} V y =  W^{\ast}A^{-1} W y = \frac{1}{\tilde{\lambda}} y. \tag{3.10}</div>
+
+
+由于矩阵 <span class="math-inline">W</span> 是正交的，这导致了一个有趣的观察：该方法在数学上等价于使用正交投影过程来计算 <span class="math-inline">A^{-1}</span> 的特征值。在这种情况下，近似子空间是 <span class="math-inline"> A \mathcal{K}</span>。因此，近似特征值 <span class="math-inline">\tilde{\lambda}</span> 被称为<em>调和 Ritz 值（harmonic Ritz values）</em>。
+注意，不需要对 <span class="math-inline">A</span> 进行求逆，但如果通过在 <span class="math-inline">W</span> 上进行正交变换的同时也在 <span class="math-inline">V</span> 上进行，从而保持形式关系 <span class="math-inline">W = A V</span>，那么可以使用 (<a href="node82.html#eq:HarmGen1">3.10</a>) 的左侧来进行约化矩阵的计算。
+由于调和 Ritz 值是 <span class="math-inline">A^{-1}</span> 的 Ritz 值（尽管是通过 <span class="math-inline">A</span> 生成的子空间），它们往往能更好地逼近内部特征值（那些最接近原点的特征值）。可以证明，对于厄米矩阵 <span class="math-inline">A</span>，调和 Ritz 向量最大化 <span class="math-inline">A^{-1}</span> 的 Rayleigh 商，因此可以被解释为我们拥有的关于绝对值最小特征值的最佳信息。这使得调和 Ritz 向量适合用于重启，这一点由 Morgan [<a href="node421.html#morg91">331</a>] 在对称矩阵中提出。
 
 <p>
-调和 Ritz 值和向量的正式引入见 [<a href="node421.html#papv95">349</a>]，其中还包括了 Ritz 对与调和 Ritz 对之间的有趣关系。研究表明，在 Krylov 子空间的情况下，投影矩阵 <span class="math-inline">W^\ast A^{-1} W</span> 的计算可以作为矩阵 <span class="math-inline">V^\ast A V</span> 的秩一更新获得，因此调和 Ritz 对可以作为常规 Krylov 过程的廉价副产品生成。调和 Ritz 值对更一般子空间的推广发表在 [<a href="node421.html#slvo96">411</a>]。
+调和 Ritz 值和向量的正式引入见 [<a href="node421.html#papv95">349</a>]，其中还包括了 Ritz 对与调和 Ritz 对之间的有趣关系。研究表明，在 Krylov 子空间的情况下，投影矩阵 <span class="math-inline">W^\ast A^{-1} W</span> 的计算可以通过矩阵 <span class="math-inline">V^\ast A V</span> 的秩一更新获得，因此调和 Ritz 对可以作为常规 Krylov 过程的廉价副产品生成。调和 Ritz 值对更一般子空间的推广发表在 [<a href="node421.html#slvo96">411</a>]。
 
 <p>
 由于 <span class="math-inline">A^{-1}</span> 的投影是在为 <span class="math-inline">A</span> 生成的子空间上进行的，因此不应期望此方法能与在 <span class="math-inline">A^{-1}</span> 生成的 Krylov 子空间上的投影一样好。实际上，调和 Ritz 值对于内部特征值的近似越来越好，但对于不断增大的子空间，改进可能非常有限（尽管稳定）。因此，它们通常不能替代位移-逆变换技术，除非成功构建了合适的子空间，例如通过使用廉价的近似位移-逆变换技术，如在 (Jacobi-) Davidson 方法中。
 
 <p>
 我们将更详细地讨论调和 Ritz 值和 Ritz 值在厄米情况 <span class="math-inline">A^\ast =A</span> 下的行为。假设 <span class="math-inline">A</span> 的特征值按大小顺序排列：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n. </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 类似的标记也适用于近似值 <span class="math-inline">\tilde{\lambda}_i</span>。
 
 <p>
 如前所述，Ritz 值逼近厄米矩阵 <span class="math-inline">A</span> 的特征值是“由内而外”的，即最右侧的特征值从下方逼近，而最左侧的特征值从上方逼近，如下图所示。
-<div align="CENTER">
-<br>
-<img width="515" height="64" align="BOTTOM" border="0" src="img720.png" alt="\begin{picture}(6.5,1.2)(0.0,0.5)
-\put(0,1.0){\line(1,0){6.4}}
-%%
-\put(0.1,1.2...
-...%%
-\put(5.8,0.6){<span class="math-inline">\tla_{n}</span>}
-\put(5.9,0.95){\line(0,1){0.1} }
-%%
-\end{picture}">
-<br>
+
+<div style="text-align: center;">
+<img src="icon/img720.png"/>
 </div>
+
 这一原则也适用于调和 Ritz 值：由于这些值是通过应用于 <span class="math-inline">A^{-1}</span> 的正交投影方法得到的，因此从该过程中获得的调和 Ritz 特征值 <span class="math-inline">1/\tilde{\lambda}_i</span> 将以“由内而外”的方式逼近 <span class="math-inline">A</span> 的相应特征值 <span class="math-inline">1/\lambda_i</span>。对于正特征值，我们有
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\tilde{\lambda}_i^{-1} \le \lambda_i ^{-1}; \quad i=1,2, \ldots\qquad \longrightarrow \qquad\tilde{\lambda}_i \ge \lambda_i; \quad i=1,2, \ldots.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 注意到，最大的正特征值现在从上方逼近，这与标准的正交投影方法相反。这些类型的技术在几十年前很流行，作为一种确保包含给定特征值的区间的策略。事实上，如 [<a href="node421.html#papv95">349</a>] 所示，Ritz 值与调和 Ritz 值共同构成了所谓的 Lehmann 区间，它们对 <span class="math-inline">A</span> 的特征值具有良好的包含性质。从某种意义上说，它们提供了从给定 Krylov 子空间导出的关于 <span class="math-inline">A</span> 特征值的最优信息。例如，可以通过正交投影方法和调和投影方法分别获得最大正特征值的下界和上界。
 
 <p>
-我们以调和 Ritz 值的讨论作为结束，指出它们也可以针对移位矩阵 <span class="math-inline">A-\sigma I</span> 进行计算，从而使得近似值针对接近 <span class="math-inline">\sigma</span> 的特征值得到改进。
+我们以调和 Ritz 值的如下观察来结束讨论：它们也可以针对移位矩阵 <span class="math-inline">A-\sigma I</span> 进行计算，从而使得近似值对于接近 <span class="math-inline">\sigma</span> 的特征值得到改进。
 
 <p>
-在应用这一原则于负特征值时，我们必须谨慎，因为顺序是相反的。因此，我们将正特征值和负特征值分别标记。上述不等式必须对负特征值进行反转，标记从最小到最大负特征值（<span class="math-inline">\lambda_1^{-} \le \lambda_2^{-} \le ...</span>）。结果总结在下图中。
-<div align="CENTER">
-<br>
-<img width="515" height="72" align="BOTTOM" border="0" src="img727.png" alt="\begin{picture}(6.5,1.2)(0.0,0.5)
-\put(0,1.0){\line(1,0){6.4}}
-%%
-\put(2.4,1.2)...
-...5){\line(0,1){0.1}}
-%%
-\put(3.4,0.95){<span class="math-inline">\bullet</span>}
-\put(3.4,1.3){0}
-\end{picture}">
-<br>
-</div>
-为了简化，假设 <span class="math-inline">A</span> 是正定对称矩阵，并定义：
-<br><p></p>
-<div align="CENTER">
-<div class="math-display">\mathcal{K}\sup{i}= \{ x \ \in \mathcal{K}\quad \vert \quad A x \perp A \tilde{u}_1, A \tilde{u}_2,\ldots A \tilde{u}_{i-1} \} </div>
-</div>
-<br clear="ALL">
-<p></p>
-其中 <span class="math-inline">\mathcal{K}\sup{0} \bydef K</span>。那么 Courant 特征化变为：
-<br><p></p>
-<div align="CENTER">
-<div class="math-display">\tilde{\lambda}_i^{-1} =\max_{x \ \in \ \mathcal{K}\sup{i}} \ \frac{ (A x , x ) }{ (A x,A x) }</div>
-</div>
-<br clear="ALL">
-<p></p>
-
-<p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br> 
-
-<p>
-<hr><!--Navigation Panel-->
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html1929"
   href="node83.html">
 <button class="navigate">下一节</button></a> 
@@ -207,11 +149,9 @@ V^ A^ A V y =  V^ A^ V y . <a name="eq:HarmGen"></a>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html1930" href="node83.html">Refined Projection Methods.</a>
-<b>上一级：</b><a name="tex2html1924" href="node79.html">Basic Ideas Y. Saad</a>
-<b>上一节：</b><a name="tex2html1918" href="node81.html">Oblique Projection Methods.</a>
-  
-  
+<b>下一节：</b><a name="tex2html1930" href="node83.html">改进的投影法</a>
+<b>上一级：</b><a name="tex2html1924" href="node79.html">基本概念</a>
+<b>上一节：</b><a name="tex2html1918" href="node81.html">斜投影法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
