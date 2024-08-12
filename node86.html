@@ -66,74 +66,51 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2051" href="node87.html">Overview of Available Algorithms.</a>
-<b>上一级：</b><a name="tex2html2045" href="node85.html">厄米特征值问题</a>
-<b>上一节：</b><a name="tex2html2039" href="node85.html">厄米特征值问题</a>
-  
-  
+<b>下一节：</b><a name="tex2html2051" href="node87.html">可用的算法概览</a>
+<b>上一级：</b><a name="tex2html2045" href="node85.html">厄米征值问题</a>
+<b>上一节：</b><a name="tex2html2039" href="node85.html">厄米征值问题</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001310000000000000000"></a> <a name="sec:heigintro"></a>
-<br>
+<!--End of Navigation Panel-->
+<h1><a name="SECTION001310000000000000000"></a>
+<a name="sec:heigintro"></a>
 引言
 </h1>
-本章我们将探讨标准的厄米特（Hermitian），或通常是实对称矩阵的特征值问题（HEP），
-<br>
-<div align="RIGHT">
 
+本章我们将探讨标准的厄米或（更常见的）实对称矩阵的特征值问题（HEP），
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="symeig"></a><div class="math-display">Ax=\lambda x\,,</div></td>
-<td WIDTH=10 align="RIGHT">
-(16)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#symeig">Ax=\lambda x\, \tag{4.1}</div>
+
 其中 <span class="math-inline">A=A^{\ast}</span>。
 这是最常见的代数特征值问题，对此我们拥有最可靠的理论和最强大的算法。
 
 <p>
-关于厄米特特征值问题的基本理论概述见第<a href="node21.html#sec_chap2_Hep">2.2</a>节。
+关于厄米特征值问题的基本理论概述见第<a href="node21.html#sec_chap2_Hep">2.2</a>节。
 已知问题（<a href="node86.html#symeig">4.1</a>）具有 <span class="math-inline">n</span> 个实特征值 <span class="math-inline">\lambda_i</span>，我们可以按递增顺序排列为
 
 <span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。注意，多个特征值可能相同。在许多应用中，矩阵 <span class="math-inline">A</span> 是正定的，即 <span class="math-inline">\lambda_1>0</span>（或半正定，即 <span class="math-inline">\lambda_1\geq 0</span>）。
-即使在可以利用正定性的情况下，我们仍选择在本章中处理具有一般特征值分布的厄米特矩阵 <span class="math-inline">A</span>。
+即使在可以利用正定性的情况下，我们仍选择在本章中处理具有一般特征值分布的厄米矩阵 <span class="math-inline">A</span>。
 
 <p>
-当 <span class="math-inline">A</span> 是厄米特矩阵时，总能找到 <span class="math-inline">n</span> 个相互正交的特征向量 <span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
-<br>
-<div align="RIGHT">
+当 <span class="math-inline">A</span> 是厄米矩阵时，总能找到 <span class="math-inline">n</span> 个相互正交的特征向量 <span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
 
+<div class="math-display" name="#symeigdec">A=X \Lambda X^{\ast}, \tag{4.2}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="symeigdec"></a><div class="math-display">A=X \Lambda X^{\ast},</div></td>
-<td WIDTH=10 align="RIGHT">
-(17)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-其中 <span class="math-inline">\Lambda=\diag(\lambda_i)</span>，
-
+其中 <span class="math-inline">\Lambda=\mathrm{diag}(\lambda_i)</span>，
 <span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>，且 <span class="math-inline">X^{\ast}X=I</span>。特征向量 <span class="math-inline">x_i</span> 并非唯一；唯一的是每个不同特征值对应的<i>不变子空间</i>。
-对于厄米特矩阵 <span class="math-inline">A</span>，不变子空间的维度与特征值的重数相同。重要的是要记住，当某些特征值相同时，它们的特征向量失去了个性：无法断言一组向量是某个多重特征值的<i>唯一</i>特征向量。
+对于厄米矩阵 <span class="math-inline">A</span>，不变子空间的维度与特征值的重数相同。重要的是要记住，当某些特征值相同时，它们的特征向量失去了个性：无法断言一组向量是某个多重特征值的<i>唯一</i>特征向量。
 两种不同的算法，甚至同一算法的两次运行，都会在不变子空间中给出不同的代表性特征向量。
 另一方面，用户有权要求算法产生的特征向量近似彼此正交，即便矩阵具有多重特征值。
-<br>
-<br>
+
 <p>
 <span class="math-inline">A</span> 的特征值总是良态的。
 如果对矩阵 <span class="math-inline">A</span> 添加扰动 <span class="math-inline">E</span>，
 那么每个特征值的扰动最多不超过谱范数 <span class="math-inline">\Vert E\Vert _2</span>，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#eigvpert">\vert\lambda_i(A+E)-\lambda_i(A)\vert\leq \Vert E\Vert_2 \,. \tag{4.3}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eigvpert"></a><div class="math-display">\vert\lambda_i(A+E)-\lambda_i(A)\vert\leq \Vert E\Vert _2\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(18)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 还有几个更强的结果，例如 Wielandt-Hoffman 不等式，它表明特征值差的平方和被 <span class="math-inline">E</span> 元素的平方和所控制；详见第<a href="node148.html#sec:pert-H">4.8</a>节及其参考文献。
-在许多情况下，人们关注相对于范数 <span class="math-inline">\Vert A\Vert</span> 较小的特征值，对于这些特征值，不等式（<a href="node86.html#eigvpert">4.3</a>）并不十分令人满意，因为它允许这些小特征值有较大的<i>相对</i>扰动。在某些附加假设下，可以发展出相对扰动的扰动界。
+在许多情况下，人们关注相对于范数 <span class="math-inline">\Vert A\Vert</span> 较小的特征值，对于这些特征值，不等式（<a href="node86.html#eigvpert">4.3</a>）并不十分令人满意，因为它允许这些小特征值有较大的<i>相对</i>扰动。在某些附加假设下，可以得出相对扰动的扰动界。
 
 <p>
 对于<i>特征向量</i>的扰动，没有像（<a href="node86.html#eigvpert">4.3</a>）这样简单的结果：必须增加特征值分离的假设。
@@ -146,20 +123,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">\delta = \min_{\lambda_j \neq \lambda_i} \vert \mu - \lambda_j \vert</span>。
 定义残差向量 <span class="math-inline">r</span> 为 <span class="math-inline">r=Az-\mu z</span>；于是我们有
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#eigvecpert">\sin\angle(z,x_i)\leq\frac{\Vert r\Vert _2}{\delta}\,.</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eigvecpert"></a><div class="math-display">\sin\angle(z,x_i)\leq\frac{\Vert r\Vert _2}{\delta}\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(19)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-在相同的假设下，我们得到了特征值近似的改进界，
-<a name="eigvecpert_b"></a>|-_i|{||r||_2,||r||_2^2}.
+在相同的假设下，我们可以得到特征值近似的改进界限，
 
-这个最小值中的第一个选项等价于先前的界（<a href="node86.html#eigvpert">4.3</a>），因为 <span class="math-inline">\mu</span> 是扰动矩阵 <span class="math-inline">A+E</span> 的特征值，其中 <span class="math-inline">E=-rz^{\ast}</span> 是一个范数为 <span class="math-inline">\Vert E\Vert _2 = \Vert r\Vert _2</span> 的秩一扰动（在界（<a href="node86.html#eigvpert">4.3</a>）中，<span class="math-inline">E</span> 不必是厄米特矩阵）。
+<div class="math-display" name="eigvecpert_b">\vert \mu - \lambda_i \vert \le \min \left\{\Vert r \Vert_2, \frac{\Vert r \Vert_2^2}{\delta}\right\}.</div>
+
+这个最小值中的第一个选项等价于先前的界（<a href="node86.html#eigvpert">4.3</a>），因为 <span class="math-inline">\mu</span> 是扰动矩阵 <span class="math-inline">A+E</span> 的特征值，其中 <span class="math-inline">E=-rz^{\ast}</span> 是一个范数为 <span class="math-inline">\Vert E\Vert _2 = \Vert r\Vert _2</span> 的秩一扰动（在界（<a href="node86.html#eigvpert">4.3</a>）中，<span class="math-inline">E</span> 不必是厄米矩阵）。
 读者可参考第<a href="node148.html#sec:pert-H">4.8</a>节了解更多细节。
 
 <p>
@@ -168,15 +139,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><ul>
-<li><ul>
 <li><a name="tex2html2052" href="node87.html">可用算法概览</a>
 <li><a name="tex2html2053" href="node88.html">选择总结</a>
 <li><a name="tex2html2054" href="node89.html">矩阵准备</a>
 <li><a name="tex2html2055" href="node90.html">正交化</a>
 <li><a name="tex2html2056" href="node91.html">所求特征值</a>
 <li><a name="tex2html2057" href="node92.html">存储</a>
-</ul></ul></ul>
+</ul>
 <!--End of Table of Child-Links-->
 <hr>
 
@@ -197,11 +166,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2051" href="node87.html">Overview of Available Algorithms.</a>
-<b>上一级：</b><a name="tex2html2045" href="node85.html">厄米特征值问题</a>
-<b>上一节：</b><a name="tex2html2039" href="node85.html">厄米特征值问题</a>
-  
-  
+<b>下一节：</b><a name="tex2html2051" href="node87.html">可用的算法概览</a>
+<b>上一级：</b><a name="tex2html2045" href="node85.html">厄米征值问题</a>
+<b>上一节：</b><a name="tex2html2039" href="node85.html">厄米征值问题</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

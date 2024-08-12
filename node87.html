@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Overview of Available Algorithms.</title>
+<title>可用的算法概览</title>
 <meta charset="utf-8">
-<meta name="description" content="Overview of Available Algorithms.">
+<meta name="description" content="可用的算法概览">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,29 +66,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2071" href="node88.html">Summary of Choices.</a>
+<b>下一节：</b><a name="tex2html2071" href="node88.html">算法选择概述</a>
 <b>上一级：</b><a name="tex2html2065" href="node86.html">引言</a>
 <b>上一节：</b><a name="tex2html2059" href="node86.html">引言</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001310010000000000000">
-可用算法概览</a>
+<!--End of Navigation Panel-->
+<h4>
+<a name="SECTION001310010000000000000"></a>
+可用的算法概览
 </h4>
 
 <p>
-读者或许还记得，中等规模的特征值问题，即在此情况下可以方便地存储一个完整的<span class="math-inline">n \times n</span>矩阵，通常采用<i>直接法</i>解决，有时也称为<i>变换法</i>。通过相似变换，直至特征值能够被轻易读取。<a name="tex2html15"
-  href="footnode.html#foot10740"><sup><button class="footnote"></button></sup></a>我们在第<a href="node93.html#sec:dense">4.2</a>节对一些当前的直接法进行了简要回顾。
+读者或许还记得，中等规模的特征值问题，即在此情况下可以方便地存储一个完整的<span class="math-inline">n \times n</span>矩阵，通常采用<i>直接法</i>解决，有时也称为<i>变换法</i>。通过相似变换，直至特征值能够被轻易读取 <sup><a href="#footnote-direct">1</a></sup>。我们在第<a href="node93.html#sec:dense">4.2</a>节对一些当前的直接法进行了简要回顾。
 
 <p>
-本书的重点在于<i>迭代法</i>，其中稀疏矩阵存储的优势得以发挥。在此方法中，矩阵算子作用于一个或少数几个初始向量，特征值近似从低维子空间中计算得出，迭代持续进行直至收敛到特征值的某个子集。
+本书的重点在于<i>迭代法</i>，此时稀疏矩阵存储的优势得以发挥。在此方法中，矩阵算子作用于一个或少数几个初始向量，特征值近似从低维子空间中计算得出，迭代持续进行直至收敛到特征值的某个子集。
 
 <p>
 本章将介绍六种基本的迭代算法：
 <dl>
 <dt><strong><i>幂法</i></strong></dt>
-<dd>在第<a href="node94.html#sec_power_sym">4.3</a>节中描述，是最基本的迭代方法。它从一个初始向量开始，让矩阵作用于该向量，直至得到的向量与主特征向量平行。当存在唯一一个最大幅值的特征值时，该方法收敛，但在这些有利情况下，其速度仍慢于本章讨论的其他算法。
+<dd>在第<a href="node94.html#sec_power_sym">4.3</a>节中描述，是最基本的迭代方法。它从一个初始向量开始，让矩阵作用于该向量，直至得到的向量与主特征向量平行。当存在唯一一个最大幅值的特征值时，该方法收敛，但即使在这些有利情况下，其速度仍慢于本章讨论的其他算法。
 
 <p>
 </dd>
@@ -103,13 +102,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong><i>隐式重启Lanczos法</i></strong></dt>
-<dd>在第<a href="node117.html#sec:irlm">4.5</a>节中描述，是一种变体，其中正交基的大小保持有界并持续更新，直至其子空间包含一组预定的特征向量。在许多情况下，它能够以略多的矩阵-向量乘法次数，显著减少存储空间，实现与原始Lanczos变体相同的特征值收敛数量。此变体在需要特征向量时尤为有用。
+<dd>在第<a href="node117.html#sec:irlm">4.5</a>节中描述，是一种变体，其中正交基的大小保持有界并持续更新，直至其子空间包含一组预定的特征向量。在许多情况下，它能够以略多的矩阵-向量乘法次数，显著减少存储空间，实现与原始Lanczos变体相同数量收敛的特征值。此变体在需要特征向量时尤为有用。
 
 <p>
 </dd>
 <dt><strong><i>带状Lanczos法</i></strong></dt>
-<dd>在第<a href="node131.html#rwf:bandsym">4.6</a>节中描述，是同时幂法的Lanczos对应方法。对于存储在后备存储或内存层次结构中的矩阵，同时作用于多个向量比逐个作用更为高效。这就是多个<i>最先进</i>的结构工程软件包采用此类算法的原因[<a
- href="node421.html#grls94">206</a>]。在多输入多输出控制问题中，人们实际上对基于给定初始向量的降阶模型感兴趣，这是开发此处描述的变体的主要原因。
+<dd>在第<a href="node131.html#rwf:bandsym">4.6</a>节中描述，是同时幂法的Lanczos对应方法。对于存储在磁盘或内存层次结构中的矩阵，同时作用于多个向量比逐个作用更为高效。这是多个<i>最先进</i>的结构工程软件包采用此类算法的原因[<a href="node421.html#grls94">206</a>]。在多输入多输出控制问题中，人们实际上对基于给定的一组初始向量的降阶模型（reduced-order models）感兴趣，这是开发这一变体的主要原因。
 
 <p>
 </dd>
@@ -119,6 +117,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dl>
 
 <p>
+<hr>
+<ol>
+<li id="footnote-direct">请注意，所谓“直接”方法仍需迭代，因为从数学上讲，求解特征值等同于寻找多项式的零点，而对于后者，不存在非迭代方法。我们可以称一种方法为直接法，如果经验表明它（几乎）永远不会在固定次数的迭代中失败。</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html2070"
   href="node88.html">
@@ -136,11 +138,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2071" href="node88.html">Summary of Choices.</a>
+<b>下一节：</b><a name="tex2html2071" href="node88.html">算法选择概述</a>
 <b>上一级：</b><a name="tex2html2065" href="node86.html">引言</a>
 <b>上一节：</b><a name="tex2html2059" href="node86.html">引言</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

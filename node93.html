@@ -66,30 +66,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2153" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html2153" href="node94.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html2147" href="node85.html">厄米特征值问题</a>
-<b>上一节：</b><a name="tex2html2141" href="node92.html">Storage.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2141" href="node92.html">存储</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001320000000000000000"></a> <a name="sec:dense"></a> 
-<a name="7348"></a>
-<a name="7349"></a>
-<a name="7350"></a>
-<a name="7351"></a>
-<br>
+<!--End of Navigation Panel-->
+<h1>
+<a name="SECTION001320000000000000000"></a>
+<a name="sec:dense"></a> 
 直接方法
 </h1>
 
 <p>
-在这一节中，我们将简要讨论用于计算对称矩阵特征值的直接方法，这些对称矩阵可以作为满矩阵存储在计算机中。这些直接方法有时被称为变换方法，并且围绕相似变换构建。
+在这一节中，我们将简要讨论用于计算对称矩阵特征值的直接方法，这些对称矩阵可以完整存储在计算机中。这些直接方法有时被称为变换方法，并且围绕相似变换构建。
 
 <p>
-它们在LAPACK[<a href="node421.html#lapack">12</a>]、ScaLAPACK[<a href="node421.html#scalapack">52</a>]以及MATLAB的eig命令中得到实现。<a name="tex2html17" href="footnode.html#foot10741"><sup><button class="footnote"></button></sup></a>
+它们在LAPACK[<a href="node421.html#lapack">12</a>]、ScaLAPACK[<a href="node421.html#scalapack">52</a>]以及MATLAB的eig命令中得到实现 <sup><a href="#footnote-eig-softwafe">1</a></sup>。
 
 <p>
-我们将在本章后面讨论的所有基于子空间算法都需要使用密集、三对角或带状矩阵例程作为内部迭代，以获得子空间特征值的Ritz近似。
+我们后面讨论的所有基于子空间算法都需要使用密集、三对角或带状矩阵的直接方法例程作为内部迭代，以获得子空间特征值的Ritz近似。
 
 <p>
 最常见的直接方法分为两个阶段：
@@ -102,25 +98,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ol> 
 
 <p>
-初始化简到三对角形式是通过一系列<span class="math-inline">n-2</span>个正交Householder反射实现的，需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，或者如果还需要计算特征向量，则需要<span class="math-inline">\frac{8}{3}n^3</span>次浮点运算。LAPACK的对称或厄米驱动例程从这个简化开始：它由实数情况的xSYTRD计算例程和复数情况的xHETRD计算例程（在ScaLAPACK中为PxSYTRD和PxHETRD）计算。还有针对压缩和带状存储的实现。
+初始化简到三对角形式是通过一系列 <span class="math-inline">n-2</span> 个正交Householder反射实现的，需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，或者如果还需要计算特征向量，则需要<span class="math-inline">\frac{8}{3}n^3</span>次浮点运算。LAPACK的对称或厄米矩阵例程简单来说，实数情况是 <code>xSYTRD</code> 例程，复数情况是 <code>xHETRD</code> 例程（在ScaLAPACK中为 <code>PxSYTRD</code> 和 <code>PxHETRD</code>）。还有针对压缩和带状存储的实现。
 
 <p>
 对于三对角矩阵的特征分解，有几种方法可以选择：
 
 <p>
 <dl>
-<dd><a name="7369"></a>
-</dd>
 <dt><strong><i>QR算法：</i></strong></dt>
-<dd>该算法找到所有特征值，并可选地找到所有特征向量。对于找到一个三对角矩阵的所有特征值，它需要<span class="math-inline">O(n^2)</span>次浮点运算。由于将一个密集矩阵化简为三对角形式需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，对于足够大的<span class="math-inline">n</span>，<span class="math-inline">O(n^2)</span>是可以忽略的。对于找到所有特征向量，QR迭代平均需要略多于<span class="math-inline">6n^3</span>次浮点运算。它在LAPACK中作为xSTEQR和xSTERF实现。
+<dd>该算法找到所有特征值，并可选地找到所有特征向量。对于找到一个三对角矩阵的所有特征值，它需要<span class="math-inline">O(n^2)</span>次浮点运算。由于将一个密集矩阵化简为三对角形式需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，对于足够大的<span class="math-inline">n</span>，<span class="math-inline">O(n^2)</span>是可以忽略的。对于找到所有特征向量，QR迭代平均需要略多于<span class="math-inline">6n^3</span>次浮点运算。
+它在 LAPACK 中通过 <code>xSTEQR</code> 和 <code>xSTERF</code> 实现。
 
 <p>
-这是MATLAB命令eig背后的算法。<a name="tex2html18" href="footnode.html#foot10742"><sup><button class="footnote"></button></sup></a>
+这也是MATLAB命令eig背后的算法 <sup><a href="#footnote-eig-symtri">2</a></sup>。
 <p>
 </dd>
+
 <dt><strong><i>分治法：</i></strong></dt>
 <dd><a name="7376"></a>
-它将三对角矩阵分成两半，分别解决每一半的特征问题，并通过求解一个特殊的有理方程将解粘合在一起。它在LAPACK中作为xSTEVD实现。对于大型矩阵，xSTEVD可以比xSTEQR快很多倍，但需要更多的内存空间（<span class="math-inline">2n^2</span>或<span class="math-inline">3n^2</span>）。
+它将三对角矩阵分成两半，分别解决每一半的特征问题，并通过求解一个特殊的有理方程将解粘合在一起。它在LAPACK中作为 <code>xSTEVD</code> 实现。对于大型矩阵，<code>xSTEVD</code> 可以比 <code>xSTEQR</code> 快很多倍，但需要更多的内存空间（<span class="math-inline">2n^2</span>或<span class="math-inline">3n^2</span>）。
 
 <p>
 </dd>
@@ -130,30 +126,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 二分法可以用于仅找到一部分特征值，例如区间<span class="math-inline">[a,b]</span>内的那些。它只需要<span class="math-inline">O(nk)</span>次浮点运算，其中<span class="math-inline">k</span>是所需的特征值数量。因此，当<span class="math-inline">k \ll n</span>时，二分法可能比QR方法快得多。它可以非常精确，但如果接受较低的精度，也可以调整以更快运行。
 
 <p>
-然后可以使用逆迭代来找到相应的特征向量。在最佳情况下，当特征值很好地分离时，逆迭代也只需要<span class="math-inline">O(nk)</span>次浮点运算。这远少于QR或分治法，即使当所有特征值和特征向量都需要时（<span class="math-inline">k=n</span>）。另一方面，当许多特征值聚集在一起时，将需要Gram-Schmidt正交化以确保我们不会得到几个相同的特征向量。在最坏情况下，这将增加<span class="math-inline">O(nk^2)</span>次浮点运算到操作计数中。
+然后可以使用逆迭代来找到相应的特征向量。在最佳情况下，当特征值很好地分离时，逆迭代也只需要<span class="math-inline">O(nk)</span>次浮点运算。这远少于QR或分治法，即使当所有特征值和特征向量都需要时（<span class="math-inline">k=n</span>）。另一方面，当许多特征值聚集在一起时，将需要Gram-Schmidt正交化以确保我们不会得到几个相同的特征向量。在最坏情况下，这将增加<span class="math-inline">O(nk^2)</span>次浮点运算。
 
 <p>
-二分法和逆迭代在LAPACK例程xSTEBZ和xSTEIN中实现，并且它们作为选项在xSYEVX中可用。在ScaLAPACK中，它们是子例程PxSTEBZ和PxSTEIN。
+二分法和逆迭代在LAPACK例程 <code>xSTEBZ</code> 和 <code>xSTEIN</code> 中实现，并且它们作为选项在 <code>xSYEVX</code> 中可用。在ScaLAPACK中，它们是子例程 <code>PxSTEBZ</code> 和 <code>PxSTEIN</code>。
 
 <p>
 </dd>
 <dt><strong><i>相对稳健表示算法：</i></strong></dt>
 <dd><a name="7387"></a> 
-该算法使用LDL<span class="math-inline">^T</span>分解对多个平移<span class="math-inline">T-s I</span>进行分解，其中<span class="math-inline">s</span>是每个特征值簇附近的平移。对于每个平移，该算法计算非常精确的小特征值的特征对。它在LAPACK中作为xSTEGR实现。xSTEGR比所有例程都快，除了少数情况，并且使用最少的内存空间。参见[<a href="node421.html#parldhi97">358</a>,<a href="node421.html#dhil97">128</a>,<a href="node421.html#pama:99">360</a>]。
+该算法使用LDL<span class="math-inline">^T</span>分解对多个平移<span class="math-inline">T-s I</span>进行分解，其中<span class="math-inline">s</span>是每个特征值簇附近的位移。对于每个平移，该算法计算非常精确的小特征值的特征对。它在LAPACK中作为 <code>xSTEGR</code> 实现。<code>xSTEGR</code> 比所有例程都快，除了少数情况，并且使用最少的内存空间。参见[<a href="node421.html#parldhi97">358</a>,<a href="node421.html#dhil97">128</a>,<a href="node421.html#pama:99">360</a>]。
 
-<p>
 </dd>
 </dl>
 
 <p>
-最后，解决厄米特征值问题的一个经典方法是<i>雅可比方法</i>。<a name="7393"></a> 
+最后，解决厄米特征值问题的一个经典方法是<i>雅可比方法</i>。
 该方法通过一系列基本正交旋转构造一个正交变换到对角形式，
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">A=X\Lambda X^{\ast}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 每次减少矩阵非对角元素平方和，直到它达到工作精度的对角形式。
 
 <p>
@@ -163,7 +155,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 雅可比算法有一个重要的优点。正确实现它可以提供相对误差小的特征值近似，而基于三对角化的算法只能保证误差相对于矩阵范数有界（<a href="node86.html#eigvpert">4.3</a>）。参见[<a href="node421.html#deve92">124</a>]。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+<ol>
+<li id="footnote-eig-softwafe">据悉，基于LAPACK的数值计算库将成为MATLAB下一大版本更新的组成部分；详情可参阅《MATLAB、Simulink及工具箱用户通讯》2000年冬季刊，网址为<a href="http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml">http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml</a>。</li>
+<li id="footnote-eig-symtri">MATLAB会检查eig函数的参数是否对称，并在适当的情况下使用对称QR算法。</li>
+</ol>
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html2152"
   href="node94.html">
 <button class="navigate">下一节</button></a> 
@@ -180,11 +178,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2153" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html2153" href="node94.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html2147" href="node85.html">厄米特征值问题</a>
-<b>上一节：</b><a name="tex2html2141" href="node92.html">Storage.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2141" href="node92.html">存储</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

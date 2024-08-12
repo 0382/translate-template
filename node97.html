@@ -67,15 +67,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
-<b>上一级：</b><a name="tex2html2211" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html2211" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2205" href="node96.html">逆迭代法</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001333000000000000000"></a>
-<a name="7465"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001333000000000000000"></a>
 瑞利商迭代法
 </h2> 
 
@@ -84,25 +82,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="7469"></a> 
 
 <p>
-一般来说，瑞利商迭代（RQI）比使用固定移位的逆迭代需要更少的迭代次数来找到一个特征值；它最终具有三次收敛性，而逆迭代是线性收敛的。然而，如何选择初始向量 <span class="math-inline">y</span> 以使 RQI 收敛到特定的特征值/特征向量对并不明显。例如，RQI 可能收敛到一个特征值，该特征值并不是最接近初始瑞利商 <span class="math-inline">\rho(y)</span> 的，或者收敛到一个特征向量，该特征向量并不是最接近初始向量 <span class="math-inline">y</span> 的。此外，还存在一个微小但令人讨厌的可能性，即它可能根本不收敛到任何特征值/特征向量对。RQI 比逆迭代更昂贵，因为它在每次迭代中都需要对 <span class="math-inline">A - \rho_k I</span> 进行因式分解，而当 <span class="math-inline">\rho_k</span> 达到某个特征值时，这个矩阵将变为奇异矩阵。因此，只有当每次迭代中都能廉价地获得这种因式分解时，RQI 才是实用的。更多细节请参见 Parlett [<a href="node421.html#parl80">353</a>]。
+一般来说，瑞利商迭代（RQI）比使用固定移位的逆迭代需要更少的迭代次数来找到一个特征值；它最终具有三次收敛性，而逆迭代是线性收敛的。然而，如何选择初始向量 <span class="math-inline">y</span> 以使 RQI 收敛到特定的特征值/特征向量对并不明显。例如，RQI 可能收敛到一个特征值，该特征值并不是最接近初始瑞利商 <span class="math-inline">\rho(y)</span> 的，或者收敛到一个特征向量，该特征向量并不是最接近初始向量 <span class="math-inline">y</span> 的。此外，还存在一个微小但令人讨厌的可能性，即它可能根本不收敛到任何特征值/特征向量对。RQI 比逆迭代更昂贵，因为它在每次迭代中都需要对 <span class="math-inline">A - \rho_k I</span> 进行分解，而当 <span class="math-inline">\rho_k</span> 达到某个特征值时，这个矩阵将变为奇异矩阵。因此，只有当每次迭代中都能廉价地获得这种分解时，RQI 才是实用的。更多细节请参见 Parlett [<a href="node421.html#parl80">353</a>]。
 
-<p>
-<br>
-<img
- width="598" height="245" align="BOTTOM" border="0"
- src="img832.png"
- alt="\begin{algorithm}{RQI for HEP}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb\=ccc\=ddd\= \...
-...t <span class="math-inline">\lambda=\rho_k</span>\ for most recent <span class="math-inline">k</span>\ and <span class="math-inline">x=v</span>\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre style="text-align: left;">
+算法 4.3 HEP的瑞利商迭代
+(1)  取初始猜测向量 <span class="math-inline">y = z</span>，令 <span class="math-inline">v = y / \Vert y \Vert_2, \; \rho_1 = \rho(v)</span>
+(2)  for k = 1, 2, ...
+(3)    <span class="math-inline">y = (A - \rho_k I)^{-1}v</span>,
+(4)    若奇异，结束
+(5)    <span class="math-inline">\theta = \Vert y \Vert_2</span>,
+(6)    <span class="math-inline">\rho_{k+1} = \rho_k + y^\ast v / \theta^2</span>,
+(7)    <span class="math-inline">v = y / \theta</span>,
+(8)    若 <span class="math-inline">\theta \ge \epsilon_M^{-1/2}</span>, 结束 
+(9)  end for
+(10) 结果： <span class="math-inline">\lambda = \rho_k, \; x = v</span>
+</pre>
 
 <p>
 <hr>
-
-瑞利商迭代法是一种高效的特征值求解方法，尤其适用于需要快速收敛的场合。尽管存在一些不确定性和计算成本，但其在数值计算领域的应用仍然十分广泛。通过不断优化初始向量的选择和迭代过程中的参数调整，可以进一步提高瑞利商迭代法的实用性和可靠性。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html2216"
   href="node98.html">
 <button class="navigate">下一节</button></a> 
@@ -120,10 +118,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
-<b>上一级：</b><a name="tex2html2211" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html2211" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2205" href="node96.html">逆迭代法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

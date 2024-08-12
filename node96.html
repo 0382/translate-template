@@ -67,44 +67,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2203" href="node97.html">瑞利商迭代法</a>
-<b>上一级：</b><a name="tex2html2197" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html2197" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2191" href="node95.html">幂法</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001332000000000000000"></a> <a name="sec_InversePowerMethod"></a><a name="7431"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001332000000000000000"></a>
+<a name="sec_InversePowerMethod"></a>
 逆迭代法
 </h2>
 
 <p>
 幂法的一些缺点可以通过将其应用于
 <span class="math-inline">(A - \sigma I)^{-1}</span>
-而不是<span class="math-inline">A</span>上来部分克服，其中<span class="math-inline">\sigma</span>被称为<em>位移</em>。这将使方法收敛到最接近<span class="math-inline">\sigma</span>的特征值，而不是仅仅
+而不是<span class="math-inline">A</span>上来部分克服，其中<span class="math-inline">\sigma</span>被称为<em>位移（shift）</em>。这将使方法收敛到最接近<span class="math-inline">\sigma</span>的特征值，而不仅仅是
 <span class="math-inline">\lambda_{\max}</span>。这种方法被称为<em>逆迭代</em>，或<em>逆幂法</em>。
 
-<p>
-<br>
-<a name="inverseiteration"></a><img
- width="598" height="203" align="BOTTOM" border="0"
- src="img820.png"
- alt="\begin{algorithm}{HEP逆迭代法}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=b...
-...接受 <span class="math-inline">\lambda=\sigma+1/\theta</span> 和 <span class="math-inline">x=y/\theta</span> \end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre style="text-align: left;" id="inverseiteration">
+算法 4.2 HEP逆迭代法
+(1) 取初始猜测向量 <span class="math-inline">y = z</span>，
+(2) for k = 1, 2, ...
+(3)     <span class="math-inline">v = y / \Vert y \Vert_2</span>
+(4)     <span class="math-inline">y = (A - \sigma I)^{-1} v</span>
+(5)     <span class="math-inline">\theta = v^\ast y</span>
+(6)     若 <span class="math-inline">\Vert y-\theta v\Vert_2 \le \epsilon_M \vert\theta\vert</span>, 结束
+(7) end for
+(8) 结果： <span class="math-inline">\lambda = \sigma+1/\theta</span> 和 <span class="math-inline">x=y/\theta</span>
+</pre>
 
 <p>
 需要注意的是，在步骤(4)中没有必要显式计算
 逆
 <span class="math-inline">\left(A-\sigma I\right)^{-1}</span>。我们只需要高效地解一个形如
-
-<span class="math-inline">\left(A-\sigma I\right) y = v</span> 的系统来求 <span class="math-inline">y</span>，这从形式上给出
-
-<span class="math-inline">y = \left(A-\sigma I\right)^{-1} \, v</span>。
+<span class="math-inline">\left(A-\sigma I\right) y = v</span> 的系统来求 <span class="math-inline">y</span>，这从形式上给出 <span class="math-inline">y = \left(A-\sigma I\right)^{-1} \, v</span>。
 
 <p>
 与幂法类似，我们应该期望由逆幂法生成的<span class="math-inline">v</span>向量序列变得越来越平行于
@@ -120,7 +115,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\vert\lambda_k - \sigma \vert^{-1}</span>是
 <span class="math-inline">(A - \sigma I)^{-1}</span>
 的模第二大的特征值。
-<a name="7463"></a>
 
 <p>
 逆迭代相对于幂法的一个优点是能够收敛到任何期望的特征值（最接近<span class="math-inline">\sigma</span>的那个）。通过选择非常接近某个期望特征值的<span class="math-inline">\sigma</span>，逆迭代可以非常快速地收敛。当我们有一个特征值的良好近似并且只想计算这个特征值及其对应的特征向量时，这种方法特别有效。然而，逆迭代确实需要对矩阵<span class="math-inline">A-\sigma I</span>进行分解，这使得当这种分解成本较高时，逆迭代不那么有吸引力。
@@ -146,10 +140,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2203" href="node97.html">瑞利商迭代法</a>
-<b>上一级：</b><a name="tex2html2197" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html2197" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2191" href="node95.html">幂法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

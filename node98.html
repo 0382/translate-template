@@ -66,36 +66,31 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2231" href="node99.html">Subspace Dimension.</a>
-<b>上一级：</b><a name="tex2html2225" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html2231" href="node99.html">子空间维度</a>
+<b>上一级：</b><a name="tex2html2225" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2219" href="node97.html">瑞利商迭代法</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001334000000000000000"></a> <a name="sec:4.pract"></a>  
-<a name="7498"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001334000000000000000"></a>
+<a name="sec:4.pract"></a>  
 子空间迭代法
 </h2>
 
 <p>
 在幂法基础上的一项重要改进是允许我们计算一个<span class="math-inline">(p > 1)</span>维的不变子空间，而不是一次计算一个特征向量。这种方法被称为<em>正交迭代</em>（有时也称为<em>子空间迭代</em>或<em>同时迭代</em>）。
 
-<p>
-<br>
-<img
- width="598" height="182" align="BOTTOM" border="0"
- src="img834.png"
- alt="\begin{algorithm}{简单子空间迭代法求解高能物理问题}
-{
-\begin{tabbing}
-(nr)ss\...
-...ize <span class="math-inline">V R = Y</span>\ \\
-{\rm (7)} \&gt; \&gt; {\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre style="text-align: left;">
+算法 4.4 HEP的简单子空间迭代
+(1) 取初始猜测矩阵 <span class="math-inline">Z</span>，对其做QR分解得到 <span class="math-inline">Z=V R</span>。
+(2) for k = 1,2,...
+(3)     <span class="math-inline">Y = AV</span>
+(4)     <span class="math-inline">H = V^\ast Y</span>
+(5)     若 <span class="math-inline">\Vert Y - VH\Vert_2 \le \epsilon_M</span>，结束
+(6)     对 <span class="math-inline">Y</span> 做QR分解得到 <span class="math-inline">Y=V R</span>
+(7) end for
+</pre>
 
 <p>
 该算法是幂法的直接推广。QR分解是一种归一化过程，类似于幂法中使用的归一化。厄米矩阵<span class="math-inline">H=V^{\ast}AV</span>的特征值将趋近于矩阵<span class="math-inline">A</span>的<span class="math-inline">p</span>个绝对值最大的特征值。
@@ -112,15 +107,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>子节</strong></a>
 
 <ul>
-<li><ul>
 <li><a name="tex2html2232" href="node99.html">子空间维度.</a>
 <li><a name="tex2html2233" href="node100.html">锁定.</a>
 <li><a name="tex2html2234" href="node101.html">加速.</a>
-</ul></ul>
+</ul>
 <!--子节链接表结束-->
 <hr>
-
-这段文本介绍了子空间迭代法，这是一种在幂法基础上改进的方法，用于计算多维不变子空间。该方法通过QR分解进行归一化，并逐步逼近矩阵的特征值。为了提高效率和实用性，需要进行一些改进，如减少正交化次数、选择合适的子空间维度以及锁定已收敛的特征值。此外，通常还会采用一些加速技术来提高计算效率。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html2230"
   href="node99.html">
 <button class="navigate">下一节</button></a> 
@@ -137,11 +130,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2231" href="node99.html">Subspace Dimension.</a>
-<b>上一级：</b><a name="tex2html2225" href="node94.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html2231" href="node99.html">子空间维度</a>
+<b>上一级：</b><a name="tex2html2225" href="node94.html">单向量和多向量迭代</a>
 <b>上一节：</b><a name="tex2html2219" href="node97.html">瑞利商迭代法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

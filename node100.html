@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Locking.</title>
+<title>锁</title>
 <meta charset="utf-8">
-<meta name="description" content="Locking.">
+<meta name="description" content="锁">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,37 +66,40 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2262" href="node101.html">Acceleration.</a>
+<b>下一节：</b><a name="tex2html2262" href="node101.html">加速</a>
 <b>上一级：</b><a name="tex2html2256" href="node98.html">子空间迭代法</a>
-<b>上一节：</b><a name="tex2html2250" href="node99.html">Subspace Dimension.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2250" href="node99.html">子空间维度</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001334020000000000000"></a>  <a name="7529"></a>
-<br>
-锁定机制。
+<!--End of Navigation Panel-->
+<h4>
+<a name="SECTION001334020000000000000"></a>
+<a name="7529"></a>
+锁
 </h4>
-由于通过子空间迭代计算的每个近似特征值的收敛速度不同，通常的做法是一次提取一个并进行某种形式的缩小（deflation）。因此，一旦第一个特征向量收敛，就没有必要在后续迭代中继续将其与<span class="math-inline">A</span>相乘。实际上，我们可以冻结这个向量，只处理向量<span class="math-inline">v_2, \ldots,v_m</span>。然而，我们仍然需要在需要进行正交化时对冻结向量<span class="math-inline">v_1</span>进行后续正交化。这种策略的术语是<i>锁定</i>；也就是说，我们不再试图改进对<span class="math-inline">v_1</span>的锁定近似。
+
+由于通过子空间迭代计算的每个近似特征值的收敛速度不同，通常的做法是每次提取特征值，并进行某种形式的收缩。即，一旦第一个特征向量收敛，就没有必要在后续迭代中继续将其与<span class="math-inline">A</span>相乘。实际上，我们可以冻结这个向量，只处理向量<span class="math-inline">v_2, \ldots,v_m</span>。然而，我们仍然需要在需要进行正交化时对冻结向量<span class="math-inline">v_1</span>进行后续正交化。这种策略的术语是<i>锁定</i>；也就是说，我们不再试图改进对<span class="math-inline">v_1</span>的锁定近似。
 
 <p>
 以下算法描述了一种实用的带缩小（锁定）的子空间迭代，用于计算<span class="math-inline">n_{\mathrm{ev}}</span>个主特征值。
 
-<p>
-<br>
-<a name="symsubspaceiter"></a><img
- width="620" height="302" align="BOTTOM" border="0"
- src="img842.png"
- alt="\begin{algorithm}{Subspace Iteration with Projection and Deflation for HEP
-\inde...
-...igenvalues \\
-{\rm (11)} \&gt; \&gt; {\bf end while}
-\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre style="text-align: left;" id="symsubspaceiter">
+算法 4.5 HEP带锁定和投影的子空间迭代
+(1)  取初始猜测矩阵 <span class="math-inline">Z</span>，对其做QR分解得到 <span class="math-inline">Z=V R</span>。
+(2)  令 <span class="math-inline">j = 0</span>
+(3)  while <span class="math-inline">j \le n_{ev}</span> do
+(4)      <span class="math-inline">\hat{Y} = [V_j, A^\text{iter}V_{p-j}]</span>
+(5)      对 <span class="math-inline">\hat{Y}</span> 做正交化得到 <span class="math-inline">\hat{Y} = V R</span> （前 <span class="math-inline">j</span> 列保持不变）
+(6)      <span class="math-inline">H = V^\ast_{p-j} A V_{p-j}</span>
+(7)      计算 <span class="math-inline">H</span> 的特征分解 <span class="math-inline">H = S \Theta S^\ast</span>
+(8)      测试特征值 <span class="math-inline">\Theta</span> 的收敛性
+(9)      <span class="math-inline">V = [V_j, V_{p-j} S]</span>
+(10)     令 <span class="math-inline">j = j + i_\text{conv}</span>，其中 <span class="math-inline">i_\text{conv}</span> 是新收敛的特征值数量
+(11) end while
+</pre>
 
 <p>
-现在我们描述一些实现细节。
+下面我们讨论一些实现细节。
 
 <p>
 <dl>
@@ -104,7 +107,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>初始启动矩阵<span class="math-inline">Z</span>应构建为在感兴趣的特征向量方向上占主导地位，以加速收敛。当没有此类先验信息时，随机矩阵与其他选择一样好。
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>迭代参数<span class="math-inline">\iter</span>应选择为在保持合理数值精度的同时最小化正交化成本。放大因子<span class="math-inline">(\lambda_1/\lambda_p)^{\iter}</span>，其中特征值<span class="math-inline">\lambda_i</span>按绝对值递减排序，给出了精度损失。鲁蒂斯豪瑟[<a href="node421.html#ruti69">381</a>]采取保守策略，仅允许放大因子为<span class="math-inline">10</span>，损失一位小数，而斯图尔特和詹宁斯[<a href="node421.html#stje81">426</a>]让算法运行至<span class="math-inline">\eps^{-1/2}</span>，即机器精度的一半，但不超过10次迭代。
+<dd>迭代参数 <span class="math-inline">\mathrm{iter}</span>（乘以 <span class="math-inline">A</span> 的次数）应选择为在保持合理数值精度的同时最小化正交化成本。放大因子<span class="math-inline">(\lambda_1/\lambda_p)^\text{iter}</span>，其中特征值<span class="math-inline">\lambda_i</span>按绝对值递减排序，给出了精度损失。鲁蒂斯豪瑟[<a href="node421.html#ruti69">381</a>]采取保守策略，仅允许放大因子为<span class="math-inline">10</span>，损失一位小数，而斯图尔特和詹宁斯[<a href="node421.html#stje81">426</a>]让算法运行至<span class="math-inline">\epsilon_M^{-1/2}</span>，即机器精度的一半，但不超过10次迭代。
 </dd>
 </dl>
 
@@ -126,11 +129,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2262" href="node101.html">Acceleration.</a>
+<b>下一节：</b><a name="tex2html2262" href="node101.html">加速</a>
 <b>上一级：</b><a name="tex2html2256" href="node98.html">子空间迭代法</a>
-<b>上一节：</b><a name="tex2html2250" href="node99.html">Subspace Dimension.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2250" href="node99.html">子空间维度</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

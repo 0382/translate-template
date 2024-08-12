@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Matrix Preparation.</title>
+<title>准备矩阵</title>
 <meta charset="utf-8">
-<meta name="description" content="Matrix Preparation.">
+<meta name="description" content="准备矩阵">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,44 +66,51 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2099" href="node90.html">Orthogonalization.</a>
+<b>下一节：</b><a name="tex2html2099" href="node90.html">正交化</a>
 <b>上一级：</b><a name="tex2html2093" href="node86.html">引言</a>
-<b>上一节：</b><a name="tex2html2087" href="node88.html">Summary of Choices.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2087" href="node88.html">算法选择概述</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h4><a name="SECTION001310030000000000000">
-Matrix Preparation.</a>
+<h4><a name="SECTION001310030000000000000"></a>
+准备矩阵
 </h4>
-For each algorithm we have 
-distinguished between different ways of preparing the matrix 
-prior to running the algorithm.<dl>
-<dt><strong>``Dir''</strong></dt>
-<dd>is direct application, where we perform a matrix multiply 
-on a vector in each step. It is the simplest variant to apply, 
-since the matrix can be stored in any compact way. On the other hand, 
-most algorithms need many matrix-vector multiplications to converge
-and are restricted to seeking eigenvalues at the ends of the spectrum. 
-</dd>
-<dt><strong>``SI''</strong></dt>
-<dd>is the shift-and-invert which needs a factorization routine 
-to enable solutions of systems 
-<span class="math-inline">(A-\sigma I)x=b</span> for <span class="math-inline">x</span>, but gives 
-the ability to compute a wider choice of eigenvalues in fewer iterations. 
-</dd>
-<dt><strong>``Prec''</strong></dt>
-<dd>means application with a preconditioner, for instance,
- a sparse approximate factorization. This requires 
-less space than the shift-and-invert, 
-but most often it also needs a larger number of matrix-vector multiplies.
-</dd>
-</dl> 
+
+针对每种算法，我们区分了在运行算法之前准备矩阵的不同方式。
+
+<dl>
+<dt><strong>直接</strong></dt>
+<dd>表示直接应用，即在每一步中对向量进行矩阵乘法运算。这是最简单的应用变体，因为矩阵可以以任何紧凑方式存储。另一方面，大多数算法需要多次矩阵-向量乘法才能收敛，并且仅限于寻找谱两端的特征值。</dd>
+<dt><strong>位移-逆</strong></dt>
+<dd>表示位移-逆变换，需要一个分解例程来启用对系统<span class="math-inline">(A-\sigma I)x=b</span>的求解，从而能够在更少的迭代次数中计算更广泛的特征值选择。</dd>
+<dt><strong>预处理</strong></dt>
+<dd>表示使用预处理器的应用，例如稀疏近似分解。这比位移-逆变换需要的空间更少，但大多数情况下也需要更多的矩阵-向量乘法。</dd>
+</dl>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2098"
+  href="node90.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2092"
+  href="node86.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2086"
+  href="node88.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2094"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2096"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2099" href="node90.html">正交化</a>
+<b>上一级：</b><a name="tex2html2093" href="node86.html">引言</a>
+<b>上一节：</b><a name="tex2html2087" href="node88.html">算法选择概述</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

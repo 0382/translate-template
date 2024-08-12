@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Acceleration.</title>
+<title>加速</title>
 <meta charset="utf-8">
-<meta name="description" content="Acceleration.">
+<meta name="description" content="加速">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -68,16 +68,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <b>下一节：</b><a name="tex2html2274" href="node102.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html2268" href="node98.html">子空间迭代法</a>
-<b>上一节：</b><a name="tex2html2264" href="node100.html">Locking.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2264" href="node100.html">锁</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001334030000000000000">
-加速方法</a>
+<!--End of Navigation Panel-->
+<h4><a name="SECTION001334030000000000000"></a>
+加速方法
 </h4>
+
 若需要求解接近某一<i>位移</i> <span class="math-inline">\sigma</span> 的特征值，并且可以便捷地得到分解式  
-<span class="math-inline">A - \sigma \, I=LU</span>（参见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节），
+<span class="math-inline">A - \sigma \, I=LU</span>（参见第<a href="node385.html#sec:directsolvers">10.3</a>节），
 那么可以将上述算法应用于
 
 <span class="math-inline">\left(A - \sigma \, I\right)^{-1}</span>。接近 <span class="math-inline">\sigma</span> 的特征值将快速收敛。
@@ -97,20 +97,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 通过这些改进，子空间迭代法可能成为一种相当高效的方法，其优势在于易于编码和理解。然而，后续讨论的一些方法通常更受欢迎，因为它们往往能更快地找到特征值/特征向量。
 
 <p>
-本节内容大量引自 Demmel [<a
- href="node421.html#demmelbook">114</a>]，Golub 和 Van Loan [<a
- href="node421.html#golo96">198</a>]，
-以及 Saad [<a
- href="node421.html#saad92">387</a>]。关于子空间迭代的进一步讨论，建议读者参考 Chatelin [<a
- href="node421.html#chat93">79</a>]，
-Lehoucq 和 Scott [<a
- href="node421.html#lesc95">292</a>]，Stewart [<a
- href="node421.html#stew76">422</a>]，以及
-Wilkinson [<a
- href="node421.html#wilk65">457</a>]。另请参阅 Bathe 和 Wilson [<a
- href="node421.html#bawi76">42</a>] 以及
-Jennings [<a
- href="node421.html#jenn77">242</a>] 
+本节内容大量引自 Demmel [<a href="node421.html#demmelbook">114</a>]，Golub 和 Van Loan [<a href="node421.html#golo96">198</a>]，
+以及 Saad [<a href="node421.html#saad92">387</a>]。关于子空间迭代的进一步讨论，建议读者参考 Chatelin [<a href="node421.html#chat93">79</a>]，
+Lehoucq 和 Scott [<a href="node421.html#lesc95">292</a>]，Stewart [<a href="node421.html#stew76">422</a>]，以及
+Wilkinson [<a href="node421.html#wilk65">457</a>]。另请参阅 Bathe 和 Wilson [<a href="node421.html#bawi76">42</a>] 以及
+Jennings [<a href="node421.html#jenn77">242</a>] 
 关于结构工程方法的论述。
 
 <p>
@@ -133,9 +124,7 @@ Jennings [<a
 <br>
 <b>下一节：</b><a name="tex2html2274" href="node102.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html2268" href="node98.html">子空间迭代法</a>
-<b>上一节：</b><a name="tex2html2264" href="node100.html">Locking.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2264" href="node100.html">锁</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
