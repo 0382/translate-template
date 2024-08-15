@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Lanczos Method &nbsp; A. Ruhe </title>
+<title>Lanczos 方法 A. Ruhe</title>
 <meta charset="utf-8">
-<meta name="description" content="Lanczos Method &nbsp; A. Ruhe ">
+<meta name="description" content="Lanczos 方法 A. Ruhe">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,115 +69,70 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html2300" href="node104.html">算法</a>
 <b>上一级：</b><a name="tex2html2294" href="node85.html">厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html2288" href="node102.html">可用的软件</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001340000000000000000"></a><a name="sec:lan"></a><a name="7598"></a>
-<br>
+<!--End of Navigation Panel-->
+<h1>
+<a name="SECTION001340000000000000000"></a>
+<a name="sec:lan"></a>
 Lanczos方法
-<br>&nbsp; <em>A. 鲁赫(A. Ruhe)</em>
+<br>&nbsp; <em>A. Ruhe</em>
 </h1>
 
 <p>
-Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要通过矩阵-向量运算来访问矩阵。不同的是，它更好地利用了通过记忆所有计算方向并始终让矩阵作用于一个与之前所有尝试方向正交的向量所获得的信息。
+Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要通过矩阵-向量操作来访问矩阵。不同的是，Lanczos算法在利用信息方面更为高效。它通过记忆所有计算方向，并始终让矩阵作用于一个与之前所有尝试方向正交的向量，从而更好地利用了这些信息。
 
 <p>
 本节我们将介绍适用于特征值问题的厄米Lanczos算法，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="evp"></a><div class="math-display">Ax=\lambda x\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(20)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#evp">Ax=\lambda x\;,</div>
+
 其中<span class="math-inline">A</span>是一个厄米矩阵，或在实数情况下是对称矩阵。
 
 <p>
 算法从一个适当选择的初始向量<span class="math-inline">v</span>开始，构建Krylov子空间的正交基<span class="math-inline">V_j</span>，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="Krylov"></a><div class="math-display">{\mathcal K}^j(A,v)=\mathrm{span}\{v,VA,A^2v,\dots,A^{j-1}v\}\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(21)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#Krylov">{\mathcal K}^j(A,v)=\mathrm{span}\{v,Av,A^2v,\dots,A^{j-1}v\}\;,</div>
+
 一次构建一列。每一步只需进行一次矩阵-向量乘法
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="Ax_op"></a><div class="math-display">y=Ax</div></td>
-<td WIDTH=10 align="RIGHT">
-(22)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#Ax_op">y=Ax</div>
+
 在新正交基<span class="math-inline">V_j</span>下，算子<span class="math-inline">A</span>表示为一个实对称三对角矩阵，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="tridia"></a><div class="math-display">T_{j}=\left[\begin{array}{cccc}\alpha_1 & \beta_1 &&\\\be......beta_{j-1}\\&&\beta_{j-1}&\alpha_j\\\end{array} \right]\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(23)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-该矩阵也是一次构建一行和一列，使用基本递归公式，
-<br>
-<div align="RIGHT">
+<div class="math-display" name="#tridia">
+T_{j}=\begin{bmatrix} 
+\alpha_1 & \beta_1 & & \\
+\beta_1 & \alpha_2 & \ddots & \\
+& \ddots & \ddots & \beta_{j-1} \\
+& & \beta_{j-1} & \alpha_j 
+\end{bmatrix},
+</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="herm-recursion"></a><div class="math-display">AV_j=V_{j}T_{j}+re_j^{\ast} \quad \mathrm{with} \quad V^{\ast}_j r = 0.</div></td>
-<td WIDTH=10 align="RIGHT">
-(24)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_{j}</span>的特征解，
-<br>
-<div align="RIGHT">
+该矩阵也是一次构建一行和一列，通过如下递归关系
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="T-eigenvalues"></a><div class="math-display">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)}\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(25)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-其中上标<span class="math-inline">(j)</span>用于表示这些量在每次迭代<span class="math-inline">j</span>中变化。Ritz值<span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量，
-<br>
-<div align="RIGHT">
+<div class="math-display" name="#herm-recursion">AV_j=V_{j}T_{j}+re_j^{\ast} \quad \mathrm{with} \quad V^{\ast}_j r = 0.</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eigenvector"></a><div class="math-display">x_i^{(j)}=V_js_i^{(j)}\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(26)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-如果残差的范数很小，将是<span class="math-inline">A</span>的一个特征对的良好近似；参见第4.8节。
+在任何步骤 <span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_{j}</span>的特征解，
+
+<div class="math-display" name="#T-eigenvalues">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)}\;,</div>
+
+其中上标<span class="math-inline">(j)</span>用于表示这些量在每次迭代<span class="math-inline">j</span>中变化。如果残差的范数很小，Ritz值<span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量，
+
+<div class="math-display" name="#eigenvector">x_i^{(j)}=V_js_i^{(j)}\;,</div>
+
+将是<span class="math-inline">A</span>的一个特征对的良好近似；参见第<a href="node148.html#sec:pert-H">4.8</a>节。
 
 <p>
 让我们计算这个Ritz对的残差，
-<br><p></p>
-<div align="CENTER">
 
-<div class="math-display">r_i^{(j)}=Ax_i^{(j)}-x_i^{(j)}\theta_i^{(j)}=AV_js_i^{(j)}-V......^{(j)}=(AV_j-V_jT_{j})s_i^{(j)}=v_{j+1}\beta_js_{j,i}^{(j)}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
+<div class="math-display">r_i^{(j)}=Ax_i^{(j)}-x_i^{(j)}\theta_i^{(j)}=AV_js_i^{(j)}-V_js_i^{(j)}\theta_i^{(j)}=(AV_j-V_jT_{j})s_i^{(j)}=v_{j+1}\beta_js_{j,i}^{(j)}\;.</div>
+
 我们看到其范数满足
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="estimate_residual"></a><div class="math-display">\Vert r_i^{(j)}\Vert _2=\vert\beta_js_{i,j}^{(j)}\vert=\beta_{j,i}\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(27)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-因此我们只需要监测<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{i,j}^{(j)}</span>，就可以估计残差的范数。一旦这个估计值变小，我们就可以将Ritz值<span class="math-inline">\theta_i^{(j)}</span>标记为收敛到特征值<span class="math-inline">\lambda_i</span>。注意，计算Ritz值不需要矩阵-向量乘法（参见第4.12节）。我们可以节省这个耗时的操作，直到步骤<span class="math-inline">j</span>，当估计值（参见第4.12节）指示收敛时再进行。
+<div class="math-display" name="#estimate_residual">\Vert r_i^{(j)}\Vert _2=\vert\beta_js_{i,j}^{(j)}\vert=\beta_{j,i}\;,</div>
+
+因此我们只需要监测<span class="math-inline">T</span>的次对角元素<span class="math-inline">\beta_j</span>及其特征向量的最后一个元素<span class="math-inline">s_{i,j}^{(j)}</span>，就可以估计残差的范数。一旦这个估计值变小，我们就可以将Ritz值<span class="math-inline">\theta_i^{(j)}</span>标记为收敛到特征值<span class="math-inline">\lambda_i</span>。注意，计算Ritz值不需要矩阵-向量乘法。我们可以节省这个耗时的操作，直到步骤<span class="math-inline">j</span>，当估计值指示收敛时再进行。
 
 <p>
 <br><hr>
@@ -191,18 +146,18 @@ Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要�
 <li><a name="tex2html2303" href="node106.html">多重特征值</a>
 </ul>
 <li><a name="tex2html2304" href="node107.html">谱变换</a>
-<li><a name="tex2html2305" href="node108.html">再正交化</a>
+<li><a name="tex2html2305" href="node108.html">重新正交化</a>
 <ul>
-<li><a name="tex2html2306" href="node109.html">完全再正交化</a>
-<li><a name="tex2html2307" href="node110.html">选择性再正交化</a>
-<li><a name="tex2html2308" href="node111.html">局部再正交化与检测虚假Ritz值</a>
+<li><a name="tex2html2306" href="node109.html">完全重新正交化</a>
+<li><a name="tex2html2307" href="node110.html">选择性重新正交化</a>
+<li><a name="tex2html2308" href="node111.html">局部重新正交化与检测虚假的Ritz值</a>
 </ul>
-<li><a name="tex2html2309" href="node112.html">软件可用性</a>
+<li><a name="tex2html2309" href="node112.html">可用的软件</a>
 <li><a name="tex2html2310" href="node113.html">数值示例</a>
 <ul>
 <li><a name="tex2html2311" href="node114.html">L形膜片结果</a>
 <li><a name="tex2html2312" href="node115.html">Medline SVD结果</a>
-<li><a name="tex2html2313" href="node116.html">L形膜片与移位-反演结果</a>
+<li><a name="tex2html2313" href="node116.html">L形膜片位移-逆结果</a>
 </ul></ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
@@ -225,8 +180,6 @@ Lanczos算法与前一节讨论的迭代算法密切相关，因为它只需要�
 <b>下一节：</b><a name="tex2html2300" href="node104.html">算法</a>
 <b>上一级：</b><a name="tex2html2294" href="node85.html">厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html2288" href="node102.html">可用的软件</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

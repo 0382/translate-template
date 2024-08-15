@@ -67,55 +67,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2327" href="node105.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html2321" href="node103.html">Lanczos Method &nbsp; A.</a>
-<b>上一节：</b><a name="tex2html2315" href="node103.html">Lanczos Method &nbsp; A.</a>
-  
-  
+<b>上一级：</b><a name="tex2html2321" href="node103.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html2315" href="node103.html">Lanczos方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001341000000000000000">
-算法</a>
+<!--End of Navigation Panel-->
+<h2>
+<a name="SECTION001341000000000000000"></a>
+算法
 </h2>
 
 <p>
 我们得到以下算法。
 
-<p>
-<br>
-<a name="Symmetric_Lanczos"></a><img
- width="598" height="317" align="BOTTOM" border="0"
- src="img870.png"
- alt="\begin{algorithm}{Lanczos Method for HEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb...
-...}\&gt; \&gt; compute approximate eigenvectors <span class="math-inline">X=V_j\,S</span>\end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre style="text-align: left;" id="Symmetric_Lanczos">
+算法 4.6 HEP的Lanczos方法
+(1)  取初始猜测向量 <span class="math-inline">r = v</span>
+(2)  <span class="math-inline">\beta_0 = \Vert r \Vert_2</span>
+(3)  for j = 1,2,..., until convergence
+(4)    <span class="math-inline">v_j = r/\beta_{j-1}</span>
+(5)    <span class="math-inline">r = A v_j</span>
+(6)    <span class="math-inline">r = r - v_{j-1}\beta_{j-1}</span>
+(7)    <span class="math-inline">\alpha_j = v_j^\ast r</span>
+(8)    <span class="math-inline">r = r - v_j \alpha_j</span>
+(9)    如果需要，进行正交化
+(10)   <span class="math-inline">\beta_j = \Vert r \Vert_2</span>
+(11)   计算近似特征值 <span class="math-inline">T_j = S \Theta^{(j)}S^\ast</span>
+(12)   测试是否收敛
+(13) end for
+(14) 计算近似特征向量 <span class="math-inline">X = V_j S</span>
+</pre>
 
 <p>
 让我们对算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的一些步骤进行评论：
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>如果对所需的特征向量有一个好的猜测，可以使用它。例如，对于离散化的偏微分方程，如果已知所需的特征向量在网格上是平滑的，可以从全为1的向量开始。在其他情况下，选择一个随机方向，例如由正态分布的随机数组成的向量。
+<dd>如果对所需的特征向量有一个好的猜测，可以用它作为初始值。例如，对于离散化的偏微分方程，如果已知所需的特征向量在网格上是平滑的，可以从全为1的向量开始。在其他情况下，选择一个随机值，例如由正态分布的随机数组成的向量。
 
 <p>
 </dd>
 <dt><strong>(5)</strong></dt>
-<dd>这种矩阵-向量运算通常是CPU占主导的工作。任何执行矩阵-向量乘法的例程都可以使用。在移位-反演情况下，用分解矩阵求解系统。目前，在反演情况下使用迭代方程求解器的经验还不多。
+<dd>这种矩阵-向量运算通常是CPU占主导的工作。任何执行矩阵-向量乘法的例程都可以使用。在位移-逆情况下，用分解矩阵求解系统。目前，在位移-逆情况下使用迭代方程求解器的经验还不多。
 
 <p>
 </dd>
 <dt><strong>(9)</strong></dt>
-<dd>在有限精度计算中，一旦一个特征值收敛，正交性就会丧失。<a name="7699"></a>  
+<dd>在有限精度计算中，一旦一个特征值收敛，正交性就会丧失。
 重新正交化的选择有：
 
 <p>
-
 <ol>
-<li><em>完全正交化：</em> <a name="7702"></a> 
-实现简单；参见下文第<a href="node108.html#select-ort">4.4.4</a>节。随着<span class="math-inline">j</span>的增加，迭代所需的计算量会逐渐增加。在移位-反演情况下，当多个特征值在少数步骤<span class="math-inline">j</span>内收敛时，这是首选选择。
+<li><em>完全正交化：</em>
+实现简单；参见下文第<a href="node108.html#select-ort">4.4.4</a>节。随着<span class="math-inline">j</span>的增加，迭代所需的计算量会逐渐增加。在位移-逆情况下，当多个特征值在少数步骤<span class="math-inline">j</span>内收敛时，这是首选选择。
 
 <p>
 </li>
@@ -135,7 +138,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>对于每个步骤<span class="math-inline">j</span>，或在适当的间隔，计算三对角矩阵<span class="math-inline">T_{j}</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>和特征向量<span class="math-inline">s_i^{(j)}</span>（参见第<a href="node103.html#tridia">4.9</a>节）。
 
 <p>
-如果期望快速收敛，如移位-反演问题，<span class="math-inline">j</span>将远小于<span class="math-inline">n</span>；那么这种计算非常快，推荐使用LAPACK等标准软件[<a href="node421.html#lapack">12</a>]。
+如果期望快速收敛，如位移-逆问题，<span class="math-inline">j</span>将远小于<span class="math-inline">n</span>；那么这种计算非常快，推荐使用LAPACK等标准软件[<a href="node421.html#lapack">12</a>]。
 
 <p>
 如果直接对<span class="math-inline">A</span>应用Lanczos算法并计算大型三对角矩阵，有基于二分法和Givens递归的特殊三对角特征值算法；参见[<a href="node421.html#parl96">356</a>,<a href="node421.html#parldhi97">358</a>,<a href="node421.html#dhil97">128</a>]和第<a href="node93.html#sec:dense">4.2</a>节。
@@ -147,23 +150,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 如果基<span class="math-inline">V_j</span>不完全正交，残差的估计<span class="math-inline">\beta_{j,i}</span>（参见第<a href="node103.html#estimate_residual">4.13</a>节）可能过于乐观。那么Ritz向量<span class="math-inline">x_i^{(j)}</span>（参见第<a href="node103.html#eigenvector">4.12</a>节）的范数可能小于1，我们必须用以下估计替换（参见<a href="#estimate___residual"><button class="crossref"></button></a>）：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\Vert r_i^{(j)}\Vert=\vert\beta_js_{i,j}^{(j)}\vert/\Vert V_js_i^{(j)}\Vert\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
 
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
 <dd>仅当步骤(12)中的测试表明特征向量已收敛时，才计算原始矩阵<span class="math-inline">A</span>的特征向量。然后使用基<span class="math-inline">V_j</span>进行矩阵-向量乘法以获得特征向量（参见第<a href="node103.html#eigenvector">4.12</a>节），
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">x_i^{(j)}=V_js_i^{(j)}\;,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 对于每个标记为已收敛的<span class="math-inline">i</span>。
 </dd>
 </dl> 
@@ -172,7 +168,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 这类算法的一大优点是，矩阵<span class="math-inline">A</span>仅在算法<a href="node104.html#Symmetric_Lanczos">4.6</a>的步骤(5)中通过矩阵-向量运算被访问。任何类型的稀疏性和任何存储方案都可以利用。
 
 <p>
-只需保留三个向量<span class="math-inline">r</span>、<span class="math-inline">v_j</span>和<span class="math-inline">v_{j-1}</span>，随时可用；较早的向量可以留在后备存储中。甚至有一种变体只需要两个向量（参见[<a href="node421.html#parl80">353</a>, 第13.1章]），但编码它需要一些技巧。除了矩阵-向量乘法外，只需要标量积和向量的倍数相加。我们推荐使用Level 1 BLAS例程；参见第<a href="node379.html#sec:blas">10.2</a>节。
+只需保留三个向量<span class="math-inline">r</span>、<span class="math-inline">v_j</span>和<span class="math-inline">v_{j-1}</span>，随时可用；较早的向量可以留在后备存储中。甚至有一种变体只需要两个向量（参见[<a href="node421.html#parl80">353</a>, 第13.1章]），但编码它需要一些技巧。除了矩阵-向量乘法外，只需要内积和向量的倍数相加。我们推荐使用Level 1 BLAS例程；参见第<a href="node379.html#sec:blas">10.2</a>节。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -193,8 +189,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2327" href="node105.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html2321" href="node103.html">Lanczos Method &nbsp; A.</a>
-<b>上一节：</b><a name="tex2html2315" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>上一级：</b><a name="tex2html2321" href="node103.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html2315" href="node103.html">Lanczos方法</a>
   
   
 <!--End of Navigation Panel-->

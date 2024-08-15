@@ -66,49 +66,55 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2382" href="node109.html">Full Reorthogonalization.</a>
-<b>上一级：</b><a name="tex2html2376" href="node103.html">Lanczos Method &nbsp; A.</a>
+<b>下一节：</b><a name="tex2html2382" href="node109.html">完全重新正交化</a>
+<b>上一级：</b><a name="tex2html2376" href="node103.html">Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2370" href="node107.html">谱变换</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h2><a name="SECTION001344000000000000000"></a><a name="select-ort"></a><a name="7790"></a>
-<br>
+<h2>
+<a name="SECTION001344000000000000000"></a>
+<a name="select-ort"></a>
 Reorthogonalization
 </h2>
-The Lanczos recursion is constructed to make the basis <span class="math-inline">V</span> orthogonal,
-but this is true only for infinite precision computation. In the
-algorithm we only make sure that the new vector <span class="math-inline">v_{j+1}</span> is
-orthogonal to working
-precision to the two latest vectors <span class="math-inline">v_{j-1}</span> and <span class="math-inline">v_j</span>, 
-and orthogonality to the earlier vectors follows from the symmetry of
-<span class="math-inline">A</span> and the recursion (<a href="node103.html#herm-recursion">4.10</a>). As soon as one
-eigenvalue converges, i.e., the Ritz pair has a small residual (<a href="#estimate___residual"><button class="crossref"></button></a>), all the basis vectors <span class="math-inline">v_j</span> get perturbations in the
-direction of the eigenspace of the converged eigenvalue. As a result of this,
-a duplicate copy of that eigenvalue will soon show up in 
-the tridiagonal matrix <span class="math-inline">T</span>.
-Paige&nbsp;[<a
- href="node421.html#paig71">347</a>] was the first to discover this; the reader is
-referred to the monograph [<a
- href="node421.html#parl80">353</a>] for a detailed discussion.
+
+Lanczos递归法旨在构建正交基<span class="math-inline">V</span>，但这一特性仅在无限精度计算中成立。在算法中，我们确保新向量<span class="math-inline">v_{j+1}</span>与最新两个向量<span class="math-inline">v_{j-1}</span>和<span class="math-inline">v_j</span>保持工作精度下的正交性，而与更早向量的正交性则源于<span class="math-inline">A</span>的对称性和递归关系（参见<a href="node103.html#herm-recursion">4.10</a>）。一旦某个特征值收敛，即Ritz对具有小残差（见<a href="#estimate___residual"><button class="crossref"></button></a>），所有基向量<span class="math-inline">v_j</span>都会在收敛特征值的特征空间方向上受到扰动。结果是，三对角矩阵<span class="math-inline">T</span>中很快会出现该特征值的重复副本。Paige[<a href="node421.html#paig71">347</a>]首次发现了这一现象，读者可参考专著[<a href="node421.html#parl80">353</a>]以获得详细讨论。
 
 <p>
-Let us consider three different strategies to handle this.
+让我们考虑三种不同的策略来处理这一问题。
 <br><hr>
 <!--Table of Child-Links-->
 <a name="CHILD_LINKS"><strong>Subsections</strong></a>
 
 <ul>
-<li><ul>
-<li><a name="tex2html2383" href="node109.html">Full Reorthogonalization.</a>
-<li><a name="tex2html2384" href="node110.html">Selective Reorthogonalization.</a>
-<li><a name="tex2html2385" href="node111.html">Local Reorthogonalization and Detecting Spurious Ritz Values.</a>
-</ul></ul>
+<li><a name="tex2html2383" href="node109.html">完全重新正交化</a>
+<li><a name="tex2html2384" href="node110.html">选择重新正交化</a>
+<li><a name="tex2html2385" href="node111.html">部重新正交化和检测虚假的Ritz值</a>
+</ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2381"
+  href="node109.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2375"
+  href="node103.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2369"
+  href="node107.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2377"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2379"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2382" href="node109.html">完全重新正交化</a>
+<b>上一级：</b><a name="tex2html2376" href="node103.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html2370" href="node107.html">谱变换</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

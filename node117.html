@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Implicitly Restarted Lanczos Method &nbsp; R.&nbsp;Lehoucq and D.&nbsp;Sorensen</title>
+<title>隐式重启Lanczos R.&nbsp;Lehoucq and D.&nbsp;Sorensen</title>
 <meta charset="utf-8">
-<meta name="description" content="Implicitly Restarted Lanczos Method &nbsp; R.&nbsp;Lehoucq and D.&nbsp;Sorensen">
+<meta name="description" content="隐式重启Lanczos R.&nbsp;Lehoucq and D.&nbsp;Sorensen">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -68,51 +68,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <b>下一节：</b><a name="tex2html2508" href="node118.html">隐式重启</a>
 <b>上一级：</b><a name="tex2html2502" href="node85.html">厄米特征值问题</a>
-<b>上一节：</b><a name="tex2html2496" href="node116.html">Results for L-Shaped Membrane</a>
-  
-  
+<b>上一节：</b><a name="tex2html2496" href="node116.html">L形膜片位移-逆结果</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h1><a name="SECTION001350000000000000000"></a><a name="sec:irlm"></a><a name="7954"></a>
-<br>
-Implicitly Restarted Lanczos Method 
-<br>&nbsp; <em>R.&nbsp;Lehoucq and D.&nbsp;Sorensen</em>
+<h1>
+<a name="SECTION001350000000000000000"></a>
+<a name="sec:irlm"></a><a name="7954"></a>
+隐式重启Lanczos方法
+<br>&nbsp; <em>R. Lehoucq 和 D. Sorensen</em>
 </h1>
 
 <p>
-The Lanczos process for a Hermitian matrix <span class="math-inline">A=A^{\ast}</span> has been 
-derived  previously in &#167;<a href="node103.html#sec:lan">4.4</a>.
-Here, we discuss how to apply
-implicit restart.
-Our starting point is a <em><span class="math-inline">k</span>-step 
-Lanczos factorization</em>&nbsp;(<a href="node103.html#herm-recursion">4.10</a>):
-<a name="7959"></a>
-<br><p></p>
-<div align="CENTER">
-
+厄米矩阵的Lanczos过程已在第<a href="node103.html#sec:lan">4.4</a>节中推导过。
+这里，我们将讨论如何应用隐式重启技术。
+我们的起点是一个<em><span class="math-inline">k</span>步Lanczos分解</em>（参见<a href="node103.html#herm-recursion">4.10</a>）：
 
 <div class="math-display">A V_k = V_k T_k + r_k e_k^{\ast},</div>
-</div>
-<br clear="ALL">
-<p></p>
-where 
-<span class="math-inline">V_k \in {\mathcal C}^{n \times k}</span> 
-has orthonormal columns, 
-<span class="math-inline"> V_k^{\ast} r_k = 0</span>,
-and 
-<span class="math-inline">T_k \in {\mathcal R}^{k \times k}</span> is real, symmetric, and tridiagonal 
-with nonnegative subdiagonal elements.  
-The columns of <span class="math-inline"> V_k </span> are referred to as the <em>Lanczos vectors</em>.
-<a name="7967"></a> 
-For implicit restart it is important that
-the columns of <span class="math-inline"> V_k </span> be made orthogonal to full accuracy.
+
+其中，<span class="math-inline">V_k \in {\mathcal C}^{n \times k}</span>
+的列是正交归一化的，<span class="math-inline"> V_k^{\ast} r_k = 0</span>，
+而<span class="math-inline">T_k \in {\mathcal R}^{k \times k}</span>是实对称且三对角化的，其次对角线元素非负。
+<span class="math-inline"> V_k </span>的列被称为<em>Lanczos向量</em>。
+<a name="7967"></a>
+对于隐式重启，确保<span class="math-inline"> V_k </span>的列达到完全正交精度至关重要。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
 <li><a name="tex2html2509" href="node118.html">隐式重启</a>
@@ -133,6 +118,27 @@ the columns of <span class="math-inline"> V_k </span> be made orthogonal to full
 </ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2507"
+  href="node118.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2501"
+  href="node85.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2495"
+  href="node116.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2503"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2505"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2508" href="node118.html">隐式重启</a>
+<b>上一级：</b><a name="tex2html2502" href="node85.html">厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html2496" href="node116.html">L形膜片位移-逆结果</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

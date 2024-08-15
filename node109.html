@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Full Reorthogonalization.</title>
+<title>完全重新正交化</title>
 <meta charset="utf-8">
-<meta name="description" content="Full Reorthogonalization.">
+<meta name="description" content="完全重新正交化">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,46 +66,52 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2399" href="node110.html">Selective Reorthogonalization.</a>
+<b>下一节：</b><a name="tex2html2399" href="node110.html">选择重新正交化</a>
 <b>上一级：</b><a name="tex2html2393" href="node108.html">重新正交化</a>
 <b>上一节：</b><a name="tex2html2387" href="node108.html">重新正交化</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001344010000000000000">
-Full Reorthogonalization.</a>
+完全重新正交化</a>
 </h4>
-We could play it safe and do a <i>full reorthogonalization</i> either by
-modified or classical Gram-Schmidt, in the latter case computing the
-orthogonalization coefficients in a vector
-<br><p></p>
-<div align="CENTER">
 
+我们可以选择稳妥的做法，即进行<i>完全重新正交化</i>，无论是通过修正的或是经典的高斯-施密特方法。在后一种情况下，计算正交化系数向量
 
 <div class="math-display">h=V_j^{\ast} v_{j+1}</div>
-</div>
-<br clear="ALL">
-<p></p>
-and then subtracting
-<br><p></p>
-<div align="CENTER">
 
+然后进行减法操作
 
 <div class="math-display">v'_{j+1}=v_{j+1}-V_jh</div>
-</div>
-<br clear="ALL">
-<p></p>
-to get the improved vector <span class="math-inline">v'_{j+1}</span>. If the norm is decreased by a
-nontrivial amount, say 
-<span class="math-inline">\Vert v'_{j+1}\Vert&lt;\frac{1}{\sqrt{2}}\Vert v_{j+1}\Vert</span>,
-this will have to be repeated, but this will hardly ever happen when
-treating properly computed Lanczos vectors.
+
+以获得改进后的向量 <span class="math-inline">v'_{j+1}</span>。如果范数减少了一个显著的量，例如 
+<span class="math-inline">\Vert v'_{j+1}\Vert&lt;\frac{1}{\sqrt{2}}\Vert v_{j+1}\Vert</span>，
+这种情况需要重复进行，但在正确处理计算出的Lanczos向量时，这种情况几乎不会发生。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2398"
+  href="node110.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2392"
+  href="node108.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2386"
+  href="node108.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2394"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2396"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2399" href="node110.html">选择重新正交化</a>
+<b>上一级：</b><a name="tex2html2393" href="node108.html">重新正交化</a>
+<b>上一节：</b><a name="tex2html2387" href="node108.html">重新正交化</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

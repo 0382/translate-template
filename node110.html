@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Selective Reorthogonalization.</title>
+<title>选择重新正交化</title>
 <meta charset="utf-8">
-<meta name="description" content="Selective Reorthogonalization.">
+<meta name="description" content="选择重新正交化">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,105 +66,60 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2413" href="node111.html">Local Reorthogonalization and Detecting</a>
+<b>下一节：</b><a name="tex2html2413" href="node111.html">局部重新正交化</a>
 <b>上一级：</b><a name="tex2html2407" href="node108.html">重新正交化</a>
-<b>上一节：</b><a name="tex2html2401" href="node109.html">Full Reorthogonalization.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2401" href="node109.html">完全重新正交化</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001344020000000000000">
-选择性再正交化</a>
+<!--End of Navigation Panel-->
+<h4><a name="SECTION001344020000000000000">
+选择重新正交化</a>
 </h4>
-随着基的大小 <span class="math-inline">j</span> 增长，完全再正交化将需要大量的算术工作，我们寻求一种更经济的方案。可以证明，只要基是<i>半正交</i>的，即正交到机器精度的二分之一，Lanczos算法的大多数期望性质都能保持。
-<br>
-<div align="RIGHT">
 
+随着基的大小 <span class="math-inline">j</span> 增长，完全再正交化将需要大量的算术工作，我们寻求一种更经济的方案。可以证明，只要基是<i>近正交（semiorthogonal）</i>的，即正交到机器精度的二分之一，Lanczos算法的大多数期望性质都能保持。
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="semiorthogonal"></a><div class="math-display">W_{j}=V^{\ast}_jV_j=I_{j}+E\,, \quad \Vert E\Vert &lt; \sqrt{\eps}\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(32)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#semiorthogonal">W_{j}=V^{\ast}_jV_j=I_{j}+E\,, \quad \Vert E\Vert &lt; \sqrt{\epsilon_M}\,.</div>
 
 <p>
 读者可参考Simon[<a href="node421.html#simo84b">402</a>]的详细讨论。证明指出，如果通过具有半正交基 <span class="math-inline">V_j</span> 的Lanczos算法计算三对角矩阵 <span class="math-inline">T</span>，那么 <span class="math-inline">T</span> 是 <span class="math-inline">A</span> 在计算基 <span class="math-inline">V_j</span> 所张成子空间上的完全精确投影。
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">T_{j}=N_j^{\ast} AN_j+G\,, \quad \Vert G\Vert = O(\epsilon_M\Vert A\Vert)\,.</div>
 
-<div class="math-display">T_{j}=N_j^{\ast} AN_j+G\,, \quad \Vert G\Vert = O(\eps\Vert A\Vert)\,.</div>
-</div>
-<br clear="ALL">
-<p></p>
 这里 <span class="math-inline">N_j</span> 是 <span class="math-inline">V_j</span> 所张成子空间的一个正交基。即使 <span class="math-inline">N_j</span> 不显式已知，我们也知道 <span class="math-inline">T_j</span> 的特征值是 <span class="math-inline">A</span> 特征值的精确近似。
 
 <p>
-确保计算基半正交的一种方法是使用Paige推导的递归关系，监测早期步骤中正交性的损失如何传播到后续步骤，并在递归关系指示超过 <span class="math-inline">\sqrt{\eps}</span> 阈值时进行再正交化。该递归关系涉及乘积矩阵 <span class="math-inline">W_{j}</span> 的连续元素 <span class="math-inline">\omega_{j,k}</span>，并从基本递归关系推导得出。
+确保计算基半正交的一种方法是使用Paige推导的递归关系，监测早期步骤中正交性的损失如何传播到后续步骤，并在递归关系指示超过 <span class="math-inline">\sqrt{\epsilon_M}</span> 阈值时进行再正交化。该递归关系涉及乘积矩阵 <span class="math-inline">W_{j}</span> 的连续元素 <span class="math-inline">\omega_{j,k}</span>，并从基本递归关系推导得出。
 
 <p>
 首先注意到计算向量 <span class="math-inline">v_{j+1}</span> 满足基本递归关系：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\beta_jv_{j+1}=Av_j-\alpha_j v_j - \beta_{j-1}v_{j-1}+f_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中 <span class="math-inline">f_j</span> 是舍入误差向量。为得到乘积矩阵 <span class="math-inline">W_{j}</span> 的元素 <span class="math-inline">\omega_{j,k}</span>，我们用 <span class="math-inline">v_k^{\ast}</span> 预乘以上式：
-<br><p></p>
-<div align="CENTER">
 
+其中 <span class="math-inline">f_j</span> 是舍入误差向量。为得到乘积矩阵 <span class="math-inline">W_{j}</span> 的元素 <span class="math-inline">\omega_{j,k}</span>，我们用 <span class="math-inline">v_k^{\ast}</span> 预乘以上式：
 
 <div class="math-display">\beta_j\omega_{j+1,k}=v_k^{\ast}Av_j-\alpha_j \omega_{j,k} - \beta_{j-1}\omega_{j-1,k}+v_k^{\ast}f_j\,.</div>
-</div>
-<br clear="ALL">
-<p></p>
-交换 <span class="math-inline">j</span> 和 <span class="math-inline">k</span> 的乘积关系得到：
-<br><p></p>
-<div align="CENTER">
 
+交换 <span class="math-inline">j</span> 和 <span class="math-inline">k</span> 的乘积关系得到：
 
 <div class="math-display">\beta_k\omega_{j,k+1}=v_j^{\ast}Av_k-\alpha_k \omega_{j,k} - \beta_{k-1}\omega_{j,k-1}+v_j^{\ast}f_k\,,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 两式相减得到：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#w-recursion">
+\beta_j\omega_{j+1,k}=\beta_k\omega_{j,k+1}+(\alpha_k-\alpha_j)\omega_{j,k} + \beta_{k-1}\omega_{j,k-1} - \beta_{j-1}\omega_{j-1,k}-v_j^{\ast}f_k+v_k^{\ast}f_j.
+</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="w-recursion"></a><div class="math-display">\beta_j\omega_{j+1,k}=\beta_k\omega_{j,k+1}+(\alpha_k-\alpha......j-1}\omega_{j-1,k}-v_j^{\ast}f_k+v_k^{\ast}f_j.\hspace*{6pt}</div></td>
-<td WIDTH=10 align="RIGHT">
-(33)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 注意到由于 <span class="math-inline">A</span> 是厄米矩阵，涉及 <span class="math-inline">A</span> 的项抵消了。
 
 <p>
-我们使用此递归关系逐行填充对称矩阵 <span class="math-inline">W</span> 的下半三角部分。对角元素 <span class="math-inline">\omega_{k,k}=1</span> 和紧邻对角线上下的元素 <span class="math-inline">\omega_{k-1,k}=\omega_{k,k-1}=O(\eps)</span> 在舍入误差水平上，由于对称性和显式正交化。这为递归关系提供了初始值。我们估计最后两项的绝对值之和为 <span class="math-inline">2\eps\Vert A\Vert</span>，并将其输入递归关系，选择符号以最大化新的 <span class="math-inline">\vert\omega_{j+1,k}\vert</span>。
-<br><p></p>
-<div align="CENTER">
-
+我们使用此递归关系逐行填充对称矩阵 <span class="math-inline">W</span> 的下半三角部分。对角元素 <span class="math-inline">\omega_{k,k}=1</span> 和紧邻对角线上下的元素 <span class="math-inline">\omega_{k-1,k}=\omega_{k,k-1}=O(\epsilon_M)</span> 在舍入误差水平上，由于对称性和显式正交化。这为递归关系提供了初始值。我们估计最后两项的绝对值之和为 <span class="math-inline">2\epsilon_M\Vert A\Vert</span>，并将其输入递归关系，选择符号以最大化新的 <span class="math-inline">\vert\omega_{j+1,k}\vert</span>。
 
 <div class="math-display">\tilde{\omega}=\beta_k\omega_{j,k+1}+(\alpha_k-\alpha_j)\omega_{j,k}+\beta_{k-1}\omega_{j,k-1}-\beta_{j-1}\omega_{j-1,k},</div>
-</div>
-<br clear="ALL">
-<p></p>
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">\omega_{j+1,k}=(\tilde{\omega}+\mathrm{sign}(\tilde{\omega})2\eps\Vert A\Vert)/\beta_j.</div>
-</div>
-<br clear="ALL">
-<p></p>
+<div class="math-display">\omega_{j+1,k}=(\tilde{\omega}+\mathrm{sign}(\tilde{\omega})2\epsilon_M\Vert A\Vert)/\beta_j.</div>
 
 <p>
-一旦某个元素 <span class="math-inline">\omega_{j+1,k}</span> 超过 <span class="math-inline">\sqrt{\eps}</span> 阈值，我们就将当前向量 <span class="math-inline">v_{j}</span> 和 <span class="math-inline">v_{j+1}</span> 对所有先前的向量 <span class="math-inline">v_k\,,\, k=1,\dots,j</span> 进行正交化，并将相应的 <span class="math-inline">\omega_{j,k}</span> 和 <span class="math-inline">\omega_{j+1,k}</span> 降至舍入误差水平。由于Lanczos方法中的三项递归关系，我们需要正交化两个向量。存储矩阵 <span class="math-inline">W</span> 的 <span class="math-inline">\omega</span> 估计值时，仅需存储最新的两行 <span class="math-inline">j-1</span> 和 <span class="math-inline">j</span>。
+一旦某个元素 <span class="math-inline">\omega_{j+1,k}</span> 超过 <span class="math-inline">\sqrt{\epsilon_M}</span> 阈值，我们就将当前向量 <span class="math-inline">v_{j}</span> 和 <span class="math-inline">v_{j+1}</span> 对所有先前的向量 <span class="math-inline">v_k\,,\, k=1,\dots,j</span> 进行正交化，并将相应的 <span class="math-inline">\omega_{j,k}</span> 和 <span class="math-inline">\omega_{j+1,k}</span> 降至舍入误差水平。由于Lanczos方法中的三项递归关系，我们需要正交化两个向量。存储矩阵 <span class="math-inline">W</span> 的 <span class="math-inline">\omega</span> 估计值时，仅需存储最新的两行 <span class="math-inline">j-1</span> 和 <span class="math-inline">j</span>。
 
 <p>
 上述技术之一在[<a href="node421.html#simo84b">402</a>]中描述。另一种方法仅对那些 <span class="math-inline">\omega_{j+1,k}</span> 超过阈值的向量 <span class="math-inline">v_k</span> 进行显式正交化。Simon[<a href="node421.html#simo84b">402</a>]称之为<i>部分</i>再正交化，而这里描述的<i>周期性</i>再正交化，由Grcar[<a href="node421.html#grcar81">204</a>]首次描述，实现更简单，并能使用Level 2 BLAS操作。
@@ -187,9 +142,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2413" href="node111.html">Local Reorthogonalization and Detecting</a>
+<b>下一节：</b><a name="tex2html2413" href="node111.html">局部重新正交化</a>
 <b>上一级：</b><a name="tex2html2407" href="node108.html">重新正交化</a>
-<b>上一节：</b><a name="tex2html2401" href="node109.html">Full Reorthogonalization.</a>
+<b>上一节：</b><a name="tex2html2401" href="node109.html">完全重新正交化</a>
   
   
 <!--End of Navigation Panel-->
