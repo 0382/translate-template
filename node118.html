@@ -67,14 +67,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2535" href="node119.html">位移的选择</a>
-<b>上一级：</b><a name="tex2html2529" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2523" href="node117.html">Implicitly Restarted Lanczos Method</a>
-  
-  
+<b>上一级：</b><a name="tex2html2529" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2523" href="node117.html">隐式重启Lanczos</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001351000000000000000"></a> <a name="imprest"></a><a name="7970"></a>
-<br>
 隐式重启
 </h2> 
 
@@ -92,76 +89,77 @@ Lanczos过程的一个不幸方面是，无法预先确定需要多少步才能�
 
 <p>
 隐式重启提供了一种从大型Krylov子空间中提取有趣信息的方法，同时避免了与标准方法相关的存储和数值困难。它通过不断将有趣的信息压缩到一个固定大小的 <span class="math-inline">k</span> 维子空间中来实现这一点。这是通过隐式移位QR机制完成的。一个长度为 <span class="math-inline">m = k+p</span> 的Lanczos分解，
-<a name="lanc_fact"></a>A V_m =  V_m T_m  + r_m e_m^ ,
+
+<div class="math-display" name="#lanc_fact">A V_m =  V_m T_m  + r_m e_m^\ast, \tag{4.20}</div>
+
 被压缩为一个保留感兴趣特征信息的 <span class="math-inline">k</span> 长度的分解。这是通过应用 <span class="math-inline">p</span> 个隐式移位QR步完成的。移位过程的第一阶段结果是
 
-<a name="lanupd"></a>A V_m^+ =  V_m^+ T_m^+  + r_m e_m^ Q ,
+<div class="math-display" name="#lanupd">A V_m^+ =  V_m^+ T_m^+  + r_m e_m^\ast Q, \tag{4.21}</div>
 
 其中 <span class="math-inline"> V_m^+ = V_m Q</span>， <span class="math-inline">T_m^+ = Q^{\ast} T_m Q</span>，以及
 
-<span class="math-inline">Q = Q_1Q_2 \cdots Q_p</span>。每个 <span class="math-inline">Q_j</span> 是与移位QR算法中使用的移位 <span class="math-inline">\mu_j</span> 相关的正交矩阵。由于矩阵 <span class="math-inline">Q_j</span> 的海森堡结构，向量 <span class="math-inline">e_m^{\ast} Q</span> 的前 <span class="math-inline">k-1</span> 个条目为零。这意味着方程 (<a href="node118.html#lanupd">4.21</a>) 中的前 <span class="math-inline">k</span> 列保持在Lanczos关系中。将 (<a href="node118.html#lanupd">4.21</a>) 两边的第一个 <span class="math-inline">k</span> 列等式化，提供了更新的 <span class="math-inline">k</span> 步Lanczos分解
-<br><p></p>
-<div align="CENTER">
+<span class="math-inline">Q = Q_1Q_2 \cdots Q_p</span>。每个 <span class="math-inline">Q_j</span> 是与移位QR算法中使用的移位 <span class="math-inline">\mu_j</span> 相关的正交矩阵。由于矩阵 <span class="math-inline">Q_j</span> 的海森堡结构，向量 <span class="math-inline">e_m^{\ast} Q</span> 的前 <span class="math-inline">k-1</span> 个元素为零。这意味着方程 (<a href="node118.html#lanupd">4.21</a>) 中的前 <span class="math-inline">k</span> 列保持在Lanczos关系中。将 (<a href="node118.html#lanupd">4.21</a>) 两边的第一个 <span class="math-inline">k</span> 列等式化，提供了更新的 <span class="math-inline">k</span> 步Lanczos分解
 
-<div class="math-display">A V_k^+ = V_k^+ T_k^+ + r_k^+ e_k^{\ast} ,</div>
-</div>
-<br clear="ALL">
-<p></p>
+<div class="math-display">A V_k^+ = V_k^+ T_k^+ + r_k^+ e_k^{\ast},</div>
+
 具有更新形式的残差
 <span class="math-inline"> r_k^+ = V_m^+ e_{k+1} \beta_k + r_m Q(m,k)</span>。以此为起点，可以应用 <span class="math-inline">p</span> 个额外的Lanczos步骤返回到原始的 <span class="math-inline">m</span> 步形式。
 
 <p>
-隐式重启Lanczos方法（IRLM）的模板在算法 <a href="node118.html#fig:irlm">4.7</a> 中给出。
+隐式重启Lanczos方法（IRLM）的模板在算法 <a href="node118.html#alg-irlm">4.7</a> 中给出。
 <a name="7989"></a>
 
-<p>
-<br>
-<a name="fig:irlm"></a><img
- width="598" height="393" align="BOTTOM" border="0"
- src="img977.png"
- alt="\begin{algorithm}{IRLM
-for HEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb\=ccc\=dd...
-...e_m^{\ast} <span class="math-inline">\ \\
-{\rm (13)}\&gt; \&gt;{\bf end repeat}
-\end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre style="text-align: left;" name="#alg-irlm">
+算法 4.7 HEP的隐式重启Lanczos方法（IRLM）
+(1)  取初始猜测向量 <span class="math-inline">v</span>，归一化 <span class="math-inline">v_1 = v/\Vert v\Vert_2</span>
+(2)  计算 <span class="math-inline">m</span>-步Lanczos分解 <span class="math-inline">AV_m = V_mT_m + r_me^\ast_m</span>
+(3)  repeat until 收敛（<span class="math-inline">T_k=D_k</span> 对角化）
+(4)      计算谱 <span class="math-inline">\sigma(T_m)</span>，选择 <span class="math-inline">p</span> 个位移 <span class="math-inline">\mu_1, \mu_2, \dots, \mu_p</span>
+(5)      初始化 <span class="math-inline">Q = I_m</span>
+(6)      for j = 1,2,...,p,
+(7)          QR分解 <span class="math-inline">Q_jR_j = T_m - \mu_j I</span>
+(8)          更新 <span class="math-inline">T_m = Q_j^\ast T_m Q_j, Q = QQ_j</span>
+(9)      end for
+(10)     <span class="math-inline">r_k = v_{k+1}\beta_k + r_m \sigma_k</span>, 其中 <span class="math-inline">\beta_k = T(k+1,k)</span> 及 <span class="math-inline">\sigma_k = Q(m, k)</span>
+(11)     <span class="math-inline">V_k = V_m Q(:, 1:k)</span>; <span class="math-inline">T_k = T_m(1:k, 1:k)</span>
+(12)     以如下 <span class="math-inline">k</span> 步Lanczos分解开始
+             <span class="math-inline">AV_k = V_kT_k+r_k e^\ast_k</span>,
+        在进行 <span class="math-inline">p</span> 步Lanczos迭代后，得到新的 <span class="math-inline">m</span> 步Lanczos分解
+             <span class="math-inline">AV_m = V_mT_m+r_m e^\ast_m</span>
+(13) end repeat
+</pre>
 
 <p>
-现在我们将描述一些实现细节，参考算法 <a href="node118.html#fig:irlm">4.7</a> 中的相应阶段。
+现在我们将描述一些实现细节，参考算法 <a href="node118.html#alg-irlm">4.7</a> 中的相应阶段。
 <dl>
 <dt><strong>(1)</strong></dt>
-<dd>理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的初始向量 </span>v<span class="math-inline">。如果有一系列密切相关的特征值问题，前一个问题的解可能为下一个问题提供初始向量。在没有其他考虑的情况下，随机向量是一个合理的选择。
+<dd>理想情况下，对于特征值计算，应尝试构建一个在感兴趣的特征向量方向上占主导地位的初始向量 <span class="math-inline">v</span>。如果有一系列密切相关的特征值问题，前一个问题的解可能为下一个问题提供初始向量。在没有其他考虑的情况下，随机向量是一个合理的选择。
 
 <p>
 </dd>
 <dt><strong>(2)</strong></dt>
-<dd>下面的算法 <a href="node120.html#fig:ksteplan">4.8</a> 可以用来计算这个初始的 </span>(m = k+p)<span class="math-inline"> 步Lanczos分解。
+<dd>下面的算法 <a href="node120.html#alg-ksteplan">4.8</a> 可以用来计算这个初始的 <span class="math-inline">(m = k+p)</span> 步Lanczos分解。
 
 <p>
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>移位 </span>\mu_j<span class="math-inline"> 是根据用户的“所需集”规范以及 </span>T_m<span class="math-inline"> 的谱的当前和可能过去的信息选择的；参见 §<a href="node119.html#irlm_shiftsel">4.5.2</a> 以下。
+<dd>移位 <span class="math-inline">\mu_j</span> 是根据用户的“所需集”规范以及 <span class="math-inline">T_m</span> 的谱的当前和可能过去的信息选择的；参见第<a href="node119.html#irlm_shiftsel">4.5.2</a>节。
 
 <p>
 </dd>
 <dt><strong>(6)-(9)</strong></dt>
-<dd>使用 </span>\mu_1, \mu_2, \ldots, \mu_p<span class="math-inline"> 作为移位，对 </span>T_m<span class="math-inline"> 应用 </span>p<span class="math-inline"> 步移位QR迭代。这应该使用隐式移位QR变体（即“凸起追踪”机制）来完成。如果使用精确移位，则在完成 </span>p<span class="math-inline"> 步QR后，</span>\beta_{k} = T_m(k+1,k)<span class="math-inline"> 应为零，并且前导子矩阵 </span>T_m(1:k,1:k)<span class="math-inline"> 应具有 </span>\theta_1, \theta_2, \ldots, \theta_k<span class="math-inline"> 作为其特征值。
+<dd>使用 <span class="math-inline">\mu_1, \mu_2, \ldots, \mu_p</span> 作为移位，对 <span class="math-inline">T_m</span> 应用 <span class="math-inline">p</span> 步移位QR迭代。这应该使用隐式移位QR变体（即“凸起追踪”机制）来完成。如果使用精确移位，则在完成 <span class="math-inline">p</span> 步QR后，<span class="math-inline">\beta_{k} = T_m(k+1,k)</span> 应为零，并且前导子矩阵 <span class="math-inline">T_m(1:k,1:k)</span> 应具有 <span class="math-inline">\theta_1, \theta_2, \ldots, \theta_k</span> 作为其特征值。
 
 <p>
 </dd>
 <dt><strong>(10)</strong></dt>
 <dd>当使用精确移位时，步骤 (6)-(9) 中提到的属性通常在有限精度下近似为真。然而，由于舍入误差，它们可能无法实现。因此，在更新残差向量时包含两个项是很重要的
-</span>r_k \leftarrow v_{k+1}\beta_{k} + r_m \sigma_k<span class="math-inline">。请注意，使用精确移位，更新后的 </span> V_k <span class="math-inline"> 和 </span>T_k<span class="math-inline"> 将提供一个新的 </span>k<span class="math-inline"> 步Lanczos分解，其Ritz值和向量是目前为止对用户规范的最佳近似。
+<span class="math-inline">r_k \leftarrow v_{k+1}\beta_{k} + r_m \sigma_k</span>。请注意，使用精确移位，更新后的 <span class="math-inline">V_k</span> 和 <span class="math-inline">T_k</span> 将提供一个新的 <span class="math-inline">k</span> 步Lanczos分解，其Ritz值和向量是目前为止对用户规范的最佳近似。
 
 <p>
 </dd>
 <dt><strong>(12)</strong></dt>
-<dd>这一步需要对之前讨论的Lanczos过程进行轻微修改。它从通常方案的第 </span>k<span class="math-inline"> 步开始，并假设所有 </span>k<span class="math-inline"> 个Lanczos向量都已保留在一个矩阵 </span> V_k $ 中。详细信息在下面的算法 <a href="node120.html#fig:ksteplan">4.8</a> 中给出。
+<dd>这一步需要对之前讨论的Lanczos过程进行轻微修改。它从通常方案的第 <span class="math-inline">k</span> 步开始，并假设所有 <span class="math-inline">k</span> 个Lanczos向量都已保留在一个矩阵 <span class="math-inline">V_k</span> 中。详细信息在下面的算法 <a href="node120.html#alg-ksteplan">4.8</a> 中给出。
 
 <p>
 </dd>
@@ -186,10 +184,8 @@ for HEP
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2535" href="node119.html">位移的选择</a>
-<b>上一级：</b><a name="tex2html2529" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2523" href="node117.html">Implicitly Restarted Lanczos Method</a>
-  
-  
+<b>上一级：</b><a name="tex2html2529" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2523" href="node117.html">隐式重启Lanczos</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

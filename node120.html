@@ -67,60 +67,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2563" href="node121.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html2557" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一级：</b><a name="tex2html2557" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2551" href="node119.html">位移的选择</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001353000000000000000"></a>
 <a name="8054"></a>
-<br>
-兰索斯法在GEMV形式中的应用
+GEMV形式的Lanczos方法
 </h2>
-在算法<a href="node118.html#fig:irlm">4.7</a>每次重启时，我们拥有一个
- <span class="math-inline">k</span>步的兰索斯分解
-<br><p></p>
-<div align="CENTER">
 
+在算法<a href="node118.html#alg-irlm">4.7</a>每次重启时，我们拥有一个 <span class="math-inline">k</span>步的Lanczos分解
 
 <div class="math-display">AV_k = V_k T_k + r_k e_k^{\ast}</div>
-</div>
-<br clear="ALL">
-<p></p>
-或者，对于<span class="math-inline">k=0</span>，有一个初始向量<span class="math-inline">r_0</span>。
-算法<a href="node120.html#fig:ksteplan">4.8</a>提供了一个模板，用于应用<span class="math-inline">p</span>个额外的
-兰索斯步骤
-将其扩展为一个<span class="math-inline">m</span>步的兰索斯分解
-<br><p></p>
-<div align="CENTER">
 
+或者，对于<span class="math-inline">k=0</span>，有一个初始向量<span class="math-inline">r_0</span>。
+算法<a href="node120.html#alg-ksteplan">4.8</a>提供了一个模板，用于应用<span class="math-inline">p</span>个额外的
+Lanczos步骤将其扩展为一个<span class="math-inline">m</span>步的Lanczos分解
 
 <div class="math-display">AV_m = V_m T_m + r_m e_m^{\ast}.</div>
-</div>
-<br clear="ALL">
-<p></p>
 
 <p>
 
-<p></p>
-<div align="CENTER">
-
-<p><a name="fig:ksteplan"></a></p><img
- width="598" height="289" border="0"
- src="img992.png"
- alt="\begin{figure}\begin{algorithm}{<span class="math-inline">m</span>-Step Lanczos Factorization}
-{
-\begin{tabbi...
-... if}\\
-{\rm (12)} \&gt; \&gt;{\bf end for}
-\end{tabbing}}
-\end{algorithm}\end{figure}">
-</div>
-<p></p>
+<pre style="text-align: left;" id="alg-ksteplan">
+算法 4.8：<small>m</small> 步Lanczos分解
+(1)  开始于 <span class="math-inline">r = r_k</span> （之前的剩余向量或初始向量），令 <span class="math-inline">\beta_k = \Vert r_k \Vert</span>
+(2)  for j = k+1,...,m
+(3)      <span class="math-inline">v_j = r/\beta_{j-1}</span>
+(4)      <span class="math-inline">r = Av_j - v_{j-1}\beta_{j-1}</span>
+(5)      <span class="math-inline">\alpha_j = v^\ast_j r</span>
+(6)      <span class="math-inline">r = r - v_j\alpha_j</span>
+(7)      if <span class="math-inline">\Vert r \Vert_2 \lt \rho \sqrt{\alpha_j^2 + \beta^2_{j-1}}</span>
+(8)          <span class="math-inline">s = V_j^\ast r</span>
+(9)          <span class="math-inline">r = r - V_j s</span>
+(10)         <span class="math-inline">\alpha_j = \alpha_j + s_j, \; \beta_j = \beta_j + s_{j-1}</span>
+(11)     end if
+(12) end for
+</pre>
 
 <p>
-我们现在将描述一些实现细节，参考算法<a href="node120.html#fig:ksteplan">4.8</a>中的相应阶段。
+我们现在将描述一些实现细节，参考算法<a href="node120.html#alg-ksteplan">4.8</a>中的相应阶段。
 <dl>
 <dt><strong>(2)</strong></dt>
 <dd>如果从头开始(<span class="math-inline">k=0</span>)，取<span class="math-inline">r_0=v</span>作为初始向量。
@@ -138,7 +123,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong>(5)</strong></dt>
-<dd>这是兰索斯三项递归步骤，用于使<span class="math-inline">r</span>相对于<span class="math-inline">V_j</span>的两个最新列正交化。
+<dd>这是Lanczos三项递归步骤，用于使<span class="math-inline">r</span>相对于<span class="math-inline">V_j</span>的两个最新列正交化。
 它以改进的格拉姆-施密特形式组织。
 
 <p>
@@ -153,7 +138,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline"> \Vert r\Vert/ \sqrt{ \alpha_{j}^2 + \beta_{j-1}^2 } = \tan \theta</span>，
 其中<span class="math-inline">\theta</span>是向量<span class="math-inline">r</span>与<span class="math-inline">V_{j}</span>的值域空间之间的夹角。
 <span class="math-inline">\rho</span>的值越大，正交性要求越严格。
-当<span class="math-inline">\rho = 0</span>时，算法恢复为没有再正交化的标准兰索斯过程。
+当<span class="math-inline">\rho = 0</span>时，算法恢复为没有再正交化的标准Lanczos过程。
 这种修正的一个步骤可能不够，应该作为一个迭代实现，后续修正的测试为
 <span class="math-inline">\Vert r\Vert &lt; \rho \Vert s \Vert</span>；
 参见[<a
@@ -164,7 +149,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dl>
 
 <p>
-众所周知，经典的兰索斯三项方案在 Ritz 值（近似特征值）收敛到 <span class="math-inline">A</span> 的特征值时，将无法精确生成正交向量。
+众所周知，经典的Lanczos三项方案在 Ritz 值（近似特征值）收敛到 <span class="math-inline">A</span> 的特征值时，将无法精确生成正交向量。
 为了解决这个问题，我们引入了一种迭代细化技术，该技术以非常合理的成本保持正交性至完全工作精度。
 隐式重启的特殊情况使得这种修改对于获得准确的特征值和数值上正交的特征向量至关重要。
 如果数值正交性没有保持，隐式重启机制的效果将降低，甚至可能失败。
@@ -190,7 +175,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2563" href="node121.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html2557" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>上一级：</b><a name="tex2html2557" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2551" href="node119.html">位移的选择</a>
   
   

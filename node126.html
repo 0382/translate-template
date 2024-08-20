@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Locking .</title>
+<title>锁定</title>
 <meta charset="utf-8">
-<meta name="description" content="Locking .">
+<meta name="description" content="锁定">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,59 +66,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2651" href="node127.html">Purging .</a>
+<b>下一节：</b><a name="tex2html2651" href="node127.html">清洗</a>
 <b>上一级：</b><a name="tex2html2645" href="node124.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html2639" href="node125.html">Locking or Purging a</a>
-  
-  
+<b>上一节：</b><a name="tex2html2639" href="node125.html">锁定或清洗</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001357020000000000000">
-锁定 <span class="math-inline">\theta </span>。</a>
+锁定 <span class="math-inline">\theta </span></a>
 </h4>
+
 首先讨论的是锁定单个收敛的 Ritz 值。假设
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">Ty = y \theta, \; \Vert y\Vert = 1,</div>
 
-<div class="math-display">Ty = y \theta, \ \ \Vert y\Vert = 1,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中 <span class="math-inline">e_k^* y = \eta</span>，且 <span class="math-inline">|\eta| \le \epsilon_D \Vert T \Vert</span>。这里，<span class="math-inline">\epsilon_M \le \epsilon_D < 1</span> 是一个指定的相对精度容差，介于 <span class="math-inline">\epsilon_M</span> 和 <span class="math-inline">1</span> 之间。
+其中 <span class="math-inline">e_k^* y = \eta</span>，且 <span class="math-inline">|\eta| \le \epsilon_D \Vert T \Vert</span>。这里，<span class="math-inline">\epsilon_M \le \epsilon_D \lt 1</span> 是一个指定的相对精度容差，介于 <span class="math-inline">\epsilon_M</span> 和 <span class="math-inline">1</span> 之间。
 
 <p>
-如果 <span class="math-inline">\theta </span> 是“需要的”，那么锁定 <span class="math-inline">\theta </span> 是可取的。然而，为了实现这一点，需要对当前的 Lanczos 分解进行变换，使其具有一个小次对角线以隔离 <span class="math-inline">\theta </span>。这可以通过构造一个 <span class="math-inline">k \times k</span> 的正交矩阵 <span class="math-inline">Q = Q(y)</span> 来实现，使用算法&nbsp;<a href="node124.html#fig:orthQ">4.9</a>：
-<br><p></p>
-<div align="CENTER">
+如果 <span class="math-inline">\theta </span> 是“需要的”，那么锁定 <span class="math-inline">\theta </span> 是可取的。然而，为了实现这一点，需要对当前的 Lanczos 分解进行变换，使其具有一个小次对角线以隔离 <span class="math-inline">\theta </span>。这可以通过构造一个 <span class="math-inline">k \times k</span> 的正交矩阵 <span class="math-inline">Q = Q(y)</span> 来实现，使用算法<a href="node124.html#alg-orthQ">4.9</a>：
 
+<div class="math-display">Q e_1 = y \quad \mathrm{且} \quad e_k^* Q = ( \eta, \tau e_{k-1}^*),</div>
 
-<div class="math-display">Q e_1 = y \ \ \mathrm{且} \ \e_k^* Q = ( \eta, \tau e_{k-1}^*),</div>
-</div>
-<br clear="ALL">
-<p></p>
 其中 <span class="math-inline">\eta^2 + \tau^2 = 1 </span>。
 
 <p>
 这些变换的最终结果是
 
-   Av_1 &=& v_1 +  r ,   其中    
-                                                         v_1^* r = 0, 
-<br>
-A V_2 &=&  V_2 T_2 +  r e_k-1^* , 
+<div class="math-display">
+\begin{aligned}
+Av_1 &= v_1\theta +  r\eta, \quad  \text{其中} \quad  v_1^* r = 0, \\
+A V_2 &=  V_2 T_2 +  r\tau e_{k-1}^*,
+\end{aligned}
+</div>
 
 其中 <span class="math-inline">[v_1 , V_2] = V Q</span>。
 
 <p>
 这意味着随后的隐式重启发生在
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A V_2 = V_2 T_2 + r\tau e_{k-1}^*</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 所有与隐式重启相关的后续正交变换应用于 <span class="math-inline">T_2</span>，并且不会干扰关系 <span class="math-inline"> Av_1 = v_1 \theta + r \eta </span>。在随后的 Lanczos 步骤中，<span class="math-inline">v_1</span> 参与正交化，从而自动实现了 Parlett 和 Scott 推荐的择优正交化 [<a href="node421.html#pasc79">363</a>,<a href="node421.html#parl80">353</a>]。
 
 <p>
@@ -139,11 +125,9 @@ A V_2 &=&  V_2 T_2 +  r e_k-1^* ,
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2651" href="node127.html">Purging .</a>
+<b>下一节：</b><a name="tex2html2651" href="node127.html">清洗</a>
 <b>上一级：</b><a name="tex2html2645" href="node124.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html2639" href="node125.html">Locking or Purging a</a>
-  
-  
+<b>上一节：</b><a name="tex2html2639" href="node125.html">锁定或清洗</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

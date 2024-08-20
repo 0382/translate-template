@@ -66,48 +66,53 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2703" href="node131.html">Band Lanczos Method &nbsp;</a>
-<b>上一级：</b><a name="tex2html2697" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2693" href="node129.html">Implementation of Locking and</a>
-  
-  
+<b>下一节：</b><a name="tex2html2703" href="node131.html">带状Lanczos方法</a>
+<b>上一级：</b><a name="tex2html2697" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2693" href="node129.html">锁和清洗的实施</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION001359000000000000000"></a> <a name="sec1"></a>
-<br>
-Software Availability
+可用的软件
 </h2>
-While we have presented the IRLM as much as possible in template form,
-we do not recommend implementation from this description for production 
-purposes. High-quality software is freely available in ARPACK.
+
+尽管我们尽可能以模板形式介绍了IRLM，但我们不建议仅根据此描述进行生产目的的实现。高质量的软件在ARPACK中可免费获取。
 <a name="8287"></a>
-This software is based upon the implicitly 
-restarted Arnoldi method (IRAM) that is presented here in
-&#167;<a href="node220.html#sec:nsymiram">7.6</a>.
-When the matrix <span class="math-inline">A</span> is symmetric (Hermitian) this reduces to the 
-IRLM described in this section.
+该软件基于隐式重启Arnoldi方法（IRAM），这一方法在第<a href="node220.html#sec:nsymiram">7.6</a>节中有所介绍。当矩阵<span class="math-inline">A</span>是对称（厄米）的，这便简化为本节所述的IRLM。
 
 <p>
-ARPACK provides various drivers in template form for direct application to
-<span class="math-inline">A</span>, SI, and for computing a partial
-SVD of a general rectangular matrix.
-For complete information, one should consult the <i>ARPACK
-Users' Guide</i>&nbsp;[<a
- href="node421.html#lesy98">295</a>].
+ARPACK提供了多种模板形式的驱动程序，可直接应用于<span class="math-inline">A</span>、SI，以及计算一般矩形矩阵的部分SVD。欲获取完整信息，应查阅《ARPACK用户指南》[<a href="node421.html#lesy98">295</a>]。
 
 <p>
-The thick restart variant of Wu and Simon&nbsp;[<a
- href="node421.html#wusi99">463</a>] is implemented in
-the code TRLAN.
+吴和Simon的厚重启变体[<a href="node421.html#wusi99">463</a>]在代码TRLAN中得以实现。
 
 <p>
-For more information about this software, including how to access it,  
-see the book's homepage ETHOME. <a name="endofirlm"></a> 
+关于此软件的更多信息，包括如何访问，请参阅本书的主页ETHOME。<a name="endofirlm"></a>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2702"
+  href="node131.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2696"
+  href="node117.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2692"
+  href="node129.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2698"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2700"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2703" href="node131.html">带状Lanczos方法</a>
+<b>上一级：</b><a name="tex2html2697" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2693" href="node129.html">锁和清洗的实施</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

@@ -66,18 +66,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2549" href="node120.html">Lanczos Method in GEMV</a>
-<b>上一级：</b><a name="tex2html2543" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>下一节：</b><a name="tex2html2549" href="node120.html">GEMV形式的Lanczos方法</a>
+<b>上一级：</b><a name="tex2html2543" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2537" href="node118.html">隐式重启</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001352000000000000000"></a><a name="irlm_shiftsel"></a>
-<br>
-移位选择
+位移的选择
 </h2>
-选择应用于QR步骤的移位 <span class="math-inline">\{\mu_j\}</span> 有许多方法。几乎任何显式的多项式重启方案都可以通过这种隐式机制来应用。选择**精确移位**取得了相当大的成功。这种选择是通过将 <span class="math-inline">T_m</span> 的特征值分成两个不相交的集合，即 <span class="math-inline">k</span> 个“想要的”和 <span class="math-inline">p</span> 个“不想要的”特征值，并使用这 <span class="math-inline">p</span> 个不想要的特征值作为移位。通过这种选择，<span class="math-inline">p</span> 次移位应用后，<span class="math-inline">T_k^+</span> 的特征值谱就包含了这 <span class="math-inline">k</span> 个想要的特征值。随着收敛的进行，<span class="math-inline">T_k</span> 的次对角线元素趋向于零，而最期望的特征值近似值作为 <span class="math-inline">T_m</span> 的前 <span class="math-inline">k \times k</span> 块的对角线上的特征值出现。基向量 <span class="math-inline">V_k</span> 趋向于成为 <span class="math-inline">A</span> 的正交特征向量。
+
+选择应用于QR步骤的位移 <span class="math-inline">\{\mu_j\}</span> 有许多方法。几乎任何显式的多项式重启方案都可以通过这种隐式机制来应用。选择<em>精确位移</em>取得了相当大的成功。这种选择是通过将 <span class="math-inline">T_m</span> 的特征值分成两个不相交的集合，即 <span class="math-inline">k</span> 个“想要的”和 <span class="math-inline">p</span> 个“不想要的”特征值，并使用这 <span class="math-inline">p</span> 个不想要的特征值作为位移。通过这种选择，<span class="math-inline">p</span> 次位移应用后，<span class="math-inline">T_k^+</span> 的特征值谱就包含了这 <span class="math-inline">k</span> 个想要的特征值。随着收敛的进行，<span class="math-inline">T_k</span> 的次对角线元素趋向于零，而最期望的特征值近似值作为 <span class="math-inline">T_m</span> 的前 <span class="math-inline">k \times k</span> 块的对角线上的特征值出现。基向量 <span class="math-inline">V_k</span> 趋向于成为 <span class="math-inline">A</span> 的正交特征向量。
 <a name="8037"></a>
 
 <p>
@@ -99,19 +97,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd>模最小的 <span class="math-inline">k</span> 个特征值。
 </dd>
 </dl>
-在选择这些选项时，请记住，谱两端的特征值首先收敛，因此任何避免这些特征值的选择都可能导致收敛缓慢。当寻求内部特征值时，建议使用SI（平移反转）。
+在选择这些选项时，请记住，谱两端的特征值首先收敛，因此任何避免这些特征值的选择都可能导致收敛缓慢。当寻求内部特征值时，建议使用SI（位移-逆）。
 
 <p>
-其他有趣的移位选择 <span class="math-inline">\{\mu_j\}</span> 包括切比雪夫多项式的根[<a href="node421.html#saad84">383</a>]、调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]、Leja多项式的根[<a href="node421.html#bacr98">23</a>]、最小二乘多项式的根[<a href="node421.html#saad87">384</a>]以及精炼移位[<a href="node421.html#jia98c">244</a>]。特别是，Leja多项式和调和Ritz值已被用于估计 <span class="math-inline">A</span> 的内部特征值。
+其他有趣的位移选择 <span class="math-inline">\{\mu_j\}</span> 包括切比雪夫多项式的根[<a href="node421.html#saad84">383</a>]、调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]、Leja多项式的根[<a href="node421.html#bacr98">23</a>]、最小二乘多项式的根[<a href="node421.html#saad87">384</a>]以及精炼位移[<a href="node421.html#jia98c">244</a>]。特别是，Leja多项式和调和Ritz值已被用于估计 <span class="math-inline">A</span> 的内部特征值。
 
 <p>
-另一种解释源于以下事实：每一次移位循环都会隐式地将一个 <span class="math-inline">A</span> 的多项式（次数为 <span class="math-inline">p</span>）应用于初始向量：
+另一种解释源于以下事实：每一次位移循环都会隐式地将一个 <span class="math-inline">A</span> 的多项式（次数为 <span class="math-inline">p</span>）应用于初始向量：
 
- v_1 (A) v_1  其中 () = _j=1^p (- _j )。<a name="filtpoly"></a>
-这个多项式的根就是在QR过程中使用的移位，这些移位可以选择来增强初始向量在期望特征值对应的特征向量方向上的分量，并抑制不希望方向上的分量。当然，这是可取的，因为它迫使初始向量进入与期望特征值相关的不变子空间。这反过来又使得 <span class="math-inline">r_k</span> 变小，从而实现收敛。详细信息可以在[<a href="node421.html#sore92">419</a>]中找到。
+<div class="math-display" id="filtpoly">
+v_1 \leftarrow \psi(A) v_1, \quad \text{其中} \quad \psi(\lambda) = \prod_{j=1}^p (\lambda - \mu_j).
+</div>
+ 
+这个多项式的根就是在QR过程中使用的位移，这些位移可以选择来增强初始向量在期望特征值对应的特征向量方向上的分量，并抑制不希望方向上的分量。当然，这是可取的，因为它迫使初始向量进入与期望特征值相关的不变子空间。这反过来又使得 <span class="math-inline">r_k</span> 变小，从而实现收敛。详细信息可以在[<a href="node421.html#sore92">419</a>]中找到。
 
 <p>
-还有一种隐式重启的方法，即**厚重启**，由吴和西蒙[<a href="node421.html#wusi99">463</a>]描述。在那里，计算了 <span class="math-inline">T_m</span> 的特征值分解（<a href="node118.html#lanc_fact">4.20</a>），并保留对应于**想要的**特征值的部分作为箭头矩阵，其余部分则被丢弃。如果选择了相同的想要的和不想要的特征值，厚重启在数学上等价于精确移位IRLM。
+还有一种隐式重启的方法，即<em>厚重启</em>，由Wu和Simon[<a href="node421.html#wusi99">463</a>]描述。在那里，计算了 <span class="math-inline">T_m</span> 的特征值分解（<a href="node118.html#lanc_fact">4.20</a>），并保留对应于<em>想要的</em>特征值的部分作为箭头矩阵，其余部分则被丢弃。如果选择了相同的想要的和不想要的特征值，厚重启在数学上等价于精确位移IRLM。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -131,11 +132,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2549" href="node120.html">Lanczos Method in GEMV</a>
-<b>上一级：</b><a name="tex2html2543" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>下一节：</b><a name="tex2html2549" href="node120.html">GEMV形式的Lanczos方法</a>
+<b>上一级：</b><a name="tex2html2543" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2537" href="node118.html">隐式重启</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

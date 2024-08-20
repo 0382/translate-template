@@ -67,34 +67,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2577" href="node122.html">计算成本与权衡</a>
-<b>上一级：</b><a name="tex2html2571" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2565" href="node120.html">Lanczos Method in GEMV</a>
-  
-  
+<b>上一级：</b><a name="tex2html2571" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2565" href="node120.html">GEMV形式的Lanczos</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001354000000000000000"></a> <a name="consec"></a><a name="8104"></a>
-<br>
 收敛性质
 </h2>
-关于如何通过隐式重启对初始向量 <span class="math-inline">v_1</span> 进行反复更新从而实现收敛，有一个相当直观的解释。如果 <span class="math-inline">v_1</span> 表示为矩阵 <span class="math-inline">A</span> 的特征向量 <span class="math-inline">\{x_j\}</span> 的线性组合，那么
-<br><p></p>
-<div align="CENTER">
 
+关于如何通过隐式重启对初始向量 <span class="math-inline">v_1</span> 进行反复更新从而实现收敛，有一个相当直观的解释。如果 <span class="math-inline">v_1</span> 表示为矩阵 <span class="math-inline">A</span> 的特征向量 <span class="math-inline">\{x_j\}</span> 的线性组合，那么
 
 <div class="math-display">v_1 = \sum_{j=1}^n x_j \gamma_j \quad \Rightarrow \quad\psi(A)v_1 = \sum_{j=1}^n x_j \psi(\lambda_j) \gamma_j .</div>
-</div>
-<br clear="ALL">
-<p></p>
-重复应用相同的多项式（即使用相同的位移）进行 <span class="math-inline">\ell</span> 次迭代，会导致原始展开系数中的第 <span class="math-inline">j</span> 项被一个因子所衰减
-<br><p></p>
-<div align="CENTER">
 
+重复应用相同的多项式（即使用相同的位移）进行 <span class="math-inline">\ell</span> 次迭代，会导致原始展开系数中的第 <span class="math-inline">j</span> 项被一个因子所衰减
 
 <div class="math-display">\left( \frac{\psi(\lambda_j)}{\psi(\lambda_1)} \right)^{\ell} \ ,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中特征值已根据 <span class="math-inline">\vert\psi(\lambda_j)\vert</span> 的递减值进行排序。在这个展开中，前 <span class="math-inline">k</span> 个特征值变得占主导地位，而其余的特征值随着迭代的进行变得越来越不重要。因此，初始向量 <span class="math-inline">v_1</span> 被强制进入一个不变子空间，正如所愿。通过精确位移机制提供的自适应选择进一步增强了这种展开中所需成分的隔离，并且随着迭代的进行，所需特征值的近似越来越好。
 
 <p>
@@ -105,8 +93,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <hr>
-
-以上内容遵循了您的要求，直接翻译了英文段落，并保持了原文的格式和信息完整性。对于人名，按照要求进行了处理，并在科学阶段的人名中没有添加括号。同时，保留了HTML标签，并使用了指定的专业词汇。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html2576"
   href="node122.html">
 <button class="navigate">下一节</button></a> 
@@ -124,10 +111,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2577" href="node122.html">计算成本与权衡</a>
-<b>上一级：</b><a name="tex2html2571" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2565" href="node120.html">Lanczos Method in GEMV</a>
-  
-  
+<b>上一级：</b><a name="tex2html2571" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2565" href="node120.html">GEMV形式的Lanczos</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

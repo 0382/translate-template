@@ -67,36 +67,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2691" href="node130.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html2685" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2679" href="node128.html">Stability of .</a>
-  
-  
+<b>上一级：</b><a name="tex2html2685" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2679" href="node128.html"><span class="math-inline">Q^* T Q</span> 的稳定性</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001358000000000000000">
 锁定与清除的实现</a>
 </h2>
+
 尽管锁定和清除的基本通缩思路在概念上简单明了，但在实施过程中仍需考虑许多细节和多种策略。最终，一些临时决策是不可避免的。这里采用的通缩策略相对保守，但实际表现相当合理。在[<a href="node421.html#sore98">420</a>]中，计算示例表明，即使指定非常粗略的容差，也不会遗漏多个或聚集的本征值。
 
 <p>
 实施细节相当复杂，仅通过展示代码难以传达这些思路。因此，我们将通过较高层次的口头描述来概述策略的主要思想。
 
-<p>
-<br>
-<a name="fig:defL"></a><img
- width="598" height="313" align="BOTTOM" border="0"
- src="img1104.png"
- alt="\begin{algorithm}
-% latex2html id marker 8274
-{Deflation for IRLM
-}
-{
-\begin{en...
-... locked Ritz values, the
-iteration is halted.
-\end{enumerate}}
-\end{algorithm}">
-<br> 
+<div style="text-align: left;">
+<img src="icon/alg4.11.png", id="alg-defL", alt="Deflation for IRLM"/>
+</div>
 
 <p>
 实现笔记：
@@ -140,10 +126,8 @@ iteration is halted.
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2691" href="node130.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html2685" href="node117.html">Implicitly Restarted Lanczos Method</a>
-<b>上一节：</b><a name="tex2html2679" href="node128.html">Stability of .</a>
-  
-  
+<b>上一级：</b><a name="tex2html2685" href="node117.html">隐式重启Lanczos</a>
+<b>上一节：</b><a name="tex2html2679" href="node128.html"><span class="math-inline">Q^* T Q</span> 的稳定性</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

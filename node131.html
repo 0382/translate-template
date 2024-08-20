@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Band Lanczos Method &nbsp; R. Freund </title>
+<title>带状Lanczos方法 R. Freund</title>
 <meta charset="utf-8">
-<meta name="description" content="Band Lanczos Method &nbsp; R. Freund ">
+<meta name="description" content="带状Lanczos方法 R. Freund">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,14 +69,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html2717" href="node132.html">收缩的必要性</a>
 <b>上一级：</b><a name="tex2html2711" href="node85.html">厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html2705" href="node130.html">可用的软件</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001360000000000000000"></a> <a name="rwf:bandsym"></a><a name="8295"></a>
-<br>
 带状Lanczos方法
-<br>&nbsp; <em>R. 弗罗因德(R. Freund)</em>
+<br>&nbsp; <em>R. Freund</em>
 </h1>
 
 <p>
@@ -90,41 +87,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在本节中，我们描述了一种用于厄米特征值问题的带状Lanczos方法，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AAA"></a><div class="math-display">A x = \lambda x, %%\quad \mathrm{where} \quad A = A^H,</div></td>
-<td WIDTH=10 align="RIGHT">(34)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#rwf:AAA">A x = \lambda x, \tag{4.25}</div>
+
 该方法基于由矩阵<span class="math-inline">A</span>和一组<span class="math-inline">p</span>个初始向量生成的块Krylov子空间，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AAB"></a><div class="math-display">b_1,b_2,\ldots,b_p.</div></td>
-<td WIDTH=10 align="RIGHT">(35)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#rwf:AAB">b_1,b_2,\ldots,b_p. \tag{4.26}</div>
+
 矩阵<span class="math-inline">A</span>和初始向量(<a href="node131.html#rwf:AAB">4.26</a>)生成了块Krylov序列
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABA"></a><div class="math-display">b_1,b_2,\ldots,b_p,A b_1, A b_2, \ldots, A b_p,\ldots,A^{k-1} b_1, A^{k-1} b_2, \ldots, A^{k-1} b_p, \ldots.</div></td>
-<td WIDTH=10 align="RIGHT">(36)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#rwf:ABA">b_1,b_2,\ldots,b_p,A b_1, A b_2, \ldots, A b_p,\ldots,A^{k-1} b_1, A^{k-1} b_2, \ldots, A^{k-1} b_p, \ldots. \tag{4.27}</div>
+
 带状Lanczos算法的目标是构造正交向量，
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABB"></a><div class="math-display">v_1,v_2,\ldots,v_j,</div></td>
-<td WIDTH=10 align="RIGHT">(37)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" name="#rwf:ABB">v_1,v_2,\ldots,v_j, \tag{4.28}</div>
+
 这些向量构成了块Krylov序列(<a href="node131.html#rwf:ABA">4.27</a>)中前<span class="math-inline">j</span>个线性无关向量所张成子空间的基。
 
 <p>
@@ -133,7 +110,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><a name="tex2html2718" href="node132.html">分解的必要性</a>
+<li><a name="tex2html2718" href="node132.html">收缩的必要性</a>
 <li><a name="tex2html2719" href="node133.html">基本性质</a>
 <li><a name="tex2html2720" href="node134.html">算法</a>
 <li><a name="tex2html2721" href="node135.html">变体</a>
@@ -159,8 +136,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html2717" href="node132.html">收缩的必要性</a>
 <b>上一级：</b><a name="tex2html2711" href="node85.html">厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html2705" href="node130.html">可用的软件</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

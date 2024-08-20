@@ -66,28 +66,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2619" href="node125.html">Locking or Purging a</a>
-<b>上一级：</b><a name="tex2html2613" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>下一节：</b><a name="tex2html2619" href="node125.html">锁定或清洗</a>
+<b>上一级：</b><a name="tex2html2613" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2607" href="node123.html">收缩与停止规则</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001357000000000000000"></a> <a name="orth_sec"></a>
-<br>
-正交缩减变换
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001357000000000000000"></a> <a name="orth_sec"></a>
+正交收缩变换
 </h2>
-我们将利用一种特殊的正交变换来实现上述的缩减方案。这些缩减方案与一个与需要缩减（锁定或清除）的Ritz值相关联的特征向量有关。给定一个单位长度的向量<span class="math-inline">y</span>，如算法<a href="node124.html#fig:orthQ">4.9</a>所示，计算出一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q e_1 = y</span>（因此<span class="math-inline">e_1 = Q^* y</span>）。这个正交矩阵具有非常特殊的形式，可以写成
 
-<a name="upform"></a>   <span class="math-inline">Q = R + y e_1^*</span>，其中  
-                       <span class="math-inline">R e_1 = 0</span>，<span class="math-inline">R^* y = 0</span>，
+我们将利用一种特殊的正交变换来实现上述的收缩方案。这些收缩方案与一个与需要收缩（锁定或清洗）的Ritz值相关联的特征向量有关。给定一个单位长度的向量<span class="math-inline">y</span>，如算法<a href="node124.html#alg-orthQ">4.9</a>所示，计算出一个正交矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q e_1 = y</span>（因此<span class="math-inline">e_1 = Q^* y</span>）。这个正交矩阵具有非常特殊的形式，可以写成
 
-这里<span class="math-inline">R</span>是上三角矩阵。它也可以写成
+<div class="math-display" id="upform">
+Q = R + y e_1^*, \quad \text{其中} \quad R e_1 = 0, R^* y = 0
+</div>
 
-<a name="loform"></a>          <span class="math-inline">Q = L + y g^*</span>，其中  
-                       <span class="math-inline">L e_1 = 0</span>，<span class="math-inline">L^* y = e_1 - g</span>，
+其中<span class="math-inline">R</span>是上三角矩阵。它也可以写成
 
-这里<span class="math-inline">L</span>是下三角矩阵，
+<div class="math-display" id="loform">
+Q = L + y g^*, \quad \text{其中} \quad L e_1 = 0, L^* y = e_1 - g
+</div>
+
+其中<span class="math-inline">L</span>是下三角矩阵，
 <span class="math-inline">g^* \equiv e_1^* + \frac{1}{\eta_1} e_1^* R</span>。
 这里我们假设
 <span class="math-inline">y^T=(\eta_1,\dots,\eta_n)</span>。
@@ -100,39 +101,41 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 以及事实
 <span class="math-inline">Q^* T y = \theta e_1</span> 和 <span class="math-inline">1 = y^*y</span>，将得到
 
-<span class="math-inline">Q^* T Q</span>  &=& <span class="math-inline">Q^* T ( R + y e_1^*)</span>
-<br>               &=& <span class="math-inline">(L^* + g y^*) T R + e_1 e_1^*</span>
-<br>               &=& <span class="math-inline">L^*TR + g y^*T R + e_1 e_1^*</span>。
+<div class="math-display">
+\begin{aligned}
+Q^* T Q &= Q^* T ( R + y e_1^*) \\
+&= (L^* + g y^*) TR + \theta e_1 e_1^* \\
+&= L^*TR + g y^*T R + \theta e_1 e_1^*.
+\end{aligned}
+</div>
 
 由于<span class="math-inline">L^*</span>和<span class="math-inline">R</span>都是上三角矩阵，因此<span class="math-inline">L^*TR</span>是上Hessenberg矩阵，其第一行和第一列均为零，因为<span class="math-inline">Le_1 = Re_1 = 0</span>。同时，<span class="math-inline">g y^*T R = g \theta y^*R = 0</span>。由此我们得出<span class="math-inline">L^*TR</span>也必须是对称的，因此是三对角的。因此，我们看到
 <span class="math-inline">T_+ \equiv Q^* T Q</span> 具有以下形式
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">T_+ = \begin{bmatrix} \theta & 0 \\0 & \widehat{T} \end{bmatrix},</div>
 
-<div class="math-display">T_+ = \left[\ba{cc}\theta & 0 \\0 & \widehat{T} \\\ea \right],</div>
-</div>
-<br clear="ALL">
-<p></p>
 其中<span class="math-inline">\widehat{T}</span>是对称且三对角的。
 
 <p>
-需要注意的是，如算法<a href="node124.html#fig:orthQ">4.9</a>计算的那样，<span class="math-inline">Q</span>将在元素相对误差上达到机器精度<span class="math-inline">\epsilon_M</span>，且没有元素增长。
+需要注意的是，如算法<a href="node124.html#alg-orthQ">4.9</a>计算的那样，<span class="math-inline">Q</span>将在元素相对误差上达到机器精度<span class="math-inline">\epsilon_M</span>，且没有元素增长。
 
-<p>
-<br>
-<a name="fig:orthQ"></a><img
- width="598" height="316" align="BOTTOM" border="0"
- src="img1048.png"
- alt="\begin{algorithm}{Orthogonal Deflating Transformation for IRLM
-}
-{
-\begin{tabb...
-...<span class="math-inline"> \tau_o = \tau</span>\\
-{\rm (14)} \&gt; \&gt;{\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre style="text-align: left;" id="alg-orthQ">
+算法 4.9 IRLM的正交收缩变换
+(1)  以 <span class="math-inline">k</span> 维的向量 <span class="math-inline">y</span> 开始，其中 <span class="math-inline">\Vert y \Vert = 1</span>
+(2)  <span class="math-inline">Q = 0, \; Q(:,1) = y</span>
+(3)  <span class="math-inline">\sigma=y(1)^2, \tau_0 = \vert y(1)\vert</span>
+(4)  for j = 2,...,k
+(5)      <span class="math-inline">\sigma=\sigma+y(j)^2, \; \tau = \sqrt\sigma</span>
+(6)      if <span class="math-inline">\tau_0 \ne 0</span>
+(7)          <span class="math-inline">\gamma = (y(j)/\tau)/\tau_0</span>
+(8)          <span class="math-inline">Q(1:j-1,j)=-y(1:j-1)\gamma</span>
+(9)          <span class="math-inline">Q(j,j)=\tau_0/\tau</span>
+(10)     else
+(11)         <span class="math-inline">Q(j-1,j) = 1</span>
+(12)     end if
+(13)     <span class="math-inline">\tau_0 = \tau</span>
+(14) end for
+</pre>
 
 <p>
 <br><hr>
@@ -140,16 +143,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
-<li><ul>
-<li><a name="tex2html2620" href="node125.html">锁定或清除单个特征值</a>
+<li><a name="tex2html2620" href="node125.html">锁定或清洗单个特征值</a>
 <li><a name="tex2html2621" href="node126.html">锁定<span class="math-inline">\theta</span></a>
-<li><a name="tex2html2622" href="node127.html">清除<span class="math-inline">\theta</span></a>
+<li><a name="tex2html2622" href="node127.html">清洗<span class="math-inline">\theta</span></a>
 <li><a name="tex2html2623" href="node128.html"><span class="math-inline">Q^* T Q</span>的稳定性</a>
-</ul></ul>
+</ul>
 <!--End of Table of Child-Links-->
 <hr>
-
-这段内容介绍了正交缩减变换的概念及其在矩阵运算中的应用，通过特定的算法和数学推导，展示了如何利用正交矩阵进行特征值的锁定或清除，并分析了变换后的矩阵性质及其稳定性。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html2618"
   href="node125.html">
 <button class="navigate">下一节</button></a> 
@@ -166,11 +167,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2619" href="node125.html">Locking or Purging a</a>
-<b>上一级：</b><a name="tex2html2613" href="node117.html">Implicitly Restarted Lanczos Method</a>
+<b>下一节：</b><a name="tex2html2619" href="node125.html">锁定或清洗</a>
+<b>上一级：</b><a name="tex2html2613" href="node117.html">隐式重启Lanczos</a>
 <b>上一节：</b><a name="tex2html2607" href="node123.html">收缩与停止规则</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
