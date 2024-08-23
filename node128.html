@@ -116,10 +116,10 @@ y_j^* T_j \hat{q}_j\phi + \rho_j  \beta_j \eta_{j+1}\psi &= \pm \epsilon_M \tau_
 </div>
 
 <p>
-如果<span class="math-inline">\rho_j</span>在<span class="math-inline">\sqrt{\epsilon_M}</span>的量级上，这种缩放可以被吸收到<span class="math-inline">\rho_j</span>中，而不改变<span class="math-inline">y</span>，也不影响<span class="math-inline">Q</span>的数值正交性。当<span class="math-inline">y</span>被修改时，之前计算的<span class="math-inline">q_i, 2 \le i < j,</span>不需要改变。在第<span class="math-inline">j</span>步之后，向量<span class="math-inline">y_j</span>在后续步骤中仅被重新缩放，定义<span class="math-inline">q_i, 2 \le i \le j,</span>的公式对<span class="math-inline">y_j</span>的缩放是不变的。有关详细信息，请参阅[<a href="node421.html#sore98">420</a>]。
+如果<span class="math-inline">\rho_j</span>在<span class="math-inline">\sqrt{\epsilon_M}</span>的量级上，这种缩放可以被吸收到<span class="math-inline">\rho_j</span>中，而不改变<span class="math-inline">y</span>，也不影响<span class="math-inline">Q</span>的数值正交性。当<span class="math-inline">y</span>被修改时，之前计算的<span class="math-inline">q_i, 2 \le i \lt j,</span>不需要改变。在第<span class="math-inline">j</span>步之后，向量<span class="math-inline">y_j</span>在后续步骤中仅被重新缩放，定义<span class="math-inline">q_i, 2 \le i \le j,</span>的公式对<span class="math-inline">y_j</span>的缩放是不变的。有关详细信息，请参阅[<a href="node421.html#sore98">420</a>]。
 
 <p>
-算法<a href="node128.html#alg-orthQ2">4.10</a>实现了这一方案来计算可接受的<span class="math-inline">Q</span>。<a name="tex2html23" href="footnode.html#foot8206"><sup><button class="footnote"></button></sup></a>在实践中，这种变换可以在不存储<span class="math-inline">Q</span>的情况下就地计算和应用，以获得<span class="math-inline">T \leftarrow Q^* T Q</span>和<span class="math-inline">V \leftarrow VQ</span>。然而，这种实现相当微妙，构造<span class="math-inline">Q</span>的细节要求避免额外的存储。该代码与上述描述略有不同，因为向量<span class="math-inline">y</span>仅在所有列<span class="math-inline">2</span>到<span class="math-inline">m</span>确定后才被重新缩放到单位范数。
+算法<a href="node128.html#alg-orthQ2">4.10</a>实现了这一方案来计算可接受的<span class="math-inline">Q</span> <sup><a href="#footnote-q">1</a></sup>。在实践中，这种变换可以在不存储<span class="math-inline">Q</span>的情况下就地计算和应用，以获得<span class="math-inline">T \leftarrow Q^* T Q</span>和<span class="math-inline">V \leftarrow VQ</span>。然而，这种实现相当微妙，构造<span class="math-inline">Q</span>的细节要求避免额外的存储。该代码与上述描述略有不同，因为向量<span class="math-inline">y</span>仅在所有列<span class="math-inline">2</span>到<span class="math-inline">m</span>确定后才被重新缩放到单位范数。
 
 <div style="text-align: left;">
 <img src="icon/alg4.10.png" id="alg-orthQ2" alt="Algorithm 4.10 Stable Orthogonal Deflating Transformation for IRLM"/>
@@ -143,7 +143,10 @@ y_j^* T_j \hat{q}_j\phi + \rho_j  \beta_j \eta_{j+1}\psi &= \pm \epsilon_M \tau_
 </dd>
 </dl>
 
-<p>
+<hr>
+<ol>
+<li id="footnote-q">目前，有一种更为优秀的算法用于构建和应用这些变换；参见 D. Sorensen, Deflation for Implicitly Restarted Arnoldi Methods, CAAM Technical Report, TR 98-12, Rice University, 1998 (revised August 2000).</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html2676"
   href="node129.html">

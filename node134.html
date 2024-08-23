@@ -67,56 +67,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2763" href="node135.html">变体</a>
-<b>上一级：</b><a name="tex2html2757" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html2757" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2751" href="node133.html">基本性质</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001363000000000000000"></a> <a name="rwf:bandsym_alg"></a>
-<br>
 算法
 </h2>
 
 <p>
 厄米矩阵 <span class="math-inline">A</span> 的带状 Lanczos 算法的完整陈述如下。
 
-<p>
-<br>
-<a name="rwf:alg1"></a><img
- width="598" height="455" align="BOTTOM" border="0"
- src="img1186.png"
- alt="\begin{algorithm}{Band Lanczos Method for HEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\...
-...convergence \\
-\textup{(13)} \&gt; \&gt; {\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br>
-
-<p>
-
-<p>
-<br>
+<div style="text-align: left;" id="rwf:alg1">
+<img src="icon/alg4.12.png" alt="Band Lanczos Method for HEP"/>
+</div>
 
 <p>
 接下来，我们将更详细地讨论算法<a href="node134.html#rwf:alg1">4.12</a>的一些步骤。
 <dl>
 <dt><strong>(4)</strong></dt>
 <dd>通常，是否需要对 <span class="math-inline">\hat{v}_j</span> 进行收缩的决策应基于检查是否
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:AGA">\Vert\hat{v}_j\Vert_2 \leq {\tt dtol}, \tag{4.42}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AGA"></a><div class="math-display">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol},</div></td>
-<td WIDTH=10 align="RIGHT">
-(51)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中 <span class="math-inline">{\tt dtol}</span> 是一个适当选择的收缩容差。如果满足(<a href="node134.html#rwf:AGA">4.42</a>)，则对向量 <span class="math-inline">\hat{v}_j</span> 进行收缩。在这种情况下，如果 <span class="math-inline">j-p_c</span> 为正，则将其添加到包含 <span class="math-inline">T_j^{\rm {(d)}}</span> 中非零行索引的集合 <span class="math-inline">{\mathcal I}</span> 中，并将当前块大小更新为 <span class="math-inline">p_c=p_c-1</span>。如果 <span class="math-inline">p_c=0</span>，则块 Krylov 序列(<a href="node131.html#rwf:ABA">4.27</a>)耗尽，算法自然终止。如果 <span class="math-inline">p_c>0</span>，则删除向量 <span class="math-inline">\hat{v_j}</span>，将其余候选向量 <span class="math-inline">\hat{v}_{k+1}</span> 的索引 <span class="math-inline">k+1</span> 重置为 <span class="math-inline">k</span>，最后，算法返回到步骤(3)。如果不满足(<a href="node134.html#rwf:AGA">4.42</a>)，则不需要收缩，算法继续进行步骤(5)。
 
 <p>
@@ -126,14 +99,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(5)</strong></dt>
 <dd>向量 <span class="math-inline">\hat{v}_j</span> 已通过收缩检查，现在被归一化为下一个 Lanczos 向量 <span class="math-inline">v_j</span>。归一化使得
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">\left\Vert v_j \right\Vert _2 = 1\quad \mathrm{for all}\quad j.</div>
-</div>
-<br clear="ALL">
-<p></p>
+<div class="math-display">\left\Vert v_j \right\Vert _2 = 1\quad \text{for all}\quad j.</div>
 
 <p>
 </dd>
@@ -188,10 +155,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2763" href="node135.html">变体</a>
-<b>上一级：</b><a name="tex2html2757" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html2757" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2751" href="node133.html">基本性质</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

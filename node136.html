@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen and H.&nbsp;van der Vorst </title>
+<title>Jacobi-Davidson方法 G.&nbsp;Sleijpen and H.&nbsp;van der Vorst </title>
 <meta charset="utf-8">
-<meta name="description" content="Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen and H.&nbsp;van der Vorst ">
+<meta name="description" content="Jacobi-Davidson方法 G.&nbsp;Sleijpen and H.&nbsp;van der Vorst ">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,34 +69,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html2789" href="node137.html">基本理论</a>
 <b>上一级：</b><a name="tex2html2783" href="node85.html">厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html2777" href="node135.html">变体</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h1><a name="SECTION001370000000000000000"></a><a name="sec:jacdavsym"></a><a name="9111"></a>
-<br>
-Jacobi-Davidson Methods 
-<br>&nbsp; <em>G.&nbsp;Sleijpen and H.&nbsp;van der Vorst</em> 
+Jacobi-Davidson方法
+<br>&nbsp; <em>G. Sleijpen 和 H. van der Vorst</em>
 </h1>
 
 <p>
-The Lanczos method (see &#167;<a href="node103.html#sec:lan">4.4</a>) is quite effective 
-in computing eigenvalues in the ends of the spectrum of <span class="math-inline">A</span> if these
-eigenvalues are well separated from the remaining spectrum, or 
-if it is applied to a shifted and inverted matrix operator 
+Lanczos方法（参见第<a href="node103.html#sec:lan">4.4</a>节）在计算<span class="math-inline">A</span>谱端特征值时非常有效，前提是这些特征值与剩余谱之间有良好的分离，或者应用于某个合理平移接近感兴趣特征值的平移逆矩阵算子
 
-<span class="math-inline">(A - \sigma I)^{-1}</span>, for some reasonable shift
-<span class="math-inline">\sigma</span> close to the interesting eigenvalues.
+<span class="math-inline">(A - \sigma I)^{-1}</span>。
 
 <p>
-If none of these conditions is fulfilled, for instance, if the computation
-of a vector 
-<span class="math-inline">(A-\sigma I)^{-1}y</span> for given <span class="math-inline">y</span> is not feasible with
-a direct solver, then variants of the Jacobi-Davidson method [<a
+如果这些条件均不满足，例如，对于给定的<span class="math-inline">y</span>，无法通过直接求解器计算向量
+<span class="math-inline">(A-\sigma I)^{-1}y</span>，那么Jacobi-Davidson算法的变体[<a
  href="node421.html#slvo96">411</a>]
-offer an attractive alternative.
+提供了一个有吸引力的替代方案。
 
 <p>
 <br><hr>
@@ -122,6 +113,27 @@ offer an attractive alternative.
 </ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2788"
+  href="node137.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2782"
+  href="node85.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2776"
+  href="node135.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2784"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2786"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2789" href="node137.html">基本理论</a>
+<b>上一级：</b><a name="tex2html2783" href="node85.html">厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html2777" href="node135.html">变体</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

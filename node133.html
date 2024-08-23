@@ -67,78 +67,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2749" href="node134.html">算法</a>
-<b>上一级：</b><a name="tex2html2743" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html2743" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2737" href="node132.html">收缩的必要性</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001362000000000000000"></a> <a name="rwf:bandsym_prop"></a>
-<br>
 基本性质
 </h2>
 
 <p>
 经过前<span class="math-inline">j</span>次迭代后，带状Lanczos算法已经生成了前<span class="math-inline">j</span>个Lanczos向量(<a href="node131.html#rwf:ABB">4.28</a>)。这些向量被构造为正交归一的：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABC">V_j^{\ast} V_j = I_j,\quad \mathrm{其中}\quad V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right]. \tag{4.29}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABC"></a><div class="math-display">V_j^{\ast} V_j = I_j,\quad \mathrm{其中}\quadV_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right].</div></td>
-<td WIDTH=10 align="RIGHT">
-(38)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这里，<span class="math-inline">I_j</span>表示<span class="math-inline">j\times j</span>的单位矩阵。
 除了(<a href="node131.html#rwf:ABB">4.28</a>)，算法还构造了向量
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABY">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+p_c}, \tag{4.30}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABY"></a><div class="math-display">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+p_c},</div></td>
-<td WIDTH=10 align="RIGHT">
-(39)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这些向量是接下来<span class="math-inline">p_c</span>个Lanczos向量的候选，
-
 <span class="math-inline">v_{j+1},v_{j+2},\ldots,v_{j+p_c}</span>。
 这里，<span class="math-inline">p_c</span>是起始向量数<span class="math-inline">p</span>减去在前<span class="math-inline">j</span>次迭代中发生的缩减次数。
 向量(<a href="node133.html#rwf:ABY">4.30</a>)被构造为满足正交关系
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABE">V_j^{\ast} \hat{v}_{k} = 0 \quad \mathrm{对于所有}\quad k=j+1,j+2,\ldots,j+p_c. \tag{4.31}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABE"></a><div class="math-display">V_j^{\ast} \hat{v}_{k} = 0 \quad \mathrm{对于所有}\quadk=j+1,j+2,\ldots,j+p_c.</div></td>
-<td WIDTH=10 align="RIGHT">
-(40)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 带状Lanczos算法内置了一个基于向量(<a href="node133.html#rwf:ABY">4.30</a>)的简单缩减过程。
 实际上，在第<span class="math-inline">j+1</span>次迭代时的精确缩减等价于
 <span class="math-inline">\hat{v}_{j+1}=0</span>。
-因此，在算法中，检查
-
-<span class="math-inline">\left\Vert\hat{v}_{j+1}\right\Vert _2</span>
+因此，在算法中，检查 <span class="math-inline">\left\Vert\hat{v}_{j+1}\right\Vert _2</span>
 是否小于某个合适的缩减容差。
 如果是，向量<span class="math-inline">\hat{v}_{j+1}</span>被缩减，<span class="math-inline">p_c</span>减1。
 否则，<span class="math-inline">\hat{v}_{j+1}</span>被归一化为下一个Lanczos向量<span class="math-inline">v_{j+1}</span>。
 
 <p>
 算法中用于生成向量(<a href="node131.html#rwf:ABB">4.28</a>)和(<a href="node133.html#rwf:ABY">4.30</a>)的递推关系可以紧凑地总结如下：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABD">A V_j = V_j T_j + \begin{bmatrix} 0 & \cdots & 0 &  \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{v}_{j+p_c}\end{bmatrix} + \hat{V}_j^{\rm {(dl)}}. \tag{4.32}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABD"></a><div class="math-display">A V_j = V_j T_j + \left[ \begin{array}{ccccccc}0 & \cdots ......hat{v}_{j+p_c}\end{array} \right]+ \hat{V}_j^{\rm {(dl)}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(41)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这里，<span class="math-inline">T_j</span>是一个<span class="math-inline">j\times j</span>矩阵，其元素被选择以满足正交条件(<a href="node133.html#rwf:ABC">4.29</a>)和(<a href="node133.html#rwf:ABE">4.31</a>)。
 矩阵
 <span class="math-inline">\hat{V}_j^{\rm {(dl)}}</span>在(<a href="node133.html#rwf:ABD">4.32</a>)中包含大多数零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的未归一化向量。
@@ -150,16 +116,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 此外，每次不精确缩减都会导致<span class="math-inline">T_j</span>在带状部分之外和右侧的固定行中具有非零元素。
 更准确地说，由缩减引起的每个这样的行的行索引由<span class="math-inline">k - p_c(k)</span>给出，其中<span class="math-inline">k</span>是发生缩减的迭代次数，<span class="math-inline">p_c(k)</span>是该迭代时的相应<span class="math-inline">p_c</span>值。
 因此，矩阵<span class="math-inline">T_j</span>可以写成
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABW">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}}, \tag{4.3}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABW"></a><div class="math-display">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}},</div></td>
-<td WIDTH=10 align="RIGHT">
-(42)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
 <span class="math-inline">T_j^{\rm {(b)}}</span>是一个带状矩阵，
 <span class="math-inline">T_j^{\rm {(d)}}</span>
@@ -177,16 +136,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在这种情况下，矩阵
 <span class="math-inline">T_{15}=T_{15}^{\rm {(b)}} + T_{15}^{\rm {(d)}}</span>
 具有以下稀疏结构：
-<br>
-<div align="RIGHT">
 
+<div style="text-align: center;" id="rwf:ACA">
+<img src="icon/t15.png" alt="T_{15}的带状结构"/>
+</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ACA"></a><div class="math-display">T_{15} = %%\footnotesize{\left[ \begin{array}{ccccccccccccc...... \\& & & & & & & & & & & &{*}&{*}&{*}\end{array} \right].</div></td>
-<td WIDTH=10 align="RIGHT">
-(43)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这里，<span class="math-inline">{*}</span>表示带状部分
 <span class="math-inline">T_{15}^{\rm {(b)}}</span>内可能非零的条目，
 <span class="math-inline">{\tt d}</span>表示由于在迭代<span class="math-inline">k=8</span>、<span class="math-inline">k=11</span>和<span class="math-inline">k=13</span>处缩减而导致的
@@ -196,56 +150,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 经过<span class="math-inline">j</span>次带状Lanczos算法迭代后，通过计算
 <span class="math-inline">T_j^{\rm {(pr)}}</span>的特征解，可以得到厄米特征值问题(<a href="node131.html#rwf:AAA">4.25</a>)的近似特征解，
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">T_j^{\rm {(pr)}} z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quad i=1,2,\ldots,j.</div>
 
-<div class="math-display">T_j^{\rm {(pr)}} z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quadi=1,2,\ldots,j.</div>
-</div>
-<br clear="ALL">
-<p></p>
 这里，
 <span class="math-inline">T_j^{\rm {(pr)}}</span>是<span class="math-inline">A</span>在Lanczos基矩阵<span class="math-inline">V_j</span>所张成的空间上的投影，即
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABG">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j. \tag{4.35}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABG"></a><div class="math-display">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j.</div></td>
-<td WIDTH=10 align="RIGHT">
-(44)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 每个值
 <span class="math-inline">\theta_i^{(j)}</span>及其Ritz向量，
-
 <span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>，产生<span class="math-inline">A</span>的一个近似特征对。
 当然，矩阵
 <span class="math-inline">T_j^{\rm {(pr)}}</span>不是通过其定义(<a href="node133.html#rwf:ABG">4.35</a>)计算的。
 相反，我们使用公式
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABP">T_j^{\rm {(pr)}} = T_j + \left(T_j^{\rm {(d)}}\right)^{\ast}. \tag{4.36}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABP"></a><div class="math-display">T_j^{\rm {(pr)}} = T_j + \left(T_j^{\rm {(d)}}\right)^{\ast}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(45)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 通过(<a href="node133.html#rwf:ABP">4.36</a>)，我们只需共轭并转置<span class="math-inline">T_j</span>带状部分之外的部分，并将其添加到<span class="math-inline">T_j</span>中以获得
 <span class="math-inline">T_j^{\rm {(pr)}}</span>。
 为了证明(<a href="node133.html#rwf:ABP">4.36</a>)确实成立，注意通过从左侧乘以<span class="math-inline">V_j^{\ast}</span>并使用正交关系(<a href="node133.html#rwf:ABC">4.29</a>)和(<a href="node133.html#rwf:ABE">4.31</a>)，我们得到
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:ABF">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j = T_j + S_j, \quad \mathrm{其中}\quad S_j = V_j^{\ast} \hat{V}_j^{\rm {(dl)}}. \tag{4.37}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ABF"></a><div class="math-display">T_j^{\rm {(pr)}} = V_j^{\ast} A V_j = T_j + S_j, \quad \mathrm{其中}\quadS_j = V_j^{\ast} \hat{V}_j^{\rm {(dl)}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(46)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 由于矩阵
 <span class="math-inline">T_j^{\rm {(pr)}}</span>和
 <span class="math-inline">T_j^{\rm {(b)}}</span>都是
@@ -258,18 +185,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 例如，对于(<a href="node133.html#rwf:ACA">4.34</a>)中的<span class="math-inline">T_{15}</span>，相关的矩阵
 <span class="math-inline">T_{15}^{(\rm pr)} = T_{15} + (T_{15}^{\rm {(d)}})^{\ast}</span>
 具有以下形式
-<br>
-<div align="RIGHT">
 
+<div style="text-align: center;" id="rwf:ACB">
+<img src="icon/t15pr.png" alt="T_{15}^{(\rm pr)}的带状结构"/>
+</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:ACB"></a><div class="math-display">T_{15}^{\rm {(pr)}} = %%\footnotesize{\left[ \begin{array}{...... &&\overline{{\tt d}}& & &{*}&{*}&{*}\end{array} \right].</div></td>
-<td WIDTH=10 align="RIGHT">
-(47)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-这里，
-<span class="math-inline">\overline{{\tt d}}</span>在带状部分下方是通过共轭并转置(<a href="node133.html#rwf:ACA">4.34</a>)中带状部分上方的相应条目获得的。
+这里，<span class="math-inline">\overline{{\tt d}}</span>在带状部分下方是通过共轭并转置(<a href="node133.html#rwf:ACA">4.34</a>)中带状部分上方的相应条目获得的。
 我们注意到，在(<a href="node133.html#rwf:ACB">4.38</a>)中，带状部分之外的条目<span class="math-inline">{\tt d}</span>和
 
 <span class="math-inline">\overline{{\tt d}}</span>通常很小。
@@ -287,27 +208,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 最后，我们注意到带状Lanczos算法在达到<span class="math-inline">p_c=0</span>时终止。
 这意味着已经发生了<span class="math-inline">p</span>次缩减，因此块Krylov序列被耗尽。
 由于<span class="math-inline">p_c=0</span>导致的终止，Lanczos向量的关系(<a href="node133.html#rwf:ABD">4.32</a>)简化为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:RED">A V_j = V_j T_j + \hat{V}_j^{\rm {(dl)}}. \tag{4.39}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:RED"></a><div class="math-display">A V_j = V_j T_j + \hat{V}_j^{\rm {(dl)}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(48)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 使用(<a href="node133.html#rwf:ABF">4.37</a>)，我们可以将(<a href="node133.html#rwf:RED">4.39</a>)重写为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:REE">A V_j - V_j T_j^{\rm {(pr)}} =\left(I - V_j V_j^{\ast} \right) \hat{V}_j^{\rm {(dl)}}. \tag{4.40}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:REE"></a><div class="math-display">A V_j - V_j T_j^{\rm {(pr)}} =\left(I - V_j V_j^{\ast} \right) \hat{V}_j^{\rm {(dl)}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(49)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 现在让
 <span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">z_i^{(j)}</span>是
 <span class="math-inline">T_j^{\rm {(pr)}}</span>的任意特征对，并假设<span class="math-inline">z_i^{(j)}</span>被归一化
@@ -319,16 +226,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 被用作<span class="math-inline">A</span>的近似特征解。
 通过从右侧乘以<span class="math-inline">z_i^{(j)}</span>并取范数，可以得出近似特征解
 <span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">x_i^{(j)}</span>的残差可以被限制为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" name="#rwf:REF">\left\Vert A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)} \right\Vert_2 = \left\Vert(I-V_jV^*_j)\hat{V}_j^\text{(dl)} z_i^{(j)}\right\Vert_2\leq \left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert_2. \tag{4.41}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:REF"></a><div class="math-display">\left\Vert A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)} \right\Ver......ert _2\leq \left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert _2.</div></td>
-<td WIDTH=10 align="RIGHT">
-(50)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 特别是，如果仅执行精确缩减，那么
 
 <span class="math-inline">\hat{V}_j^{\rm {(dl)}} = 0</span>，并且(<a href="node133.html#rwf:REF">4.41</a>)表明
@@ -336,18 +236,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\theta_i^{(j)}</span>确实是<span class="math-inline">A</span>的特征值。
 对于一般缩减，
 <span class="math-inline">\hat{V}_j^{\rm {(dl)}}\not=0</span>，然而，
-
 <span class="math-inline">\Vert \hat{V}_j^{\rm {(dl)}} \Vert _2</span>的量级
 是缩减容差。
 更准确地说，如果使用下面的缩减检查(<a href="node134.html#rwf:AGA">4.42</a>)，那么
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert _2 \leq\sqrt{p} \; {\tt dtol},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">{\tt dtol}</span>表示缩减容差。
 
 <p>
@@ -371,10 +265,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2749" href="node134.html">算法</a>
-<b>上一级：</b><a name="tex2html2743" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html2743" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2737" href="node132.html">收缩的必要性</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

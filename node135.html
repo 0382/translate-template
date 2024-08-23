@@ -66,15 +66,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b>上一级：</b><a name="tex2html2769" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html2769" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2765" href="node134.html">算法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001364000000000000000"></a> <a name="rwf:bandsym_var"></a>
-<br>
 变种
 </h2>
 
@@ -83,69 +80,55 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 如算法<a href="node134.html#rwf:alg1">4.12</a>所述的带状Lanczos方法版本，在进行所有与<span class="math-inline">A</span>的乘法运算时，都是以矩阵-向量乘积的形式进行，且每次只涉及单一向量。然而，在算法的任何阶段，也可以预先计算接下来<span class="math-inline">p_c</span>次迭代所需的<span class="math-inline">p_c</span>个矩阵-向量乘积，这可以通过一次矩阵-矩阵乘积<span class="math-inline">AV</span>来实现，其中<span class="math-inline">V</span>是一个包含<span class="math-inline">p_c</span>个向量的块矩阵。具体步骤如下：我们不执行算法<a href="node134.html#rwf:alg1">4.12</a>中的步骤(7)，而是计算矩阵-矩阵乘积：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">A \left[ \begin{array}{ccccc}v_j & \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{v}_{j+p_c-1}\end{array} \right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这样我们得到了向量<span class="math-inline">\hat{v}_{j+p_c} = A v_j</span>，它用于迭代<span class="math-inline">j</span>的剩余步骤，以及向量：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXB"></a><div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+p_c-1}.</div></td>
-<td WIDTH=10 align="RIGHT">(52)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#rwf:AXB">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+p_c-1}. \tag{4.43}</div>
+
 在接下来的<span class="math-inline">p_c-1</span>次迭代中，我们将需要这些向量：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXC"></a><div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+p_c^{\prime}-1}.</div></td>
-<td WIDTH=10 align="RIGHT">(53)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#rwf:AXC">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+p_c^{\prime}-1}. \tag{4.44}</div>
+
 这里，<span class="math-inline">p_c^{\prime}</span>定义为<span class="math-inline">p_c</span>减去在这接下来的<span class="math-inline">p_c-1</span>次迭代中将发生的缩减次数。特别地，如果没有任何缩减发生，则<span class="math-inline">p_c^{\prime}=p_c</span>。我们所需的矩阵-向量乘积（<a href="node135.html#rwf:AXC">4.44</a>）与我们之前计算的（<a href="node135.html#rwf:AXB">4.43</a>）并不完全相同。然而，向量（<a href="node135.html#rwf:AXB">4.43</a>）和（<a href="node135.html#rwf:AXC">4.44</a>）通过以下关系相连：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXD"></a><div class="math-display">\begin{array}{rl}&\!\!\!\!\! \left[ \begin{array}{cccc}A ......ray} \right]T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}.\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">(54)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-这里，<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>是<span class="math-inline">T_{j+p_c^{\prime}-1}</span>的子矩阵，包含行<span class="math-inline">j+1,\ldots,j+p_c^{\prime}-1</span>和列<span class="math-inline">j-p_c+1,\ldots,j-1</span>的元素。如果<span class="math-inline">p_c^{\prime}<p_c</span>，（<a href="node135.html#rwf:AXD">4.45</a>）中的一些<span class="math-inline">\hat{v}_k</span>会导致缩减向量。设<span class="math-inline">\hat{v}_{j_1}, \hat{v}_{j_2},\ldots, \hat{v}_{j_{p_c^{\prime}-1}}</span>为未缩减的向量。进一步，设<span class="math-inline">\tilde{T}</span>是从<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>中删除对应于（<a href="node135.html#rwf:AXD">4.45</a>）中缩减向量的列得到的矩阵。根据（<a href="node135.html#rwf:AXD">4.45</a>），我们有：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:AXM"></a><div class="math-display">\!\!\!\!\left[ \begin{array}{cccc}A \hat{v}_{j_1} & A \ha......cdots & A v_{j+p_c^{\prime}-1}\end{array} \right] \tilde{T}.</div></td>
-<td WIDTH=10 align="RIGHT">(55)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#rwf:AXD">
+\begin{aligned}
+&\begin{bmatrix}A\hat{v}_{j+1} & A\hat{v}_{j+2} & \cdots & A\hat{v}_{j+p_c-1}\end{bmatrix} \\
+= &\begin{bmatrix}A v_{j+1} & A v_{j+2} & \cdots & A v_{j+p_c^{\prime}-1}\end{bmatrix}
+T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}. \tag{4.45}
+\end{aligned}
+</div>
+
+这里，<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>是<span class="math-inline">T_{j+p_c^{\prime}-1}</span>的子矩阵，包含行<span class="math-inline">j+1,\ldots,j+p_c^{\prime}-1</span>和列<span class="math-inline">j-p_c+1,\ldots,j-1</span>的元素。如果<span class="math-inline">p_c^{\prime} \lt p_c </span>，（<a href="node135.html#rwf:AXD">4.45</a>）中的一些<span class="math-inline">\hat{v}_k</span>会导致缩减向量。设<span class="math-inline">\hat{v}_{j_1}, \hat{v}_{j_2},\ldots, \hat{v}_{j_{p_c^{\prime}-1}}</span>为未缩减的向量。进一步，设<span class="math-inline">\tilde{T}</span>是从<span class="math-inline">T_{j+1:j+p_c^{\prime}-1,j-p_c+1:j-1}</span>中删除对应于（<a href="node135.html#rwf:AXD">4.45</a>）中缩减向量的列得到的矩阵。根据（<a href="node135.html#rwf:AXD">4.45</a>），我们有：
+
+<div class="math-display" name="#rwf:AXM">
+\begin{bmatrix}A\hat{v}_{1} & A\hat{v}_{2} & \cdots & A\hat{v}_{j_{p'_c-1}}\end{bmatrix} =
+\begin{bmatrix}A v_{j+1} & A v_{j+2} & \cdots & A v_{j+p'_c-1}\end{bmatrix}\tilde{T}.
+\tag{4.46}
+</div>
+
 矩阵<span class="math-inline">\tilde{T}</span>是非奇异的且为上三角矩阵。因此，利用（<a href="node135.html#rwf:AXM">4.46</a>），我们可以通过预计算向量（<a href="node135.html#rwf:AXB">4.43</a>）的适当线性组合来获得（<a href="node135.html#rwf:AXC">4.44</a>）中的每个向量<span class="math-inline">A v_{j+k}</span>，<span class="math-inline">k=1,2,\ldots,p_c^{\prime}-1</span>。
 
 <p>
 对于厄米正定矩阵<span class="math-inline">A</span>，还有一种基于耦合递归的算法<a href="node134.html#rwf:alg1">4.12</a>的变种在[<a href="node421.html#baif98">35</a>]中被提出。这一变种的动机是观察到对于病态的厄米正定矩阵<span class="math-inline">A</span>，从Lanczos矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>得到的最小特征值可能会变为负值；参见[<a href="node421.html#baff98">34</a>,<a href="node421.html#baif98">35</a>]中的例子。在精确算术中，这是不可能的，因为<span class="math-inline">A</span>的正定性意味着<span class="math-inline">T_j^{\rm {(pr)}}=V_j^{\ast} A V_j</span>也是正定的。然而，在有限精度算术中，舍入误差可能导致算法<a href="node134.html#rwf:alg1">4.12</a>生成的矩阵<span class="math-inline">T_j^{\rm {(pr)}}</span>略微非定。这可以通过使用耦合递归来生成<span class="math-inline">T_j^{\rm {(pr)}}</span>的Cholesky因子而不是<span class="math-inline">T_j^{\rm {(pr)}}</span>本身来轻松避免。更确切地说，（<a href="node133.html#rwf:ABD">4.32</a>）中总结的递归被替换为以下形式的耦合递归：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:APA"></a><div class="math-display">\begin{array}{rl}A P_j & \!\!\! = V_j L_j D_j + \left[ \beg......}_j^{\rm {(dl)}},\\ [4pt]V_j & \!\!\! = P_j U_j.\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">(56)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#rwf:APA">
+\begin{aligned}
+AP_j &= V_jL_jD_j + \begin{bmatrix}0 & \cdots & 0 & \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{j+p_c}\end{bmatrix} + \hat{V}_j^\text{(dl)} \\
+V_j&=P_jU_j, \\
+\end{aligned}
+</div>
+
 这里，<span class="math-inline">P_j</span>是另一个基矩阵，其列跨越与<span class="math-inline">V_j</span>相同的子空间，并且被构造为<span class="math-inline">A</span>-正交的：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">P_j^{\ast} A P_j = D_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">D_j</span>是一个正定对角矩阵。此外，在（<a href="node135.html#rwf:APA">4.47</a>）中，矩阵<span class="math-inline">L_j</span>是单位下三角的，矩阵<span class="math-inline">U_j</span>是单位上三角的。经过<span class="math-inline">j</span>次迭代后，<span class="math-inline">A</span>的近似特征对通过计算厄米正定矩阵的特征解得到：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">V_j^{\ast} A V_j = U_j^{\ast} D_j U_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这是以<span class="math-inline">D_j</span>和<span class="math-inline">U_j</span>表示的。
 
 <p>
@@ -169,11 +152,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b>上一级：</b><a name="tex2html2769" href="node131.html">Band Lanczos Method &nbsp;</a>
+<b>下一节：</b><a name="tex2html2775" href="node136.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html2769" href="node131.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html2765" href="node134.html">算法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
