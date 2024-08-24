@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2953" href="node148.html">Stability and Accuracy Assessments</a>
-<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>下一节：</b><a name="tex2html2953" href="node148.html">稳定性和准确性评估</a>
+<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson方法</a>
 <b>上一节：</b><a name="tex2html2943" href="node146.html">可用的软件</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001376000000000000000">
@@ -87,37 +85,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们使用算法<a href="node144.html#alg:jdqr">4.17</a>来计算<span class="math-inline">{k}_{\max}=10</span>个最大特征值。输入参数选择如下：初始向量<span class="math-inline">{v}_0=(0.01,\ldots,0.01,1)^T</span>，容差<span class="math-inline">\epsilon = 10^{-8}</span>，子空间维度参数<span class="math-inline">{m}_{\min}=10</span>，<span class="math-inline">{m}_{\max}=15</span>，目标值<span class="math-inline">\tau=1001</span>。
 
 <p>
-
-<p></p>
-<div align="CENTER"><a name="fig:exjd1"></a><a name="10618"></a>
-<table>
-<caption align="BOTTOM"><strong>图4.5：</strong>
-针对外部特征值的Jacobi-Davidson算法，采用多种策略求解校正方程。</caption>
-<tr><td><img
- width="705" height="16" border="0"
- src="img1433.png"
- alt="\begin{figure}\@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@@@@}}4{Chap3JDa11.eps}{Chap3JDa12.eps}{Chap3JDa21.eps}{Chap3JDa22.eps}
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;" id="fig:exjd1">
+<a name="10618"></a>
+<img src="icon/fig4.5.png" alt="图4.5：针对外部特征值的Jacobi-Davidson算法，采用多种策略求解校正方程。"/>
+<figcaption>图4.5：针对外部特征值的Jacobi-Davidson算法，采用多种策略求解校正方程。</figcaption>
+</div>
 
 <p>
-
-<p></p>
-<div align="CENTER"><a name="fig:exjd2"></a><a name="10627"></a>
-<table>
-<caption align="BOTTOM"><strong>图4.6：</strong>
-针对外部特征值（顶部）和内部特征值（底部）的Jacobi-Davidson算法。校正方程通过5步普通GMRES（左侧）和5步预处理GMRES（右侧）求解。</caption>
-<tr><td><img
- width="709" height="16" border="0"
- src="img1434.png"
- alt="\begin{figure}\begin{center}
-\@ifnextchar1{\Plot@}{\@ifnextchar2{\Plot@@}{\Plot@...
-...{Chap3JDb21.eps}{Chap3JDb22.eps}
-\end{center}\vspace*{-18pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;" id="fig:exjd2">
+<a name="10627"></a>
+<img src="icon/fig4.6.png" alt="图4.6：针对外部特征值（顶部）和内部特征值（底部）的Jacobi-Davidson算法。校正方程通过5步普通GMRES（左侧）和5步预处理GMRES（右侧）求解。"/>
+<figcaption>图4.6：针对外部特征值（顶部）和内部特征值（底部）的Jacobi-Davidson算法。校正方程通过5步普通GMRES（左侧）和5步预处理GMRES（右侧）求解。</figcaption>
+</div>
 
 <p>
 我们在图<a href="node147.html#fig:exjd1">4.5</a>中以图形方式展示了残差向量的范数随迭代次数的变化。每次范数小于<span class="math-inline">\epsilon</span>时，表示在此精度内确定了特征值，并通过缩减继续迭代以确定下一个特征值。四幅图按字母顺序分别代表以下不同情况：
@@ -162,11 +141,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2953" href="node148.html">Stability and Accuracy Assessments</a>
-<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>下一节：</b><a name="tex2html2953" href="node148.html">稳定性和准确性评估</a>
+<b>上一级：</b><a name="tex2html2947" href="node136.html">Jacobi-Davidson方法</a>
 <b>上一节：</b><a name="tex2html2943" href="node146.html">可用的软件</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

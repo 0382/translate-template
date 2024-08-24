@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Transfer Residual Error to Backward Error.</title>
+<title>将传递残差误差转化为后向误差</title>
 <meta charset="utf-8">
-<meta name="description" content="Transfer Residual Error to Backward Error.">
+<meta name="description" content="将传递残差误差转化为后向误差">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,44 +66,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2999" href="node151.html">Error Bounds for Computed</a>
-<b>上一级：</b><a name="tex2html2993" href="node148.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html2987" href="node149.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html2999" href="node151.html">计算特征值的误差界</a>
+<b>上一级：</b><a name="tex2html2993" href="node148.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html2987" href="node149.html">残差向量</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION00138000000000000000"></a>
 <a name="10675"></a>
-<br>
 将残差误差转化为后向误差
 </h4>
+
 存在厄米矩阵 <span class="math-inline">E</span>，使得 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">A+E</span> 的一个精确特征值及其对应的特征向量，即
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">(A+E)\widetilde x=\widetilde\lambda\widetilde x.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中一种 <span class="math-inline">E</span> 的形式为
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:E2-H"></a><div class="math-display">E = -r\widetilde x^*-\widetilde x r^* +\left(\widetilde x^*A\widetilde x -\widetilde\lambda\right)\widetilde x\widetilde x^*.</div></td>
-<td WIDTH=10 align="RIGHT">
-(61)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#eq:E2-H">E = -r\widetilde x^*-\widetilde x r^* +\left(\widetilde x^*A\widetilde x -\widetilde\lambda\right)\widetilde x\widetilde x^*. \tag{4.52}</div>
+
 我们关注的是那些范数尽可能小的矩阵 <span class="math-inline">E</span>。事实证明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span>，最佳的 <span class="math-inline">E=E_2</span> 和对于 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>，最佳的 <span class="math-inline">E=E_{F}</span> 满足
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:std-H-b2"></a><div class="math-display">\Vert E_2\Vert _2=\Vert r\Vert _2 \quad \mathrm{and} \quad\Vert E_F\Vert _F=\sqrt{\Vert r\Vert^2_2 - \left(\widetilde x^* A\widetilde x-\widetilde\lambda\right)^2};</div></td>
-<td WIDTH=10 align="RIGHT">
-(62)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-参见，例如 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>]。实际上，<span class="math-inline">E_{\F}</span> 由 (<a href="node150.html#eq:E2-H">4.52</a>) 明确给出。因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 就是附近矩阵的一个精确特征对。这种类型的误差分析称为 <em>后向误差分析</em>，矩阵 <span class="math-inline">E</span> 是 <em>后向误差</em>。
+
+<div class="math-display" name="#eq:std-H-b2">\Vert E_2\Vert _2=\Vert r\Vert _2 \quad \mathrm{and} \quad\Vert E_F\Vert _F=\sqrt{\Vert r\Vert^2_2 - \left(\widetilde x^* A\widetilde x-\widetilde\lambda\right)^2}; \tag{4.53}</div>
+
+参见，例如 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>]。实际上，<span class="math-inline">E_{F}</span> 由 (<a href="node150.html#eq:E2-H">4.52</a>) 明确给出。因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 就是附近矩阵的一个精确特征对。这种类型的误差分析称为 <em>后向误差分析</em>，矩阵 <span class="math-inline">E</span> 是 <em>后向误差</em>。
 
 <p>
 我们称一个算法如果输出的近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 对于范数 <span class="math-inline">\Vert\cdot\Vert</span> 是 <em><span class="math-inline">\tau </span>-后向稳定</em> 的，如果它是 <span class="math-inline">A+E</span> 的一个精确特征对，且 <span class="math-inline">\Vert E\Vert\le\tau</span>。根据这个定义，可以对计算特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 的算法的数值稳定性进行说明。按照惯例，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert A\Vert)</span>，其中 <span class="math-inline">\epsilon_M</span> 是机器精度，则称该算法为 <em>后向稳定</em> 的。
@@ -126,11 +111,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2999" href="node151.html">Error Bounds for Computed</a>
-<b>上一级：</b><a name="tex2html2993" href="node148.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html2987" href="node149.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html2999" href="node151.html">计算特征值的误差界</a>
+<b>上一级：</b><a name="tex2html2993" href="node148.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html2987" href="node149.html">残差向量</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

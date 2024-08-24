@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Restart Strategy.</title>
+<title>重启策略</title>
 <meta charset="utf-8">
-<meta name="description" content="Restart Strategy.">
+<meta name="description" content="重启策略">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,37 +66,42 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2873" href="node142.html">Deflation.</a>
+<b>下一节：</b><a name="tex2html2873" href="node142.html">收缩</a>
 <b>上一级：</b><a name="tex2html2867" href="node140.html">重启与收缩</a>
 <b>上一节：</b><a name="tex2html2861" href="node140.html">重启与收缩</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001373010000000000000"></a>
 <a name="9741"></a>
-<br>
-Restart Strategy.
+重启策略
 </h4>
-The increasing storage or the computational overhead, for increasing
-dimension <span class="math-inline">{m}</span> of the subspace, may make it necessary to restart. An
-obvious way to restart is to take the most recent approximation for the
-desired eigenvector. However, this may not be the most efficient
-strategy for restarting. With any restart by a single vector we discard
-possibly valuable information that is contained in the remaining part of
-the subspace. Unless we have an invariant subspace, all vectors in the
-subspace contain information for the wanted eigenvector. After restart
-with one single vector we see the effect of the lost information by a
-slowdown in the speed of convergence. Therefore it is often better to
-restart with a set of vectors representing a subspace that contains more
-information for the wanted eigenpair, and a good strategy is to restart
-with the subspace spanned by the Ritz vectors of a small number of the
-Ritz values closest to a specified target value.
+随着子空间维度<span class="math-inline">{m}</span>的增加，存储需求或计算开销也随之上升，这可能使得重启变得必要。一种显而易见重启方法是采用最近一次对所需特征向量的近似结果。然而，这未必是最有效的重启策略。通过单一向量进行重启时，我们可能会丢弃子空间中剩余部分所包含的宝贵信息。除非我们拥有不变子空间，否则子空间内的所有向量都含有寻找目标特征向量的信息。重启后仅使用单一向量，我们会因丢失这些信息而观察到收敛速度的减缓。因此，更佳的做法往往是重启时采用一组向量，这些向量构成的子空间包含了更多关于目标特征对的信息。一种有效的策略是，利用与指定目标值最接近的一小部分里兹值对应的里兹向量所张成的子空间来进行重启。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html2872"
+  href="node142.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html2866"
+  href="node140.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html2860"
+  href="node140.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html2868"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html2870"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html2873" href="node142.html">收缩</a>
+<b>上一级：</b><a name="tex2html2867" href="node140.html">重启与收缩</a>
+<b>上一节：</b><a name="tex2html2861" href="node140.html">重启与收缩</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

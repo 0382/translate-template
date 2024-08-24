@@ -67,67 +67,42 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2814" href="node138.html">基本算法</a>
-<b>上一级：</b><a name="tex2html2808" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b>上一节：</b><a name="tex2html2802" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-  
-  
+<b>上一级：</b><a name="tex2html2808" href="node136.html">Jacobi-Davidson方法</a>
+<b>上一节：</b><a name="tex2html2802" href="node136.html">Jacobi-Davidson方法</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001371000000000000000"></a><a name="sec:jdsym"></a>
-<br>
 基本理论
 </h2>
 
 <p>
 Jacobi-Davidson方法基于两个基本原则的结合。第一个原则是针对特征问题<span class="math-inline">A{x}=\lambda {x}</span>应用Galerkin方法，相对于由正交基<span class="math-inline">{v}_1,\ldots,{v}_m</span>张成的给定子空间。使用不同于Krylov子空间的方法是由Davidson[<a href="node421.html#davi75">99</a>]提出的，他还提出了特定的选择<a name="9123"></a>，与我们即将采取的方法不同，用于构造正交基向量<span class="math-inline">{v}_j</span>。Galerkin条件是
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">AV_m{s}-\theta V_m{s} \perp \{{v}_1, \ldots, {v}_m\} , </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这导致简化的系统
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:reduced"></a><div class="math-display">V_m^\ast AV_m {s} - \theta {s} = 0 ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(57)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#eq:reduced">V_m^\ast AV_m {s} - \theta {s} = 0, \tag{4.48}</div>
+
 其中<span class="math-inline">V_m</span>表示列从<span class="math-inline">{v}_1</span>到<span class="math-inline">{v}_m</span>的矩阵。这个方程有<span class="math-inline">m</span>个解<span class="math-inline">(\theta_j^{(m)}, {s}_j^{(m)})</span>。<span class="math-inline">m</span>对<span class="math-inline">(\theta_j^{(m)}, {u}_j^{(m)}\equiv V_ms_j^{(m)})</span>被称为<span class="math-inline">{A}</span>相对于由<span class="math-inline">{V}_m</span>列张成的子空间的Ritz值和Ritz向量。这些Ritz对是<span class="math-inline">{A}</span>的特征对的近似，我们的目标是通过精心选择的子空间扩展来获得更好的近似。
 
 <p>
 在此基础上，Jacobi-Davidson方法的另一个原则开始发挥作用。这一思想可以追溯到Jacobi[<a href="node421.html#jaco46">241</a>]。假设我们有一个对应于给定特征值<span class="math-inline">\lambda</span>的特征向量<span class="math-inline">{x}</span>的近似<span class="math-inline">{u}_j^{(m)}</span>。那么Jacobi建议（在原始论文中针对强对角占优矩阵）计算<span class="math-inline">{u}_j^{(m)}</span>的正交校正<span class="math-inline">{t}</span>，使得
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">A({u}_j^{(m)} + {t}) = \lambda ({u}_j^{(m)} +{t}) .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 由于<span class="math-inline">{t}\perp {u}_j^{(m)}</span>，我们可以将自己限制在与<span class="math-inline">{u}_j^{(m)}</span>正交的子空间中。在该子空间中，由<span class="math-inline">{u}_j^{(m)}</span>张成的子空间上的算子<span class="math-inline">A</span>由
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)A\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right) , </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 给出，我们发现<span class="math-inline">{t}</span>满足方程
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)(A-\lambda I)\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){t} =- (A-\theta_j^{(m)} I){u}_j^{(m)} .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 在实际情况下，我们不知道<span class="math-inline">\lambda</span>，显然的解决方案是用其近似<span class="math-inline">\theta_j^{(m)}</span>替换它，这导致了针对更新<span class="math-inline">t_j^{({m})}\perp {u}_j^{(m)}</span>的<em>Jacobi-Davidson校正方程</em>：
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:jdcorr"></a><div class="math-display">\begin{array}{r}\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)\left(A-\theta_j^{(m)}I\right)\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){t}_j^{({m})}\equiv -(A-\theta_j^{(m)}I){u}_j^{(m)}.\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(58)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" name="#eq:jdcorr">\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)\left(A-\theta_j^{(m)}I\right)\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){t}_j^{({m})} = -r^{(m)}_j \equiv -(A-\theta_j^{(m)}I){u}_j^{(m)}. \tag{4.49}</div>
+
 这个校正方程只是近似求解，其近似解<span class="math-inline">\tilde{t}^{(m)}</span>用于子空间的扩展。这是与Krylov子空间方法的一个根本区别；我们不是选择一个作为算子作用于给定起始向量的幂的子空间，而是选择一些没有Krylov结构的子空间，并将给定矩阵投影到这个子空间上。
 
 <p>
@@ -141,43 +116,28 @@ Jacobi-Davidson方法基于两个基本原则的结合。第一个原则是针�
 
 <p>
 我们现在将讨论如何使用预处理为像广义最小残差(GMRES)或共轭梯度平方(CGS)这样的迭代求解器，应用于方程(<a href="node137.html#eq:jdcorr">4.49</a>)。假设我们有一个可用的左预处理器<span class="math-inline">{K}</span>用于算子<span class="math-inline">A-\theta_j^{(m)}I</span>，在某种意义上<span class="math-inline">{K}^{-1}(A-\theta_j^{(m)} I) \approx I</span>。由于<span class="math-inline">\theta_j^{(m)}</span>随迭代计数<span class="math-inline">{m}</span>变化，预处理器也可能变化，尽管通常对于不同的<span class="math-inline">\theta</span>值使用相同的<span class="math-inline">{K}</span>是实用的。当然，预处理器<span class="math-inline">{K}</span>也必须限制在与<span class="math-inline">{u}_j^{(m)}</span>正交的子空间中，这意味着我们必须有效地使用
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\widetilde{K}\equiv\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){K}\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right) .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这可能看起来过于复杂，而且乍一看似乎涉及大量由于投影<span class="math-inline">(I-{u}_j^{(m)}{{u}_j^{(m)}}^{\ast})</span>包围矩阵向量操作的开销。但实际上，这归结为少数相当简单的操作，正如我们现在将展示的。
 
 <p>
 我们假设使用带有初始猜测<span class="math-inline">{t}_0=0</span>的Krylov求解器和左预处理来近似求解校正方程(<a href="node137.html#eq:jdcorr">4.49</a>)。由于起始向量在<span class="math-inline">{u}_j^{(m)}</span>正交的子空间中，Krylov求解器的所有迭代向量都将在这个空间中。在这个子空间中，我们必须为Krylov求解器提供的向量<span class="math-inline">{v}</span>计算向量<span class="math-inline">{z} \equiv\widetilde{K}^{-1}\widetilde{A}{v}</span>，并且
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\widetilde{A}\equiv\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)\left(A-\theta_j^{(m)} I\right)\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们将分两步进行。首先我们计算
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\widetilde{A}v =\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right)\left(A-\theta_j^{(m)} I\right)\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){v}=\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){y}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">y \equiv (A-\theta_j^{(m)} I){v}</span>因为<span class="math-inline">{{u}_j^{(m)}}^\ast {v}=0</span>。然后，使用左预处理，我们解<span class="math-inline">{z}\perp {u}_j^{(m)}</span>从
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\widetilde{K} {z}=\left(I-{u}_j^{(m)}{{u}_j^{(m)}}^\ast\right){y} .</div>
-</div>
-<br clear="ALL">
-<p></p>
-由于<span class="math-inline">{z}\perp {u}_j^{(m)}</span>，因此<span class="math-inline">{z}</span>满足<span class="math-inline">K{z}={y}-\alpha {u}_j^{(m)}</span>或<span class="math-inline">{z}=K^{-1}{y} - \alphaK^{-1}{u}_j^{(m)}</span>。条件<span class="math-inline">{z}\perp {u}_j^{(m)}</span>导致
-<br><p></p>
-<div align="CENTER">
+
+由于<span class="math-inline">{z}\perp {u}_j^{(m)}</span>，因此<span class="math-inline">{z}</span>满足<span class="math-inline">K{z}={y}-\alpha {u}_j^{(m)}</span>或<span class="math-inline">{z}=K^{-1}{y} - \alpha K^{-1}{u}_j^{(m)}</span>。条件<span class="math-inline">{z}\perp {u}_j^{(m)}</span>导致
+
 <div class="math-display">\alpha = \frac{{{u}_j^{(m)}}^\ast K^{-1}y}{{{u}_j^{(m)}}^\ast K^{-1}{u}_j^{(m)}} .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 向量<span class="math-inline">\widehat{y}\equiv {K}^{-1}{y}</span>从<span class="math-inline">{K}\widehat{y}={y}</span>解出，同样地，<span class="math-inline">\widehat{u}\equiv{K}^{-1}{u}_j^{(m)}</span>从<span class="math-inline">{K}\widehat{u}={u}_j^{(m)}</span>解出。最后一个方程在方程(<a href="node137.html#eq:jdcorr">4.49</a>)的迭代过程中只需解一次，因此对于<span class="math-inline">{i}_S</span>次迭代的线性求解器，实际上需要<span class="math-inline">{i}_S+1</span>次预处理器的操作。同样地，Krylov求解器中左预处理算子的矩阵向量乘法在一次迭代中只需要一次内积和一次向量更新，而不是投影算子<span class="math-inline">(I-{u}_j^{(m)}{{u}_j^{(m)}}^{\ast})</span>的四次操作。这在算法<a href="node138.html#alg:corrit">4.15</a>中给出的解决方案模板中得到了详细说明。沿着类似的思路，可以获得一个虽然比左预处理情况稍微昂贵但仍然高效的模板，用于右预处理算子。这个模板在算法<a href="node138.html#alg:corrita">4.16</a>中描述。有关校正方程预处理的更多细节，请参见[<a href="node421.html#slvm98">412</a>]。
 
 <p>
@@ -202,10 +162,8 @@ Jacobi-Davidson方法基于两个基本原则的结合。第一个原则是针�
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html2814" href="node138.html">基本算法</a>
-<b>上一级：</b><a name="tex2html2808" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b>上一节：</b><a name="tex2html2802" href="node136.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-  
-  
+<b>上一级：</b><a name="tex2html2808" href="node136.html">Jacobi-Davidson方法</a>
+<b>上一节：</b><a name="tex2html2802" href="node136.html">Jacobi-Davidson方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

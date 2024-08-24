@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Deflation.</title>
+<title>收缩</title>
 <meta charset="utf-8">
-<meta name="description" content="Deflation.">
+<meta name="description" content="收缩">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,45 +66,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html2887" href="node143.html">Preconditioning.</a>
+<b>下一节：</b><a name="tex2html2887" href="node143.html">预处理</a>
 <b>上一级：</b><a name="tex2html2881" href="node140.html">重启与收缩</a>
-<b>上一节：</b><a name="tex2html2875" href="node141.html">Restart Strategy.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2875" href="node141.html">重启策略</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001373020000000000000"></a>
 <a name="9744"></a>
-<br>
-收缩技术
+收缩
 </h4>
 
 <p>
 当一个Ritz值足够接近某个特征值时，当前子空间的剩余部分将已经包含丰富的邻近特征对成分，因为我们已经在每一步中选择了与期望特征值接近的Ritz向量。我们可以利用这些信息作为计算下一个特征向量的子空间基础。为了防止已计算的特征向量重新进入计算过程，我们在Jacobi-Davidson算法中使新的搜索向量显式地与已计算的特征向量正交。这种技术被称为显式<em>收缩</em>。我们将在稍详细地讨论这一点。
 
 <p>
-设<span class="math-inline">\widetilde{x}_1,\ldots,\widetilde{x}_{k-1}</span>表示已接受的特征向量近似，并假设这些向量是正交归一的。矩阵<span class="math-inline">\widetilde{X}_{k-1}</span>的列向量为<span class="math-inline">\widetilde{x}_j</span>。为了找到下一个特征向量<span class="math-inline">\widetilde{x}_k</span>，我们将Jacobi-Davidson算法应用于收缩矩阵<a name="tex2html24" href="footnode.html#foot10917"><sup><button class="footnote"></button></sup></a>
-<br><p></p>
-<div align="CENTER">
+设<span class="math-inline">\widetilde{x}_1,\ldots,\widetilde{x}_{k-1}</span>表示已接受的特征向量近似，并假设这些向量是正交归一的。矩阵<span class="math-inline">\widetilde{X}_{k-1}</span>的列向量为<span class="math-inline">\widetilde{x}_j</span>。为了找到下一个特征向量<span class="math-inline">\widetilde{x}_k</span>，我们将Jacobi-Davidson算法应用于收缩矩阵 <sup><a href="#footnote-deflated-matrix">1</a></sup>
 
 <div class="math-display">(I-\widetilde{X}_{k-1}\widetilde{X}_{k-1}^\ast)\,A\,(I-\widetilde{X}_{k-1}\widetilde{X}_{k-1}^\ast) ,</div>
-</div>
-<br clear="ALL">
-<p></p>
-这将导致一个修正方程，形式如下
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:jddefl"></a><div class="math-display">{P}_{m}(I-\widetilde{X}_{k-1}\widetilde{X}_{k-1}^\ast)\,(......}\widetilde{X}_{k-1}^\ast){P}_{m} t_j^{(m)} = -r_j^{({m})} ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(59)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+这将导致一个修正方程，形式如下
+
+<div class="math-display" name="#eq:jddefl">{P}_{m}(I-\widetilde{X}_{k-1}\widetilde{X}_{k-1}^\ast)(A-\theta^{(m)}_j I)(I-\widetilde{X}_{k-1}\widetilde{X}_{k-1}^\ast){P}_{m} t_j^{(m)} = -r_j^{({m})}, \tag{4.50}</div>
+
 其中<span class="math-inline">{P}_{m}\equiv (I-{u}_j^{(m)}{{u}_j^{(m)}}^{\ast})</span>，需要为每个新的特征向量近似<span class="math-inline">{u}_j^{(m)}</span>求解修正<span class="math-inline">t_j^{(m)}</span>，对应的Ritz值为<span class="math-inline">\theta_j^{(m)}</span>。在[<a href="node421.html#fosv98">172</a>]中，通过数值证据表明，对于修正方程，显式地对由<span class="math-inline">\widetilde{X}_{k-1}</span>表示的向量进行收缩是非常推荐的，但在计算投影矩阵时（将<span class="math-inline">A</span>投影到由连续近似<span class="math-inline">{v}_j</span>张成的子空间上，以寻找第<span class="math-inline">k</span>个特征向量），并不需要包含这种收缩。投影矩阵可以计算为<span class="math-inline">{V}_{m}^\ast A{V}_{m}</span>，而不会显著损失精度。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+<ol>
+<li id="footnote-deflated-matrix">
+在利用近似特征向量进行收缩时，若计算出的特征值与剩余特征值之间有良好的分离度，则可能会在特征值上引入数量级为 <span class="math-inline">\epsilon^2</span> 的误差[<a href="node421.html#parl80">353</a>，第5.1节]。
+</li>
+</ol>
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html2886"
   href="node143.html">
 <button class="navigate">下一节</button></a> 
@@ -119,13 +113,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">目录</button></a> 
 <a name="tex2html2884"
   href="node422.html">
-<button class="navigate">索引</button></a> 
+<button class="navigate">索引</button></a>
 <br>
-<b>下一节：</b><a name="tex2html2887" href="node143.html">Preconditioning.</a>
+<b>下一节：</b><a name="tex2html2887" href="node143.html">预处理</a>
 <b>上一级：</b><a name="tex2html2881" href="node140.html">重启与收缩</a>
-<b>上一节：</b><a name="tex2html2875" href="node141.html">Restart Strategy.</a>
-  
-  
+<b>上一节：</b><a name="tex2html2875" href="node141.html">重启策略</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
