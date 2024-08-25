@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Application.</title>
+<title>应用</title>
 <meta charset="utf-8">
-<meta name="description" content="Application.">
+<meta name="description" content="应用">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,38 +66,54 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3163" href="node160.html">Orthogonalization.</a>
+<b>下一节：</b><a name="tex2html3163" href="node160.html">正交化</a>
 <b>上一级：</b><a name="tex2html3157" href="node156.html">引言</a>
-<b>上一节：</b><a name="tex2html3151" href="node158.html">Summary of Choices.</a>
-  
-  
+<b>上一节：</b><a name="tex2html3151" href="node158.html">算法选择总结</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001410030000000000000">
-Application.</a>
+应用</a>
 </h4>
-For each algorithm we have 
-distinguished between different ways of running the algorithm:<dl>
-<dt><strong>``Dir''</strong></dt>
-<dd>is direct application, where we multiply with <span class="math-inline">A</span> and solve with <span class="math-inline">B</span>.
+
+对于每种算法，我们区分了运行该算法的不同方式：<dl>
+<dt><strong>“直接”</strong></dt>
+<dd>即直接应用，我们通过乘以<span class="math-inline">A</span>并使用<span class="math-inline">B</span>求解来实现。
 </dd>
-<dt><strong>``SI''</strong></dt>
-<dd>is shift and invert, which solves systems 
-<span class="math-inline">(A-\sigma B)x=b</span> for <span class="math-inline">x</span> 
-and multiplies with <span class="math-inline">B</span>. This gives 
-the ability to compute a wider choice of eigenvalues in fewer iterations. 
+<dt><strong>“位移反演”</strong></dt>
+<dd>即位移与反演，它解决系统<span class="math-inline">(A-\sigma B)x=b</span>以获得<span class="math-inline">x</span>，并乘以<span class="math-inline">B</span>。这种方式能够在较少的迭代次数内计算出更广泛的特征值选择。
 </dd>
-<dt><strong>``Prec''</strong></dt>
-<dd>means application with a preconditioner, for instance,
- a sparse approximate factorization. This needs 
-less space than shift and invert, but most often it also needs a larger number of matrix-vector multiplies.
+<dt><strong>“预处理”</strong></dt>
+<dd>意味着使用预处理器的应用，例如，稀疏近似分解。这比位移反演需要更少的存储空间，但大多数情况下也需要更多的矩阵向量乘法运算。
 </dd>
-</dl> 
+</dl>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3162"
+  href="node160.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3156"
+  href="node156.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3150"
+  href="node158.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3158"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3160"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3163" href="node160.html">正交化</a>
+<b>上一级：</b><a name="tex2html3157" href="node156.html">引言</a>
+<b>上一节：</b><a name="tex2html3151" href="node158.html">算法选择总结</a>
+<br>
+<br>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

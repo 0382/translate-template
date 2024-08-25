@@ -66,19 +66,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3115" href="node157.html">Overview of Available Algorithms.</a>
+<b>下一节：</b><a name="tex2html3115" href="node157.html">可用算法综述</a>
 <b>上一级：</b><a name="tex2html3109" href="node155.html">广义厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html3103" href="node155.html">广义厄米特征值问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001410000000000000000">
 引言</a>
 </h1>
+
 一个广义厄米特征值问题(GHEP)由以下形式给出：
 
-<div class="math-display" id="gsymeig">Ax=\lambda B x\,, \tag{66}</div>
+<div class="math-display" id="gsymeig">Ax=\lambda B x\,, \tag{5.1}</div>
 
 其中，<span class="math-inline">A</span>和<span class="math-inline">B</span>是厄米的，即<span class="math-inline">A^{\ast} = A</span>，<span class="math-inline">B^{\ast} = B</span>。
 我们称形式为(<a href="node156.html#gsymeig">5.1</a>)中的矩阵对<span class="math-inline">\{A,B\}</span>为一个<i>矩阵束</i>。
@@ -89,7 +88,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 在非标准情况下，即<span class="math-inline">\alpha A + \beta B</span>是正定矩阵时，可以通过注意到当<span class="math-inline">B</span>是正定时，束
 
-<div class="math-display" id="make_B_pd">(A-\theta(\alpha A + \beta B))x=0 \tag{67}</div>
+<div class="math-display" id="make_B_pd">(A-\theta(\alpha A + \beta B))x=0 \tag{5.2}</div>
 
 具有特征值<span class="math-inline">\theta_i=\lambda_i/(\beta+\alpha \lambda_i)</span>，并且与原始束(<a href="node156.html#gsymeig">5.1</a>)具有相同的特征向量。
 可以对这一修改后的束应用任何适用于正定<span class="math-inline">B</span>的算法，并从<span class="math-inline">\theta_i</span>恢复<span class="math-inline">\lambda_i</span>。
@@ -102,9 +101,9 @@ GHEP (<a href="node156.html#gsymeig">5.1</a>)具有<span class="math-inline">n</
 <p>
 当束<span class="math-inline">\{A,B\}</span>是厄米正定时，可以找到<span class="math-inline">n</span>个相互<span class="math-inline">B</span>-正交的特征向量<span class="math-inline">x_i,\,i=1,\dots,n</span>，使得
 
-<div class="math-display" id="gsymeigdec">A=X \Lambda X^{\ast},\quad B=X X^{\ast},\pagebreak \tag{68}</div>
+<div class="math-display" id="gsymeigdec">A=X \Lambda X^{\ast},\quad B=X X^{\ast}, \tag{5.3}</div>
 
-其中<span class="math-inline">\Lambda=\diag(\lambda_i)</span>，<span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>。
+其中<span class="math-inline">\Lambda=\mathrm{diag}(\lambda_i)</span>，<span class="math-inline">X=[x_1,x_2,\dots,x_n]</span>。
 特征向量<span class="math-inline">x_i</span>不是唯一的，但对于每个不同的特征值，存在一个唯一的<i>约化子空间</i>。
 对于厄米正定束，约化子空间与特征值的重数具有相同的维度。重要的是要记住，当一对特征值重合时，它们的特征向量失去了个性：无法说一组向量是多重特征值的<i>唯一</i>特征向量。
 
@@ -147,11 +146,9 @@ GHEP (<a href="node156.html#gsymeig">5.1</a>)具有<span class="math-inline">n</
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3115" href="node157.html">Overview of Available Algorithms.</a>
+<b>下一节：</b><a name="tex2html3115" href="node157.html">可用算法综述</a>
 <b>上一级：</b><a name="tex2html3109" href="node155.html">广义厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html3103" href="node155.html">广义厄米特征值问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
