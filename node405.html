@@ -81,16 +81,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 雅可比-戴维森方法在第&#167;<a href="node269.html#sec:jacdnonh">7.12</a>节中进行了讨论。与戴维森方法不同的是，雅可比-戴维森方法将待解的线性系统投影到与当前里兹向量正交的空间上。这导致了解决校正方程的问题
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:correction">\left( I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)......_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j, \tag{276}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:correction"></a><div class="math-display">\left( I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)......_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j,</div></td>
-<td WIDTH=10 align="RIGHT">
-(276)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
 <span class="math-inline">(\theta_j,x_j)</span> 是第 <span class="math-inline">j</span> 次迭代的里兹对。（注意通常在右侧残差前放置一个减号。）假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，即
 

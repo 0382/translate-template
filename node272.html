@@ -84,15 +84,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 调和Ritz值的概念[<a href="node421.html#papv95">349</a>]很容易推广到非对称矩阵[<a href="node421.html#slvo96">411</a>]。如我们所见，Jacobi-Davidson方法生成子空间<span class="math-inline">{\mathcal V}_{m}</span>的基向量<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>。为了将<span class="math-inline">A</span>投影到这个子空间上，我们需要计算向量<span class="math-inline">{w}_j\equiv A{v}_j</span>。相对于由<span class="math-inline">{w}_j</span>张成的子空间的<span class="math-inline">A^{-1}</span>的Ritz值的倒数被称为<em>调和Ritz值</em>。调和Ritz值可以在不反转<span class="math-inline">A</span>的情况下计算，因为调和Ritz对<span class="math-inline">(\widetilde{\theta}_j^{({m})},\widetilde{u}_j^{({m})})</span>满足
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:harm5"></a><div class="math-display">A\widetilde{u}_j^{({m})} -\widetilde\theta_j^{({m})}\widetilde{u}_j^{({m})}\perp{\mathcal W}_{m}\equiv \mathrm{span}\{{w}_1,\ldots , {w}_{m}\}</div></td>
-<td WIDTH=10 align="RIGHT">
-(209)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="eq:harm5">A\widetilde{u}_j^{({m})} -\widetilde\theta_j^{({m})}\widetilde{u}_j^{({m})}\perp{\mathcal W}_{m}\equiv \mathrm{span}\{{w}_1,\ldots , {w}_{m}\} \tag{209}</div>
+
 对于<span class="math-inline">\widetilde{u}_j^{({m})} \in {V}_{m}</span>且<span class="math-inline">\widetilde{u}_j^{({m})}\neq 0</span>。这意味着调和Ritz值是矩阵束<span class="math-inline">(W_{m}^\ast AV_{m}, W_{m}^\ast V_{m})</span>的特征值：
 <br><p></p>
 <div align="CENTER">

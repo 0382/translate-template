@@ -104,92 +104,37 @@ SI（谱变换）在
 
 <p>
 令<span class="math-inline">x = V_m y</span>且<span class="math-inline">H_m y = y \theta</span>，其中<span class="math-inline">\Vert y \Vert _2=1</span>。由于
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonsymA:eq:res">(A-\sigma I)^{-1}x - x \theta = CV_my - V_mH_my = f_m \, e^\ast_my, \tag{129}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonsymA:eq:res"></a><div class="math-display">(A-\sigma I)^{-1}x - x \theta = CV_my - V_mH_my = f_m \, e^\ast_my,</div></td>
-<td WIDTH=10 align="RIGHT">
-(129)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 因此，<span class="math-inline">\Vert f_m\Vert\,\vert e^\ast_my\vert</span>是残差<span class="math-inline">\Vert Cx - x \theta \Vert</span>的范数。如果<span class="math-inline">\Vert f_m\Vert\,\vert e^\ast_my\vert \leq \epsilon_U</span>，其中<span class="math-inline">\epsilon_U</span>是用户指定的容差，那么根据&nbsp;(<a href="node224.html#nonsymA:eq:evest">7.17</a>)，<span class="math-inline">x</span>和<span class="math-inline">\theta</span>是<span class="math-inline">C</span>附近矩阵的精确特征对。然而，我们真正感兴趣的是原矩阵<span class="math-inline">A</span>的特征值-特征向量近似。
 
 <p>
 简单地重排&nbsp;(<a href="node233.html#nonsymA:eq:res">7.23</a>)得到
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonsymA:eq:sires">Ax - x\left(\sigma + \frac{1}{\theta}\right) =-(A - \sigma I) f_m \frac{e^\ast_my}{\theta}, \tag{130}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonsymA:eq:sires"></a><div class="math-display">Ax - x\left(\sigma + \frac{1}{\theta}\right) =-(A - \sigma I) f_m \frac{e^\ast_my}{\theta},</div></td>
-<td WIDTH=10 align="RIGHT">
-(130)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这是计算得到的特征对<span class="math-inline">(x , \sigma + \frac{1}{\theta})</span>对于矩阵<span class="math-inline">A</span>的残差。然而，通过少量的额外算术运算，可以显著提高特征向量的质量并减少相应的残差范数。
 
 <p>
 在&nbsp;(<a href="node233.html#nonsymA:eq:sires">7.24</a>)的右侧加上并减去<span class="math-inline">f_m \frac{e^\ast_my}{\theta^2}</span>并重新排列项，将得到
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonsymA:eq:siresp">Az - z \left(\sigma + \frac{1}{\theta}\right) =-f_m \frac{e^\ast_my}{\theta^2} , \tag{131}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonsymA:eq:siresp"></a><div class="math-display">Az - z \left(\sigma + \frac{1}{\theta}\right) =-f_m \frac{e^\ast_my}{\theta^2} ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(131)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">z \equiv x + f_m ( e^\ast_m y/\theta)</span>。在<span class="math-inline">\vert\theta\vert \gg 1</span>的情况下，我们看到<span class="math-inline">z</span>将是一个比<span class="math-inline">x</span>好得多的近似特征向量。此外，如果<span class="math-inline">\Vert A\Vert</span>相对于<span class="math-inline">\vert\sigma\vert</span>很大，则避免了由于项<span class="math-inline">(A - \sigma I) f_m</span>引起的误差放大。
 
 <p>
 一个启发式论点进一步支持使用<span class="math-inline">z</span>而不是<span class="math-inline">x</span>。从&nbsp;(<a href="node233.html#nonsymA:eq:res">7.23</a>)可以得出
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonsymA:eq:RQz">\left\vert \frac{z^\ast A z}{ z^\ast z} - \left(\sigma +\fra......\vert e_m^* y \vert }{\vert\theta\vert\Vert z \Vert}\right)^2. \tag{133}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">(A - \sigma I)^{-1}x = x\theta + f_m e^\ast_m y,</div></td>
-<td WIDTH=10 align="RIGHT">
-(132)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-因此，<span class="math-inline">z = x + f_m ( e^\ast_m y/\theta)</span>是在<span class="math-inline">x</span>上进行<span class="math-inline">A-\sigma I</span>的一次逆迭代的结果（归一化后）。
-
-<p>
-这个向量<span class="math-inline">z</span>尚未被缩放为单位范数。然而，
-
-<span class="math-inline">\Vert z \Vert^2 = 1 + \left(\vert e^\ast_m y \vert\Vert f_m \Vert/\vert\theta\vert\right)^2</span>，
-所以归一化后误差界将减小。此外，如果<span class="math-inline">{\vert e^\ast_m y \vert\Vert f_m \Vert}/{\vert\theta\vert} &lt; \sqrt{\epsilon_M}</span>，那么浮点计算范数将已经得到<span class="math-inline">\Vert z\Vert = 1</span>，无需重新缩放。
-
-<p>
-从&nbsp;(<a href="node233.html#nonsymA:eq:res">7.23</a>)，残差<span class="math-inline">C x - x \theta</span>与<span class="math-inline">V_m</span>的列所张成的Krylov空间正交。然而，无论使用<span class="math-inline">x</span>还是<span class="math-inline">z</span>，在将计算得到的特征对转换回原系统时，这种Galerkin条件都会丢失。这是因为<span class="math-inline">\sigma +1/\theta</span>不是<span class="math-inline">x</span>或<span class="math-inline">z</span>的Rayleigh商。然而，从&nbsp;(<a href="node233.html#nonsymA:eq:siresp">7.25</a>)
-<br>
-<div align="RIGHT">
-
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonsymA:eq:RQz"></a><div class="math-display">\left\vert \frac{z^\ast A z}{ z^\ast z} - \left(\sigma +\fra......\vert e_m^* y \vert }{\vert\theta\vert\Vert z \Vert}\right)^2.</div></td>
-<td WIDTH=10 align="RIGHT">
-(133)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 换句话说，当使用向量<span class="math-inline">z</span>作为近似特征向量时，近似特征值<span class="math-inline">\sigma +1/\theta</span>几乎是<span class="math-inline">A</span>的Rayleigh商。实际上，当<span class="math-inline">\frac{\vert e^\ast_m y \vert\Vert f_m \Vert}{\vert\theta\vert} &lt; \sqrt{\epsilon_M}</span>时，<span class="math-inline">\sigma +1/\theta</span>将在舍入误差水平内成为Rayleigh商。
 
 <p>
 另一方面，从&nbsp;(<a href="node233.html#nonsymA:eq:sires">7.24</a>)我们推断出
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonsymA:eq:RQx">\left\vert x^\ast A x - \left(\sigma + \frac{1}{\theta}\rig......\Vert f_m\Vert\vert e^\ast_my \vert}{\vert\theta\vert} \right) \tag{134}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonsymA:eq:RQx"></a><div class="math-display">\left\vert x^\ast A x - \left(\sigma + \frac{1}{\theta}\rig......\Vert f_m\Vert\vert e^\ast_my \vert}{\vert\theta\vert} \right)</div></td>
-<td WIDTH=10 align="RIGHT">
-(134)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 是当使用<span class="math-inline">x</span>时，<span class="math-inline">\sigma +1/\theta</span>作为<span class="math-inline">A</span>的Rayleigh商的误差。
 
 <p>

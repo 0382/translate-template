@@ -81,25 +81,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在特征值计算中，通常可以自由选择带状Lanczos方法的右起始向量和左起始向量。然而，在其他一些重要应用中，起始向量是作为问题的一部分给出的。一个这样的应用是多输入多输出时不变线性动力系统的降阶建模；例如，参见最近的调查[<a href="node421.html#freu98">176</a>]。这类系统的特点是具有以下形式的矩阵值传递函数：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:TAA"></a><div class="math-display">H(s) = C^T \left(I - s A\right)^{-1} B, \quad s\in {\mathcal C}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(189)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="rwf:TAA">H(s) = C^T \left(I - s A\right)^{-1} B, \quad s\in {\mathcal C}. \tag{189}</div>
+
 这里，<span class="math-inline">A</span> 是一个方阵，通常是非厄米矩阵，而
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:TAZ"></a><div class="math-display">B = \left[ \begin{array}{cccc}b_1 & b_2 & \cdots & b_m\\end{array} \right], \quad C = \left[ \begin{array}{cccc}c_1 & c_2 & \cdots & c_p\\end{array} \right]</div></td>
-<td WIDTH=10 align="RIGHT">
-(190)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="rwf:TAZ">B = \left[ \begin{array}{cccc}b_1 & b_2 & \cdots & b_m\\end{array} \right], \quad C = \left[ \begin{array}{cccc}c_1 & c_2 & \cdots & c_p\\end{array} \right] \tag{190}</div>
+
 是分别具有 <span class="math-inline">m</span> 和 <span class="math-inline">p</span> 列的矩形矩阵。此外，<span class="math-inline">m</span> 是输入的数量，<span class="math-inline">p</span> 是输出的数量，通常 <span class="math-inline">m</span> 和 <span class="math-inline">p</span> 是不同的。带状Lanczos方法（应用于 <span class="math-inline">A</span> 以及矩阵 (<a href="node260.html#rwf:TAZ">7.84</a>) 的列，<span class="math-inline">B</span> 和 <span class="math-inline">C</span> 作为右起始向量和左起始向量）可以用来生成由 (<a href="node260.html#rwf:TAA">7.83</a>) 描述的线性动力系统的降阶模型。
 
 <p>
@@ -124,15 +112,9 @@ if <span class="math-inline">j\leq p_c</span>,
 
 <p>
 现在设 <span class="math-inline">j\geq \max\{m_1,p_1\}</span>，并设 <span class="math-inline">T_j^{\rm (pr)}</span>、<span class="math-inline">\rho</span> 和 <span class="math-inline">\eta</span> 是算法 <a href="node259.html#rwf:alg2">7.16</a> 经过 <span class="math-inline">j</span> 次迭代后生成的矩阵。这三个矩阵随后定义了原始传递函数 (<a href="node260.html#rwf:TAA">7.83</a>) 的第 <span class="math-inline">j</span> 阶降阶模型，如下所示：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:TBB"></a><div class="math-display">H_j(s) = \eta_j^T D_j \left(I_j - s T_j^{\rm (pr)}\right)^{-1} \rho_j,\quad s\in {\mathcal C}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(191)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="rwf:TBB">H_j(s) = \eta_j^T D_j \left(I_j - s T_j^{\rm (pr)}\right)^{-1} \rho_j,\quad s\in {\mathcal C}. \tag{191}</div>
+
 这里，
 <br><p></p>
 <div align="CENTER">

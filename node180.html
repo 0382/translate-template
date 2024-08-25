@@ -79,29 +79,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 将残差误差转化为后向误差
 </h4>
 可以证明存在厄米矩阵 <span class="math-inline">E</span>，例如
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:E2-pdpBdef">E = -r\widetilde x^*-\widetilde x r^*+\left(\widetilde x^*A\widetilde x-\widetilde\lambda \widetilde x^*B\widetilde x \right)\widetilde x\widetilde x^*, \tag{93}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:E2-pdpBdef"></a><div class="math-display">E = -r\widetilde x^*-\widetilde x r^*+\left(\widetilde x^*A\widetilde x-\widetilde\lambda \widetilde x^*B\widetilde x \right)\widetilde x\widetilde x^*,</div></td>
-<td WIDTH=10 align="RIGHT">
-(93)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 使得 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">\{A+E,B\}</span> 的精确特征值及其对应的特征向量。
 我们感兴趣的是那些范数尽可能小的矩阵 <span class="math-inline">E</span>。
 事实证明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span> 而言，最佳的 <span class="math-inline">E=E_2</span> 以及对于 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span> 而言，最佳的 <span class="math-inline">E=E_{F}</span> 满足
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:pdpBdef-b2">\Vert E_2\Vert _2=\Vert r\Vert _2, \quad\Vert E_{F}\Vert _{......Vert^2_2- (\widetilde x^* A\widetilde x-\widetilde\lambda\widetilde x^* B\widetilde x)^2}. \tag{94}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:pdpBdef-b2"></a><div class="math-display">\Vert E_2\Vert _2=\Vert r\Vert _2, \quad\Vert E_{F}\Vert _{......Vert^2_2- (\widetilde x^* A\widetilde x-\widetilde\lambda\widetilde x^* B\widetilde x)^2}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(94)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。
 实际上，<span class="math-inline">E_{\F}</span> 由 (<a href="node180.html#eq:E2-pdpBdef">5.29</a>) 明确给出。
 因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，那么计算得到的 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 就是 <em>邻近</em> 矩阵的精确特征值和特征向量。

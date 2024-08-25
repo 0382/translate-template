@@ -80,88 +80,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 经过<span class="math-inline">j</span>次迭代后，该算法生成了向量(<a href="node256.html#rwf:MBB">7.62</a>)。引入以下符号将更为方便：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBC">V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right],\quad W_j = \left[ \begin{array}{cccc}w_1 & w_2 & \cdots & w_j\end{array} \right] \tag{169}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBC"></a><div class="math-display">V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right],\quad W_j = \left[ \begin{array}{cccc}w_1 & w_2 & \cdots & w_j\end{array} \right]</div></td>
-<td WIDTH=10 align="RIGHT">
-(169)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">V_j</span>和<span class="math-inline">W_j</span>分别是右和左Lanczos向量构成的矩阵(<a href="node256.html#rwf:MBB">7.62</a>)。这些向量被构造为双正交的。利用符号(<a href="node258.html#rwf:WBC">7.63</a>)，双正交性可以简洁地表述为：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBD">W_j^T V_j = D_j = {\mathop{\rm diag}\nolimits}\left(\delta_1,\delta_2,\ldots,\delta_j\right). \tag{170}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBD"></a><div class="math-display">W_j^T V_j = D_j = {\mathop{\rm diag}\nolimits}\left(\delta_1,\delta_2,\ldots,\delta_j\right).</div></td>
-<td WIDTH=10 align="RIGHT">
-(170)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 为了确保下一组Lanczos向量的双正交性，算法涉及除以对角项<span class="math-inline">\delta_k</span>，如(<a href="node258.html#rwf:WBD">7.64</a>)所示。因此，一旦出现
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBM">\delta_k = w_k^T v_k = 0,\quad \mathrm{但}\quad v_k,\; w_k \not=0, \tag{171}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBM"></a><div class="math-display">\delta_k = w_k^T v_k = 0,\quad \mathrm{但}\quad v_k,\; w_k \not=0,</div></td>
-<td WIDTH=10 align="RIGHT">
-(171)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 算法必须立即停止。这种情况(<a href="node258.html#rwf:WBM">7.65</a>)称为算法的“崩溃”。尽管可以通过引入所谓的“前瞻”来修正崩溃，但为了简化讨论，这里仅讨论不带前瞻的带状Lanczos算法。
 
 <p>
 经过<span class="math-inline">j</span>次迭代后，除了(<a href="node256.html#rwf:MBB">7.62</a>)，算法还构造了向量
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBY">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}\quad \mathrm{和}\quad\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}. \tag{172}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBY"></a><div class="math-display">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}\quad \mathrm{和}\quad\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(172)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这些向量<span class="math-inline">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}</span>是下一组<span class="math-inline">m_c</span>个右Lanczos向量的候选，<span class="math-inline">\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}</span>是下一组<span class="math-inline">p_c</span>个左Lanczos向量的候选。这里，<span class="math-inline">m_c</span>是右起始向量数<span class="math-inline">m</span>减去在前<span class="math-inline">j</span>次迭代中右块Krylov序列发生的缩减次数，<span class="math-inline">p_c</span>是左起始向量数<span class="math-inline">p</span>减去在前<span class="math-inline">j</span>次迭代中左块Krylov序列发生的缩减次数。向量(<a href="node258.html#rwf:WBY">7.66</a>)被构造为满足双正交关系
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBE">\begin{array}{rl}W_j^T \hat{v}_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+m_c, \\ \hat{W}_j^T v_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+p_c.\end{array} \tag{173}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBE"></a><div class="math-display">\begin{array}{rl}W_j^T \hat{v}_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+m_c, \\ \hat{W}_j^T v_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+p_c.\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(173)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 算法内置了一个基于向量(<a href="node258.html#rwf:WBY">7.66</a>)的简单缩减过程。实际上，在第<span class="math-inline">j+1</span>次迭代时，右块Krylov序列的精确缩减等价于<span class="math-inline">\hat{v}_{j+1}=0</span>。因此，在算法中，检查<span class="math-inline">\left\Vert\hat{v}_{j+1}\right\Vert _2</span>是否小于某个合适的缩减容差。如果是，向量<span class="math-inline">\hat{v}_{j+1}</span>被缩减，<span class="math-inline">m_c</span>减1；否则，<span class="math-inline">\hat{v}_{j+1}</span>被归一化为下一个右Lanczos向量<span class="math-inline">v_{j+1}</span>。类似地，左块Krylov序列的精确缩减等价于<span class="math-inline">\hat{w}_{j+1}=0</span>。在算法中，检查<span class="math-inline">\left\Vert\hat{w}_{j+1}\right\Vert _2</span>是否小于缩减容差。如果是，向量<span class="math-inline">\hat{w}_{j+1}</span>被缩减，<span class="math-inline">p_c</span>减1；否则，<span class="math-inline">\hat{w}_{j+1}</span>被归一化为下一个左Lanczos向量<span class="math-inline">w_{j+1}</span>。
 
 <p>
 用于生成向量(<a href="node256.html#rwf:MBB">7.62</a>)和(<a href="node258.html#rwf:WBY">7.66</a>)的递推关系可以简洁地总结如下：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WBF">\begin{array}{rl}A V_j &\!\!\! = V_j T_j + \left[ \begin{array}{c}v_{j+1} \\ \vdots \\ v_{j+m_c}\end{array} \right] \left[ \begin{array}{ccc}t_{j+1,1} & \cdots & t_{j+1,j}\end{array} \right] + \hat{V}_j^{\rm {(dl)}}, \\ A^T W_j &\!\!\! = W_j \tilde{T}_j + \left[ \begin{array}{c}w_{j+1} \\ \vdots \\ w_{j+p_c}\end{array} \right] \left[ \begin{array}{ccc}\tilde{t}_{j+1,1} & \cdots & \tilde{t}_{j+1,j}\end{array} \right]+ \hat{W}_j^{\rm {(dl)}}.\end{array} \tag{174}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WBF"></a><div class="math-display">\begin{array}{rl}A V_j &\!\!\! = V_j T_j + \left[ \begin{array}{c}v_{j+1} \\ \vdots \\ v_{j+m_c}\end{array} \right] \left[ \begin{array}{ccc}t_{j+1,1} & \cdots & t_{j+1,j}\end{array} \right] + \hat{V}_j^{\rm {(dl)}}, \\ A^T W_j &\!\!\! = W_j \tilde{T}_j + \left[ \begin{array}{c}w_{j+1} \\ \vdots \\ w_{j+p_c}\end{array} \right] \left[ \begin{array}{ccc}\tilde{t}_{j+1,1} & \cdots & \tilde{t}_{j+1,j}\end{array} \right]+ \hat{W}_j^{\rm {(dl)}}.\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(174)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这里，<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>是<span class="math-inline">j\times j</span>矩阵，其元素选择使得双正交条件(<a href="node258.html#rwf:WBD">7.64</a>)和(<a href="node258.html#rwf:WBE">7.67</a>)得到满足。矩阵<span class="math-inline">\hat{V}_j^{\rm {(dl)}}</span>在(<a href="node258.html#rwf:WBF">7.68</a>)中包含大部分零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的<span class="math-inline">\hat{v}_k</span>向量。矩阵<span class="math-inline">\hat{W}_j^{\rm {(dl)}}</span>在(<a href="node258.html#rwf:WBF">7.68</a>)中包含大部分零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的<span class="math-inline">\hat{w}_k</span>向量。我们注意到<span class="math-inline">m-m_c</span>是被缩减的<span class="math-inline">\hat{v}_k</span>向量的数量，<span class="math-inline">p-p_c</span>是被缩减的<span class="math-inline">\hat{w}_k</span>向量的数量。事实证明，双正交性只需在<span class="math-inline">m_c+p_c+1</span>个连续的Lanczos向量之间显式强制，并且一旦发生缩减，还需与<span class="math-inline">p-p_c</span>个固定的早期左Lanczos向量和<span class="math-inline">m-m_c</span>个固定的早期右Lanczos向量进行双正交。因此，矩阵<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>“基本上”是带状的。更准确地说，<span class="math-inline">T_j</span>的下带宽为<span class="math-inline">m_c+1</span>，上带宽为<span class="math-inline">p_c+1</span>，每次<span class="math-inline">\hat{v}_{k}</span>向量被缩减时，下带宽减少1，每次<span class="math-inline">\hat{w}_{k}</span>向量被缩减时，上带宽减少1。此外，每次<span class="math-inline">\hat{w}_{k}</span>向量被缩减时，<span class="math-inline">T_j</span>在带状部分之外和右侧的固定行中会有非零元素。更准确地说，每次由<span class="math-inline">\hat{w}_{k}</span>向量缩减引起的行的行索引由<span class="math-inline">k - p_c(k)</span>给出，其中<span class="math-inline">k</span>是发生缩减的迭代次数，<span class="math-inline">p_c(k)</span>是该迭代时的相应<span class="math-inline">p_c</span>值。因此，矩阵<span class="math-inline">T_j</span>可以写为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:XAC">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}}, \tag{175}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:XAC"></a><div class="math-display">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}},</div></td>
-<td WIDTH=10 align="RIGHT">
-(175)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">T_j^{\rm {(b)}}</span>是带状矩阵，<span class="math-inline">T_j^{\rm {(d)}}</span>包含由于<span class="math-inline">\hat{w}_{k}</span>向量缩减引起的带状部分上方的水平“尖峰”。类似地，
 <br><p></p>
 <div align="CENTER">
@@ -175,27 +126,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 矩阵<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>的元素不是相互独立的。更准确地说，设定
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:XAB">T_j^{\rm (pr)} = T_j +D_j^{-1} \left(\tilde{T}_j^{\rm {(d)}}\right)^T D_j,\quad \tilde{T}_j^{\rm (pr)} = \tilde{T}_j +D_j^{-1} \left(T_j^{\rm {(d)}}\right)^T D_j, \tag{176}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:XAB"></a><div class="math-display">T_j^{\rm (pr)} = T_j +D_j^{-1} \left(\tilde{T}_j^{\rm {(d)}}\right)^T D_j,\quad \tilde{T}_j^{\rm (pr)} = \tilde{T}_j +D_j^{-1} \left(T_j^{\rm {(d)}}\right)^T D_j,</div></td>
-<td WIDTH=10 align="RIGHT">
-(176)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 我们有
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:XAA">T_j^{\rm (pr)} = D_j^{-1} \left(\tilde{T}_j^{\rm (pr)}\right)^T D_j, \tag{177}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:XAA"></a><div class="math-display">T_j^{\rm (pr)} = D_j^{-1} \left(\tilde{T}_j^{\rm (pr)}\right)^T D_j,</div></td>
-<td WIDTH=10 align="RIGHT">
-(177)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">D_j</span>是由(<a href="node258.html#rwf:WBD">7.64</a>)给出的对角矩阵。将(<a href="node258.html#rwf:XAC">7.69</a>)代入(<a href="node258.html#rwf:XAB">7.70</a>)中<span class="math-inline">T_j^{\rm (pr)}</span>的定义，我们得到关系
 <br><p></p>
 <div align="CENTER">

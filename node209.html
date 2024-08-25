@@ -83,16 +83,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 实践中用于解决非厄米特征值问题(NHEP)（参见公式<a href="node204.html#eq:nep1">7.1</a>及<a href="node204.html#eq:nep2">7.2</a>）的主要直接方法是QR算法。<a name="22912"></a>该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="chap5:schur">A = U T U^{\ast}, \tag{121}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="chap5:schur"></a><div class="math-display">A = U T U^{\ast},</div></td>
-<td WIDTH=10 align="RIGHT">
-(121)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">U</span>是酉矩阵，满足<span class="math-inline">U^{\ast} U = I</span>，而<span class="math-inline">T</span>是上三对角矩阵。矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>即为<span class="math-inline">T</span>的对角线元素（详见第<a href="node48.html#sec_chap2_nHep">2.5</a>节）。矩阵<span class="math-inline">A</span>的特征向量<span class="math-inline">x</span>为<span class="math-inline">U s</span>，其中<span class="math-inline">s</span>是<span class="math-inline">T</span>的特征向量，可通过求解三角形方程组获得。当<span class="math-inline">A</span>为实矩阵时，QR算法计算实Schur分解以避免复数运算，从而节省浮点运算和内存。
 
 <p>

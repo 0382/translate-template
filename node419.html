@@ -96,13 +96,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 目前还没有理论可以准确预测算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速度。然而，通过类比已知的PCG系统求解器的收敛理论，我们预计<span class="math-inline">\mu^{(i)}_j</span>向<span class="math-inline">\mu_j</span>的收敛是线性的，其比率为<a name="49065"></a>
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_linear"></a><div class="math-display">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2, ......lta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}.</div></td>
-<td WIDTH=10 align="RIGHT">(288)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="prec_linear">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2, ......lta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}. \tag{288}</div>
+
 
 <p>
 我们通过数值比较（参见[<a href="node421.html#k98">268</a>]）了块变体的最速上升算法<a href="node414.html#fig:prec_steepBA">11.6</a>和算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，块大小<span class="math-inline">m=3</span>。然而，我们只绘制了两个顶部特征值的误差，省略了第三个特征值。两种红色阴影代表块SA方法，两种蓝色阴影对应于算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>。在黑白打印上也很容易区分这些方法，因为算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>总是收敛得更快。两条直线对应于(<a href="node419.html#prec_linear">11.18</a>)预测的线性收敛。
@@ -173,13 +169,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 不幸的是，如果我们想要能够在进一步迭代过程中研究由此产生的误差的传播，那么在预处理特征求解器中使用正交化进行锁定可能并不简单。
 
 <p>
-作为一个例子，让我们考虑我们最简单的预处理特征求解器，算法<a href="node413.html#fig:prec_powerBA">11.5</a>，带有由正交投影器<span class="math-inline">P^\perp</span>定义的附加正交化，该投影器位于已经计算的特征向量所张成的子空间的正交补上，可以写成<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_orth"></a><div class="math-display">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquadw^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}).</div></td>
-<td WIDTH=10 align="RIGHT">(289)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+作为一个例子，让我们考虑我们最简单的预处理特征求解器，算法<a href="node413.html#fig:prec_powerBA">11.5</a>，带有由正交投影器<span class="math-inline">P^\perp</span>定义的附加正交化，该投影器位于已经计算的特征向量所张成的子空间的正交补上，可以写成
+<div class="math-display" id="prec_orth">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquadw^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}). \tag{289}</div>
+
 我们需要弄清楚在我们的正交投影器<span class="math-inline">P^\perp</span>中要使用哪些标量积。
 
 <p>

@@ -89,16 +89,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
  href="node421.html#mosc86">335</a>,<a
  href="node421.html#m90">329</a>,<a
  href="node421.html#saad92">387</a>]）：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="prec_dm">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......u^{(i)} A)x^{(i)} \}</span>.\end{tabular}\vspace{\belowdisplayskip} \tag{286}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_dm"></a><div class="math-display">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......u^{(i)} A)x^{(i)} \}</span>.\end{tabular}\vspace{\belowdisplayskip}</div></td>
-<td WIDTH=10 align="RIGHT">
-(286)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 由于子空间 <span class="math-inline">{\mathcal D}_i</span> 的维度随着每一步增长，并且所有基向量都需要存储，因此通常需要像预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>中那样进行重启。一个简单的重启过程是在一定数量的内迭代步骤后停止方法，然后使用最后一个迭代向量作为下一步（外迭代）的初始近似重新开始。
 
 <p>

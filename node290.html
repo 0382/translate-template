@@ -128,27 +128,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 因此，广义Schur对 <span class="math-inline">((\alpha,\beta),q)</span> 是缩减矩阵对的一个特征对
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:JD7-defl">\begin{array}{l}\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\rig......ight)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)\right).\end{array} \tag{228}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:JD7-defl"></a><div class="math-display">\begin{array}{l}\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\rig......ight)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)\right).\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(228)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这个特征问题可以再次用我们在第&#167;<a href="node288.html#ss:JD7-intro">8.4.1</a>节中概述的Jacobi-Davidson过程来解决。在这个过程中，我们构造了与<span class="math-inline">Q_{k-1}</span>正交的向量<span class="math-inline">v_i</span>和与<span class="math-inline">{Z}_{k-1}</span>正交的向量<span class="math-inline">w_i</span>。这简化了与缩减算子相关的交互矩阵<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>的计算：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:JD7-deflIM">\left\{\begin{array}{l}M^A\equiv W^\ast\left(I-{Z}_{k-1}{......\ast\right) V=W^\ast B V,\rule{0pt}{3.5ex}\end{array}\right. \tag{229}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:JD7-deflIM"></a><div class="math-display">\left\{\begin{array}{l}M^A\equiv W^\ast\left(I-{Z}_{k-1}{......\ast\right) V=W^\ast B V,\rule{0pt}{3.5ex}\end{array}\right.</div></td>
-<td WIDTH=10 align="RIGHT">
-(229)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 并且<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>可以简单地计算为<span class="math-inline">W^\ast A V</span>和<span class="math-inline">W^\ast B V</span>。
 
 <p>

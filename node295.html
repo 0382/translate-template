@@ -82,16 +82,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 有理Krylov子空间方法用于计算正则束的特征值和特征向量，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="albx">(A-\lambda B)x=0\;.\vspace*{-12pt}%% long page\pagebreak \tag{230}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="albx"></a><div class="math-display">(A-\lambda B)x=0\;.\vspace*{-12pt}%% long page\pagebreak</div></td>
-<td WIDTH=10 align="RIGHT">
-(230)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 它是位移-反演Arnoldi算法的推广，在一次运行中使用多个不同位移的因子分解。这样，我们可以很好地近似于所有选定位移周围区域的特征值；参见[<a
  href="node421.html#MR1618804">378</a>]。一个典型的应用是线性动态系统的模型降阶，其中希望在预定频率范围内获得响应；例如，参见[<a
  href="node421.html#ruhsko98">379</a>]或[<a
@@ -99,27 +92,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 有理Krylov开始时是一个带有位移<span class="math-inline">\sigma_1</span>和初始向量<span class="math-inline">v_1</span>的位移和反演Arnoldi迭代。它使用基本递归计算正交基<span class="math-inline">V_j</span>，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="SI-Arnoldi">(A-\sigma_1B)^{-1}BV_j=V_{j+1}H_{j+1,j}\;. \tag{231}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="SI-Arnoldi"></a><div class="math-display">(A-\sigma_1B)^{-1}BV_j=V_{j+1}H_{j+1,j}\;.</div></td>
-<td WIDTH=10 align="RIGHT">
-(231)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 （下标表示矩阵的大小，<span class="math-inline">H_{j+1,j}</span>是<span class="math-inline">(j+1) \times j</span>，而<span class="math-inline">V_j</span>是一个每列长度为<span class="math-inline">n</span>的<span class="math-inline">j</span>列矩阵。）我们可以从<span class="math-inline">H_{j,j}</span>计算Ritz值，并以通常的方式从<span class="math-inline">V_j</span>计算Ritz近似特征向量。解这个小规模的特征值问题
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="H-eig">H_{j,j}Z^{(j)}=Z^{(j)}\Theta^{(j)} \tag{232}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="H-eig"></a><div class="math-display">H_{j,j}Z^{(j)}=Z^{(j)}\Theta^{(j)}</div></td>
-<td WIDTH=10 align="RIGHT">
-(232)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 并得到Ritz值<span class="math-inline">\lambda^{(j)}_i=\sigma_1+1/\theta_i^{(j)}</span>和Ritz向量<span class="math-inline">y^{(j)}_i=V_jz_{.,i}^{(j)}</span>，其中<span class="math-inline">i=1,\dots,j</span>。经过适度的步数<span class="math-inline">j</span>后，我们可以很好地近似于最接近位移<span class="math-inline">\sigma_1</span>的那些特征值<span class="math-inline">\lambda_i</span>。
 
 <p>
@@ -174,16 +153,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 从右侧乘以三角矩阵<span class="math-inline">R_{j,j}</span>的逆，我们知道如果海森堡矩阵是未简化的，它是非奇异的，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="VQ-rec">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}=V_{j+1}H_{j+1,j}R_{j,j}^{-1}\;. \tag{233}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="VQ-rec"></a><div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}=V_{j+1}H_{j+1,j}R_{j,j}^{-1}\;.</div></td>
-<td WIDTH=10 align="RIGHT">
-(233)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 引入新的正交基<span class="math-inline">V_{j+1}Q_{j+1,j+1}</span>，并注意到束(<a href="node295.html#albx">8.17</a>)在新的基下由全矩阵表示，
 <br><p></p>
 <div align="CENTER">

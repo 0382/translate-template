@@ -81,16 +81,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在LAPACK[<a href="node421.html#lapack">12</a>]等软件包中提供的稳健QR算法的实现，可以计算出一个满足以下条件的矩阵<span class="math-inline">A</span>的近似舒尔形式：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="backqr">(A+E)\hat{V} = \hat{V} \hat{R}, \tag{128}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="backqr"></a><div class="math-display">(A+E)\hat{V} = \hat{V} \hat{R},</div></td>
-<td WIDTH=10 align="RIGHT">
-(128)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">\hat{R}</span>是上三角矩阵，<span class="math-inline">\Vert \hat{V}^\ast \hat{V} - I\Vert \approx \epsilon_M</span>，并且<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>，<span class="math-inline">\epsilon_M</span>是机器精度（单位舍入误差）。由于在迭代过程中仅使用酉变换，<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>这一事实直接导致了QR算法的后向稳定性。换句话说，QR方法计算的是一个接近<span class="math-inline">A</span>的矩阵<span class="math-inline">A+E</span>的舒尔形式。
 
 <p>

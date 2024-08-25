@@ -81,74 +81,32 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 这对应于<span class="math-inline">C=B^{-1}A</span>。它计算一个
 基<span class="math-inline">V_j</span>，其中矩阵束<span class="math-inline">\{A,B\}</span>由一个
 实对称三对角矩阵表示，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen_tridia">T_{j}=\left[\begin{array}{cccc}\alpha_1 & \beta_1 &&\\\be......beta_{j-1}\\&&\beta_{j-1}&\alpha_j\\\end{array} \right]\;, \tag{72}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_tridia"></a><div class="math-display">T_{j}=\left[\begin{array}{cccc}\alpha_1 & \beta_1 &&\\\be......beta_{j-1}\\&&\beta_{j-1}&\alpha_j\\\end{array} \right]\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(72)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 满足基本递归关系，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen-herm-recursion">AV_j=BV_{j}T_{j}+re_j^{\ast}\;. \tag{73}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen-herm-recursion"></a><div class="math-display">AV_j=BV_{j}T_{j}+re_j^{\ast}\;.</div></td>
-<td WIDTH=10 align="RIGHT">
-(73)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 与标准厄米特情况（<a href="node103.html#herm-recursion">4.10</a>）相比较。
 现在基<span class="math-inline">V_j</span>是<span class="math-inline">B</span>-正交的，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="B-ortho">V_j^{\ast}BV_j=I_{j}\,, \tag{74}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="B-ortho"></a><div class="math-display">V_j^{\ast}BV_j=I_{j}\,,</div></td>
-<td WIDTH=10 align="RIGHT">
-(74)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 且矩阵<span class="math-inline">T</span>与<span class="math-inline">A</span>的一个截面是相合的，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="T_section">V_j^{\ast}AV_j=T_{j}\,. \tag{75}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="T_section"></a><div class="math-display">V_j^{\ast}AV_j=T_{j}\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(75)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 
 <p>
 我们通过引入一个辅助基来简化<span class="math-inline">B</span>-正交化的描述，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="w-basis">W_j=BV_j\,, \tag{76}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="w-basis"></a><div class="math-display">W_j=BV_j\,,</div></td>
-<td WIDTH=10 align="RIGHT">
-(76)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 它是<span class="math-inline">B^{-1}</span>-正交的，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="B-w-ortho">W_j^{\ast}B^{-1}W_j=I_{j}\,, \tag{77}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="B-w-ortho"></a><div class="math-display">W_j^{\ast}B^{-1}W_j=I_{j}\,,</div></td>
-<td WIDTH=10 align="RIGHT">
-(77)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 并且对于它，<span class="math-inline">W^{\ast}V=I</span>。
 
 <p>
@@ -165,16 +123,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 并得到一个
 Ritz 值
 <span class="math-inline">\theta_i^{(j)}</span> 和一个 Ritz 向量，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen_eigenvector">x_i^{(j)}=V_js_i^{(j)}, \tag{78}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_eigenvector"></a><div class="math-display">x_i^{(j)}=V_js_i^{(j)},</div></td>
-<td WIDTH=10 align="RIGHT">
-(78)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 近似于束的特征对（<a href="node156.html#gsymeig">5.1</a>）。
 其残差，
 <p></p>
@@ -196,16 +147,9 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\theta_i^{(j)}
 
 <p>
 我们可以像在标准厄米特情况中那样估计残差的范数（<a href="node103.html#estimate_residual">4.13</a>），但现在使用<span class="math-inline">B^{-1}</span>-范数会更好，得到
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen_estimate_residual">\Vert r_i^{(j)}\Vert _{B^{-1}}=\vert\beta_js_{j,i}^{(j)}\vert\;, \tag{79}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_estimate_residual"></a><div class="math-display">\Vert r_i^{(j)}\Vert _{B^{-1}}=\vert\beta_js_{j,i}^{(j)}\vert\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(79)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 利用了事实
 <span class="math-inline">(Bv_{j+1})^{\ast}B^{-1}(Bv_{j+1})=v_{j+1}^{\ast}Bv_{j+1}</span>。
 在衡量收敛性时自然使用<span class="math-inline">B^{-1}</span>-范数；

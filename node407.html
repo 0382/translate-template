@@ -115,29 +115,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 将所有方程收集起来，对于</span>j=1,\ldots,k<span class="math-inline">，我们有
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:rks-Sk">A V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k} - S_k \ , \tag{277}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:rks-Sk"></a><div class="math-display">A V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k} - S_k \ ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(277)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这是另一种写法（<a href="node400.html#eq:system-Sk">11.3</a>）。注意，当从该方程中省略</span>S_k<span class="math-inline">时，我们得到通常的有理Krylov子空间（RKS）递推关系。同样在这种情况下，</span>L_{k+1,k}<span class="math-inline">和</span>K_{k+1,k}<span class="math-inline">是上部海森堡矩阵，并且</span>L_{k+1,k}<span class="math-inline">具有满秩。令
 </span>L_{k+1,k}^{\dagger}<span class="math-inline">表示</span>L_{k+1,k}<span class="math-inline">的广义Moore-Penrose逆。利用
 </span>E_k = S_k L_{k+1,k}^{\dagger} V_{k+1}^{\ast}<span class="math-inline">，我们也可以写成
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:rks-Ek">(A + E_k) V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k}, \tag{278}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:rks-Ek"></a><div class="math-display">(A + E_k) V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k},</div></td>
-<td WIDTH=10 align="RIGHT">
-(278)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这对应于（<a href="node400.html#eq:system-Ek">11.4</a>）。换句话说，RKS系数矩阵</span>L_{k+1,k}<span class="math-inline">和</span>K_{k+1,k}<span class="math-inline">以及向量</span>V_{k+1}<span class="math-inline">可以被视为通过对扰动问题应用精确有理Krylov方法计算得到的结果
 
 </span>(A + E_k) u = \eta B u<span class="math-inline">。类似于“非精确”Cayley变换的术语，我们谈论“非精确”有理Krylov方法。

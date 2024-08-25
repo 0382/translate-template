@@ -81,15 +81,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一个简单的PCG方法变体，针对矩阵束<span class="math-inline">B - \mu A</span>，可以写成如下形式：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_cgmBA"></a><div class="math-display">\begin{array}{l}x^{(i+1)} = w^{(i)} + \tau^{(i)} x^{(i)} + ......mu^{(i)} A x^{(i)}), \\\mu^{(i)} = \mu (x^{(i)}),\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(287)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="prec_cgmBA">\begin{array}{l}x^{(i+1)} = w^{(i)} + \tau^{(i)} x^{(i)} + ......mu^{(i)} A x^{(i)}), \\\mu^{(i)} = \mu (x^{(i)}),\end{array} \tag{287}</div>
+
 其中，适当选择的标量迭代参数<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>。参数选择最简单且最有效的方式基于<em>局部最优</em>的思想[<a href="node421.html#k90">266</a>]；即，选择<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>，通过Rayleigh-Ritz方法最大化Rayleigh商<span class="math-inline">\mu(x^{(i+1)})</span>；参见算法<a href="node418.html#fig:prec_cgmBA">11.10</a>。
 
 <p>

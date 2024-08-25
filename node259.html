@@ -102,16 +102,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <br>
 然而，实际上大约只有这些项的一半需要明确计算为内积。其余的项可以通过以下关系获得：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:SAV">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i, \tag{185}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:SAV"></a><div class="math-display">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i,</div></td>
-<td WIDTH=10 align="RIGHT">
-(185)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这一关系源自<span class="math-inline">T_j^{\rm (pr)}</span>和<span class="math-inline">\tilde{T}_j^{\rm (pr)}</span>的连接<a href="node258.html#rwf:XAA">7.71</a>。特别是，在步骤(10)、(12)、(13)和(14)的讨论中，我们给出了使用<a href="node259.html#rwf:SAV">7.79</a>尽可能多的<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>项的公式。采用这些公式可以最小化内积的数量，但会牺牲一些数值稳定性。
 
 <p>
@@ -121,32 +114,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dl>
 <dt><strong>(4)</strong></dt>
 <dd>通常，是否需要对<span class="math-inline">\hat{v}_j</span>进行收缩的决策应基于检查是否
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WGA">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol}, \tag{186}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WGA"></a><div class="math-display">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol},</div></td>
-<td WIDTH=10 align="RIGHT">
-(186)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中<span class="math-inline">{\tt dtol}</span>是一个适当选择的小收缩容差。如果<a href="node259.html#rwf:WGA">7.80</a>满足，则对<span class="math-inline">\hat{v}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-m_c</span>，则添加到包含<span class="math-inline">\tilde{T}_j</span>的<span class="math-inline">\tilde{T}_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_w</span>中，并且当前右块大小更新为<span class="math-inline">m_c=m_c-1</span>。如果<span class="math-inline">m_c=0</span>，则右块Krylov序列<a href="node256.html#rwf:MBA1">7.60</a>耗尽，算法自然终止。如果<span class="math-inline">m_c>0</span>，删除向量<span class="math-inline">\hat{v_j}</span>，剩余右候选向量<span class="math-inline">\hat{v}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(3)。如果不满足<a href="node259.html#rwf:WGA">7.80</a>，则不需要收缩，算法继续步骤(5)。
 
 <p>
 </dd>
 <dt><strong>(6)</strong></dt>
 <dd>类似于<a href="node259.html#rwf:WGA">7.80</a>，是否需要对<span class="math-inline">\hat{w}_j</span>进行收缩的决策基于检查是否
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:WGB">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}. \tag{187}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:WGB"></a><div class="math-display">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(187)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 如果<a href="node259.html#rwf:WGB">7.81</a>满足，则对<span class="math-inline">\hat{w}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-p_c</span>，则添加到包含<span class="math-inline">T_j</span>的<span class="math-inline">T_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_v</span>中，并且当前左块大小更新为<span class="math-inline">p_c=p_c-1</span>。如果<span class="math-inline">p_c=0</span>，则左块Krylov序列<a href="node256.html#rwf:MBA2">7.61</a>耗尽，算法自然终止。如果<span class="math-inline">p_c>0</span>，删除向量<span class="math-inline">\hat{w}_j</span>，剩余左候选向量<span class="math-inline">\hat{w}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(5)。如果不满足<a href="node259.html#rwf:WGB">7.81</a>，则不需要收缩，算法继续步骤(7)。
 
 <p>
@@ -176,16 +155,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(10)</strong></dt>
 <dd>向量<span class="math-inline">\hat{v}_{j+m_c}</span>与左Lanczos向量<span class="math-inline">w_k</span>，<span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。通过使用<a href="node259.html#rwf:SAV">7.79</a>，可以在计算<span class="math-inline">t_{kj}</span>时节省一个内积。更确切地说，应使用以下<span class="math-inline">t_{kj}</span>的公式：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="rwf:SAV1">t_{kj}= \cases{\displaystyle{\tilde{t}_{jk}\, \delta_j/\delta_k}& \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{{w_k^T \hat{v}_{j+m_c}}/{\delta_k}}& \ otherwise.} \tag{188}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="rwf:SAV1"></a><div class="math-display">t_{kj}= \cases{\displaystyle{\tilde{t}_{jk}\, \delta_j/\delta_k}& \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{{w_k^T \hat{v}_{j+m_c}}/{\delta_k}}& \ otherwise.}</div></td>
-<td WIDTH=10 align="RIGHT">
-(188)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 注意，<a href="node259.html#rwf:SAV1">7.82</a>中所需的项<span class="math-inline">\tilde{t}_{jk}</span>可从步骤(7)获得。
 <a name="25715"></a> 
 

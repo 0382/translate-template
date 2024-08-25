@@ -110,50 +110,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一个更好的收缩实现方式，与Arnoldi过程很好地结合，是使用单个基<span class="math-inline">v_1, v_2, \ldots , v_m</span>，其前几个向量是已经收敛的舒尔向量。假设已有<span class="math-inline">k-1</span>个这样的向量收敛，记为<span class="math-inline">v_1, v_2,\ldots,v_{k-1}</span>。然后我们选择一个与<span class="math-inline">v_1,\ldots,v_{k-1}</span>正交且范数为1的向量<span class="math-inline">v_k</span>。接下来执行<span class="math-inline">m-k</span>步Arnoldi过程，其中向量<span class="math-inline">v_j</span>相对于所有之前的<span class="math-inline">v_i</span>，包括<span class="math-inline">v_1,\ldots,v_{k-1}</span>保持正交。这将生成子空间的正交基
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">{\rm span}\{ v_1,\ldots, v_{k-1} , v_k, A v_k, \ldots, A^{m-k} v_k \} \ .</div></td>
-<td WIDTH=10 align="RIGHT">
-(125)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-因此，这个修改的Krylov子空间的维数通常是恒定的，等于<span class="math-inline">m</span>。结合Arnoldi方法的隐式收缩过程的概要如下。
 
-<p>
-<br>
-<a name="alg:defl"></a><img
- width="598" height="435" align="BOTTOM" border="0"
- src="img1940.png"
- alt="\begin{algorithm}{Explicitly Restarted Arnoldi Method with
-Deflation for NHEP
-}...
-...o to} (3) \\
-{\rm (16)} \&gt; \&gt; \&gt; {\bf end if}
-\end{tabbing}
-}
-\end{algorithm}">
-<br>
+<div class="math-display" id="alg:defl">\underbrace{\left[v_1, v_2, \ldots, v_{k-1}\right.}_{Locked},\underbrace{\left. v_k, v_{k+1}, \ldots v_m \right] }_{Active} \tag{126}</div>
 
-<p>
-注意，在循环中，与特征值<span class="math-inline">\lambda_1,\ldots,\lambda_{k-1}</span>相关的舒尔向量在后续步骤中不会被触及。它们有时被称为“锁定向量”。同样，与这些向量对应的上三角矩阵也被锁定。
-<br><p></p>
-<div align="CENTER">
-<div class="math-display">\underbrace{\left[v_1, v_2, \ldots, v_{k-1}\right.}_{Locked},\underbrace{\left. v_k, v_{k+1}, \ldots v_m \right] }_{Active}</div>
-</div>
-<br clear="ALL">
-<p></p>
-
-<p>
-当一个新的舒尔向量收敛时，步骤(10)计算与这个新基向量相关的<span class="math-inline">R</span>的第<span class="math-inline">k</span>列。在后续步骤中，近似特征值是算法中定义的<span class="math-inline">m \times m</span>海森堡矩阵<span class="math-inline">H_m</span>的特征值，其<span class="math-inline">k \times k</span>主子矩阵是上三角的。例如，当<span class="math-inline">m=6</span>且第二个舒尔向量<span class="math-inline">k=2</span>收敛后，矩阵<span class="math-inline">H_m</span>将具有以下形式
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">H_m ~ = ~\left[ \begin{array}{cccccc}* & * & * & * & * &...... & & & * & * & * \\& & & & * & * \\\end{array} \right].</div></td>
-<td WIDTH=10 align="RIGHT">
-(126)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 在后续步骤中，只需考虑与<span class="math-inline">2 \times 2</span>上三角矩阵无关的特征值。
 
 <p>

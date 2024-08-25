@@ -87,15 +87,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们将假设预处理器 <span class="math-inline">T</span> 是<em>对称正定</em>的。由于 <span class="math-inline">A</span> 也是对称正定的，因此存在正的常数 <span class="math-inline">\delta_1 \geq \delta_0 > 0</span> 使得
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_equiv"></a><div class="math-display">\delta_0 (M x,x) \leq (Ax,x) \leq \delta_1 (M x,x), \ M = T^{-1} .</div></td>
-<td WIDTH=10 align="RIGHT">
-(279)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="prec_equiv">\delta_0 (M x,x) \leq (Ax,x) \leq \delta_1 (M x,x), \ M = T^{-1} . \tag{279}</div>
+
 比值 <span class="math-inline">\delta_1 / \delta_0</span> 可以视为预处理矩阵 <span class="math-inline">TA</span> 的谱条件数 <span class="math-inline">\kappa(TA)</span>，并衡量 <span class="math-inline">M</span> 在缩放范围内对原矩阵 <span class="math-inline">A</span> 的近似程度。较小的比值 <span class="math-inline">\delta_1 / \delta_0</span> 确保更快的收敛。
 
 <p>
@@ -106,15 +100,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们首先定义，参照 [<a href="node421.html#k98">268</a>]，对于矩阵束 <span class="math-inline">B - \mu A</span>，一个预处理的单向量迭代求解器，作为一种广义多项式方法：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="defprecesgen"></a><div class="math-display">x^{(k)}=P_{m_k}(TA,TB) x^{(0)},</div></td>
-<td WIDTH=10 align="RIGHT">
-(280)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="defprecesgen">x^{(k)}=P_{m_k}(TA,TB) x^{(0)}, \tag{280}</div>
+
 其中 <span class="math-inline">P_{m_k}</span> 是两个独立变量的 <span class="math-inline">m_k</span> 次多项式，<span class="math-inline"> x^{(0)}</span> 是初始猜测，<span class="math-inline">T</span> 是固定的预处理器。
 
 <p>
@@ -146,25 +134,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 类似地，我们定义一般的预处理<em>块迭代方法</em>，其中一组向量 <span class="math-inline">x^{(k)}_j, \ j=1, \ldots, m</span>，同时计算：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="defprecesgenblock"></a><div class="math-display">x^{(k)}_j=P_{m_k}(TA,TB) x^{(0)}_j, \qquad j=1, \ldots, m,</div></td>
-<td WIDTH=10 align="RIGHT">
-(281)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="defprecesgenblock">x^{(k)}_j=P_{m_k}(TA,TB) x^{(0)}_j, \qquad j=1, \ldots, m, \tag{281}</div>
+
 其中 <span class="math-inline">P_{m_k}</span> 是两个独立变量的 <span class="math-inline">m_k</span> 次多项式，<span class="math-inline"> x^{(0)}_j</span> 是初始猜测。多项式 <span class="math-inline">P_{m_k}</span> 不必（实际上通常不是）对不同的 <span class="math-inline">j</span> 值相同。如果相同，则 (<a href="node412.html#defprecesgenblock">11.11</a>) 可以重写为<em>子空间迭代</em>：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="defprecesgensub"></a><div class="math-display">S^{(k)}=P_{m_k}(TA,TB) S^{(0)},</div></td>
-<td WIDTH=10 align="RIGHT">
-(282)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="defprecesgensub">S^{(k)}=P_{m_k}(TA,TB) S^{(0)}, \tag{282}</div>
+
 其中 <span class="math-inline">S^{(0)}</span> 和 <span class="math-inline">S^{(k)}</span> 是 <span class="math-inline">m</span> 维子空间。这种方法在理论上更容易分析；参见基于移位幂方法的预处理子空间迭代的例子 [<a href="node421.html#dk82">148</a>,<a href="node421.html#dk92">149</a>]，但在实践中可能收敛较慢。
 
 <p>

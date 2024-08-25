@@ -83,16 +83,9 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 <span class="math-inline">U^*AV</span>呈双对角形式。实际上，<span class="math-inline">V</span>的第一列<span class="math-inline">v_1</span>
 可以选择为任意单位向量，之后<span class="math-inline">U</span>和<span class="math-inline">V</span>的其他列通常是唯一确定的。
 我们将其表示为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="uav">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_{n} \\\end{array} \right]. \tag{111}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="uav"></a><div class="math-display">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_{n} \\\end{array} \right].</div></td>
-<td WIDTH=10 align="RIGHT">
-(111)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 即使<span class="math-inline">A</span>是复数，所有<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>也都是实数。
 
 <p>
@@ -124,111 +117,9 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 <br clear="ALL">
 <p></p>
 或者
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gklmethod">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0, \tag{116}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">\alpha_k u_k = Av_k - \beta_{k-1}u_{k-1}, \quad\quad \beta_0 = 0.</div></td>
-<td WIDTH=10 align="RIGHT">
-(112)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-另一方面，从关系式
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">A^{\ast} \left[\begin{array}{cccc}u_1 & u_2 & \ldots & u_n\end{array} \right] = V\left[\begin{array}{cccccc}\alpha_1 & & & \\& \alpha_2 & \beta_1 & \\& & \ddots & \ddots & \\& & & \beta_{n-1} & \alpha_n \\\end{array} \right],</div>
-</div>
-<br clear="ALL">
-<p></p>
-我们得到
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">A^{\ast} u_k = {\alpha}_k v_k + {\beta}_k v_{k+1}</div>
-</div>
-<br clear="ALL">
-<p></p>
-或者
-<br>
-<div align="RIGHT">
-
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">{\beta}_k v_{k+1} = A^{\ast} u_k - {\alpha}_k v_k.</div></td>
-<td WIDTH=10 align="RIGHT">
-(113)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
-
-<p>
-由于<span class="math-inline">U</span>和<span class="math-inline">V</span>的列是归一化的，我们必须有
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">\alpha_k = \Vert Av_k - \beta_{k-1}u_{k-1}\Vert _2</div>
-</div>
-<br clear="ALL">
-<p></p>
-以及
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">\beta_k = \Vert A^* u_k - \alpha_k v_k\Vert _2.</div>
-</div>
-<br clear="ALL">
-<p></p>
-我们将递归总结在以下算法中。
-
-<p>
-<br>
-<a name="gklmethod"></a><img
- width="598" height="221" align="BOTTOM" border="0"
- src="img1774.png"
- alt="\begin{algorithm}{Golub--Kahan--Lanczos Bidiagonalization Procedure
-}
-{
-\begin{t...
-...} = v_{k+1}/ \beta_k<span class="math-inline">\ \\
-{\rm (9)}\&gt; {\bf end}
-\end{tabbing}}
-\end{algorithm}">
-<br>
-
-<p>
-收集算法前</span>k<span class="math-inline">步计算的量，我们得到以下重要关系：
-<br>
-<div align="CENTER"><a name="lansvdeq1"></a><a name="lansvdeq2"></a>
-
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A V_k<span class="math-inline"></td>
-<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
-<td align="LEFT" NOWRAP></span>\displaystyle U_k B_k,<span class="math-inline"></td>
-<td WIDTH=10 align="RIGHT">
-(114)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A^{\ast} U_{k}<span class="math-inline"></td>
-<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
-<td align="LEFT" NOWRAP></span>\displaystyle V_k B^*_k + \beta_{k}v_{k+1}e^*_k,<span class="math-inline"></td>
-<td WIDTH=10 align="RIGHT">
-(115)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
-以及
-<br>
-<div align="RIGHT">
-
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="uvorth"></a><div class="math-display">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0,</div></td>
-<td WIDTH=10 align="RIGHT">
-(116)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中</span>B_k<span class="math-inline">是</span>B<span class="math-inline">的</span>k$阶前主子矩阵，如&nbsp;(<a href="node198.html#uav">6.4</a>)所定义。
 
 <p>

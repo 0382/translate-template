@@ -123,15 +123,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 因此，可以通过简单地用<span class="math-inline">q_{j+1}</span>的倍数更新<span class="math-inline">{x}_i^{(j)}</span>来廉价计算净化的里兹向量，
 
 <span class="math-inline">(1/\theta_i^{(j)})H^{-1}B{x}_i^{(j)},</span>
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ercorrection"></a><div class="math-display">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(240)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="ercorrection">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}. \tag{240}</div>
+
 这一技术最初在[<a href="node421.html#erru80">162</a>]中提出，旨在提高里兹向量的质量，后来在[<a href="node421.html#npej87">340</a>]中证明具有所需的净化效果。数值经验表明，更新后的向量几乎完全位于<span class="math-inline">H^{-1} B</span>的值域内，通常能提供更好的特征向量近似。该方案也推荐用于不定情况。
 
 <p>

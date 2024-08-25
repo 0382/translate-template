@@ -81,16 +81,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 在本章中，我们将考虑 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 矩阵 <span class="math-inline">A</span> 的奇异值分解（SVD）。我们假设不失一般性，<span class="math-inline">m \geq n</span>；如果 <span class="math-inline">m < n</span>，则考虑 <span class="math-inline">A^*</span>。如第&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>节所述，这种分解可以写成 <a name="20676"></a>
 <br>
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eqn_chapSVD_SVD1">A = U \Sigma V^*,\vspace*{-2pt}%% help \tag{108}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn_chapSVD_SVD1"></a><div class="math-display">A = U \Sigma V^*,\vspace*{-2pt}%% help</div></td>
-<td WIDTH=10 align="RIGHT">
-(108)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
 <span class="math-inline">U = [u_1,\ldots,u_m]</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的酉矩阵，
 
@@ -246,16 +239,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">\Lambda = {\rm diag}( \Sigma_n , -\Sigma_n , O^{(m-n) \times (m-n)})</span>
 和
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eqn_chap6_QforH_A_">Q=\begin{bmatrix} \frac{1}{\sqrt{2}} U_n & - \frac{1}{\sqrt{2}} U...... + \frac{1}{\sqrt{2}} V &O^{n \times (m-n)} \end{bmatrix}\; \; \; . \tag{109}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn_chap6_QforH_A_"></a><div class="math-display">Q=\begin{bmatrix} \frac{1}{\sqrt{2}} U_n & - \frac{1}{\sqrt{2}} U...... + \frac{1}{\sqrt{2}} V &O^{n \times (m-n)} \end{bmatrix}\; \; \; .</div></td>
-<td WIDTH=10 align="RIGHT">
-(109)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 换句话说，<span class="math-inline">\pm \sigma_i</span> 是一个特征值，其单位特征向量为
 
 <span class="math-inline">\frac{1}{\sqrt{2}} [{\pm u_i \atop v_i}]</span>，<span class="math-inline">i=1</span> 到 <span class="math-inline">n</span>，

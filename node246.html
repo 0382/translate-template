@@ -84,41 +84,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 Ritz值倾向于首先收敛到谱的凸包边界上的特征值。为了计算内部特征值，通常值得对<span class="math-inline">A</span>应用谱变换。策略是通过将复平面中期望的特征值映射到变换谱的外部来加速收敛速率。标准方法是将对Lanczos算法应用于移位和逆矩阵
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonherm_shift_invert">C=(A-\sigma I)^{-1} \tag{150}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonherm_shift_invert"></a><div class="math-display">C=(A-\sigma I)^{-1}</div></td>
-<td WIDTH=10 align="RIGHT">
-(150)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 复平面中离移位<span class="math-inline">\sigma</span>最近的特征值首先收敛。注意，LU分解，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="nonherm_shift_invert_factor">A-\sigma I = LU, \tag{151}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nonherm_shift_invert_factor"></a><div class="math-display">A-\sigma I = LU,</div></td>
-<td WIDTH=10 align="RIGHT">
-(151)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 可以用于计算Lanczos算法中所需的<span class="math-inline">C q_j = U^{-1}(L^{-1}q)</span>和<span class="math-inline">C^{\ast} p_j =L^{-\ast}(U^{-\ast}p)</span>。参见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节。
 
 <p>
 非对称特征值问题(NHEP)的一个内在困难是，已知的<span class="math-inline">\theta_i^{(j)}</span>到<span class="math-inline">A</span>的特征值的距离界限不实用[<a href="node421.html#stsu90">425</a>,<a href="node421.html#kapj82">256</a>]。另一个复杂之处是，为了有用，双侧算法的收敛理论必须考虑到左右Krylov子空间同时近似<span class="math-inline">A</span>的特征值这一事实。这两个问题通过界定距离<span class="math-inline">\Vert F\Vert</span>到具有特征三元组<span class="math-inline">(\theta_i^{(j)},x_i^{(j)},y_i^{(j)})</span>的最近矩阵<span class="math-inline">A-F</span>来解决。特征值敏感度（条件数）也可用。回想残差向量<span class="math-inline">r_i^{(j)}</span>和<span class="math-inline">s_i^{(j)}</span>，如式(<a href="node245.html#bnhlrr">7.40</a>)和(<a href="node245.html#bnhllr">7.41</a>)所定义。接下来观察到双正交条件(<a href="node245.html#biorthogonal">7.37</a>)意味着<span class="math-inline">(s_i^{(j)})^{\ast} x_i^{(j)} = (y_i^{(j)})^{\ast} r_i^{(j)} = 0</span>。这些关系一起意味着
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="residerr">F = \frac{ r_i^{(j)} (x_i^{(j)})^{\ast} }{ \Vert x_i^{(j)}\Vert^2_2 } + \frac{ y_i^{(j)} (s_i^{(j)})^{\ast}}{ \Vert y_i^{(j)}\Vert^2_2 } \tag{152}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="residerr"></a><div class="math-display">F = \frac{ r_i^{(j)} (x_i^{(j)})^{\ast} }{ \Vert x_i^{(j)}\Vert^2_2 } + \frac{ y_i^{(j)} (s_i^{(j)})^{\ast}}{ \Vert y_i^{(j)}\Vert^2_2 }</div></td>
-<td WIDTH=10 align="RIGHT">
-(152)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 是所需的扰动，使得
 <br>
 <div align="CENTER"><a name="backwd1"></a><a name="backwd2"></a>

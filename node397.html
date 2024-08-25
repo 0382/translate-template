@@ -94,14 +94,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 引言的其余部分探讨了本章将描述的各种预处理方法之间的相似性。已经提到，预处理方法通常一次只寻找一个特征值。这与非预处理的Krylov子空间方法截然不同，后者可以同时找到多个特征值。有时采用块方法来缓解预处理方法的这一问题；例如，参见§<a href="node419.html#sec:prec_block">11.3.9</a>。预处理方法之间的另一个相似之处是全球收敛可能更具挑战性。某些方法，例如§<a href="node418.html#sec:prec_pcg">11.3.8</a>中的局部最优预处理共轭梯度法，在数值实验中实际上非常稳健，通常在随机初始猜测下收敛。然而，其他一些方法，例如基于内外迭代的方法，如果可用合理的特征向量近似作为起始向量，效果会更好。这引导我们关注混合方法，即以Krylov方法开始，以预处理方法结束。事实上，可以用于Krylov方法的算子包括<span class="math-inline">A</span>、<span class="math-inline">M^{-1}</span>（其中<span class="math-inline">M</span>是位移矩阵<span class="math-inline">A-\nu I</span>的近似），甚至是预处理的算子<span class="math-inline">M^{-1}(A-\nu I)</span>，对于固定的<span class="math-inline">\nu</span>和<span class="math-inline">M</span>。混合方法可能提供更多的鲁棒性，值得进一步研究。
 
 <p>
-我们再看一个特征值预处理方法之间的相似之处。为便于阐述，我们假设存在一个标准的对称特征值问题。似乎所有方法的共同点是算子<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:keyop"></a><div class="math-display">M^{-1}(A-\nu I),</div></td>
-<td WIDTH=10 align="RIGHT">
-(272)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+我们再看一个特征值预处理方法之间的相似之处。为便于阐述，我们假设存在一个标准的对称特征值问题。似乎所有方法的共同点是算子
+<div class="math-display" id="eq:keyop">M^{-1}(A-\nu I), \tag{272}</div>
+
 其中<span class="math-inline">\nu</span>是近似特征值，<span class="math-inline">M</span>是<span class="math-inline">A-\nu I</span>的（可能变化的）近似。我们将探讨一些不同方法如何使用此算子的例子；有关一般讨论，请参见§<a href="node412.html#sec:prec_preconditioning">11.3.2</a>。讨论的四种方法包括预处理的幂法、Rayleigh商迭代（RQI）、Davidson方法和Jacobi-Davidson方法。预处理的幂法是§<a href="node410.html#sec:prec">11.3</a>中的算法<a href="node413.html#fig:prec_powerBA">11.5</a>。当<span class="math-inline">B=I</span>时，该算法的步骤4和5执行<br><p></p>
 <div align="CENTER">
 <div class="math-display">w =T(x^{(i)}-\mu^{(i)}Ax^{(i)}) =-\mu^{(i)} T(A - {1/\mu^{(i)}} I) x^{(i)}. </div>

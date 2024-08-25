@@ -94,16 +94,9 @@ Jacobi-Davidson方法
 
 <p>
 在这个子空间中，向量<span class="math-inline">{u}\equiv {V}_{m}{s}</span>的Ritz-Galerkin条件导致
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:jdgensyga">({V}_{m}^\ast A {V}_{m}) {s} - \theta ({V}_{m}^\ast B {V}_{m}) {s} = 0 , \tag{88}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:jdgensyga"></a><div class="math-display">({V}_{m}^\ast A {V}_{m}) {s} - \theta ({V}_{m}^\ast B {V}_{m}) {s} = 0 ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(88)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 或者，由于<span class="math-inline">{V}_{m}</span>的<span class="math-inline">B</span>-正交性：
 <br><p></p>
 <div align="CENTER">
@@ -117,16 +110,9 @@ Jacobi-Davidson方法
 
 <p>
 对于广义特征问题的特征向量分量<span class="math-inline">t_j^{({m})}\perpB{u}_j^{(m)}</span>的校正方程可以写成
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:ghcorr">\begin{array}{r}\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast......j^{({m})}\equiv - (A-\theta_j^{(m)} B){u}_j^{(m)} .\end{array} \tag{89}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:ghcorr"></a><div class="math-display">\begin{array}{r}\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast......j^{({m})}\equiv - (A-\theta_j^{(m)} B){u}_j^{(m)} .\end{array}</div></td>
-<td WIDTH=10 align="RIGHT">
-(89)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 如果矩阵<span class="math-inline">A-\theta_j^{(m)} B</span>的线性系统可以高效求解，那么我们可以计算精确解<span class="math-inline">t_j^{({m})}</span>。在其他情况下，我们可以像通常对Jacobi-Davidson方法所做的那样，使用应用于（<a href="node176.html#eq:ghcorr">5.25</a>）的Krylov求解器计算<span class="math-inline">t_j^{({m})}</span>的近似解。注意，算子
 <br><p></p>
 <div align="CENTER">

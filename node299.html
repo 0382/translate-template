@@ -156,15 +156,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 这并不显式使用 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。综上所述，可以在算法 <a href="node298.html#alg:jsymlan">8.4</a> 的内循环中（即步骤 (19)）使用
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:proverrest"></a><div class="math-display">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\}</div></td>
-<td WIDTH=10 align="RIGHT">
-(239)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="eq:proverrest">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\} \tag{239}</div>
+
 作为临时误差估计。只有在所需数量的 Ritz 值 <span class="math-inline">\theta^{(j)}_i</span> 通过此测试后，才可以计算 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。此时，可以以形成 <span class="math-inline">B{x}_i^{(j)}</span> 的额外成本计算更精确的因子，
 <br><p></p>
 <div align="CENTER">

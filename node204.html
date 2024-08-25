@@ -77,27 +77,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 引言</a>
 </h1>
 在本章中，我们将讨论非厄米特征值问题（NHEP）
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:nep1">Ax = \lambda x, \tag{117}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:nep1"></a><div class="math-display">Ax = \lambda x,</div></td>
-<td WIDTH=10 align="RIGHT">
-(117)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中，方阵 <span class="math-inline">A \neq A^{\ast}</span>。向量 <span class="math-inline">x \neq 0</span> 称为右特征向量。一个满足
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:nep2">y^{\ast} A = \lambda y^{\ast} \tag{118}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:nep2"></a><div class="math-display">y^{\ast} A = \lambda y^{\ast}</div></td>
-<td WIDTH=10 align="RIGHT">
-(118)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 的向量 <span class="math-inline">y \neq 0</span> 称为 <span class="math-inline">A</span> 的左特征向量。
 
 <p>
@@ -105,16 +91,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 与厄米矩阵不同，非厄米矩阵不具备正交的特征向量集；换句话说，非厄米矩阵 <span class="math-inline">A</span> 通常不能通过正交矩阵 <span class="math-inline">Q</span> 变换为对角形式 <span class="math-inline">D=Q^\ast A Q</span>。多数非厄米矩阵可通过非正交矩阵 <span class="math-inline">X</span> 变换为对角形式 <span class="math-inline">D=X^{-1}AX</span>，但存在一些矩阵甚至无法做到这一点。这类矩阵可视为极限情况，其中 <span class="math-inline">X</span> 趋向于奇异算子，且它们不具备完整的特征向量集；它们被称为<em>缺陷矩阵</em>。这揭示了数值不稳定的来源：如果 <span class="math-inline">X</span> 在某种意义上接近奇异算子，那么变换可能对 <span class="math-inline">A</span> 的扰动敏感。这些扰动由计算 <span class="math-inline">X</span> 和 <span class="math-inline">D</span> 的过程引入。因此，尽可能多地使用正交或接近正交的变换至关重要。众所周知，对于任何非厄米矩阵 <span class="math-inline">A</span>，存在一个酉矩阵 <span class="math-inline">U</span> 将其变换为上三角形式
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="sec51:eq1">T=U^\ast A U. \tag{119}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="sec51:eq1"></a><div class="math-display">T=U^\ast A U.</div></td>
-<td WIDTH=10 align="RIGHT">
-(119)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 矩阵 <span class="math-inline">T</span> 称为 <span class="math-inline">A</span> 的<em>舒尔形式</em>。<span class="math-inline">A</span> 的特征值出现在 <span class="math-inline">T</span> 的对角线上。此外，矩阵 <span class="math-inline">U</span> 可以正交变换，使得 <span class="math-inline">A</span> 的特征值按预定顺序出现在 <span class="math-inline">R</span> 的对角线上。如果 <span class="math-inline">z</span> 是 <span class="math-inline">R</span> 对应于特征值 <span class="math-inline">\lambda</span> 的特征向量，即 <span class="math-inline">Tz=\lambda z</span>，则有
 <br><p></p>
 <div align="CENTER">

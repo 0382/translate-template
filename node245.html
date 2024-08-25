@@ -89,73 +89,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 生成的两个向量序列<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>使用三项递归关系：
-<br>
-<div align="CENTER"><a name="right_recursion"></a><a name="left_recursion"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle \beta_{j+1} q_{j+1}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Aq_j - \alpha_j q_j - \gamma_j q_{j-1},</span></td>
-<td WIDTH=10 align="RIGHT">
-(139)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle \bar{\gamma}_{j+1} p_{j+1}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle A^{\ast} p_j - \bar{\alpha}_j p_j - \bar{\beta}_j p_{j-1}.</span></td>
-<td WIDTH=10 align="RIGHT">
-(140)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
-向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>被称为Lanczos向量，分别张成<span class="math-inline">{\mathcal K}^j(A, q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast}, p_1)</span>，并且是双正交的，即<span class="math-inline">p^{\ast}_{k} q_{\ell} = 0</span>如果<span class="math-inline">k \neq \ell</span>，以及<span class="math-inline">w^{\ast}_{k} v_{k} = 1</span>。用矩阵表示，在第<span class="math-inline">j</span>步，Lanczos方法生成两个<span class="math-inline">n \times j</span>矩阵<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>：
-<br><p></p>
-<div align="CENTER">
+<div class="math-display" id="rightgoverneq">P_j^{\ast} AQ_j = T_j. \tag{144}</div>
 
-
-<div class="math-display">Q_j = [ q_1, q_2, \ldots, q_j ], \quad P_j = [ p_1, p_2, \ldots, p_j ]</div>
-</div>
-<br clear="ALL">
-<p></p>
-以及
-<br><p></p>
-<div align="CENTER">
-
-
-<div class="math-display">T_j = \left[ \begin{array}{ccccc} \alpha_1 & \gamma_2 & & & \\ \vdots & \ddots & \ddots & & \\ & \gamma_{j-1} & \alpha_{j-1} & \gamma_j & \\ & & \beta_j & \alpha_j \\ \end{array} \right].</div>
-</div>
-<br clear="ALL">
-<p></p>
-计算得到的量满足称为Lanczos分解的控制关系：
-<br>
-<div align="CENTER"><a name="rightgoverneq"></a><a name="leftgoverneq"></a><a name="biorthogonal"></a>
-
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle AQ_j</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Q_j T_j + \beta_{j+1} q_{j+1} e_{j}^{\ast},</span></td>
-<td WIDTH=10 align="RIGHT">
-(141)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle A^{\ast} P_j</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle P_j T_j^{\ast} + \bar{\gamma}_{j+1} p_{j+1} e_j^{\ast},</span></td>
-<td WIDTH=10 align="RIGHT">
-(142)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle P_j^{\ast} Q_j</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle I_j.</span></td>
-<td WIDTH=10 align="RIGHT">
-(143)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
-此外，<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>和<span class="math-inline">p_{j+1}^{\ast} Q_j = 0</span>。关系式(<a href="node245.html#biorthogonal">7.37</a>)表明Lanczos向量（基）是双正交的。但注意<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>都不是酉矩阵。在Lanczos基下，矩阵<span class="math-inline">A</span>由一个非厄米三对角矩阵表示，
-<br>
-<div align="RIGHT">
-
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="nstridia"></a><div class="math-display">P_j^{\ast} AQ_j = T_j.</div></td>
-<td WIDTH=10 align="RIGHT">
-(144)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_j</span>的特征解，
 <br><p></p>
 <div align="CENTER">
@@ -169,55 +105,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对于每个Ritz值<span class="math-inline">\theta_i^{(j)}</span>，存在相应的右和左Ritz向量，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="ritz_vectors">x_i^{(j)} = Q_j z_i^{(j)} \quad \text{和} \quad y_i^{(j)} = P_j w_i^{(j)}. \tag{145}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ritz_vectors"></a><div class="math-display">x_i^{(j)} = Q_j z_i^{(j)} \quad \text{和} \quad y_i^{(j)} = P_j w_i^{(j)}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(145)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 Ritz值和向量收敛到原始矩阵<span class="math-inline">A</span>的特征值和特征向量的程度可以通过比较残差的范数与<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的范数来评估，
-<br>
-<div align="CENTER"><a name="bnhlrr"></a><a name="bnhllr"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle r_i^{(j)}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)},</span></td>
-<td WIDTH=10 align="RIGHT">
-(146)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle (s_i^{(j)})^{\ast}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle (y_i^{(j)})^{\ast} A - \theta_i^{(j)} (y_i^{(j)})^{\ast}</span></td>
-<td WIDTH=10 align="RIGHT">
-(147)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
-此外，根据方程(<a href="node245.html#rightgoverneq">7.35</a>)，右残差向量变为
-<br>
-<div align="RIGHT">
+<div class="math-display" id="bnhlrr2">r_i^{(j)} = \beta_{j+1} q_{j+1} (e_j^{\ast} z_i^{(j)}), \tag{148}</div>
 
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="bnhlrr2"></a><div class="math-display">r_i^{(j)} = \beta_{j+1} q_{j+1} (e_j^{\ast} z_i^{(j)}),</div></td>
-<td WIDTH=10 align="RIGHT">
-(148)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 根据方程(<a href="node245.html#leftgoverneq">7.36</a>)，左残差向量变为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="bnhllr2">(s_i^{(j)})^{\ast} = \gamma_{j+1} p_{j+1}^{\ast} ((w_i^{(j)})^{\ast} e_j). \tag{149}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="bnhllr2"></a><div class="math-display">(s_i^{(j)})^{\ast} = \gamma_{j+1} p_{j+1}^{\ast} ((w_i^{(j)})^{\ast} e_j).</div></td>
-<td WIDTH=10 align="RIGHT">
-(149)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 因此，与厄米情况（参见§<a href="node103.html#sec:lan">4.4</a>）一样，残差范数可以在不显式计算Ritz向量<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的情况下获得，尽管<span class="math-inline">\|x_i^{(j)}\|_2</span>和<span class="math-inline">\|y_i^{(j)}\|_2</span>是不可用的。有关此主题的更详细讨论，请参见§<a href="node246.html#zbdd:convergence">7.8.2</a>。
 
 <p>

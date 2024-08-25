@@ -88,16 +88,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 根据 (<a href="node151.html#ineq:err-1-ev">4.54</a>) 在页&nbsp;<a href="node151.html#ineq:err-1-ev"><button class="crossref"></button></a>，我们有
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="ineq:pdpBdef-err-1-ev">\vert\widetilde\lambda-\lambda\vert\le \frac {\Vert G^{-1}r\Vert......}{\Vert\widetilde x\Vert _B}\le\Vert B^{-1}\Vert _2\Vert r\Vert _2 \tag{95}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:pdpBdef-err-1-ev"></a><div class="math-display">\vert\widetilde\lambda-\lambda\vert\le \frac {\Vert G^{-1}r\Vert......}{\Vert\widetilde x\Vert _B}\le\Vert B^{-1}\Vert _2\Vert r\Vert _2</div></td>
-<td WIDTH=10 align="RIGHT">
-(95)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 对于某些特征值 <span class="math-inline">\lambda</span> 的对 <span class="math-inline">\{A,B\}</span>。
 为了使用这个界限，需要对 <span class="math-inline">\Vert B^{-1}\Vert _2</span> 进行良好的估计。
 
@@ -110,16 +103,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 因此我们假设 <span class="math-inline">\widetilde\lambda</span> 具有这个值。
 假设 <span class="math-inline">\widetilde\lambda</span> 比对中的任何其他特征值更接近 <span class="math-inline">\lambda</span>，并且
 令 <span class="math-inline">\delta</span> 是 <span class="math-inline">\widetilde\lambda</span> 与对中任何其他特征值之间的<em>间隙</em> <a name="18233"></a>。那么
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="ineq:pdpBdef-err-1-ev-wgap">\vert\widetilde\lambda-\lambda\vert\le \frac 1{\delta}\cdot\fr......\le \Vert B^{-1}\Vert _2^2\frac {\Vert r\Vert _2^2}{\delta}. \tag{96}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="ineq:pdpBdef-err-1-ev-wgap"></a><div class="math-display">\vert\widetilde\lambda-\lambda\vert\le \frac 1{\delta}\cdot\fr......\le \Vert B^{-1}\Vert _2^2\frac {\Vert r\Vert _2^2}{\delta}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(96)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 如果间隙 <span class="math-inline">\delta</span> 相当大，这将改进 (<a href="node181.html#ineq:pdpBdef-err-1-ev">5.31</a>)。在实践中，我们总是可以选择更好的一个。
 这个界限还需要关于 <span class="math-inline">\delta</span> 的信息，除了残差误差 <span class="math-inline">r</span> 和 <span class="math-inline">\Vert B^{-1}\Vert _2</span>。
 通常，这种信息在成功计算后可用，例如，通过位移-反迭代 Lanczos 算法，该算法通常在位移附近提供特征值，从而产生关于 <span class="math-inline">\delta</span> 的良好信息。这个评论也适用于下面的界限 (<a href="node182.html#ineq:pdpBdef-err-1-evt">5.33</a>) 和 (<a href="node182.html#ineq:evt-pdpBdef-theta">5.34</a>)。

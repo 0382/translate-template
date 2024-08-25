@@ -78,45 +78,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h4>
 在许多实际应用中，位移反转变体是一种自然选择。
 它对应于以下选择：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen_shift_invert">C=B(A-\sigma B)^{-1}\,. \tag{80}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_shift_invert"></a><div class="math-display">C=B(A-\sigma B)^{-1}\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(80)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这给出了接近所选位移点<span class="math-inline">\sigma</span>的特征值，并且我们可以在更少的步骤<span class="math-inline">j</span>后获得收敛。即使带有位移矩阵<span class="math-inline">(A-\sigma B)</span>的系统比直接变体中所需的<span class="math-inline">B</span>更难以解决，所需的较少步骤<span class="math-inline">j</span>通常会弥补这一点。
 
 <p>
 基本递归公式（<a href="node170.html#gen-herm-recursion">5.9</a>）被替换为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="si-gen-herm-recursion">B(A-\sigma B)^{-1}V_j=V_{j}T_{j}+re_j^{\ast}\;, \tag{81}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen-herm-recursion"></a><div class="math-display">B(A-\sigma B)^{-1}V_j=V_{j}T_{j}+re_j^{\ast}\;,</div></td>
-<td WIDTH=10 align="RIGHT">
-(81)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 现在使用<span class="math-inline">B^{-1}</span>-正交（<a href="node170.html#B-ortho">5.10</a>）基<span class="math-inline">V_j</span>和<span class="math-inline">B</span>正交辅助基<span class="math-inline">W_j</span>，其中<span class="math-inline">V_j=BW_j</span>。这两个基是双正交的，
 <span class="math-inline">V_j^{\ast}W_j=I_{j}</span>，与非对称双侧Lanczos算法（如第<a href="node244.html#sec:nsymlanczos">7.8</a>节所述）相比。
 
 <p>
 矩阵<span class="math-inline">T</span>是对称的，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="si-T-section">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j\,. \tag{82}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-T-section"></a><div class="math-display">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(82)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 
 <p>
 <span class="math-inline">T_{j}</span>的特征解，
@@ -129,27 +108,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 用于获得近似特征值
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="si-appr-lambda">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}} \tag{83}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-appr-lambda"></a><div class="math-display">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}}</div></td>
-<td WIDTH=10 align="RIGHT">
-(83)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 和近似特征向量
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="si-gen_eigenvector">x_i^{(j)}=W_js_i^{(j)}\,. \tag{84}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen_eigenvector"></a><div class="math-display">x_i^{(j)}=W_js_i^{(j)}\,.</div></td>
-<td WIDTH=10 align="RIGHT">
-(84)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其残差为
 
 <p>
@@ -168,16 +133,9 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <br clear="ALL"><p></p>
 <br clear="ALL"><p></p>
 其范数在以下量小时也小
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="si-gen_estimate_residual">\beta_js_{j,i}^{(j)}/\theta_i^{(j)} \tag{85}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="si-gen_estimate_residual"></a><div class="math-display">\beta_js_{j,i}^{(j)}/\theta_i^{(j)}</div></td>
-<td WIDTH=10 align="RIGHT">
-(85)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这个近似不是标准的，而是原特征问题的调和Ritz值（参见第<a href="node79.html#sec:algbasics">3.2</a>节的讨论）。
 
 <p>
@@ -248,30 +206,16 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 
 <p>
 当我们运行位移反转算子（<a href="node171.html#gen_shift_invert">5.16</a>）时，我们因子化
- <br>
-<div align="RIGHT">
+ 
+<div class="math-display" id="gen_shift_invert_factor">LDL^{\ast}=P^T(A-\sigma B)P \tag{86}</div>
 
-
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_shift_invert_factor"></a><div class="math-display">LDL^{\ast}=P^T(A-\sigma B)P</div></td>
-<td WIDTH=10 align="RIGHT">
-(86)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 对于适当的稀疏保持排列<span class="math-inline">P</span>，在开始时使用稀疏高斯消去法。
 
 <p>
 在实际迭代过程中，我们使用因子<span class="math-inline">L</span>和<span class="math-inline">U</span>，计算
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gen_ulinvx">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j)))) \tag{87}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gen_ulinvx"></a><div class="math-display">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j))))</div></td>
-<td WIDTH=10 align="RIGHT">
-(87)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 在算法<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>的步骤(4)中。
 
 <p>

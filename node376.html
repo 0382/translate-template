@@ -87,25 +87,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 通常，带状格式涉及存储一些零。CDS 格式甚至可能包含一些根本不对应于矩阵元素的数组元素。考虑由以下定义的非对称矩阵 <span class="math-inline">A</span>：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="sparseA2"></a><div class="math-display">A =\left[\begin{array}{rrrrrr}10 & -3 & 0 & 0 & 0 & 0 \\ ...... 9 & 9 & 13 \\0 & 0 & 0 & 0 & 2 & -1\end{array}\right] ~.</div></td>
-<td WIDTH=10 align="RIGHT">
-(270)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="sparseA2">A =\left[\begin{array}{rrrrrr}10 & -3 & 0 & 0 & 0 & 0 \\ ...... 9 & 9 & 13 \\0 & 0 & 0 & 0 & 2 & -1\end{array}\right] ~. \tag{270}</div>
+
 使用 CDS 格式，我们将矩阵 <span class="math-inline">A</span> 存储在一个维度为 (6,-1:1) 的数组中，使用以下映射：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eqn:diag-conversion"></a><div class="math-display">{\tt val(i,j)}=a_{i,i+j}. </div></td>
-<td WIDTH=10 align="RIGHT">
-(271)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="eqn:diag-conversion">{\tt val(i,j)}=a_{i,i+j}.  \tag{271}</div>
+
 因此，val(:,:) 数组的行是：
 <div align="CENTER">
 <table CELLPADDING=3 border="1">

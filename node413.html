@@ -98,16 +98,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 基于<span class="math-inline">A^{-1}B</span>的特征分解的标准论证，对于矩阵束<span class="math-inline">B - \mu A</span>，并不能证明幂法收敛，因为特征分解中的特征向量不一定是迭代算子的特征向量。这使得收敛理论相当复杂。D'yakonov及其同事[<a href="node421.html#do80">150</a>,<a href="node421.html#d83">146</a>,<a href="node421.html#d">147</a>]利用假设(<a href="node412.html#prec_equiv">11.9</a>)，对迭代算法<a href="node413.html#fig:prec_powerBA">11.5</a>得到了线性收敛的显式估计。简而言之（参见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>,<a href="node421.html#k98">268</a>]），算法<a href="node421.html#fig:prec_powerBA">11.5</a>的收敛速率估计可以写为
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="prec_est_power">\frac{\mu_1 - \mu^{(n)}}{\mu^{(n)} - \mu_2} \leq (1 - \xi )^......{\delta_0}{\delta_1}\frac{\mu_1 - \mu_2}{\mu_1 - \mu_{\min}}, \tag{283}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_est_power"></a><div class="math-display">\frac{\mu_1 - \mu^{(n)}}{\mu^{(n)} - \mu_2} \leq (1 - \xi )^......{\delta_0}{\delta_1}\frac{\mu_1 - \mu_2}{\mu_1 - \mu_{\min}},</div></td>
-<td WIDTH=10 align="RIGHT">
-(283)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 在假设<span class="math-inline">\mu^{(0)} &gt; \mu_2</span>下。
 <a name="48710"></a>
 

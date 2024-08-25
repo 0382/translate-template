@@ -90,14 +90,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 对于任何<span class="math-inline">\xi\ne 0</span>都表示相同的比率，因此也是相同的特征值。所以实际上一对<span class="math-inline">(\alpha,\beta)</span>是从一组给出相同比率的对中选出的代表。
 两个特征值之间的差异是通过<em>弦长度量</em>来衡量的：<a name="18270"></a>
 对于<span class="math-inline">\lambda = \alpha/\beta</span>和<span class="math-inline">\widetilde\lambda=\widetilde\alpha/\widetilde\beta</span>，
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:chordal-defn"></a><div class="math-display">\chi(\lambda,\widetilde\lambda)\equiv\chi((\alpha, \beta),(\widetilde\alpha, \widetilde\beta))=\frac{\vert\alpha\widetilde\beta-\beta\widetilde\alpha\vert}{\sqrt{1 + \vert\lambda\vert^2} \sqrt{1 + \vert\widetilde\lambda\vert^2}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(99)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="eq:chordal-defn">\chi(\lambda,\widetilde\lambda)\equiv\chi((\alpha, \beta),(\widetilde\alpha, \widetilde\beta))=\frac{\vert\alpha\widetilde\beta-\beta\widetilde\alpha\vert}{\sqrt{1 + \vert\lambda\vert^2} \sqrt{1 + \vert\widetilde\lambda\vert^2}}. \tag{99}</div>
+
 一个等价的定义是关于厄米矩阵对<span class="math-inline">\{A,B\}</span>是确定对的，即<em>克劳福德数</em> <a name="18282"></a>
 <br><p></p>
 <div align="CENTER">
@@ -109,36 +104,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
  href="node421.html#stsu90">425</a>]，如果<span class="math-inline">\{A,B\}</span>是一个确定对，那么
 <ul>
 <li>存在一个<span class="math-inline">\phi\in[0,2\pi)</span>使得<span class="math-inline">B_{\phi}</span>是<em>正定</em>的，并且<span class="math-inline">\gamma(A,B)=\lambda_{\min}(B_{\phi})</span>，即<span class="math-inline">B_{\phi}</span>的最小特征值，其中
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:AB-phi"></a><div class="math-display">A_{\phi}= A\cos\phi-B\sin\phi, \quadB_{\phi}= A\sin\phi+B\cos\phi.</div></td>
-<td WIDTH=10 align="RIGHT">
-(100)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="eq:AB-phi">A_{\phi}= A\cos\phi-B\sin\phi, \quadB_{\phi}= A\sin\phi+B\cos\phi. \tag{100}</div>
+
 读者可以参考[<a
  href="node421.html#craw:86">86</a>,<a
  href="node421.html#crmo:83">87</a>]了解实现这种<span class="math-inline">B_{\phi}</span>的算法，这反过来又产生了估计误差界限所需的<span class="math-inline">\gamma(A,B)</span>的下界。
 </li>
 <li>存在一个<span class="math-inline">n \times n</span>的可逆矩阵<span class="math-inline">X</span>使得
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:eigd-pdp"></a><div class="math-display">X^*AX =\Lambda_A,\quad X^*BX =\Lambda_B,</div></td>
-<td WIDTH=10 align="RIGHT">
-(101)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="eq:eigd-pdp">X^*AX =\Lambda_A,\quad X^*BX =\Lambda_B, \tag{101}</div>
+
 其中
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:Lambda-AB"></a><div class="math-display">\Lambda_A =\diag(\alpha_1,\alpha_2,\ldots,\alpha_n), \quad\Lambda_B =\diag(\beta_1,\beta_2,\ldots,\beta_n).</div></td>
-<td WIDTH=10 align="RIGHT">
-(102)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="eq:Lambda-AB">\Lambda_A =\diag(\alpha_1,\alpha_2,\ldots,\alpha_n), \quad\Lambda_B =\diag(\beta_1,\beta_2,\ldots,\beta_n). \tag{102}</div>
+
 </li>
 </ul>
 <p>
@@ -147,14 +127,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在(<a href="node184.html#eq:eigd-pdp">5.37</a>)和(<a href="node184.html#eq:Lambda-AB">5.38</a>)中
 对于所有<span class="math-inline">i</span>，<span class="math-inline">\vert\alpha_i\vert^2 + \vert\beta_i\vert^2=1</span>，那么[<a
  href="node421.html#stew:79a">423</a>]
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:eigd-pdp-X"></a><div class="math-display">\Vert X\Vert _2\le\frac 1{\sqrt{\gamma(A,B)}},\quad\Vert X^{-1}\Vert _2\le\frac {\Vert(A,B)\Vert _2}{\sqrt{\gamma(A,B)}}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(103)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="eq:eigd-pdp-X">\Vert X\Vert _2\le\frac 1{\sqrt{\gamma(A,B)}},\quad\Vert X^{-1}\Vert _2\le\frac {\Vert(A,B)\Vert _2}{\sqrt{\gamma(A,B)}}. \tag{103}</div>
+
 <p>
 <br><hr>
 <!--Table of Child-Links-->

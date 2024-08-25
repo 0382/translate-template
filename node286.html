@@ -79,15 +79,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 位移-反转变换
 </h4>
 无论是标准形式变换，如(<a href="node284.html#zb:snep1">8.3</a>)、(<a href="node284.html#zb:snep2">8.4</a>)还是(<a href="node285.html#zb:snep3">8.5</a>)，都无法应用于<span class="math-inline">A</span>和<span class="math-inline">B</span>均为奇异矩阵或<span class="math-inline">B</span>为病态矩阵的情况。一种吸引人的流行技术是首先对原始问题进行位移处理，然后进行分裂-反转变换。这就是SI方法，如第<a href="node84.html#spec_trans">3.3</a>节所述。具体来说，设<span class="math-inline">\sigma</span>为用户选定的位移，使得矩阵<span class="math-inline">A-\sigma B</span>非奇异；那么原始问题(<a href="node281.html#eq:gnsym">8.1</a>)可以变换为
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:snep4"></a><div class="math-display">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast},</div></td>
-<td WIDTH=10 align="RIGHT">
-(219)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="zb:snep4">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast}, \tag{219}</div>
+
 其中
 <br><p></p>
 <div align="CENTER">
@@ -116,14 +110,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 对于给定的向量<span class="math-inline">q</span>和<span class="math-inline">p</span>。为了高效计算，设
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="zb:ablufact"></a><div class="math-display">A - \sigma B = {\mathcal L} {\mathcal U}</div></td>
-<td WIDTH=10 align="RIGHT">
-(220)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display" id="zb:ablufact">A - \sigma B = {\mathcal L} {\mathcal U} \tag{220}</div>
+
 表示<span class="math-inline">A-\sigma B</span>的某种方便的分解，其中<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>是方阵。由于假设<span class="math-inline">A-\sigma B</span>是非奇异的，因子<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>也是非奇异的。分解应选择使得与<span class="math-inline">{\mathcal L}</span>、<span class="math-inline">{\mathcal L}^{\ast}</span>和/或<span class="math-inline">{\mathcal U}</span>、<span class="math-inline">{\mathcal U}^{\ast}</span>相关的线性方程组能够高效求解，通常使用稀疏LU分解。参见第<a href="node385.html#sec:directsolvers">10.3</a>节。当然，如果这导致方便的线性系统，也可以选择<span class="math-inline">{\mathcal L} = A - \sigma B</span>和<span class="math-inline">{\mathcal U} = I</span>。
 
 <p>

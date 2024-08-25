@@ -89,15 +89,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 通常，<span class="math-inline">p</span>个移位是通过利用<span class="math-inline">H_{[r+p]}</span>中包含的谱信息来选择的。将<span class="math-inline">{H}_{[m]}</span>的特征值分块，使得
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:wanted"></a><div class="math-display">\{ \underbrace{\theta_1,\ldots,\theta_r}_{\mathrm{wanted}}\}......ce{\theta_{r+1},\ldots,\theta_{m\cdot b}}_{\mathrm{unwanted}}\}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(137)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="eq:wanted">\{ \underbrace{\theta_1,\ldots,\theta_r}_{\mathrm{wanted}}\}......ce{\theta_{r+1},\ldots,\theta_{m\cdot b}}_{\mathrm{unwanted}}\}. \tag{137}</div>
+
 对于非块约化，<span class="math-inline">p</span>个移位从<span class="math-inline">H_{[m]}</span>的不需要的特征值中选择，其中<span class="math-inline">r=k</span>。Sorensen[<a href="node421.html#sore92">419</a>]提出了这种精确移位策略。该策略等同于用与<span class="math-inline">k</span>个需要的特征值相关的近似Schur向量的线性组合重启后续的约化。其他有趣的策略包括Chebyshev多项式的根[<a href="node421.html#saad84">383</a>]，调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]，Leja多项式的根[<a href="node421.html#bacr98">23</a>]，最小二乘多项式的根[<a href="node421.html#saad87">384</a>]，以及精化移位[<a href="node421.html#jia98c">244</a>]。特别是Leja值和谐调Ritz值已被用于估计<span class="math-inline">A</span>的内部特征值。
 
 <p>

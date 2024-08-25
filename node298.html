@@ -130,16 +130,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对称不定Lanczos算法的模板在算法&nbsp;<a href="node298.html#alg:jsymlan">8.4</a>中展示。生成的Lanczos向量<span class="math-inline">\{q_j\}</span>和标量<span class="math-inline">\{ \alpha_j, \beta_j, \omega_j\}</span>满足以下控制方程：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="GovEqn">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j, \tag{235}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="GovEqn"></a><div class="math-display">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j,</div></td>
-<td WIDTH=10 align="RIGHT">
-(235)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
 <br><p></p>
 <div align="CENTER">
@@ -190,16 +183,9 @@ Lanczos向量
 
 <p>
 与Ritz对<span class="math-inline">\{\theta^{(j)}_i, x^{(j)}_i\}</span>对应的右残差向量<span class="math-inline">r^{(j)}_i</span>是
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="RightResid">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1}, \tag{236}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="RightResid"></a><div class="math-display">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1},</div></td>
-<td WIDTH=10 align="RIGHT">
-(236)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
 <br><p></p>
 <div align="CENTER">
@@ -210,27 +196,13 @@ Lanczos向量
 <br clear="ALL">
 <p></p>
 注意，在&nbsp;(<a href="node298.html#RightResid">8.23</a>)中的最后一个等式是通过将方程&nbsp;(<a href="node298.html#GovEqn">8.22</a>)右乘<span class="math-inline">u^{(j)}_i</span>并利用<span class="math-inline">x^{(j)}_i</span>的定义得到的。左残差向量<span class="math-inline">(s^{(j)}_i)^{\ast}</span>与右残差向量<span class="math-inline">r^{(j)}_i</span>的关系为<span class="math-inline">(s^{(j)}_i)^{\ast} = (r^{(j)}_i)^T B</span>。由此得出
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="normRk">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert \tag{237}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="normRk"></a><div class="math-display">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert</div></td>
-<td WIDTH=10 align="RIGHT">
-(237)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 和
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="normSk">\Vert s^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert\, \Vert B q_{j+1}\Vert _2. \tag{238}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="normSk"></a><div class="math-display">\Vert s^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert\, \Vert B q_{j+1}\Vert _2.</div></td>
-<td WIDTH=10 align="RIGHT">
-(238)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 注意，向量<span class="math-inline">Bq_{j+1}</span>在对称不定Lanczos算法的每次迭代中都是直接可用的。不需要额外的<span class="math-inline">B</span>调用。因此，Lanczos算法的一个吸引人的特点是可以在不显式计算Ritz向量<span class="math-inline">{x}^{(j)}_i</span>和<span class="math-inline">{y}^{(j)}_i</span>的情况下计算残差向量。
 <br>
 <br>

@@ -79,64 +79,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 不难看出，方程(<a href="node332.html#qep">9.1</a>)中的二次特征值问题等价于以下广义的“线性”特征值问题：<a name="tex2html51"
   href="footnode.html#foot42828"><sup><button class="footnote"></button></sup></a>
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gep1">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B , \tag{248}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gep1"></a><div class="math-display">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(248)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil1">A = \twobytwo{0}{I}{-K}{-C}, \quadB = \twobytwo{I}{0}{0}{M} \tag{249}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil1"></a><div class="math-display">A = \twobytwo{0}{I}{-K}{-C}, \quadB = \twobytwo{I}{0}{0}{M}</div></td>
-<td WIDTH=10 align="RIGHT">
-(249)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 以及
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil11">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{(\lambda M + C)^{\ast} y }{y}. \tag{250}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil11"></a><div class="math-display">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{(\lambda M + C)^{\ast} y }{y}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(250)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 广义特征值问题(<a href="node333.html#gep1">9.4</a>)通常被称为二次特征值问题(<a href="node332.html#qep">9.1</a>)的线性化。可以证明，对于上述形式的任意矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>，右特征向量<span class="math-inline">z</span>和左特征向量<span class="math-inline">w</span>具有(<a href="node333.html#matrixpencil11">9.6</a>)中所描述的结构。
 
 <p>
 注意，从因式分解
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="eq:4a">A - \lambda B = \twobytwo{0}{I}{-I}{-\lambda M - C}\twobyt...... M + \lambda C + K}{0}{0}{I}\twobytwo{I}{0}{-\lambda I }{I}, \tag{251}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="eq:4a"></a><div class="math-display">A - \lambda B = \twobytwo{0}{I}{-I}{-\lambda M - C}\twobyt...... M + \lambda C + K}{0}{0}{I}\twobytwo{I}{0}{-\lambda I }{I},</div></td>
-<td WIDTH=10 align="RIGHT">
-(251)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 我们可以得出结论，矩阵束<span class="math-inline">A - \lambda B</span>与矩阵(<a href="node333.html#exmatrixpol">9.8</a>)是<em>等价</em>的<a name="tex2html52"
   href="footnode.html#foot42872"><sup><button class="footnote"></button></sup></a>，
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="exmatrixpol">\twobytwo{\lambda^2 M + \lambda C + K }{0}{0}{I} \tag{252}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="exmatrixpol"></a><div class="math-display">\twobytwo{\lambda^2 M + \lambda C + K }{0}{0}{I}</div></td>
-<td WIDTH=10 align="RIGHT">
-(252)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 并且
 <br><p></p>
 <div align="CENTER">
@@ -178,38 +143,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL">
 <p></p>
 例如，如果矩阵<span class="math-inline">M</span>、<span class="math-inline">K</span>和<span class="math-inline">C</span>都是对称的，如特殊情况(<a href="node332.html#scase">9.2</a>)，且<span class="math-inline">K</span>是非奇异的，那么我们可以选择<span class="math-inline">W = - K</span>，从而得到以下对称广义“线性”特征值问题
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gep1K">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B , \tag{253}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gep1K"></a><div class="math-display">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B ,</div></td>
-<td WIDTH=10 align="RIGHT">
-(253)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil2">A = \twobytwo{0}{-K}{-K}{ -C}, \quadB = \twobytwo{-K}{0}{0}{M}, \quad \tag{254}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil2"></a><div class="math-display">A = \twobytwo{0}{-K}{-K}{ -C}, \quadB = \twobytwo{-K}{0}{0}{M}, \quad</div></td>
-<td WIDTH=10 align="RIGHT">
-(254)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 以及
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil22">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{y}{\bar\lambda y}. \tag{255}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil22"></a><div class="math-display">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{y}{\bar\lambda y}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(255)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 <span class="math-inline">A</span>和<span class="math-inline">B</span>都是对称的，但可能是非定的。
 
 <p>

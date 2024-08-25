@@ -84,15 +84,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 设定参数<span class="math-inline">\mu</span>为固定值。我们考虑以下辅助特征值问题：
 
 <p>
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_aux"></a><div class="math-display">T (B- \mu A)v= \nu v.</div></td>
-<td WIDTH=10 align="RIGHT">
-(284)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="prec_aux">T (B- \mu A)v= \nu v. \tag{284}</div>
+
 
 <p>
 若<span class="math-inline">\mu = \mu_1</span>，则存在零特征值<span class="math-inline">\nu</span>，且对应的特征向量在式(<a href="node415.html#prec_aux">11.14</a>)中也是原矩阵束<span class="math-inline">B - \mu A</span>对应于<span class="math-inline">\mu_1</span>的特征向量。该零特征值是矩阵<span class="math-inline">T (B- \mu A)</span>的最大特征值，并与其他负特征值分离开来。因此，可采用标准的多项式方法（特别是Lanczos方法）计算该值。我们注意到，决定收敛速度的分离程度依赖于预处理矩阵<span class="math-inline">T</span>的质量；详见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>]。
@@ -127,15 +121,9 @@ Scott[<a href="node421.html#scot81">397</a>]证明了对于完全收敛的内迭
 
 <p>
 在这种情况下，我们仍可为算子<span class="math-inline">T(B - \mu^{(i)}A)</span>构造Krylov子空间，并利用Rayleigh-Ritz方法将算子<span class="math-inline">B - \mu A</span>投影到该子空间。示意如下：
-<br>
-<div align="RIGHT">
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="prec_ppm"></a><div class="math-display">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......, \\ldots, [T(B- \mu^{(i)} A)]^{l_i}x^{(i)} \}</span>,\end{tabular}</div></td>
-<td WIDTH=10 align="RIGHT">
-(285)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+<div class="math-display" id="prec_ppm">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......, \\ldots, [T(B- \mu^{(i)} A)]^{l_i}x^{(i)} \}</span>,\end{tabular} \tag{285}</div>
+
 其中<span class="math-inline">l_i</span>为第<span class="math-inline">i</span>次外迭代步骤的内迭代步数。
 
 <p>

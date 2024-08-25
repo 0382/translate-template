@@ -77,41 +77,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 逆QEP问题</a>
 </h4>
 对于求解广义特征值问题的大多数迭代方法，如果目标是确定少数外部特征值和特征向量，那么公式（<a href="node333.html#gep1">9.4</a>），无论是与（<a href="node333.html#matrixpencil1">9.5</a>）还是与（<a href="node333.html#matrixpencil2">9.10</a>）结合，都是合适的。如果目标是计算一些模最小的特征值和特征向量，那么明显的转换是<span class="math-inline">\mu=1/\lambda</span>，并且在乘以QEP（<a href="node332.html#qep">9.1</a>）后，我们得到逆QEP：
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="inverqep">\left( M + \mu C + \mu^2 K \right) x = 0 . \tag{256}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="inverqep"></a><div class="math-display">\left( M + \mu C + \mu^2 K \right) x = 0 .</div></td>
-<td WIDTH=10 align="RIGHT">
-(256)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 这里假设<span class="math-inline">0</span>不是原始QEP（<a href="node332.html#qep">9.1</a>）的特征值，即<span class="math-inline">K</span>是非奇异的。
 
 <p>
 三元组<span class="math-inline">\{K,C,M\}</span>的QEP可以线性化，如在第<a href="node333.html#sec-qred">9.2.2</a>节中讨论的那样，例如，作为（<a href="node333.html#gep1">9.4</a>）与（<a href="node333.html#matrixpencil1">9.5</a>），其中<span class="math-inline">M</span>与<span class="math-inline">K</span>互换。我们可以用<span class="math-inline">\lambda</span>而不是<span class="math-inline">\mu</span>重新表述这个广义线性化特征问题，从而得到
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="gep2">A z = \frac{1}{\lambda} B z, \tag{257}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="gep2"></a><div class="math-display">A z = \frac{1}{\lambda} B z,</div></td>
-<td WIDTH=10 align="RIGHT">
-(257)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil3">A = \twobytwo{-C}{-M}{I}{0}, \quadB = \twobytwo{K}{0}{0}{I}, \quadz = \twobyone{x}{\lambda x}. \tag{258}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil3"></a><div class="math-display">A = \twobytwo{-C}{-M}{I}{0}, \quadB = \twobytwo{K}{0}{0}{I}, \quadz = \twobyone{x}{\lambda x}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(258)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 注意，从因式分解
 <br><p></p>
 <div align="CENTER">
@@ -134,16 +113,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对于特殊情况（<a href="node332.html#scase">9.2</a>），我们可以用
-<br>
-<div align="RIGHT">
 
+<div class="math-display" id="matrixpencil4">A = \twobytwo{C}{M}{M}{0}, \quadB = \twobytwo{-K}{0}{0}{M}. \tag{259}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><a name="matrixpencil4"></a><div class="math-display">A = \twobytwo{C}{M}{M}{0}, \quadB = \twobytwo{-K}{0}{0}{M}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(259)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 在这种情况下，两个矩阵都是厄米的，但不确定。用（<a href="node335.html#matrixpencil4">9.15</a>）线性化后，左乘（<a href="node335.html#matrixpencil3">9.14</a>）与块对角矩阵<span class="math-inline">\mathrm{diag}(-I,-M)</span>。因此，如果<span class="math-inline">\mathrm{det}(M) \neq 0</span>，那么矩阵束<span class="math-inline">B - \lambda A</span>是正则的当且仅当二次矩阵多项式<span class="math-inline">\lambda^2 M + \lambda C + K</span>是正则的。
 
 <p>
