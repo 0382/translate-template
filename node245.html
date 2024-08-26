@@ -80,27 +80,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 下面介绍的非厄米Lanczos方法（参见算法<a href="node245.html#bd:lanalg">7.13</a>）是一种双侧迭代算法，起始向量为<span class="math-inline">p_1</span>和<span class="math-inline">q_1</span>。它可以看作是通过双侧Gram-Schmidt过程对两个Krylov序列进行双正交化：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\{ q_1, Aq_1, A^2q_1, \ldots \} \quad \text{和} \quad \{ p_1, A^{\ast}p_1, (A^{\ast})^2 p_1, \ldots \}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 生成的两个向量序列<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>使用三项递归关系：
 
 <div class="math-display" id="rightgoverneq">P_j^{\ast} AQ_j = T_j. \tag{144}</div>
 
 在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_j</span>的特征解，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)} \quad \text{和} \quad (w_i^{(j)})^{\ast} T_j = \theta_i^{(j)} (w_i^{(j)})^{\ast}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 矩阵<span class="math-inline">A</span>的特征值由<span class="math-inline">T_j</span>的特征值<span class="math-inline">\theta_i^{(j)}</span>近似，这些特征值称为Ritz值。
 
 <p>

@@ -81,40 +81,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们考虑一类广义的<em>对称正定</em>特征值问题，其形式为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A - \lambda B)x=0</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">A</span>和<span class="math-inline">B</span>是<span class="math-inline">n</span>阶实对称矩阵，且假设<span class="math-inline">A</span>为正定矩阵。
 <a name="48538"></a>
 这描述了一个具有离散谱的正则矩阵束<span class="math-inline">A - \lambda B</span>，包含<span class="math-inline">n</span>个实数特征值，其中某些可能为无穷大，
 
 <span class="math-inline">\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n</span>。若<span class="math-inline">B</span>为非奇异矩阵，则所有特征值均为有限值。若<span class="math-inline">B</span>为半正定矩阵（例如，<span class="math-inline">B=I</span>），则所有特征值均为正数，
 我们考虑计算矩阵束<span class="math-inline">A - \lambda B</span>的最小<span class="math-inline">m</span>个特征值的问题。当<span class="math-inline">B</span>为不定矩阵时，考虑矩阵束<span class="math-inline">B - \mu A</span>及其特征值更为方便，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\mu = \frac 1 \lambda, \quad\mu_{\min} = \mu_n \leq \cdots \leq \mu_1 = \mu_{\max},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们希望计算最大的<span class="math-inline">m</span>个特征值，即<span class="math-inline">\mu_1, \ldots, \mu_m</span>。计算最小<span class="math-inline">m</span>个特征值<span class="math-inline">\mu_i</span>的问题可以通过将<span class="math-inline">B</span>替换为<span class="math-inline">-B</span>来重新表述为前述问题。在屈曲问题中，最大的和最小的特征值<span class="math-inline">\mu_i</span>都具有重要意义。
 
 <p>
 众所周知，满足<span class="math-inline">(B - \mu_i A) x_i = 0</span>的（右）特征向量<span class="math-inline">x_i</span>可以选择为正交的，具体含义如下：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(x_i,A x_j) = (x_i, B x_j) = 0, \qquad i \neq j.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 一类重要的特征值问题是<i>网格特征值问题</i>，源自数学物理中自伴微分算子的边界值问题的离散化。网格特征值问题具有以下典型特性：
@@ -126,14 +111,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li>有时可能廉价地对<span class="math-inline">B</span>进行分解，但通常情况下，我们只能高效地执行<span class="math-inline">B</span>与向量的乘法运算。</li>
 <li>矩阵<span class="math-inline">A</span>是病态的。通常，<span class="math-inline">B</span>的条件数小于<span class="math-inline">A</span>。</li>
 <li>所需的特征对数量<span class="math-inline">m</span>可以选择，使得感兴趣的特征值与谱的其余部分良好分离；换句话说，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\frac{ \mu_m - \mu_{m+1} } { \mu_{\max} - \mu_{\min}}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 的比值不太小。这意味着矩阵<span class="math-inline">A^{-1}B</span>的不变子空间由感兴趣的特征向量张成，是良态的，因此计算<span class="math-inline">m</span>个特征对的问题是良定的。在许多应用中，当矩阵束<span class="math-inline">B - \mu A</span>的谱近似于紧算子的谱时，可以建立这一性质，使得零是近似特征值的唯一凝聚点。</li>
 </ul>
 
@@ -148,14 +128,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一种流行的方法是基于移位-逆变换算子的乘法：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">x^{(i+1)}=(B - \mu A)^{-1}Ax^{(i)};</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 参见第4.3节。该方法允许我们快速计算最接近移位<span class="math-inline">\mu</span>的特征值，假设这一操作可以通过<span class="math-inline">B - \mu A</span>的显式高效三角分解来实现。通过适当选择的变量移位，例如基于瑞利商
 <a name="prec_RQ"></a>(x) = (x,Bx)(x,Ax)，
 
@@ -166,14 +141,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 另一种方法是在<span class="math-inline">B</span>可以高效分解的情况下使用，这样我们可以通过<span class="math-inline">AB^{-1}</span>或<span class="math-inline">B^{-1}A</span>乘以向量，并使用传统的Lanczos方法；参见第4.4节。在这种情况下，单次迭代成本不高，但收敛可能较慢。如果<span class="math-inline">B</span>是不定的，我们需要使用多项式方法在中谱中寻找特征值<span class="math-inline">\lambda_i</span>，这是一个已知难题。如果<span class="math-inline">B</span>是正定的，情况则较为简单，因为我们希望找到极值（最小）特征值<span class="math-inline">\lambda_i</span>。然而，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\frac{\lambda_{m+1} - \lambda_m}{\lambda_{\max} - \lambda_{\min}}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这一比值通常表征<span class="math-inline">\lambda_m</span>的收敛速度，由于分母较大，可能导致收敛缓慢。
 
 <p>

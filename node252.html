@@ -198,13 +198,9 @@ ABLE有四个实现级别：
 </dd>
 <dt><strong>(21)</strong></dt>
 <dd>如果发生失效或收敛的Ritz值群集的阶数超过当前块大小<span class="math-inline">\delta_c > p_j</span>，则可以增加<span class="math-inline">Q_{j+1}</span>和<span class="math-inline">P_{j+1}</span>：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">Q_{j+1} := \onebytwo{Q_{j+1}}{\widehat{Q}}, \quadP_{j+1} := \onebytwo{P_{j+1}}{\widehat{P}},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 使得<span class="math-inline">P^{\ast}_{j+1} Q_{j+1}</span>在数值上非奇异，其中<span class="math-inline">\widehat{Q}</span>和<span class="math-inline">\widehat{P}</span>是<span class="math-inline">n \times \delta</span>，<span class="math-inline">\delta</span>由<span class="math-inline">\delta = \min ( \max( \delta_c, \delta_d ), p_{\max} - p_j )</span>确定，其中<span class="math-inline">p_j</span>是参数前的块大小，<span class="math-inline">p_{\max}</span>是规定的最大块大小。新的块大小为<span class="math-inline">p_j+\delta</span>。然后调用TSMGS对<span class="math-inline">Q_{j+1}</span>和<span class="math-inline">P_{j+1}</span>与存储在<span class="math-inline">Q_{[j]}</span>和<span class="math-inline">P_{[j]}</span>中的先前Lanczos向量进行双正交化。这就是所谓的自适应分块方案。<a name="24872"></a>
 
 <p>
@@ -217,29 +213,17 @@ ABLE有四个实现级别：
 
 <p>
 公式（<a href="node251.html#rightres2">7.56</a>）和（<a href="node251.html#leftres2">7.57</a>）可用于检测收敛。由于我们期望在Level 1的Lanczos迭代中步骤过多，我们使用以下收敛测试：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\min\{ \Vert r^{(j)}_i\Vert, \Vert(s^{(j)}_i)^{\ast}\Vert \} \leq\mathrm{\tt tolconv} \cdot \Vert A\Vert _1,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 在更高级别中，我们可能使用半二次收敛测试：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\min\left\{ \Vert r^{(j)}_i\Vert, \Vert(s^{(j)}_i)^{\ast}\Ve......j)}_i \right\}\leq \mathrm{\tt tolconv} \cdot \Vert A\Vert _1,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\eta^{(j)}_i = \frac{ \Vert r^{(j)}_i\Vert\; \Vert(s^{(j)}_i)^{\ast}\Vert _2}{{\rm gap}(\theta^{(j)}_i,T_{[j]})};</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <span class="math-inline">\mathrm{gap}(\theta^{(j)}_i, T_{[j]})</span>定义<span class="math-inline">\theta^{(j)}_i</span>与其他Ritz值之间的间隙。具体地，<span class="math-inline">{\rm gap}(\theta^{(j)}_i,T_{[j]})=\min_{k \ne i} \vert \theta^{(j)}_i - \theta^{(j)}_k\vert</span>。在分块情况下，间隙定义在群集之间。
 
@@ -253,13 +237,9 @@ ABLE有四个实现级别：
 
 <p>
 <span class="math-inline">(j+1)</span>st Lanczos向量<span class="math-inline">Q_{j+1}</span>和<span class="math-inline">P_{j+1}</span>与先前Lanczos向量的双正交性由量<span class="math-inline">d_{j+1}</span>衡量：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">d_{j+1} = \max \left\{ \frac{\Vert P_{[j]}^{\ast}Q_{j+1} \Ve...... _1}{\Vert Q_{[j]}\Vert _1 \Vert P_{j+1}\Vert _1 } \right\}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 在[<a href="node421.html#bady99">29</a>]中开发了一种高效的过程，以<span class="math-inline">O(n)</span>成本有效模拟此量。
 
 <p>

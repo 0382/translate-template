@@ -91,23 +91,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 有一个相当直观的解释来说明这种通过隐式重启对初始向量 <span class="math-inline">v_1</span> 的重复更新是如何导致收敛的。如果 <span class="math-inline">v_1</span> 表示为 <span class="math-inline">A</span> 的特征向量 <span class="math-inline">\{q_j\}</span> 的线性组合，那么
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">v_1 = \sum_{j=1}^n q_j \gamma_j \quad \Rightarrow \quad\psi(A)v_1 = \sum_{j=1}^n q_j \psi(\lambda_j) \gamma_j .</div>
-</div>
-<br clear="ALL">
-<p></p>
-对相同的（即使用相同的移位）多项式重复应用 <span class="math-inline">\ell</span> 次迭代将导致第 <span class="math-inline">j</span> 个原始展开系数的衰减因子为
-<br><p></p>
-<div align="CENTER">
 
+对相同的（即使用相同的移位）多项式重复应用 <span class="math-inline">\ell</span> 次迭代将导致第 <span class="math-inline">j</span> 个原始展开系数的衰减因子为
 
 <div class="math-display">\left( \frac{\psi(\lambda_j)}{\psi(\lambda_1)} \right)^{\ell} \ ,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中特征值按照 <span class="math-inline">\vert\psi(\lambda_j)\vert</span> 的递减值排序。前 <span class="math-inline">k</span> 个特征值在这个展开中变得占主导地位，而其余的特征值随着迭代的进行变得越来越不重要。因此，初始向量 <span class="math-inline">v_1</span> 被强制进入一个不变子空间，正如所期望的那样。由精确移位机制提供的自适应选择进一步增强了在这个展开中对所需分量的隔离。因此，随着迭代的进行，所需的特征值被更好地近似。
 
 <p>

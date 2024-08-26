@@ -82,21 +82,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 和
 <span class="math-inline">{\mathcal K}^j(A^{\ast},P_1)</span>。
 具体来说，经过<span class="math-inline">j</span>步后，Lanczos过程确定一个块三对角矩阵
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">T_{[j]} = \left[ \begin{array}{cccc}A_1 & B_2 & & \\C_2......ts & \ddots & B_j \\& & C_j & A_j \\\end{array} \right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 以及右和左Lanczos向量矩阵
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">Q_{[j]} = \left[\, Q_1, Q_2, \ldots , Q_j \,\right] \quad \m......and} \quadP_{[j]} = \left[\, P_1, P_2, \ldots , P_j \,\right]</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 满足双正交条件
 
 <div class="math-display" id="biorth">P^{\ast}_{[j]} Q_{[j]} = I. \tag{155}</div>
@@ -139,13 +131,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 为了使用Lanczos方法近似<span class="math-inline">A</span>的特征值和特征向量，我们解<span class="math-inline">jp \times jp</span>块三对角矩阵<span class="math-inline">T_{[j]}</span>的特征值问题。每个特征三元组<span class="math-inline">( \theta^{(j)}_i, z^{(j)}_i, w^{(j)}_i )</span> of <span class="math-inline">T_{[j]}</span>，
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">T_{[j]} z^{(j)}_i = \theta^{(j)}_i z^{(j)}_i\quad {\rm and......w^{(j)}_i)^{\ast} T_{[j]} = \theta^{(j)}_i (w^{(j)}_i)^{\ast}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 确定一个Ritz三元组<span class="math-inline">( \theta^{(j)}_i, x^{(j)}_i, y^{(j)}_i )</span>，其中
 
 <span class="math-inline">x^{(j)}_i = Q_{[j]} z^{(j)}_i</span>和

@@ -98,23 +98,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="eq:JD8-ppol">(\theta^2 V^\ast C_2 V +\theta V^\ast C_1 V + V^\ast C_0V){s}=0 \tag{266}</div>
 
 矩阵<span class="math-inline">V</span>的列<span class="math-inline">{v}_i</span>构成了搜索子空间的基。为了稳定性考虑，这些列被构造为正交归一的。投影问题与原问题具有相同的阶数，但维度要小得多，通常<span class="math-inline">{m}\lln</span>。我们假设解向量<span class="math-inline">{s}</span>是归一化的，<span class="math-inline">\Vert{s}\Vert _2 = 1</span>。首先，选择具有所需特性的Ritz值<span class="math-inline">\theta</span>，例如实部最大或最接近某个目标<span class="math-inline">\tau</span>，并计算相关的特征向量<span class="math-inline">{s}</span>。然后计算Ritz向量<span class="math-inline">{u}\equiv V {s}</span>和残差<span class="math-inline">r\equiv \Psi(\theta){u}</span>。为了扩展搜索空间，计算向量<span class="math-inline">{p}</span>，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{p} \equiv \Psi'(\theta){u},</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中
-<br><p></p>
-<div align="CENTER">
 
+其中
 
 <div class="math-display">\Psi'(\theta)= 2 \theta C_2+C_1</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 在雅可比-戴维森迭代步骤的第二部分，搜索子空间<span class="math-inline">\mathrm{span}({V})</span>通过一个与<span class="math-inline">{u}</span>正交的向量<span class="math-inline">{t}</span>进行扩展，该向量近似地满足校正方程

@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Lanczos Algorithm with SI.</title>
+<title>带SI的Lanczos算法</title>
 <meta charset="utf-8">
-<meta name="description" content="Lanczos Algorithm with SI.">
+<meta name="description" content="带SI的Lanczos算法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,27 +72,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3336" href="node172.html">Convergence Properties.</a>
-<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b>上一节：</b><a name="tex2html3324" href="node170.html">Algorithm.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3336" href="node172.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html3324" href="node170.html">算法</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001450020000000000000">
 带位移反转的Lanczos算法</a>
 </h4>
+
 在许多实际应用中，位移反转变体是一种自然选择。
 它对应于以下选择：
 
-<div class="math-display" id="gen_shift_invert">C=B(A-\sigma B)^{-1}\,. \tag{80}</div>
+<div class="math-display" id="gen_shift_invert">C=B(A-\sigma B)^{-1}. \tag{5.16}</div>
 
 这给出了接近所选位移点<span class="math-inline">\sigma</span>的特征值，并且我们可以在更少的步骤<span class="math-inline">j</span>后获得收敛。即使带有位移矩阵<span class="math-inline">(A-\sigma B)</span>的系统比直接变体中所需的<span class="math-inline">B</span>更难以解决，所需的较少步骤<span class="math-inline">j</span>通常会弥补这一点。
 
 <p>
 基本递归公式（<a href="node170.html#gen-herm-recursion">5.9</a>）被替换为
 
-<div class="math-display" id="si-gen-herm-recursion">B(A-\sigma B)^{-1}V_j=V_{j}T_{j}+re_j^{\ast}\;, \tag{81}</div>
+<div class="math-display" id="si-gen-herm-recursion">B(A-\sigma B)^{-1}V_j=V_{j}T_{j}+re_j^{\ast}, \tag{5.17}</div>
 
 现在使用<span class="math-inline">B^{-1}</span>-正交（<a href="node170.html#B-ortho">5.10</a>）基<span class="math-inline">V_j</span>和<span class="math-inline">B</span>正交辅助基<span class="math-inline">W_j</span>，其中<span class="math-inline">V_j=BW_j</span>。这两个基是双正交的，
 <span class="math-inline">V_j^{\ast}W_j=I_{j}</span>，与非对称双侧Lanczos算法（如第<a href="node244.html#sec:nsymlanczos">7.8</a>节所述）相比。
@@ -94,47 +99,34 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 矩阵<span class="math-inline">T</span>是对称的，
 
-<div class="math-display" id="si-T-section">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j\,. \tag{82}</div>
-
+<div class="math-display" id="si-T-section">T_{j}=V_j^{\ast}(A-\sigma B)^{-1}V_j. \tag{5.18}</div>
 
 <p>
 <span class="math-inline">T_{j}</span>的特征解，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_{j}s_i^{(j)}=s_i^{(j)}\theta_i^{(j)},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 用于获得近似特征值
 
-<div class="math-display" id="si-appr-lambda">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}} \tag{83}</div>
+<div class="math-display" id="si-appr-lambda">\lambda_i^{(j)}=\sigma+\frac{1}{\theta_i^{(j)}} \tag{5.19}</div>
 
 和近似特征向量
 
-<div class="math-display" id="si-gen_eigenvector">x_i^{(j)}=W_js_i^{(j)}\,. \tag{84}</div>
+<div class="math-display" id="si-gen_eigenvector">x_i^{(j)}=W_js_i^{(j)}. \tag{5.20}</div>
 
 其残差为
 
-<p>
-<p></p>
-<div align="CENTER">
+<div class="math-display">
+\begin{aligned}
+r_i^{(j)} &= Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}=(A-\sigma B)x_i^{(j)}-\frac{1}{\theta^{(j)}_i}Bx_i^{(j)} \\
+&= \frac{1}{\theta^{(j)}_i}\left((A-\sigma B)W_js_i^{(j)}\theta^{(j)}_i-V_j s^{(j)}\right) \\
+&= -\frac{1}{\theta^{(j)}_i}(A-\sigma B)w_{j+1}\beta_j s^{(j)}_{j,i},
+\end{aligned}
+</div>
 
-<img
- width="388" height="140" border="0"
- src="img1561.png"
- alt="\begin{eqnarray*}
-r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
-=(A-\sigma...
-...\frac{1}{\theta_i^{(j)}}(A-\sigma B)w_{j+1}\beta_js_{j,i}^{(j)},
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
 其范数在以下量小时也小
 
-<div class="math-display" id="si-gen_estimate_residual">\beta_js_{j,i}^{(j)}/\theta_i^{(j)} \tag{85}</div>
+<div class="math-display" id="si-gen_estimate_residual">\beta_js_{j,i}^{(j)}/\theta_i^{(j)} \tag{5.21}</div>
 
 这个近似不是标准的，而是原特征问题的调和Ritz值（参见第<a href="node79.html#sec:algbasics">3.2</a>节的讨论）。
 
@@ -146,58 +138,48 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <p>
 我们得到以下算法。
 
-<p>
-<br>
-<a name="si-gen_approximate_eigenvectors"></a><a name="si-gen_convergence"></a><a name="si-gen_approximate_eigenvalues"></a><a name="si-gen_Reorthogonalize"></a><a name="si-gen_Operate"></a><a name="si-gen_h_starting_vector"></a><a name="si-Gen_Herm_Lanczos"></a><img
- width="598" height="318" align="BOTTOM" border="0"
- src="img1564.png"
- alt="\begin{algorithm}{Shift-and-Invert Lanczos Method for GHEP
-}
-{
-\begin{tabbing}
-...
-...\&gt; \&gt; compute approximate eigenvectors <span class="math-inline">X=W_j\,S</span>\end{tabbing}}
-\end{algorithm}">
-<br>
+
+<a name="si-gen_approximate_eigenvectors"></a><a name="si-gen_convergence"></a><a name="si-gen_approximate_eigenvalues"></a><a name="si-gen_Reorthogonalize"></a><a name="si-gen_Operate"></a><a name="si-gen_h_starting_vector"></a><a name="si-Gen_Herm_Lanczos"></a>
+<pre class="algorithm">
+算法 5.5 GHEP的位移-逆 Lanczos 方法
+(1)  从初始向量 <span class="math-inline">r = x</span> 开始。计算 <span class="math-inline">q = B r</span> 和 <span class="math-inline">\beta_0 = \left\| q^* r \right\|^{1/2}</span>
+(2)  对于 <span class="math-inline">j = 1, 2, \ldots</span>，直到收敛，
+(3)      <span class="math-inline">w_j = r / \beta_{j-1}</span>, <span class="math-inline">v_j = q / \beta_{j-1}</span>
+(4)      计算 <span class="math-inline">r = (A - \sigma B)^{-1} v_j</span>
+(5)      <span class="math-inline">r = r - w_{j-1} B_{j-1}</span>
+(6)      <span class="math-inline">a_j = v_j^* r</span>
+(7)      <span class="math-inline">r = r - w_j a_j</span>
+(8)      必要时进行再正交化
+(9)      计算 <span class="math-inline">q = B r</span>
+(10)     <span class="math-inline">B_j = \left\| q^* r \right\|^{1/2}</span>
+(11)     计算近似特征值 <span class="math-inline">T_j = S \Theta^{(j)} S^*</span>
+(12)     测试收敛性
+(13) 结束循环
+(14) 计算近似特征向量 <span class="math-inline">X = W_j S</span>
+</pre>
 
 <p>
 我们注意到，只有少数步骤与之前的直接迭代算法不同。在实际实现中，可以使用相同的程序进行这两种计算。让我们评论那些不同的步骤：
 <dl COMPACT>
 <dt>(8)</dt>
 <dd>现在我们期望对于相当少的向量<span class="math-inline">j</span>收敛，建议使用完全再正交化，即使选择性再正交化给出的结果足够准确。应用Gram-Schmidt正交化过程，
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">r=r-W_j(W_j^{\ast}(Br)),</div>
 
-<div class="math-display">r=r-W_j(W_j^{\ast}(Br))\,,</div>
-</div>
-<br clear="ALL">
-<p></p>
 直到<span class="math-inline">r</span>对基<span class="math-inline">W_j</span>是<span class="math-inline">B</span>-正交的。我们需要每次再正交化额外进行一次<span class="math-inline">B</span>的矩阵向量乘法，并且必须使用经典的Gram-Schmidt正交化过程。
 
 <p>
 我们可以保存并使用辅助基<span class="math-inline">V_j</span>以节省额外的<span class="math-inline">B</span>操作，
-<br><p></p>
-<div align="CENTER">
 
-
-<div class="math-display">r=r-W_j(V_j^{\ast}r)\,.</div>
-</div>
-<br clear="ALL">
-<p></p>
+<div class="math-display">r=r-W_j(V_j^{\ast}r).</div>
 
 <p>
 </dd>
 <dt>(14)</dt>
 <dd>现在使用基<span class="math-inline">W_j</span>来获取特征向量（<a href="node171.html#si-gen_eigenvector">5.20</a>），
-<br><p></p>
-<div align="CENTER">
 
+<div class="math-display">x_i^{(j)}=W_js_i^{(j)},</div>
 
-<div class="math-display">x_i^{(j)}=W_js_i^{(j)}\;,</div>
-</div>
-<br clear="ALL">
-<p></p>
 对于每个标记为收敛的<span class="math-inline">i</span>。
 
 <p>
@@ -207,14 +189,14 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
 <p>
 当我们运行位移反转算子（<a href="node171.html#gen_shift_invert">5.16</a>）时，我们因子化
  
-<div class="math-display" id="gen_shift_invert_factor">LDL^{\ast}=P^T(A-\sigma B)P \tag{86}</div>
+<div class="math-display" id="gen_shift_invert_factor">LDL^{\ast}=P^T(A-\sigma B)P \tag{5.22}</div>
 
 对于适当的稀疏保持排列<span class="math-inline">P</span>，在开始时使用稀疏高斯消去法。
 
 <p>
 在实际迭代过程中，我们使用因子<span class="math-inline">L</span>和<span class="math-inline">U</span>，计算
 
-<div class="math-display" id="gen_ulinvx">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j)))) \tag{87}</div>
+<div class="math-display" id="gen_ulinvx">r=P(L^{-\ast}(D^{-1}(L^{-1}(P^Tv_j)))) \tag{5.23}</div>
 
 在算法<a href="node171.html#si-Gen_Herm_Lanczos">5.5</a>的步骤(4)中。
 
@@ -244,11 +226,9 @@ r_i^{(j)}&amp; = &amp; Ax_i^{(j)}-Bx_i^{(j)}\lambda_i^{(j)}
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3336" href="node172.html">Convergence Properties.</a>
-<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b>上一节：</b><a name="tex2html3324" href="node170.html">Algorithm.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3336" href="node172.html">收敛性质</a>
+<b>上一级：</b><a name="tex2html3330" href="node169.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html3324" href="node170.html">算法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

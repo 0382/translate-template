@@ -80,23 +80,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 SI（谱变换）在
 &#167;<a href="node84.html#spec_trans">3.3</a>节中被引入。具体来说，我们使用矩阵
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">C \equiv (A - \sigma I)^{-1}</div>
-</div>
-<br clear="ALL">
-<p></p>
-代替<span class="math-inline">A</span>，并利用以下事实
-<br><p></p>
-<div align="CENTER">
 
+代替<span class="math-inline">A</span>，并利用以下事实
 
 <div class="math-display">C x = x \theta \iff A x = x \left(\sigma + \frac{1}{\theta}\right)</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 来恢复原矩阵的特征值。与SI结合使用时，Arnoldi方法极为有效。通常，收敛到与<span class="math-inline">\sigma</span>最接近的<span class="math-inline">A</span>的特征值对应的特征向量非常迅速。因此，只要能高效求解系数矩阵为<span class="math-inline">A-\sigma I</span>的线性系统，就应采用这种方法。
 
 <p>

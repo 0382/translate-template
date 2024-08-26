@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Power Method.</title>
+<title>幂法</title>
 <meta charset="utf-8">
-<meta name="description" content="Power Method.">
+<meta name="description" content="幂法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,66 +72,66 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3262" href="node167.html">Inverse Iteration.</a>
-<b>上一级：</b><a name="tex2html3256" href="node165.html">Single- and Multiple-Vector Iterations</a>
-<b>上一节：</b><a name="tex2html3250" href="node165.html">Single- and Multiple-Vector Iterations</a>
-  
-  
+<b>下一节：</b><a name="tex2html3262" href="node167.html">逆迭代</a>
+<b>上一级：</b><a name="tex2html3256" href="node165.html">单向量和多向量迭代</a>
+<b>上一节：</b><a name="tex2html3250" href="node165.html">单向量和多向量迭代</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001440010000000000000">
-Power Method.</a>
+幂法</a>
 </h4>
-The direct iteration methods for the HEP
-can be generalized to the GHEP (<a href="node156.html#gsymeig">5.1</a>).
+
+直接迭代法在HPE问题中的应用可以推广至GHEP问题（<a href="node156.html#gsymeig">5.1</a>）。
 
 <p>
-First we assume that a Cholesky factorization of 
-<span class="math-inline">B = L \, L^{\ast}</span> 
-is easily obtainable. 
-We then reformulate (<a href="node156.html#gsymeig">5.1</a>) as a standard Hermitian eigenvalue
-problem with the matrix <span class="math-inline">C</span> as described 
-in the previous subsection (<a href="node163.html#C_eigenvalues">5.5</a>),
-possibly after making <span class="math-inline">B</span> positive definite as noted
-in the introduction (<a href="node156.html#make_B_pd">5.2</a>).
-The power method of &#167;<a href="node94.html#sec_power_sym">4.3</a> now takes the following form. 
-<a name="17168"></a> 
+首先我们假设矩阵B的Cholesky分解<span class="math-inline">B = L \, L^{\ast}</span>容易获得。然后我们将（<a href="node156.html#gsymeig">5.1</a>）重新表述为一个标准厄米特征值问题，涉及矩阵<span class="math-inline">C</span>，如前一小节（<a href="node163.html#C_eigenvalues">5.5</a>）所述，可能需要先使矩阵<span class="math-inline">B</span>正定，如引言部分（<a href="node156.html#make_B_pd">5.2</a>）所述。第&#167;<a href="node94.html#sec_power_sym">4.3</a>节中的幂法现在采取以下形式。
+<a name="17168"></a>
+
+<pre class="algorithm">
+算法 5.1：GHEP问题的幂法
+(1) 取初始向量 <span class="math-inline">v</span>，计算 <span class="math-inline">y := Lv, \; z:= y / \Vert y \Vert_2</span>
+(2) for <span class="math-inline">k = 2,3,\dots</span>
+(3)     计算 <span class="math-inline">y := C z, \; \theta := z^T y</span>
+(4)     if <span class="math-inline">\Vert y - \theta z \Vert_2 \leq \epsilon_M</span> then
+(5)         计算 <span class="math-inline">y := L^{-\ast} z, \; z := y / \Vert y \Vert_2</span> 并停止
+(6)     else
+(7)         <span class="math-inline">z := y / \Vert y \Vert_2</span>
+(8)     end if
+(9) end for
+</pre>
 
 <p>
-<br>
-<img
- width="598" height="221" align="BOTTOM" border="0"
- src="img1516.png"
- alt="\begin{algorithm}{Power Method for GHEP}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb\=...
-... {\bf end if} \\
-{\rm (9)} \&gt; \&gt; {\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br>
-
-<p>
-In step (3),
-the computation <span class="math-inline"> y := C \, z</span> can be executed into three
-steps as 
-<br><p></p>
-<div align="CENTER">
-
+在步骤（3）中，计算<span class="math-inline"> y := C \, z</span>可以分解为三个步骤：
 
 <div class="math-display">y_1 = L^{-\ast}\, z, \quad y_2 = A \, y_1, \quad\mathrm{and}\quad y = L^{-1} \, y_2. </div>
-</div>
-<br clear="ALL">
-<p></p>
-Hence, no explicit knowledge of the matrix <span class="math-inline">C</span> is needed for
-the power method. The power method converges under
-conditions similar to those for the standard HEP.
+
+因此，幂法执行过程中无需显式了解矩阵<span class="math-inline">C</span>。幂法的收敛条件与标准HEP问题类似。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3261"
+  href="node167.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3255"
+  href="node165.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3249"
+  href="node165.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3257"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3259"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3262" href="node167.html">逆迭代</a>
+<b>上一级：</b><a name="tex2html3256" href="node165.html">单向量和多向量迭代</a>
+<b>上一节：</b><a name="tex2html3250" href="node165.html">单向量和多向量迭代</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

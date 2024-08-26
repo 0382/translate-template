@@ -106,14 +106,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </span>t_j<span class="math-inline">被称为延续向量。经过Gram-Schmidt正交化后，我们有
 
 </span>w_j = V_{j+1} h_j<span class="math-inline">，因此我们可以将（<a href="node400.html#eq:system">11.2</a>）重写为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A V_{j+1}\left( h_j - \left[\begin{array}{c} t_j \\ 0 \end{array}\right] \nu_j \right)- s_j.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 将所有方程收集起来，对于</span>j=1,\ldots,k<span class="math-inline">，我们有
 
 <div class="math-display" id="eq:rks-Sk">A V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k} - S_k \ , \tag{277}</div>
@@ -146,45 +141,25 @@ Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-
 
 <p>
 由算法<a href="node407.html#alg:I-rks">11.4</a>计算的Ritz对<span class="math-inline">(\theta,x)</span>产生的残差
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A + E_k) x - \theta B x = f_k</div>
-</div>
-<br clear="ALL">
-<p></p>
-由引理<a href="node407.html#le:rks-ritz">11.1</a>定义。与原始问题相关的残差可以写成
-<br><p></p>
-<div align="CENTER">
 
+由引理<a href="node407.html#le:rks-ritz">11.1</a>定义。与原始问题相关的残差可以写成
 
 <div class="math-display">A x - \theta B x = f_k - E_k x</div>
-</div>
-<br clear="ALL">
-<p></p>
-或者，根据（<a href="node407.html#eq:rks-Sk">11.6</a>），
-<br><p></p>
-<div align="CENTER">
 
+或者，根据（<a href="node407.html#eq:rks-Sk">11.6</a>），
 
 <div class="math-display">A x - \theta B x = f_k -S_k z \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 为了使残差变小，<span class="math-inline">E_k x = S_k z</span>必须趋向于零。关于非精确有理Krylov方法收敛性的数学论证已由Lehoucq和Meerbergen[<a href="node421.html#leme98">291</a>]以及De Samblanx[<a href="node421.html#dsam98">109</a>]给出。我们仅概述理论和一些数值结果。在[<a href="node421.html#leme98">291</a>]和[<a href="node421.html#dsam98">109</a>]中，给出了数学和启发式论证，即
 <span class="math-inline">S_j z_j \approx s_j</span>，使得
 
 <span class="math-inline">\Vert s_j\Vert \leq \tau \Vert r_{j-1}\Vert</span>（见第<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>节），
 残差满足递推关系
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert r_j\Vert \approx \Vert f_j\Vert + \tau \Vert r_{j-1}\Vert \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 当项<span class="math-inline">f_j</span>对<span class="math-inline">S_j z_j</span>占优势时，<span class="math-inline">j=1,\ldots,k</span>，则
 收敛由精确有理Krylov过程的收敛主导：
 <span class="math-inline">A x - \theta B x \approx f_j</span>。当第二项占优势时，我们有
@@ -206,14 +181,9 @@ Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-
 （见第<a href="node405.html#sec:jd-cayley">11.2.5</a>节），则收敛是二次的。项<span class="math-inline">f_j</span>以二次方式收敛到零，而第二项在<span class="math-inline">\tau</span>不依赖于<span class="math-inline">j</span>时线性收敛。通常，收敛具有二次行为，直到
 <span class="math-inline">S_j z_j</span>成为<span class="math-inline">r_j</span>中的主导项。从那时起，收敛变为线性，收敛比率为<span class="math-inline">\tau</span>。在实践中，建议选择<span class="math-inline">\tau</span>与<span class="math-inline">\Vert r_j\Vert</span>成比例，以保持二次收敛。通过
 <span class="math-inline">\tau_j = \varrho \Vert r_{j-1}\Vert</span>，我们得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert r_j\Vert \approx \Vert f_j\Vert + \varrho \Vert r_{j-1}\Vert^2,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这显示了第二项的二次收敛。
 </li>
 </ul>

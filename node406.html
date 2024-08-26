@@ -82,13 +82,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 假设<span class="math-inline">A</span>和<span class="math-inline">B</span>是对称的，并且我们有一个正定的预处理器<span class="math-inline">M</span>用于<span class="math-inline">A - \mu B</span>，即<span class="math-inline">M \approx A - \mu B</span>。我们可以对<span class="math-inline">M^{-1} (A-\nu B)</span>应用Arnoldi方法来计算接近<span class="math-inline">\mu</span>的特征值。（再次使用Ritz值<span class="math-inline">\theta</span>作为零。）这导致递推关系
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">M^{-1} (A - \nu B) V_k = V_k H_k + f_k e_k^T \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 由于<span class="math-inline">M</span>是正定的，我们有<span class="math-inline">x^{\ast} M y</span>是一个有效的内积。当我们在Arnoldi方法中使用<span class="math-inline">M</span>内积<span class="math-inline">x^{\ast} M y</span>而不是标准内积<span class="math-inline">x^{\ast}y</span>时，我们有<span class="math-inline">V_k^{\ast} M V_k = I</span>和
 
 <span class="math-inline">V_k^{\ast} M f_k = 0</span>，
@@ -117,21 +113,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 回想一下，对于不精确的Cayley变换
 
 <span class="math-inline">T_{\mathrm{IC}} = M^{-1} (A - \nu B)</span>，Lanczos递推关系是
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">T_{\mathrm{IC}} V_k - V_k H_k = f_k e_k^T \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 递推关系也可以写成
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">T_{\mathrm{C}} V_k - V_k H_k = f_k e_k^T + (T_{\mathrm{C}} - T_{\mathrm{IC}}) V_k.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们知道对于一个Ritz对<span class="math-inline">(x, \theta)</span>，当<span class="math-inline">\theta \approx \nu</span>时，<span class="math-inline">(T_{\mathrm{C}} - T_{\mathrm{IC}}) x</span>可能很小。因此，如果<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{IC}}</span>的特征向量，并且<span class="math-inline">\theta</span>接近<span class="math-inline">\nu</span>，那么<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{C}}</span>的特征向量，因此Ritz值<span class="math-inline">\theta</span>接近<span class="math-inline">Ax = \lambda Bx</span>的特征值。
 
 <p>

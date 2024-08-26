@@ -88,12 +88,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 位移秩可以定义如下：对于给定的矩阵<span class="math-inline">A</span>和<span class="math-inline">F</span>以及矩阵<span class="math-inline">T</span>，我们定义运算符
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\Delta_{A,F}(T)=A\cdot T-T\cdot F</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 并记<span class="math-inline">\alpha={\rm rank}(\Delta_{A,F}(T))</span>。我们称<span class="math-inline">\alpha</span>为<span class="math-inline">T</span>相对于运算符<span class="math-inline">\Delta_{A,F}</span>的“位移秩”。如果<span class="math-inline">\alpha</span>很小（通常为<span class="math-inline">O(1)</span>），我们称矩阵<span class="math-inline">T</span>具有“低位移秩”。由于
 
 <span class="math-inline">{\rm rank}(\Delta_{A,F}(T))=\alpha</span>，存在
@@ -105,12 +102,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 以Cauchy矩阵为例
 
 <span class="math-inline">C = (C_{ij})=(1/(x_i-y_j))</span>，我们有
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\Delta_{\diag(x),\diag(y)}(C)=\diag(x) \cdot C-C \cdot \diag(y)=(1,1,\ldots,1)^T\cdot (1,1,\ldots,1).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此，Cauchy矩阵的位移秩为1，生成元为
 <span class="math-inline">G=B=(1,1,\ldots,1)^T</span>。
 

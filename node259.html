@@ -132,14 +132,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(7)</strong></dt>
 <dd>向量<span class="math-inline">\hat{v}_j</span>和<span class="math-inline">\hat{w}_j</span>都通过了收缩检查，现在被归一化以成为下一个右和左Lanczos向量<span class="math-inline">v_j</span>和<span class="math-inline">w_j</span>。归一化使得
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left\Vert v_j \right\Vert _2 = \left\Vert w_j \right\Vert _2 = 1\quad \mathrm{for all}\quad j.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 </dd>
@@ -170,27 +165,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(12)</strong></dt>
 <dd>向量<span class="math-inline">\hat{w}_{j+p_c}</span>与右Lanczos向量<span class="math-inline">v_k</span>，<span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。同样，为了节省一个内积，应使用以下<span class="math-inline">\tilde{t}_{kj}</span>的公式：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\tilde{t}_{kj} = \cases{\displaystyle{t_{jk}\, \delta_j/\delta_k}& \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{{\hat{w}_{j+p_c}^T v_k}/{\delta_k}}& \ otherwise.}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 </dd>
 <dt><strong>(13)</strong></dt>
 <dd>右候选向量<span class="math-inline">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}</span>与最新左Lanczos向量<span class="math-inline">w_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">t_{j,k-m_c}</span>的公式：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">t_{j,k-m_c} = \cases{\displaystyle{{w_j^T \hat{v}_{k}}/{\delta_j}}& \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{\tilde{t}_{k-m_c,j}\, \delta_{k-m_c}/{\delta_j}}& \ otherwise.}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 然而，使用这一公式会牺牲一些数值稳定性。
 <a name="tex2html44"
   href="footnode.html#foot27226"><sup><button class="footnote"></button></sup></a>
@@ -198,14 +183,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>(14)</strong></dt>
 <dd>左候选向量<span class="math-inline">\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}</span>与最新右Lanczos向量<span class="math-inline">v_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">\tilde{t}_{j,k-p_c}</span>的公式：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\tilde{t}_{j,k-p_c} = \cases{\displaystyle{{\hat{w}_{k}^T v_j}/{\delta_j}}& \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{t_{k-p_c,j}\, \delta_{k-p_c}/{\delta_j}}& \ otherwise.}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 然而，使用这一公式会牺牲一些数值稳定性。
 
 <p>

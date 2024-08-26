@@ -79,23 +79,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 将残差误差转化为后向误差
 </h4> 
 事实证明，计算出的特征值和特征向量总是可以解释为邻近矩阵的确切特征值和特征向量，即
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A+E)\widetilde x=\widetilde\lambda\widetilde x,</div>
-</div>
-<br clear="ALL">
-<p></p>
-以及
-<br><p></p>
-<div align="CENTER">
 
+以及
 
 <div class="math-display">\widetilde y^{\ast} (A+E)=\widetilde\lambda\widetilde y^{\ast}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 如果 <span class="math-inline">\widetilde y</span> 可用，其中误差矩阵 <span class="math-inline">E</span> 在范数上相对于 <span class="math-inline">\Vert A\Vert</span> 通常较小。这种解释有两个目的：首先，它间接反映了特征问题解决的准确程度；其次，它可以用来推导下面将要讨论的计算特征值和特征向量的误差界限。理想情况下，我们希望 <span class="math-inline">E</span> 是零矩阵，但实际上这几乎从未发生。有无限多个误差矩阵 <span class="math-inline">E</span> 满足上述方程，我们想知道的只是最优或近似最优的误差矩阵，即某些范数（通常是2-范数 <span class="math-inline">\Vert\cdot\Vert _2</span> 或 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>）在所有可行误差矩阵中被最小化。事实上，如果我们能确定这些（近似）最优矩阵的范数上界，就能满足实际需求。以下结果集确实表明，<em>如果 <span class="math-inline">r</span>（以及 <span class="math-inline">s^{\ast}</span>，如果可用）很小，误差矩阵 <span class="math-inline">E</span> 也很小</em> [<a href="node421.html#stsu90">425</a>]。
 
 <p>
@@ -107,14 +97,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="eq:std-NH-b1">(A+E)\widetilde x=\widetilde\lambda\widetilde x, \tag{210}</div>
 
 满足
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert E\Vert _2=\Vert E\Vert _{F}=\Vert r\Vert _2.</div>
-</div>
-<br clear="ALL">
-<p></p> 
+ 
          
 <p>
 </li>
@@ -123,23 +108,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="eq:std-NHx-b1">(A+E)\widetilde x=\widetilde\lambda\widetilde x\quad\mathrm{and}\quad\widetilde y^{\ast} (A+E)=\widetilde\lambda\widetilde y^{\ast} \tag{211}</div>
 
 对于 <span class="math-inline">E=E_2, E_{F}</span>，满足
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert E_2\Vert _2=\max\{\Vert r\Vert _2,\Vert s^{\ast}\Vert _2\}</div>
-</div>
-<br clear="ALL">
-<p></p> 
+ 
 以及
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert E_{F}\Vert _{F}=\sqrt{\Vert r\Vert^2_2 +\Vert s^{\ast...... - (\widetilde y^{\ast} A\widetilde x-\widetilde\lambda\widetilde y^{\ast}\widetilde x)^2}.</div>
-</div>
-<br clear="ALL">
-<p></p> 
+ 
 </li>
 </ol>
 参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>]。

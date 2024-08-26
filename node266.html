@@ -90,12 +90,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 Lanczos向量矩阵<span class="math-inline">V_j</span>不再是复正交的，而是<span class="math-inline">D_j = V_j^T V_j</span>成为一个复对称块对角矩阵，其中对角块的大小对应于提前看一步的长度。
 特别是，每当可以进行常规的Lanczos步（不带提前看一步）时，会出现一个<span class="math-inline">1 \times 1</span>的“块”，而每个大于<span class="math-inline">1</span>的“真实”块对应于一次提前看一步。
 此外，不再有<a href="node264.html#rwf:CBY">7.101</a>中的关系，而是有
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">D_j T_j = V_j^T A V_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这表明<span class="math-inline">D_j T_j</span>是复对称的。
 此外，矩阵<span class="math-inline">D_j T_j</span>是块三对角的，其对角块的大小与<span class="math-inline">D_j</span>相同。
 因此，在提前看一步的情况下，不再解决标准的特征值问题<a href="node264.html#rwf:CBZ">7.100</a>，而是可以解决等价的复对称广义特征值问题

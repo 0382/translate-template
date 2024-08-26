@@ -85,25 +85,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 范德蒙矩阵：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">V = \begin{bmatrix}1 & 1 & \ldots & 1 \\x_1 & x_2 & \ldots......ddots & \\x_1^{n-1} & x_2^{n-1} & \ldots & x_n^{n-1} \end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 托普利茨矩阵：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T = \begin{bmatrix}t_0 & t_{-1} & \ldots &t_{2-n}& t_{1-n} \...... & t_{-1} \\t_{n-1 } & t_{n-2 } & \ldots & t_1 & t_0 \end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 汉克尔矩阵： 
@@ -119,14 +109,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 这些矩阵及其逆矩阵可以以<span class="math-inline">O(n\log^k n)</span>时间复杂度与向量相乘，其中<span class="math-inline">0 \leq k \leq 2</span>，而不是<span class="math-inline">O(n^2)</span>或<span class="math-inline">O(n^3)</span>时间，具体取决于结构。这对于使用迭代求解器处理这些矩阵特别有用。迭代求解器在求解形如<span class="math-inline">(A+B)x=b</span>的系统时也很有用，其中<span class="math-inline">A</span>和<span class="math-inline">B</span>都是结构化的但属于不同的结构类别，或者如果<span class="math-inline">A</span>是结构化的而<span class="math-inline">B</span>是带状或稀疏的等。迭代方法在求解块系统时也很有用，当块是结构化矩阵但属于不同的结构类别，某些块也可能是稀疏的。例如，乘积
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\begin{bmatrix}A & B \\C & 0 \end{bmatrix}\begin{bmatrix}x \\ y \end{bmatrix} =\begin{bmatrix}Ax+By \\ Cx \end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">A</span>是对角的，<span class="math-inline">B</span>和<span class="math-inline">C</span>是托普利茨矩阵，可以在<span class="math-inline">O(n\log n)</span>时间内形成。
 
 <p>
@@ -134,14 +119,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
  href="node421.html#gool:94a">196</a>,<a
  href="node421.html#gool:94b">195</a>]。类似范德蒙矩阵及其逆矩阵也是如此，其中“-like”矩阵的定义见第&#167;<a href="node389.html#sec:DirectStructuredSolvers">10.3.4</a>节。托普利茨矩阵及其类似矩阵的矩阵-向量乘法使用快速傅里叶变换（FFT）需要<span class="math-inline">O(n\log n)</span>时间[<a
  href="node421.html#golo96">198</a>]。柯西矩阵-向量乘积<span class="math-inline">Cz</span>相当于在<span class="math-inline">n</span>个不同点<span class="math-inline">x_1,x_2,\ldots,x_n</span>上评估函数
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Phi(w)=\sum_{i=1}^n \frac{-z_i}{y_i-w}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 可以通过使用快速多极方法在<span class="math-inline">O(n)</span>时间内完成[<a
  href="node421.html#cagrro88">76</a>,<a
  href="node421.html#grro87">205</a>]。
@@ -154,23 +134,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 循环矩阵是一种特殊的托普利茨矩阵，形式为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">C_n = \begin{bmatrix}a_0 & a_{-1} & \ldots &a_{2-n}& a_{1-n}......& a_{-1} \\a_{n-1 } & a_{n-2 } & \ldots & a_1 & a_0 \end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
-其性质为<span class="math-inline">a_{-k}=a_{n-k}</span>，对于<span class="math-inline">1\le k \le n-1</span>。循环矩阵通过FFT对角化，即
-<br><p></p>
-<div align="CENTER">
 
+其性质为<span class="math-inline">a_{-k}=a_{n-k}</span>，对于<span class="math-inline">1\le k \le n-1</span>。循环矩阵通过FFT对角化，即
 
 <div class="math-display">C_n=F_n^* \cdot \diag(F_n a) \cdot F_n,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">a=[a_0,a_1,\ldots,a_n]</span>，<span class="math-inline">F_n</span>是傅里叶矩阵
 
 <span class="math-inline">F_n(j,k) = \frac{1}{\sqrt{n}} e^{-(j-1)(k-1)2 \pi \sqrt{-1}/n}</span>。众所周知，<span class="math-inline">F_n</span>是酉矩阵，乘积<span class="math-inline">F_n x</span>可以在<span class="math-inline">O(n\log n)</span>时间内形成[<a
@@ -186,32 +156,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 现在，如果<span class="math-inline">T_n</span>是一个托普利茨矩阵
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_n = \begin{bmatrix}t_0 & t_{-1} & \ldots &t_{2-n}& t_{1-n}...... & t_{-1} \\t_{n-1 } & t_{n-2 } & \ldots & t_1 & t_0 \end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
-那么乘积<span class="math-inline">T_nx</span>可以通过首先将<span class="math-inline">T_n</span>嵌入到一个<span class="math-inline">2n\times 2n</span>循环矩阵<span class="math-inline">C_{2n}</span>中，在<span class="math-inline">O(n\log n)</span>时间内计算，因为
-<br><p></p>
-<div align="CENTER">
 
+那么乘积<span class="math-inline">T_nx</span>可以通过首先将<span class="math-inline">T_n</span>嵌入到一个<span class="math-inline">2n\times 2n</span>循环矩阵<span class="math-inline">C_{2n}</span>中，在<span class="math-inline">O(n\log n)</span>时间内计算，因为
 
 <div class="math-display">C_{2n} \cdot\begin{bmatrix}y\\ 0\end{bmatrix}\equiv\begin{bmatrix}T_......\cdot\begin{bmatrix}y\\ 0\end{bmatrix}= \begin{bmatrix}T_ny\\ B_n y\end{bmatrix}</div>
-</div>
-<br clear="ALL">
-<p></p>
-并且
-<br><p></p>
-<div align="CENTER">
 
+并且
 
 <div class="math-display">B_n = \begin{bmatrix}0 & t_{n-1} & \ldots & t_2 & t_1 \\t......ts & t_{n-1} \\t_{-1} & t_{-2} & \ldots & t_{1-n}& 0 \end{bmatrix}.</div>
-</div>
-<br clear="ALL">
-<p></p> 
+ 
 
 <p>
 <hr>

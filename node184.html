@@ -79,12 +79,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 这是关于确定矩阵对的一般情况，现在<span class="math-inline">B</span>可能是奇异的。为了能够处理无穷大的特征值，通常的做法[<a
  href="node421.html#stsu90">425</a>]是引入一个齐次表示法
 通过一对非零数<span class="math-inline">(\alpha,\beta)</span>来表示特征值<span class="math-inline">\lambda</span>：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\lambda\equiv\alpha/\beta, \quad\quad \vert\alpha\vert^2+\vert\beta\vert^2&gt;0.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 当<span class="math-inline">\beta = 0</span>时，这样的对表示特征值<span class="math-inline">\infty</span>，这种情况发生在<span class="math-inline">B</span>是奇异矩阵时。
 这种表示显然不是唯一的，因为<span class="math-inline">(\xi\alpha,\xi\beta)</span>
 对于任何<span class="math-inline">\xi\ne 0</span>都表示相同的比率，因此也是相同的特征值。所以实际上一对<span class="math-inline">(\alpha,\beta)</span>是从一组给出相同比率的对中选出的代表。
@@ -94,12 +91,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="eq:chordal-defn">\chi(\lambda,\widetilde\lambda)\equiv\chi((\alpha, \beta),(\widetilde\alpha, \widetilde\beta))=\frac{\vert\alpha\widetilde\beta-\beta\widetilde\alpha\vert}{\sqrt{1 + \vert\lambda\vert^2} \sqrt{1 + \vert\widetilde\lambda\vert^2}}. \tag{99}</div>
 
 一个等价的定义是关于厄米矩阵对<span class="math-inline">\{A,B\}</span>是确定对的，即<em>克劳福德数</em> <a name="18282"></a>
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\gamma(A,B)\equiv\min_{\Vert x\Vert _2=1}\sqrt{ (x^*Ax)^2+(x^*Bx)^2 } &gt; 0.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 可以证明[<a
  href="node421.html#stsu90">425</a>]，如果<span class="math-inline">\{A,B\}</span>是一个确定对，那么
 <ul>

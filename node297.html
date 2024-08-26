@@ -82,21 +82,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 确定矩阵束的所有特征值都是实数，但一个不定矩阵束可能具有复数特征值。例如，当
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">A = \left[\begin{array}{cc}0&10\\ 10&20\end{array}\right],\quad B = \left[\begin{array}{cc}-1&0\\ 0&10\end{array}\right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 矩阵对 <span class="math-inline">\{A,B\}</span> 的特征值是复共轭对 <span class="math-inline">1\pm 3i</span>。与确定情况进一步的区别在于，不定矩阵束可能没有完整的特征向量集。例如，考虑矩阵束
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\left[\begin{array}{cc}0&1\\ 1&2\end{array}\right]-\lambda\left[\begin{array}{cc}0&1\\ 1&1\end{array}\right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 它有一个特征值 <span class="math-inline">\lambda = 1</span>（重数为2），并且只有一个特征向量 <span class="math-inline">x = [{1 \atop 0}]</span>。
 
 <p>
@@ -104,61 +96,37 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 当 <span class="math-inline">B</span> 是不定且非奇异的，并且如果 <span class="math-inline">B^{-1}A</span> 没有缺陷（即没有缺失特征向量），我们可以找到完整的特征向量集 <span class="math-inline">X</span>。方程 <span class="math-inline">AX = BX \Lambda</span> 仍然成立，并且可以选择特征向量使得 <span class="math-inline">X^TBX=J</span>，其中 <span class="math-inline">J</span> 是对角矩阵，对角线上有 <span class="math-inline">1</span> 和 <span class="math-inline">-1</span>（注意这是转置，而不是共轭转置，即使某些向量可能是复数）。<span class="math-inline">B</span> 内积 <span class="math-inline">(x,y)_B</span> 是一个不定内积或伪内积，<span class="math-inline">(x,x)_B</span> 可用于归一化目的。与正定情况不同，存在一组向量具有伪长度零（由 <span class="math-inline">(x,x)_B</span> 测量）。事实上，一个特征向量 <span class="math-inline">x</span> 可能满足 <span class="math-inline">x^TAx=x^TBx=0</span>。这意味着瑞利商
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\rho = \frac{x^TAx}{x^TBx}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 是未定义的。这种现象由对角矩阵
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">A = {\rm diag}(-1,1,1), \quad B = {\rm diag}(1,1,-1)</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 说明。向量 <span class="math-inline">x = \left[ \begin{array}{ccc}1 & 0 & 1\end{array} \right]^T</span> 是矩阵对 <span class="math-inline">\{A,B\}</span> 对应于重特征值 <span class="math-inline">\lambda = -1</span> 的特征向量，但 <span class="math-inline">x^TAx=x^TBx=0</span>。
 
 <p>
 确定情况和不定情况之间的类比可以进一步展开。当 <span class="math-inline">B</span> 是正定矩阵时，<span class="math-inline">\tilde{u}</span> 是近似特征向量，<span class="math-inline">\tilde{\lambda}</span> 是近似特征值，我们有标准的残差界：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _{B^{-1}}}{\Vert\tilde{u}\Vert _B},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中 <span class="math-inline">\Vert\cdot \Vert _{B^{-1}}</span> 是关于 <span class="math-inline">B^{-1}</span> 的范数，即
 
 <span class="math-inline">\Vert x \Vert _{B^{-1}}=(x^{\ast}B^{-1}x)^{1/2}</span>（类似地，其他范数也是如此）。另见第&#167;<a href="node177.html#sec:gsym_pert">5.7</a>节。当 <span class="math-inline">B</span> 是不定且非奇异的，<span class="math-inline">X^TBX=J</span>，且 <span class="math-inline">B^{-1}A</span> 没有缺陷时，可以证明
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _{\bar{X}X^{T}}}{\Vert\tilde{u}\Vert _{(XX^{\ast})^{-1}}};</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 注意在确定情况下 <span class="math-inline">B^{-1}=XX^{\ast}</span>。类似的界由
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\vert\lambda-\tilde{\lambda}\vert \le \frac{\Vert(A-\tilde{\lambda} B)\tilde{u}\Vert _2......t _2}\Vert B^{-1}\Vert _2\Vert X\Vert _2\Vert X^{-1}\Vert _2.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 即使这些界不可计算，它们也表明小的残差是好的。当 <span class="math-inline">B</span> 是奇异的，有类似的界；参见[<a href="node421.html#eric86">161</a>]。
 
 <p>
 如果 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 都是奇异的，或者接近奇异的，可能会出现更严重的问题。假设存在一个非零向量 <span class="math-inline">z</span> 使得 <span class="math-inline">Az=Bz=0</span>；那么任何复数 <span class="math-inline">\lambda</span> 都是一个特征值。一个更一般的情况如下例所示：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">A=\left[\begin{array}{ccc}1 & 0 & 0\\0 & -1 & 0\\0 & 0 & 0\end{array}\right],\quad B=\left[\begin{array}{ccc}1 & 0 & 1\\0 & -1 & 1\\1 & 1 & 0\end{array}\right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 特征多项式 <span class="math-inline">\det (A-\lambda B)</span> 恒等于零，因此任何复数都是特征值；我们有一个奇异矩阵束。矩阵 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 的零空间是一维的，分别由 <span class="math-inline">z_a=[0~0~1]^T</span> 和 <span class="math-inline">z_b=[-1~1~1]^T</span> 张成。注意零空间之间的交集只是零向量。问题的奇异性意味着 <span class="math-inline">z_a^TBz_a=0</span>（且 <span class="math-inline">z_b^TAz_b=0</span>）。要使用数值方法解决奇异问题，必须消除奇异性。直接攻击原始问题是徒劳的，正如通过扰动 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 可以看到的那样。设 <span class="math-inline">a_{3,3}=\epsilon</span> 并将 <span class="math-inline">\delta</span> 加到 <span class="math-inline">b_{1,1}</span>，则
 
 <span class="math-inline">\det (A-\lambda B)=\delta\lambda^3+\epsilon(\lambda-1)(\lambda(1+\delta)-1)</span>。

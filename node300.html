@@ -83,21 +83,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 当<span class="math-inline">B</span>奇异时，<span class="math-inline">\{A,B\}</span>具有无穷大特征值；对应无穷大特征值的特征向量位于<span class="math-inline">B</span>的零空间中，而对应感兴趣特征值（即有限特征值）的特征向量则属于<span class="math-inline">H^{-1} B</span>的值域。考虑以下示例：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">A=\left[\begin{array}{cc}\alpha & \beta\\\beta & \gamma\end{array}\right], \quad B=\left[\begin{array}{cc}1 & 0 \\0 & 0\end{array}\right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 于是
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">H^{-1} B = (A-\sigma B)^{-1}B=\frac{1}{\delta}\left[\begin{array}{cc}\gamma & 0\\-\beta & 0\end{array}\right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">\delta = (\alpha-\sigma)\gamma-\beta^2</span>。<span class="math-inline">H^{-1} B</span>的感兴趣特征值为<span class="math-inline">\gamma/\delta</span>，相应的特征向量为
 
 <span class="math-inline">\onebytwo{\gamma}{-\beta}^T</span>（零特征值对应于原问题的无穷大特征值）。
@@ -113,13 +105,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 然而，在有限精度算术中，仅预处理初始向量<span class="math-inline">q</span>可能不足以确保里兹向量位于<span class="math-inline">H^{-1} B</span>的值域内。随着兰索斯迭代的进行，舍入误差导致兰索斯向量在<span class="math-inline">B</span>的零空间中获得不需要的分量。尽管可以通过[<a href="node421.html#npej87">340</a>]中推导的廉价递归来监控这些分量的大小，但无法廉价地从兰索斯向量中消除这些分量。幸运的是，有一种简单的后处理方案可以清除位于<span class="math-inline">B</span>零空间中的里兹向量的不期望分量。其思路是用<span class="math-inline">H^{-1}Bx_i^{(j)}</span>的倍数替换里兹向量<span class="math-inline">{x}_i^{(j)}</span>，显然这属于<span class="math-inline">H^{-1} B</span>的值域。实际上，无需显式计算向量<span class="math-inline">H^{-1}Bx_i^{(j)}</span>；我们可以利用兰索斯过程中现成的量来计算与<span class="math-inline">H^{-1}B {x}_i^{(j)}</span>平行的向量。由方程(<a href="node298.html#RightResid">8.23</a>)可知
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">H^{-1}B{x}_i^{(j)}= \theta_i^{(j)} {x}_i^{(j)} +\gamma_i^{(j)}q_{j+1}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此，可以通过简单地用<span class="math-inline">q_{j+1}</span>的倍数更新<span class="math-inline">{x}_i^{(j)}</span>来廉价计算净化的里兹向量，
 
 <span class="math-inline">(1/\theta_i^{(j)})H^{-1}B{x}_i^{(j)},</span>

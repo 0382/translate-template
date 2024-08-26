@@ -78,14 +78,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h4>
 在某些应用中，<span class="math-inline">B</span>矩阵是厄米正定且良态的。
 在这种情况下，建议首先计算稀疏的Cholesky分解
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">B=LL^{\ast},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">L</span>是一个下三角矩阵；详见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节。
 等价的标准特征值问题是
 
@@ -96,23 +91,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\tilde{y} = L^{\ast} y</span>。
 如同反演B方法，类似<span class="math-inline">L^{-1} AL^{-\ast}</span>的矩阵不应显式计算，尤其是因为它们通常不会保持稀疏性。
 对于标准特征值问题的迭代方法应用，我们只需高效地计算矩阵向量乘积，例如
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">r = (L^{-1} AL^{-\ast})q</div>
-</div>
-<br clear="ALL">
-<p></p>
-或
-<br><p></p>
-<div align="CENTER">
 
+或
 
 <div class="math-display">s = (L^{-1} A^{\ast} L^{-\ast}) p,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">q</span>和<span class="math-inline">p</span>是给定的向量。
 实际上，向量<span class="math-inline">r = (L^{-1} AL^{-\ast})q</span>可以通过以下三个步骤形成：
 

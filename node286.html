@@ -83,12 +83,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="zb:snep4">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast}, \tag{219}</div>
 
 其中
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">C = (A - \sigma B)^{-1} B, \quad\mu = \frac{1}{\lambda - \sigma}, \quad \mathrm{且} \quad z= (A - \sigma B)^{\ast} y.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们看到，问题(<a href="node281.html#eq:gnsym">8.1</a>)中接近位移<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda</span>被映射为简化标准特征值问题(<a href="node286.html#zb:snep4">8.6</a>)的外部特征值，即最大幅值的特征值，而这些特征值正是迭代方法首先能够良好近似的特征值。
 
 <p>
@@ -96,19 +93,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对于简化标准特征值问题(<a href="node286.html#zb:snep4">8.6</a>)的迭代方法应用，需要计算矩阵-向量乘积
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">r = C q = \left( (A - \sigma B)^{-1} B \right) q</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 或
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">s = C^{\ast} p = \left( (A - \sigma B)^{-1} B \right)^{\ast} p</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 对于给定的向量<span class="math-inline">q</span>和<span class="math-inline">p</span>。为了高效计算，设
 
 <div class="math-display" id="zb:ablufact">A - \sigma B = {\mathcal L} {\mathcal U} \tag{220}</div>

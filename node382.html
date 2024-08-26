@@ -81,14 +81,9 @@ CRS格式矩阵-向量乘积
 
 <p>
 使用CRS格式计算矩阵-向量乘积 <span class="math-inline">y=Ax</span> 可以按常规方式表示：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">y_i=\sum_j a_{i,j}x_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因为这会遍历矩阵 <span class="math-inline">A</span> 的行。对于一个 <span class="math-inline">n \times n</span> 的矩阵 <span class="math-inline">A</span>，矩阵-向量乘法由以下公式给出：
 <div align="CENTER">
 </div>
@@ -105,23 +100,13 @@ CRS格式矩阵-向量乘积
 
 <p>
 对于转置乘积 <span class="math-inline">y=A^Tx</span>，我们不能使用以下公式
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">y_i=\sum_j (A^T)_{i,j}x_j=\sum_j a_{j,i}x_j,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因为这暗示着遍历矩阵的列，对于以CRS格式存储的矩阵来说，这是一个极其低效的操作。因此，我们切换索引为
-        <br><p></p>
-<div align="CENTER">
-
-
+        
 <div class="math-display">\hbox{对于所有 <span class="math-inline">j</span>，执行对于所有 <span class="math-inline">i</span>：}\qquad y_i\leftarrow y_i + a_{j,i}x_j. </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 涉及 <span class="math-inline">A^T</span> 的矩阵-向量乘法随后由以下公式给出：
 
    for i = 1, n

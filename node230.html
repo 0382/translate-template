@@ -83,34 +83,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 我们将使用 (<a href="node227.html#prgform">7.21</a>) 来清除一个不需要但已收敛的 Ritz 值。
 在这种情况下，需要一个左特征向量 <span class="math-inline">y</span>，满足
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">y^*h = \theta y^*, \ \ \Vert y\Vert = 1.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 现在，当我们应用
 <span class="math-inline">AVQ = VQ (Q^*H Q) + f e_k^* Q </span> 时，我们得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A [v_1 , V_2] = [v_1 , V_2] = \left[\ba{cc}\theta & 0 \\h & H_2\ea\right]+ f (\eta, \tau e_{k-1}^*),</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中 <span class="math-inline">H_2</span> 是上三角海森堡矩阵。这里，<span class="math-inline">\eta = e_k^*y</span> 如前所述，但没有要求 <span class="math-inline">\eta</span> 必须很小。所需的清除操作仅仅是丢弃该方程两边的第一列。
 然后我们得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A V_2 = V_2 H_2 + f\tau e_{k-1}^*.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 除了可接受的舍入误差水平外，通过此清除过程不会引入其他误差。
 此外，没有要求 <span class="math-inline">y</span> 必须是 <span class="math-inline">H</span> 的精确左特征向量。只需要
 残差

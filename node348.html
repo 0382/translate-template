@@ -84,14 +84,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 现在假设Procrustes问题中的<span class="math-inline">B</span>块随<span class="math-inline">Y</span>变化。此外，假设<span class="math-inline">B(Y)</span>是与<span class="math-inline">Y^*AY</span>最接近的阶梯形式；即，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">B(Y) = \left[ \begin{array}{ccc}\lambda_1 I & * & * \cr0 & \lambda_2 I & * \cr0 & 0 & \dots\end{array}\right]</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 对于固定的块大小，
 其中*元素是<span class="math-inline">Y^*AY</span>的相应矩阵元素，而<span class="math-inline">\lambda_i I</span>块要么固定，要么由某种启发式方法确定，例如，取它们在<span class="math-inline">Y^*AY</span>中替代块的平均迹。然后，最小化<span class="math-inline">\vert\vert AY-YB(Y)\vert\vert _F</span>找到作为特定Jordan结构的最近矩阵，其中结构由块大小决定，特征值为<span class="math-inline">\lambda_i</span>。
 当<span class="math-inline">\lambda_i</span>固定时，我们称之为<em>轨道</em>问题，而当<span class="math-inline">\lambda_i</span>由给定的启发式方法选择时，我们称之为<em>束</em>问题。
@@ -101,14 +96,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 令人惊讶的是，<span class="math-inline">F(Y)</span>的微分形式与Procrustes问题的<span class="math-inline">F(Y)</span>相同
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">dF(Y) = A^*(AY-YB(Y))-(AY-YB(Y))B(Y)^*.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这是因为
 
 <span class="math-inline">\tr( -(AY-YB(Y))^*Y \dot{B} ) = \tr( (B(Y)-Y^*AY)^* \dot{B}) = 0</span>
@@ -118,14 +108,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 相比之下，二阶导数的形式更为复杂，因为<span class="math-inline">B</span>现在依赖于<span class="math-inline">Y</span>：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} =\frac{d}{dt} dF_{Proc}(Y(......rt _{t=0}-A^*Y\dot{B}-AY \dot{B}^*+YB \dot{B}^*+Y \dot{B} B^*,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中
 <span class="math-inline">\dot{Y}(0) = H</span>，
 <span class="math-inline">dF_{\rm Proc}</span>只是Procrustes（<span class="math-inline">B</span>常数）二阶导数部分的简写，而

@@ -122,40 +122,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一种更复杂的方法是首先以某种方式将<span class="math-inline">Y+\epsilon H</span>处的梯度移动到<span class="math-inline">Y</span>，使其以平行方式从<span class="math-inline">Y+\epsilon H</span>翻译到<span class="math-inline">Y</span>，然后在相同的切空间中比较这两个梯度。可以检查，对于<span class="math-inline">V \in T_{Y+\epsilon H}(\mathrm{Stief}(n,k))</span>，规则
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">V \rightarrow V + \epsilon \Gamma(V,H),</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">\Gamma(V,H)</span>是Levi-Civita联络，将<span class="math-inline">V</span>转换为<span class="math-inline">T_{Y}(\mathrm{Stief}(n,k))</span>的一个元素，并保留内积信息（至<span class="math-inline">\epsilon</span>的一阶）。这是可以在通常文献中找到的标准平行移动规则（[80,459,273,222]，以及其他）。
 
 <p>
 使用这个规则来比较相邻向量，然后有以下规则来取向量场的导数：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">D_H G = \frac{d}{ds} G(Y+sH) \vert _{s=0} + \Gamma(G,H),</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">G</span>是任何向量场（但我们只对梯度场的导数感兴趣）。这是软件中<code>dgrad</code>实现的函数。
 
 <p>
 在无约束最小化中，梯度<span class="math-inline">g = \nabla f</span>沿向量<span class="math-inline">\vec{h}</span>的二阶导数是Hessian
 
 <span class="math-inline">[\frac{\partial^2 f}{\partial x_i \partial x_j}]</span>乘以<span class="math-inline">\vec{h}</span>。协变地，我们有类似的规则，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left[\frac{\partial^2 f}{\partial x_i \partial x_j} \right] \vec{h} =(\vec{h} \cdot \nabla) g\sim D_H G.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 <hr><!--Navigation Panel-->

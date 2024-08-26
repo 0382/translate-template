@@ -95,14 +95,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="sec51:eq1">T=U^\ast A U. \tag{119}</div>
 
 矩阵 <span class="math-inline">T</span> 称为 <span class="math-inline">A</span> 的<em>舒尔形式</em>。<span class="math-inline">A</span> 的特征值出现在 <span class="math-inline">T</span> 的对角线上。此外，矩阵 <span class="math-inline">U</span> 可以正交变换，使得 <span class="math-inline">A</span> 的特征值按预定顺序出现在 <span class="math-inline">R</span> 的对角线上。如果 <span class="math-inline">z</span> 是 <span class="math-inline">R</span> 对应于特征值 <span class="math-inline">\lambda</span> 的特征向量，即 <span class="math-inline">Tz=\lambda z</span>，则有
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A(Uz)=\lambda (Uz),</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此 <span class="math-inline">Uz</span> 是 <span class="math-inline">A</span> 对应于特征向量 <span class="math-inline">\lambda</span> 的特征向量。
 
 <p>
@@ -125,14 +120,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 和第<a href="node235.html#sec:blockarnoldi">7.7</a>节。
 现代子空间迭代方法试图构建一个富含对应于所需特征值的特征向量的子空间。实际上，它们可以被解释为保留了幂方法中生成的多个向量。相对于受限维度的子空间的基，它们通常将矩阵约简为更易处理的形式。在Arnoldi方法中，从一个初始猜测 <span class="math-inline">v</span> 开始，生成一个维度为 <span class="math-inline">m</span> 的<em>Krylov子空间</em>的正交基：
 </i>
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{\mathcal K}^m(A;v) \equiv \mathrm{span}\{v, Av, A^2v, \ldots , A^{m-1}v \}.</div>
-</div>
-<br clear="ALL">
-<p></p><i>
+<i>
 （与幂方法一样，也可以使用移位逆算子 <span class="math-inline">(A - \sigma I)^{-1}</span>。）
 </i>
 <p>

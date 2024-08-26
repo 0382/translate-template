@@ -85,12 +85,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对于一般规则矩阵对<span class="math-inline">\{A,B\}</span>的情况，比第<a href="node275.html#sec:errbds_nsym">7.13</a>节（第<a href="node275.html#sec:errbds_nsym"><button class="crossref"></button></a>页）讨论的标准非厄米特征值问题(NHEP)更为复杂，特别是当<span class="math-inline">B</span>为奇异矩阵时，特征多项式<span class="math-inline">\det (A-\lambda B)</span>的次数不再等于矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>的维度<span class="math-inline">n</span>。即使<span class="math-inline">B</span>在数学上非奇异但接近奇异，尝试将其转换为<span class="math-inline">B^{-1}A</span>的标准特征值问题时，可能会出现巨大的特征值，从而导致数值不稳定性。为了涵盖所有可能性，提出了用非零数对<span class="math-inline">(\alpha,\beta)</span>来表示特征值<span class="math-inline">\lambda</span>的齐次表示法：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\lambda\equiv\alpha/\beta, \quad\quad \vert\alpha\vert^2+\vert\beta\vert^2&gt;0.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 当<span class="math-inline">\beta = 0</span>时，这样的数对表示无穷大特征值，这种情况发生在<span class="math-inline">B</span>为奇异矩阵时。这种表示显然不是唯一的，因为对于任意<span class="math-inline">\xi\ne 0</span>，<span class="math-inline">(\xi\alpha,\xi\beta)</span>表示相同的比值，因此代表相同的特征值。实际上，数对<span class="math-inline">(\alpha,\beta)</span>是从给出相同比值的一类数对中选出的一个代表。
 <br>
 <br>
@@ -99,12 +96,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 但是，在特征值表示非唯一性的情况下，我们如何衡量两个特征值之间的差异呢？我们采用弦距度量<a name="37834"></a>来衡量<span class="math-inline">\lambda = \alpha/\beta</span>和<span class="math-inline">\widetilde\lambda=\widetilde\alpha/\widetilde\beta</span>之间的距离，其弦距定义为：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\chi(\lambda,\widetilde\lambda) = \chi((\alpha, \beta),(\widetilde\alpha......1 + \vert\lambda\vert^2} \sqrt{1 + \vert\widetilde\lambda\vert^2}}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 现在，我们准备讨论评估计算近似值精度的议题。
 
 <p>

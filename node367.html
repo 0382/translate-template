@@ -93,13 +93,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 然而，如果切空间具有内积，我们可以找到一种有用的方式将<span class="math-inline">df</span>唯一地与切向量对应起来。设<span class="math-inline">ip(H_1,H_2)</span>是
 <span class="math-inline">\mathrm{Stief}(n,k)</span>在<span class="math-inline">Y</span>处的切空间上的对称非退化双线性形式。然后可以通过以下方式隐式定义梯度<span class="math-inline">G</span>：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">ip(G,H) = \tr ( H^* df) = D_H f.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 由于<span class="math-inline">ip</span>是非退化形式，这足以定义<span class="math-inline">G</span>。函数<code>tangent</code>执行从微分到切向量的投影（如图<a href="node367.html#gradientfig">9.7</a>所示）。这一操作由<code>grad</code>执行，以产生目标函数的梯度。
 
 <p>

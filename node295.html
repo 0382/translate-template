@@ -106,102 +106,52 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 将递归(<a href="node295.html#SI-Arnoldi">8.18</a>)重写为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">BV_j=(A-\sigma_1B)V_{j+1}H_{j+1,j}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
-在左侧添加一个矩阵，使得右侧的<span class="math-inline">\sigma_1</span>被新位移<span class="math-inline">\sigma_2</span>替换，
-<br><p></p>
-<div align="CENTER">
 
+在左侧添加一个矩阵，使得右侧的<span class="math-inline">\sigma_1</span>被新位移<span class="math-inline">\sigma_2</span>替换，
 
 <div class="math-display">(\sigma_1-\sigma_2)BV_{j+1}H_{j+1,j}+BV_j=(A-\sigma_2B)V_{j+1}H_{j+1,j}\;,</div>
-</div>
-<br clear="ALL">
-<p></p>
-并注意到<span class="math-inline">B</span>是左侧唯一的大矩阵，
-<br><p></p>
-<div align="CENTER">
 
+并注意到<span class="math-inline">B</span>是左侧唯一的大矩阵，
 
 <div class="math-display">BV_{j+1}(I_{j+1,j}+(\sigma_1-\sigma_2)H_{j+1,j})=(A-\sigma_2B)V_{j+1}H_{j+1,j}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
-左侧的矩阵<span class="math-inline">K_{j+1,j}=I_{j+1,j}+(\sigma_1-\sigma_2)H_{j+1,j}</span>是梯形的，与<span class="math-inline">H_{j+1,j}</span>具有相同的非零模式，我们可以通过预乘<span class="math-inline">(A-\sigma_2B)^{-1}</span>回到类似于递归(<a href="node295.html#SI-Arnoldi">8.18</a>)的表达式，
-<br><p></p>
-<div align="CENTER">
 
+左侧的矩阵<span class="math-inline">K_{j+1,j}=I_{j+1,j}+(\sigma_1-\sigma_2)H_{j+1,j}</span>是梯形的，与<span class="math-inline">H_{j+1,j}</span>具有相同的非零模式，我们可以通过预乘<span class="math-inline">(A-\sigma_2B)^{-1}</span>回到类似于递归(<a href="node295.html#SI-Arnoldi">8.18</a>)的表达式，
 
 <div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}K_{j+1,j}=V_{j+1}H_{j+1,j}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 剩下的就是去掉左侧的因子<span class="math-inline">K_{j+1,j}</span>，这是通过以下方式完成的。对<span class="math-inline">K_{j+1,j}</span>进行QR分解并得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j+1}\left[\begin{array}{c}{R_{j,j}}\\ 0\end{array}\right]=V_{j+1}H_{j+1,j}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 从右侧乘以三角矩阵<span class="math-inline">R_{j,j}</span>的逆，我们知道如果海森堡矩阵是未简化的，它是非奇异的，
 
 <div class="math-display" id="VQ-rec">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}=V_{j+1}H_{j+1,j}R_{j,j}^{-1}\;. \tag{233}</div>
 
 引入新的正交基<span class="math-inline">V_{j+1}Q_{j+1,j+1}</span>，并注意到束(<a href="node295.html#albx">8.17</a>)在新的基下由全矩阵表示，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">L_{j+1,j}=Q_{j+1,j+1}^{\ast}H_{j+1,j}R_{j,j}^{-1},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们可以通过从底部向上应用Householder算法将这个<span class="math-inline">L_{j+1,j}</span>转换为梯形（上部海森堡）形式（参见[<a
  href="node421.html#ru98e">377</a>]），
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">L_{j+1,j}= \left[\begin{array}{cc}P_j & 0 \\ 0&1\end{array}\right]\tilde{H}_{j+1,j}P_j^{\ast}\;.</div>
-</div>
-<br clear="ALL">
-<p></p>
-从右侧乘以正交的<span class="math-inline">P_j</span>并得到
-<br><p></p>
-<div align="CENTER">
 
+从右侧乘以正交的<span class="math-inline">P_j</span>并得到
 
 <div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}P_j=V_{j+1}Q_{j+1}\left[\begin{array}{cc}P_j & 0 \\ 0& 1\end{array}\right]\tilde{H}_{j+1,j}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 或
- <br><p></p>
-<div align="CENTER">
-
-
+ 
 <div class="math-display">(A-\sigma_2B)^{-1}BW_{j}=W_{j+1}\tilde{H}_{j+1,j},</div>
-</div>
-<br clear="ALL">
-<p></p>
-一个带有新位移<span class="math-inline">\sigma_2</span>的Arnoldi递归(<a href="node295.html#SI-Arnoldi">8.18</a>)，新的正交基，
-<br><p></p>
-<div align="CENTER">
 
+一个带有新位移<span class="math-inline">\sigma_2</span>的Arnoldi递归(<a href="node295.html#SI-Arnoldi">8.18</a>)，新的正交基，
 
 <div class="math-display">W_{j+1}=V_{j+1}Q_{j+1,j+1}\left[\begin{array}{cc}P_j & 0 \\ 0& 1\end{array}\right]\;,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 和新的梯形（上部海森堡）矩阵<span class="math-inline">\tilde{H}_{j+1,j}</span>。
 
 <p>
@@ -209,14 +159,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在实际实现中，这与锁定、清除和隐式重启相结合。首先用第一个位移<span class="math-inline">\sigma_1</span>运行位移和反演Arnoldi。当<span class="math-inline">\sigma_1</span>周围适当数量的特征值收敛时，比如经过<span class="math-inline">m</span>步，锁定这些收敛的特征值并清除那些完全在感兴趣区域之外的特征值，留下一个<span class="math-inline">(j \leq m)</span>步的Arnoldi递归(<a href="node295.html#SI-Arnoldi">8.18</a>)。然后引入新的位移<span class="math-inline">\sigma_2</span>，并按照本节的描述获取新的基<span class="math-inline">W_{j+1}</span>，替换<span class="math-inline">V_{j+1}</span>。从新的位移开始，对这个新基的最后一个向量进行操作
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">r:=(A-\sigma_2B)^{-1}Bv_{j+1}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 并得到带有新位移<span class="math-inline">\sigma_2</span>的Arnoldi递归(<a href="node295.html#SI-Arnoldi">8.18</a>)中的下一个基向量<span class="math-inline">v_{j+2}</span>。继续直到我们在<span class="math-inline">\sigma_2</span>周围的特征值集合收敛，并重复新的位移过程，直到所有感兴趣的特征值都收敛或预定的频率范围内的所有位移都已使用。
 
 <p>

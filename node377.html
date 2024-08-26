@@ -85,33 +85,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 一种简化的JDS形式，称为ITPACK存储或普渡存储，可以描述如下。对于以下非对称矩阵，所有元素都向左移动：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left[\begin{array}{rrrrrr}10 & -3 & 0 & 1 & 0 & 0 \\0 ......\\6 & 7 & 5 & 4 \\9 & 13 \\5 & -1\end{array}\right]</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 之后，列被连续存储。所有行都在右侧用零填充，以使它们具有相同的长度。对应于矩阵元素数组val(:,:)，还存储了一个列索引数组col_ind(:,:)：
 
 <p>
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\vert......{\tt val}(:,4) & 0 & 0 & 0 & 4 & 0 & 0 \\ \hline\end{array},</div>
-</div>
-<br clear="ALL">
-<p></p>
-<br><p></p>
-<div align="CENTER">
 
 
 <div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\vert...... col\_ind}(:,4) & 0 & 0 & 0 & 6 & 0 & 0 \\ \hline\end{array}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 显然，这种结构中的填充零可能是一个缺点，特别是当矩阵的带宽变化很大时。因此，在CRS格式中，我们根据每行的非零元素数量按降序重新排序矩阵的行。压缩和置换的对角线随后存储在一个线性数组中。这种新的数据结构称为<em>锯齿对角线</em>。

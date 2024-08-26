@@ -95,12 +95,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 现在我们将描述广义特征值问题（<a href="node288.html#eq:JD7-GE">8.8</a>）的Jacobi-Davidson方法。从关系式（<a href="node288.html#eq:JD7-SCHUR">8.9</a>）我们得出
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\beta_i A q_i - \alpha_i B q_i \perp z_i,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这表明我们应该遵循Petrov-Galerkin条件来构建简化系统。在每一步中，近似特征向量<span class="math-inline">u</span>从搜索空间<span class="math-inline">\mathrm{span}(V)</span>中选择。我们要求残差<span class="math-inline">\eta Au - \zeta Bu</span>对某些精心选择的测试空间<span class="math-inline">\mathrm{span}(W)</span>正交：
 
 <div class="math-display" id="eq:JD7-pe">\eta \, A u -\zeta \, B u \perp \mathrm{span}(W). \tag{223}</div>
@@ -114,12 +111,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="eq:JD7-appschur">(S^L)^\ast ( W^\ast A V)S^R=T^A\quad\mathrm{and}\quad(S^L)^\ast ( W^\ast B V)S^R=T^B. \tag{225}</div>
 
 分解可以重新排序，使得<span class="math-inline">S^R</span>的第一列和<span class="math-inline">T^A</span>与<span class="math-inline">T^B</span>的<span class="math-inline">(1,1)</span>项表示所需的Petrov解[<a href="node421.html#fosv98">172</a>]。设<span class="math-inline">{s}\equiv s^R_1\equiv {S^R}e_1</span>和<span class="math-inline">\zeta\equiv T^A_{1,1}</span>，<span class="math-inline">\eta\equiv T^B_{1,1}</span>，定义与广义Petrov值<span class="math-inline">(\zeta,\eta)</span>相关的Petrov向量为<span class="math-inline">{u}\equiv V {s}</span>。在我们的算法中，我们将构建正交矩阵<span class="math-inline">V</span>和<span class="math-inline">W</span>，因此也有<span class="math-inline">\Vert{u}\Vert _2=1</span>。利用（<a href="node288.html#eq:JD7-appschur">8.12</a>）中的分解，我们构建了近似的局部广义舒尔形式（参见（<a href="node288.html#eq:JD7-SCHUR">8.9</a>））：<span class="math-inline"> V S^R</span>近似于<span class="math-inline">Q_k</span>，<span class="math-inline">W S^L</span>近似于相关的<span class="math-inline">Z_k</span>。由于<span class="math-inline">\mathrm{span}(Z_k)= \mathrm{span}(A Q_k)= \mathrm{span}(B Q_k)</span>（参见（<a href="node288.html#eq:JD7-SCHUR">8.9</a>）），这建议选择<span class="math-inline">W</span>使得<span class="math-inline">\mathrm{span}(W)</span>与<span class="math-inline">\mathrm{span}(\nu_0 A V+\mu_0 B V)</span>一致。通过权重<span class="math-inline">\nu_0</span>和<span class="math-inline">\mu_0</span>，我们可以影响Petrov值的收敛。如果我们希望近似特征对<span class="math-inline">\lambda</span>接近目标<span class="math-inline">\tau</span>，那么选择
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\nu_0=1/\sqrt{1+\vert\tau\vert^2}, \qquad \mu_0=-\tau \nu_0</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 非常有效[<a href="node421.html#fosv98">172</a>]，特别是当我们希望计算<span class="math-inline">A - \lambda B</span>的谱内部特征值时。我们称这种选择的Petrov近似为调和Petrov特征对。对于矩阵束<span class="math-inline">\eta A -\zeta B</span>，Jacobi-Davidson修正方程对于分量<span class="math-inline">{t}\perp u</span>变为
 
 <div class="math-display" id="eq:JD7-CE">\left( I- \frac{pp^\ast}{p^\ast p}\right)(\eta A-\zeta B)\left( I-uu^\ast\right) {t}=- r, \tag{226}</div>

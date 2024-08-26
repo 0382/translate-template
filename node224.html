@@ -94,44 +94,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在IRAM迭代的任何阶段，我们有
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A + E_o) V_k = V_k H_k + f_k e_k^*,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中<span class="math-inline">\Vert E_o\Vert \approx \Vert A\Vert\epsilon_M</span>。如果我们成功地使<span class="math-inline">\Vert f_k\Vert < \Vert A\Vert\epsilon_M</span>，那么
-<br><p></p>
-<div align="CENTER">
 
+其中<span class="math-inline">\Vert E_o\Vert \approx \Vert A\Vert\epsilon_M</span>。如果我们成功地使<span class="math-inline">\Vert f_k\Vert < \Vert A\Vert\epsilon_M</span>，那么
 
 <div class="math-display">(A + E) V_k = V_k H_k,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中<span class="math-inline">E = E_o + f_k (V_k e_k)^*</span>。如果<span class="math-inline">H_k Z_k = Z_k R_k</span>是<span class="math-inline">H_k</span>的舒尔分解，那么
-<br><p></p>
-<div align="CENTER">
 
+其中<span class="math-inline">E = E_o + f_k (V_k e_k)^*</span>。如果<span class="math-inline">H_k Z_k = Z_k R_k</span>是<span class="math-inline">H_k</span>的舒尔分解，那么
 
 <div class="math-display">(A + E) \hat{V}_k = \hat{V}_k R_k \ \ \mathrm{其中} \ \ \hat{V}_k = V_k Z_k</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 是一个附近矩阵<span class="math-inline">A+E</span>的精确部分舒尔分解。
 
 <p>
 更有可能的是，在某个阶段，<span class="math-inline">H_m</span>（<span class="math-inline">m = k+p</span>）的特征向量的最后一个分量很小，从而实现收敛。我们仍然有
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A + E_1) V_m = V_m H_m + f_m e_m^*,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">E_1</span>相对于<span class="math-inline">\Vert A\Vert</span>很小。如果<span class="math-inline">H_m y = y \theta</span>，其中<span class="math-inline">\eta = e_m^*y</span>很小（例如<span class="math-inline">\Vert f_m\Vert \vert\eta\vert < \epsilon_U \Vert H_m \Vert</span>），那么
 
 <a name="nonsymA:eq:evest"></a> (A + E) x = x ,
@@ -140,14 +120,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 通过使用我们将在第<a href="node226.html#sec:deflation">7.6.6</a>节中介绍的收缩技术，可以使用酉变换来获得关于一组<span class="math-inline">k</span>个收敛特征值的部分舒尔分解的后向稳定性声明。如果有<span class="math-inline">k</span>个<span class="math-inline">H_m</span>的特征值已经收敛，可以构造一个酉矩阵<span class="math-inline">Q</span>，使得<span class="math-inline">Q^* H_m Q</span>的前<span class="math-inline">k \times k</span>子矩阵<span class="math-inline">R_k</span>是上三角的，并且
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">( A + \hat{E}) \hat{V}_k = \hat{V}_k R_k , \ \mathrm{其中} \ \ \hat{V}_k = V_m Q,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">\hat{E}</span>相对于<span class="math-inline">\Vert A\Vert</span>很小。关于这一点的讨论在第<a href="node226.html#sec:deflation">7.6.6</a>节中给出，更多细节可以在[<a href="node421.html#sore98">420</a>]中找到。
 
 <p>

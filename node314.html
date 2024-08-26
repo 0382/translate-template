@@ -79,35 +79,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 为了完整性，我们考虑一个线性束<span class="math-inline">A - \lambda B</span>，其KCF中包含了所有不同类型的结构块：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{\rm diag}(L_0, L_2, J_1(0), J_3(0), J_1(\alpha), J_1(\beta), J_1(\gamma),N_1, N_3, 2L_0^T, L_1^T, L_2^T, L_3^T).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此，这个<span class="math-inline">24 \times 21</span>线性束的GUPTRI形式包含了所有类型的对角块，如(<a href="node312.html#eq.guptri1">8.34</a>)和(<a href="node312.html#eq.guptri_reg">8.35</a>)所示。由于<span class="math-inline">A - \lambda B</span>和<span class="math-inline">6\times 8</span>的例子具有相同的右奇异结构和零特征值的Jordan结构，它们也具有相同的<span class="math-inline">A_r - \lambda B_r</span>和<span class="math-inline">A_z - \lambda B_z</span>（见上文）。无穷特征值的Jordan结构（<span class="math-inline">A_i - \lambda B_i</span>）和左奇异结构（<span class="math-inline">A_l - \lambda B_l</span>）的GUPTRI形式如下：
 
 <p>
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A_{i} - \lambda B_{i} =\bmat{c\vert c\vert cc}{\bf z}& y ...... x}& {\bf x}\\ \hline0 & 0 & 0 & 0 \\0 & 0 & 0 & 0\end{bmatrix},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A_{l} - \lambda B_{l} =\bmat{c\vert cc\vert ccc}z & y & y......0 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 0 \\\end{bmatrix}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 由于这些形式是使用<span class="math-inline">LI</span>-阶梯化简计算的，块指标<span class="math-inline">n_i</span>和<span class="math-inline">r_i</span>从东南角开始计数。现在，<span class="math-inline">B_i</span>和<span class="math-inline">B_l</span>的超对角块具有满行秩，而<span class="math-inline">A_i</span>和<span class="math-inline">A_l</span>的对角块具有满列秩。下表总结了<span class="math-inline">LI</span>-、<span class="math-inline">L</span>-和<span class="math-inline">I</span>-阶梯形式的结构指标。
@@ -177,14 +162,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </table>
 </div>
 最后，对应于有限非零特征值<span class="math-inline">\alpha, \beta</span>和<span class="math-inline">\gamma</span>的GUPTRI形式中的块具有以下外观：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A_{f} - \lambda B_{f} =\begin{bmatrix}{\bf x}& x & x \\0 & ......{\bf x}& x & x \\0 & {\bf x}& x \\0 & 0 & {\bf x}\end{bmatrix}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 <span class="math-inline">A_f</span>和<span class="math-inline">B_f</span>中的对角元素是特征值对，其比率为<span class="math-inline">\alpha, \beta</span>和<span class="math-inline">\gamma</span>（顺序任意）。
 
 <p>

@@ -83,29 +83,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <br>
 第一种选择是在重启时将<span class="math-inline">v_1</span>取为近似特征向量的线性组合。例如，如果我们需要计算<span class="math-inline">p</span>个最右侧的特征向量，我们可以取
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\hat v_1 = \sum_{i=1}^p \rho_i \tilde u_i, </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中特征值按其实部的递减顺序编号。然后通过归一化<span class="math-inline">\hat v_1</span>得到向量<span class="math-inline">v_1</span>。系数<span class="math-inline">\rho_i</span>的最简单选择是取<span class="math-inline">\rho_i = 1, i=1,\ldots,p</span>。这种方法有几个缺点，其中最重要的是无法以系统的方式选择系数<span class="math-inline">\rho_i</span>。结果是对于难题，收敛性难以实现。
 
 <p>
 一个更可靠的替代方法是逐个计算特征对并使用收缩法。矩阵<span class="math-inline">A</span>可以通过逐步构建前<span class="math-inline">k</span>个舒尔向量来显式收缩。如果已经计算出不变子空间的前<span class="math-inline">k-1</span>个正交基<span class="math-inline">U_{k-1} = [u_1,\ldots,u_{k-1}]</span>，那么在计算特征值<span class="math-inline">\lambda_{k}</span>时，我们可以使用矩阵
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\tilde A = A - U_{k-1} \Sigma U_{k-1}^{\ast}, </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中<span class="math-inline">\Sigma = \diag(\sigma_i)</span>是一个位移的对角矩阵。<span class="math-inline">\tilde A</span>的特征值由两组组成。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值将位移至<span class="math-inline">\tilde \lambda_i = \lambda_i - \sigma_i</span>，而其余特征值保持不变。如果寻求具有最大实部的特征值，则选择位移使得<span class="math-inline">\lambda_k</span>成为<span class="math-inline">\tilde A</span>中具有最大实部的下一个特征值。也可以通过简单地投影出与由<span class="math-inline">U_{k-1}</span>张成的不变子空间相关的分量来进行收缩；这将导致操作矩阵
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\tilde A = A (I - U_{k-1} U_{k-1}^{\ast}).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 注意，如果<span class="math-inline">A U_{k-1} = U_{k-1} R_{k-1}</span>是与前<span class="math-inline">k-1</span>个里兹值相关的部分舒尔分解，那么<span class="math-inline">\tilde A = A - U_{k-1} R_{k-1} U_{k-1}^{\ast}</span>。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值现在都将移动到零。
 
 <p>
@@ -117,12 +108,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 可以证明，在精确算术中，下部<span class="math-inline">(2 \times 2)</span>块中的<span class="math-inline">(n-k) \times (n-k)</span>海森堡矩阵与应用于矩阵
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\tilde A = (I-U_{k-1} U_{k-1}^{\ast} ) A.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 的Arnoldi运行所得到的矩阵相同。因此，我们隐式地从<span class="math-inline">A</span>的范围中投影出已经计算出的不变子空间。
 
 <p>

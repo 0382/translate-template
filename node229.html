@@ -77,14 +77,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 锁定<span class="math-inline">\theta </span>。</a>
 </h4>
 首先讨论的是单个收敛的Ritz值的锁定。假设
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">Hy = y \theta, \ \ \Vert y\Vert = 1,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 且
 <span class="math-inline">e_k^* y = \eta</span>，其中
 <span class="math-inline"> \vert\eta \vert \le \epsilon_D \Vert H \Vert </span>。
@@ -93,28 +88,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 如果 <span class="math-inline">\theta </span> 是“需要的”，那么锁定 <span class="math-inline">\theta </span> 是可取的。然而，为了实现这一点，需要安排对当前Arnoldi分解进行变换，使其具有小的次对角线以隔离 <span class="math-inline">\theta </span>。这可以通过使用算法<a href="node227.html#fig:orthQ3">7.8</a>构建一个 <span class="math-inline">k \times k</span> 正交矩阵 <span class="math-inline">Q = Q(y)</span> 来完成：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">Q e_1 = y \ \ \mathrm{且} \ \e_k^* Q = ( \eta, \tau e_{k-1}^*),</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中
 <span class="math-inline">\eta^2 + \tau^2 = 1 </span>。
 
 <p>
 现在，当我们应用
 <span class="math-inline">AVQ = VQ (Q^*H Q) + f e_k^* Q </span>，我们得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A [v_1 , V_2] = [v_1 , V_2] \left[\ba{cc}\theta & h^* \\0 & H_2\ea\right]+ f (\eta, \tau e_{k-1}^*) .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 不幸的是，<span class="math-inline">H_2</span> 不是上三角海森堡形式。需要进一步的工作将其转换为海森堡形式，同时不干扰残余项 <span class="math-inline"> f (\eta, \tau e_{k-1}^*) </span> 的形式。我们需要构建一个正交矩阵 <span class="math-inline">U</span>，使得 <span class="math-inline">\widehat{H}_2 = U^*H_2U </span> 是上三角海森堡形式，且 <span class="math-inline">e_{k-1}^* U = e_{k-1}^*</span>。这可以通过Householder变换或算法<a href="node227.html#fig:orthQ3">7.8</a>中定义的变换的变体从最后一行向上工作来完成。以下MATLAB代码段展示了一种略低效的方法来获得这样的 <span class="math-inline">U</span>。
 
        rev = [k-1:-1:1];
@@ -138,14 +123,9 @@ H_2
 
 其中
 <span class="math-inline">[v_1 , V_2] = V Q</span> 且 <span class="math-inline">H_2</span> 是上三角海森堡形式。之后，所有后续的隐式重启都像
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A V_2 = V_2 H_2 + f\tau e_{k-1}^*.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 所有与隐式重启相关的后续正交变换都应用于 <span class="math-inline"> V_2 </span> 和
 
 <span class="math-inline">[{h^* \atop H_2}] </span>

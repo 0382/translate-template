@@ -136,95 +136,9 @@ fmin =
 其中<code>Y0</code>是必需的，可选参数包括（见表<a href="node345.html#argumentstable">9.1</a>）：
 
 <p>
-<br><p></p>
-<div align="CENTER">
-
-<a name="argumentstable"></a>
-<p>
-<br>
-<div align="CENTER">
-<a name="43340"></a>
-<table CELLPADDING=3 border="1">
-<caption><strong>表9.1:</strong>
-sg_min可选参数简表</caption>
-<tr><td align="LEFT">参数</td>
-<td align="LEFT">描述</td>
-</tr>
-<tr><td align="LEFT">rc</td>
-<td align="LEFT">{'real', 'complex' }</td>
-</tr>
-<tr><td align="LEFT">mode</td>
-<td align="LEFT">{'newton', 'dog', 'prcg', 'frcg' }</td>
-</tr>
-<tr><td align="LEFT">metric</td>
-<td align="LEFT">{'flat', 'euclidean',  'canonical' }</td>
-</tr>
-<tr><td align="LEFT">motion</td>
-<td align="LEFT">{'approximate', 'exact' }</td>
-</tr>
-<tr><td align="LEFT">verbose</td>
-<td align="LEFT">{'verbose', 'quiet'}</td>
-</tr>
-<tr><td align="LEFT">ftol</td>
-<td align="LEFT">首次收敛容差</td>
-</tr>
-<tr><td align="LEFT">gradtol</td>
-<td align="LEFT">第二次收敛容差</td>
-</tr>
-<tr><td align="LEFT">partition</td>
-<td align="LEFT"><span class="math-inline">p</span>的分区，指示<span class="math-inline">f</span>的对称性</td>
-</tr>
-</table>
-</div>
-</div>
-<br>
-
-<p>
-<dl>
-<dt><strong>rc</strong></dt>
-<dd>指定矩阵是否包含复数项。尽管大部分代码对此不敏感，但<code>rc</code>对于正确计算问题的维度至关重要。当省略时，<code>sg_min</code>根据<code>Y0</code>是否有非零虚部进行猜测。
-
-<p>
-</dd>
-<dt><strong>mode</strong></dt>
-<dd>选择将使用的优化方法。'newton'选择带有共轭梯度Hessian逆的牛顿法。'dog'选择插值最速下降和牛顿法步长的狗腿算法。'frcg'选择Fletcher-Reeves共轭梯度。最后，'prcg'选择Polak-Ribiere共轭梯度，其优点是不需要非常准确的Hessian（因此如果使用有限差分近似实现<code>ddF.m</code>，这是这些方法中最安全的）。虽然'newton'是默认值，但这并不意味着我们推荐它优于其他方法，对于某些问题，其他方法可能更准确且成本更低。
-
-<p>
-</dd>
-<dt><strong>metric</strong></dt>
-<dd>选择赋予约束表面的几何类型。这最终影响协变Hessian的定义。'flat'将无约束Hessian的结果投影到切空间上，而'euclidean'和'canonical'增加了特定于其几何的<em>连接</em>项。'euclidean'是默认值。
-
-<p>
-</dd>
-<dt><strong>motion</strong></dt>
-<dd>选择沿所选度量的测地线方程的解析解或计算成本较低的近似解进行线性运动（默认）。（对于'flat'度量，没有测地线方程，因此此参数在这种情况下无效。）
-
-<p>
-</dd>
-<dt><strong>verbose</strong></dt>
-<dd>确定函数在执行时是否显示每次迭代的报告。当此参数为'verbose'（默认）时，将显示数据并记录在全局<code>SGdata</code>中。当此参数为'quiet'时，不显示或记录收敛数据。
-
-<p>
-</dd>
-<dt><strong>gradtol和ftol</strong></dt>
-<dd>如果以下两个条件都满足，我们声明收敛：
-<br><code>grad/gradinit &lt; gradtol</code>（默认<code>1e-7</code>）或<code>(f-fold)/f &lt; ftol</code>（默认<code>1e-10</code>），
-其中<code>gradinit</code>是初始梯度大小，<code>fold</code>是上一次迭代中<span class="math-inline">F(Y)</span>的值。
-
-<p>
-</dd>
-<dt><strong>partition</strong></dt>
-<dd>是一个单元数组，其元素是表示<code>1:p</code>的不相交分区的索引向量。
-如果<span class="math-inline">F</span>没有对称性，则分区为<code>num2cell(1:p)</code>。
-如果<span class="math-inline">F(Y)=F(YQ)</span>对所有正交<span class="math-inline">Q</span>成立，则分区为<code>{1:p}</code>。
-如果<span class="math-inline">F</span>的对称性为<span class="math-inline">F(Y)=F(YQ)</span>，其中<span class="math-inline">Q</span>的稀疏结构为
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\left[\begin{array}{ccccc}\times & \times & & & \\\times & \times & & & \\& & \times & \times & \times \\\end{array} \right] . </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 用户可以同样指定<code>{3:5,1:2}</code>或<code>{[5 3 4],[2 1]}</code>作为分区；即，分区是一组集合。
 分区的目的是投影掉由于<span class="math-inline">F(Y)</span>的块对角正交对称性导致的Hessian的零空间。
 如果省略该参数，我们的代码将通过确定<span class="math-inline">F</span>的对称性（使用其<code>partition.m</code>函数）来选择分区。

@@ -82,14 +82,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 奇异矩阵束可能有也可能没有特征值。
 事实上，一般情况对应于一个没有特征值的奇异矩阵束。
 下面我们通过两个3×3的例子来说明这一点：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A_1 - \lambda B_1 = \left[ \begin{array}{c\vert c\vert c}1......line0 & 0 & 1\\0 & 0 & -\lambda \\\end{array} \right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 显然，
 <span class="math-inline">{\rm det}(A_1 - \lambda B_1) \equiv 0</span> 和
 
@@ -118,26 +113,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 奇异矩阵对的特征值问题比正则矩阵对要复杂得多。
 例如，考虑奇异矩阵对
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A = \left[ \begin{array}{cc}1 & 0 \\0 & 0 \\\end{array} \right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 它有一个有限特征值1和一个不确定特征值0/0
 （对应于奇异部分 <span class="math-inline">\mathrm{diag}(L_0, L_0^T)</span>）。
 为了看到特征值1和奇异部分都不能由数据很好地确定，考虑
 稍微扰动的问题
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A' = \left[ \begin{array}{cc}1 & \epsilon_1 \\\epsilon_2 & 0 \\\end{array} \right],</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中 <span class="math-inline">\epsilon_i</span> 是微小的非零数。
 由此可知 <span class="math-inline">\{A', B'\}</span> 是正则的，其特征值为
 
@@ -173,14 +158,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 一个处于Schur形式的矩阵对 <span class="math-inline">\{A,B\}</span> 可能非常接近奇异，因此具有非常敏感的特征值，即使 <span class="math-inline">A</span> 或 <span class="math-inline">B</span> 的对角线元素都不小。
 只要 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 近似具有一个共同的零空间就足够了。
 例如，考虑 <span class="math-inline">16 \times 16</span> 矩阵
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A'' = \left[ \begin{array}{ccccc}0.1 & 1 & & & \\& 0.1 & 1 & & \\& & \ddots & \ddots & \\& & & 0.1 & 1 \\& & & & 0.1 \\\end{array} \right] \quad\quad\mathrm{and} \quad\quad B'' = A''.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 那么 <span class="math-inline">\{A'', B''\}</span> 的所有特征值都在1。
 将 <span class="math-inline">{A}_{n1}''</span> 和 <span class="math-inline">{B}_{n1}''</span> 改为 <span class="math-inline">10^{-16}</span> 使得
 <span class="math-inline">A''</span> 和 <span class="math-inline">B''</span> 在机器精度下都是奇异的，并且具有一个共同的零向量；即存在一个单位向量 <span class="math-inline">x</span> 使得

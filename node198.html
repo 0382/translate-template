@@ -90,32 +90,17 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 
 <p>
 常数<span class="math-inline">\alpha_k</span>和<span class="math-inline">\beta_k</span>由以下公式给出：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\alpha_k = u^{\ast}_k A v_k \quad\mathrm{和}\quad\beta_k = u^{\ast}_k A v_{k+1}.</div>
-</div>
-<br clear="ALL">
-<p></p>
-从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归。乘以<span class="math-inline">U</span>，我们有
-<br><p></p>
-<div align="CENTER">
 
+从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归。乘以<span class="math-inline">U</span>，我们有
 
 <div class="math-display">A\left[\begin{array}{cccc}v_1 & v_2 & \ldots & v_n\end{array} \right] = U\left[\begin{array}{cccccc}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_n \\\end{array} \right].</div>
-</div>
-<br clear="ALL">
-<p></p>
-将两边第<span class="math-inline">k</span>列对应相等，我们得到
-<br><p></p>
-<div align="CENTER">
 
+将两边第<span class="math-inline">k</span>列对应相等，我们得到
 
 <div class="math-display">Av_k = \beta_{k-1}u_{k-1} + \alpha_k u_k</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 或者
 
 <div class="math-display" id="gklmethod">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0, \tag{116}</div>

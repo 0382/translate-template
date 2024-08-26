@@ -95,44 +95,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 使 QEP 不同于标准特征问题 <span class="math-inline">Ax = \lambda x</span> 或广义特征问题 <span class="math-inline">Ax = \lambda Bx</span> 的因素之一是，QEP 有 <span class="math-inline">2n</span> 个特征值，最多有 <span class="math-inline">2n</span> 个右（和左）特征向量。当然，在 <span class="math-inline">n</span> 维空间中，右（和左）特征向量不再构成独立集。这一点可以通过以下简单例子说明。三元组
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">M=\left[ \begin{array}{cc}5 & 2 \\1 & 4\end{array} \right], \quad C=\left[ \begin{array}{cc}3 & 0 \\0 & 6\end{array} \right], \quad K=\left[ \begin{array}{cc}2 & 0 \\0 & 12\end{array} \right]</div>
-</div>
-<br clear="ALL">
-<p></p>
-有 4 个不同的（但成对共轭的）特征值（四舍五入到五位小数）：
-<br><p></p>
-<div align="CENTER">
 
+有 4 个不同的（但成对共轭的）特征值（四舍五入到五位小数）：
 
 <div class="math-display">\begin{array}{ll}\lambda_1=-0.9396+ 1.5749i, & \lambda_2=-0.9396- 1.5749i, \\ \lambda_3=-0.0049+ 0.6296i, & \lambda_4=-0.0049- 0.6296i. \\\end{array}</div>
-</div>
-<br clear="ALL">
-<p></p>
-相关的特征向量（归一化使得第一个坐标等于 1）为：
-<br><p></p>
-<div align="CENTER">
 
+相关的特征向量（归一化使得第一个坐标等于 1）为：
 
 <div class="math-display">\begin{array}{ll}x_1= (1, -2.4756-0.9779i)^T, & x_2= (1, -2.4756+0.9779i)^T, \\ x_3= (1, 0.0326-0.0132i)^T, & x_4= (1, 0.0326+0.0132i)^T. \\\end{array}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这四个特征向量显然是依赖的，但在实际问题中，每个特征向量可能代表系统的相关状态。
 
 <p>
 对于二次特征值问题，必须谨慎处理瑞利商。确实，给定 <span class="math-inline">x</span> 作为 QEP（参见第<a href="node332.html#qep">9.1</a>节）的右特征向量，即
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">( \lambda^2 M + \lambda C + K ) x = 0,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 可以构造一个<em>二次瑞利商</em>：
 <a name="42810"></a>
 
@@ -145,14 +125,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 为了决定哪一个是要找的，哪一个是虚假的，可以计算残差向量
 <a name="42819"></a>
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">r_{\mu}\equiv (\mu^2 M +\mu C + K) x_1 ,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这导致 <span class="math-inline">\Vert r_{\mu_1}\Vert _2\approx 8.4 \times 10^{-14}</span>, <span class="math-inline">\Vert r_{\mu_2}\Vert _2\approx 12.5</span>，在这种情况下，清楚地指出 <span class="math-inline">\mu_2</span> 不是特征值。我们不能排除在人为设计的例子中可能做出错误选择，这可能导致特定的迭代求解方法延迟。
 
 <p>

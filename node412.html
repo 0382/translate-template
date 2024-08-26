@@ -107,13 +107,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们只需选择一个多项式，无论是先验的还是迭代过程中的，并使用递归公式来引导迭代方案。对于给定的特征向量近似 <span class="math-inline">x^{(i)}</span>，对于矩阵束 <span class="math-inline">B - \mu A</span> 的特征值近似 <span class="math-inline">\mu^{(i)}</span>，通常使用瑞利商 <span class="math-inline">\mu (x)</span> (<a href="node411.html#prec_RQ">11.8</a>)：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">\mu(x^{(i)}) = \frac {(x^{(i)},Bx^{(i)})}{(x^{(i)},A x^{(i)})}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此，我们有了一个完整的预处理特征求解器，用于矩阵束 <span class="math-inline">B - \mu A</span> 的描述，如下所示：
 
 <p>
@@ -145,13 +141,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在 (<a href="node412.html#defprecesgenblock">11.11</a>) 中，迭代子空间 <span class="math-inline">S^{(k)}</span> 定义为单个向量 <span class="math-inline"> x^{(k)}_j</span> 的跨度：
-<br><p></p>
-<div align="CENTER">
 
 <div class="math-display">S^{(k)} = {\rm span}\{ x^{(k)}_1, \ldots, x^{(k)}_m \}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 通常通过将其与选择 <span class="math-inline">S^{(k)}</span> 中单个向量作为下一递归步骤初始向量的过程结合，来递归使用 (<a href="node412.html#defprecesgenblock">11.11</a>)。瑞利-里兹方法是这种过程的常见选择。递归的一步如下所示：
 
 <p>

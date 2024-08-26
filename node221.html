@@ -77,12 +77,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 阿诺尔迪过程的GEMV形式</a>
 </h2>
 首先，我们将从稍有不同的视角来审视阿诺尔迪过程。阿诺尔迪过程在第&#167;<a href="node215.html#sec:arnodimethod">7.5</a>节中已有推导，并在算法<a href="node216.html#alg:arn0">7.3</a>中以修正格拉姆-施密特算法的形态呈现。本节中，我们将采用经典的格拉姆-施密特过程结合正交化细化[<a href="node421.html#dgks76">96</a>]，以矩阵-向量（或GEMV）形式描述该过程。阿诺尔迪关系涉及矩阵<span class="math-inline">A</span>、基矩阵<span class="math-inline">V_k</span>及残差向量<span class="math-inline">f_k</span>，其形式为：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">A V_k = V_k H_k + f_k e_k^{\ast},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中，<span class="math-inline">V_k \in {\mathcal C}^{n \times k}</span>的列向量正交归一，<span class="math-inline">V_k^{\ast} f_k = 0</span>，且<span class="math-inline">H_k \in {\mathcal C}^{k\times k}</span>为上部海森堡矩阵，其次对角线元素非负。我们称此为<span class="math-inline">A</span>的<span class="math-inline">k</span>步阿诺尔迪分解。从构造过程可轻易看出，<span class="math-inline">H_k = V_k^{\ast} A V_k</span>为上部海森堡矩阵。当<span class="math-inline">A</span>为厄米矩阵时，这意味着<span class="math-inline">H_k</span>为实对称且三对角矩阵。<span class="math-inline">V_k</span>的列向量被称为阿诺尔迪向量。
 
 <p>

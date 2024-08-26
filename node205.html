@@ -90,24 +90,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 例如，考虑矩阵
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A = \left[ \begin{array}{ccc}1&0&10^{-4}\\ 1&1&10^{-2}\\ 10^4&10^2&1 \end{array} \right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 选择
 <span class="math-inline">D = \mathrm{diag}(100, 1, .01)</span> 得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">B=DAD^{-1}=\left[\begin{array}{ccc}1&0&1\\ 10^{-2}&1&1\\ 1&1&1\end{array}\right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 而 <span class="math-inline">\vert\vert A\vert\vert _F</span> 大约为 <span class="math-inline">10^4</span>，<span class="math-inline">\vert\vert B\vert\vert _F</span> 大约为
 <span class="math-inline">2.6</span>。 此外，<span class="math-inline">B</span> 的特征值的条件数都大约为 <span class="math-inline">1</span>，而 <span class="math-inline">A</span> 的特征值的条件数大小范围从 <span class="math-inline">10^1</span> 到 <span class="math-inline">10^3</span>。
 

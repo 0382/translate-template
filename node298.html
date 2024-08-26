@@ -83,49 +83,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dl COMPACT>
 <dt>(a)</dt>
 <dd>如果需要求解矩阵对<span class="math-inline">\{A,B\}</span>中模最大的几个特征值，且矩阵<span class="math-inline">B</span>非奇异，我们可以通过乘以<span class="math-inline">B^{-1}</span>来得到
-       <br><p></p>
-<div align="CENTER">
-
-
+       
 <div class="math-display">B^{-1} A x = \lambda x.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 矩阵<span class="math-inline">B^{-1}A</span>关于<span class="math-inline">A</span>或<span class="math-inline">B</span>对称。
 </dd>
 <dt>(b)</dt>
 <dd>如果需要求解接近给定值<span class="math-inline">\sigma</span>的几个特征值，我们应用SI方法
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left( (A - \sigma B)^{-1} B \right) x = (\lambda - \sigma)^{-1} x.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 特别是，如果需要求解模最小的特征值，可以选择移位值<span class="math-inline">\sigma=0</span>。注意，矩阵<span class="math-inline">(A - \sigma B)^{-1} B</span>关于<span class="math-inline">B</span>或<span class="math-inline">(A-\sigma B)</span>对称。
 </dd>
 </dl> 
 
 <p>
 本节余下部分将重点讨论情况(b)，并将变换后的问题写为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">H^{-1} B x = \mu x,</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中
-<br><p></p>
-<div align="CENTER">
 
+其中
 
 <div class="math-display">H = A - \sigma B\quad \mathrm{且} \quad\mu = \frac{1}{\lambda-\sigma}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 注意，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数矩阵，<span class="math-inline">\{A,B\}</span>的特征值也可能是复数，因此可能需要使用复数<span class="math-inline">\sigma</span>。即使使用了复数移位，Lanczos递归仍可以通过实数运算实现；参见&nbsp;[<a href="node421.html#pasa87">362</a>]。
 
 <p>
@@ -134,51 +114,31 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" id="GovEqn">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j, \tag{235}</div>
 
 其中
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_j = \left[ \begin{array}{cccc}\alpha_1 & \beta_2 & & \\ ......\Omega_j = \mathrm{diag}(\omega_1,\omega_2, \ldots, \omega_j).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 
 <p>
 Lanczos向量
 
 <span class="math-inline">Q_j = \left[ \begin{array}{cccc}q_1 &amp; q_2 &amp; \cdots &amp; q_j \\\end{array} \right]</span>是<span class="math-inline">B</span>正交的，即，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">Q^T_j B Q_j = \Omega_j, \quad\quadQ^T_j B q_{j+1} = 0,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 并且被归一化为单位欧几里得范数，即<span class="math-inline">\Vert q_j\Vert _2 = 1</span>。
 
 <p>
 简化的特征值问题是
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_j u^{(j)}_i = \theta^{(j)}_i \Omega_j u^{(j)}_i.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 它继承了与原问题相同的数值困难。例如，Ritz值<span class="math-inline">\theta^{(j)}_i</span>可能是复数，甚至是缺陷的。换句话说，它可能属于<span class="math-inline">\Omega^{-1}_j T_j</span>的非对角Jordan块。
 
 <p>
 一旦计算出<span class="math-inline">\{\theta^{(j)}_i,u^{(j)}_i\}</span>，右和左Ritz向量分别定义为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{x}^{(j)}_i := Q_j u^{(j)}_i \quad \mathrm{且} \quad{y}^{(j)}_i := B \bar{Q}_j \bar{u}^{(j)}_i = B \bar{x}^{(j)}_i,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 相应的。量<span class="math-inline">\{\theta^{(j)}_i, x^{(j)}_i, y^{(j)}_i\}</span>被称为矩阵<span class="math-inline">H^{-1} B</span>的Ritz三元组。
 
 <p>
@@ -187,14 +147,9 @@ Lanczos向量
 <div class="math-display" id="RightResid">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1}, \tag{236}</div>
 
 其中
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\gamma^{(j)}_i = \frac{\beta_{j+1}}{\omega_{j+1}} (e_j^Tu^{(j)}_i).</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 注意，在&nbsp;(<a href="node298.html#RightResid">8.23</a>)中的最后一个等式是通过将方程&nbsp;(<a href="node298.html#GovEqn">8.22</a>)右乘<span class="math-inline">u^{(j)}_i</span>并利用<span class="math-inline">x^{(j)}_i</span>的定义得到的。左残差向量<span class="math-inline">(s^{(j)}_i)^{\ast}</span>与右残差向量<span class="math-inline">r^{(j)}_i</span>的关系为<span class="math-inline">(s^{(j)}_i)^{\ast} = (r^{(j)}_i)^T B</span>。由此得出
 
 <div class="math-display" id="normRk">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert \tag{237}</div>
@@ -238,14 +193,9 @@ Lanczos向量
 </dd>
 <dt><strong>(7)</strong></dt>
 <dd>必须求解线性方程组<span class="math-inline">H r = w</span>以得到<span class="math-inline">r</span>。设
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">H = {\mathcal L}{\mathcal D}{\mathcal L}^T</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 为稀疏LDL<span class="math-inline">^{\rm T}</span>分解（参见&#167;<a href="node385.html#sec:directsolvers">10.3</a>），在for循环之前计算。然后向量<span class="math-inline">r</span>可以通过三个步骤高效计算：
 
 <span class="math-inline">(7)^{\prime}</span> 解<span class="math-inline">{\mathcal L} u = w </span>得到<span class="math-inline">u</span>
@@ -269,14 +219,9 @@ Lanczos向量
 </dd>
 <dt><strong>(14)</strong></dt>
 <dd>在对称Lanczos算法（参见&#167;<a href="node103.html#sec:lan">4.4</a>）中，Lanczos向量被缩放为<span class="math-inline">B</span>正交归一化，<span class="math-inline">q_j^TBq_j = 1</span>。然而，在对称不定算法中，向量被缩放为单位欧几里得范数，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\Vert q_j\Vert _2 = 1. </div>
-</div>
-<br clear="ALL">
-<p></p>
+
 改变缩放的原因有两个，都与<span class="math-inline">B</span>的不定性有关。第一个原因是，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数矩阵，缩放Lanczos向量使得<span class="math-inline">q_j^TBq_j = 1</span>可能涉及复数运算。（通过跟踪<span class="math-inline">q_j^TBq_j</span>的符号，可以避免复数运算，但仍然使用<span class="math-inline">\vert q_j^TBq_j \vert^{1/2}</span>作为范数。然而，这种算法稳定性较差。）第二个原因是，当<span class="math-inline">B</span>不定<!--Navigation Panel-->
 <a name="tex2html5321"
   href="node299.html">

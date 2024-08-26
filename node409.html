@@ -92,38 +92,23 @@ are solved with a relative error tolerance <span class="math-inline">\tau </span
 
 <p>
 When the Cayley transform is used, the linear system
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A -\mu B) w = (A - \theta B) x - s</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 is solved, where 
 <span class="math-inline">\Vert s\Vert \leq \tau \Vert(A - \theta B) x\Vert</span>.
 This linear system can be written as
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A -\mu B) (w - x) = (\mu - \theta) B x - s \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 So, with 
 <span class="math-inline">z = (w- x)/(\mu-\theta)</span> and 
 <span class="math-inline">t = s/(\mu-\theta)</span>, we
 obtain the
 shift-and-invert linear system
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A -\mu B) z = B x - t,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 where 
 <span class="math-inline">\Vert t\Vert \leq \tau \Vert(A - \theta B) x\Vert/ (\mu-\theta)</span>. 
 In other words, we can use the SI, but instead of

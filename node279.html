@@ -82,34 +82,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 考虑一个近似特征对 <span class="math-inline">(\widetilde\lambda,\widetilde x)</span> 对应于精确特征对 <span class="math-inline">(\lambda,x)</span>。设 <span class="math-inline">A=QTQ^{\ast}</span> 是 <span class="math-inline">A</span> 的舒尔分解（参见第&#167;<a href="node48.html#sec_chap2_nHep">2.5</a>节，页码<a href="node48.html#sec_chap2_nHep"><button class="crossref"></button></a>），其中 <span class="math-inline">Q=[x,Q_2]</span> 是酉矩阵，且
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T=\left[\begin{array}{cc}\lambda & a^{\ast} \\ 0 & T_{22}\end{array}\right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 从残差向量
 
 <span class="math-inline">r=A \widetilde x-\widetilde\lambda\widetilde x = Q T Q^{\ast}\widetilde x-\widetilde\lambda\widetilde x</span>，我们有
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">Q^{\ast} r=T Q^{\ast} \widetilde x-\widetilde\lambda Q^{\ast} \widetilde x=(T-\widetilde\lambda I)Q^{\ast} \widetilde x.</div>
-</div>
-<br clear="ALL">
-<p></p>
-因此，上述方程的第二到最后一个分量意味着
-<br><p></p>
-<div align="CENTER">
 
+因此，上述方程的第二到最后一个分量意味着
 
 <div class="math-display">\Vert r\Vert _2=\Vert Q^{\ast} r\Vert _2\ge\Vert(T_{22}-\widetilde\lambda I)^{-1}\Vert _2^{-1} \Vert Q_2^{\ast} \widetilde x\Vert _2,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这表明
 
 <div class="math-display" id="eq:std-nH-vt">\sin\theta(x,\widetilde x)\equiv\Vert Q_2^{\ast} \widetilde x\Vert _2\leq \frac{\Vert r\Vert _2}{\sigma_{\min}(T_{22}-\widetilde\lambda I)}. \tag{213}</div>
@@ -121,14 +106,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 注意，<span class="math-inline">\sigma_{\min}(T_{22}-\widetilde\lambda I)</span> 大致衡量了 <span class="math-inline">\lambda</span> 与 <span class="math-inline">T_{22}</span> 特征值之间的分离度。我们必须说“大致”，因为
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\sigma_{\min}(T_{22}-\widetilde\lambda I) \leq \min_{\mu \in \lambda(T_{22})}\vert \mu -\widetilde\lambda \vert</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 而上界可能是一个严重的过高估计。
 
 <p>

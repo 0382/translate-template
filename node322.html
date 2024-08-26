@@ -77,26 +77,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 MATLAB示例</a>
 </h4>
 让我们考虑以下具有整数项的<span class="math-inline">5 \times 5</span>奇异矩阵束<span class="math-inline">A - \lambda B</span>：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A = \left[\begin{array}{ccccc}22 & 34 & 31 & 31 & 17 \\...... & 14 & 23 \\24 & 35 & 18 & 21 & 22 \\\end{array}\right].</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 通过构造，此示例的KCF（Kronecker Canonical Form，克罗内克标准型）为
 
 <span class="math-inline">{\rm diag}( L_0, J_2(0), J_1(2), N_1, L^T_0 )</span>.
 我们通过调用计算<span class="math-inline">A - \lambda B</span>的GUPTRI形式
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{\tt [S, T, P, Q, kstr] = guptri(A, B)};</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 即，我们使用EPSU、GAP和ZERO的默认值。此次调用的输出如下所示：
 
   S =
@@ -177,14 +167,9 @@ GUPTRI形式中剩余的Kronecker结构包含在
 <p>
 计算的变换矩阵<span class="math-inline">P</span>和<span class="math-inline">Q</span>在机器精度范围内是正交的。
 此外，
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\delta = \Vert(A - A', B - B') \Vert _F = 2.8184e-13</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 是到具有KCF的<span class="math-inline">\{A', B'\}</span>的最近<span class="math-inline">\{A + \delta A, B + \delta B\}</span>的距离的上界，其中
 <span class="math-inline">A' = PSQ^{\ast}</span>和
 <span class="math-inline">B' = PTQ^{\ast}</span>。
@@ -196,14 +181,9 @@ GUPTRI形式中剩余的Kronecker结构包含在
 <p>
 通过设置
 <span class="math-inline">{\tt ZERO} = 0</span>并进行调用（使用EPSU和GAP的默认值）
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{\tt [S, T, P, Q, kstr] = guptri(A, B, EPSU, GAP, ZERO)},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们对<span class="math-inline">A - \lambda B</span>执行真正的等价变换：
 
 S =

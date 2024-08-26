@@ -82,14 +82,9 @@ Jacobi-Davidson方法
 
 <p>
 我们考虑将Jacobi-Davidson方法应用于GHEP（<a href="node156.html#gsymeig">5.1</a>）。类似于上一节中对Lanczos方法的处理（参见[<a href="node421.html#vors82a">444</a>]），我们可以将Jacobi-Davidson方法应用于（<a href="node156.html#gsymeig">5.1</a>），其中搜索子空间的基是<span class="math-inline">B</span>-正交的，即
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">{V}_{m}^\ast B{V}_{m}=I_{m},</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 如果我们用<span class="math-inline">{V}_{m}</span>表示列向量为<span class="math-inline">{v}_j</span>的矩阵。
 
 <p>
@@ -98,14 +93,9 @@ Jacobi-Davidson方法
 <div class="math-display" id="eq:jdgensyga">({V}_{m}^\ast A {V}_{m}) {s} - \theta ({V}_{m}^\ast B {V}_{m}) {s} = 0 , \tag{88}</div>
 
 或者，由于<span class="math-inline">{V}_{m}</span>的<span class="math-inline">B</span>-正交性：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">({V}_{m}^\ast A {V}_{m}) {s} - \theta {s} = 0 .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 这导致了Ritz向量<span class="math-inline">{u}_j^{(m)}\equiv V_{m}{s}_j</span>和Ritz值<span class="math-inline">\theta_j^{(m)}</span>。我们假设这些Ritz向量是相对于<span class="math-inline">B</span>-内积归一化的。
 
 <p>
@@ -114,35 +104,20 @@ Jacobi-Davidson方法
 <div class="math-display" id="eq:ghcorr">\begin{array}{r}\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast......j^{({m})}\equiv - (A-\theta_j^{(m)} B){u}_j^{(m)} .\end{array} \tag{89}</div>
 
 如果矩阵<span class="math-inline">A-\theta_j^{(m)} B</span>的线性系统可以高效求解，那么我们可以计算精确解<span class="math-inline">t_j^{({m})}</span>。在其他情况下，我们可以像通常对Jacobi-Davidson方法所做的那样，使用应用于（<a href="node176.html#eq:ghcorr">5.25</a>）的Krylov求解器计算<span class="math-inline">t_j^{({m})}</span>的近似解。注意，算子
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">\left( I - B{u}_j^{(m)} {{u}_j^{(m)}}^\ast \right)(A-\theta_j^{(m)} B)\left( I - {u}_j^{(m)} {{u}_j^{(m)}}^\ast B \right)</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 将空间<span class="math-inline">(B{u}_j^{(m)})^\perp</span>映射到空间<span class="math-inline">({u}_j^{(m)})^\perp</span>，因此如果我们在<span class="math-inline">(B{u}_j^{(m)})^\perp</span>和<span class="math-inline">(B{u}_j^{(m)})^\perp</span>之间使用Krylov求解器，则总是需要预处理（参见算法<a href="node176.html#alg:jdqrgens">5.6</a>中的项(31)）。
 
 <p>
 对于标准厄米特情况，所得到的方案可以与重启和消减相结合。如果我们希望在消减中使用正交算子，那么我们必须使用将给定广义系统化为Schur形式的<span class="math-inline">B</span>-正交矩阵：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A{Q}_{k}={Z}_{k}{D}_{k},</div>
-</div>
-<br clear="ALL">
-<p></p>
-其中<span class="math-inline">{Z}_{k}=B{Q}_{k}</span>且<span class="math-inline">{Q}_{k}</span>是<span class="math-inline">B</span>-正交的。矩阵<span class="math-inline">{D}_{k}</span>是一个对角矩阵，其对角线上是计算出的<span class="math-inline">{k}</span>个特征值；<span class="math-inline">{Q}_{k}</span>的列是<span class="math-inline">A</span>的特征向量。这导致了对消减的前<span class="math-inline">{k}</span>个特征向量的斜投影：
-<br><p></p>
-<div align="CENTER">
 
+其中<span class="math-inline">{Z}_{k}=B{Q}_{k}</span>且<span class="math-inline">{Q}_{k}</span>是<span class="math-inline">B</span>-正交的。矩阵<span class="math-inline">{D}_{k}</span>是一个对角矩阵，其对角线上是计算出的<span class="math-inline">{k}</span>个特征值；<span class="math-inline">{Q}_{k}</span>的列是<span class="math-inline">A</span>的特征向量。这导致了对消减的前<span class="math-inline">{k}</span>个特征向量的斜投影：
 
 <div class="math-display">\left( I - {Z}_{k} {Q}_{k}^\ast \right)(A-\lambda B)\left( I - {Q}_{k} {Z}_{k}^\ast \right) \, .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 很容易验证，相对于空间<span class="math-inline">(B{u}_j^{(m)})^\perp</span>，消减后的算子<span class="math-inline">B</span>仍然是关于该空间的对称正定。我们可以简单地在该空间中使用<span class="math-inline">B</span>-内积，因为<span class="math-inline">B</span>和消减后的<span class="math-inline">B</span>在该空间上一致。
 
 <p>

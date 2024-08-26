@@ -80,48 +80,33 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <span class="math-inline">H_+ = Q^* H Q</span> 为海森堡形式取决于表达式中的项 <span class="math-inline">g y^* H R</span> 消失，即
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">Q^* H Q = L^*HR + g y^*H R + \theta e_1 e_1^*.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 然而，进一步检查发现，
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">e_1^* Q = e_1^* L + (e_1^* y) g^* = \eta_1 g^*,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 其中 <span class="math-inline">\eta_1</span> 是 <span class="math-inline">y</span> 的第一个分量。因此，
 <a name="gnorm2"></a>  
 || g || = 1|  _1 |,
 
 <p>
 因此当 <span class="math-inline">y</span> 的第一个分量很小时，可能会出现数值困难。具体来说，<span class="math-inline">y^*H = \theta y^*</span> 并且因此在精确算术中 <span class="math-inline"> y^* H R = 0</span>。然而，在有限精度下，计算得到的 <span class="math-inline">fl(y^* H) = \theta y^* + z^*</span>。误差 <span class="math-inline">z</span> 相对于 <span class="math-inline">\Vert H \Vert</span> 约为 <span class="math-inline">\epsilon_M</span>，但
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">\Vert g y^*H R \Vert = \Vert g\Vert \cdot \Vert z^* R \Vert =\frac{1}{\vert \eta_1 \vert} \Vert z^* R \Vert,</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此这一项可能相当大。如果 <span class="math-inline">\eta_1 = O(\epsilon_M)</span>，它可能达到 <span class="math-inline">O(1)</span> 量级。这是一个严重的问题，并且在实践中如果不进行我们提出的修改，这种情况就会发生。
 
 <p>
 解决办法是引入逐步可接受的扰动和向量 <span class="math-inline">y</span> 的重缩放，同时强制满足以下条件：
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">Q^* y = e_1 \ \ \mathrm{和}\ \ y^* H Q = \theta e_1^*</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 在有限精度下具有足够的准确性。为了实现这一点，我们将设计一个方案，以数值方式实现
-<br><p></p>
-<div align="CENTER">
+
 <div class="math-display">y^* H q_j = 0 \ \ \mathrm{对于} \ \ j > 1</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 如文献 [<a href="node421.html#sore98">420</a>] 所示，这一修改足以在数值上建立 <span class="math-inline"> q_i^* H q_j = 0</span>，相对于 <span class="math-inline">\Vert H \Vert</span>，对于 <span class="math-inline"> i > j + 1</span>。
 
 <p>

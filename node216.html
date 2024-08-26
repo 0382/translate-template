@@ -144,23 +144,13 @@ Arnoldi方法是一种投影到Krylov子空间上的正交投影方法。
 <p>
 在算法进行过程中获得Ritz对的残差范数是相当廉价的。
 设</span>y_i \sup{m}<span class="math-inline">是与特征值</span>\lambda_i \sup{m}<span class="math-inline">相关的</span>H_m<span class="math-inline">的特征向量，设</span>u_i \sup{m}<span class="math-inline">是Ritz近似特征向量</span>u_i \sup{m}= V_m y_i \sup{m}<span class="math-inline">。我们有以下关系：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">(A - \lambda_i \sup{m}I ) u_i \sup{m}= h_{m+1,m}(e_m^{\ast} y_i\sup{m})v_{m+1},</div>
-</div>
-<br clear="ALL">
-<p></p>
-因此，
-<br><p></p>
-<div align="CENTER">
 
+因此，
 
 <div class="math-display">\Vert ( A - \lambda_i \sup{m}I ) u_i \sup{m}\Vert _2 = h_{m+1,m} \vert e_m^{\ast} y_i\sup{m}\vert \ .</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 因此，残差范数等于特征向量</span>y_i \sup{m}<span class="math-inline">的最后一个分量的绝对值乘以</span>h_{m+1,m}<span class="math-inline">。残差范数并不总是指示</span>\lambda_i \sup{m}$中的实际误差，但可以非常有帮助地推导停止过程。
 
 <p>

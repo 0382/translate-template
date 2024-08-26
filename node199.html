@@ -78,14 +78,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h4>
 从方程(<a href="node198.html#lansvdeq1">6.7</a>)、(<a href="node198.html#lansvdeq2">6.8</a>)和
 (<a href="node198.html#uvorth">6.9</a>)中，我们有
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">A^{\ast} A V_k = V_k B^*_k B_k + \alpha_k \beta_{k}v_{k+1}e^*_k.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 我们注意到<span class="math-inline">B^*_k B_k</span>是对称的且三对角的，因为<span class="math-inline">B_k</span>是双对角的。
 与方程(<a href="node103.html#herm-recursion">4.10</a>)比较，我们可以看到
 算法(<a href="node198.html#gklmethod">6.1</a>)
@@ -96,14 +91,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 类似地，我们得到
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">AA^* U_k = U_k B_k B_k^* + \beta_k (A v_{k+1}) e_k^*.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 同样，<span class="math-inline">B_k B_k^*</span>是对称的且三对角的。
 所以再次与方程(<a href="node103.html#herm-recursion">4.10</a>)比较，我们可以看到
 算法(<a href="node198.html#gklmethod">6.1</a>)
@@ -116,14 +106,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 最后，假设我们使用特殊的起始向量
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">z_1 = \begin{bmatrix} 0 \\ v_1 \end{bmatrix}</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 对<span class="math-inline">H(A)</span>应用Lanczos方法（算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)）
 生成Lanczos向量<span class="math-inline">z_2, z_3,\ldots.</span>
 算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)的第一步产生
@@ -158,14 +143,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br clear="ALL"><p></p>
 继续这种方式，我们可以看到算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)的两步计算的信息
 与算法(<a href="node198.html#gklmethod">6.1</a>)的一步相同：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">z_{2i-1} = \begin{bmatrix} 0 \\ v_i \end{bmatrix}\; \; {\rm and} \; \;z_{2i} = \begin{bmatrix} u_i \\ 0 \end{bmatrix}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 然而，算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)进行了两倍的矩阵-向量乘法
 通过<span class="math-inline">A</span>和<span class="math-inline">A^*</span>与算法(<a href="node198.html#gklmethod">6.1</a>)
 （其中一半是通过零向量的乘法），因此
@@ -173,14 +153,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 相反，如果对<span class="math-inline">H(A)</span>应用Lanczos方法得到一个
 三对角矩阵<span class="math-inline">T_k</span>，那么<span class="math-inline">T_k</span>的对角线上会有零，
 非对角线元素将与<span class="math-inline">B_k</span>（从方程(<a href="node198.html#uav">6.4</a>)的符号）的非零元素相同：
-<br><p></p>
-<div align="CENTER">
-
 
 <div class="math-display">T_{2k} = \begin{bmatrix}0 & \alpha_1 & & & & & \\\alpha_1...... \ddots & \ddots & \alpha_k \\& & & & & \alpha_k & 0 \end{bmatrix}.</div>
-</div>
-<br clear="ALL">
-<p></p>
+
 由于这些等价性，第&#167;<a href="node103.html#sec:lan">4.4</a>节中Lanczos的所有算法变体
 和收敛性质都适用于
 算法(<a href="node198.html#gklmethod">6.1</a>)。
