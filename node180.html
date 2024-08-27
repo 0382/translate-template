@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Transfer Residual Error to Backward Error.</title>
+<title>将残差误差转化为后向误差</title>
 <meta charset="utf-8">
-<meta name="description" content="Transfer Residual Error to Backward Error.">
+<meta name="description" content="将残差误差转化为后向误差">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,30 +66,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3475" href="node181.html">Error Bounds for Computed</a>
-<b>上一级：</b><a name="tex2html3469" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3463" href="node179.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3475" href="node181.html">计算特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html3469" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3463" href="node179.html">残差向量</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001471020000000000000"></a>
 <a name="18194"></a>
-<br>
 将残差误差转化为后向误差
 </h4>
+
 可以证明存在厄米矩阵 <span class="math-inline">E</span>，例如
 
-<div class="math-display" id="eq:E2-pdpBdef">E = -r\widetilde x^*-\widetilde x r^*+\left(\widetilde x^*A\widetilde x-\widetilde\lambda \widetilde x^*B\widetilde x \right)\widetilde x\widetilde x^*, \tag{93}</div>
+<div class="math-display" id="eq:E2-pdpBdef">E = -r\widetilde x^*-\widetilde x r^*+\left(\widetilde x^*A\widetilde x-\widetilde\lambda \widetilde x^*B\widetilde x \right)\widetilde x\widetilde x^*, \tag{5.29}</div>
 
 使得 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">\{A+E,B\}</span> 的精确特征值及其对应的特征向量。
 我们感兴趣的是那些范数尽可能小的矩阵 <span class="math-inline">E</span>。
 事实证明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span> 而言，最佳的 <span class="math-inline">E=E_2</span> 以及对于 Frobenius 范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span> 而言，最佳的 <span class="math-inline">E=E_{F}</span> 满足
 
-<div class="math-display" id="eq:pdpBdef-b2">\Vert E_2\Vert _2=\Vert r\Vert _2, \quad\Vert E_{F}\Vert _{......Vert^2_2- (\widetilde x^* A\widetilde x-\widetilde\lambda\widetilde x^* B\widetilde x)^2}. \tag{94}</div>
+<div class="math-display" id="eq:pdpBdef-b2">\Vert E_2\Vert _2=\Vert r\Vert _2, \quad \Vert E_{F}\Vert_F = \sqrt{2\Vert r\Vert^2_2- (\widetilde x^* A\widetilde x-\widetilde\lambda\widetilde x^* B\widetilde x)^2}. \tag{5.30}</div>
 
 参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。
-实际上，<span class="math-inline">E_{\F}</span> 由 (<a href="node180.html#eq:E2-pdpBdef">5.29</a>) 明确给出。
+实际上，<span class="math-inline">E_{F}</span> 由 (<a href="node180.html#eq:E2-pdpBdef">5.29</a>) 明确给出。
 因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，那么计算得到的 <span class="math-inline">\widetilde\lambda</span> 和 <span class="math-inline">\widetilde x</span> 就是 <em>邻近</em> 矩阵的精确特征值和特征向量。
 此类误差分析被称为 <em>后向误差分析</em>，而矩阵 <span class="math-inline">E</span> 则是 <em>后向误差</em>。
 
@@ -116,11 +114,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3475" href="node181.html">Error Bounds for Computed</a>
-<b>上一级：</b><a name="tex2html3469" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3463" href="node179.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3475" href="node181.html">计算特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html3469" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3463" href="node179.html">残差向量</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Error Bounds for Computed Eigenvectors.</title>
+<title>计算特征向量的误差界限</title>
 <meta charset="utf-8">
-<meta name="description" content="Error Bounds for Computed Eigenvectors.">
+<meta name="description" content="计算特征向量的误差界限">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,37 +66,53 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3503" href="node183.html">Remarks on Clustered Eigenvalues.</a>
-<b>上一级：</b><a name="tex2html3497" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3491" href="node181.html">Error Bounds for Computed</a>
-  
-  
+<b>下一节：</b><a name="tex2html3503" href="node183.html">关于聚集特征值的备注</a>
+<b>上一级：</b><a name="tex2html3497" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3491" href="node181.html">计算特征值的误差界限</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001471040000000000000"></a>
 <a name="18248"></a>
-<br>
-Error Bounds for Computed Eigenvectors.
+计算特征向量的误差界限
 </h4>
-Keep the assignments to <span class="math-inline">\widetilde\lambda</span>, <span class="math-inline">\lambda</span>, and <span class="math-inline">\delta</span> as above, and
-let <span class="math-inline">x</span> be the eigenvector  of <span class="math-inline">A</span> corresponding to <span class="math-inline">\lambda</span>.
-The error bound for the computed eigenvector <span class="math-inline">\widetilde x</span> and the
-true eigenvector <span class="math-inline">x</span> are 
 
-<div class="math-display" id="ineq:pdpBdef-err-1-evt">\sin\theta_B(x,\widetilde x)\le\frac 1{\delta}\cdot\frac {\Vert r\Vert _{B^{-1}}}{\Vert\widetilde x\Vert _B}. \tag{97}</div>
+保持对<span class="math-inline">\widetilde\lambda</span>、<span class="math-inline">\lambda</span>和<span class="math-inline">\delta</span>的赋值如上，并设<span class="math-inline">x</span>为与<span class="math-inline">\lambda</span>对应的<span class="math-inline">A</span>的特征向量。
 
-This, (<a href="node178.html#ineq:M-2-nrm">5.27</a>), and (<a href="node178.html#ineq:aglM-agl">5.28</a>)
-yield
+计算得到的特征向量<span class="math-inline">\widetilde x</span>与真实特征向量<span class="math-inline">x</span>之间的误差界限为
 
-<div class="math-display" id="ineq:evt-pdpBdef-theta">\sin\theta(x,\widetilde x)\le\Vert B^{-1}\Vert _2\frac {\sqrt{2\kappa(B)}}{\delta}\Vert r\Vert _2. \tag{98}</div>
+<div class="math-display" id="ineq:pdpBdef-err-1-evt">\sin\theta_B(x,\widetilde x)\le\frac 1{\delta}\cdot\frac {\Vert r\Vert _{B^{-1}}}{\Vert\widetilde x\Vert _B}. \tag{5.33}</div>
 
-The factor <span class="math-inline">\sqrt 2</span> can be removed
-by a more elaborate argument, but we shall omit it here.
+结合（<a href="node178.html#ineq:M-2-nrm">5.27</a>）和（<a href="node178.html#ineq:aglM-agl">5.28</a>），我们得到
+
+<div class="math-display" id="ineq:evt-pdpBdef-theta">\sin\theta(x,\widetilde x)\le\Vert B^{-1}\Vert _2\frac {\sqrt{2\kappa(B)}}{\delta}\Vert r\Vert _2. \tag{5.34}</div>
+
+通过更复杂的论证可以去除<span class="math-inline">\sqrt 2</span>这一因子，但此处我们略去不谈。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3502"
+  href="node183.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3496"
+  href="node178.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3490"
+  href="node181.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3498"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3500"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3503" href="node183.html">关于聚集特征值的备注</a>
+<b>上一级：</b><a name="tex2html3497" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3491" href="node181.html">计算特征值的误差界限</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

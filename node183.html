@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Remarks on Clustered Eigenvalues.</title>
+<title>关于聚集特征值的备注</title>
 <meta charset="utf-8">
-<meta name="description" content="Remarks on Clustered Eigenvalues.">
+<meta name="description" content="关于聚集特征值的备注">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,16 +66,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3515" href="node184.html">Some Combination of and</a>
-<b>上一级：</b><a name="tex2html3509" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3505" href="node182.html">Error Bounds for Computed</a>
+<b>下一节：</b><a name="tex2html3515" href="node184.html">某些<span class="math-inline">A</span>与<span class="math-inline">B</span>的组合是正定矩阵</a>
+<b>上一级：</b><a name="tex2html3509" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3505" href="node182.html">计算特征向量的误差界限</a>
   
   
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001471050000000000000">
-关于聚类特征值的评述</a>
+关于聚集特征值的备注</a>
 </h4>
+
 当特征值<span class="math-inline">\lambda</span>与其邻近存在一个或多个矩阵<span class="math-inline">A</span>的其他特征值时，即<span class="math-inline">\lambda</span>属于一组特征值聚类时，根据(<a href="node181.html#ineq:pdpBdef-err-1-ev">5.31</a>)，只要<span class="math-inline">\Vert B^{-1}\Vert _2\Vert r\Vert _2</span>极小，计算得到的<span class="math-inline">\widetilde\lambda</span>依然准确，但由于(<a href="node182.html#ineq:pdpBdef-err-1-evt">5.33</a>)中分母出现间隙<span class="math-inline">\delta</span>，计算的特征向量<span class="math-inline">\widetilde x</span>可能不准确。事实表明，与聚类特征值相关的每个单独特征向量对扰动非常敏感，但所有这些特征向量所张成的特征空间则不然。因此，对于聚类特征值，我们应计算整个特征空间。
 
 可以建立如上所述的理论，证明计算的特征空间与聚类相关的特征空间之间的差异，与定义为聚类内任一特征值与聚类外任一特征值之间最小差异的间隙成反比。由于其定义方式，该间隙预期会较大。
@@ -98,9 +99,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3515" href="node184.html">Some Combination of and</a>
-<b>上一级：</b><a name="tex2html3509" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3505" href="node182.html">Error Bounds for Computed</a>
+<b>下一节：</b><a name="tex2html3515" href="node184.html">某些<span class="math-inline">A</span>与<span class="math-inline">B</span>的组合是正定矩阵</a>
+<b>上一级：</b><a name="tex2html3509" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3505" href="node182.html">计算特征向量的误差界限</a>
   
   
 <!--End of Navigation Panel-->

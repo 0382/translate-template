@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Transfer Residual Error to Backward Error.</title>
+<title>将残差误差转化为后向误差</title>
 <meta charset="utf-8">
-<meta name="description" content="Transfer Residual Error to Backward Error.">
+<meta name="description" content="将残差误差转化为后向误差">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,29 +66,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3560" href="node187.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html3554" href="node184.html">Some Combination of and</a>
-<b>上一节：</b><a name="tex2html3548" href="node185.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3560" href="node187.html">计算特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html3554" href="node184.html">某些<span class="math-inline">A</span>与<span class="math-inline">B</span>的组合是正定矩阵</a>
+<b>上一节：</b><a name="tex2html3548" href="node185.html">残差向量</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001472020000000000000"></a>
 <a name="18323"></a>
-<br>
 将残差误差转化为后向误差
 </h4>
+
 可以证明存在厄米矩阵 <span class="math-inline">E</span> 和 <span class="math-inline">F</span>，例如
 
-<div class="math-display" id="eq:E2-pdp">(E,F) = \left[-r\widetilde x^*-\widetilde x r^*+\left(\widetilde\beta\widetilde x^......\widetilde x^*\right]\cdot\left(\widetilde\beta I, -\widetilde\alpha I\right), \tag{104}</div>
+<div class="math-display" id="eq:E2-pdp">(E,F) = \left[-r\widetilde x^*-\widetilde x r^*+\left(\widetilde\beta\widetilde x^* \widetilde A\widetilde x - \widetilde\alpha\widetilde x^*\widetilde B\widetilde x\right)\widetilde x\widetilde x^*\right]\cdot\left(\widetilde\beta I, -\widetilde\alpha I\right), \tag{5.40}</div>
 
 使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是 <span class="math-inline">\{A+E, B+F\}</span> 的一个精确特征值及其对应的特征向量。
 我们感兴趣的是那些范数尽可能小的矩阵 <span class="math-inline">(E,F)</span>。
 结果表明，对于谱范数 <span class="math-inline">\Vert\cdot\Vert _2</span>，最佳的 <span class="math-inline">(E,F)=(E_2,F_2)</span> 和对于弗罗贝尼乌斯范数 <span class="math-inline">\Vert\cdot\Vert _{F}</span>，最佳的 <span class="math-inline">(E,F)=(E_{F},F_{F})</span> 满足
 
-<div class="math-display" id="eq:pdp-b2">\Vert(E_2, F_2)\Vert _2={\Vert r\Vert _2}, \quad\Vert(E_{F}......- (\widetilde\beta\widetilde x^* A\widetilde x-\widetilde\alpha\widetilde x^* B\widetilde x)^2}. \tag{105}</div>
+<div class="math-display" id="eq:pdp-b2">\Vert(E_2, F_2)\Vert _2={\Vert r\Vert _2}, \quad
+\Vert(E_{F}, F_F)\Vert_F = \sqrt{2\Vert r\Vert_2^2 - (\widetilde\beta\widetilde x^* A\widetilde x-\widetilde\alpha\widetilde x^* B\widetilde x)^2}. \tag{5.41}</div>
 
-参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<a name="tex2html31" href="footnode.html#foot18417"><sup><button class="footnote"></button></sup></a>事实上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。
+参见 [<a href="node421.html#kapj82">256</a>,<a href="node421.html#sun98">431</a>,<a href="node421.html#hihi98">473</a>]。<sup><a href="#footnote-cite">[1]</a></sup> 事实上，<span class="math-inline">(E_{F},F_{F})</span> 由 (<a href="node186.html#eq:E2-pdp">5.40</a>) 明确给出。
 因此，如果 <span class="math-inline">\Vert r\Vert _2</span> 很小，计算得到的 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是附近矩阵的精确特征值和特征向量。这种误差分析称为<em>后向误差分析</em>，矩阵 <span class="math-inline">(E,F)</span> 是<em>后向误差</em>。
 
 <p>
@@ -97,6 +96,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 按照惯例，如果 <span class="math-inline">\tau = O(\epsilon_M \Vert(A,B)\Vert)</span>，算法被称为<em>后向稳定</em>。
 
 <p>
+<hr>
+<ol>
+<li id="footnote-cite">Kahan、Parlett 和 Jiang[<a href="node421.html#kapj82">256</a>，定理1'] 仅给出了<span class="math-inline">\widetilde\beta E-\widetilde\alpha F\equiv Z</span>的最优范数。
+  取<span class="math-inline">E=\widetilde\beta Z</span>和<span class="math-inline">F=-\widetilde\alpha Z</span>，可见<span class="math-inline">(E,F)</span>与<span class="math-inline">Z</span>具有相同的2-范数和Frobenius范数。</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html3559"
   href="node187.html">
@@ -114,11 +118,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3560" href="node187.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html3554" href="node184.html">Some Combination of and</a>
-<b>上一节：</b><a name="tex2html3548" href="node185.html">Residual Vector.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3560" href="node187.html">计算特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html3554" href="node184.html">某些<span class="math-inline">A</span>与<span class="math-inline">B</span>的组合是正定矩阵</a>
+<b>上一节：</b><a name="tex2html3548" href="node185.html">残差向量</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

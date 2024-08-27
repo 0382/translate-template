@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Numerical Example.</title>
+<title>数值示例</title>
 <meta charset="utf-8">
-<meta name="description" content="Numerical Example.">
+<meta name="description" content="数值示例">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,42 +66,56 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3390" href="node176.html">Jacobi-Davidson Methods &nbsp;G.&nbsp;Sleijpen and</a>
-<b>上一级：</b><a name="tex2html3384" href="node169.html">Lanczos Methods &nbsp; A.</a>
-<b>上一节：</b><a name="tex2html3380" href="node174.html">Software Availability.</a>
-  
-  
+<b>下一节：</b><a name="tex2html3390" href="node176.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html3384" href="node169.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html3380" href="node174.html">可用的软件</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001450060000000000000">
-Numerical Example.</a>
+数值示例</a>
 </h4>
-We report results on the generalized Hermitian shift-and-invert Lanczos algorithm
-for one of the examples in &#167;<a href="node113.html#sec:laneg">4.4.6</a>, the L-shaped membrane,
-but now with a 9-point finite difference approximation.
 
 <p>
-We use the same grid spacing <span class="math-inline">h=1/64</span> and
-get two  sparse symmetric positive definite
-matrices <span class="math-inline">A</span> and <span class="math-inline">B</span> of order <span class="math-inline">n=2945</span>. They  have a very regular sparse band
-structure, now with at most 9 nonzero elements filled in each row.
-We used the shift <span class="math-inline">\sigma=0</span> to seek the 8 smallest eigenvalues.
-The residual estimates (<a href="node171.html#si-gen_estimate_residual">5.21</a>) 
-at each step <span class="math-inline">j</span> are plotted in Figure&nbsp;<a href="node174.html#Lmemb9SIres">5.1</a>.
+
+我们报告了针对第&#167;<a href="node113.html#sec:laneg">4.4.6</a>节中L形膜问题的一个例子，使用9点有限差分近似法，所得到的广义厄米移位-逆兰索斯算法的计算结果。
 
 <p>
-When we compare the results on this generalized problem
-to those for the standard Hermitian
-eigenproblem of the same order in Figure&nbsp;<a href="node114.html#Lmemb5SIres">4.4</a> 
-(p.&nbsp;<a href="node114.html#Lmemb5SIres"><button class="crossref"></button></a>) in &#167;<a href="node113.html#sec:laneg">4.4.6</a>, we have 
-to bear in mind that this 9-point
-approximation is a more accurate one to the partial
-differential equation than the 5-point approximation used there.
+我们采用了相同的网格间距<span class="math-inline">h=1/64</span>，得到了两个阶数为<span class="math-inline">n=2945</span>的稀疏对称正定矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>。它们具有非常规则的稀疏带状结构，每行最多填充9个非零元素。我们使用了移位<span class="math-inline">\sigma=0</span>来寻找8个最小的特征值。在每一步<span class="math-inline">j</span>的残差估计（参见<a href="node171.html#si-gen_estimate_residual">5.21</a>）如图&nbsp;<a href="node175.html#Lmemb9SIres">5.1</a>所示。
+
+<div style="text-align: center;" id="Lmemb9SIres">
+<img src="icon/Lmemb9SI.png", alt="残差估计，Lanczos方法结合移位逆变换，L-膜9点有限差分近似。"/>
+<figcaption>图5.1：残差估计，Lanczos方法结合移位逆变换，L-膜9点有限差分近似。</figcaption>
+</div>
+  
+
+<p>
+当我们比较这个广义问题的结果与第&#167;<a href="node113.html#sec:laneg">4.4.6</a>节中相同阶数的标准厄米特征问题的结果（图&nbsp;<a href="node114.html#Lmemb5SIres">4.4</a>，页码&nbsp;<a href="node114.html#Lmemb5SIres"><button class="crossref"></button></a>）时，我们必须记住，这里的9点近似法比之前使用的5点近似法对偏微分方程的近似更为精确。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3389"
+  href="node176.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3383"
+  href="node169.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3379"
+  href="node174.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3385"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3387"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3390" href="node176.html">Jacobi-Davidson方法</a>
+<b>上一级：</b><a name="tex2html3384" href="node169.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html3380" href="node174.html">可用的软件</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

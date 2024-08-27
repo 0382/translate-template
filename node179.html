@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Residual Vector.</title>
+<title>残差向量</title>
 <meta charset="utf-8">
-<meta name="description" content="Residual Vector.">
+<meta name="description" content="残差向量">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,39 +66,51 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3461" href="node180.html">Transfer Residual Error to</a>
-<b>上一级：</b><a name="tex2html3455" href="node178.html">Positive Definite</a>
-<b>上一节：</b><a name="tex2html3449" href="node178.html">Positive Definite</a>
-  
-  
+<b>下一节：</b><a name="tex2html3461" href="node180.html">将残差误差转化为后向误差</a>
+<b>上一级：</b><a name="tex2html3455" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3449" href="node178.html">正定 <span class="math-inline">B</span></a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001471010000000000000"></a>
 <a name="18190"></a>
-<br>
-Residual Vector.
+残差向量
 </h4>
-Let <span class="math-inline">\widetilde\lambda</span> be a computed eigenvalue, and  let
-<span class="math-inline">\widetilde x</span> be its corresponding computed eigenvector.
-For the simplicity of the presentation,
-we normalize the computed eigenvector so that
 
-<span class="math-inline">\Vert\widetilde x\Vert _2 = 1</span>.
-The corresponding <em>residual vector</em> or
-<em>residual error</em> is defined by
+设<span class="math-inline">\widetilde\lambda</span>为计算出的特征值，<span class="math-inline">\widetilde x</span>为其对应的计算特征向量。为简化表述，我们将计算出的特征向量归一化，使得
+
+<span class="math-inline">\Vert\widetilde x\Vert _2 = 1</span>。相应的**残差向量**或**残差误差**定义为
 
 <div class="math-display">r = A\widetilde x - \widetilde\lambda B \widetilde x.</div>
 
-Ideally, we would like to have <span class="math-inline">r=0</span>, but in practice <span class="math-inline">r \approx 0</span>.
-It is conceivable that a small residual error implies
-good accuracy in the computed <span class="math-inline">\widetilde\lambda</span> and <span class="math-inline">\widetilde x</span>.
-We are interested in knowing how accurate the computed
-<span class="math-inline">\widetilde\lambda</span> and <span class="math-inline">\widetilde x</span> are, given <span class="math-inline">r</span>.
+理想情况下，我们希望<span class="math-inline">r=0</span>，但实际上<span class="math-inline">r \approx 0</span>。可以想象，残差误差小意味着计算出的<span class="math-inline">\widetilde\lambda</span>和<span class="math-inline">\widetilde x</span>具有良好的精度。我们感兴趣的是，在给定<span class="math-inline">r</span>的情况下，如何准确评估计算出的<span class="math-inline">\widetilde\lambda</span>和<span class="math-inline">\widetilde x</span>的精度。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3460"
+  href="node180.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3454"
+  href="node178.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3448"
+  href="node178.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3456"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3458"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3461" href="node180.html">将残差误差转化为后向误差</a>
+<b>上一级：</b><a name="tex2html3455" href="node178.html">正定 <span class="math-inline">B</span></a>
+<b>上一节：</b><a name="tex2html3449" href="node178.html">正定 <span class="math-inline">B</span></a>
+<br>
+<br>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20
