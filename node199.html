@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Relationship to Symmetric Lanczos.</title>
+<title>与对称Lanczos的关系</title>
 <meta charset="utf-8">
-<meta name="description" content="Relationship to Symmetric Lanczos.">
+<meta name="description" content="与对称Lanczos的关系">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -68,14 +68,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <b>下一节：</b><a name="tex2html3758" href="node200.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html3752" href="node197.html">Golub-Kahan-Lanczos 方法</a>
-<b>上一节：</b><a name="tex2html3748" href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
-  
-  
+<b>上一节：</b><a name="tex2html3748" href="node198.html">与对称Lanczos的关系</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001533020000000000000">
-对称Lanczos方法的关系。</a>
+与对称Lanczos方法的关系。</a>
 </h4>
+
 从方程(<a href="node198.html#lansvdeq1">6.7</a>)、(<a href="node198.html#lansvdeq2">6.8</a>)和
 (<a href="node198.html#uvorth">6.9</a>)中，我们有
 
@@ -112,35 +111,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 对<span class="math-inline">H(A)</span>应用Lanczos方法（算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)）
 生成Lanczos向量<span class="math-inline">z_2, z_3,\ldots.</span>
 算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)的第一步产生
-<p></p>
-<div align="CENTER">
 
-<img
- width="474" height="206" border="0"
- src="img1793.png"
- alt="\begin{eqnarray*}
-% latex2html id marker 21028r &amp; = &amp; H(A) z_1 = \bmat{c} Av_1...
-... \ as\ computed\ in\ line\ (5) \ of\ Algorithm~\ref{gklmethod}.}
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+r &= H(A)z_1 = \begin{bmatrix} Av_1 \\ 0\end{bmatrix}, \\
+\hat{\alpha}_1 &= r^*z_1 = 0, \\
+r &= r - 0*z_1, \\
+\hat{\beta}_1 &= \Vert r \Vert_2, \\
+z_2 &= r/\hat{\beta}_1, \\
+  &= \begin{bmatrix} u_1 \\ 0 \end{bmatrix}.
+\end{aligned}
+</div>
+其中 <span class="math-inline">u_1</span> 在算法(<a href="node198.html#gklmethod">6.1</a>)中的第(5)行计算得到。
 
 <p>
 算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)的下一步产生
-<p></p>
-<div align="CENTER">
 
-<img
- width="471" height="230" border="0"
- src="img1794.png"
- alt="\begin{eqnarray*}
-% latex2html id marker 21038r &amp; = &amp; H(A) z_2 = \bmat{c} 0 \\...
-...s \ as\ computed\ in\ line\ (8)\ of\ Algorithm~\ref{gklmethod}.}
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+r &= H(A)z_2 = \begin{bmatrix} 0 \\ A^*u_1\end{bmatrix}, \\
+\hat{\alpha}_2 &= r^*z_2 = 0, \\
+r &= r - 0*z_2 - \hat{\beta}_1 z_1 = \begin{bmatrix}0 \\ Au_1\end{bmatrix} - \begin{bmatrix}0 \\ \hat{\beta}_1 v_1\end{bmatrix}, \\
+\hat{\beta}_2 &= \Vert r \Vert_2, \\
+z_3 &= r/\hat{\beta}_2, \\
+  &= \begin{bmatrix} 0 \\ v_2 \end{bmatrix}.
+\end{aligned}
+</div>
+其中 <span class="math-inline">v_2</span> 在算法(<a href="node198.html#gklmethod">6.1</a>)中的第(8)行计算得到。
+
+<p>
 继续这种方式，我们可以看到算法(<a href="node104.html#Symmetric_Lanczos">4.6</a>)的两步计算的信息
 与算法(<a href="node198.html#gklmethod">6.1</a>)的一步相同：
 
@@ -154,7 +153,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 三对角矩阵<span class="math-inline">T_k</span>，那么<span class="math-inline">T_k</span>的对角线上会有零，
 非对角线元素将与<span class="math-inline">B_k</span>（从方程(<a href="node198.html#uav">6.4</a>)的符号）的非零元素相同：
 
-<div class="math-display">T_{2k} = \begin{bmatrix}0 & \alpha_1 & & & & & \\\alpha_1...... \ddots & \ddots & \alpha_k \\& & & & & \alpha_k & 0 \end{bmatrix}.</div>
+<div class="math-display">T_{2k} = \begin{bmatrix}
+0 & \alpha_1 & & & & & \\
+\alpha_1 & 0 & \beta_1 & & & \\
+& \beta_1 & 0 & \alpha_2 & & \\
+& & \alpha_2 & 0 & \beta_2 & \\
+& & & \beta_2 & 0 & \ddots \\
+& & & & \ddots & \ddots & \alpha_k \\
+& & & & & \alpha_k & 0
+\end{bmatrix}.</div>
 
 由于这些等价性，第&#167;<a href="node103.html#sec:lan">4.4</a>节中Lanczos的所有算法变体
 和收敛性质都适用于
@@ -180,9 +187,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <b>下一节：</b><a name="tex2html3758" href="node200.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html3752" href="node197.html">Golub-Kahan-Lanczos 方法</a>
-<b>上一节：</b><a name="tex2html3748" href="node198.html">Golub-Kahan-Lanczos Bidiagonalization Procedure.</a>
-  
-  
+<b>上一节：</b><a name="tex2html3748" href="node198.html">与对称Lanczos的关系</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

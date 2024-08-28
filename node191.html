@@ -66,23 +66,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3640" href="node192.html">Overview of Available Algorithms.</a>
+<b>下一节：</b><a name="tex2html3640" href="node192.html">可用的算法概述</a>
 <b>上一级：</b><a name="tex2html3634" href="node190.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html3628" href="node190.html">奇异值分解</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001510000000000000000"></a> <a name="sec:svdintro"></a>
-<br>
-简介
+引言
 </h1>
 
 <p>
 在本章中，我们将考虑 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 矩阵 <span class="math-inline">A</span> 的奇异值分解（SVD）。我们假设不失一般性，<span class="math-inline">m \geq n</span>；如果 <span class="math-inline">m < n</span>，则考虑 <span class="math-inline">A^*</span>。如第&#167;<a href="node39.html#sec_chap2_SVD">2.4</a>节所述，这种分解可以写成 <a name="20676"></a>
 <br>
 
-<div class="math-display" id="eqn_chapSVD_SVD1">A = U \Sigma V^*,\vspace*{-2pt}%% help \tag{108}</div>
+<div class="math-display" id="eqn_chapSVD_SVD1">A = U \Sigma V^*, \tag{6.1}</div>
 
 其中
 <span class="math-inline">U = [u_1,\ldots,u_m]</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的酉矩阵，
@@ -240,7 +237,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">\Lambda = {\rm diag}( \Sigma_n , -\Sigma_n , O^{(m-n) \times (m-n)})</span>
 和
 
-<div class="math-display" id="eqn_chap6_QforH_A_">Q=\begin{bmatrix} \frac{1}{\sqrt{2}} U_n & - \frac{1}{\sqrt{2}} U...... + \frac{1}{\sqrt{2}} V &O^{n \times (m-n)} \end{bmatrix}\; \; \; . \tag{109}</div>
+<div class="math-display" id="eqn_chap6_QforH_A_">
+Q=\begin{bmatrix}
+\frac{1}{\sqrt{2}} U_n & -\frac{1}{\sqrt{2}} U_n & \widetilde{U}_n \\
+\frac{1}{\sqrt{2}} V  & +\frac{1}{\sqrt{2}} V &O^{n \times (m-n)} 
+\end{bmatrix}.\tag{6.2}
+</div>
 
 换句话说，<span class="math-inline">\pm \sigma_i</span> 是一个特征值，其单位特征向量为
 
@@ -270,8 +272,60 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 
 <p>
-<span class="math-inline">A</span> 的SVD与 <span class="math-inline">H(A)</span> 的特征分解之间的对应关系表明，第&#167;<a href="node86.html#sec:heigintro">4.1</a>节和
-第&#167;<a href="node148.html#sec:pert-H">4.8</a>节中关于厄米矩阵特征值和特征向量的扰动理论讨论直接适用于SVD，我们现<!--Navigation Panel-->
+矩阵 <span class="math-inline">A</span> 的 SVD（奇异值分解）与其特征分解 <span class="math-inline">H(A)</span> 之间的对应关系表明，第 <a href="node86.html#sec:heigintro">4.1</a> 节和第 <a href="node148.html#sec:pert-H">4.8</a> 节中关于厄米矩阵特征值和特征向量的摄动理论讨论，可以直接应用于 SVD，具体如下所述。
+
+<p>
+将 <span class="math-inline">A</span> 扰动为 <span class="math-inline">A+E</span> 时，奇异值的变化最多为 <span class="math-inline">\Vert E\Vert _2</span>：
+
+<div class="math-display" id="eqn_chap6_SValuePert">\vert \sigma_i (A+E) - \sigma_i(A) \vert \leq \Vert E\Vert_2. \tag{6.3}</div>
+
+现在假设 <span class="math-inline">(\hat{\sigma}, \hat{u}, \hat{v})</span> 是奇异三元组 <span class="math-inline">(\sigma_i, u_i, v_i)</span> 的一个近似，其中 <span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 是单位向量。与 <span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 对应的“最佳” <span class="math-inline">\hat{\sigma}</span> 是瑞利商
+
+<span class="math-inline">\hat{\sigma} = {\rm Re}(\hat{u}^* A \hat{v})</span>，因此我们假设 <span class="math-inline">\hat{\sigma}</span> 取此值。假设 <span class="math-inline">\hat{\sigma}</span> 比其他任何 <span class="math-inline">\sigma_j</span> 更接近 <span class="math-inline">\sigma_i</span>，并设 <span class="math-inline">\delta</span> 为 <span class="math-inline">\hat{\sigma}</span> 与其他奇异值之间的 <em>间隔</em>：
+
+<span class="math-inline">\delta = \min_{j \neq i} \vert \hat{\sigma} - \sigma_j \vert</span>。
+
+<p>
+定义 <em>残差向量</em> <span class="math-inline">r</span> 为
+
+
+<div class="math-display">r = \frac{1}{\sqrt{2}} \begin{bmatrix} A\hat{v} - \hat{\sigma} \hat{u} \\A^*\hat{u} - \hat{\sigma} \hat{v} \end{bmatrix}.</div>
+
+如果 <span class="math-inline">r=0</span>，则 <span class="math-inline">(\hat{\sigma}, \hat{u}, \hat{v})</span> 是一个精确的奇异三元组，当 <span class="math-inline">\Vert r\Vert _2</span> 较小时，我们的误差界限也会较小。
+<a name="20794"></a>
+
+<p>
+<span class="math-inline">\hat{\sigma}</span> 与 <span class="math-inline">\sigma_i</span> 之间的差异被限制在
+
+
+<div class="math-display">\vert \hat{\sigma} - \sigma_i \vert \leq \min \left\{ \Vert r\Vert _2 ,\frac{\Vert r\Vert _2^2}{\delta} \right\}.</div>
+
+此外，近似奇异向量与真实奇异向量之间的角度 <span class="math-inline">\angle (\hat{v}, v_i)</span> 和 <span class="math-inline">\angle (\hat{u}, u_i)</span> 被限制在
+
+<div class="math-display">\max \{ \sin \angle (\hat{v}, v_i) , \sin \angle (\hat{u}, u_i) \}\leq \frac{\sqrt{2} \Vert r\Vert _2}{\delta}.</div>
+
+换句话说，近似奇异值 <span class="math-inline">\hat{\sigma}</span> 与其他所有 <span class="math-inline">\sigma_j</span> 之间的间隔 <span class="math-inline">\delta</span> 越大，残差 <span class="math-inline">r</span> 越小，则对 <span class="math-inline">\hat{\sigma}</span>、<span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span> 的误差界限就越紧。
+
+<p>
+给定 <span class="math-inline">A</span>、<span class="math-inline">\hat{u}</span> 和 <span class="math-inline">\hat{v}</span>，计算 <span class="math-inline">\Vert r\Vert _2</span> 很容易，但 <span class="math-inline">\delta</span> 需要更多关于奇异值的信息才能近似。通常使用接近 <span class="math-inline">\hat{\sigma}</span> 的计算奇异值来近似 <span class="math-inline">\delta</span>：
+
+<span class="math-inline">\delta \approx \min \{ \hat{\sigma} - \hat{\sigma}_- ,\hat{\sigma}_+ - \hat{\sigma} \}</span>，
+其中 <span class="math-inline">\hat{\sigma}_-</span> 是比 <span class="math-inline">\hat{\sigma}</span> 小的下一个计算奇异值，<span class="math-inline">\hat{\sigma}_+</span> 是比 <span class="math-inline">\hat{\sigma}</span> 大的下一个计算奇异值。
+
+<p>
+<br><hr>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
+
+<ul>
+<li><a name="tex2html3641"
+  href="node192.html">可用的算法概述</a>
+</ul>
+<!--End of Table of Child-Links-->
+<hr>
+
+</p>
+<!--Navigation Panel-->
 <a name="tex2html3639"
   href="node192.html">
 <button class="navigate">下一节</button></a> 
@@ -288,11 +342,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3640" href="node192.html">Overview of Available Algorithms.</a>
+<b>下一节：</b><a name="tex2html3640" href="node192.html">可用的算法概述</a>
 <b>上一级：</b><a name="tex2html3634" href="node190.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html3628" href="node190.html">奇异值分解</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

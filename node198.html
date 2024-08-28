@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Golub-Kahan-Lanczos Bidiagonalization Procedure.</title>
+<title>Golub-Kahan-Lanczos双对角化过程</title>
 <meta charset="utf-8">
-<meta name="description" content="Golub-Kahan-Lanczos Bidiagonalization Procedure.">
+<meta name="description" content="Golub-Kahan-Lanczos双对角化过程">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,25 +72,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3746" href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b>下一节：</b><a name="tex2html3746" href="node199.html">与对称Lanczos的关系</a>
 <b>上一级：</b><a name="tex2html3740" href="node197.html">Golub-Kahan-Lanczos 方法</a>
 <b>上一节：</b><a name="tex2html3734" href="node197.html">Golub-Kahan-Lanczos 方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001533010000000000000"></a> 
 <a name="20907"></a>
-<br>
 Golub-Kahan-Lanczos双对角化过程
-</h4> 
+</h4>
+
 如第&#167;<a href="node193.html#sec:svdtm">6.2</a>节所述，
 SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</span>和<span class="math-inline">V</span>，使得
 <span class="math-inline">U^*AV</span>呈双对角形式。实际上，<span class="math-inline">V</span>的第一列<span class="math-inline">v_1</span>
 可以选择为任意单位向量，之后<span class="math-inline">U</span>和<span class="math-inline">V</span>的其他列通常是唯一确定的。
 我们将其表示为
 
-<div class="math-display" id="uav">U^{*} A V = B = \left[ \begin{array}{cccccc}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_{n} \\\end{array} \right]. \tag{111}</div>
+<div class="math-display" id="uav">U^{*} A V = B = \begin{bmatrix}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_{n} \end{bmatrix}. \tag{6.4}</div>
 
 即使<span class="math-inline">A</span>是复数，所有<span class="math-inline">\alpha</span>和<span class="math-inline">\beta</span>也都是实数。
 
@@ -95,7 +99,7 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 
 从双对角形式&nbsp;(<a href="node198.html#uav">6.4</a>)中，我们可以推导出<span class="math-inline">U</span>和<span class="math-inline">V</span>的列<span class="math-inline">u_k</span>和<span class="math-inline">v_k</span>的双重递归。乘以<span class="math-inline">U</span>，我们有
 
-<div class="math-display">A\left[\begin{array}{cccc}v_1 & v_2 & \ldots & v_n\end{array} \right] = U\left[\begin{array}{cccccc}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_n \\\end{array} \right].</div>
+<div class="math-display">A\begin{bmatrix}v_1 & v_2 & \ldots & v_n \end{bmatrix} = U\begin{bmatrix}\alpha_1 & \beta_1 & & & \\& \alpha_2 & \beta_2 & & \\& & \ddots & \ddots & \\& & & \alpha_{n-1} & \beta_{n-1} \\& & & & &\alpha_n \end{bmatrix}.</div>
 
 将两边第<span class="math-inline">k</span>列对应相等，我们得到
 
@@ -103,9 +107,54 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
 
 或者
 
-<div class="math-display" id="gklmethod">U^{\ast}_k U_k = I, \quadV^{\ast}_k V_k = I, \quad \mathrm{and} \quadV^{\ast}_k v_{k+1} = 0, \tag{116}</div>
+<div class="math-display">\alpha_k u_k = Av_k - \beta_{k-1}u_{k-1}, \quad\quad \beta_0 = 0. \tag{6.5}</div>
+另一方面，从关系式
 
-其中</span>B_k<span class="math-inline">是</span>B<span class="math-inline">的</span>k$阶前主子矩阵，如&nbsp;(<a href="node198.html#uav">6.4</a>)所定义。
+<div class="math-display">A^{\ast} \begin{bmatrix} u_1 & u_2 & \ldots & u_n\end{bmatrix} = V\begin{bmatrix} \alpha_1 & & & \\& \alpha_2 & \beta_1 & \\& & \ddots & \ddots & \\& & & \beta_{n-1} & \alpha_n \end{bmatrix},</div>
+
+我们得到
+
+<div class="math-display">A^{\ast} u_k = {\alpha}_k v_k + {\beta}_k v_{k+1}</div>
+
+或者
+
+<div class="math-display">{\beta}_k v_{k+1} = A^{\ast} u_k - {\alpha}_k v_k.\tag{6.6}</div>
+
+<p>
+由于<span class="math-inline">U</span>和<span class="math-inline">V</span>的列是归一化的，我们必须有
+
+<div class="math-display">\alpha_k = \Vert Av_k - \beta_{k-1}u_{k-1}\Vert _2</div>
+
+以及
+
+<div class="math-display">\beta_k = \Vert A^* u_k - \alpha_k v_k\Vert _2.</div>
+
+我们将递归总结在以下算法中。
+
+<pre class="algorithm" id="gklmethod">
+算法 6.1: Golub-Kahan-Lanczos 双对角化过程
+(1) 选择 <span class="math-inline">v_{1}</span> 为单位 2-范数向量，并设置 <span class="math-inline">\beta_{0}=0</span>
+(2) for <span class="math-inline">k=1,2,\ldots</span>，
+(3)     <span class="math-inline">u_{k}=A v_{k}-\beta_{k-1} u_{k-1}</span>
+(4)     <span class="math-inline">\alpha_{k}=\left\|u_{k}\right\|_{2}</span>
+(5)     <span class="math-inline">u_{k}=u_{k}/\alpha_{k}</span>
+(6)     <span class="math-inline">v_{k+1}=A^{*} u_{k}-\alpha_{k} v_{k}</span>
+(7)     <span class="math-inline">\beta_{k}=\left\|v_{k+1}\right\|_{2}</span>
+(8)     <span class="math-inline">v_{k+1}=v_{k+1}/\beta_{k}</span>
+(9) end for
+</pre>
+
+<p>
+收集算法前<span class="math-inline">k</span>步计算的量，我们得到以下重要关系：
+
+<div class="math-display" id="lansvdeq1">A V_k = U_k B_k, \tag{6.7}</div>
+<div class="math-display" id="lansvdeq2">A^{\ast} U_{k} = V_k B^*_k + \beta_{k}v_{k+1}e^*_k, \tag{6.8}</div>
+
+ 以及
+
+<div class="math-display" id="uvorth">U^{\ast}_k U_k = I, \quad V^{\ast}_k V_k = I, \quad \mathrm{and} \quad V^{\ast}_k v_{k+1} = 0, \tag{6.9}</div>
+
+其中<span class="math-inline">B_k</span>是<span class="math-inline">B</span>的 <span class="math-inline">k</span> 阶前主子矩阵，如&nbsp;(<a href="node198.html#uav">6.4</a>)所定义。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -125,7 +174,7 @@ SVD变换方法的第一阶段是计算酉矩阵<span class="math-inline">U</spa
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3746" href="node199.html">Relationship to Symmetric Lanczos.</a>
+<b>下一节：</b><a name="tex2html3746" href="node199.html">与对称Lanczos的关系</a>
 <b>上一级：</b><a name="tex2html3740" href="node197.html">Golub-Kahan-Lanczos 方法</a>
 <b>上一节：</b><a name="tex2html3734" href="node197.html">Golub-Kahan-Lanczos 方法</a>
   
