@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Single- and Multiple-Vector Iterations &nbsp; M.&nbsp;Gu </title>
+<title>单向量与多向量迭代 &nbsp; M.&nbsp;Gu </title>
 <meta charset="utf-8">
-<meta name="description" content="Single- and Multiple-Vector Iterations &nbsp; M.&nbsp;Gu ">
+<meta name="description" content="单向量与多向量迭代 &nbsp; M.&nbsp;Gu ">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,36 +69,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html3985" href="node211.html">幂法</a>
 <b>上一级：</b><a name="tex2html3979" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html3973" href="node209.html">直接方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h1><a name="SECTION001640000000000000000"></a> <a name="sec:power_nsym"></a>
-<br>
-Single- and Multiple-Vector Iterations 
+单向量与多向量迭代 
 <br>&nbsp; <em>M.&nbsp;Gu</em> 
 </h1>
 
 <p>
-The single- and multiple-vector iteration methods for the
-Hermitian eigenproblem in &#167;<a href="node94.html#sec_power_sym">4.3</a> can
-also be used to solve the NHEP, in
-many cases with similar convergence properties. Although
-these methods are in general not as competitive as the other
-methods to be covered in later sections, they are a good
-choice for those who only want to find a few extreme
-eigenvalues with a very simple method. 
-The Rayleigh quotient iteration (RQI) will have an ultimately quadratic rate of
-convergence, which is slower than the cubic rate for the Hermitian case.
-When converging to a defective eigenvalue it has a slow linear 
-rate <span class="math-inline">(m-1)/m</span>, where <span class="math-inline">m</span> is the multiplicity of the eigenvalue.
+针对厄米特征值问题的单向量和多向量迭代方法，在第&#167;<a href="node94.html#sec_power_sym">4.3</a>节中有所介绍，同样可用于求解非厄米特征值问题(NHEP)，在许多情况下具有类似的收敛特性。尽管这些方法通常不如后续章节将要介绍的其他方法那样具有竞争力，但对于仅需通过一种极为简便的方法求得少数极端特征值的用户来说，它们不失为一种理想选择。
+
+瑞利商迭代法(RQI)最终将呈现出平方收敛速率，这一速率较之厄米情况下的立方收敛速率要慢。当逼近一个缺陷特征值时，其收敛速率为缓慢的线性速率<span class="math-inline">(m-1)/m</span>，其中<span class="math-inline">m</span>代表特征值的重数。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
 <li><a name="tex2html3986" href="node211.html">幂法</a>
@@ -108,6 +96,27 @@ rate <span class="math-inline">(m-1)/m</span>, where <span class="math-inline">m
 </ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html3984"
+  href="node211.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html3978"
+  href="node203.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html3972"
+  href="node209.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html3980"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html3982"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html3985" href="node211.html">幂法</a>
+<b>上一级：</b><a name="tex2html3979" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html3973" href="node209.html">直接方法</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

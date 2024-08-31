@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Arnoldi Method &nbsp; Y.&nbsp;Saad </title>
+<title>Arnoldi方法 &nbsp; Y.&nbsp;Saad </title>
 <meta charset="utf-8">
-<meta name="description" content="Arnoldi Method &nbsp; Y.&nbsp;Saad ">
+<meta name="description" content="Arnoldi方法 &nbsp; Y.&nbsp;Saad ">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,38 +69,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4057" href="node216.html">基本算法</a>
 <b>上一级：</b><a name="tex2html4051" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4045" href="node214.html">可用的软件</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h1><a name="SECTION001650000000000000000"></a> <a name="sec:arnodimethod"></a><a name="23067"></a>
-<br>
-Arnoldi Method 
+Arnoldi方法 
 <br>&nbsp; <em>Y.&nbsp;Saad</em> 
 </h1>  
 
 <p>
-The Arnoldi method was first introduced as a <em>direct</em> algorithm
-for reducing     a     general  matrix   into      upper    Hessenberg
-form&nbsp;[<a
- href="node421.html#arno51">19</a>].  It was later discovered that this algorithm leads
-to a good  <em>iterative</em> technique  for approximating eigenvalues of
-large  sparse  matrices.  
+Arnoldi方法最初作为一种<em>直接</em>算法被引入，用于将一般矩阵转化为上三角海森堡形式[<a href="node421.html#arno51">19</a>]。随后人们发现，该算法还能衍生出一种优秀的<em>迭代</em>技术，用于近似求解大型稀疏矩阵的特征值问题。
 
 <p>
-The algorithm works for non-Hermitian matrices.  
-It is  most useful for cases  when the matrix <span class="math-inline">A</span> is  large
-but  matrix-vector  products  are relatively  inexpensive to  perform.
-This is the situation, for example, when <span class="math-inline">A</span> is large and sparse.
-We begin with a presentation of the  basic algorithm and then describe
-a number of variations.
+该算法适用于非厄米矩阵。在矩阵<span class="math-inline">A</span>规模庞大但矩阵向量乘积计算相对简便的情况下，Arnoldi方法尤为有效。例如，当<span class="math-inline">A</span>为大型稀疏矩阵时，便是如此。本文首先介绍基础算法，随后阐述若干变种。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
 <li><a name="tex2html4058" href="node216.html">基本算法</a>
@@ -110,6 +97,27 @@ a number of variations.
 </ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4056"
+  href="node216.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4050"
+  href="node203.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4044"
+  href="node214.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4052"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4054"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4057" href="node216.html">基本算法</a>
+<b>上一级：</b><a name="tex2html4051" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4045" href="node214.html">可用的软件</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

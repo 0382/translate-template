@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Stability of .</title>
+<title>稳定性</title>
 <meta charset="utf-8">
-<meta name="description" content="Stability of .">
+<meta name="description" content="稳定性">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,16 +72,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4302" href="node232.html">Locking and Purging in</a>
+<b>下一节：</b><a name="tex2html4302" href="node232.html">锁定或清除单个特征值</a>
 <b>上一级：</b><a name="tex2html4296" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4290" href="node230.html">Purging .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4290" href="node230.html">清除 <span class="math-inline">\theta</span></a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001667040000000000000">
-稳定性分析 <span class="math-inline">Q^{\ast } H Q</span>。</a>
+<span class="math-inline">Q^{\ast } H Q</span>的稳定性</a>
 </h4>
+
 如算法 <a href="node227.html#fig:orthQ3">7.8</a> 所示的收缩正交变换构建过程显然是稳定的（即，分量相对精确地表示了在精确算术中可获得的变化）。毫无疑问，相似变换 <span class="math-inline">Q^* H Q</span> 在数值上保留了 <span class="math-inline">H</span> 的特征值。然而，关于这些变换在清除过程中数值上保持海森堡形式的效果存在严重疑问。需要对基本算法进行修改，以确保如果 <span class="math-inline">y^*H = \theta y^*</span>，那么 <span class="math-inline">H_+ \equiv Q^* H Q</span> 在数值上是海森堡的（即，次对角线以下的所有元素相对于 <span class="math-inline">\Vert H \Vert</span> 都是微小的）。
 
 <p>
@@ -88,8 +93,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display">e_1^* Q = e_1^* L + (e_1^* y) g^* = \eta_1 g^*,</div>
 
 其中 <span class="math-inline">\eta_1</span> 是 <span class="math-inline">y</span> 的第一个分量。因此，
-<a name="gnorm2"></a>  
-|| g || = 1|  _1 |,
+
+<div class="math-display" id="gnorm2">\Vert g\Vert = \frac{1}{\vert \eta_1 \vert}, \tag{7.22}</div>
 
 <p>
 因此当 <span class="math-inline">y</span> 的第一个分量很小时，可能会出现数值困难。具体来说，<span class="math-inline">y^*H = \theta y^*</span> 并且因此在精确算术中 <span class="math-inline"> y^* H R = 0</span>。然而，在有限精度下，计算得到的 <span class="math-inline">fl(y^* H) = \theta y^* + z^*</span>。误差 <span class="math-inline">z</span> 相对于 <span class="math-inline">\Vert H \Vert</span> 约为 <span class="math-inline">\epsilon_M</span>，但
@@ -112,30 +117,56 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 基本思想如下：如果在第 <span class="math-inline">j</span> 步，计算得到的 <span class="math-inline">fl(y^* H q_j )</span> 不够小，则通过缩放向量 <span class="math-inline">y_j</span> 和分量 <span class="math-inline">\eta_{j+1}</span> 来调整使其足够小。在计算 <span class="math-inline">q_{j+1}</span> 之前进行这种重缩放，我们有 <span class="math-inline">y_j \leftarrow y_j \phi</span> 和 <span class="math-inline">\hat{y}_j \leftarrow \hat{y}_j \psi</span>，其中 <span class="math-inline">y^* = [ y_j^* , \hat{y}_j^*]</span>。当然，<span class="math-inline">\Vert y \Vert</span> 不应因这种缩放而改变，因此这是必要的。这给出了以下方程组来确定 <span class="math-inline">\phi</span> 和 <span class="math-inline">\psi</span>：如果 <span class="math-inline">\vert y_j^* H_j \hat{q}_j + \rho_j \beta_j \eta_{j+1} \vert >\epsilon_M \tau_{j+1}</span>，
 
-(_j )^2 + (1 - _j^2)^2 &amp;=&amp; 1, 
-<br>
-y_j^* H_j q_j + _j  _j _j+1 &amp;=&amp; 
-    _M _j+1.
+<div class="math-display">
+\begin{aligned}
+  (\tau_j \phi)^2 + (1 - \tau_j^2)\psi^2 &= 1,  \\
+y_j^* H_j \hat{q}_j\phi + \rho_j  \beta_j \eta_{j+1}\psi &= \pm\epsilon_M \tau_{j+1}.
+\end{aligned}
+</div>
 
 如果 <span class="math-inline">\rho_j</span> 在 <span class="math-inline">\sqrt{\epsilon_M}</span> 量级，那么这种缩放可以被吸收到 <span class="math-inline">\rho_j</span> 中，而不改变 <span class="math-inline">y</span> 并且不影响 <span class="math-inline">Q</span> 的数值正交性。当 <span class="math-inline">y</span> 被修改时，之前计算的 <span class="math-inline">q_i</span>（<span class="math-inline">2 \le i < j</span>）不需要改变。在第 <span class="math-inline">j</span> 步之后，向量 <span class="math-inline">y_j</span> 仅在后续步骤中进行重缩放，并且定义 <span class="math-inline">q_i</span>（<span class="math-inline">2 \le i \le j</span>）的公式对于 <span class="math-inline">y_j</span> 的缩放是不变的。有关详细信息，请参阅文献 [<a href="node421.html#sore98">420</a>]。
 
 <p>
-算法 <a href="node231.html#fig:orthQ4">7.9</a> 所示的代码实现了这一方案，以计算可接受的 <span class="math-inline">Q</span>。<a name="tex2html42" href="footnode.html#foot23623"><sup><button class="footnote"></button></sup></a>在实践中，这种变换可以在不存储 <span class="math-inline">Q</span> 的情况下就地计算并应用于 <span class="math-inline">H := Q^* H Q</span> 和 <span class="math-inline">V := VQ</span>。然而，这种实现非常微妙，构造 <span class="math-inline">Q</span> 的细节要求避免了额外的存储。该代码与上述描述略有不同，因为向量 <span class="math-inline">y</span> 仅在确定所有列 <span class="math-inline">2</span> 到 <span class="math-inline">n</span> 之后才被重缩放以具有单位范数。
+算法 <a href="node231.html#fig:orthQ4">7.9</a> 所示的代码实现了这一方案，以计算可接受的 <span class="math-inline">Q</span>。<sup><a href="footnote-better-algorithm">[1]</a></sup> 在实践中，这种变换可以在不存储 <span class="math-inline">Q</span> 的情况下就地计算并应用于 <span class="math-inline">H := Q^* H Q</span> 和 <span class="math-inline">V := VQ</span>。然而，这种实现非常微妙，构造 <span class="math-inline">Q</span> 的细节要求避免了额外的存储。该代码与上述描述略有不同，因为向量 <span class="math-inline">y</span> 仅在确定所有列 <span class="math-inline">2</span> 到 <span class="math-inline">n</span> 之后才被重缩放以具有单位范数。
 
 <p>
-<br>
-<a name="fig:orthQ4"></a><img
- width="598" height="699" align="BOTTOM" border="0"
- src="img2075.png"
- alt="\begin{algorithm}
-{Stable Orthogonal Deflating Transformation for IRAM
-}
-{
-\beg...
-...for} \\
-{\rm (33)} \&gt; <span class="math-inline">Q(:,1) = y/\Vert y \Vert </span>\end{tabbing}}
-\end{algorithm}">
-<br> 
+
+<pre class="algorithm" id="fig:orthQ4">
+算法 7.9：IRAM的稳定正交消去变换
+(1)  从满足 <span class="math-inline">\|y\|=1</span> 的n维向量y开始，<span class="math-inline">\eta=e_n^* y</span>  以及满足 <span class="math-inline">T y=\theta y</span> 的n阶对称三对角矩阵T
+(2)  <span class="math-inline">Q=0</span>
+(3)  当 <span class="math-inline">y(i)=0, y(i)=\epsilon_M / n, i:=i+1</span>，结束循环
+(4)  <span class="math-inline">\sigma=y(1)^2, \quad \tau_0=|y(1)|</span>
+(5)  对于 <span class="math-inline">j=2,\ldots, n</span>
+(6)      <span class="math-inline">\sigma=\sigma+y(j)^2, \quad \tau=\sqrt{\sigma}</span>
+(7)      <span class="math-inline">\gamma=-(y(j)/\tau)/\tau_0</span>
+(8)      <span class="math-inline">\rho=\tau_0/\tau</span>
+(9)      <span class="math-inline">Q(1: j-1, j)=y(1: j-1)\gamma, Q(j, j)=\rho</span>
+(10)     如果 <span class="math-inline">(j\lt n</span> 且 <span class="math-inline">\tau\lt.05)</span>
+(11)         <span class="math-inline">\tau_p=\sqrt{\sigma+y(j+1)^2}</span>
+(12)         <span class="math-inline">\alpha=y(1: j)^* H(1: j, 1: j) Q(1: j, j)</span>
+(13)         <span class="math-inline">\delta=y(j+1) H(j, j+1)\rho</span>
+(14)         <span class="math-inline">\sigma_0=-1</span>
+(15)         如果 <span class="math-inline">\operatorname{sign}(\alpha)\cdot\operatorname{sign}(\delta)\lt 0, \sigma_0=1</span>，结束如果
+(16)         如果 <span class="math-inline">|\delta+\alpha|>\epsilon_M\tau_p</span>
+(17)             如果 <span class="math-inline">\rho<\sqrt{\epsilon_M} / 100</span>
+(18)                 <span class="math-inline">Q(j, j)=Q(j, j)\sigma_0(\epsilon_M\tau_p+|\alpha|)/|\delta|</span>
+(19)             否则
+(20)                 如果 <span class="math-inline">|\alpha|>|\delta|</span>
+(21)                     <span class="math-inline">\phi=\sigma_0(\epsilon_M\tau_p+|\delta|)/|\alpha|</span>
+(22)                     <span class="math-inline">y(1: j)=y(1: j)\phi</span>
+(23)                     <span class="math-inline">\sigma=\sigma\phi^2, \quad \tau=\tau|\phi|</span>
+(24)                 否则
+(25)                     <span class="math-inline">\psi=\sigma_0(\epsilon_M\tau_p+|\alpha|)/|\delta|</span>
+(26)                     <span class="math-inline">y(j+1: n)=y(j+1: n)\psi</span>
+(27)                 结束如果
+(28)             结束如果
+(29)         结束如果
+(30)     结束如果
+(31)     <span class="math-inline">\tau_0=\tau</span>
+(32) 结束循环
+(33) <span class="math-inline">Q(:, 1)=y/\|y\|</span>
+</pre>
 
 <p>
 有几个实现问题需要注意：
@@ -156,6 +187,10 @@ y_j^* H_j q_j + _j  _j _j+1 &amp;=&amp;
 </dl>
 
 <p>
+<hr>
+<ol>
+<li id="footnote-better-algorithm">现在有一种更好的算法用于构建和应用这些变换；参见D. Sorensen的《隐式重启Arnoldi方法的去膨胀化》，CAAM技术报告，TR 98-12，莱斯大学，1998年（2000年8月修订）。</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html4301"
   href="node232.html">
@@ -173,11 +208,9 @@ y_j^* H_j q_j + _j  _j _j+1 &amp;=&amp;
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4302" href="node232.html">Locking and Purging in</a>
+<b>下一节：</b><a name="tex2html4302" href="node232.html">锁定或清除单个特征值</a>
 <b>上一级：</b><a name="tex2html4296" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4290" href="node230.html">Purging .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4290" href="node230.html">清除 <span class="math-inline">\theta</span></a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

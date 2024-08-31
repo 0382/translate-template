@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Purging .</title>
+<title>清除</title>
 <meta charset="utf-8">
-<meta name="description" content="Purging .">
+<meta name="description" content="清除">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,16 +66,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4288" href="node231.html">Stability of .</a>
+<b>下一节：</b><a name="tex2html4288" href="node231.html"><span class="math-inline">Q^{\ast } H Q</span>的稳定性</a>
 <b>上一级：</b><a name="tex2html4282" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4276" href="node229.html">Locking .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4276" href="node229.html">锁定 <span class="math-inline">\theta</span></a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001667030000000000000">
-清除 <span class="math-inline">\theta </span>。</a>
+清除 <span class="math-inline">\theta </span></a>
 </h4> 
+
 如果 <span class="math-inline">\theta </span> 是“不需要的”，那么我们可能希望从投影矩阵 <span class="math-inline">H</span> 的谱中移除 <span class="math-inline">\theta </span>。
 然而，使用精确位移的隐式重启策略有时会无法清除一个已经收敛的不需要的 Ritz 值 [<a
  href="node421.html#leso96">294</a>]。   
@@ -89,7 +88,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 现在，当我们应用
 <span class="math-inline">AVQ = VQ (Q^*H Q) + f e_k^* Q </span> 时，我们得到
 
-<div class="math-display">A [v_1 , V_2] = [v_1 , V_2] = \left[\ba{cc}\theta & 0 \\h & H_2\ea\right]+ f (\eta, \tau e_{k-1}^*),</div>
+<div class="math-display">A [v_1 , V_2] = [v_1 , V_2] = \begin{bmatrix}\theta & 0 \\h & H_2\end{bmatrix}+ f (\eta, \tau e_{k-1}^*),</div>
 
 其中 <span class="math-inline">H_2</span> 是上三角海森堡矩阵。这里，<span class="math-inline">\eta = e_k^*y</span> 如前所述，但没有要求 <span class="math-inline">\eta</span> 必须很小。所需的清除操作仅仅是丢弃该方程两边的第一列。
 然后我们得到
@@ -119,11 +118,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4288" href="node231.html">Stability of .</a>
+<b>下一节：</b><a name="tex2html4288" href="node231.html"><span class="math-inline">Q^{\ast } H Q</span>的稳定性</a>
 <b>上一级：</b><a name="tex2html4282" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4276" href="node229.html">Locking .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4276" href="node229.html">锁定 <span class="math-inline">\theta</span></a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

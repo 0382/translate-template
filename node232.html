@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Locking and Purging in IRAM.</title>
+<title>IRAM中的锁定与清除</title>
 <meta charset="utf-8">
-<meta name="description" content="Locking and Purging in IRAM.">
+<meta name="description" content="IRAM中的锁定与清除">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,35 +72,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4314" href="node233.html">Eigenvector Computation with Spectral</a>
+<b>下一节：</b><a name="tex2html4314" href="node233.html">特征向量计算与谱变换</a>
 <b>上一级：</b><a name="tex2html4308" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4304" href="node231.html">Stability of .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4304" href="node231.html"><span class="math-inline">Q^{\ast} H Q</span> 的稳定性</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001667050000000000000">
 IRAM中的锁定与清除</a>
 </h4>
+
 尽管锁定和清除的基本收缩思路在概念上简单明了，但在实际操作中仍需考虑诸多细节和不同策略。最终，某些临时决策在所难免。此处采用的收缩策略较为保守，但实际表现相当合理。在[<a href="node421.html#sore98">420</a>]中，计算实例表明，即便设定极低容差，也不会遗漏多重或聚集的本征值。
 
 <p>
 实施细节颇为复杂，仅通过代码展示难以传达核心思想。因此，我们将通过较高层次的文字描述来概述策略要点。
 
-<p>
-<br>
-<a name="fig:defL2"></a><img
- width="598" height="313" align="BOTTOM" border="0"
- src="img2077.png"
- alt="\begin{algorithm}{IRAM收缩算法}
-{
-\begin{enumerate}
-\item [\rm (1)]
-首...
-...若所有锁定里兹值均已处理，迭代即告终止。
-\end{enumerate}}
-\end{algorithm}">
-<br> 
+<pre class="algorithm" id="fig:defL2">
+算法 7.10：IRAM的清除
+(1) 每次有一个Ritz值<span class="math-inline">\theta</span>收敛时锁定它 <span class="math-inline">\left(\|A x - x\theta\| < \epsilon_D\right)</span>，直到锁定了<span class="math-inline">k</span>个值。
+(2) 继续迭代并锁定每个新近收敛且比现有值更“好”的Ritz值。每次锁定操作后，执行清除操作以删除最不想要但已锁定的Ritz值。因此，总是有<span class="math-inline">k</span>个锁定的Ritz值和向量就位。
+(3) 继续步骤(2)，直到下一个要收敛的Ritz值不是“更好”的值。用一个随机生成的向量替换第<span class="math-inline">(k+1)</span>个基向量，将其与之前的向量正交化，然后构建一个新的<span class="math-inline">((k+p)-</span>步) Arnoldi分解。重复步骤(2)。
+(4) 当步骤(3)连续执行两次且没有替换现有的锁定Ritz值时，迭代停止。
+</pre>
+
 
 <p>
 实施要点：
@@ -139,11 +138,9 @@ IRAM中的锁定与清除</a>
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4314" href="node233.html">Eigenvector Computation with Spectral</a>
+<b>下一节：</b><a name="tex2html4314" href="node233.html">特征向量计算与谱变换</a>
 <b>上一级：</b><a name="tex2html4308" href="node227.html">正交收缩变换</a>
-<b>上一节：</b><a name="tex2html4304" href="node231.html">Stability of .</a>
-  
-  
+<b>上一节：</b><a name="tex2html4304" href="node231.html"><span class="math-inline">Q^{\ast} H Q</span> 的稳定性</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

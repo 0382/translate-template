@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,96 +73,81 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4075" href="node217.html">变体</a>
-<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-  
-  
+<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi方法</a>
+<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi方法</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001651000000000000000">
 基本算法</a>
-</h2> 
+</h2>
 Arnoldi方法是一种投影到Krylov子空间上的正交投影方法。
 它从Arnoldi过程开始，如算法<a href="node216.html#alg:arn0">7.3</a>所述。
 该过程基本上可以看作是构建Krylov子空间<span class="math-inline">\mathcal{K}^m(A,v)</span>正交基的改进Gram-Schmidt过程。
 
-<p>
-<br>
-<a name="alg:arn0"></a><img
- width="598" height="259" align="BOTTOM" border="0"
- src="img1893.png"
- alt="\begin{algorithm}{Arnoldi Procedure
-}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb\=ccc\...
-... h_{j+1,j} <span class="math-inline">\ \\
-{\rm (11)} \&gt; \&gt; {\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="alg:arn0">
+算法 7.3：Arnoldi 过程
+(1)  对起始向量 <span class="math-inline">v</span>，计算 <span class="math-inline">v_1 = \frac{v}{\|v\|_2}</span>
+(2)  对于 <span class="math-inline">j = 1, 2, ..., m</span> 执行循环
+(3)      <span class="math-inline">w := A v_j</span>
+(4)      对于 <span class="math-inline">i = 1, 2, ..., j</span> 执行循环
+(5)          <span class="math-inline">h_{ij} = w^* v_i</span>
+(6)          <span class="math-inline">w := w - h_{ij} v_i</span>
+(7)      结束循环
+(8)      <span class="math-inline">h_{j+1, j} = \|w\|_2</span>
+(9)      如果 <span class="math-inline">h_{j+1, j} = 0</span>，则停止
+(10)     <span class="math-inline">v_{j+1} = \frac{w}{h_{j+1, j}}</span>
+(11) 结束循环
+</pre>
+
 
 <p>
 上述过程<a name="23104"></a>
-会在第(8)行计算的向量</span>w<span class="math-inline">消失时停止。
-向量</span>v_1, v_2, \ldots , v_m<span class="math-inline">通过构造形成一个正交系统，被称为<em>Arnoldi向量</em>。
+会在第(8)行计算的向量<span class="math-inline">w</span>消失时停止。
+向量<span class="math-inline">v_1, v_2, \ldots , v_m</span>通过构造形成一个正交系统，被称为<em>Arnoldi向量</em>。
 <a name="23106"></a>
-一个简单的归纳论证表明，这个系统是Krylov子空间</span>\mathcal{K}^m(A,v)<span class="math-inline">的一个基。
+一个简单的归纳论证表明，这个系统是Krylov子空间<span class="math-inline">\mathcal{K}^m(A,v)</span>的一个基。
 
 <p>
 接下来我们考虑算法生成的量之间的一个基本关系。
 以下等式很容易推导出：
 
-<div class="math-display" id="10">A v_j = \sum_{i=1}^{j+1} h_{ij} v_i , \quad j=1,2,\ldots ,m \ . \tag{122}</div>
+<div class="math-display" id="10">A v_j = \sum_{i=1}^{j+1} h_{ij} v_i , \quad j=1,2,\ldots ,m \ . \tag{7.6}</div>
 
-如果我们用</span>V_m<span class="math-inline">表示列向量为</span>v_1,\ldots, v_m<span class="math-inline">的</span>n \times m<span class="math-inline">矩阵，用</span>H_m<span class="math-inline">表示由算法定义的非零元素</span>h_{ij}<span class="math-inline">的</span>m \times m<span class="math-inline">海森堡矩阵，那么以下关系成立：
-<br>
-<div align="CENTER"><a name="eq:AVm"></a><a name="eq:VmTAVm"></a>
+如果我们用<span class="math-inline">V_m</span>表示列向量为<span class="math-inline">v_1,\ldots, v_m</span>的<span class="math-inline">n \times m</span>矩阵，用<span class="math-inline">H_m</span>表示由算法定义的非零元素<span class="math-inline">h_{ij}</span>的<span class="math-inline">m \times m</span>海森堡矩阵，那么以下关系成立：
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle A V_m<span class="math-inline"></td>
-<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
-<td align="LEFT" NOWRAP></span>\displaystyle V_m H_m + h_{m+1,m} v_{m+1} e_m^{\ast},<span class="math-inline"></td>
-<td WIDTH=10 align="RIGHT">
-(123)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"></span>\displaystyle V_m^{\ast} A V_m<span class="math-inline"></td>
-<td align="CENTER" NOWRAP></span>\textstyle =<span class="math-inline"></td>
-<td align="LEFT" NOWRAP></span>\displaystyle H_m \ .<span class="math-inline"></td>
-<td WIDTH=10 align="RIGHT">
-(124)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
-关系eq:VmTAVm通过将eq:AVm的两边乘以</span>V_m^{\ast}<span class="math-inline">并利用</span>\{v_1, \ldots,v_m\}<span class="math-inline">的正交性从eq:AVm得出。
+<div class="math-display" id="eq:AVm">A V_m = V_m H_m + h_{m+1,m} v_{m+1} e_m^{\ast} , \tag{7.7}</div>
+<div class="math-display" id="eq:VmTAVm">V_m^{\ast} A V_m = H_m \ . \tag{7.8}</div>
+
+关系 (<a href="#eq:VmTAVm">7.8</a>) 通过将 (<a href="#eq:AVm">7.7</a>) 的两边乘以<span class="math-inline">V_m^{\ast}</span>并利用<span class="math-inline">\{v_1, \ldots,v_m\}</span>的正交性从 (<a href="#eq:AVm">7.7</a>) 得出。
 
 <p>
-如前所述，当第(8)行计算的</span>w<span class="math-inline">的范数在某一步</span>j<span class="math-inline">消失时，算法会中断。
-事实证明，这当且仅当起始向量</span>v<span class="math-inline">是</span>j<span class="math-inline">个特征向量的组合时发生（即，</span>v_1<span class="math-inline">的最小多项式是</span>j<span class="math-inline">次）。
-此外，子空间</span>\mathcal{K}_j<span class="math-inline">是然后不变的，近似特征值和特征向量是精确的[<a href="node421.html#saad92">387</a>]。
+如前所述，当第(8)行计算的<span class="math-inline">w</span>的范数在某一步<span class="math-inline">j</span>消失时，算法会中断。
+事实证明，这当且仅当起始向量<span class="math-inline">v</span>是<span class="math-inline">j</span>个特征向量的组合时发生（即，<span class="math-inline">v_1</span>的最小多项式是<span class="math-inline">j</span>次）。
+此外，子空间<span class="math-inline">\mathcal{K}_j</span>是然后不变的，近似特征值和特征向量是精确的[<a href="node421.html#saad92">387</a>]。
 
 <p>
-投影过程在</span>\mathcal{K}_m<span class="math-inline">上提供的近似特征值</span>\lambda_i \sup{m}<span class="math-inline">是海森堡矩阵</span>H_m<span class="math-inline">的特征值。这些被称为<em>Ritz值</em>。
-与Ritz值</span>\lambda_i \sup{m}<span class="math-inline">相关的<em>Ritz近似特征向量</em>定义为</span>u_i \sup{m}= V_m y_i \sup{m}<span class="math-inline">，其中</span>y_i \sup{m}<span class="math-inline">是与特征值</span>\lambda_i \sup{m}<span class="math-inline">相关的特征向量。通常，Ritz特征值的少数几个将构成</span>A<span class="math-inline">的相应特征值</span>\lambda_i<span class="math-inline">的良好近似，并且近似的质量通常会随着</span>m<span class="math-inline">的增加而提高。
+投影过程在<span class="math-inline">\mathcal{K}_m</span>上提供的近似特征值<span class="math-inline">\lambda_i^{(m)}</span>是海森堡矩阵<span class="math-inline">H_m</span>的特征值。这些被称为<em>Ritz值</em>。
+与Ritz值<span class="math-inline">\lambda_i^{(m)}</span>相关的<em>Ritz近似特征向量</em>定义为<span class="math-inline">u_i^{(m)}= V_m y_i^{(m)}</span>，其中<span class="math-inline">y_i^{(m)}</span>是与特征值<span class="math-inline">\lambda_i^{(m)}</span>相关的特征向量。通常，Ritz特征值的少数几个将构成<span class="math-inline">A</span>的相应特征值<span class="math-inline">\lambda_i</span>的良好近似，并且近似的质量通常会随着<span class="math-inline">m</span>的增加而提高。
 
 <p>
-原始算法包括增加</span>m<span class="math-inline">直到找到</span>A<span class="math-inline">的所有期望特征值。对于大矩阵，这在计算和存储方面都变得昂贵。
-在存储方面，我们需要保留</span>m<span class="math-inline">个长度为</span>n<span class="math-inline">的向量加上一个</span>m \times m<span class="math-inline">海森堡矩阵，总共大约</span>nm + m^2/2<span class="math-inline">。对于算术成本，我们需要将</span>v_j<span class="math-inline">乘以</span>A<span class="math-inline">，成本为</span>2 \times N_z<span class="math-inline">，其中</span>N_z<span class="math-inline">是</span>A<span class="math-inline">中的非零元素数量，然后对</span>j<span class="math-inline">个向量进行正交化，成本为</span>4(j+1)n<span class="math-inline">，这随着步数</span>j<span class="math-inline">增加。因此，</span>m<span class="math-inline">维Arnoldi过程的成本在存储上为</span>\approx nm + m^2/2<span class="math-inline">，在算术操作上为</span>\approx N_z + 2nm^2<span class="math-inline">。
+原始算法包括增加<span class="math-inline">m</span>直到找到<span class="math-inline">A</span>的所有期望特征值。对于大矩阵，这在计算和存储方面都变得昂贵。
+在存储方面，我们需要保留<span class="math-inline">m</span>个长度为<span class="math-inline">n</span>的向量加上一个<span class="math-inline">m \times m</span>海森堡矩阵，总共大约<span class="math-inline">nm + m^2/2</span>。对于算术成本，我们需要将<span class="math-inline">v_j</span>乘以<span class="math-inline">A</span>，成本为<span class="math-inline">2 \times N_z</span>，其中<span class="math-inline">N_z</span>是<span class="math-inline">A</span>中的非零元素数量，然后对<span class="math-inline">j</span>个向量进行正交化，成本为<span class="math-inline">4(j+1)n</span>，这随着步数<span class="math-inline">j</span>增加。因此，<span class="math-inline">m</span>维Arnoldi过程的成本在存储上为<span class="math-inline">\approx nm + m^2/2</span>，在算术操作上为<span class="math-inline">\approx N_z + 2nm^2</span>。
 
 <p>
 在算法进行过程中获得Ritz对的残差范数是相当廉价的。
-设</span>y_i \sup{m}<span class="math-inline">是与特征值</span>\lambda_i \sup{m}<span class="math-inline">相关的</span>H_m<span class="math-inline">的特征向量，设</span>u_i \sup{m}<span class="math-inline">是Ritz近似特征向量</span>u_i \sup{m}= V_m y_i \sup{m}<span class="math-inline">。我们有以下关系：
+设<span class="math-inline">y_i^{(m)}</span>是与特征值<span class="math-inline">\lambda_i^{(m)}</span>相关的<span class="math-inline">H_m</span>的特征向量，设<span class="math-inline">u_i^{(m)}</span>是Ritz近似特征向量<span class="math-inline">u_i^{(m)}= V_m y_i^{(m)}</span>。我们有以下关系：
 
-<div class="math-display">(A - \lambda_i \sup{m}I ) u_i \sup{m}= h_{m+1,m}(e_m^{\ast} y_i\sup{m})v_{m+1},</div>
+<div class="math-display">(A - \lambda_i^{(m)}I ) u_i^{(m)}= h_{m+1,m}(e_m^{\ast} y_i^{(m)})v_{m+1},</div>
 
 因此，
 
-<div class="math-display">\Vert ( A - \lambda_i \sup{m}I ) u_i \sup{m}\Vert _2 = h_{m+1,m} \vert e_m^{\ast} y_i\sup{m}\vert \ .</div>
+<div class="math-display">\Vert ( A - \lambda_i^{(m)}I ) u_i^{(m)}\Vert _2 = h_{m+1,m} \vert e_m^{\ast} y_i^{(m)}\vert \ .</div>
 
-因此，残差范数等于特征向量</span>y_i \sup{m}<span class="math-inline">的最后一个分量的绝对值乘以</span>h_{m+1,m}<span class="math-inline">。残差范数并不总是指示</span>\lambda_i \sup{m}$中的实际误差，但可以非常有帮助地推导停止过程。
+因此，残差范数等于特征向量<span class="math-inline">y_i^{(m)}</span>的最后一个分量的绝对值乘以<span class="math-inline">h_{m+1,m}</span>。残差范数并不总是指示<span class="math-inline">\lambda_i^{(m)}</span>中的实际误差，但可以非常有帮助地推导停止过程。
 
 <p>
 <hr>
-
-</p><!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html4074"
   href="node217.html">
 <button class="navigate">下一节</button></a> 
@@ -174,10 +165,8 @@ Arnoldi方法是一种投影到Krylov子空间上的正交投影方法。
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4075" href="node217.html">变体</a>
-<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
-  
-  
+<b>上一级：</b><a name="tex2html4069" href="node215.html">Arnoldi方法</a>
+<b>上一节：</b><a name="tex2html4063" href="node215.html">Arnoldi方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

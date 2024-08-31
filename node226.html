@@ -67,28 +67,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4227" href="node227.html">正交收缩变换</a>
-<b>上一级：</b><a name="tex2html4221" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4221" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4215" href="node225.html">计算成本与权衡</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001666000000000000000"></a> <a name="sec:deflation"></a><a name="23514"></a>
-<br>
-缩减与停止规则
+收缩与停止规则
 </h2>
 
 <p>
-缩减是QR迭代实际应用中的一个重要概念，因此对IRAM（隐式重启Arnoldi方法）同样至关重要。在QR迭代的背景下，缩减意味着将海森堡矩阵<span class="math-inline">H</span>的一个小次对角元素置零。之所以称为缩减，是因为这会将海森堡矩阵分割成两个更小的子问题，这两个子问题可以独立地进一步细化。
+收缩是QR迭代实际应用中的一个重要概念，因此对IRAM（隐式重启Arnoldi方法）同样至关重要。在QR迭代的背景下，收缩意味着将海森堡矩阵<span class="math-inline">H</span>的一个小次对角元素置零。之所以称为收缩，是因为这会将海森堡矩阵分割成两个更小的子问题，这两个子问题可以独立地进一步细化。
 
 <p>
-然而，在IRAM的背景下，传统的QR缩减技术并不总是适用。需要针对隐式重启的额外缩减功能。通常希望在精度水平<span class="math-inline">\epsilon_D</span>处进行缩减，其中<span class="math-inline">1 > \epsilon_D > \epsilon_M</span>，<span class="math-inline">\epsilon_M</span>是机器精度。理论上（即在精确算术中），当<span class="math-inline">A</span>具有对应于不同特征向量的多重特征值时，IRAM不可能计算出该多重性的多个实例，因为它是一种“单向量”方法，而非块方法。然而，在实践中，通常在收敛过程中方法会自行缩减，且舍入误差通常会在后续起始向量中引入新特征向量方向的分量，因此计算多重特征值通常没有太大困难。尽管如此，这种方法可能不可靠，可能会遗漏多重特征值。无论如何，这种方法通常需要严格的收敛容差才能成功找到多重特征值的所有实例。更有效的方法是，一旦近似特征值收敛到一定精度水平，就进行缩减（即锁定），然后强制后续的Arnoldi向量与收敛的子空间正交。通过这一功能，可以以相同的指定精度计算多重特征值的额外实例，而无需将它们收敛到不必要的过高精度。
+然而，在IRAM的背景下，传统的QR收缩技术并不总是适用。需要针对隐式重启的额外收缩功能。通常希望在精度水平<span class="math-inline">\epsilon_D</span>处进行收缩，其中<span class="math-inline">1 > \epsilon_D > \epsilon_M</span>，<span class="math-inline">\epsilon_M</span>是机器精度。理论上（即在精确算术中），当<span class="math-inline">A</span>具有对应于不同特征向量的多重特征值时，IRAM不可能计算出该多重性的多个实例，因为它是一种“单向量”方法，而非块方法。然而，在实践中，通常在收敛过程中方法会自行收缩，且舍入误差通常会在后续起始向量中引入新特征向量方向的分量，因此计算多重特征值通常没有太大困难。尽管如此，这种方法可能不可靠，可能会遗漏多重特征值。无论如何，这种方法通常需要严格的收敛容差才能成功找到多重特征值的所有实例。更有效的方法是，一旦近似特征值收敛到一定精度水平，就进行收缩（即锁定），然后强制后续的Arnoldi向量与收敛的子空间正交。通过这一功能，可以以相同的指定精度计算多重特征值的额外实例，而无需将它们收敛到不必要的过高精度。
 
 <p>
-在Arnoldi过程中，与QR迭代一样，在隐式重启的过程中，前<span class="math-inline">k</span>个次对角线元素可能会变小。然而，通常情况下，在次对角元素变小之前，<span class="math-inline">H</span>的谱中就已经出现了收敛的Ritz值。这种收敛通常通过观察<span class="math-inline">H</span>的特征向量<span class="math-inline">y</span>中的小末端分量来检测。当这种情况发生时，我们能够构造<span class="math-inline">H</span>的正交相似变换，得到一个略微扰动的<span class="math-inline">H</span>，确实具有零次对角线，这是我们缩减方案的基础。
+在Arnoldi过程中，与QR迭代一样，在隐式重启的过程中，前<span class="math-inline">k</span>个次对角线元素可能会变小。然而，通常情况下，在次对角元素变小之前，<span class="math-inline">H</span>的谱中就已经出现了收敛的Ritz值。这种收敛通常通过观察<span class="math-inline">H</span>的特征向量<span class="math-inline">y</span>中的小末端分量来检测。当这种情况发生时，我们能够构造<span class="math-inline">H</span>的正交相似变换，得到一个略微扰动的<span class="math-inline">H</span>，确实具有零次对角线，这是我们收缩方案的基础。
 
 <p>
-在IRAM的背景下，需要两种类型的缩减：
+在IRAM的背景下，需要两种类型的收缩：
 <dl>
 <dt><strong><i>锁定：</i></strong></dt>
 <dd><a name="23516"></a> 
@@ -101,7 +98,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 如果一个Ritz值<span class="math-inline">\theta</span>已经收敛但不是所需集合的成员，那么我们希望解耦并从由Arnoldi向量张成的当前Krylov子空间中移除特征对<span class="math-inline">(x, \theta)</span>。这个过程称为清除。
 </dd>
 </dl> 
-这种缩减技术最初是在[<a href="node421.html#leho95">289</a>,<a href="node421.html#leso96">294</a>]中开发的。我们在这里介绍的方案基于[<a href="node421.html#sore98">420</a>]中的改进。该方案允许稳定且高效地缩减（或锁定）已经以指定相对精度<span class="math-inline">\epsilon_D</span>收敛的Ritz值，该精度可能远大于机器精度<span class="math-inline">\epsilon_M</span>。在没有加速收敛的SI（Shift-and-Invert）时，这一点尤其重要。通常，在这种情况下，矩阵-向量乘积的数量会很大，因此以低容差锁定收敛的Ritz值将非常可取。这将避免为达到允许正常QR类型缩减的精度所需的矩阵-向量乘积的开销。此外，能够清除已收敛但不需要的Ritz值非常重要。正如[<a href="node421.html#leho95">289</a>]中指出的，Parlett和Le[<a href="node421.html#pale93">359</a>]发现的QR波纹追踪过程的前向不稳定性将阻止隐式重启用于清除已收敛的不需要Ritz值。
+这种收缩技术最初是在[<a href="node421.html#leho95">289</a>,<a href="node421.html#leso96">294</a>]中开发的。我们在这里介绍的方案基于[<a href="node421.html#sore98">420</a>]中的改进。该方案允许稳定且高效地收缩（或锁定）已经以指定相对精度<span class="math-inline">\epsilon_D</span>收敛的Ritz值，该精度可能远大于机器精度<span class="math-inline">\epsilon_M</span>。在没有加速收敛的SI（Shift-and-Invert）时，这一点尤其重要。通常，在这种情况下，矩阵-向量乘积的数量会很大，因此以低容差锁定收敛的Ritz值将非常可取。这将避免为达到允许正常QR类型收缩的精度所需的矩阵-向量乘积的开销。此外，能够清除已收敛但不需要的Ritz值非常重要。正如[<a href="node421.html#leho95">289</a>]中指出的，Parlett和Le[<a href="node421.html#pale93">359</a>]发现的QR波纹追踪过程的前向不稳定性将阻止隐式重启用于清除已收敛的不需要Ritz值。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -122,10 +119,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4227" href="node227.html">正交收缩变换</a>
-<b>上一级：</b><a name="tex2html4221" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4221" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4215" href="node225.html">计算成本与权衡</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

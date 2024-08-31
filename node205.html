@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Balancing Matrices &nbsp; T.&nbsp;Chen and J.&nbsp;Demmel </title>
+<title>平衡矩阵 T.&nbsp;Chen and J.&nbsp;Demmel </title>
 <meta charset="utf-8">
-<meta name="description" content="Balancing Matrices &nbsp; T.&nbsp;Chen and J.&nbsp;Demmel ">
+<meta name="description" content="平衡矩阵 T.&nbsp;Chen and J.&nbsp;Demmel ">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,13 +69,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html3914" href="node206.html">直接平衡法</a>
 <b>上一级：</b><a name="tex2html3908" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html3902" href="node204.html">引言</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001620000000000000000">
 平衡矩阵
-<br>&nbsp; <em>陈天奇(T. Chen) 和 邓默(J. Demmel)</em> </a>
+<br>&nbsp; <em>T.&nbsp;Chen and J.&nbsp;Demmel</em>
 </h1>
 
 <p>
@@ -103,16 +101,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 奥斯本(Osborne) [346] 首先注意到，矩阵 <span class="math-inline">A</span> 的范数通常可以通过以下形式的相似变换来减小
-<br>
-<div align="RIGHT">
 
+<div class="math-display">B=DAD^{-1}, \tag{7.4}</div>
 
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">B=DAD^{-1},</div></td>
-<td WIDTH=10 align="RIGHT">
-(120)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
 其中 <span class="math-inline">D</span> 是一个对角矩阵。 奥斯本在考虑不可约矩阵并忽略其对角元素的情况下，还证明了使 <span class="math-inline">\vert\vert B\vert\vert _F</span> 最小的 <span class="math-inline">D</span> 也在 <span class="math-inline">2</span>-范数下平衡了 <span class="math-inline">B</span>：如果对于任何 <span class="math-inline">i</span>，行 <span class="math-inline">i</span> 的 <span class="math-inline">\alpha</span>-范数与列 <span class="math-inline">i</span> 的 <span class="math-inline">\alpha</span>-范数相同，则矩阵在 <span class="math-inline">\alpha</span>-范数下是平衡的。 他引入了第一个平衡算法，该算法反复遍历 <span class="math-inline">D</span> 的对角线元素，更新 <span class="math-inline">D_{ii}</span> 以平衡第 <span class="math-inline">i</span> 行和第 <span class="math-inline">i</span> 列。
 
 <p>
@@ -153,8 +144,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html3914" href="node206.html">直接平衡法</a>
 <b>上一级：</b><a name="tex2html3908" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html3902" href="node204.html">引言</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

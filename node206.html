@@ -67,20 +67,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html3931" href="node207.html">Krylov平衡算法</a>
-<b>上一级：</b><a name="tex2html3925" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b>上一节：</b><a name="tex2html3919" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-  
-  
+<b>上一级：</b><a name="tex2html3925" href="node205.html">平衡矩阵</a>
+<b>上一节：</b><a name="tex2html3919" href="node205.html">平衡矩阵</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001621000000000000000"></a>
 <a name="22784"></a>
-<br>
 直接平衡法
 </h2> 
 
 <p>
-我们将传统密集平衡算法，即LAPACK中的xGEBAL，分为两个阶段，详细描述见[<a href="node421.html#ParlettRe69">361</a>]。<a name="22787"></a> 
+我们将传统稠密平衡算法，即LAPACK中的xGEBAL，分为两个阶段，详细描述见[<a href="node421.html#ParlettRe69">361</a>]。<a name="22787"></a> 
 第一阶段对矩阵<span class="math-inline">A</span>的行和列进行置换，使得能够单独分离出一个特征值的行位于矩阵底部，而能够单独分离出一个特征值的列位于矩阵左侧。由于该算法假设平衡操作旨在提高计算特征值的准确性，因此没有必要对这些已经可以精确确定特征值的行和列进行平衡。第二阶段通过迭代剩余的行和列对矩阵进行平衡——每对行/列依次进行平衡，直到无法再取得显著进展为止。
 
 <p>
@@ -109,10 +106,8 @@ SPBALANCE的平衡阶段，针对置换阶段发现的对角块进行，采用�
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html3931" href="node207.html">Krylov平衡算法</a>
-<b>上一级：</b><a name="tex2html3925" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-<b>上一节：</b><a name="tex2html3919" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
-  
-  
+<b>上一级：</b><a name="tex2html3925" href="node205.html">平衡矩阵</a>
+<b>上一节：</b><a name="tex2html3919" href="node205.html">平衡矩阵</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

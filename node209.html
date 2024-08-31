@@ -66,25 +66,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3971" href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html3971" href="node210.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html3965" href="node203.html">非厄米特特征值问题</a>
-<b>上一节：</b><a name="tex2html3959" href="node208.html">Accuracy of Eigenvalues Computed</a>
-  
-  
+<b>上一节：</b><a name="tex2html3959" href="node208.html">平衡后特征值计算的准确性</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001630000000000000000"></a>  <a name="sec:nsymeigdirect"></a><a name="22905"></a> 
 <a name="22906"></a> 
 <a name="22907"></a> 
 <a name="22908"></a>
-<br>
 直接方法
 </h1> 
 
 <p>
-实践中用于解决非厄米特征值问题(NHEP)（参见公式<a href="node204.html#eq:nep1">7.1</a>及<a href="node204.html#eq:nep2">7.2</a>）的主要直接方法是QR算法。<a name="22912"></a>该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
+实践中用于解决非厄米特征值问题(NHEP)（参见公式<a href="node204.html#eq:nep1">7.1</a>及<a href="node204.html#eq:nep2">7.2</a>）的主要直接方法 <sup><a href="footnote-direct-method">[1]</a></sup> 是QR算法。<a name="22912"></a>该算法首先计算非厄米矩阵<span class="math-inline">A</span>的Schur标准型（或简称为Schur分解）：
 
-<div class="math-display" id="chap5:schur">A = U T U^{\ast}, \tag{121}</div>
+<div class="math-display" id="chap5:schur">A = U T U^{\ast}, \tag{7.5}</div>
 
 其中<span class="math-inline">U</span>是酉矩阵，满足<span class="math-inline">U^{\ast} U = I</span>，而<span class="math-inline">T</span>是上三对角矩阵。矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>即为<span class="math-inline">T</span>的对角线元素（详见第<a href="node48.html#sec_chap2_nHep">2.5</a>节）。矩阵<span class="math-inline">A</span>的特征向量<span class="math-inline">x</span>为<span class="math-inline">U s</span>，其中<span class="math-inline">s</span>是<span class="math-inline">T</span>的特征向量，可通过求解三角形方程组获得。当<span class="math-inline">A</span>为实矩阵时，QR算法计算实Schur分解以避免复数运算，从而节省浮点运算和内存。
 
@@ -114,20 +111,20 @@ QR算法具有向后稳定性；<a name="22925"></a>即，对于计算得到的�
 其中<span class="math-inline">\Vert E\Vert \leq p(n)\epsilon\Vert A\Vert</span>，<span class="math-inline">p(n)</span>是一个适度增长的<span class="math-inline">n</span>的多项式函数。
 
 <p>
-实现QR算法的子程序几乎存在于所有与线性代数相关的软件包中。在MATLAB中，它作为eig命令使用。<a name="tex2html41" href="footnode.html#foot27093"><sup><button class="footnote"></button></sup></a>在LAPACK[<a href="node421.html#lapack">12</a>]中，提供了以下驱动程序例程，用于执行计算Schur分解、特征值、特征向量及计算结果精度估计的变种任务：
-<div align="CENTER">
+实现QR算法的子程序几乎存在于所有与线性代数相关的软件包中。在MATLAB中，它作为eig命令使用。<sup><a href="footnote-matlab">[2]</a></sup> 在LAPACK[<a href="node421.html#lapack">12</a>]中，提供了以下驱动程序例程，用于执行计算Schur分解、特征值、特征向量及计算结果精度估计的变种任务：
+<div align="center">
 <table CELLPADDING=3>
-<tr><td align="LEFT">xGEES</td>
-<td align="LEFT">计算Schur分解并按特征值排序，</td>
+<tr><td align="left">xGEES</td>
+<td align="left">计算Schur分解并按特征值排序，</td>
 </tr>
-<tr><td align="LEFT">xGEESX</td>
-<td align="LEFT">xGEES加上条件估计，</td>
+<tr><td align="left">xGEESX</td>
+<td align="left">xGEES加上条件估计，</td>
 </tr>
-<tr><td align="LEFT">xGEEV</td>
-<td align="LEFT">特征值与特征向量，</td>
+<tr><td align="left">xGEEV</td>
+<td align="left">特征值与特征向量，</td>
 </tr>
-<tr><td align="LEFT">xGEEVX</td>
-<td align="LEFT">xGEEV加上条件估计，</td>
+<tr><td align="left">xGEEVX</td>
+<td align="left">xGEEV加上条件估计，</td>
 </tr>
 </table>
 </div>
@@ -137,6 +134,11 @@ QR算法具有向后稳定性；<a name="22925"></a>即，对于计算得到的�
 在ScaLAPACK[<a href="node421.html#scalapack">52</a>]中，提供了用于并行执行海森堡约简及隐式移位QR迭代的计算例程，分别是PxGEHRD和PxLAHQR。
 
 <p>
+<hr>
+<ol>
+<li id="footnote-direct-method">请注意，由于在数学上，求解特征值等同于寻找多项式的零点，而针对后者不存在非迭代方法，因此直接法也必须进行迭代。我们称一种方法为<em>直接法</em>，是指实践证明该方法（几乎）从未在固定次数的迭代中失败过，即能够确保收敛。</li>
+<li id="footnote-matlab">已经宣布，一个基于LAPACK的数值库将成为MATLAB下一个主要版本的一部分；参见《MATLAB、Simulink和工具箱用户通讯，冬季 <span class="math-inline">2000</span>》，可在以下网址获取<a href="http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml">http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml</a></li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html3970"
   href="node210.html">
@@ -154,11 +156,9 @@ QR算法具有向后稳定性；<a name="22925"></a>即，对于计算得到的�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3971" href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b>下一节：</b><a name="tex2html3971" href="node210.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html3965" href="node203.html">非厄米特特征值问题</a>
-<b>上一节：</b><a name="tex2html3959" href="node208.html">Accuracy of Eigenvalues Computed</a>
-  
-  
+<b>上一节：</b><a name="tex2html3959" href="node208.html">平衡后特征值计算的准确性</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

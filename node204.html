@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3900" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>下一节：</b><a name="tex2html3900" href="node205.html">平衡矩阵</a>
 <b>上一级：</b><a name="tex2html3894" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html3888" href="node203.html">非厄米特特征值问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001610000000000000000">
@@ -78,11 +76,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h1>
 在本章中，我们将讨论非厄米特征值问题（NHEP）
 
-<div class="math-display" id="eq:nep1">Ax = \lambda x, \tag{117}</div>
+<div class="math-display" id="eq:nep1">Ax = \lambda x, \tag{7.1}</div>
 
 其中，方阵 <span class="math-inline">A \neq A^{\ast}</span>。向量 <span class="math-inline">x \neq 0</span> 称为右特征向量。一个满足
 
-<div class="math-display" id="eq:nep2">y^{\ast} A = \lambda y^{\ast} \tag{118}</div>
+<div class="math-display" id="eq:nep2">y^{\ast} A = \lambda y^{\ast} \tag{7.2}</div>
 
 的向量 <span class="math-inline">y \neq 0</span> 称为 <span class="math-inline">A</span> 的左特征向量。
 
@@ -92,7 +90,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 与厄米矩阵不同，非厄米矩阵不具备正交的特征向量集；换句话说，非厄米矩阵 <span class="math-inline">A</span> 通常不能通过正交矩阵 <span class="math-inline">Q</span> 变换为对角形式 <span class="math-inline">D=Q^\ast A Q</span>。多数非厄米矩阵可通过非正交矩阵 <span class="math-inline">X</span> 变换为对角形式 <span class="math-inline">D=X^{-1}AX</span>，但存在一些矩阵甚至无法做到这一点。这类矩阵可视为极限情况，其中 <span class="math-inline">X</span> 趋向于奇异算子，且它们不具备完整的特征向量集；它们被称为<em>缺陷矩阵</em>。这揭示了数值不稳定的来源：如果 <span class="math-inline">X</span> 在某种意义上接近奇异算子，那么变换可能对 <span class="math-inline">A</span> 的扰动敏感。这些扰动由计算 <span class="math-inline">X</span> 和 <span class="math-inline">D</span> 的过程引入。因此，尽可能多地使用正交或接近正交的变换至关重要。众所周知，对于任何非厄米矩阵 <span class="math-inline">A</span>，存在一个酉矩阵 <span class="math-inline">U</span> 将其变换为上三角形式
 
-<div class="math-display" id="sec51:eq1">T=U^\ast A U. \tag{119}</div>
+<div class="math-display" id="sec51:eq1">T=U^\ast A U. \tag{7.3}</div>
 
 矩阵 <span class="math-inline">T</span> 称为 <span class="math-inline">A</span> 的<em>舒尔形式</em>。<span class="math-inline">A</span> 的特征值出现在 <span class="math-inline">T</span> 的对角线上。此外，矩阵 <span class="math-inline">U</span> 可以正交变换，使得 <span class="math-inline">A</span> 的特征值按预定顺序出现在 <span class="math-inline">R</span> 的对角线上。如果 <span class="math-inline">z</span> 是 <span class="math-inline">R</span> 对应于特征值 <span class="math-inline">\lambda</span> 的特征向量，即 <span class="math-inline">Tz=\lambda z</span>，则有
 
@@ -160,120 +158,114 @@ Arnoldi和Lanczos方法在应用移位逆变换时最为有效；即，必须有
 在表<a href="node204.html#nepsummary">7.1</a>中，我们总结了各种类方法。该表并非旨在替代进一步阅读；它仅作为起点，并可能帮助读者发现哪种方法最适合哪种需求。每种方法的实际性能通常取决于许多参数，且一种方法对于某一类问题最佳，可能对某些特定矩阵会遇到收敛问题。
 
 <p>
-<br><p></p>
-<div align="CENTER">
-
+<div align="center">
 <a name="nepsummary"></a> 
-
-<p>
-<br>
-<div align="CENTER"><a name="22726"></a>
-<table CELLPADDING=3 border="1">
-<caption><strong>表 7.1:</strong>
-非厄米特征值问题算法总结</caption>
-<tr><td align="CENTER">算法</td>
-<td align="CENTER">模式</td>
-<td align="CENTER">FL-<span class="math-inline">\lambda</span></td>
-<td align="CENTER"><span class="math-inline">\lambda</span>-ext</td>
-<td align="CENTER"><span class="math-inline">\lambda</span>-int</td>
-<td align="CENTER">内存/开销</td>
+<div align="center"><a name="22726"></a>
+<table style="border-collapse: collapse;" border="1">
+<caption><strong>表 7.1:</strong>非厄米特征值问题算法总结</caption>
+<tr><td align="center">算法</td>
+<td align="center">模式</td>
+<td align="center">FL-<span class="math-inline">\lambda</span></td>
+<td align="center"><span class="math-inline">\lambda</span>-ext</td>
+<td align="center"><span class="math-inline">\lambda</span>-int</td>
+<td align="center">内存/开销</td>
 </tr>
-<tr><td align="CENTER">幂迭代</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">慢</td>
-<td align="CENTER">否</td>
-<td align="CENTER">否</td>
-<td align="CENTER">低</td>
+<tr><td align="center">幂迭代</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">慢</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">低</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">
+<tr><td align="center">&nbsp;</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">否</td>
-<td align="CENTER">否</td>
-<td align="CENTER">低</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">低</td>
 </tr>
-<tr><td align="CENTER">子空间迭代</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">否</td>
-<td align="CENTER">适中</td>
+<tr><td align="center">子空间迭代</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">
+<tr><td align="center">&nbsp;</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">适中</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">Arnoldi</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">否</td>
-<td align="CENTER">适中</td>
+<tr><td align="center">Arnoldi</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">(IRAM)</td>
-<td align="CENTER">
+<tr><td align="center">(IRAM)</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">适中</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">Lanczos</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">否</td>
-<td align="CENTER">低</td>
+<tr><td align="center">Lanczos</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">低</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">
+<tr><td align="center">&nbsp;</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">低</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">低</td>
 </tr>
-<tr><td align="CENTER">块Lanczos</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">否</td>
-<td align="CENTER">适中</td>
+<tr><td align="center">块Lanczos</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">
+<tr><td align="center">&nbsp;</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">适中</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">Jac.-Dav.</td>
-<td align="CENTER"><span class="math-inline">A</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">慢</td>
-<td align="CENTER">适中</td>
+<tr><td align="center">Jac.-Dav.</td>
+<td align="center"><span class="math-inline">A</span></td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">慢</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">
+<tr><td align="center">&nbsp;</td>
+<td align="center">
 <span class="math-inline">(A - \sigma I)^{-1}</span></td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">适中</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
 </tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">预条件</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">是</td>
-<td align="CENTER">适中</td>
+<tr><td align="center">&nbsp;</td>
+<td align="center">预条件</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">适中</td>
 </tr>
 </table></div>
 </div>
@@ -300,118 +292,7 @@ Arnoldi和Lanczos方法在应用移位逆变换时最为有效；即，必须有
 <dt><strong>预条件:</strong></dt>
 <dd>使用 <span class="math-inline">A-\sigma I</span> 的预条件器进行操作；即，允许对 <span class="math-inline">(A-\sigma I)x=b</span> 进行不精确求解，从而提高效率的可能性（当然，这取决于预条件器的质量）。
 </dd>
-</dl> 
-
-<p>
-
-<br><p></p>
-<div align="CENTER">
-
-<div align="CENTER"><a name="22745"></a>
-<table CELLPADDING=3 border="1">
-<caption><strong>表:</strong>
-<b>非厄米特征值问题算法比较 </b></caption>
-<tr><td align="CENTER">算法</td>
-<td align="CENTER">模式</td>
-<td align="CENTER">WIL</td>
-<td align="CENTER">E-ext</td>
-<td align="CENTER">E-int</td>
-<td align="CENTER">内存</td>
-</tr>
-<tr><td align="CENTER">幂迭代</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">--</span></td>
-<td align="CENTER"><span class="math-inline">--</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-</tr>
-<tr><td align="CENTER">多向量</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">-</span></td>
-<td align="CENTER"><span class="math-inline">--</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-</tr>
-<tr><td align="CENTER">Arnoldi</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-</tr>
-<tr><td align="CENTER">(IRAM)</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-</tr>
-<tr><td align="CENTER">Lanczos</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">--</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-</tr>
-<tr><td align="CENTER">块Lanczos</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">--</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-</tr>
-<tr><td align="CENTER">Jac Dav</td>
-<td align="CENTER">直接</td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">\square</span></td>
-<td align="CENTER"><span class="math-inline">\square/-</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">SI</td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">\square/-</span></td>
-</tr>
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">预条件</td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">++</span></td>
-<td align="CENTER"><span class="math-inline">+</span></td>
-<td align="CENTER"><span class="math-inline">\square/-</span></td>
-</tr>
-</table></div>
-</div>
-<br>
+</dl>
 
 <p>
 <hr><!--Navigation Panel-->
@@ -431,11 +312,9 @@ Arnoldi和Lanczos方法在应用移位逆变换时最为有效；即，必须有
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3900" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>下一节：</b><a name="tex2html3900" href="node205.html">平衡矩阵</a>
 <b>上一级：</b><a name="tex2html3894" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html3888" href="node203.html">非厄米特特征值问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

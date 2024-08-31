@@ -67,22 +67,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4199" href="node225.html">计算成本与权衡</a>
-<b>上一级：</b><a name="tex2html4193" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4193" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4187" href="node223.html">收敛性质</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001664000000000000000"></a>
 <a name="23480"></a>
-<br>
 数值稳定性
 </h2>
 
 <p>
 在LAPACK[<a href="node421.html#lapack">12</a>]等软件包中提供的稳健QR算法的实现，可以计算出一个满足以下条件的矩阵<span class="math-inline">A</span>的近似舒尔形式：
 
-<div class="math-display" id="backqr">(A+E)\hat{V} = \hat{V} \hat{R}, \tag{128}</div>
+<div class="math-display" id="backqr">(A+E)\hat{V} = \hat{V} \hat{R}, \tag{7.16}</div>
 
 其中<span class="math-inline">\hat{R}</span>是上三角矩阵，<span class="math-inline">\Vert \hat{V}^\ast \hat{V} - I\Vert \approx \epsilon_M</span>，并且<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>，<span class="math-inline">\epsilon_M</span>是机器精度（单位舍入误差）。由于在迭代过程中仅使用酉变换，<span class="math-inline">\Vert E\Vert \approx \epsilon_M\Vert A\Vert</span>这一事实直接导致了QR算法的后向稳定性。换句话说，QR方法计算的是一个接近<span class="math-inline">A</span>的矩阵<span class="math-inline">A+E</span>的舒尔形式。
 
@@ -114,7 +111,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 其中<span class="math-inline">E_1</span>相对于<span class="math-inline">\Vert A\Vert</span>很小。如果<span class="math-inline">H_m y = y \theta</span>，其中<span class="math-inline">\eta = e_m^*y</span>很小（例如<span class="math-inline">\Vert f_m\Vert \vert\eta\vert < \epsilon_U \Vert H_m \Vert</span>），那么
 
-<a name="nonsymA:eq:evest"></a> (A + E) x = x ,
+<div class="math-display" id="nonsymA:eq:evest">(A + E) x = x \theta, \tag{7.17}</div>
 
 其中<span class="math-inline">x = V_m y</span>，<span class="math-inline">E = E_1 + f_m (e_m^*y) x^*</span>（假设<span class="math-inline">\Vert y\Vert = 1</span>）。因此，在任何情况下，收敛的近似特征对<span class="math-inline">(x, \theta)</span>对于一个附近的矩阵<span class="math-inline">A+E</span>是精确的。
 
@@ -144,10 +141,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4199" href="node225.html">计算成本与权衡</a>
-<b>上一级：</b><a name="tex2html4193" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4193" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4187" href="node223.html">收敛性质</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

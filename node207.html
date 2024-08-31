@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,15 +72,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3945" href="node208.html">Accuracy of Eigenvalues Computed</a>
-<b>上一级：</b><a name="tex2html3939" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>下一节：</b><a name="tex2html3945" href="node208.html">平衡后特征值计算的准确性</a>
+<b>上一级：</b><a name="tex2html3939" href="node205.html">平衡矩阵</a>
 <b>上一节：</b><a name="tex2html3933" href="node206.html">直接平衡法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001622000000000000000">
-克里洛夫平衡算法</a>
+Krylov平衡算法</a>
 </h2>
 
 <p>
@@ -86,10 +90,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 迭代次数<span class="math-inline">t</span>和<em>cutoff</em>值由用户决定，因为最佳停止准则和cutoff值可能取决于矩阵<span class="math-inline">A</span>。基于实验证据，我们选择了<span class="math-inline">t</span>的默认值为5，<em>cutoff</em>的默认值为<span class="math-inline">10^{-8}</span>。这意味着平衡最多需要10次矩阵-向量乘法，因此与随后的特征值计算相比，成本可能非常低。
 
-<p>
-<br>
-<a name="alg:krylovbalance"></a><img width="598" height="299" align="BOTTOM" border="0" src="img1860.png" alt="\begin{algorithm}{克里洛夫平衡算法用于非厄米特征值问题（{\sc KrylovCutoff}）} { \... ...\textbf{结束循环} \end{tabbing}} \vspace*{-12pt}%% 长页面 \pagebreak \end{algorithm}">
-<br>
+<pre class="algorithm" id="alg:krylovbalance">
+算法 7.1: 用于NHEP的Krylov平衡算法(KRYLOVCUTOFF)
+(1) <span class="math-inline">\text{normA} = \Vert A\Vert_\infty</span>
+(2) for <span class="math-inline">i=1,n</span>, <span class="math-inline">D(i)=1</span>
+(3) for <span class="math-inline">j=1,2,..., t</span>
+(4)     <span class="math-inline">z = \text{一个长度为} n \text{的随机} \pm 1\text{向量}</span>
+(5)     <span class="math-inline">p = D(A(D^{-1}z))</span>
+(6)     <span class="math-inline">r = D^{-1}(A^T(Dz))</span>
+(7)     for <span class="math-inline">i=1,2,...,n</span>
+(8)         if <span class="math-inline">(|p(i)| > \text{cutoff} \cdot \text{normA})</span> and <span class="math-inline">(r(i) \neq 0)</span>
+(9)             <span class="math-inline">D(i) = D(i) \cdot \sqrt{|r(i)/p(i)|}</span>
+(10)        end if
+(11)    end for
+(12) end for
+</pre>
 
 <p>
 <hr><!--Navigation Panel-->
@@ -109,11 +124,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html3945" href="node208.html">Accuracy of Eigenvalues Computed</a>
-<b>上一级：</b><a name="tex2html3939" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>下一节：</b><a name="tex2html3945" href="node208.html">平衡后特征值计算的准确性</a>
+<b>上一级：</b><a name="tex2html3939" href="node205.html">平衡矩阵</a>
 <b>上一节：</b><a name="tex2html3933" href="node206.html">直接平衡法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

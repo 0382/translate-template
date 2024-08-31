@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,19 +72,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4115" href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>下一节：</b><a name="tex2html4115" href="node220.html">隐式重启Arnoldi方法</a>
+<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4105" href="node218.html">显式重启</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001654000000000000000"></a>
 <a name="sec:imp-def"></a>  
 <a name="Deflation_Arnoldi_method__explicit"></a>
-<br>
-收缩法
+收缩
 </h2>
+
 我们现在考虑引入收缩过程的以下实现方式。迄今为止，我们已经描述了仅计算一个特征对（eigenpair）的算法。若需计算多个特征对，则有两种可能的选择。
 <br>
 <br>
@@ -93,7 +97,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <div class="math-display">\tilde A = A - U_{k-1} \Sigma U_{k-1}^{\ast}, </div>
 
-其中<span class="math-inline">\Sigma = \diag(\sigma_i)</span>是一个位移的对角矩阵。<span class="math-inline">\tilde A</span>的特征值由两组组成。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值将位移至<span class="math-inline">\tilde \lambda_i = \lambda_i - \sigma_i</span>，而其余特征值保持不变。如果寻求具有最大实部的特征值，则选择位移使得<span class="math-inline">\lambda_k</span>成为<span class="math-inline">\tilde A</span>中具有最大实部的下一个特征值。也可以通过简单地投影出与由<span class="math-inline">U_{k-1}</span>张成的不变子空间相关的分量来进行收缩；这将导致操作矩阵
+其中<span class="math-inline">\Sigma = \mathrm{diag}(\sigma_i)</span>是一个位移的对角矩阵。<span class="math-inline">\tilde A</span>的特征值由两组组成。与舒尔向量<span class="math-inline">u_1, \ldots, u_{k-1}</span>相关的特征值将位移至<span class="math-inline">\tilde \lambda_i = \lambda_i - \sigma_i</span>，而其余特征值保持不变。如果寻求具有最大实部的特征值，则选择位移使得<span class="math-inline">\lambda_k</span>成为<span class="math-inline">\tilde A</span>中具有最大实部的下一个特征值。也可以通过简单地投影出与由<span class="math-inline">U_{k-1}</span>张成的不变子空间相关的分量来进行收缩；这将导致操作矩阵
 
 <div class="math-display">\tilde A = A (I - U_{k-1} U_{k-1}^{\ast}).</div>
 
@@ -102,7 +106,48 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 一个更好的收缩实现方式，与Arnoldi过程很好地结合，是使用单个基<span class="math-inline">v_1, v_2, \ldots , v_m</span>，其前几个向量是已经收敛的舒尔向量。假设已有<span class="math-inline">k-1</span>个这样的向量收敛，记为<span class="math-inline">v_1, v_2,\ldots,v_{k-1}</span>。然后我们选择一个与<span class="math-inline">v_1,\ldots,v_{k-1}</span>正交且范数为1的向量<span class="math-inline">v_k</span>。接下来执行<span class="math-inline">m-k</span>步Arnoldi过程，其中向量<span class="math-inline">v_j</span>相对于所有之前的<span class="math-inline">v_i</span>，包括<span class="math-inline">v_1,\ldots,v_{k-1}</span>保持正交。这将生成子空间的正交基
 
-<div class="math-display" id="alg:defl">\underbrace{\left[v_1, v_2, \ldots, v_{k-1}\right.}_{Locked},\underbrace{\left. v_k, v_{k+1}, \ldots v_m \right] }_{Active} \tag{126}</div>
+<div class="math-display">{\rm span}\{ v_1,\ldots, v_{k-1} , v_k, A v_k, \ldots, A^{m-k} v_k \}. \tag{7.9}</div>
+
+因此，这个修改的Krylov子空间的维数通常是恒定的，等于<span class="math-inline">m</span>。结合Arnoldi方法的隐式收缩过程的概要如下。
+
+<pre class="algorithm" id="alg:defl">
+算法 7.5：显式重启带消去的Arnoldi方法用于NHEP
+(1)  设置 <span class="math-inline">k := 1</span>
+(2)  <strong>循环</strong>
+(3)      对于 <span class="math-inline">j = k, k+1, \ldots, m</span> 执行
+(4)      <span class="math-inline">w := Av_j</span>
+(5)      计算一组 <span class="math-inline">j</span> 个系数 <span class="math-inline">h_{ij}</span>，使得 <span class="math-inline">w := w - \sum_{i=1}^{j} h_{ij} v_i</span> 正交于所有先前的 <span class="math-inline">v_i</span>，<span class="math-inline">i = 1, 2, \ldots, j</span>。
+(6)      <span class="math-inline">h_{j+1, j} = \|w\|_2</span>
+(7)      <span class="math-inline">v_{j+1} = \frac{w}{h_{j+1, j}}</span>
+(8)      计算与特征值 <span class="math-inline">\tilde{\lambda}_k</span> 相关的 <span class="math-inline">A</span> 的近似特征向量及其相关的残差范数估计 <span class="math-inline">\rho_k</span>。
+(9)      将此特征向量正交化以得到近似的Schur向量 <span class="math-inline">\widetilde{u}_k</span> 并定义 <span class="math-inline">v_k := \widetilde{u}_k</span>。
+(10)     如果 <span class="math-inline">\rho_k</span> 足够小，则（接受特征值）
+(11)         <span class="math-inline">h_{i,k} = v_i^* Av_k</span>，<span class="math-inline">i = 1, \ldots, k</span>
+(12)         设置 <span class="math-inline">k := k + 1</span>，
+(13)         如果 <span class="math-inline">k \geq \text{nev}</span>，则停止，否则跳转到 (2)
+(14)     否则
+(15)         跳转到 (3)
+(16)     结束如果
+</pre>
+
+注意，在循环中，与特征值<span class="math-inline">\lambda_1,\ldots,\lambda_{k-1}</span>相关的舒尔向量在后续步骤中不会被触及。它们有时被称为“锁定向量”。同样，与这些向量对应的上三角矩阵也被锁定。
+
+<div class="math-display">\underbrace{\left[v_1, v_2, \ldots, v_{k-1}\right.}_{Locked},\underbrace{\left. v_k, v_{k+1}, \ldots v_m \right] }_{Active}</div>
+
+<p>
+当一个新的舒尔向量收敛时，步骤(10)计算与这个新基向量相关的<span class="math-inline">R</span>的第<span class="math-inline">k</span>列。在后续步骤中，近似特征值是算法中定义的<span class="math-inline">m \times m</span>海森堡矩阵<span class="math-inline">H_m</span>的特征值，其<span class="math-inline">k \times k</span>主子矩阵是上三角的。例如，当<span class="math-inline">m=6</span>且第二个舒尔向量<span class="math-inline">k=2</span>收敛后，矩阵<span class="math-inline">H_m</span>将具有以下形式
+
+<div class="math-display">
+H_m = \begin{bmatrix}
+* & * & * & * & * & * \\
+  & * & * & * & * & * \\
+  &   & * & * & * & * \\
+  &   & * & * & * & * \\
+  &   &   & * & * & * \\
+  &   &   &   & * & *
+\end{bmatrix} \tag{7.10}
+</div>
+
 
 在后续步骤中，只需考虑与<span class="math-inline">2 \times 2</span>上三角矩阵无关的特征值。
 
@@ -131,11 +176,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4115" href="node220.html">Implicitly Restarted Arnoldi Method</a>
-<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>下一节：</b><a name="tex2html4115" href="node220.html">隐式重启Arnoldi方法</a>
+<b>上一级：</b><a name="tex2html4109" href="node215.html">Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4105" href="node218.html">显式重启</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

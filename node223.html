@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4185" href="node224.html">数值稳定性</a>
-<b>上一级：</b><a name="tex2html4179" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4179" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4173" href="node222.html">隐式重启</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001663000000000000000"></a>
 <a name="sec:convbehav"></a><a name="23465"></a>
-<br>
 收敛性质
 </h2> 
 
@@ -85,8 +82,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 另一种解释源于以下事实：每个这样的移位周期都会隐式地应用一个以 <span class="math-inline">A</span> 为变量的次数为 <span class="math-inline">p</span> 的多项式到初始向量上。
 
- v_1 (A) v_1  其中 () = _j=1^p (- _j )。
-     <a name="filtpoly2"></a>
+<div class="math-display" id="filtpoly2">v_1 = \psi(A)v_1 \text{  其中  }  \phi(\lambda) = \prod_{j=1}^{p}(\lambda - \mu_j). \tag{7.15}</div>
+
 这个多项式的根是 QR 过程中使用的移位，这些移位可以选择来增强初始向量在期望特征值对应的本征向量方向上的分量，并抑制不希望方向上的分量。当然，这是可取的，因为它迫使初始向量进入与期望特征值相关联的不变子空间。这反过来迫使 <span class="math-inline">f_k</span> 变小，从而导致收敛。详细信息可以在 [<a href="node421.html#sore92">419</a>] 中找到。
 
 <p>
@@ -127,10 +124,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4185" href="node224.html">数值稳定性</a>
-<b>上一级：</b><a name="tex2html4179" href="node220.html">Implicitly Restarted Arnoldi Method</a>
+<b>上一级：</b><a name="tex2html4179" href="node220.html">隐式重启Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4173" href="node222.html">隐式重启</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

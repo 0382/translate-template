@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,48 +73,49 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4103" href="node219.html">收缩</a>
-<b>上一级：</b><a name="tex2html4097" href="node215.html">Arnoldi Method &nbsp; Y.&nbsp;Saad</a>
+<b>上一级：</b><a name="tex2html4097" href="node215.html">Arnoldi方法</a>
 <b>上一节：</b><a name="tex2html4091" href="node217.html">变体</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION001653000000000000000"></a> 
 <a name="23161"></a>
-<br>
-Explicit Restarts
-</h2> 
-As was mentioned earlier, the standard implementations of the Arnoldi 
-method are limited by their high  storage and computational
-requirements as <span class="math-inline">m</span> increases.  Suppose that we are interested in only
-one eigenvalue/eigenvector of <span class="math-inline">A</span>, namely, the eigenvalue of largest
-real part of <span class="math-inline">A</span>. Then one way to circumvent the difficulty is to
-<i>restart</i> the algorithm. After a run with <span class="math-inline">m</span> Arnoldi vectors,
-we compute the approximate eigenvector and use it as an initial
-vector for the next run with the Arnoldi method. This process, which is 
-the simplest of this kind, is iterated to convergence to compute
-one eigenpair. For computing other eigenpairs, and for improving
-the efficiency of the process, a number of strategies have been
-developed, which are somewhat related. These include 
-deflation procedures briefly discussed in the next section, 
-and the implicit restarting strategy described in &#167;<a href="node220.html#sec:nsymiram">7.6</a>. 
+显式重启
+</h2>
 
-<p>
-<br>
-<img
- width="598" height="135" align="BOTTOM" border="0"
- src="img1920.png"
- alt="\begin{algorithm}
-% latex2html id marker 23164
-{Explicitly Restarted Arnoldi Met...
-...lse set <span class="math-inline"> v_1 \equiv u_1 \sup{m}</span>\ and goto <span class="math-inline">(1)</span>\end{tabbing}}
-\end{algorithm}">
-<br> 
+如前所述，随着<span class="math-inline">m</span>的增加，阿诺尔迪方法的标准实现受到其高存储和计算需求的限制。假设我们只对<span class="math-inline">A</span>的一个特征值/特征向量感兴趣，即<span class="math-inline">A</span>的实部最大的特征值。那么，绕过这一难题的一种方法就是重新启动算法。在运行了<span class="math-inline">m</span>个阿诺尔迪向量之后，我们计算近似特征向量，并将其作为下一次运行阿诺尔迪方法的初始向量。这个过程是最简单的一类，迭代至收敛以计算一个特征对。为了计算其他特征对并提高过程的效率，已经开发了许多策略，这些策略在某种程度上是相关的。其中包括下一节简要讨论的消减程序，以及第&#167;<a href="node220.html#sec:nsymiram">7.6</a>节描述的隐式重启策略。
+
+<pre class="algorithm">
+算法 7.4：显式重启Arnoldi方法用于NHEP
+(1) 迭代：执行算法 7.3 的 <span class="math-inline">m</span> 步
+(2) 重启：计算与最右端特征值 <span class="math-inline">\lambda_1^{(m)}</span> 相关的近似特征向量 <span class="math-inline">u^{(m)}_1</span>。
+(3) 如果满足条件则停止，否则设置 <span class="math-inline">v_1 = u</span> 并跳转到 (1)
+</pre>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4102"
+  href="node219.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4096"
+  href="node215.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4090"
+  href="node217.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4098"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4100"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4103" href="node219.html">收缩</a>
+<b>上一级：</b><a name="tex2html4097" href="node215.html">Arnoldi方法</a>
+<b>上一节：</b><a name="tex2html4091" href="node217.html">变体</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

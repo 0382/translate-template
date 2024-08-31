@@ -146,8 +146,7 @@ xBDSQR也被ScaLAPACK驱动例程PxGESVD使用。
 这是目前LAPACK中用于找到大于约25乘25的双对角矩阵的所有奇异值和向量的最快方法[<a
  href="node421.html#gudemmeldhillon94">208</a>,<a
  href="node421.html#lapack">12</a>]。
-它将矩阵分成两半，计算每一半的SVD，并通过求解一个特殊的有理方程将解粘合在一起。对于一个大的双对角矩阵，这会递归重复，直到部分小于25，这时调用QR算法。<a name="tex2html33"
-  href="footnode.html#foot20863"><sup><button class="footnote"></button></sup></a>它可能比DQDS或QR稍不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
+它将矩阵分成两半，计算每一半的SVD，并通过求解一个特殊的有理方程将解粘合在一起。对于一个大的双对角矩阵，这会递归重复，直到部分小于25，这时调用QR算法。<sup><a href="footnote-qr">[2]</a></sup>它可能比DQDS或QR稍不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
 
 <p>
 分治法由LAPACK计算例程xBDSDC实现，该例程被LAPACK驱动例程xGESDD用于计算稠密矩阵的SVD。
@@ -191,6 +190,7 @@ LAPACK、ScaLAPACK或MATLAB目前不包含基于二分法和逆迭代的SVD例�
 <hr>
 <ol>
 <li id="footnote-matlab">已经宣布，基于LAPACK的数值库将成为MATLAB下一个主要版本的一部分；请参阅《MATLAB、Simulink和工具箱用户通讯，2000年冬季版》，网址为<a href="http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml">http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml</a>。</li>
+<li id="footnote-qr">这段代码对浮点运算的假设非常温和。它能在具备保护位（guard digit）的加减法机器上运行，也能在没有保护位的二进制机器上工作，例如Cray X-MP、Cray Y-MP、Cray C-90或Cray-2等机型。理论上，它可能在不具备保护位的十六进制或十进制机器上失效，但我们目前尚未发现此类情况。</li>
 </ol>
 <hr>
 <!--Navigation Panel-->

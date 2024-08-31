@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html3957" href="node209.html">直接方法</a>
-<b>上一级：</b><a name="tex2html3951" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一级：</b><a name="tex2html3951" href="node205.html">平衡矩阵</a>
 <b>上一节：</b><a name="tex2html3947" href="node207.html">Krylov平衡算法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001623000000000000000"></a>
 <a name="22840"></a>
-<br>
 平衡后计算特征值的精度
 </h2>
 
@@ -92,42 +89,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 
-<p></p>
-<div align="CENTER"><a name="fig:direct_relerr"></a><a name="27088"></a>
-<table>
-<caption align="BOTTOM"><strong>图7.1：</strong>
-QH<span class="math-inline">768</span>和TOLOSA矩阵在直接平衡和未平衡情况下计算特征值的相对精度。</caption>
-<tr><td><img
- width="594" height="231" border="0"
- src="img1861.png"
- alt="\begin{figure}\begin{center}
-\begin{tabular}{cc}
-\epsfysize =2in\epsfxsize =2.5...
-...sfxsize =2.5in\epsfbox{tolosa_fig1.eps}\\
-\end{tabular}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig:direct_relerr"></a><a name="27088"></a>
+<img src="icon/fig7.1.png" alt="图7.1：QH768和TOLOSA矩阵在直接平衡和未平衡情况下计算特征值的相对精度。" />
+<p><strong>图7.1：</strong>QH768和TOLOSA矩阵在直接平衡和未平衡情况下计算特征值的相对精度。</p>
+</div>
 
 <p>
 图<a href="node208.html#fig:direct_relerr">7.1</a>清楚地显示，SPBALANCE有效地提高了QH768和TOLOSA矩阵大多数特征值的计算精度，通常提高了很多个数量级，如[<a href="node421.html#bddd97">28</a>]所述。
 
 <p>
 
-<p></p>
-<div align="CENTER"><a name="fig:kry_relerr"></a><a name="27089"></a>
-<table>
-<caption align="BOTTOM"><strong>图7.2：</strong>
-QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡和未平衡情况下计算特征值的相对精度。</caption>
-<tr><td><img
- width="538" height="244" border="0"
- src="img1862.png"
- alt="\begin{figure}\begin{center}
-\begin{tabular}{cc}
-\psfig{file=qh768_fig2.eps,wid...
-..._fig2.eps,width=13.25pc,height=12.65pc}\\
-\end{tabular}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig:kry_relerr"></a><a name="27089"></a>
+<img src="icon/fig7.2.png" alt="图7.2：QH768和TOLOSA矩阵在Krylov平衡和未平衡情况下计算特征值的相对精度。" />
+<p><strong>图7.2：</strong>QH768和TOLOSA矩阵在Krylov平衡和未平衡情况下计算特征值的相对精度。</p>
+</div>
 
 <p>
 图<a href="node208.html#fig:kry_relerr">7.2</a>显示，K<small>RYLOV</small>C<small>UTOFF</small>也提高了QH768和TOLOSA矩阵大多数特征值的计算精度，但改进程度不如直接算法SPBALANCE。
@@ -140,39 +117,19 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡和未平衡
 
 <p>
 
-<p></p>
-<div align="CENTER"><a name="fig:qh768_eigs_relerr"></a><a name="27090"></a>
-<table>
-<caption align="BOTTOM"><strong>图7.3：</strong>
-使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对QH<span class="math-inline">768</span>矩阵最大和最小（按模）特征值相对精度的比较。</caption>
-<tr><td><img
- width="595" height="231" border="0"
- src="img1863.png"
- alt="\begin{figure}\begin{center}
-\begin{tabular}{cc}
-\epsfysize =2in\epsfxsize =2.5...
-...psfxsize =2.5in\epsfbox{qh768_fig4.eps}\\
-\end{tabular}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig:qh768_eigs_relerr"></a><a name="27090"></a>
+<img src="icon/fig7.3.png" alt="图7.3：使用不同Krylov平衡算法（默认设置为五次迭代和10^{-8}的截断值）对QH768矩阵最大和最小（按模）特征值相对精度的比较。" />
+<p><strong>图7.3：</strong>使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对QH768矩阵最大和最小（按模）特征值相对精度的比较。</p>
+</div>
 
 <p>
 
-<p></p>
-<div align="CENTER"><a name="fig:tolosa_eigs_relerr"></a><a name="27091"></a>
-<table>
-<caption align="BOTTOM"><strong>图7.4：</strong>
-使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对TOLOSA矩阵最大和最小（按模）特征值相对精度的比较。</caption>
-<tr><td><img
- width="595" height="231" border="0"
- src="img1864.png"
- alt="\begin{figure}\begin{center}
-\begin{tabular}{cc}
-\epsfysize =2in\epsfxsize =2.5...
-...sfxsize =2.5in\epsfbox{tolosa_fig4.eps}\\
-\end{tabular}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig:tolosa_eigs_relerr"></a><a name="27091"></a>
+<img src="icon/fig7.4.png" alt="图7.4：使用不同Krylov平衡算法（默认设置为五次迭代和10^{-8}的截断值）对TOLOSA矩阵最大和最小（按模）特征值相对精度的比较。" />
+<p><strong>图7.4：</strong>使用不同Krylov平衡算法（默认设置为五次迭代和<span class="math-inline">10^{-8}</span>的截断值）对TOLOSA矩阵最大和最小（按模）特征值相对精度的比较。</p>
+</div>
 
 <p>
 图<a href="node208.html#fig:qh768_eigs_relerr">7.3</a>显示，QH768矩阵最小特征值的相对误差变化不大。然而，对于最大特征值，K<small>RYLOV</small>C<small>UTOFF</small>几乎与SPBALANCE一样好，并且明显优于未平衡的结果。在TOLOSA矩阵上，最小特征值在经过K<small>RYLOV</small>C<small>UTOFF</small>平衡后计算得最准确，甚至优于直接平衡。对于最大特征值，SPBALANCE最为有效，尽管所有三种Krylov平衡算法都明显优于不进行平衡。
@@ -196,10 +153,8 @@ QH<span class="math-inline">768</span>和TOLOSA矩阵在Krylov平衡和未平衡
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html3957" href="node209.html">直接方法</a>
-<b>上一级：</b><a name="tex2html3951" href="node205.html">Balancing Matrices &nbsp; T.&nbsp;Chen</a>
+<b>上一级：</b><a name="tex2html3951" href="node205.html">平衡矩阵</a>
 <b>上一节：</b><a name="tex2html3947" href="node207.html">Krylov平衡算法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

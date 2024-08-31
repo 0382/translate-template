@@ -67,58 +67,56 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4017" href="node213.html">子空间迭代法</a>
-<b>上一级：</b><a name="tex2html4011" href="node210.html">Single- and Multiple-Vector Iterations</a>
+<b>上一级：</b><a name="tex2html4011" href="node210.html">单向量与多向量迭代</a>
 <b>上一节：</b><a name="tex2html4005" href="node211.html">幂法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION001642000000000000000"></a> <a name="22975"></a>
-<br>
-Inverse Iteration
+逆迭代法
 </h2>
-Inverse iteration, described in Algorithm&nbsp;<a href="node96.html#inverseiteration">4.2</a>,
-can also be used to solve the 
-NHEP without any apparent change. 
- 
-<br>
-<img
- width="598" height="246" align="BOTTOM" border="0"
- src="img1884.png"
- alt="\begin{algorithm}{The Inverse Iteration for the computing an
-eigenvalue closest ...
-... w - \theta \, z\vert\vert _2 \leq \epsilon <span class="math-inline">\\
-\end{tabbing}}
-\end{algorithm}">
-<br>
-As in the Hermitian case, assume that </span>\lambda_j<span class="math-inline"> and 
-</span>q_j<span class="math-inline"> are an eigenvalue and eigenvector pair of </span>A<span class="math-inline"> so that
 
-</span>\vert\lambda_j - \sigma \vert^{-1}<span class="math-inline"> is the largest eigenvalue of
+逆迭代法，如算法&nbsp;<a href="node96.html#inverseiteration">4.2</a>所述，同样可用于求解非厄米特征值问题，无需显式改动。
 
-</span>(A - \sigma I)^{-1}<span class="math-inline"> in magnitude. The inverse power method
-converges if the starting vector 
-</span>v<span class="math-inline"> is not perpendicular to </span>q_j<span class="math-inline">. The 
-convergence rate is 
-</span>\left\vert(\lambda_j - \sigma )/(\lambda_k- \sigma )\right\vert<span class="math-inline">, where </span>\lambda_k<span class="math-inline"> is an eigenvalue of
-</span>A<span class="math-inline"> such that 
-</span>\vert\lambda_k - \sigma \vert^{-1}<span class="math-inline"> is the second
-largest eigenvalue of 
-</span>(A - \sigma I)^{-1}<span class="math-inline"> in magnitude. 
+<p>
+与厄米情况类似，假设<span class="math-inline">\lambda_j</span>和<span class="math-inline">q_j</span>是矩阵<span class="math-inline">A</span>的一个特征值与特征向量对，使得
+
+<span class="math-inline">\vert\lambda_j - \sigma \vert^{-1}</span>在模上为
+
+<span class="math-inline">(A - \sigma I)^{-1}</span>的最大特征值。若初始向量
+<span class="math-inline">v</span>不垂直于<span class="math-inline">q_j</span>，则逆幂法收敛。收敛速率为
+<span class="math-inline">\left\vert(\lambda_j - \sigma )/(\lambda_k- \sigma )\right\vert</span>，其中<span class="math-inline">\lambda_k</span>是矩阵<span class="math-inline">A</span>的一个特征值，使得
+<span class="math-inline">\vert\lambda_k - \sigma \vert^{-1}</span>在模上为
+<span class="math-inline">(A - \sigma I)^{-1}</span>的第二大特征值。
 <a name="22995"></a>
 
 <p>
-In general, inverse iteration tends to have
-much more rapid convergence than the power method if
-</span>\sigma<span class="math-inline"> is chosen to be very close to a desired
-eigenvalue. However, inverse iteration does require a
-factorization of the matrix </span>A-\sigma I$, making it less
-attractive when this factorization is expensive.
+通常，若选择<span class="math-inline">\sigma</span>非常接近所需特征值，逆迭代比幂法具有更快的收敛速度。然而，逆迭代需要对矩阵<span class="math-inline">A-\sigma I</span>进行分解，这在分解成本高昂时使其吸引力降低。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4016"
+  href="node213.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4010"
+  href="node210.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4004"
+  href="node211.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4012"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4014"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4017" href="node213.html">子空间迭代法</a>
+<b>上一级：</b><a name="tex2html4011" href="node210.html">单向量与多向量迭代</a>
+<b>上一节：</b><a name="tex2html4005" href="node211.html">幂法</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20
