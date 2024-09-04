@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,14 +73,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4507" href="node246.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-  
-  
+<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001681000000000000000"></a> <a name="zbdd:algorithm"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001681000000000000000"></a> <a name="zbdd:algorithm"></a>
 算法
 </h2>
 
@@ -85,7 +89,47 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 生成的两个向量序列<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>使用三项递归关系：
 
-<div class="math-display" id="rightgoverneq">P_j^{\ast} AQ_j = T_j. \tag{144}</div>
+<div class="math-display" id="right_recursion">
+\beta_{j+1}q_{j+1} = A q_j - \alpha_j q_j - \gamma_{j} q_{j-1}, \tag{7.33}
+</div>
+
+<div class="math-display" id="left_recursion">
+\bar{\gamma}_{j+1} p_{j+1} = A^{\ast} p_j - \bar{\alpha}_j p_j - \bar{\beta}_{j} p_{j-1}. \tag{7.34}
+</div>
+
+向量<span class="math-inline">\{q_i\}</span>和<span class="math-inline">\{p_i\}</span>被称为Lanczos向量，分别张成<span class="math-inline">{\mathcal K}^j(A, q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast}, p_1)</span>，并且是双正交的，即<span class="math-inline">p^{\ast}_{k} q_{\ell} = 0</span>如果<span class="math-inline">k \neq \ell</span>，以及<span class="math-inline">w^{\ast}_{k} v_{k} = 1</span>。用矩阵表示，在第<span class="math-inline">j</span>步，Lanczos方法生成两个<span class="math-inline">n \times j</span>矩阵<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>：
+
+
+<div class="math-display">Q_j = [ q_1, q_2, \ldots, q_j ], \quad P_j = [ p_1, p_2, \ldots, p_j ]</div>
+
+以及
+
+
+<div class="math-display">T_j = \begin{bmatrix}
+\alpha_1 & \gamma_2 & & & \\
+\beta_2 & \alpha_2 & \gamma_3 & & \\
+& \beta_3 & \alpha_3 & \ddots & \\
+& & \ddots & \ddots & \gamma_j & \\
+& & & \beta_j & \alpha_j
+\end{bmatrix}.</div>
+
+计算得到的量满足称为Lanczos分解的控制关系：
+
+<div class="math-display" id="rightgoverneq">
+AQ_j = Q_j T_j + \beta_{j+1} q_{j+1} e_{j}^{\ast}, \tag{7.35}
+</div>
+
+<div class="math-display" id="leftgoverneq">
+A^{\ast} P_j = P_j T_j^{\ast} + \bar{\gamma}_{j+1} p_{j+1} e_j^{\ast}, \tag{7.36}
+</div>
+
+<div class="math-display" id="biorthogonal">
+P_j^{\ast} Q_j = I_j. \tag{7.37}
+</div>
+
+此外，<span class="math-inline">P_j^{\ast} q_{j+1} = 0</span>和<span class="math-inline">p_{j+1}^{\ast} Q_j = 0</span>。关系式(<a href="node245.html#biorthogonal">7.37</a>)表明Lanczos向量（基）是双正交的。但注意<span class="math-inline">Q_j</span>和<span class="math-inline">P_j</span>都不是酉矩阵。在Lanczos基下，矩阵<span class="math-inline">A</span>由一个非厄米三对角矩阵表示，
+
+<div class="math-display" id="rightgoverneq">P_j^{\ast} AQ_j = T_j. \tag{7.38}</div>
 
 在任何步骤<span class="math-inline">j</span>，我们可以计算<span class="math-inline">T_j</span>的特征解，
 
@@ -96,9 +140,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 对于每个Ritz值<span class="math-inline">\theta_i^{(j)}</span>，存在相应的右和左Ritz向量，
 
-<div class="math-display" id="ritz_vectors">x_i^{(j)} = Q_j z_i^{(j)} \quad \text{和} \quad y_i^{(j)} = P_j w_i^{(j)}. \tag{145}</div>
+<div class="math-display" id="ritz_vectors">x_i^{(j)} = Q_j z_i^{(j)} \quad \text{和} \quad y_i^{(j)} = P_j w_i^{(j)}. \tag{7.39}</div>
 
 Ritz值和向量收敛到原始矩阵<span class="math-inline">A</span>的特征值和特征向量的程度可以通过比较残差的范数与<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的范数来评估，
+
+<div class="math-display" id="bnhlrr">r_i^{(j)} = A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)}, \tag{7.40}</div>
+
+<div class="math-display" id="bnhllr">(s_i^{(j)})^{\ast} = (y_i^{(j)})^{\ast} A - \theta_i^{(j)} (y_i^{(j)})^{\ast}. \tag{7.41}</div>
+
+此外，根据方程(<a href="node245.html#rightgoverneq">7.35</a>)，右残差向量变为
 
 <div class="math-display" id="bnhlrr2">r_i^{(j)} = \beta_{j+1} q_{j+1} (e_j^{\ast} z_i^{(j)}), \tag{148}</div>
 
@@ -108,20 +158,33 @@ Ritz值和向量收敛到原始矩阵<span class="math-inline">A</span>的特征
 
 因此，与厄米情况（参见§<a href="node103.html#sec:lan">4.4</a>）一样，残差范数可以在不显式计算Ritz向量<span class="math-inline">x_i^{(j)}</span>和<span class="math-inline">y_i^{(j)}</span>的情况下获得，尽管<span class="math-inline">\|x_i^{(j)}\|_2</span>和<span class="math-inline">\|y_i^{(j)}\|_2</span>是不可用的。有关此主题的更详细讨论，请参见§<a href="node246.html#zbdd:convergence">7.8.2</a>。
 
-<p>
-<br>
-<a name="bd:lanalg"></a><img
- width="598" height="497" align="BOTTOM" border="0"
- src="img2199.png"
- alt="\begin{algorithm}{Lanczos Method for NHEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ijkl\=bbb...
-...ximate eigenvectors <span class="math-inline">x^{(j)}_i</span>\ and <span class="math-inline">y^{(j)}_i</span>\end{tabbing}
-}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="bd:lanalg">
+算法 7.13：NHEP的Lanczos方法
+
+(1)  选择起始向量 <span class="math-inline">q_1</span> 和 <span class="math-inline">p_1</span>，使得 <span class="math-inline">p_1^* q_1 = 1</span>。
+(2)  <span class="math-inline">r = A q_1</span>
+(3)  <span class="math-inline">s = A^* p_1</span>
+(4)  对于 <span class="math-inline">j = 1, 2, ...,</span> 直到收敛，
+(5)      <span class="math-inline">\alpha_j = p_j^* r</span>
+(6)      <span class="math-inline">r := r - q_j \alpha_j</span>
+(7)      <span class="math-inline">s := s - p_j \alpha_j</span>
+(8)      如果 (<span class="math-inline">\|r\| = 0</span> 和/或 <span class="math-inline">\|s\| = 0</span>)，则停止
+(9)      <span class="math-inline">w_j = r^* s</span>
+(10)     如果 (<span class="math-inline">w_j = 0</span>)，则停止
+(11)     <span class="math-inline">B_{j+1} = |w_j|^{1/2}</span>
+(12)     <span class="math-inline">Y_{j+1} = w_j / B_{j+1}</span>
+(13)     <span class="math-inline">q_{j+1} = r / \beta_{j+1}</span>
+(14)     <span class="math-inline">P_{j+1} = s / Y_{j+1}</span>
+(15)     计算 <span class="math-inline">T_j</span> 的特征三元组 <span class="math-inline">\left(\theta_i^{(j)}, z_i^{(j)}, w_i^{(j)}\right)</span>。
+(16)     测试收敛性。
+(17)     如有必要，重新正交化。
+(18)     <span class="math-inline">r = A q_{j+1}</span>
+(19)     <span class="math-inline">s = A^* p_{j+1}</span>
+(20)     <span class="math-inline">r := r - q_j Y_{j+1}</span>
+(21)     <span class="math-inline">s := s - p_j \beta_{j+1}</span>
+(22) 结束循环
+(23) 计算近似特征向量 <span class="math-inline">x_i^{(j)}</span> 和 <span class="math-inline">y_i^{(j)}</span>。
+</pre>
 
 <p>
 我们现在对算法<a href="node245.html#bd:lanalg">7.13</a>的某些步骤进行评论：
@@ -202,10 +265,8 @@ end for
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4507" href="node246.html">收敛性质</a>
-<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos Method &nbsp; Z.&nbsp;Bai</a>
-  
-  
+<b>上一级：</b><a name="tex2html4501" href="node244.html">Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4495" href="node244.html">Lanczos方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

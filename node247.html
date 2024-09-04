@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Multiple Eigenvalues.</title>
+<title>多重特征值</title>
 <meta charset="utf-8">
-<meta name="description" content="Multiple Eigenvalues.">
+<meta name="description" content="多重特征值">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,36 +69,42 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4534" href="node248.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html4528" href="node246.html">收敛性质</a>
 <b>上一节：</b><a name="tex2html4524" href="node246.html">收敛性质</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001682010000000000000">
-Multiple Eigenvalues.</a>
-</h4> 
-Multiple eigenvalues can be <i>defective</i> (having only a single eigenvector
-and a chain of principal vectors) or <i>derogatory</i> (having several
-linearly independent eigenvectors) or both.  A normal (or more generally, a
-diagonalizable) matrix has only derogatory multiple eigenvalues.  The eigenvalue
-problem for defective matrices is ill posed.  As mentioned
-above in the discussion of convergence properties, 
-perturbation (read approximation) scatters the defective 
-eigenvalue into a cluster of poorly conditioned eigenvalues.
+多重特征值</a>
+</h4>
+
+多个特征值可以是<i>亏损的</i>（仅有一个特征向量和一系列主向量）或<i>可约的</i>（具有多个线性无关的特征向量），或两者兼有。一个正规（或更一般地，可对角化）的矩阵只具有可约的多个特征值。对于亏损矩阵的特征值问题，其求解是不适定的。如前所述，在讨论收敛性时提到，扰动（即近似）会将亏损的特征值分散成一群条件数较差的特征值。
 
 <p>
-The Lanczos algorithm has the theoretical advantage that the characteristic
-polynomials of the tridiagonal matrices <span class="math-inline">\{ T_j\}</span> approximate the
-<i>minimal polynomial</i> of <span class="math-inline">A</span> [<a
- href="node421.html#hous64">234</a>].
-This means that in exact arithmetic the Lanczos algorithm computes
-a complete chain of principal vectors for a defective
-multiple eigenvalue if run for at least as many steps as the length of the
-chain.
+Lanczos算法在理论上具有优势，即三对角矩阵的特征多项式序列<span class="math-inline">\{ T_j\}</span>近似于矩阵<span class="math-inline">A</span>的<i>最小多项式</i>[<a href="node421.html#hous64">234</a>]。这意味着在精确算术中，若Lanczos算法运行至少与亏损多重特征值的主向量链长度相同步数，则能计算出完整的主向量链。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4533"
+  href="node248.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4527"
+  href="node246.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4523"
+  href="node246.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4529"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4531"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4534" href="node248.html">可用的软件</a>
+<b>上一级：</b><a name="tex2html4528" href="node246.html">收敛性质</a>
+<b>上一节：</b><a name="tex2html4524" href="node246.html">收敛性质</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

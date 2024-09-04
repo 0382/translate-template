@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,55 +73,40 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4390" href="node238.html">Block Size.</a>
-<b>上一级：</b><a name="tex2html4384" href="node235.html">Block Arnoldi Method &nbsp;</a>
-<b>上一节：</b><a name="tex2html4378" href="node236.html">块Arnoldi收缩法</a>
-  
-  
+<b>上一级：</b><a name="tex2html4384" href="node235.html">块Arnoldi方法</a>
+<b>上一节：</b><a name="tex2html4378" href="node236.html">块Arnoldi约化</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION001672000000000000000">
-Practical Algorithm</a>
+实用算法</a>
 </h2>
 
 <p>
-Algorithm&nbsp;<a href="node237.html#imp_blk_arn_alg">7.12</a> lists a generic block implicitly
-restarted Arnoldi method (BIRAM).  The remainder of this section
-discusses some of the implementation issues necessary for a robust
-software implementation.  In particular, we address the issues of
-block size (<span class="math-inline">b</span>), convergence considerations, deflation, implicit restarting,
-and the selection of shifts and choice of <span class="math-inline">p</span>.
+算法<a href="node237.html#imp_blk_arn_alg">7.12</a>列出了一种通用的块隐式重启Arnoldi方法(BIRAM)。本节剩余部分将讨论实现稳健软件所需的一些关键实现问题。特别是，我们将探讨块大小(<span class="math-inline">b</span>)、收敛考虑、缩减、隐式重启以及位移选择和<span class="math-inline">p</span>值选取等问题。
 
-<p>
-<br>
-<a name="imp_blk_arn_alg"></a><img
- width="598" height="202" align="BOTTOM" border="0"
- src="img2135.png"
- alt="\begin{algorithm}
-% latex2html id marker 23883
-{BIRAM for NHEP
-}
-{
-\begin{tabb...
-...ngth <span class="math-inline">r</span>\ block Arnoldi \\
-\&gt; \&gt; \&gt; reduction.
-\end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre class="algorithm" id="imp_blk_arn_alg">
+算法 7.12：BIRAM用于NHEP
+直到收敛，执行以下步骤：
+(1) 将长度为r的块Arnoldi约减扩展p块：
+<span class="math-inline">AV_{[r+p]} = V_{[r+p]} H_{[r+p]} + F_{r+p} E_{r+p}^* \text{ 通过算法 7.11}</span>
+(2) 确定感兴趣的 <span class="math-inline">k</span> 个Ritz值是否足够接近 <span class="math-inline">A</span> 的值。
+(3) 锁定（或消去）满足收敛容忍度的Ritz值。
+(4) 隐式重启 <span class="math-inline">p</span> 个移位，并保留长度为 <span class="math-inline">r</span> 的块Arnoldi约减。
+</pre>
 
 <p>
 <br><hr>
-<!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<!--子章节列表-->
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><ul>
-<li><a name="tex2html4391" href="node238.html">Block Size.</a>
-<li><a name="tex2html4392" href="node239.html">Stopping Criterion.</a>
-<li><a name="tex2html4393" href="node240.html">Deflation.</a>
-<li><a name="tex2html4394" href="node241.html">Restarting a Block Arnoldi Reduction.</a>
-</ul></ul>
+<li><a name="tex2html4391" href="node238.html">块大小</a>
+<li><a name="tex2html4392" href="node239.html">停止准则</a>
+<li><a name="tex2html4393" href="node240.html">收缩</a>
+<li><a name="tex2html4394" href="node241.html">重启块Arnoldi约化</a>
+</ul>
 <!--End of Table of Child-Links-->
 <br><hr>
 <address>

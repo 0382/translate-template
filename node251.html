@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,16 +72,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4593" href="node252.html">An Adaptively Blocked Lanczos</a>
-<b>上一级：</b><a name="tex2html4587" href="node250.html">Block Lanczos Methods &nbsp;</a>
-<b>上一节：</b><a name="tex2html4581" href="node250.html">Block Lanczos Methods &nbsp;</a>
-  
-  
+<b>下一节：</b><a name="tex2html4593" href="node252.html">自适应块Lanczos方法</a>
+<b>上一级：</b><a name="tex2html4587" href="node250.html">块Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4581" href="node250.html">块Lanczos方法</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001691000000000000000">
 基本算法</a>
-</h2> 
+</h2>
+
 给定一个<span class="math-inline">n</span>阶矩阵<span class="math-inline">A</span>和初始的<span class="math-inline">n</span>阶<span class="math-inline">p</span>块向量<span class="math-inline">P_1</span>和<span class="math-inline">Q_1</span>，使得<span class="math-inline">P^{\ast}_1 Q_1 = I</span>，块Lanczos方法生成一系列<span class="math-inline">n\times p</span>的右和左Lanczos块向量<span class="math-inline">\{ Q_i \}</span>和<span class="math-inline">\{ P_i \}</span>。这些向量是Krylov子空间的双正交基
 
 <span class="math-inline">{\mathcal K}^j(A,Q_1)</span>
@@ -83,56 +88,40 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">{\mathcal K}^j(A^{\ast},P_1)</span>。
 具体来说，经过<span class="math-inline">j</span>步后，Lanczos过程确定一个块三对角矩阵
 
-<div class="math-display">T_{[j]} = \left[ \begin{array}{cccc}A_1 & B_2 & & \\C_2......ts & \ddots & B_j \\& & C_j & A_j \\\end{array} \right],</div>
+<div class="math-display">T_{[j]} = \begin{bmatrix}
+A_1 & B_2 & & \\
+C_2 & A_2 & \ddots \\
+& \ddots & \ddots & B_j \\
+& & C_j & A_j
+\end{bmatrix},
+</div>
 
 以及右和左Lanczos向量矩阵
 
-<div class="math-display">Q_{[j]} = \left[\, Q_1, Q_2, \ldots , Q_j \,\right] \quad \m......and} \quadP_{[j]} = \left[\, P_1, P_2, \ldots , P_j \,\right]</div>
+<div class="math-display">Q_{[j]} = \left[\, Q_1, Q_2, \ldots , Q_j \,\right] \quad \text{和} \quad P_{[j]} = \left[\, P_1, P_2, \ldots , P_j \,\right]</div>
 
 满足双正交条件
 
-<div class="math-display" id="biorth">P^{\ast}_{[j]} Q_{[j]} = I. \tag{155}</div>
+<div class="math-display" id="biorth">P^{\ast}_{[j]} Q_{[j]} = I. \tag{7.49}</div>
 
 块Lanczos方法使用三项递归
-<br>
-<div align="CENTER"><a name="right3term"></a><a name="left3term"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle Q_{j+1} C_{j+1}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle AQ_j - Q_j A_j - Q_{j-1} B_j,</span></td>
-<td WIDTH=10 align="RIGHT">
-(156)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle P_{j+1} B^{\ast}_{j+1}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle A^{\ast} P_j - P_j A^{\ast}_j - P_{j-1}C^{\ast}_j</span></td>
-<td WIDTH=10 align="RIGHT">
-(157)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
+<div class="math-display" id="right3term">Q_{j+1} C_{j+1} = AQ_j - Q_j A_j - Q_{j-1} B_j, \tag{7.50}</div>
+
+<div class="math-display" id="left3term">P_{j+1} B^{\ast}_{j+1} = A^{\ast} P_j - P_j A^{\ast}_j - P_{j-1}C^{\ast}_j \tag{7.51}</div>
+
 对于<span class="math-inline">j = 1, 2, \ldots</span>，其中<span class="math-inline">Q_0 = P_0 = 0</span>。在矩阵表示法中，这些量满足控制关系
-<br>
-<div align="CENTER"><a name="lancz2"></a><a name="lancz1"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle A Q_{[j]}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Q_{[j]} T_{[j]} + Q_{j+1}C_{j+1}E^{\ast}_j,</span></td>
-<td WIDTH=10 align="RIGHT">
-(158)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle A^{\ast} P_{[j]}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle P_{[j]} T^{\ast}_{[j]} +P_{j+1} B^{\ast}_{j+1}E^{\ast}_j,</span></td>
-<td WIDTH=10 align="RIGHT">
-(159)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
+<div class="math-display" id="lancz2">AQ_{[j]} = Q_{[j]} T_{[j]} + Q_{j+1}C_{j+1}E^{\ast}_j, \tag{7.52}</div>
+
+<div class="math-display" id="lancz1">A^{\ast} P_{[j]} = P_{[j]} T^{\ast}_{[j]} +P_{j+1} B^{\ast}_{j+1}E^{\ast}_j, \tag{7.53}</div>
+
 其中<span class="math-inline">E_j</span>是一个<span class="math-inline">jp</span>阶<span class="math-inline">p</span>矩阵，其底部方块是一个单位矩阵，其他地方为零。
 
 <p>
 为了使用Lanczos方法近似<span class="math-inline">A</span>的特征值和特征向量，我们解<span class="math-inline">jp \times jp</span>块三对角矩阵<span class="math-inline">T_{[j]}</span>的特征值问题。每个特征三元组<span class="math-inline">( \theta^{(j)}_i, z^{(j)}_i, w^{(j)}_i )</span> of <span class="math-inline">T_{[j]}</span>，
 
-<div class="math-display">T_{[j]} z^{(j)}_i = \theta^{(j)}_i z^{(j)}_i\quad {\rm and......w^{(j)}_i)^{\ast} T_{[j]} = \theta^{(j)}_i (w^{(j)}_i)^{\ast}</div>
+<div class="math-display">T_{[j]} z^{(j)}_i = \theta^{(j)}_i z^{(j)}_i\quad \text{和} \quad (w^{(j)}_i)^{\ast} T_{[j]} = \theta^{(j)}_i (w^{(j)}_i)^{\ast}</div>
 
 确定一个Ritz三元组<span class="math-inline">( \theta^{(j)}_i, x^{(j)}_i, y^{(j)}_i )</span>，其中
 
@@ -144,45 +133,53 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 为了评估近似值，
 设<span class="math-inline">r^{(j)}_i</span>和<span class="math-inline">s^{(j)}_i</span>表示相应的右和左残差向量：
-<br>
-<div align="CENTER"><a name="rightres1"></a><a name="leftres1"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle r^{(j)}_i</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Ax^{(j)}_i - \theta^{(j)}_i x^{(j)}_i,</span></td>
-<td WIDTH=10 align="RIGHT">
-(160)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle (s^{(j)}_i)^{\ast}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle (y^{(j)}_i)^{\ast} A-\theta^{(j)}_i (y^{(j)}_i)^{\ast}.</span></td>
-<td WIDTH=10 align="RIGHT">
-(161)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
+<div class="math-display" id="rightres1">r^{(j)}_i = Ax^{(j)}_i - \theta^{(j)}_i x^{(j)}_i, \tag{7.54}</div>
+
+<div class="math-display" id="leftres1">(s^{(j)}_i)^{\ast} = (y^{(j)}_i)^{\ast} A-\theta^{(j)}_i (y^{(j)}_i)^{\ast}. \tag{7.55}</div>
+
 分别代入(<a href="node251.html#lancz2">7.52</a>)和(<a href="node251.html#lancz1">7.53</a>)，出现
-<br>
-<div align="CENTER"><a name="rightres2"></a><a name="leftres2"></a>
 
-<table align="CENTER" cellpadding="0" width="100%">
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle r^{(j)}_i</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle Q_{j+1}C_{j+1} (E^{\ast}_j z^{(j)}_i),</span></td>
-<td WIDTH=10 align="RIGHT">
-(162)</td></tr>
-<tr valign="MIDDLE"><td NOWRAP align="RIGHT"><span class="math-inline">\displaystyle (s^{(j)}_i)^{\ast}</span></td>
-<td align="CENTER" NOWRAP><span class="math-inline">\textstyle =</span></td>
-<td align="LEFT" NOWRAP><span class="math-inline">\displaystyle ((w^{(j)}_i)^{\ast} E_j) B_{j+1} P^{\ast}_{j+1}.</span></td>
-<td WIDTH=10 align="RIGHT">
-(163)</td></tr>
-</table></div>
-<br clear="ALL"><p></p>
+<div class="math-display" id="rightres2">r^{(j)}_i = Q_{j+1}C_{j+1} (E^{\ast}_j z^{(j)}_i), \tag{7.56}</div>
+
+<div class="math-display" id="leftres2">(s^{(j)}_i)^{\ast} = ((w^{(j)}_i)^{\ast} E_j) B_{j+1} P^{\ast}_{j+1}. \tag{7.57}</div>
+
 一个Ritz值<span class="math-inline">\theta^{(j)}_i</span>被认为已经收敛，如果两个残差范数都足够小。同样，残差也可以用来确定三元组的后向误差界限，如同标准的非厄米Lanczos算法的情况（见§<a href="node244.html#sec:nsymlanczos">7.8</a>）。
 
 <p>
 基本非厄米Lanczos方法的一个简单阻塞版本在算法<a href="node251.html#bd:blanalg">7.14</a>中呈现。
 
-<p>
+<pre class="algorithm" id="bd:blanalg">
+算法 7.14：NHEP的块Lanczos方法
+
+(1)  选择 <span class="math-inline">n \times p</span> 起始块 <span class="math-inline">P_1</span> 和 <span class="math-inline">Q_1</span>，使得 <span class="math-inline">P_1^* Q_1 = I</span>
+(2)  <span class="math-inline">R = AQ_1</span>
+(3)  <span class="math-inline">S = A^* P_1</span>
+(4)  对于 <span class="math-inline">j = 1, 2, ...,</span> 直到收敛
+(5)      <span class="math-inline">A_j = P_j R</span>
+(6)      <span class="math-inline">R := R - Q_j A_j</span>
+(7)      <span class="math-inline">S := S - P_j A</span>
+(8)      QR分解 <span class="math-inline">R = Q_{j+1} C_{j+1}</span>
+(9)      QR分解 <span class="math-inline">S = P_{j+1} B</span>
+(10)     如果 <span class="math-inline">R</span> 和/或 <span class="math-inline">S</span> 秩亏，停止
+(11)     计算SVD：<span class="math-inline">P_{j+1}^* Q_{j+1} = U_j \Sigma_j V_j^*</span>
+(12)     如果 <span class="math-inline">\Sigma_j</span> 是（近乎）奇异的，停止
+(13)     <span class="math-inline">B_{j+1} := B_{j+1} U_j E_j</span>
+(14)     <span class="math-inline">C_{j+1} := E_j^{1/2} V^* C_{j+1}</span>
+(15)     <span class="math-inline">Q_{j+1} := Q_{j+1} V_j E_j</span>
+(16)     <span class="math-inline">P_{j+1} := P_{j+1} U_j E_j^{-1/2}</span>
+(17)     计算 <span class="math-inline">T_{[j]}</span> 的特征三元组 <span class="math-inline">\left(\theta_i^{(j)}, z_i^{(j)}, w_i^{(j)}\right)</span>
+(18)     测试收敛性
+(19)     如有必要，重新双正交化
+(20)     <span class="math-inline">R = AQ_{j+1}</span>
+(21)     <span class="math-inline">S = A^* P_{j+1}</span>
+(22)     <span class="math-inline">R := R - Q_j B_{j+1}</span>
+(23)     <span class="math-inline">S := S - P_j C</span>
+(24) 结束循环
+(25) 计算近似特征向量 <span class="math-inline">x_i^{(j)}</span> 和 <span class="math-inline">y_i^{(j)}</span>。
+</pre>
+
+<!-- <p>
 <br>
 <a name="bd:blanalg"></a><img
  width="598" height="552" align="BOTTOM" border="0"
@@ -196,7 +193,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 \end{tabbing}
 }
 \end{algorithm}">
-<br> 
+<br>  -->
 
 <p>
 我们现在对算法<a href="node251.html#bd:blanalg">7.14</a>的某些步骤进行评论。
@@ -285,11 +282,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4593" href="node252.html">An Adaptively Blocked Lanczos</a>
-<b>上一级：</b><a name="tex2html4587" href="node250.html">Block Lanczos Methods &nbsp;</a>
-<b>上一节：</b><a name="tex2html4581" href="node250.html">Block Lanczos Methods &nbsp;</a>
-  
-  
+<b>下一节：</b><a name="tex2html4593" href="node252.html">自适应块Lanczos方法</a>
+<b>上一级：</b><a name="tex2html4587" href="node250.html">块Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4581" href="node250.html">块Lanczos方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

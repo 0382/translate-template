@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Lanczos Method &nbsp; Z.&nbsp;Bai and D.&nbsp;Day </title>
+<title>Lanczos 方法 &nbsp; Z.&nbsp;Bai and D.&nbsp;Day </title>
 <meta charset="utf-8">
-<meta name="description" content="Lanczos Method &nbsp; Z.&nbsp;Bai and D.&nbsp;Day ">
+<meta name="description" content="Lanczos 方法 &nbsp; Z.&nbsp;Bai and D.&nbsp;Day ">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,21 +69,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
 <b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4476" href="node243.html">注释与参考文献</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001680000000000000000"></a> <a name="sec:nsymlanczos"></a> 
+<!--End of Navigation Panel-->
+<h1><a name="SECTION001680000000000000000"></a> <a name="sec:nsymlanczos"></a> 
 <a name="23974"></a>
-<br>
 Lanczos方法
-<br>&nbsp; <em>Z. 白(Bai) 和 D. 戴(Day)</em> 
+<br>&nbsp; <em>Z. Bai 和 D. Day</em></a>
 </h1> 
 
 <p>
 非厄米Lanczos方法是一种斜投影方法(参见第<a href="node79.html#sec:algbasics">3.2</a>节)，用于求解非厄米特征值问题，
 
-<div class="math-display" id="nhevp">Ax=\lambda x \quad \mathrm{和} \quad y^{\ast} A = \lambda y^{\ast}, \tag{138}</div>
+<div class="math-display" id="nhevp">Ax=\lambda x \quad \mathrm{和} \quad y^{\ast} A = \lambda y^{\ast}, \tag{7.32}</div>
 
 其中<span class="math-inline">A</span>是一个非厄米矩阵。对于复对称矩阵(<span class="math-inline">A=A^T</span>但<span class="math-inline">A \ne A^{\ast}</span>)，第<a href="node262.html#sec:csymlanczos">7.11</a>节介绍了一种特殊的Lanczos方法。
 
@@ -100,15 +98,14 @@ Lanczos方法
 <li><a name="tex2html4489" href="node245.html">算法</a>
 <li><a name="tex2html4490" href="node246.html">收敛性质</a>
 <ul>
-<li><a name="tex2html4491" href="node247.html">多重特征值。</a>
+<li><a name="tex2html4491" href="node247.html">多重特征值</a>
 </ul>
-<li><a name="tex2html4492" href="node248.html">软件可用性</a>
+<li><a name="tex2html4492" href="node248.html">可用的软件</a>
 <li><a name="tex2html4493" href="node249.html">注释和参考文献</a>
 </ul>
 <!--End of Table of Child-Links-->
 <hr>
-
-这段文字介绍了非厄米Lanczos方法，这是一种用于求解非厄米特征值问题的斜投影方法。该方法通过两个初始向量构建双正交基，用于Krylov子空间，并使用两个三项递归来减少内存需求。Lanczos方法能够提供左右特征向量的近似，对于估计特征对的误差和条件数非常重要。然而，由于不使用正交变换，该方法存在中断和数值不稳定的风险。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html4487"
   href="node245.html">
 <button class="navigate">下一节</button></a> 
@@ -128,8 +125,6 @@ Lanczos方法
 <b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
 <b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4476" href="node243.html">注释与参考文献</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

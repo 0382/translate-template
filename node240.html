@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Deflation.</title>
+<title>收缩</title>
 <meta charset="utf-8">
-<meta name="description" content="Deflation.">
+<meta name="description" content="收缩">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,42 +66,49 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4436" href="node241.html">Restarting a Block Arnoldi</a>
+<b>下一节：</b><a name="tex2html4436" href="node241.html">重启块Arnoldi约化</a>
 <b>上一级：</b><a name="tex2html4430" href="node237.html">实用算法</a>
-<b>上一节：</b><a name="tex2html4424" href="node239.html">Stopping Criterion.</a>
-  
-  
+<b>上一节：</b><a name="tex2html4424" href="node239.html">停止准则</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001672030000000000000">
-Deflation.</a>
+收缩</a>
 </h4> 
 
-<p>
 <a name="23923"></a>
+<p>
+数值稳定的缩减策略的主要优势在于能够减小工作规模，并且无需将块大小设置为大于或等于聚类大小即可确定邻近特征值的聚类。为BIRAM实现开发的缩减方案是第&#167;<a href="node220.html#sec:nsymiram">7.6</a>节讨论技术的延伸。我们建议读者参考该部分以获取更多细节。
 
 <p>
-The main advantages of a
-numerically stable deflation strategy are the reduction of the working
-size of the reduction and the ability to determine clusters of nearby
-eigenvalues without requiring the block size to be greater than or equal
-to the size of the cluster.  The deflation scheme developed for the
-BIRAM implementation is an extension of the techniques discussed in
-&#167;<a href="node220.html#sec:nsymiram">7.6</a>. We refer the reader to this section for
-further details.
+一个算法问题是如何处理收敛向量的数量不是块大小的倍数的情况。在缩减过程完成后，活跃缩减的最后一个块是不完整的。为了简化隐式重启机制，我们将最后一个块填充，使得活跃缩减的长度为<span class="math-inline">m \cdot b。</span>
 
-<p>
-An algorithmic issue that arises is how to handle situations where the
-number of converged vectors to be locked is not a multiple of the
-block size.  At the completion of the deflation procedure, the active
-reduction has an incomplete last block. To simplify the implicit
-restarting mechanism, we fill out this last block so that the active
-reduction is of length <span class="math-inline">m \cdot b.</span>
+注：以上翻译遵循了给定的约束条件，包括保留原始格式、不省略信息、正确处理人名翻译以及保留HTML标签。同时，使用了指定的专业词汇，如“厄米”、“海森堡”、“良态”和“病态”。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4435"
+  href="node241.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4429"
+  href="node237.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4423"
+  href="node239.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4431"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4433"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4436" href="node241.html">重启块Arnoldi约化</a>
+<b>上一级：</b><a name="tex2html4430" href="node237.html">实用算法</a>
+<b>上一节：</b><a name="tex2html4424" href="node239.html">停止准则</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

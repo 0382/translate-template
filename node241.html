@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Restarting a Block Arnoldi Reduction.</title>
+<title>重启块Arnoldi约化</title>
 <meta charset="utf-8">
-<meta name="description" content="Restarting a Block Arnoldi Reduction.">
+<meta name="description" content="重启块Arnoldi约化">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,15 +69,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4448" href="node242.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html4442" href="node237.html">实用算法</a>
 <b>上一节：</b><a name="tex2html4438" href="node240.html">Deflation.</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001672040000000000000"></a>
 <a name="23926"></a>
-<br>
 重启块Arnoldi约化
 </h4>
+
 在&#167;<a href="node220.html#sec:nsymiram">7.6</a>节中，我们阐述并解释了如何隐式地重启Arnoldi方法。
 实验结果[<a href="node421.html#lesc95">292</a>,<a href="node421.html#lema97">290</a>,<a href="node421.html#bcrr98">24</a>]表明，隐式重启方案优于文献中出现的其他块方法[<a href="node421.html#sadk93a">391</a>,<a href="node421.html#scot95">398</a>]。这些显式重启技术根据某种准则选择后续的起始块，然后从头开始重启。BIRAM不仅大幅减少了矩阵-向量乘积的使用，还显著减少了需要存储的Arnoldi向量数量。读者可参考[<a href="node421.html#sadk93a">391</a>,<a href="node421.html#hesa97">227</a>,<a href="node421.html#jia98a">245</a>,<a href="node421.html#scot95">398</a>]了解更多关于显式重启Arnoldi方法的信息。
 
@@ -90,7 +88,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 通常，<span class="math-inline">p</span>个移位是通过利用<span class="math-inline">H_{[r+p]}</span>中包含的谱信息来选择的。将<span class="math-inline">{H}_{[m]}</span>的特征值分块，使得
 
-<div class="math-display" id="eq:wanted">\{ \underbrace{\theta_1,\ldots,\theta_r}_{\mathrm{wanted}}\}......ce{\theta_{r+1},\ldots,\theta_{m\cdot b}}_{\mathrm{unwanted}}\}. \tag{137}</div>
+<div class="math-display" id="eq:wanted">\{ \underbrace{\theta_1,\ldots,\theta_r}_{\mathrm{wanted}}\}\cup \{\underbrace{\theta_{r+1},\ldots,\theta_{m\cdot b}}_{\mathrm{unwanted}}\}. \tag{7.31}</div>
 
 对于非块约化，<span class="math-inline">p</span>个移位从<span class="math-inline">H_{[m]}</span>的不需要的特征值中选择，其中<span class="math-inline">r=k</span>。Sorensen[<a href="node421.html#sore92">419</a>]提出了这种精确移位策略。该策略等同于用与<span class="math-inline">k</span>个需要的特征值相关的近似Schur向量的线性组合重启后续的约化。其他有趣的策略包括Chebyshev多项式的根[<a href="node421.html#saad84">383</a>]，调和Ritz值[<a href="node421.html#morg91">331</a>,<a href="node421.html#moze98">337</a>,<a href="node421.html#papv95">349</a>,<a href="node421.html#slvo96">411</a>]，Leja多项式的根[<a href="node421.html#bacr98">23</a>]，最小二乘多项式的根[<a href="node421.html#saad87">384</a>]，以及精化移位[<a href="node421.html#jia98c">244</a>]。特别是Leja值和谐调Ritz值已被用于估计<span class="math-inline">A</span>的内部特征值。
 

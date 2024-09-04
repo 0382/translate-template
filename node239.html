@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Stopping Criterion.</title>
+<title>停止准则</title>
 <meta charset="utf-8">
-<meta name="description" content="Stopping Criterion.">
+<meta name="description" content="停止准则">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,44 +66,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4422" href="node240.html">Deflation.</a>
+<b>下一节：</b><a name="tex2html4422" href="node240.html">收缩</a>
 <b>上一级：</b><a name="tex2html4416" href="node237.html">实用算法</a>
-<b>上一节：</b><a name="tex2html4410" href="node238.html">Block Size.</a>
-  
-  
+<b>上一节：</b><a name="tex2html4410" href="node238.html">块大小</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001672020000000000000">
-Stopping Criterion.</a>
+停止准则</a>
 </h4>
 
 <p>
-Suppose that <span class="math-inline">(s,\theta)</span> is an eigenpair of <span class="math-inline">H_{[m]}.</span> 
-It follows easily from equation&nbsp;(<a href="node236.html#blk_arn_red">7.29</a>) that
+假设 <span class="math-inline">(s,\theta)</span> 是 <span class="math-inline">H_{[m]}</span> 的一个特征对。由方程&nbsp;(<a href="node236.html#blk_arn_red">7.29</a>) 可轻易推得
 
-<div class="math-display" id="eq:ritzest">A V_{[m]} s - \theta V_{[m]} s = F_m E^{\ast}_m s, \tag{136}</div>
+<div class="math-display" id="eq:ritzest">A V_{[m]} s - \theta V_{[m]} s = F_m E^{\ast}_m s, \tag{7.30}</div>
 
-and so 
+因此
 <span class="math-inline"> \Vert A V_{[m]} s - \theta V_{[m]} s \Vert = \Vert F_m \Vert \, \Vert E^{\ast}_m s \Vert= \Vert H_{m+1,m} \Vert \, \Vert E^T_m s \Vert.</span>
-Thus, if the last <span class="math-inline">b</span> components of <span class="math-inline">s</span> are small relative to the size of
+由此可见，若 <span class="math-inline">s</span> 的最后 <span class="math-inline">b</span> 个分量相对于
 
-<span class="math-inline"> \Vert H_{m+1,m} \Vert</span>, then the Ritz pair 
+<span class="math-inline"> \Vert H_{m+1,m} \Vert</span> 的大小而言较小，则 Ritz 对 
 
-<span class="math-inline">(z = V_{[m]} s,\theta)</span> is an exact eigenpair for a matrix near <span class="math-inline">A.</span> 
-This follows since&nbsp;(<a href="node239.html#eq:ritzest">7.30</a>) may be rewritten as 
+<span class="math-inline">(z = V_{[m]} s,\theta)</span> 是矩阵 <span class="math-inline">A</span> 附近的一个精确特征对。这是因为方程&nbsp;(<a href="node239.html#eq:ritzest">7.30</a>) 可改写为
 
 <span class="math-inline">(A - F_m E^{\ast}_m s z^\ast)z = \theta z.</span>
 
 <p>
-The iteration in BIRAM terminates at the value of <span class="math-inline">i</span> when the <span class="math-inline">k</span> wanted 
-eigenvalues of <span class="math-inline">H_{[m]}</span> satisfy&nbsp;(<a href="node239.html#eq:ritzest">7.30</a>). The eigenvalues
-are partitioned as in&nbsp;(<a href="node241.html#eq:wanted">7.31</a>) so that the wanted ones correspond to
-the eigenvalues of <span class="math-inline">A</span> desired.
+BIRAM 迭代在满足方程&nbsp;(<a href="node239.html#eq:ritzest">7.30</a>) 时终止于 <span class="math-inline">i</span> 值，此时 <span class="math-inline">H_{[m]}</span> 的 <span class="math-inline">k</span> 个所需特征值得以满足。特征值按方程&nbsp;(<a href="node241.html#eq:wanted">7.31</a>) 进行划分，以使所需的特征值对应于期望的 <span class="math-inline">A</span> 的特征值。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4421"
+  href="node240.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4415"
+  href="node237.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4409"
+  href="node238.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4417"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4419"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4422" href="node240.html">收缩</a>
+<b>上一级：</b><a name="tex2html4416" href="node237.html">实用算法</a>
+<b>上一节：</b><a name="tex2html4410" href="node238.html">块大小</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20
