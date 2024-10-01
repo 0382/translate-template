@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Error Bound for Computed Eigenvectors.</title>
+<title>计算所得特征向量的误差界限</title>
 <meta charset="utf-8">
-<meta name="description" content="Error Bound for Computed Eigenvectors.">
+<meta name="description" content="计算所得特征向量的误差界限">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -67,10 +67,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4992" href="node280.html">广义非厄米特征值问题</a>
-<b>上一级：</b><a name="tex2html4986" href="node275.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html4982" href="node278.html">Error Bound for Computed</a>
-  
-  
+<b>上一级：</b><a name="tex2html4986" href="node275.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html4982" href="node278.html">计算所得特征值的误差界限</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION0016130040000000000000"></a> 
@@ -97,7 +95,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 这表明
 
-<div class="math-display" id="eq:std-nH-vt">\sin\theta(x,\widetilde x)\equiv\Vert Q_2^{\ast} \widetilde x\Vert _2\leq \frac{\Vert r\Vert _2}{\sigma_{\min}(T_{22}-\widetilde\lambda I)}. \tag{213}</div>
+<div class="math-display" id="eq:std-nH-vt">\sin\theta(x,\widetilde x)\equiv\Vert Q_2^{\ast} \widetilde x\Vert _2\leq \frac{\Vert r\Vert _2}{\sigma_{\min}(T_{22}-\widetilde\lambda I)}. \tag{7.107}</div>
 
 这一不等式揭示了另一个可能导致 <span class="math-inline">\sin\theta(x,\widetilde x)</span> 增大的潜在因素。当 <span class="math-inline">T_{22}</span> 远离正规矩阵集时，这种情况会发生，此时 <span class="math-inline">\Vert(T_{22}-\widetilde\lambda I)^{-1}\Vert _2</span>，即 <span class="math-inline">T_{22}-\widetilde\lambda I</span> 的最小奇异值的倒数，可能变得非常大，尽管 <span class="math-inline">A</span> 的其他特征值都没有接近 <span class="math-inline">\widetilde\lambda</span>。
 
@@ -113,9 +111,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 如总结在 [<a href="node421.html#golo96">198</a>] 中，特征值的分离度与特征向量的敏感性有关。确实，如果 <span class="math-inline">\lambda</span> 是一个非缺陷的重复特征值，那么存在无限多个可能的特征向量基与相关的不变子空间。前面的分析仅仅表明，当特征值合并时，这种不确定性开始被感受到。众所周知，与特征值簇相关的每个单独特征向量对扰动非常敏感，因此通常无法准确计算这样的特征向量。幸运的是，对于特征值簇的情况，通常是整个相关的特征空间在实际应用中具有重要意义，并且该特征空间可以以令人满意的精度计算。详细的处理超出了本书的范围，感兴趣的读者可以参考相关文献，例如 [<a href="node421.html#stsu90">425</a>]。
-
-<p>
-&nbsp;&nbsp;&nbsp;&nbsp;
 
 <p>
 
@@ -138,10 +133,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4992" href="node280.html">广义非厄米特征值问题</a>
-<b>上一级：</b><a name="tex2html4986" href="node275.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html4982" href="node278.html">Error Bound for Computed</a>
-  
-  
+<b>上一级：</b><a name="tex2html4986" href="node275.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html4982" href="node278.html">计算所得特征值的误差界限</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

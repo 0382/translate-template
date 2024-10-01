@@ -67,51 +67,52 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4693" href="node259.html">算法</a>
-<b>上一级：</b><a name="tex2html4687" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html4687" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4681" href="node257.html">收缩</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016102000000000000000"></a> <a name="rwf:bandnsym_prop"></a>
-<br>
 基本性质
 </h2>
 
 <p>
 经过<span class="math-inline">j</span>次迭代后，该算法生成了向量(<a href="node256.html#rwf:MBB">7.62</a>)。引入以下符号将更为方便：
 
-<div class="math-display" id="rwf:WBC">V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right],\quad W_j = \left[ \begin{array}{cccc}w_1 & w_2 & \cdots & w_j\end{array} \right] \tag{169}</div>
+<div class="math-display" id="rwf:WBC">V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right],\quad W_j = \left[ \begin{array}{cccc}w_1 & w_2 & \cdots & w_j\end{array} \right] \tag{7.63}</div>
 
 其中<span class="math-inline">V_j</span>和<span class="math-inline">W_j</span>分别是右和左Lanczos向量构成的矩阵(<a href="node256.html#rwf:MBB">7.62</a>)。这些向量被构造为双正交的。利用符号(<a href="node258.html#rwf:WBC">7.63</a>)，双正交性可以简洁地表述为：
 
-<div class="math-display" id="rwf:WBD">W_j^T V_j = D_j = {\mathop{\rm diag}\nolimits}\left(\delta_1,\delta_2,\ldots,\delta_j\right). \tag{170}</div>
+<div class="math-display" id="rwf:WBD">W_j^T V_j = D_j = {\mathop{\rm diag}\nolimits}\left(\delta_1,\delta_2,\ldots,\delta_j\right). \tag{7.64}</div>
 
 为了确保下一组Lanczos向量的双正交性，算法涉及除以对角项<span class="math-inline">\delta_k</span>，如(<a href="node258.html#rwf:WBD">7.64</a>)所示。因此，一旦出现
 
-<div class="math-display" id="rwf:WBM">\delta_k = w_k^T v_k = 0,\quad \mathrm{但}\quad v_k,\; w_k \not=0, \tag{171}</div>
+<div class="math-display" id="rwf:WBM">\delta_k = w_k^T v_k = 0,\quad \mathrm{但}\quad v_k,\; w_k \not=0, \tag{7.65}</div>
 
 算法必须立即停止。这种情况(<a href="node258.html#rwf:WBM">7.65</a>)称为算法的“崩溃”。尽管可以通过引入所谓的“前瞻”来修正崩溃，但为了简化讨论，这里仅讨论不带前瞻的带状Lanczos算法。
 
 <p>
 经过<span class="math-inline">j</span>次迭代后，除了(<a href="node256.html#rwf:MBB">7.62</a>)，算法还构造了向量
 
-<div class="math-display" id="rwf:WBY">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}\quad \mathrm{和}\quad\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}. \tag{172}</div>
+<div class="math-display" id="rwf:WBY">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}\quad \mathrm{和}\quad\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}. \tag{7.66}</div>
 
 这些向量<span class="math-inline">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}</span>是下一组<span class="math-inline">m_c</span>个右Lanczos向量的候选，<span class="math-inline">\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}</span>是下一组<span class="math-inline">p_c</span>个左Lanczos向量的候选。这里，<span class="math-inline">m_c</span>是右起始向量数<span class="math-inline">m</span>减去在前<span class="math-inline">j</span>次迭代中右块Krylov序列发生的缩减次数，<span class="math-inline">p_c</span>是左起始向量数<span class="math-inline">p</span>减去在前<span class="math-inline">j</span>次迭代中左块Krylov序列发生的缩减次数。向量(<a href="node258.html#rwf:WBY">7.66</a>)被构造为满足双正交关系
 
-<div class="math-display" id="rwf:WBE">\begin{array}{rl}W_j^T \hat{v}_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+m_c, \\ \hat{W}_j^T v_{k} &\!\!\! = 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+p_c.\end{array} \tag{173}</div>
+<div class="math-display" id="rwf:WBE">\begin{aligned}
+W_j^T \hat{v}_{k} &= 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+m_c, \\ \hat{W}_j^T v_{k} &= 0 \quad \mathrm{对所有}\quad k=j+1,j+2,\ldots,j+p_c.
+\end{aligned} \tag{7.67}</div>
 
 算法内置了一个基于向量(<a href="node258.html#rwf:WBY">7.66</a>)的简单缩减过程。实际上，在第<span class="math-inline">j+1</span>次迭代时，右块Krylov序列的精确缩减等价于<span class="math-inline">\hat{v}_{j+1}=0</span>。因此，在算法中，检查<span class="math-inline">\left\Vert\hat{v}_{j+1}\right\Vert _2</span>是否小于某个合适的缩减容差。如果是，向量<span class="math-inline">\hat{v}_{j+1}</span>被缩减，<span class="math-inline">m_c</span>减1；否则，<span class="math-inline">\hat{v}_{j+1}</span>被归一化为下一个右Lanczos向量<span class="math-inline">v_{j+1}</span>。类似地，左块Krylov序列的精确缩减等价于<span class="math-inline">\hat{w}_{j+1}=0</span>。在算法中，检查<span class="math-inline">\left\Vert\hat{w}_{j+1}\right\Vert _2</span>是否小于缩减容差。如果是，向量<span class="math-inline">\hat{w}_{j+1}</span>被缩减，<span class="math-inline">p_c</span>减1；否则，<span class="math-inline">\hat{w}_{j+1}</span>被归一化为下一个左Lanczos向量<span class="math-inline">w_{j+1}</span>。
 
 <p>
 用于生成向量(<a href="node256.html#rwf:MBB">7.62</a>)和(<a href="node258.html#rwf:WBY">7.66</a>)的递推关系可以简洁地总结如下：
 
-<div class="math-display" id="rwf:WBF">\begin{array}{rl}A V_j &\!\!\! = V_j T_j + \left[ \begin{array}{c}v_{j+1} \\ \vdots \\ v_{j+m_c}\end{array} \right] \left[ \begin{array}{ccc}t_{j+1,1} & \cdots & t_{j+1,j}\end{array} \right] + \hat{V}_j^{\rm {(dl)}}, \\ A^T W_j &\!\!\! = W_j \tilde{T}_j + \left[ \begin{array}{c}w_{j+1} \\ \vdots \\ w_{j+p_c}\end{array} \right] \left[ \begin{array}{ccc}\tilde{t}_{j+1,1} & \cdots & \tilde{t}_{j+1,j}\end{array} \right]+ \hat{W}_j^{\rm {(dl)}}.\end{array} \tag{174}</div>
+<div class="math-display" id="rwf:WBF">\begin{aligned}
+A V_j & = V_j T_j + \left[ \begin{array}{c} 0 & \cdots & 0 & \hat{v}_{j+1} & \hat{v}_{j+2} & \cdots & \hat{v}_{j+m_c}\end{array} \right] + \hat{V}_j^{\rm {(dl)}}, \\ A^T W_j & = W_j \tilde{T}_j + \left[ \begin{array}{c} 0 & \cdots & 0 & \hat{w}_{j+1} & \hat{w}_{j+2} & \cdots & \hat{w}_{j+p_c}\end{array} \right] + \hat{W}_j^{\rm {(dl)}}.
+\end{aligned}\tag{7.68}</div>
 
 这里，<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>是<span class="math-inline">j\times j</span>矩阵，其元素选择使得双正交条件(<a href="node258.html#rwf:WBD">7.64</a>)和(<a href="node258.html#rwf:WBE">7.67</a>)得到满足。矩阵<span class="math-inline">\hat{V}_j^{\rm {(dl)}}</span>在(<a href="node258.html#rwf:WBF">7.68</a>)中包含大部分零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的<span class="math-inline">\hat{v}_k</span>向量。矩阵<span class="math-inline">\hat{W}_j^{\rm {(dl)}}</span>在(<a href="node258.html#rwf:WBF">7.68</a>)中包含大部分零列，以及在前<span class="math-inline">j</span>次迭代中被缩减的<span class="math-inline">\hat{w}_k</span>向量。我们注意到<span class="math-inline">m-m_c</span>是被缩减的<span class="math-inline">\hat{v}_k</span>向量的数量，<span class="math-inline">p-p_c</span>是被缩减的<span class="math-inline">\hat{w}_k</span>向量的数量。事实证明，双正交性只需在<span class="math-inline">m_c+p_c+1</span>个连续的Lanczos向量之间显式强制，并且一旦发生缩减，还需与<span class="math-inline">p-p_c</span>个固定的早期左Lanczos向量和<span class="math-inline">m-m_c</span>个固定的早期右Lanczos向量进行双正交。因此，矩阵<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>“基本上”是带状的。更准确地说，<span class="math-inline">T_j</span>的下带宽为<span class="math-inline">m_c+1</span>，上带宽为<span class="math-inline">p_c+1</span>，每次<span class="math-inline">\hat{v}_{k}</span>向量被缩减时，下带宽减少1，每次<span class="math-inline">\hat{w}_{k}</span>向量被缩减时，上带宽减少1。此外，每次<span class="math-inline">\hat{w}_{k}</span>向量被缩减时，<span class="math-inline">T_j</span>在带状部分之外和右侧的固定行中会有非零元素。更准确地说，每次由<span class="math-inline">\hat{w}_{k}</span>向量缩减引起的行的行索引由<span class="math-inline">k - p_c(k)</span>给出，其中<span class="math-inline">k</span>是发生缩减的迭代次数，<span class="math-inline">p_c(k)</span>是该迭代时的相应<span class="math-inline">p_c</span>值。因此，矩阵<span class="math-inline">T_j</span>可以写为
 
-<div class="math-display" id="rwf:XAC">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}}, \tag{175}</div>
+<div class="math-display" id="rwf:XAC">T_j = T_j^{\rm {(b)}} + T_j^{\rm {(d)}}, \tag{7.69}</div>
 
 其中<span class="math-inline">T_j^{\rm {(b)}}</span>是带状矩阵，<span class="math-inline">T_j^{\rm {(d)}}</span>包含由于<span class="math-inline">\hat{w}_{k}</span>向量缩减引起的带状部分上方的水平“尖峰”。类似地，
 
@@ -122,11 +123,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 矩阵<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>的元素不是相互独立的。更准确地说，设定
 
-<div class="math-display" id="rwf:XAB">T_j^{\rm (pr)} = T_j +D_j^{-1} \left(\tilde{T}_j^{\rm {(d)}}\right)^T D_j,\quad \tilde{T}_j^{\rm (pr)} = \tilde{T}_j +D_j^{-1} \left(T_j^{\rm {(d)}}\right)^T D_j, \tag{176}</div>
+<div class="math-display" id="rwf:XAB">T_j^{\rm (pr)} = T_j +D_j^{-1} \left(\tilde{T}_j^{\rm {(d)}}\right)^T D_j,\quad \tilde{T}_j^{\rm (pr)} = \tilde{T}_j +D_j^{-1} \left(T_j^{\rm {(d)}}\right)^T D_j, \tag{7.70}</div>
 
 我们有
 
-<div class="math-display" id="rwf:XAA">T_j^{\rm (pr)} = D_j^{-1} \left(\tilde{T}_j^{\rm (pr)}\right)^T D_j, \tag{177}</div>
+<div class="math-display" id="rwf:XAA">T_j^{\rm (pr)} = D_j^{-1} \left(\tilde{T}_j^{\rm (pr)}\right)^T D_j, \tag{7.71}</div>
 
 其中<span class="math-inline">D_j</span>是由(<a href="node258.html#rwf:WBD">7.64</a>)给出的对角矩阵。将(<a href="node258.html#rwf:XAC">7.69</a>)代入(<a href="node258.html#rwf:XAB">7.70</a>)中<span class="math-inline">T_j^{\rm (pr)}</span>的定义，我们得到关系
 
@@ -136,11 +137,59 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 例如，考虑右起始向量数<span class="math-inline">m=3</span>和左起始向量数<span class="math-inline">p=5</span>的情况。假设在前<span class="math-inline">j=15</span>次迭代中，<span class="math-inline">\hat{w}_k</span>向量在迭代<span class="math-inline">k=8</span>、<span class="math-inline">k=11</span>和<span class="math-inline">k=13</span>时发生缩减，<span class="math-inline">\hat{v}_k</span>向量在迭代<span class="math-inline">k=7</span>和<span class="math-inline">k=12</span>时发生缩减。在这种情况下，矩阵<span class="math-inline">T^{(\rm pr)}_{15}</span>具有以下稀疏结构：
-<br><p></p>
-<div align="CENTER">
 
+<div style="text-align: center;">
+<img src="icon/node258-T15pr.png">
+</div>
 
-<span class="math-inline"></span>T_{15}^{\rm {(pr)}} = %%\footnotesize{\left[ \begin{array}{cccccccccccccccccccccccc}\tilde{{\tt d}}&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &<!--Navigation Panel-->
+在这里，<span class="math-inline">{*}</span>表示带状部分内可能非零的元素，<span class="math-inline">T_{15}^{\rm {(b)}}</span>；<span class="math-inline">{\tt d}</span>表示由于在迭代<span class="math-inline">k=8</span>、<span class="math-inline">k=11</span>和<span class="math-inline">k=13</span>时对<span class="math-inline">\hat{w}_k</span>向量进行收缩而可能非零的元素；而<span class="math-inline">\tilde{{\tt d}}</span>表示由于在迭代<span class="math-inline">k=7</span>和<span class="math-inline">k=12</span>时对<span class="math-inline">\hat{v}_k</span>向量进行收缩而可能非零的元素。注意，收缩已将初始的下带宽<span class="math-inline">m+1 = 4</span>在迭代<span class="math-inline">j=15</span>时减少到<span class="math-inline">m_c+1=2</span>，并将初始的上带宽<span class="math-inline">p+1 = 6</span>在迭代<span class="math-inline">j=15</span>时减少到<span class="math-inline">p_c+1 = 3</span>。
+
+<p>
+在进行了<span class="math-inline">j</span>次带状Lanczos算法迭代后，通过将矩阵<span class="math-inline">A</span>对由<span class="math-inline">V_j</span>列张成的子空间进行斜投影，并垂直于由<span class="math-inline">W_j</span>列张成的子空间，可以得到NHEP（<a href="node256.html#rwf:MAA">7.58</a>）的近似特征解。更准确地说，这意味着我们正在寻找形式为<span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>的（<a href="node256.html#rwf:MAA">7.58</a>）的近似特征向量，并且在将这个假设的<span class="math-inline">x_i^{(j)}</span>代入（<a href="node256.html#rwf:MAA">7.58</a>）后，我们从左边乘以<span class="math-inline">W_j^T</span>。这产生了广义特征值问题
+
+<div class="math-display" id="rwf:WBZ">W_j^T A V_j z_i^{(j)} = \theta_i^{(j)} W_j^T V_j z_i^{(j)},\quad i=1,2,\ldots,j. \tag{7.72}</div>
+
+利用双正交关系（<a href="node258.html#rwf:WBD">7.64</a>）和（<a href="node258.html#rwf:WBE">7.67</a>），很容易验证在（<a href="node258.html#rwf:XAB">7.70</a>）中定义的矩阵<span class="math-inline">T_j^{\rm (pr)}</span>满足
+
+<div class="math-display" id="rwf:WBH">T_j^{\rm {(pr)}} = \left(W_j^T V_j\right)^{-1} W_j^T A V_j. \tag{7.73}</div>
+
+根据（<a href="node258.html#rwf:WBH">7.73</a>），广义特征值问题（<a href="node258.html#rwf:WBZ">7.72</a>）等价于标准特征值问题
+
+<div class="math-display">T_j^{\rm {(pr)}} z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quad i=1,2,\ldots,j.</div>
+
+我们强调，在算法中，我们使用（<a href="node258.html#rwf:XAB">7.70</a>）中的公式来获得<span class="math-inline">T_j^{\rm (pr)}</span>的条目，而不是（<a href="node258.html#rwf:WBH">7.73</a>）。
+
+<p>
+带状Lanczos算法在达到<span class="math-inline">m_c=0</span>或<span class="math-inline">p_c=0</span>时终止。在<span class="math-inline">m_c=0</span>的情况下，已经发生了<span class="math-inline">m</span>次<span class="math-inline">\hat{v}_k</span>向量的收缩，因此右块Krylov序列（<a href="node256.html#rwf:MBA1">7.60</a>）被耗尽。在<span class="math-inline">p_c=0</span>的情况下，已经发生了<span class="math-inline">p</span>次<span class="math-inline">\hat{w}_k</span>向量的收缩，因此左块Krylov序列（<a href="node256.html#rwf:MBA2">7.61</a>）被耗尽。
+
+<p>
+首先考虑由于<span class="math-inline">m_c=0</span>导致的终止。然后，（<a href="node258.html#rwf:WBF">7.68</a>）中右Lanczos向量的关系可以重写如下：
+
+<div class="math-display" id="rwf:DXB">A V_j - V_j T_j^{\rm {(pr)}} = P_j \hat{V}_j^{\rm {(dl)}}. \tag{7.74}</div>
+
+这里，矩阵
+
+<div class="math-display" id="rwf:DXA">P_j = I - V_j D_j^{-1} W_j^T,\quad \mathrm{其中}\quad D_j = W_j^T V_j, \tag{7.75}</div>
+
+表示由<span class="math-inline">P_j V_j = 0</span>和<span class="math-inline">P_j x = x</span>对<span class="math-inline">W_j^T</span>的零空间中所有<span class="math-inline">x</span>的斜投影。现在让<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">z_i^{(j)}</span>是<span class="math-inline">T_j^{\rm {(pr)}}</span>的任意特征对，并假设<span class="math-inline">z_i^{(j)}</span>被归一化使得<span class="math-inline">\left\Vert z_i^{(j)}\right\Vert _2 = 1</span>。回想一下，对<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span>用作<span class="math-inline">A</span>的近似特征解。从（<a href="node258.html#rwf:DXB">7.74</a>）可以得出，这个近似特征解的残差可以如下界定：
+
+<div class="math-display" id="rwf:DXC">\left\Vert A x_i^{(j)} - \theta_i^{(j)} x_i^{(j)} \right\Vert_2 = \left\Vert P_j \hat{V}_j^{\rm{(dl)}} z_i^{(j)} \right\Vert_2 \leq \left\Vert P_j \right\Vert _2 \cdot\left\Vert \hat{V}_j^{\rm {(dl)}} \right\Vert _2. \tag{7.76}</div>
+
+特别是，如果只进行精确收缩，那么<span class="math-inline">\hat{V}_j^{\rm {(dl)}} = 0</span>，并且（<a href="node258.html#rwf:DXC">7.76</a>）表明<span class="math-inline">T_j^{\rm {(pr)}}</span>的每个特征值<span class="math-inline">\theta_i^{(j)}</span>确实是<span class="math-inline">A</span>的特征值。
+
+<p>
+类似地，在由于<span class="math-inline">p_c=0</span>导致的终止情况下，（<a href="node258.html#rwf:WBF">7.68</a>）中左Lanczos向量的关系可以重写如下：
+
+<div class="math-display" id="rwf:DXE">A^T W_j - W_j \tilde{T}_j^{\rm {(pr)}} = P_j^T \hat{W}_j^{\rm {(dl)}}. \tag{7.77}</div>
+
+这里，<span class="math-inline">P_j</span>再次是（<a href="node258.html#rwf:DXA">7.75</a>）中定义的矩阵。现在让<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">\tilde{z}_i^{(j)}</span>是<span class="math-inline">(T_j^{\rm {(pr)}})^T</span>的任意特征对，并假设<span class="math-inline">\tilde{z}_i^{(j)}</span>被归一化使得<span class="math-inline">\Vert D_j^{-1} \tilde{z}_i^{(j)}\Vert _2 = 1</span>。注意，<span class="math-inline">\tilde{z}_i^{(j)}</span>的复共轭是<span class="math-inline">T_j^{\rm {(pr)}}</span>的左特征向量。对<span class="math-inline">\theta_i^{(j)}</span>和<span class="math-inline">y_i^{(j)} = W_j D_j^{-1} \tilde{z}_i^{(j)}</span>表示<span class="math-inline">A^T</span>的近似特征解。从（<a href="node258.html#rwf:DXE">7.77</a>）可以得出，这个近似特征解的残差可以如下界定：
+
+<div class="math-display" id="rwf:DXX">\left\Vert A^T y_i^{(j)} - \theta_i^{(j)} y_i^{(j)} \right\Vert_2 = \left\Vert P_j^T \hat{W}_j^{\rm{(dl)}} D^{-1}_j \tilde{z}_i^{(j)} \right\Vert_2 \leq \left\Vert P_j^T \right\Vert _2 \cdot\left\Vert \hat{W}_j^{\rm {(dl)}} \right\Vert _2. \tag{7.78}</div>
+
+特别是，如果只进行精确收缩，那么<span class="math-inline">\hat{W}_j^{\rm {(dl)}} = 0</span>，并且（<a href="node258.html#rwf:DXX">7.78</a>）表明<span class="math-inline">T_j^{\rm {(pr)}}</span>的每个特征值<span class="math-inline">\theta_i^{(j)}</span>确实是<span class="math-inline">A^T</span>的特征值，因此也是<span class="math-inline">A</span>的特征值。
+
+<p><hr>
+<!--Navigation Panel-->
 <a name="tex2html4692"
   href="node259.html">
 <button class="navigate">下一节</button></a> 
@@ -158,10 +207,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4693" href="node259.html">算法</a>
-<b>上一级：</b><a name="tex2html4687" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html4687" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4681" href="node257.html">收缩</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,10 +73,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4707" href="node260.html">应用至降阶模型</a>
-<b>上一级：</b><a name="tex2html4701" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html4701" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4695" href="node258.html">基本性质</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016103000000000000000">
@@ -80,22 +84,46 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 带状Lanczos算法的完整描述如下。
 
-<p>
-<br>
-<a name="rwf:alg2"></a><img
- width="598" height="780" align="BOTTOM" border="0"
- src="img2426.png"
- alt="\begin{algorithm}{Band Lanczos Method for NHEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ijk...
-...nvergence \\
-\textup{(18)}
-\&gt; \&gt; {\bf end for}
-\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="rwf:alg2">
+算法 7.16：NHEP的带状Lanczos方法
+
+(1)  对于 <span class="math-inline">k = 1, 2, \ldots, m</span>，设置 <span class="math-inline">\widehat{v}_k = b_k</span>
+      对于 <span class="math-inline">k = 1, 2, \ldots, p</span>，设置 <span class="math-inline">\widehat{w}_k = c_k</span>
+      设置 <span class="math-inline">m_c = m, p_c = p</span>，并且 <span class="math-inline">\mathcal{I}_v = \mathcal{I}_w = \emptyset</span>
+(2)  对于 <span class="math-inline">j = 1, 2, \ldots</span>，直到收敛或 <span class="math-inline">m_c = 0</span> 或 <span class="math-inline">p_c = 0</span> 执行以下步骤：
+(3)      计算 <span class="math-inline">\left\|\widehat{v}_j\right\|_2</span>
+(4)      判断是否应该对 <span class="math-inline">\widehat{v}_j</span> 进行消去，如果是，执行以下操作：
+             (a) 如果 <span class="math-inline">j - m_c > 0</span>，设置 <span class="math-inline">\mathcal{I}_w = \mathcal{I}_w \cup \{j - m_c\}</span>
+             (b) 设置 <span class="math-inline">m_c = m_c - 1</span>。如果 <span class="math-inline">m_c = 0</span>，设置 <span class="math-inline">j = j - 1</span> 并停止
+             (c) 对于 <span class="math-inline">k = j, j + 1, \ldots, j + m_c - 1</span>，设置 <span class="math-inline">\widehat{v}_k = \widehat{v}_{k + 1}</span>
+             (d) 返回步骤(3)
+(5)      计算 <span class="math-inline">\left\|\widehat{w}_j\right\|_2</span>
+(6)      判断是否应该对 <span class="math-inline">\widehat{w}_j</span> 进行消去，如果是，执行以下操作：
+             (a) 如果 <span class="math-inline">j - p_c > 0</span>，设置 <span class="math-inline">\mathcal{I}_v = \mathcal{I}_v \cup \{j - p_c\}</span>
+             (b) 设置 <span class="math-inline">p_c = p_c - 1</span>。如果 <span class="math-inline">p_c = 0</span>，设置 <span class="math-inline">j = j - 1</span> 并停止
+             (c) 对于 <span class="math-inline">k = j, j + 1, \ldots, j + p_c - 1</span>，设置 <span class="math-inline">\widehat{w}_k = \widehat{w}_{k + 1}</span>
+(7)      设置 <span class="math-inline">t_{j, j - m_c} = \left\|\widehat{v}_j\right\|_2</span> 和 <span class="math-inline">\tilde{t}_{j, j - p_c} = \left\|\widehat{w}_j\right\|_2</span>
+          对 <span class="math-inline">v_j = \widehat{v}_j / t_{j, j - m_c}</span> 和 <span class="math-inline">w_j = \widehat{w}_j / \tilde{t}_{j, j - p_c}</span> 进行归一化
+(8)      计算 <span class="math-inline">\delta_j = w_j^T v_j</span>。如果 <span class="math-inline">\delta_j = 0</span>，停止
+(9)      计算 <span class="math-inline">\widehat{v}_{j + m_c} = A v_j</span>
+(10)     设置 <span class="math-inline">k_v = \max\{1, j - p_c\}</span>
+           设置 <span class="math-inline">\mathcal{I}_v^{(e)} = \mathcal{I}_v \cup \{k_v, k_v + 1, \ldots, j - 1\}</span>
+           对于 <span class="math-inline">\mathcal{I}_v^{(e)}</span> 中的 <span class="math-inline">k</span>（按升序），设置
+               <span class="math-inline">t_{k j} = w_k^T \widehat{v}_{j + m_c} / \delta_k</span> 和 <span class="math-inline">\widehat{v}_{j + m_c} = \widehat{v}_{j + m_c} - v_k t_{k j}</span>
+(11)     计算 <span class="math-inline">\widehat{w}_{j + p_c} = A^T w_j</span>
+(12)     设置 <span class="math-inline">k_w = \max\{1, j - m_c\}</span>
+           设置 <span class="math-inline">\mathcal{I}_w^{(e)} = \mathcal{I}_w \cup \{k_w, k_w + 1, \ldots, j - 1\}</span>
+           对于 <span class="math-inline">\mathcal{I}_w^{(e)}</span> 中的 <span class="math-inline">k</span>（按升序），设置
+               <span class="math-inline">\widetilde{t}_{k j} = \widehat{w}_{j + p_c}^T v_k / \delta_k</span> 和 <span class="math-inline">\widehat{w}_{j + p_c} = \widehat{w}_{j + p_c} - w_k \widetilde{t}_{k j}</span>
+(13)    对于 <span class="math-inline">k = j + 1, j + 2, \ldots, j + m_c</span>，设置
+               <span class="math-inline">t_{j, k - m_c} = w_j^T \widehat{v}_k / \delta_j</span> 和 <span class="math-inline">\widehat{v}_k = \widehat{v}_k - v_j t_{j, k - m_c}</span>
+(14)    对于 <span class="math-inline">k = j + 1, j + 2, \ldots, j + p_c</span>，设置
+               <span class="math-inline">\widetilde{t}_{j, k - p_c} = \widehat{w}_k^T v_j / \delta_j</span> 和 <span class="math-inline">\widehat{w}_k = \widehat{w}_k - w_j \widetilde{t}_{j, k - p_c}</span>
+(15)    对于 <span class="math-inline">\mathcal{I}_w</span> 中的 <span class="math-inline">k</span>，设置 <span class="math-inline">t_{j k} = \tilde{t}_{k j} \delta_k / \delta_j</span>
+(16)    设置 <span class="math-inline">T_j^{(pr)} = [t_{i k}]_{i, k = 1, 2, \ldots, j}</span>
+(17)    测试收敛性
+(18) 结束循环
+</pre>
 
 <p>
 我们强调，非厄米带状Lanczos方法可以直接按照算法<a href="node259.html#rwf:alg2">7.16</a>的描述来实现，并结合下面给出的进一步细节。为了将描述长度控制在一页内，在算法<a href="node259.html#rwf:alg2">7.16</a>中，<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>的带状部分的所有可能非零项都计算为内积。
@@ -103,7 +131,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 然而，实际上大约只有这些项的一半需要明确计算为内积。其余的项可以通过以下关系获得：
 
-<div class="math-display" id="rwf:SAV">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i, \tag{185}</div>
+<div class="math-display" id="rwf:SAV">t_{ik}=\tilde{t}_{ki}\, \delta_k / \delta_i, \tag{7.79}</div>
 
 这一关系源自<span class="math-inline">T_j^{\rm (pr)}</span>和<span class="math-inline">\tilde{T}_j^{\rm (pr)}</span>的连接<a href="node258.html#rwf:XAA">7.71</a>。特别是，在步骤(10)、(12)、(13)和(14)的讨论中，我们给出了使用<a href="node259.html#rwf:SAV">7.79</a>尽可能多的<span class="math-inline">T_j</span>和<span class="math-inline">\tilde{T}_j</span>项的公式。采用这些公式可以最小化内积的数量，但会牺牲一些数值稳定性。
 
@@ -115,7 +143,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dt><strong>(4)</strong></dt>
 <dd>通常，是否需要对<span class="math-inline">\hat{v}_j</span>进行收缩的决策应基于检查是否
 
-<div class="math-display" id="rwf:WGA">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol}, \tag{186}</div>
+<div class="math-display" id="rwf:WGA">\Vert\hat{v}_j\Vert _2 \leq {\tt dtol}, \tag{7.80}</div>
 
 其中<span class="math-inline">{\tt dtol}</span>是一个适当选择的小收缩容差。如果<a href="node259.html#rwf:WGA">7.80</a>满足，则对<span class="math-inline">\hat{v}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-m_c</span>，则添加到包含<span class="math-inline">\tilde{T}_j</span>的<span class="math-inline">\tilde{T}_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_w</span>中，并且当前右块大小更新为<span class="math-inline">m_c=m_c-1</span>。如果<span class="math-inline">m_c=0</span>，则右块Krylov序列<a href="node256.html#rwf:MBA1">7.60</a>耗尽，算法自然终止。如果<span class="math-inline">m_c>0</span>，删除向量<span class="math-inline">\hat{v_j}</span>，剩余右候选向量<span class="math-inline">\hat{v}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(3)。如果不满足<a href="node259.html#rwf:WGA">7.80</a>，则不需要收缩，算法继续步骤(5)。
 
@@ -124,7 +152,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dt><strong>(6)</strong></dt>
 <dd>类似于<a href="node259.html#rwf:WGA">7.80</a>，是否需要对<span class="math-inline">\hat{w}_j</span>进行收缩的决策基于检查是否
 
-<div class="math-display" id="rwf:WGB">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}. \tag{187}</div>
+<div class="math-display" id="rwf:WGB">\Vert\hat{w}_j\Vert _2 \leq {\tt dtol}. \tag{7.81}</div>
 
 如果<a href="node259.html#rwf:WGB">7.81</a>满足，则对<span class="math-inline">\hat{w}_j</span>进行收缩。在这种情况下，如果正值<span class="math-inline">j-p_c</span>，则添加到包含<span class="math-inline">T_j</span>的<span class="math-inline">T_j^{\rm {(d)}}</span>部分中非零行的索引集<span class="math-inline">{\mathcal I}_v</span>中，并且当前左块大小更新为<span class="math-inline">p_c=p_c-1</span>。如果<span class="math-inline">p_c=0</span>，则左块Krylov序列<a href="node256.html#rwf:MBA2">7.61</a>耗尽，算法自然终止。如果<span class="math-inline">p_c>0</span>，删除向量<span class="math-inline">\hat{w}_j</span>，剩余左候选向量<span class="math-inline">\hat{w}_{k+1}</span>的索引<span class="math-inline">k+1</span>重置为<span class="math-inline">k</span>，最后，算法返回到步骤(5)。如果不满足<a href="node259.html#rwf:WGB">7.81</a>，则不需要收缩，算法继续步骤(7)。
 
@@ -151,7 +179,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dt><strong>(10)</strong></dt>
 <dd>向量<span class="math-inline">\hat{v}_{j+m_c}</span>与左Lanczos向量<span class="math-inline">w_k</span>，<span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。通过使用<a href="node259.html#rwf:SAV">7.79</a>，可以在计算<span class="math-inline">t_{kj}</span>时节省一个内积。更确切地说，应使用以下<span class="math-inline">t_{kj}</span>的公式：
 
-<div class="math-display" id="rwf:SAV1">t_{kj}= \cases{\displaystyle{\tilde{t}_{jk}\, \delta_j/\delta_k}& \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{{w_k^T \hat{v}_{j+m_c}}/{\delta_k}}& \ otherwise.} \tag{188}</div>
+<div class="math-display" id="rwf:SAV1">t_{kj}= \begin{cases} \tilde{t}_{jk}\, \delta_j/\delta_k & \text{如果 } k = j- p_c; \\ {w_k^T \hat{v}_{j+m_c}}/{\delta_k} & \text{其他情况}.\end{cases} \tag{7.82}</div>
 
 注意，<a href="node259.html#rwf:SAV1">7.82</a>中所需的项<span class="math-inline">\tilde{t}_{jk}</span>可从步骤(7)获得。
 <a name="25715"></a> 
@@ -166,25 +194,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dt><strong>(12)</strong></dt>
 <dd>向量<span class="math-inline">\hat{w}_{j+p_c}</span>与右Lanczos向量<span class="math-inline">v_k</span>，<span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>进行双正交化。注意，这一双正交化是通过TSMGS过程完成的。同样，为了节省一个内积，应使用以下<span class="math-inline">\tilde{t}_{kj}</span>的公式：
 
-<div class="math-display">\tilde{t}_{kj} = \cases{\displaystyle{t_{jk}\, \delta_j/\delta_k}& \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{{\hat{w}_{j+p_c}^T v_k}/{\delta_k}}& \ otherwise.}</div>
-
+<div class="math-display">\tilde{t}_{kj}= \begin{cases} t_{jk}\, \delta_j/\delta_k & \text{如果 } k = j - m_c; \\ {\hat{w}_{j+p_c}^T v_k}/{\delta_k} & \text{其他情况}.\end{cases}</div>
 
 <p>
 </dd>
 <dt><strong>(13)</strong></dt>
 <dd>右候选向量<span class="math-inline">\hat{v}_{j+1},\hat{v}_{j+2},\ldots,\hat{v}_{j+m_c}</span>与最新左Lanczos向量<span class="math-inline">w_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">t_{j,k-m_c}</span>的公式：
 
-<div class="math-display">t_{j,k-m_c} = \cases{\displaystyle{{w_j^T \hat{v}_{k}}/{\delta_j}}& \ if <span class="math-inline">k\in {\mathcal I}_v^{(\rm e)}</span>; \cr \displaystyle{\tilde{t}_{k-m_c,j}\, \delta_{k-m_c}/{\delta_j}}& \ otherwise.}</div>
+<div class="math-display">t_{j,k-m_c} = \begin{cases} {w_j^T \hat{v}_{k}}/{\delta_j} & \text{如果 } k - m_c \le 0 \text{ 或 } k - m_c = j; \\ \tilde{t}_{k-m_c,j}\, \delta_{k-m_c}/{\delta_j} & \text{其他情况}.\end{cases}</div>
 
-然而，使用这一公式会牺牲一些数值稳定性。
-<a name="tex2html44"
-  href="footnode.html#foot27226"><sup><button class="footnote"></button></sup></a>
+然而，使用这一公式会牺牲一些数值稳定性。<sup><a href="footnote-stability">[1]</a></sup>
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
 <dd>左候选向量<span class="math-inline">\hat{w}_{j+1},\hat{w}_{j+2},\ldots,\hat{w}_{j+p_c}</span>与最新右Lanczos向量<span class="math-inline">v_j</span>进行双正交化。为了节省内积，可以使用以下<span class="math-inline">\tilde{t}_{j,k-p_c}</span>的公式：
 
-<div class="math-display">\tilde{t}_{j,k-p_c} = \cases{\displaystyle{{\hat{w}_{k}^T v_j}/{\delta_j}}& \ if <span class="math-inline">k\in {\mathcal I}_w^{(\rm e)}</span>; \cr \displaystyle{t_{k-p_c,j}\, \delta_{k-p_c}/{\delta_j}}& \ otherwise.}</div>
+<div class="math-display">\tilde{t}_{j,k-p_c} = \begin{cases} {\hat{w}_{k}^T v_j}/{\delta_j} & \text{如果 } k - p_c \le 0; \\ t_{k-p_c,j}\, \delta_{k-p_c}/{\delta_j} & \text{其他情况}.\end{cases}</div>
 
 然而，使用这一公式会牺牲一些数值稳定性。
 
@@ -206,6 +231,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dl>
 
 <p>
+<hr>
+<ol>
+<li id="footnote-stability">在R. W. 弗罗因德(R. W. Freund)于2000年8月撰写的《使用不完全缩减的Krylov子空间方法进行降阶建模》一文中，描述了一种增强数值稳定性但需额外进行一些内积运算的算法版本。该文作为贝尔实验室数值分析手稿的一部分，详细探讨了如何在牺牲一定计算效率的前提下，提升算法在处理复杂问题时的稳定性能。</li>
+</ol>
 <hr><!--Navigation Panel-->
 <a name="tex2html4706"
   href="node260.html">
@@ -224,10 +253,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4707" href="node260.html">应用至降阶模型</a>
-<b>上一级：</b><a name="tex2html4701" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>上一级：</b><a name="tex2html4701" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4695" href="node258.html">基本性质</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

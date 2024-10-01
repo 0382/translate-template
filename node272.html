@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,15 +73,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4896" href="node273.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html4890" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一级：</b><a name="tex2html4890" href="node269.html">Jacobi-Davidson 方法</a>
 <b>上一节：</b><a name="tex2html4884" href="node271.html">Schur 形式与重启</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016123000000000000000"></a>
 <a name="sec:unsymhar"></a>
-<br>
 计算内部特征值
 </h2>
 
@@ -85,7 +88,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 调和Ritz值的概念[<a href="node421.html#papv95">349</a>]很容易推广到非对称矩阵[<a href="node421.html#slvo96">411</a>]。如我们所见，Jacobi-Davidson方法生成子空间<span class="math-inline">{\mathcal V}_{m}</span>的基向量<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>。为了将<span class="math-inline">A</span>投影到这个子空间上，我们需要计算向量<span class="math-inline">{w}_j\equiv A{v}_j</span>。相对于由<span class="math-inline">{w}_j</span>张成的子空间的<span class="math-inline">A^{-1}</span>的Ritz值的倒数被称为<em>调和Ritz值</em>。调和Ritz值可以在不反转<span class="math-inline">A</span>的情况下计算，因为调和Ritz对<span class="math-inline">(\widetilde{\theta}_j^{({m})},\widetilde{u}_j^{({m})})</span>满足
 
-<div class="math-display" id="eq:harm5">A\widetilde{u}_j^{({m})} -\widetilde\theta_j^{({m})}\widetilde{u}_j^{({m})}\perp{\mathcal W}_{m}\equiv \mathrm{span}\{{w}_1,\ldots , {w}_{m}\} \tag{209}</div>
+<div class="math-display" id="eq:harm5">A\widetilde{u}_j^{({m})} -\widetilde\theta_j^{({m})}\widetilde{u}_j^{({m})}\perp{\mathcal W}_{m}\equiv \mathrm{span}\{{w}_1,\ldots , {w}_{m}\} \tag{7.103}</div>
 
 对于<span class="math-inline">\widetilde{u}_j^{({m})} \in {V}_{m}</span>且<span class="math-inline">\widetilde{u}_j^{({m})}\neq 0</span>。这意味着调和Ritz值是矩阵束<span class="math-inline">(W_{m}^\ast AV_{m}, W_{m}^\ast V_{m})</span>的特征值：
 
@@ -101,15 +104,45 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 基于调和Ritz值和向量的Jacobi-Davidson算法，包括部分Schur形式的约简，在算法<a href="node272.html#alg:jdnhqrhar">7.19</a>中给出。该算法包括重启和缩减技术。它可以用于计算接近<span class="math-inline">\tau</span>的多个特征值。
 
-<p>
-<div align="CENTER">
-<p><a name="alg:jdnhqrhar"></a></p><img width="598" height="817" border="0" src="img2551.png" alt="\begin{figure}\begin{algorithm}{Jacobi--Davidson Method for <span class="math-inline">k_{\max}</span>Interior E...
-...bf end while}
-\end{tabbing}}
-\end{algorithm}\vspace*{-12pt}%% help
-\end{figure}">
-</div>
-<p></p>
+<pre class="algorithm" id="alg:jdnhqrhar">
+算法 7.19：Jacobi-Davidson 方法用于 NHEP 的 <span class="math-inline">k_{\max}</span> 内部特征值
+
+(1) <span class="math-inline">t = v_0, k = 0, m = 0; Q = [], R = []</span>
+(2) 当 <span class="math-inline">k < k_{\max}</span>
+(3)     对于 <span class="math-inline">i = 1, \ldots, m</span>
+(4)         <span class="math-inline">t = t - (v_i^* t) v_i</span>
+(5)     <span class="math-inline">m = m + 1, v_m = t / \|t\|_2, v_m^A = A v_m - \tau v_m, w = v_m^A</span>
+(6)     对于 <span class="math-inline">i = 1, \ldots, k</span>
+(7)         <span class="math-inline">w = w - (q_i^* w) q_i</span>
+(8)     对于 <span class="math-inline">i = 1, \ldots, m-1</span>
+(9)         <span class="math-inline">M_{i, m}^A = w_i^* w, w = w - M_{i, m}^A w_i</span>
+(10)    <span class="math-inline">M_{m, m}^A = \|w\|_2, w_m = w / M_{m, m}^A</span>
+(11)    对于 <span class="math-inline">i = 1, \ldots, m-1</span>
+(12)        <span class="math-inline">M_{i, m} = w_i^* v_m, M_{m, i} = w_m^* v_i</span>
+(13)    <span class="math-inline">M_{m, m} = w_m^* v_m</span>
+(14)    进行QZ分解 <span class="math-inline">M^A S^R = S^L T^A, M S^R = S^L T</span>, 使得：<span class="math-inline">\left\|T_{i, i}^A / T_{i, i}\right\| \leq \left\|T_{i+1, i+1}^A / T_{i+1, i+1}\right\|</span>
+(15)    <span class="math-inline">u = V s_1^R, u^A = V^A s_1^R, \vartheta = \overline{T_{1,1}} \cdot T_{1,1}^A</span>
+(16)    <span class="math-inline">r = u^A - \vartheta u, \tilde{a} = Q^* r, \tilde{r} = r - Q \tilde{a}</span>
+(17)    当 <span class="math-inline">\|\tilde{r}\|_2 \leq \epsilon</span>
+(18)        <span class="math-inline">R = \left[\begin{array}{cc} R & \tilde{a} \\ 0 & \vartheta + \tau \end{array}\right], Q = [Q, u], k = k + 1</span>
+(19)        如果 <span class="math-inline">k = k_{\max}</span> 则停止
+(20)        <span class="math-inline">m = m - 1</span>
+(21)        对于 <span class="math-inline">i = 1, \ldots, m</span>
+(22)            <span class="math-inline">v_i = V s_{i+1}^R, v_i^A = V^A s_{i+1}^R, w_i = W s_{i+1}^L, s_i^R = s_i^L = e_i</span>
+(23)        <span class="math-inline">M^A, M</span> 是 <span class="math-inline">T^A, T</span> 的下 <span class="math-inline">m</span> 块
+(24)        <span class="math-inline">u = v_1, u^A = v_1^A, \vartheta = \overline{M_{1,1}} \cdot M_{1,1}^A</span>
+(25)        <span class="math-inline">r = u^A - \vartheta u, \tilde{a} = Q^* r, \tilde{r} = r - Q \tilde{a}</span>
+(26)    结束当
+(27)    如果 <span class="math-inline">m \geq m_{\max}</span> 则
+(28)        对于 <span class="math-inline">i = 2, \ldots, m_{\min}</span>
+(29)            <span class="math-inline">v_i = V s_i^R, v_i^A = V^A s_i^R, w_i = W s_i^L</span>
+(30)        <span class="math-inline">M^A, M</span> 是 <span class="math-inline">T^A, T</span> 的前 <span class="math-inline">m_{\min}</span> 块
+(31)        <span class="math-inline">v_1 = u, v_1^A = u^A, w_1 = W s_1^L, m = m_{\min}</span>
+(32)    结束如果
+(33)    <span class="math-inline">\theta = \vartheta + \tau, \tilde{Q} = [Q, u]</span>
+(34)    解 <span class="math-inline">t (\perp \tilde{Q})</span> （近似地）从：<span class="math-inline">\left(I - \tilde{Q} \tilde{Q}^*\right)(A - \theta I)\left(I - \tilde{Q} \tilde{Q}^*\right) t = -\tilde{r}</span>
+(35) 结束当
+</pre>
 
 <p>
 要应用此算法，我们需要指定一个起始向量<span class="math-inline">{v}_0</span>，一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个指定应计算多少个接近<span class="math-inline">\tau</span>的特征对的数目<span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span>的值表示搜索子空间的最大维度。如果超过此值，则以指定维度<span class="math-inline">{m}_{\min}</span>的子空间进行重启。
@@ -217,7 +250,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4896" href="node273.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html4890" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
+<b>上一级：</b><a name="tex2html4890" href="node269.html">Jacobi-Davidson 方法</a>
 <b>上一节：</b><a name="tex2html4884" href="node271.html">Schur 形式与重启</a>
   
   

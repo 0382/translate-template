@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li </title>
+<title>稳定性与准确性评估</title>
 <meta charset="utf-8">
-<meta name="description" content="Stability and Accuracy Assessments &nbsp; Z.&nbsp;Bai and R.&nbsp;Li ">
+<meta name="description" content="稳定性与准确性评估">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,52 +66,59 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4934" href="node276.html">Residual Vectors.</a>
+<b>下一节：</b><a name="tex2html4934" href="node276.html">残差向量</a>
 <b>上一级：</b><a name="tex2html4928" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4924" href="node274.html">数值示例</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h1><a name="SECTION0016130000000000000000"></a> <a name="sec:errbds_nsym"></a><a name="26966"></a> 
 <a name="26967"></a>
-<br>
-Stability and Accuracy Assessments 
-<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em> 
+稳定性与准确性评估
+<br>&nbsp; <em>Z.&nbsp;Bai and R.&nbsp;Li</em></em> 
 </h1>
 
 <p>
-In this section, we discuss the tools to assess the accuracy 
-of computed eigenvalues and corresponding eigenvectors. We only assume
-the availability of residual vectors for computed eigenvalues and 
-eigenvectors, which are usually available
-upon exiting a successful computation or are of marginal cost to compute 
-afterwards for the iterative methods discussed in this chapter. 
+在本节中，我们将讨论评估计算所得特征值及其对应特征向量准确性的工具。我们仅假设在成功计算后或对于本章讨论的迭代方法而言，计算成本微不足道的情况下，可以获得计算所得特征值和特征向量的残差向量。
 
 <p>
-For the treatment of error estimation
-of the computed eigenvalues, eigenvectors, and invariant
-subspaces of dense NHEPs, 
-see Chapter 4 of the <i>LAPACK Users' Guide</i>&nbsp;[<a
- href="node421.html#lapack">12</a>]. 
+关于密集非厄米特征值问题（NHEPs）计算所得特征值、特征向量及不变子空间的误差估计处理，请参阅《LAPACK用户指南》第四章&nbsp;[<a href="node421.html#lapack">12</a>]。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><ul>
-<li><ul>
-<li><a name="tex2html4935" href="node276.html">Residual Vectors.</a>
-<li><a name="tex2html4936" href="node277.html">Transfer Residual Errors to Backward Errors.</a>
-<li><a name="tex2html4937" href="node278.html">Error Bound for Computed Eigenvalues.</a>
-<li><a name="tex2html4938" href="node279.html">Error Bound for Computed Eigenvectors.</a>
-</ul></ul></ul>
+<li><a name="tex2html4935" href="node276.html">残差向量</a>
+<li><a name="tex2html4936" href="node277.html">将残差误差转化为后向误差</a>
+<li><a name="tex2html4937" href="node278.html">计算所得特征值的误差界限</a>
+<li><a name="tex2html4938" href="node279.html">计算所得特征向量的误差界限</a>
+</ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4933"
+  href="node276.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4927"
+  href="node203.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4923"
+  href="node274.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4929"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4931"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4934" href="node276.html">残差向量</a>
+<b>上一级：</b><a name="tex2html4928" href="node203.html">非厄米特特征值问题</a>
+<b>上一节：</b><a name="tex2html4924" href="node274.html">数值示例</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

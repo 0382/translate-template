@@ -66,15 +66,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4733" href="node262.html">Lanczos Method for Complex</a>
-<b>上一级：</b><a name="tex2html4727" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>下一节：</b><a name="tex2html4733" href="node262.html">复对称特征问题中的Lanczos方法</a>
+<b>上一级：</b><a name="tex2html4727" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4723" href="node260.html">应用至降阶模型</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016105000000000000000"></a> <a name="rwf:bandnsym_var"></a>
-<br>
 变体
 </h2>
 
@@ -93,23 +90,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display">A \left[ \begin{array}{ccccc}v_j & \hat{v}_{j+1} & \hat{v}_{j+2} &\cdots & \hat{v}_{j+m_c-1}\end{array} \right].</div>
 
 这为我们提供了向量<span class="math-inline">\hat{v}_{j+m_c} = A v_j</span>，它在迭代<span class="math-inline">j</span>的剩余步骤中使用，以及向量
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+m_c-1}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(192)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display">A \hat{v}_{j+1}, A \hat{v}_{j+2}, \ldots, A \hat{v}_{j+m_c-1}.\tag{7.86}</div>
+
 在接下来的<span class="math-inline">m_c-1</span>次迭代中，我们将需要向量
-<br>
-<div align="RIGHT">
-<table width="100%" align="CENTER">
-<tr valign="MIDDLE"><td align="CENTER" NOWRAP><div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+m_c^{\prime}-1}.</div></td>
-<td WIDTH=10 align="RIGHT">
-(193)</td></tr>
-</table>
-<br clear="ALL"></div><p></p>
+
+<div class="math-display">A v_{j+1}, A v_{j+2}, \ldots, A v_{j+m_c^{\prime}-1}.\tag{7.87}</div>
+
 这里，<span class="math-inline">m_c^{\prime}</span>定义为<span class="math-inline">m_c</span>减去在这些接下来的<span class="math-inline">m_c-1</span>次迭代中将发生的<span class="math-inline">\hat{v}_k</span>向量的缩减次数。使用§<a href="node135.html#rwf:bandsym_var">4.6.4</a>中概述的过程，可以很容易地获得向量(<a href="node261.html#rwf:TAE">7.87</a>)作为预计算向量(<a href="node261.html#rwf:TAD">7.86</a>)的适当线性组合。类似地，在算法的任何阶段，也可以预计算下一个<span class="math-inline">p_c</span>个矩阵-向量乘积与<span class="math-inline">A^T</span>，这将在接下来的<span class="math-inline">p_c</span>次迭代中需要，作为一个单独的矩阵-矩阵乘积<span class="math-inline">A^T W</span>，其中<span class="math-inline">W</span>是一个包含<span class="math-inline">p_c</span>个向量的块。实际上，不是执行算法<a href="node259.html#rwf:alg2">7.16</a>中的步骤(11)，而是计算矩阵-矩阵乘积
 
 <div class="math-display">A^T \left[ \begin{array}{ccccc}w_j & \hat{w}_{j+1} & \hat{w}_{j+2} &\cdots & \hat{w}_{j+p_c-1}\end{array} \right]</div>
@@ -134,11 +121,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4733" href="node262.html">Lanczos Method for Complex</a>
-<b>上一级：</b><a name="tex2html4727" href="node256.html">Band Lanczos Method &nbsp;</a>
+<b>下一节：</b><a name="tex2html4733" href="node262.html">复对称特征问题中的Lanczos方法</a>
+<b>上一级：</b><a name="tex2html4727" href="node256.html">带状Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4723" href="node260.html">应用至降阶模型</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

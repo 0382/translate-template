@@ -67,33 +67,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4868" href="node271.html">Schur 形式与重启</a>
-<b>上一级：</b><a name="tex2html4862" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-<b>上一节：</b><a name="tex2html4856" href="node269.html">Jacobi-Davidson Methods &nbsp; G.&nbsp;Sleijpen</a>
-  
-  
+<b>上一级：</b><a name="tex2html4862" href="node269.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html4856" href="node269.html">Jacobi-Davidson 方法</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION0016121000000000000000"></a><a name="sec:jdasym"></a>
-<br>
-Generalization of Hermitian Case
+厄米情况的推广
 </h2>
 
 <p>
-Similar to the Lanczos methods and the Arnoldi method, the
-Jacobi-Davidson method constructs a subspace onto which the given
-eigenproblem is projected. The subspace is constructed with approximate
-shift-and-invert steps, instead of forming a Krylov subspace. In
-&#167;<a href="node136.html#sec:jacdavsym">4.7</a> we have explained the method in detail, and the
-generalization to the non-Hermitian case for the basic algorithm,
-described in Algorithm&nbsp;<a href="node138.html#alg:jd">4.13</a> (p.&nbsp;<a href="node138.html#alg:jd"><button class="crossref"></button></a>), 
-is quite straightforward. In fact, the changes are:
+类似于Lanczos方法和Arnoldi方法，Jacobi-Davidson方法构建了一个子空间，将给定的本征问题投影到该子空间上。该子空间是通过近似的移位-逆变换步骤构建的，而不是形成一个Krylov子空间。在&#167;<a href="node136.html#sec:jacdavsym">4.7</a>中，我们已经详细解释了该方法，并且将其推广到非厄米情况下的基本算法，如算法&nbsp;<a href="node138.html#alg:jd">4.13</a>（第&nbsp;<a href="node138.html#alg:jd"><button class="crossref"></button></a>页）所述，是非常直接的。实际上，变化如下：
 
 <ol>
-<li>The construction of the matrix <span class="math-inline">{M}</span> has to take into account that <span class="math-inline">{M}</span>
-is non-Hermitian, hence the corresponding action in (7)-(9) has to be
-replaced by
+<li>矩阵<span class="math-inline">{M}</span>的构建必须考虑到<span class="math-inline">{M}</span>是非厄米的，因此（7）-（9）中的相应操作必须替换为
 
 <p>
 
@@ -104,18 +92,38 @@ replaced by
 
 <p>
 </li>
-<li>In (10) a routine has to be selected for the non-Hermitian dense matrix
-<span class="math-inline">{M}</span>
+<li>在（10）中，必须为非厄米的稠密矩阵<span class="math-inline">{M}</span>选择一个合适的算法
 
 <p>
 </li>
 </ol>
-If the correction equation (in step (15) of the algorithm) is
-solved exactly, then the approximate eigenvalues have quadratic
-convergence towards the eigenvalues of <span class="math-inline">A</span>.
+如果修正方程（算法中的第（15）步）被精确求解，那么近似特征值将以二次收敛速度趋近于<span class="math-inline">A</span>的特征值。
+
+
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html4867"
+  href="node271.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html4861"
+  href="node269.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html4855"
+  href="node269.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html4863"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html4865"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html4868" href="node271.html">Schur 形式与重启</a>
+<b>上一级：</b><a name="tex2html4862" href="node269.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html4856" href="node269.html">Jacobi-Davidson 方法</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

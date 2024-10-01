@@ -67,14 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4781" href="node265.html">算法</a>
-<b>上一级：</b><a name="tex2html4775" href="node262.html">Lanczos Method for Complex</a>
-<b>上一节：</b><a name="tex2html4769" href="node263.html">Properties of Complex Symmetric</a>
-  
-  
+<b>上一级：</b><a name="tex2html4775" href="node262.html">复对称特征问题中的Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4769" href="node263.html">复对称矩阵的性质</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016112000000000000000">
-算法的性质</a>
+算法性质</a>
 </h2>
 
 <p>
@@ -83,41 +81,48 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 经过 <span class="math-inline">j</span> 次迭代后，复对称Lanczos方法生成了 <span class="math-inline">j</span> 个Lanczos向量，
 
-<div class="math-display" id="rwf:CBB">v_1,v_2,\ldots,v_j, \tag{200}</div>
+<div class="math-display" id="rwf:CBB">v_1,v_2,\ldots,v_j, \tag{7.94}</div>
 
 这些向量张成了由复对称矩阵 <span class="math-inline">A</span> 和任意非零初始向量 <span class="math-inline">b</span> 生成的第 <span class="math-inline">j</span> 个Krylov子空间 <span class="math-inline">{\mathcal K}^j(A,b)</span>。这些向量（参见<a href="node264.html#rwf:CBB">7.94</a>）被构造为复正交的：
 
-<div class="math-display" id="rwf:CBC">V_j^T V_j = I_j,\quad \mathrm{其中}\quadV_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right]. \tag{201}</div>
+<div class="math-display" id="rwf:CBC">V_j^T V_j = I_j,\quad \mathrm{其中}\quad V_j = \left[ \begin{array}{cccc}v_1 & v_2 & \cdots & v_j\end{array} \right]. \tag{7.95}</div>
 
 注意到，考虑到可对角化的复对称矩阵 <span class="math-inline">A</span> 的特征分解（参见<a href="node263.html#rwf:CAG">7.91</a>），Lanczos向量的复正交性（参见<a href="node264.html#rwf:CBC">7.95</a>）是自然的。
 
 <p>
 复对称Lanczos算法通过三项递归关系计算这些向量（参见<a href="node264.html#rwf:CBB">7.94</a>），可以总结如下：
 
-<div class="math-display" id="rwf:CBD">A V_j = V_j T_j + \left[ \begin{array}{cccc}0 & \cdots & 0 & \hat{v}_{j+1}\end{array} \right]. \tag{202}</div>
+<div class="math-display" id="rwf:CBD">A V_j = V_j T_j + \left[ \begin{array}{cccc}0 & \cdots & 0 & \hat{v}_{j+1}\end{array} \right]. \tag{7.96}</div>
 
 这里，
 
-<div class="math-display" id="rwf:CBE">T_j = T_j^T = \left[ \begin{array}{cccc}\alpha_1 & \beta_2 & \cdots & \beta_j \\ & & \beta_j & \alpha_j\end{array} \right] \tag{203}</div>
+<div class="math-display" id="rwf:CBE">
+T_j = T_j^T = \begin{bmatrix}
+\alpha_1 & \beta_2 & & \\
+\beta_2 & \alpha_2 & \ddots & \\
+& \ddots & \ddots & \beta_j \\
+& & \beta_j & \alpha_j
+\end{bmatrix} \tag{7.97}
+</div>
 
 是一个复对称的三对角矩阵，其元素是三项递归的系数。向量 <span class="math-inline">\hat{v}_{j+1}</span> 是下一个Lanczos向量 <span class="math-inline">v_{j+1}</span> 的候选，它被构造为满足正交条件
 
-<div class="math-display" id="rwf:CBM">V_j^T \hat{v}_{j+1} = 0 \tag{204}</div>
+<div class="math-display" id="rwf:CBM">V_j^T \hat{v}_{j+1} = 0 \tag{7.98}</div>
 
 并且只需归一化使得 <span class="math-inline">v_{j+1}^T v_{j+1}=1</span>。然而，不能排除以下情况：
 
-<div class="math-display" id="rwf:CBN">\hat{v}_{j+1}^T \hat{v}_{j+1} = 0,\quad \mathrm{但}\quad\hat{v}_{j+1}\not=0. \tag{205}</div>
+<div class="math-display" id="rwf:CBN">\hat{v}_{j+1}^T \hat{v}_{j+1} = 0,\quad \mathrm{但}\quad\hat{v}_{j+1}\not=0. \tag{7.99}</div>
 
 如果（参见<a href="node264.html#rwf:CBN">7.99</a>）发生，则无法通过简单归一化 <span class="math-inline">\hat{v}_{j+1}</span> 来获得下一个向量 <span class="math-inline">v_{j+1}</span>，因为这将需要除以零。因此，（参见<a href="node264.html#rwf:CBN">7.99</a>）被称为复对称Lanczos算法的<i>中断</i>。中断可以通过在算法中加入前瞻来修复。这里，为了简单起见，我们限制自己使用没有前瞻的复对称Lanczos算法，并且在遇到中断（参见<a href="node264.html#rwf:CBN">7.99</a>）时简单地停止算法。
 
 <p>
 经过 <span class="math-inline">j</span> 次复对称Lanczos算法迭代后，通过计算 <span class="math-inline">T_j</span> 的特征解，可以得到复对称特征值问题（参见<a href="node262.html#rwf:CAA">7.88</a>）的近似特征解，
 
-<div class="math-display" id="rwf:CBZ">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quadi=1,2,\ldots,j. \tag{206}</div>
+<div class="math-display" id="rwf:CBZ">T_j z_i^{(j)} = \theta_i^{(j)} z_i^{(j)},\quad i=1,2,\ldots,j. \tag{7.100}</div>
 
 每个值 <span class="math-inline">\theta_i^{(j)}</span> 及其Ritz向量 <span class="math-inline">x_i^{(j)} = V_j z_i^{(j)}</span> 产生 <span class="math-inline">A</span> 的一个近似特征对。注意到 <span class="math-inline">T_j</span> 是 <span class="math-inline">A</span> 在由Lanczos基矩阵 <span class="math-inline">V_j</span> 张成的空间上的复正交投影，即
 
-<div class="math-display" id="rwf:CBY">T_j = V_j^T A V_j. \tag{207}</div>
+<div class="math-display" id="rwf:CBY">T_j = V_j^T A V_j. \tag{7.101}</div>
 
 确实，通过从左边乘以 <span class="math-inline">V_j^T</span> 并利用正交关系（参见<a href="node264.html#rwf:CBC">7.95</a>）和（参见<a href="node264.html#rwf:CBM">7.98</a>），可以得出这一关系。当然，在复对称Lanczos算法中，矩阵 <span class="math-inline">T_j</span> 不是通过关系（参见<a href="node264.html#rwf:CBY">7.101</a>）计算的。相反，利用定义（参见<a href="node264.html#rwf:CBE">7.97</a>）中的对称三对角结构，仅显式生成 <span class="math-inline">T_j</span> 的对角线和次对角线元素。
 
@@ -143,10 +148,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html4781" href="node265.html">算法</a>
-<b>上一级：</b><a name="tex2html4775" href="node262.html">Lanczos Method for Complex</a>
-<b>上一节：</b><a name="tex2html4769" href="node263.html">Properties of Complex Symmetric</a>
-  
-  
+<b>上一级：</b><a name="tex2html4775" href="node262.html">复对称特征问题中的Lanczos方法</a>
+<b>上一节：</b><a name="tex2html4769" href="node263.html">复对称矩阵的性质</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

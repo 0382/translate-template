@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Error Bound for Computed Eigenvalues.</title>
+<title>计算所得特征值的误差界限</title>
 <meta charset="utf-8">
-<meta name="description" content="Error Bound for Computed Eigenvalues.">
+<meta name="description" content="计算所得特征值的误差界限">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,21 +66,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4980" href="node279.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html4974" href="node275.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html4968" href="node277.html">Transfer Residual Errors to</a>
-  
-  
+<b>下一节：</b><a name="tex2html4980" href="node279.html">计算所得特征向量的误差界限</a>
+<b>上一级：</b><a name="tex2html4974" href="node275.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html4968" href="node277.html">将残差误差转化为后向误差</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION0016130030000000000000"></a>
 <a name="27011"></a>
 <br>
-计算特征值的误差界限
+计算所得特征值的误差界限
 </h4>
 从(<a href="node277.html#eq:std-NHx-b1">7.105</a>)以及特征值和特征向量的扰动理论中，可以证明，在残差范数<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下，存在一个矩阵<span class="math-inline">A</span>的特征值<span class="math-inline">\lambda</span>满足
 
-<div class="math-display" id="eq:std-NH">\vert\lambda - \widetilde\lambda \vert\lesssim \frac{1}{\vert\widetilde ...... \max\left\{\Vert r\Vert _2, \Vert s^{\ast} \Vert _2 \right\}, \tag{212}</div>
+<div class="math-display" id="eq:std-NH">\vert\lambda - \widetilde\lambda \vert \lesssim \frac{1}{\vert\widetilde{y}^*\widetilde{x}\vert} \max\left\{\Vert r\Vert _2, \Vert s^{\ast} \Vert _2 \right\}, \tag{7.106}</div>
 
 其中“<span class="math-inline">\lesssim</span>”表示“小于”在残差范数<span class="math-inline">\Vert r\Vert _2</span>和<span class="math-inline">\Vert s^{\ast}\Vert _2</span>的一阶近似下。注意，<em>个体条件数</em> <span class="math-inline">c_{\lambda}</span> <a name="27023"></a> 定义为
 
@@ -111,11 +109,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4980" href="node279.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html4974" href="node275.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html4968" href="node277.html">Transfer Residual Errors to</a>
-  
-  
+<b>下一节：</b><a name="tex2html4980" href="node279.html">计算所得特征向量的误差界限</a>
+<b>上一级：</b><a name="tex2html4974" href="node275.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html4968" href="node277.html">将残差误差转化为后向误差</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

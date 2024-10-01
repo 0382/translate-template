@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,11 +72,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4795" href="node266.html">Solving the Reduced Eigenvalue</a>
-<b>上一级：</b><a name="tex2html4789" href="node262.html">Lanczos Method for Complex</a>
+<b>下一节：</b><a name="tex2html4795" href="node266.html">求解约化特征值问题</a>
+<b>上一级：</b><a name="tex2html4789" href="node262.html">复对称特征问题中的Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4783" href="node264.html">算法性质</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION0016113000000000000000">
@@ -80,23 +84,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 完整的复对称Lanczos算法（不带前瞻）陈述如下。
 
-<p>
-<br>
-<a name="rwf:alg3"></a><img
- width="598" height="289" align="BOTTOM" border="0"
- src="img2515.png"
- alt="\begin{algorithm}{Complex Symmetric Lanczos Method
-}
-{
-\begin{tabbing}
-(nr)ss\...
-...rgence \\
-\textup{(12)} \&gt; \&gt;
-{\bf end for}
-\end{tabbing}
-}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="rwf:alg3">
+算法 7.17：复对称Lanczos方法
+
+(1)  设置 <span class="math-inline">\widehat{v}_1 = b</span> 和 <span class="math-inline">v_0 = 0</span>
+(2)  对于 <span class="math-inline">j = 1, 2, ...</span>，直到收敛或 <span class="math-inline">\beta_j = 0</span> 执行以下步骤：
+(3)      如果 <span class="math-inline">\widehat{v}_j = 0</span>，则设置 <span class="math-inline">j = j - 1</span> 并停止
+(4)      计算 <span class="math-inline">\beta_j = \sqrt{\widehat{v}_j^T \widehat{v}_j}</span>
+(5)      如果 <span class="math-inline">\beta_j = 0</span>，则设置 <span class="math-inline">j = j - 1</span> 并停止：发生故障
+(6)      归一化 <span class="math-inline">v_j = \widehat{v}_j / \beta_j</span>
+(7)      计算 <span class="math-inline">\widehat{v}_{j+1} = A v_j</span>
+(8)      减去 <span class="math-inline">\widehat{v}_{j+1} = \widehat{v}_{j+1} - v_{j-1} \beta_j</span>
+(9)      计算 <span class="math-inline">\alpha_j = v_j^T \widehat{v}_{j+1}</span>
+(10)     减去 <span class="math-inline">\widehat{v}_{j+1} = \widehat{v}_{j+1} - v_j \alpha_j</span>
+(11)     测试收敛性
+(12) 结束循环
+</pre>
 
 <p>
 接下来，我们对算法<a href="node265.html#rwf:alg3">7.17</a>的几个步骤进行点评。
@@ -138,11 +141,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html4795" href="node266.html">Solving the Reduced Eigenvalue</a>
-<b>上一级：</b><a name="tex2html4789" href="node262.html">Lanczos Method for Complex</a>
+<b>下一节：</b><a name="tex2html4795" href="node266.html">求解约化特征值问题</a>
+<b>上一级：</b><a name="tex2html4789" href="node262.html">复对称特征问题中的Lanczos方法</a>
 <b>上一节：</b><a name="tex2html4783" href="node264.html">算法性质</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

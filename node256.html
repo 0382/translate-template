@@ -69,21 +69,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4660" href="node257.html">收缩</a>
 <b>上一级：</b><a name="tex2html4654" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4648" href="node255.html">注释与参考文献</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION0016100000000000000000"></a> <a name="sec:nsymbandlanczos"></a>
-<br>
 带状Lanczos方法
-<br>&nbsp; <em>R. 弗伦(R. Freund)</em>
+<br>&nbsp; <em>R.&nbsp;Freund</em></em>
 </h1>
 
 <p>
 <a name="24977"></a> 
 在第<a href="node244.html#sec:nsymlanczos">7.8</a>节中介绍的标准非厄米Lanczos算法使用由矩阵<span class="math-inline">A</span>和一对单右左初始向量<span class="math-inline">b</span>和<span class="math-inline">c</span>生成的Krylov子空间，来产生非厄米特征值问题的近似解，
 
-<div class="math-display" id="rwf:MAA">Ax = \lambda x. \tag{164}</div>
+<div class="math-display" id="rwf:MAA">Ax = \lambda x. \tag{7.58}</div>
 
 这里，<span class="math-inline">A</span>是一个一般非厄米的方阵。
 
@@ -98,7 +95,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 本节描述非厄米带状Lanczos方法，该方法将标准非厄米Lanczos算法从单初始向量扩展到<span class="math-inline">m</span>个右和<span class="math-inline">p</span>个左初始向量块，
 
-<div class="math-display" id="rwf:MAB">b_1,b_2,\ldots,b_m\quad \mathrm{和}\quad c_1,c_2,\ldots,c_p. \tag{165}</div>
+<div class="math-display" id="rwf:MAB">b_1,b_2,\ldots,b_m\quad \mathrm{和}\quad c_1,c_2,\ldots,c_p. \tag{7.59}</div>
 
 矩阵<span class="math-inline">A</span>和向量(<a href="node256.html#rwf:MAB">7.59</a>)可以是实数或复数。
 然而，即使它们是复数，我们也将算法表述为<span class="math-inline">A</span>和<span class="math-inline">A^T</span>，而不是<span class="math-inline">A</span>和<span class="math-inline">A^{H}</span>，因为这样可以避免算法中递推关系中不必要的复共轭。
@@ -107,15 +104,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 矩阵<span class="math-inline">A</span>和初始向量(<a href="node256.html#rwf:MAB">7.59</a>)生成了右块Krylov序列
 
-<div class="math-display" id="rwf:MBA1">b_1,b_2,\ldots,b_m,A b_1, A b_2, \ldots, A b_m,\ldots,A^{k-1} b_1, \ldots, A^{k-1} b_m, \ldots, \tag{166}</div>
+<div class="math-display" id="rwf:MBA1">b_1,b_2,\ldots,b_m,A b_1, A b_2, \ldots, A b_m,\ldots,A^{k-1} b_1, \ldots, A^{k-1} b_m, \ldots, \tag{7.60}</div>
 
 和左块Krylov序列
 
-<div class="math-display" id="rwf:MBA2">c_1,c_2,\ldots,c_p,A^T c_1, A^T c_2, \ldots, A^T c_p,\ldots,(A^T)^{k-1} c_1, \ldots, (A^T)^{k-1} c_p, \ldots. \tag{167}</div>
+<div class="math-display" id="rwf:MBA2">c_1,c_2,\ldots,c_p,A^T c_1, A^T c_2, \ldots, A^T c_p,\ldots,(A^T)^{k-1} c_1, \ldots, (A^T)^{k-1} c_p, \ldots. \tag{7.61}</div>
 
 带状Lanczos算法的目标是构建合适的右左Lanczos向量，
 
-<div class="math-display" id="rwf:MBB">v_1,v_2,\ldots,v_j \quad \mathrm{和}\quad w_1,w_2,\ldots,w_j, \tag{168}</div>
+<div class="math-display" id="rwf:MBB">v_1,v_2,\ldots,v_j \quad \mathrm{和}\quad w_1,w_2,\ldots,w_j, \tag{7.62}</div>
 
 它们分别为块Krylov序列(<a href="node256.html#rwf:MBA1">7.60</a>)和(<a href="node256.html#rwf:MBA2">7.61</a>)的前<span class="math-inline">j</span>个线性独立向量所张成的子空间构建基。
 
@@ -131,7 +128,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><a name="tex2html4661" href="node257.html">缩减</a>
+<li><a name="tex2html4661" href="node257.html">收缩</a>
 <li><a name="tex2html4662" href="node258.html">基本性质</a>
 <li><a name="tex2html4663" href="node259.html">算法</a>
 <li><a name="tex2html4664" href="node260.html">应用于降阶建模</a>
@@ -158,8 +155,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html4660" href="node257.html">收缩</a>
 <b>上一级：</b><a name="tex2html4654" href="node203.html">非厄米特特征值问题</a>
 <b>上一节：</b><a name="tex2html4648" href="node255.html">注释与参考文献</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
