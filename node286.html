@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Shift-and-Invert.</title>
+<title>位移-逆变换</title>
 <meta charset="utf-8">
-<meta name="description" content="Shift-and-Invert.">
+<meta name="description" content="位移-逆变换">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,21 +66,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson 方法</a>
 <b>上一级：</b><a name="tex2html5133" href="node283.html">转换为标准问题</a>
-<b>上一节：</b><a name="tex2html5129" href="node285.html">Split-and-invert .</a>
-  
-  
+<b>上一节：</b><a name="tex2html5129" href="node285.html">对<span class="math-inline">B</span>分解取逆</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001730030000000000000"></a>
 <a name="35760"></a>
-<br>
-位移-反转变换
+位移-逆变换
 </h4>
 无论是标准形式变换，如(<a href="node284.html#zb:snep1">8.3</a>)、(<a href="node284.html#zb:snep2">8.4</a>)还是(<a href="node285.html#zb:snep3">8.5</a>)，都无法应用于<span class="math-inline">A</span>和<span class="math-inline">B</span>均为奇异矩阵或<span class="math-inline">B</span>为病态矩阵的情况。一种吸引人的流行技术是首先对原始问题进行位移处理，然后进行分裂-反转变换。这就是SI方法，如第<a href="node84.html#spec_trans">3.3</a>节所述。具体来说，设<span class="math-inline">\sigma</span>为用户选定的位移，使得矩阵<span class="math-inline">A-\sigma B</span>非奇异；那么原始问题(<a href="node281.html#eq:gnsym">8.1</a>)可以变换为
 
-<div class="math-display" id="zb:snep4">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast}, \tag{219}</div>
+<div class="math-display" id="zb:snep4">C x = \mu x\quad \mathrm{且} \quad z^{\ast} C = \mu z^{\ast}, \tag{8.6}</div>
 
 其中
 
@@ -102,20 +99,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 对于给定的向量<span class="math-inline">q</span>和<span class="math-inline">p</span>。为了高效计算，设
 
-<div class="math-display" id="zb:ablufact">A - \sigma B = {\mathcal L} {\mathcal U} \tag{220}</div>
+<div class="math-display" id="zb:ablufact">A - \sigma B = {\mathcal L} {\mathcal U} \tag{8.7}</div>
 
 表示<span class="math-inline">A-\sigma B</span>的某种方便的分解，其中<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>是方阵。由于假设<span class="math-inline">A-\sigma B</span>是非奇异的，因子<span class="math-inline">{\mathcal L}</span>和<span class="math-inline">{\mathcal U}</span>也是非奇异的。分解应选择使得与<span class="math-inline">{\mathcal L}</span>、<span class="math-inline">{\mathcal L}^{\ast}</span>和/或<span class="math-inline">{\mathcal U}</span>、<span class="math-inline">{\mathcal U}^{\ast}</span>相关的线性方程组能够高效求解，通常使用稀疏LU分解。参见第<a href="node385.html#sec:directsolvers">10.3</a>节。当然，如果这导致方便的线性系统，也可以选择<span class="math-inline">{\mathcal L} = A - \sigma B</span>和<span class="math-inline">{\mathcal U} = I</span>。
 
 <p>
 利用上述分解，矩阵-向量乘积<span class="math-inline">r = Cq</span>可以按以下步骤计算：
 
-(a) 形成<span class="math-inline">v = B q</span>，
+<br>(a) 形成<span class="math-inline">v = B q</span>，
 <br>(b) 解<span class="math-inline">{\mathcal L} w = v</span>求<span class="math-inline">w</span>，
 <br>(c) 解<span class="math-inline">{\mathcal U} r = w</span>求<span class="math-inline">r</span>。
 
+<p>
 类似地，矩阵-向量乘积<span class="math-inline">s = C^{\ast} p</span>可以按以下三个步骤计算：
 
-(a')<span class="math-inline">{\mathcal U}^{\ast} v = p</span>求<span class="math-inline">v</span>，
+<br>(a')<span class="math-inline">{\mathcal U}^{\ast} v = p</span>求<span class="math-inline">v</span>，
 <br>(b')<span class="math-inline">{\mathcal L}^{\ast} w = v</span>求<span class="math-inline">w</span>，
 <br>(c')<span class="math-inline">s = B^{\ast} w</span>。
 
@@ -140,11 +138,9 @@ SI技术在处理广义特征值问题(<a href="node281.html#eq:gnsym">8.1</a>)�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
+<b>下一节：</b><a name="tex2html5139" href="node287.html">Jacobi-Davidson 方法</a>
 <b>上一级：</b><a name="tex2html5133" href="node283.html">转换为标准问题</a>
-<b>上一节：</b><a name="tex2html5129" href="node285.html">Split-and-invert .</a>
-  
-  
+<b>上一节：</b><a name="tex2html5129" href="node285.html">对<span class="math-inline">B</span>分解取逆</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -67,29 +67,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5174" href="node289.html">收缩与重启</a>
-<b>上一级：</b><a name="tex2html5168" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b>上一节：</b><a name="tex2html5162" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-  
-  
+<b>上一级：</b><a name="tex2html5168" href="node287.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html5162" href="node287.html">Jacobi-Davidson 方法</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001741000000000000000"></a> <a name="ss:JD7-intro"></a>
-<br>
 基本理论
 </h2>
+
 对于广义厄米特征值问题（GHEP），我们希望避免将<span class="math-inline">A{x}=\lambda B {x}</span>转换为标准特征值问题。这需要每迭代步解决涉及<span class="math-inline">B</span>和/或<span class="math-inline">A</span>的某些线性系统。此外，出于稳定性考虑，我们希望使用正交变换，因此我们的目标是计算矩阵束<span class="math-inline">A - \lambda B</span>的舒尔向量，而不是特征向量。这导致了对Jacobi-Davidson算法的推广，其中我们计算矩阵束的部分舒尔形式。该算法可以解释为QZ算法的子空间迭代变体。这种方法的一个结果是，我们必须使用不同的搜索和测试空间。
 
 <p>
 设<span class="math-inline">\lambda = \alpha/\beta</span>，广义特征值问题<span class="math-inline">A{x}=\lambda B {x}</span>等价于特征值问题
 
-<div class="math-display" id="eq:JD7-GE">(\beta A-\alpha B){x}=0, \tag{221}</div>
+<div class="math-display" id="eq:JD7-GE">(\beta A-\alpha B){x}=0, \tag{8.8}</div>
 
 我们称矩阵对<span class="math-inline">\{A,B\}</span>的广义特征值为一对<span class="math-inline">(\alpha,\beta)</span>。这种方法更可取，因为在有限精度算术中，当<span class="math-inline">\alpha</span>和/或<span class="math-inline">\beta</span>为零或接近零时，可能会发生下溢或上溢，此时<span class="math-inline">\lambda = \alpha/\beta</span>可能未定义，但该对仍然良定义[<a href="node421.html#most73">328</a>], [<a href="node421.html#stsu90">425</a>, Chap.&nbsp;VI], [<a href="node421.html#ruhe94">376</a>]。
 
 <p>
 矩阵对<span class="math-inline">\{A,B\}</span>的<span class="math-inline">k</span>维部分广义舒尔形式是分解
 
-<div class="math-display" id="eq:JD7-SCHUR">A Q_k = Z_k R^A_k,\quad B Q_k = Z_k R^B_k, \tag{222}</div>
+<div class="math-display" id="eq:JD7-SCHUR">A Q_k = Z_k R^A_k,\quad B Q_k = Z_k R^B_k, \tag{8.9}</div>
 
 其中<span class="math-inline">Q_k</span>和<span class="math-inline">Z_k</span>是<span class="math-inline">n</span>乘<span class="math-inline">k</span>的正交矩阵，<span class="math-inline">R^A_k</span>和<span class="math-inline">R^B_k</span>是<span class="math-inline">k</span>乘<span class="math-inline">k</span>的上三角矩阵。<span class="math-inline">Q_k</span>的列<span class="math-inline">q_i</span>称为广义舒尔向量，我们称对<span class="math-inline">((\alpha_i,\beta_i),q_i)</span>，其中<span class="math-inline">(\alpha_i,\beta_i) =(R^A_k(i,i),R^B_k(i,i))</span>为广义舒尔对。由此可知，如果<span class="math-inline">((\alpha,\beta),y)</span>是<span class="math-inline">(R^A_k,R^B_k)</span>的广义特征对，那么<span class="math-inline">((\alpha,\beta), Q_k y)</span>是<span class="math-inline">\{A,B\}</span>的广义特征对。
 
@@ -100,15 +98,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 这表明我们应该遵循Petrov-Galerkin条件来构建简化系统。在每一步中，近似特征向量<span class="math-inline">u</span>从搜索空间<span class="math-inline">\mathrm{span}(V)</span>中选择。我们要求残差<span class="math-inline">\eta Au - \zeta Bu</span>对某些精心选择的测试空间<span class="math-inline">\mathrm{span}(W)</span>正交：
 
-<div class="math-display" id="eq:JD7-pe">\eta \, A u -\zeta \, B u \perp \mathrm{span}(W). \tag{223}</div>
+<div class="math-display" id="eq:JD7-pe">\eta \, A u -\zeta \, B u \perp \mathrm{span}(W). \tag{8.10}</div>
 
 两个空间都是相同的维度，设为<span class="math-inline">{m}</span>。方程（<a href="node288.html#eq:JD7-pe">8.10</a>）导致投影特征值问题
 
-<div class="math-display" id="eq:JD7-PE">(\eta\, W^\ast A V-\zeta \,W^\ast B V) \,{s}=0. \tag{224}</div>
+<div class="math-display" id="eq:JD7-PE">(\eta\, W^\ast A V-\zeta \,W^\ast B V) \,{s}=0. \tag{8.11}</div>
 
 矩阵束<span class="math-inline">\eta\, W^\ast A V-\zeta \,W^\ast B V</span>可以通过QZ算法（见&#167;<a href="node282.html#sec:qzalg">8.2</a>）简化为广义舒尔形式（注意这是一个<span class="math-inline">{m}</span>维问题）。这导致正交的<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵<span class="math-inline">S^R</span>和<span class="math-inline">S^L</span>以及上三角的<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵<span class="math-inline">T^A</span>和<span class="math-inline">T^B</span>，使得
 
-<div class="math-display" id="eq:JD7-appschur">(S^L)^\ast ( W^\ast A V)S^R=T^A\quad\mathrm{and}\quad(S^L)^\ast ( W^\ast B V)S^R=T^B. \tag{225}</div>
+<div class="math-display" id="eq:JD7-appschur">(S^L)^\ast ( W^\ast A V)S^R=T^A\quad\mathrm{and}\quad(S^L)^\ast ( W^\ast B V)S^R=T^B. \tag{8.12}</div>
 
 分解可以重新排序，使得<span class="math-inline">S^R</span>的第一列和<span class="math-inline">T^A</span>与<span class="math-inline">T^B</span>的<span class="math-inline">(1,1)</span>项表示所需的Petrov解[<a href="node421.html#fosv98">172</a>]。设<span class="math-inline">{s}\equiv s^R_1\equiv {S^R}e_1</span>和<span class="math-inline">\zeta\equiv T^A_{1,1}</span>，<span class="math-inline">\eta\equiv T^B_{1,1}</span>，定义与广义Petrov值<span class="math-inline">(\zeta,\eta)</span>相关的Petrov向量为<span class="math-inline">{u}\equiv V {s}</span>。在我们的算法中，我们将构建正交矩阵<span class="math-inline">V</span>和<span class="math-inline">W</span>，因此也有<span class="math-inline">\Vert{u}\Vert _2=1</span>。利用（<a href="node288.html#eq:JD7-appschur">8.12</a>）中的分解，我们构建了近似的局部广义舒尔形式（参见（<a href="node288.html#eq:JD7-SCHUR">8.9</a>））：<span class="math-inline"> V S^R</span>近似于<span class="math-inline">Q_k</span>，<span class="math-inline">W S^L</span>近似于相关的<span class="math-inline">Z_k</span>。由于<span class="math-inline">\mathrm{span}(Z_k)= \mathrm{span}(A Q_k)= \mathrm{span}(B Q_k)</span>（参见（<a href="node288.html#eq:JD7-SCHUR">8.9</a>）），这建议选择<span class="math-inline">W</span>使得<span class="math-inline">\mathrm{span}(W)</span>与<span class="math-inline">\mathrm{span}(\nu_0 A V+\mu_0 B V)</span>一致。通过权重<span class="math-inline">\nu_0</span>和<span class="math-inline">\mu_0</span>，我们可以影响Petrov值的收敛。如果我们希望近似特征对<span class="math-inline">\lambda</span>接近目标<span class="math-inline">\tau</span>，那么选择
 
@@ -116,14 +114,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 非常有效[<a href="node421.html#fosv98">172</a>]，特别是当我们希望计算<span class="math-inline">A - \lambda B</span>的谱内部特征值时。我们称这种选择的Petrov近似为调和Petrov特征对。对于矩阵束<span class="math-inline">\eta A -\zeta B</span>，Jacobi-Davidson修正方程对于分量<span class="math-inline">{t}\perp u</span>变为
 
-<div class="math-display" id="eq:JD7-CE">\left( I- \frac{pp^\ast}{p^\ast p}\right)(\eta A-\zeta B)\left( I-uu^\ast\right) {t}=- r, \tag{226}</div>
+<div class="math-display" id="eq:JD7-CE">\left( I- \frac{pp^\ast}{p^\ast p}\right)(\eta A-\zeta B)\left( I-uu^\ast\right) {t}=- r, \tag{8.13}</div>
 
 其中<span class="math-inline">r\equiv \eta Au - \zeta Bu</span>和<span class="math-inline">p\equiv \nu_0 Au + \mu_0 Bu</span>。可以证明，如果（<a href="node288.html#eq:JD7-CE">8.13</a>）被精确求解，广义特征值的收敛将是二次的；参见[<a href="node421.html#sbfv96">408</a>, Theorem&nbsp;3.2]。通常，这个修正方程仅近似求解，例如，使用（预处理的）迭代求解器。获得的向量<span class="math-inline">{t}</span>用于扩展<span class="math-inline">V</span>，<span class="math-inline">\nu_0 Av + \mu_0 Bv</span>用于扩展<span class="math-inline">W</span>。对于这两个空间，我们使用正交基。因此，新列通过改进的Gram-Schmidt正交化过程相对于当前基进行正交化（见&#167;<a href="node137.html#sec:jdsym">4.7.1</a>）。
 
 <p>
 可以证明，通过上述<span class="math-inline">p</span>和<span class="math-inline">W</span>的选择，
 
-<div class="math-display" id="eq:JD7-tz">p= W s^L_1= W S^Le_1. \tag{227}</div>
+<div class="math-display" id="eq:JD7-tz">p= W s^L_1= W S^Le_1. \tag{8.14}</div>
 
 给定大问题的部分广义舒尔形式与简化问题（<a href="node288.html#eq:JD7-PE">8.11</a>）的完整广义舒尔形式之间的关系通过右向量（<span class="math-inline">u = Vs^R_1</span>）是类似的，通过左向量（<span class="math-inline">p = Ws^L_1</span>）也是如此。这也可以用于重启。
 
@@ -146,10 +144,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5174" href="node289.html">收缩与重启</a>
-<b>上一级：</b><a name="tex2html5168" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b>上一节：</b><a name="tex2html5162" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-  
-  
+<b>上一级：</b><a name="tex2html5168" href="node287.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html5162" href="node287.html">Jacobi-Davidson 方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

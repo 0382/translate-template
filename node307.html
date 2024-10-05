@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Singular Matrix Pencils &nbsp; B.&nbsp;K&#229;gstr&#246;m </title>
+<title>奇异矩阵束</title>
 <meta charset="utf-8">
-<meta name="description" content="Singular Matrix Pencils &nbsp; B.&nbsp;K&#229;gstr&#246;m ">
+<meta name="description" content="奇异矩阵束">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,14 +69,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html5447" href="node308.html">常规问题与奇异问题</a>
 <b>上一级：</b><a name="tex2html5441" href="node280.html">广义非厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html5435" href="node306.html">注释与参考文献</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001770000000000000000"></a> <a name="sec:singularpencil"></a>
-<br>
 奇异矩阵束
-<br>&nbsp; <em>B. 卡格斯特罗姆(B. Kågström)</em>
+<br>&nbsp; <em>B.&nbsp;K&#229;gstr&#246;m</em>
 </h1>
 
 <p>
@@ -85,14 +82,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 至少在理论上，标准特征值问题<span class="math-inline">Ax = \lambda x</span>与前几节讨论的广义特征值问题<span class="math-inline">Ax = \lambda Bx</span>之间的一个区别是，每当<span class="math-inline">B</span>是奇异矩阵时，会出现无穷特征值。解决稠密广义特征值问题的标准方法是QZ算法；参见第<a href="node282.html#sec:qzalg">8.2</a>节。然而，故事不止于此。例如，如果<span class="math-inline">A</span>和<span class="math-inline">B</span>具有共同的零空间，那么广义特征值问题在病态的意义上是不适定的，即任意小的扰动可能完全改变特征值。通常，QZ算法无法可靠地处理这类问题。有必要通过允许有限精度下的范围或零空间分离的降阶准则来应用正则化技术，从而计算附近问题的特征值。通常，正则化附近问题与原始问题的距离与所用的降阶容差的大小成正比。
 
 <p>
-在本节中，我们将介绍解决最一般的<span class="math-inline">Ax = \lambda Bx</span>问题的理论、算法和软件，包括<span class="math-inline">A</span>和<span class="math-inline">B</span>为矩形矩阵的情况。该软件计算矩阵对<span class="math-inline">\{A,B\}</span>的Schur标准形式的推广，称为GUPTRI（广义上三角）形式[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：<a name="37187"></a>
+在本节中，我们将介绍解决最一般的<span class="math-inline">Ax = \lambda Bx</span>问题的理论、算法和软件，包括<span class="math-inline">A</span>和<span class="math-inline">B</span>为矩形矩阵的情况。该软件计算矩阵对<span class="math-inline">\{A,B\}</span>的Schur标准形式的推广，称为GUPTRI（广义上三角）形式[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：
+
+<div class="math-display" id="eq.guptri0">
 <a name="eq.guptri0"></a>
-<span class="math-inline">P^ (A - B) Q =</span>
-ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
-<br>
-0 &amp; <span class="math-inline">A_{reg} - B_{reg}</span> &amp; *
-<br>
-0 &amp; 0 &amp; <span class="math-inline">A_l - B_l</span>，
+<a name="37187"></a>
+P^*(A-\lambda B)Q = \begin{pmatrix}A_{r} - \lambda B_{r} & * & * \\
+0 & A_{reg} - \lambda B_{reg} & *  \\ 
+0 & 0 & A_{l} - \lambda B_{l} \end{pmatrix}, \tag{8.28}
+</div>
 
 具有以下特性：它分离了问题的正则部分和奇异部分。
 
@@ -149,8 +147,6 @@ ccc <span class="math-inline">A_r - B_r</span> &amp; * &amp; *
 <b>下一节：</b><a name="tex2html5447" href="node308.html">常规问题与奇异问题</a>
 <b>上一级：</b><a name="tex2html5441" href="node280.html">广义非厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html5435" href="node306.html">注释与参考文献</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

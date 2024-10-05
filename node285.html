@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Split-and-invert .</title>
+<title>对B分解取逆</title>
 <meta charset="utf-8">
-<meta name="description" content="Split-and-invert .">
+<meta name="description" content="对B分解取逆">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,15 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5127" href="node286.html">Shift-and-Invert.</a>
+<b>下一节：</b><a name="tex2html5127" href="node286.html">位移-逆变换</a>
 <b>上一级：</b><a name="tex2html5121" href="node283.html">转换为标准问题</a>
-<b>上一节：</b><a name="tex2html5115" href="node284.html">Invert .</a>
-  
-  
+<b>上一节：</b><a name="tex2html5115" href="node284.html">对<span class="math-inline">B</span> 取逆</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001730020000000000000">
-分裂反演法处理<span class="math-inline">B</span>矩阵</a>
+对<span class="math-inline">B</span>分解取逆</a>
 </h4>
 在某些应用中，<span class="math-inline">B</span>矩阵是厄米正定且良态的。
 在这种情况下，建议首先计算稀疏的Cholesky分解
@@ -84,7 +82,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 其中<span class="math-inline">L</span>是一个下三角矩阵；详见第&#167;<a href="node385.html#sec:directsolvers">10.3</a>节。
 等价的标准特征值问题是
 
-<div class="math-display" id="zb:snep3">(L^{-1} AL^{-\ast}) \tilde{x} = \lambda \tilde{x}\quad \m......tilde{y}^{\ast} (L^{-1}AL^{-\ast}) = \lambda \tilde{y}^{\ast}, \tag{218}</div>
+<div class="math-display" id="zb:snep3">(L^{-1} AL^{-\ast}) \tilde{x} = \lambda \tilde{x}\quad \text{和} \quad\tilde{y}^{\ast} (L^{-1}AL^{-\ast}) = \lambda \tilde{y}^{\ast}, \tag{8.5}</div>
 
 其中
 <span class="math-inline">\tilde{x} = L^{\ast} x</span> 和
@@ -101,16 +99,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 其中<span class="math-inline">q</span>和<span class="math-inline">p</span>是给定的向量。
 实际上，向量<span class="math-inline">r = (L^{-1} AL^{-\ast})q</span>可以通过以下三个步骤形成：
 
-		 (a) 解方程<span class="math-inline">L^{\ast} u = q</span>求<span class="math-inline">u</span>，
+<br>(a) 解方程<span class="math-inline">L^{\ast} u = q</span>求<span class="math-inline">u</span>，
 <br>(b) 计算<span class="math-inline">w = A u</span>，
 <br>(c) 解方程<span class="math-inline">L r = w</span>求<span class="math-inline">r</span>。
 
+<p>
 当需要时，向量<span class="math-inline">s = (L^{-1} A^{\ast} L^{-\ast}) p</span>可以按如下方式形成：
 
-		 (a')<span class="math-inline">L^{\ast} u = p</span>求<span class="math-inline">u</span>，
+<br>(a')<span class="math-inline">L^{\ast} u = p</span>求<span class="math-inline">u</span>，
 <br>(b')<span class="math-inline">w = A^{\ast} u</span>，
 <br>(c')<span class="math-inline">L s = w</span>求<span class="math-inline">s</span>。
 
+<p>
 由于<span class="math-inline">L</span>是三角矩阵，与<span class="math-inline">L</span>或<span class="math-inline">L^{\ast}</span>相关的线性系统的解可以通过前向和后向代入获得。
 在这些步骤中，稀疏性可以被直接利用。
 
@@ -132,11 +132,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5127" href="node286.html">Shift-and-Invert.</a>
+<b>下一节：</b><a name="tex2html5127" href="node286.html">位移-逆变换</a>
 <b>上一级：</b><a name="tex2html5121" href="node283.html">转换为标准问题</a>
-<b>上一节：</b><a name="tex2html5115" href="node284.html">Invert .</a>
-  
-  
+<b>上一节：</b><a name="tex2html5115" href="node284.html">对<span class="math-inline">B</span> 取逆</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

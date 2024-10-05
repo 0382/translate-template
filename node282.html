@@ -69,14 +69,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html5082" href="node283.html">转换为标准问题</a>
 <b>上一级：</b><a name="tex2html5076" href="node280.html">广义非厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html5070" href="node281.html">引言</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION001720000000000000000"></a> <a name="sec:qzalg"></a><a name="35630"></a> 
 <a name="35631"></a> 
 <a name="35632"></a>
-<br>
 直接法
 </h1> 
 
@@ -112,7 +109,7 @@ QZ算法可求得所有特征值，并可选地求得右和左特征向量。
 
 <p>
 大多数与线性代数相关的软件包都包含了实现QZ算法的子程序。
-在MATLAB中，它被用作eig(A,B)命令。<a name="tex2html46" href="footnode.html#foot37896"><sup><button class="footnote"></button></sup></a>在LAPACK[<a href="node421.html#lapack">12</a>]中，以下驱动程序可用于执行各种任务：
+在MATLAB中，它被用作eig(A,B)命令。<sup><a href="#footnote-matlab">[1]</a></sup>在LAPACK[<a href="node421.html#lapack">12</a>]中，以下驱动程序可用于执行各种任务：
 <dl>
 <dt></dt>
 <dd>xGGES：计算广义特征值、广义舒尔形式，并可选地计算左和/或右舒尔向量矩阵。
@@ -131,7 +128,10 @@ QZ算法可求得所有特征值，并可选地求得右和左特征向量。
 
 <p>
 <hr>
-
+<ol>
+<li id="footnote-matlab">据悉，基于LAPACK的数值计算库将成为MATLAB下一次重大发布的一部分；详情请参阅《MATLAB、Simulink及工具箱用户通讯》2000年冬季刊，网址为http://www.mathworks.com/company/newsletter/clevescorner/winter2000.cleve.shtml。</li>
+</ol>
+<hr>
 <!--Navigation Panel-->
 <a name="tex2html5081"
   href="node283.html">

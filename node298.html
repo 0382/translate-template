@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,15 +72,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5322" href="node299.html">Stopping Criteria and Accuracy</a>
-<b>上一级：</b><a name="tex2html5316" href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b>上一节：</b><a name="tex2html5310" href="node297.html">Some Properties of Symmetric</a>
-  
-  
+<b>下一节：</b><a name="tex2html5322" href="node299.html">停止准则与精度评估</a>
+<b>上一级：</b><a name="tex2html5316" href="node296.html">对称不定Lanczos方法</a>
+<b>上一节：</b><a name="tex2html5310" href="node297.html">对称不定矩阵对的一些性质</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001762000000000000000"></a> <a name="syinalg"></a>
-<br>
 算法
 </h2> 
 为了利用Lanczos过程解决广义特征值问题&nbsp;(<a href="node296.html#eq:gsymep">8.21</a>)，我们首先将其转换为等价的标准特征值问题。有几种可能的变换方法；以下列出了最常见的几种。
@@ -111,11 +114,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 对称不定Lanczos算法的模板在算法&nbsp;<a href="node298.html#alg:jsymlan">8.4</a>中展示。生成的Lanczos向量<span class="math-inline">\{q_j\}</span>和标量<span class="math-inline">\{ \alpha_j, \beta_j, \omega_j\}</span>满足以下控制方程：
 
-<div class="math-display" id="GovEqn">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j, \tag{235}</div>
+<div class="math-display" id="GovEqn">(H^{-1} B ) Q_j = Q_j (\Omega^{-1}_j T_j ) +\frac{\beta_{j+1}}{\omega_{j+1}} q_{j+1} e^T_j, \tag{8.22}</div>
 
 其中
 
-<div class="math-display">T_j = \left[ \begin{array}{cccc}\alpha_1 & \beta_2 & & \\ ......\Omega_j = \mathrm{diag}(\omega_1,\omega_2, \ldots, \omega_j).</div>
+<div class="math-display">T_j = \begin{bmatrix}\alpha_1 & \beta_2 & & \\ \beta_2 & \alpha_2 & \ddots & \\ & \ddots & \ddots & \\ & & \beta_j & \alpha_j \end{bmatrix} \quad\text{和}\quad \Omega_j = \mathrm{diag}(\omega_1,\omega_2, \ldots, \omega_j).</div>
 
 
 <p>
@@ -123,7 +126,7 @@ Lanczos向量
 
 <span class="math-inline">Q_j = \left[ \begin{array}{cccc}q_1 &amp; q_2 &amp; \cdots &amp; q_j \\\end{array} \right]</span>是<span class="math-inline">B</span>正交的，即，
 
-<div class="math-display">Q^T_j B Q_j = \Omega_j, \quad\quadQ^T_j B q_{j+1} = 0,</div>
+<div class="math-display">Q^T_j B Q_j = \Omega_j, \quad\quad Q^T_j B q_{j+1} = 0,</div>
 
 并且被归一化为单位欧几里得范数，即<span class="math-inline">\Vert q_j\Vert _2 = 1</span>。
 
@@ -144,7 +147,7 @@ Lanczos向量
 <p>
 与Ritz对<span class="math-inline">\{\theta^{(j)}_i, x^{(j)}_i\}</span>对应的右残差向量<span class="math-inline">r^{(j)}_i</span>是
 
-<div class="math-display" id="RightResid">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1}, \tag{236}</div>
+<div class="math-display" id="RightResid">r^{(j)}_i = (H^{-1}B)x^{(j)}_i - \theta^{(j)}_ix^{(j)}_i= \gamma^{(j)}_i q_{j+1}, \tag{8.23}</div>
 
 其中
 
@@ -152,29 +155,39 @@ Lanczos向量
 
 注意，在&nbsp;(<a href="node298.html#RightResid">8.23</a>)中的最后一个等式是通过将方程&nbsp;(<a href="node298.html#GovEqn">8.22</a>)右乘<span class="math-inline">u^{(j)}_i</span>并利用<span class="math-inline">x^{(j)}_i</span>的定义得到的。左残差向量<span class="math-inline">(s^{(j)}_i)^{\ast}</span>与右残差向量<span class="math-inline">r^{(j)}_i</span>的关系为<span class="math-inline">(s^{(j)}_i)^{\ast} = (r^{(j)}_i)^T B</span>。由此得出
 
-<div class="math-display" id="normRk">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert \tag{237}</div>
+<div class="math-display" id="normRk">\Vert r^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert \tag{8.24}</div>
 
 和
 
-<div class="math-display" id="normSk">\Vert s^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert\, \Vert B q_{j+1}\Vert _2. \tag{238}</div>
+<div class="math-display" id="normSk">\Vert s^{(j)}_i\Vert _2 = \vert\gamma^{(j)}_i\vert\, \Vert B q_{j+1}\Vert _2. \tag{8.25}</div>
 
 注意，向量<span class="math-inline">Bq_{j+1}</span>在对称不定Lanczos算法的每次迭代中都是直接可用的。不需要额外的<span class="math-inline">B</span>调用。因此，Lanczos算法的一个吸引人的特点是可以在不显式计算Ritz向量<span class="math-inline">{x}^{(j)}_i</span>和<span class="math-inline">{y}^{(j)}_i</span>的情况下计算残差向量。
-<br>
-<br>
-<p>
-<br>
-<a name="alg:jsymlan"></a><img
- width="598" height="453" align="BOTTOM" border="0"
- src="img2928.png"
- alt="\begin{algorithm}{Symmetric Indefinite Lanczos Method
-}
-{
-\begin{tabbing}
-(nr)ss...
-...&gt; compute approximate eigenvectors <span class="math-inline">{x}^{(j)}_i</span>.
-\end{tabbing}}
-\end{algorithm}">
-<br>
+
+
+<pre class="algorithm" id="alg:jsymlan">
+算法 8.4：对称不定Lanczos方法
+(1) 选择一个起始向量 <span class="math-inline">q</span>
+(2) 计算 <span class="math-inline">\beta_1 = \|q\|^2</span>
+(3) 缩放 <span class="math-inline">g_1 = \frac{q}{\beta_1}</span>
+(4) <span class="math-inline">w = Bq_1</span>
+(5) <span class="math-inline">w_i = w^T g_1</span>
+(6) 对于 j = 1,2,... 直到收敛
+(7) 解 <span class="math-inline">Hr = w</span> 得到 <span class="math-inline">r</span>
+(8) 对于 j > 1，<span class="math-inline">r := r - q_{j-1}(B_{j-1}^T w / w_{j-1})</span>
+(9) <span class="math-inline">a_j = w^T r</span>
+(10) <span class="math-inline">r := r - \frac{\alpha_j}{w_j} g_j</span>
+(11) <span class="math-inline">T = \|r\|^2</span>
+(12) 如果 <span class="math-inline">T = 0</span>，则停止
+(13) 如有需要则重新正交化
+(14) <span class="math-inline">\beta_{j+1} = \|r\|</span>
+(15) <span class="math-inline"> w = Bq_{j+1} </span>
+(16) <span class="math-inline">w_{j+1} = w^T g_{j+1}</span>
+(17) 如果 <span class="math-inline">w_{j+1} = 0</span>，则停止
+(18) <span class="math-inline">B_{j+1} = \tau w_{j+1}</span>
+(19) 解简化问题并检查收敛性。
+(20) 结束循环
+(21) 计算近似特征向量 <span class="math-inline">x_i^{(j)}</span>
+</pre>
 
 <p>
 现在我们对算法&nbsp;<a href="node298.html#alg:jsymlan">8.4</a>的某些步骤进行评论：
@@ -218,11 +231,65 @@ Lanczos向量
 <p>
 </dd>
 <dt><strong>(14)</strong></dt>
-<dd>在对称Lanczos算法（参见&#167;<a href="node103.html#sec:lan">4.4</a>）中，Lanczos向量被缩放为<span class="math-inline">B</span>正交归一化，<span class="math-inline">q_j^TBq_j = 1</span>。然而，在对称不定算法中，向量被缩放为单位欧几里得范数，
+<dd>在对称Lanczos算法（参见&#167;<a href="node103.html#sec:lan">4.4</a>）中，Lanczos向量被缩放为<span class="math-inline">B</span>正交，即<span class="math-inline">q_j^TBq_j = 1</span>。然而，在对称不定算法中，向量被缩放使得
+<br><p></p>
+<div align="CENTER">
+
 
 <div class="math-display">\Vert q_j\Vert _2 = 1. </div>
+</div>
+<br clear="ALL">
+<p></p>
+这种缩放变化有两个原因，都与<span class="math-inline">B</span>的不定性有关。第一个原因是，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数，将Lanczos向量缩放为<span class="math-inline">q_j^TBq_j = 1</span>可能涉及复数运算。（通过跟踪<span class="math-inline">q_j^TBq_j</span>的符号，可以避免复数运算，但仍使用<span class="math-inline">\vert q_j^TBq_j \vert^{1/2}</span>作为范数。然而，这种算法稳定性较差。）第二个原因是，当<span class="math-inline">B</span>不定性时，并非每个子空间都有<span class="math-inline">B</span>正交基，即使有，也可能高度病态[<a href="node421.html#snap71">417</a>,<a href="node421.html#arti57">20</a>]。这种缩放选择并不能解决Lanczos向量基可能病态的问题。然而，它提供了一种方便的方法来检测基何时变得病态，具体来说，当<span class="math-inline">\vert\omega_{j+1}\vert</span>值极小时[<a href="node421.html#pach90">357</a>]。
 
-改变缩放的原因有两个，都与<span class="math-inline">B</span>的不定性有关。第一个原因是，即使<span class="math-inline">A</span>和<span class="math-inline">B</span>是实数矩阵，缩放Lanczos向量使得<span class="math-inline">q_j^TBq_j = 1</span>可能涉及复数运算。（通过跟踪<span class="math-inline">q_j^TBq_j</span>的符号，可以避免复数运算，但仍然使用<span class="math-inline">\vert q_j^TBq_j \vert^{1/2}</span>作为范数。然而，这种算法稳定性较差。）第二个原因是，当<span class="math-inline">B</span>不定<!--Navigation Panel-->
+<p>
+</dd>
+<dt><strong>(17)</strong></dt>
+<dd>如果<span class="math-inline">\omega_{j+1}=0</span>，Lanczos过程会遭遇类似于非厄米Lanczos过程中发生的崩溃；参见&#167;<a href="node244.html#sec:nsymlanczos">7.8</a>。可以采用针对非厄米Lanczos过程开发的相同补救措施，如前瞻[<a href="node421.html#patl85">364</a>,<a href="node421.html#frgn93">178</a>]和自适应阻塞[<a href="node421.html#bady99">29</a>,<a href="node421.html#liaw98">298</a>]。
+<a name="36896"></a>
+
+<p>
+</dd>
+<dt><strong>(19)</strong></dt>
+<dd>矩阵束<span class="math-inline">A - \lambda B</span>的近似特征值通过求解简化的<span class="math-inline">j\times j</span>广义特征值问题来确定
+<br><p></p>
+<div align="CENTER">
+
+
+<div class="math-display">T_j u = \theta \Omega_j u.</div>
+</div>
+<br clear="ALL">
+<p></p>
+有几种算法可用于求解此问题。如果<span class="math-inline">j</span>较小，可以应用标准QZ算法于<span class="math-inline">\{T_j,\Omega_j\}</span>或QR算法于<span class="math-inline">\Omega_j^{-1}T_j</span>。然而，这些算法都没有利用<span class="math-inline">\{T_j,\Omega_j\}</span>的结构。在[<a href="node421.html#pach90">357</a>]中包含了对利用对称性的算法的良好综述，一些更新的工作可以在[<a href="node421.html#slap92">406</a>,<a href="node421.html#slap96">407</a>]中找到。
+
+<p>
+对于中等大小的<span class="math-inline">j</span>（例如，<span class="math-inline">j\approx 100</span>），求解简化问题在计算上变得显著。对于较长的Lanczos运行，建议定期求解简化问题，可能每五到十次Lanczos迭代一次。
+
+<p>
+对称不定Lanczos方法内循环的适当停止准则是
+<br><p></p>
+<div align="CENTER">
+
+
+<div class="math-display">\max\left\{ \Vert r^{(j)}_i\Vert _2, \Vert s^{(j)}_i\Vert_2 \right\} = \vert\gamma_i^{(j)}\vert \max \left\{ 1, \Vert Bq_{k+1}\Vert _2 \right\} \leq \epsilon,</div>
+</div>
+<br clear="ALL">
+<p></p>
+其中<span class="math-inline">\epsilon</span>是用户给定的容差值。注意，<span class="math-inline">Bq_{k+1}</span>在Lanczos运行结束时可用，其欧几里得范数可以通过一次点积计算。无需额外调用<span class="math-inline">B</span>来计算该项。关于收敛性的详细测试程序在以下&#167;<a href="node299.html#subsec:accuracy">8.6.3</a>中讨论。
+
+<p>
+</dd>
+<dt><strong>(21)</strong></dt>
+<dd>仅当对应的Ritz值根据以下描述的测试收敛时，才计算近似特征向量。
+
+<p>
+</dd>
+</dl>   
+
+<p>
+<hr>
+
+<!--Navigation Panel-->
 <a name="tex2html5321"
   href="node299.html">
 <button class="navigate">下一节</button></a> 
@@ -239,11 +306,9 @@ Lanczos向量
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5322" href="node299.html">Stopping Criteria and Accuracy</a>
-<b>上一级：</b><a name="tex2html5316" href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b>上一节：</b><a name="tex2html5310" href="node297.html">Some Properties of Symmetric</a>
-  
-  
+<b>下一节：</b><a name="tex2html5322" href="node299.html">停止准则与精度评估</a>
+<b>上一级：</b><a name="tex2html5316" href="node296.html">对称不定Lanczos方法</a>
+<b>上一节：</b><a name="tex2html5310" href="node297.html">对称不定矩阵对的一些性质</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

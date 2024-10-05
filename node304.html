@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Example 8.6.2.</title>
+<title>示例 8.6.2.</title>
 <meta charset="utf-8">
-<meta name="description" content="Example 8.6.2.">
+<meta name="description" content="示例 8.6.2.">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,33 +66,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5409" href="node305.html">Example 8.6.3.</a>
+<b>下一节：</b><a name="tex2html5409" href="node305.html">示例 8.6.3.</a>
 <b>上一级：</b><a name="tex2html5403" href="node302.html">数值示例</a>
-<b>上一节：</b><a name="tex2html5397" href="node303.html">Example 8.6.1.</a>
-  
-  
+<b>上一节：</b><a name="tex2html5397" href="node303.html">示例 8.6.1.</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001766020000000000000">
-Example 8.6.2.</a>
+示例 8.6.2.</a>
 </h4>
-Even when the initial vector is premultiplied by <span class="math-inline">H^{-1} B</span>, the
-Ritz vectors may be further improved by implementing the postprocessing step
-shown in&nbsp;(<a href="node300.html#ercorrection">8.27</a>).  The following example represents the
-same shaft as in Example 8.6.1, but with a coarser grid so that the order of
-<span class="math-inline">\{A,B\}</span> is 160.  A shift of <span class="math-inline">\sigma =1.e5i</span> was used and full 
-orthogonality was
-maintained.  The following table shows that the postprocessing step improves
-the direct residuals by up to four orders of magnitude.
+
+即使初始向量经过<span class="math-inline">H^{-1} B</span>预乘，Ritz向量也可以通过实施如(<a href="node300.html#ercorrection">8.27</a>)所示的后处理步骤进一步改进。以下示例代表与示例8.6.1相同的轴，但网格更粗糙，使得<span class="math-inline">\{A,B\}</span>的阶数为160。使用了<span class="math-inline">\sigma =1.e5i</span>的移位，并保持了完全正交性。下表显示，后处理步骤将直接残差提高了多达四个数量级。
 <div align="CENTER">
 <table CELLPADDING=3 border="1">
-<tr><td align="CENTER">&nbsp;</td>
-<td align="CENTER">&nbsp;</td>
-<td align="CENTER">&nbsp;</td>
-</tr>
-<tr><td align="CENTER">Ritz value</td>
+<tr><td align="CENTER">Ritz值</td>
 <td align="CENTER">
 <span class="math-inline"> \Vert A\tilde{x} - \tilde{\lambda}B\tilde{x}\Vert</span></td>
 <td align="CENTER">
@@ -100,8 +88,8 @@ the direct residuals by up to four orders of magnitude.
 </tr>
 <tr><td align="CENTER">
 <span class="math-inline">\tilde{\lambda}</span></td>
-<td align="CENTER">(with postprocessing)</td>
-<td align="CENTER">(no postprocessing)</td>
+<td align="CENTER">(有后处理)</td>
+<td align="CENTER">(无后处理)</td>
 </tr>
 <tr><td align="CENTER">
 <span class="math-inline">-1.96e\!-\!04 + 1.03e\!+\!05i</span></td>
@@ -129,10 +117,31 @@ the direct residuals by up to four orders of magnitude.
 <td align="CENTER"><span class="math-inline">5.06e\!-\!03 </span></td>
 </tr>
 </table>
-</div> 
+</div>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5408"
+  href="node305.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5402"
+  href="node302.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5396"
+  href="node303.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5404"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5406"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5409" href="node305.html">示例 8.6.3.</a>
+<b>上一级：</b><a name="tex2html5403" href="node302.html">数值示例</a>
+<b>上一节：</b><a name="tex2html5397" href="node303.html">示例 8.6.1.</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

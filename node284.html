@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Invert .</title>
+<title>对B取逆</title>
 <meta charset="utf-8">
-<meta name="description" content="Invert .">
+<meta name="description" content="对B取逆">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,26 +66,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5113" href="node285.html">Split-and-invert .</a>
+<b>下一节：</b><a name="tex2html5113" href="node285.html">对<span class="math-inline">B</span>分解取逆</a>
 <b>上一级：</b><a name="tex2html5107" href="node283.html">转换为标准问题</a>
 <b>上一节：</b><a name="tex2html5101" href="node283.html">转换为标准问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001730000000000000000">
-求逆<span class="math-inline">B</span>。</a>
+对<span class="math-inline">B</span>取逆</a>
 </h4>
 若<span class="math-inline">B</span>为非奇异矩阵，
 则问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>)等价于
 
-<div class="math-display" id="zb:snep1">(B^{-1}A) x = \lambda x \quad \mathrm{且} \quad\tilde{y}^{\ast} (B^{-1} A) = \lambda \tilde{y}^{\ast}, \tag{216}</div>
+<div class="math-display" id="zb:snep1">(B^{-1}A) x = \lambda x \quad \mathrm{且} \quad\tilde{y}^{\ast} (B^{-1} A) = \lambda \tilde{y}^{\ast}, \tag{8.3}</div>
 
 其中
 <span class="math-inline">\tilde{y} = B^{\ast} y</span>。
 或者，问题&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>)也等价于
 
-<div class="math-display" id="zb:snep2">(AB^{-1})\tilde{x} = \lambda \tilde{x} \quad \mathrm{且} \quady^{\ast} (AB^{-1}) = \lambda y^{\ast}, \tag{217}</div>
+<div class="math-display" id="zb:snep2">(AB^{-1})\tilde{x} = \lambda \tilde{x} \quad \mathrm{且} \quad y^{\ast} (AB^{-1}) = \lambda y^{\ast}, \tag{8.4}</div>
 
 其中
 <span class="math-inline">\tilde{x} = B x</span>。
@@ -108,15 +106,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 注意，向量
 <span class="math-inline">r = (B^{-1}A) q</span>可以分两步计算：
 
-		 (a) 		 		 形成<span class="math-inline">u = A q</span>，
-<br>(b) 		 		 解<span class="math-inline">B r = u</span>求<span class="math-inline">r</span>。
+<br>
+(a) 形成<span class="math-inline">u = A q</span>，
+<br>
+(b) 解<span class="math-inline">B r = u</span>求<span class="math-inline">r</span>。
 
+<p>
 类似地，若必要，向量
 <span class="math-inline">s = (B^{-1}A)^{\ast}p</span>可以这样计算：
+<br>
+(a)<span class="math-inline">^{\prime}</span> 解<span class="math-inline">B^{\ast} v = p</span>求<span class="math-inline">v</span>，
+<br>
+(b)<span class="math-inline">^{\prime}</span> 形成<span class="math-inline">s = A^{\ast} v</span>。
 
-		 (a)<span class="math-inline">^{\prime}</span> 解<span class="math-inline">B^{\ast} v = p</span>求<span class="math-inline">v</span>，
-<br>(b)<span class="math-inline">^{\prime}</span> 形成<span class="math-inline">s = A^{\ast} v</span>。
-
+<p>
 每一步都可以利用稀疏性。
 一般而言，除了Jacobi-Davidson方法外，迭代方法在步骤(b)
 （及(b)<span class="math-inline">^{\prime}</span>）需要精确求解线性系统。若可能，优先使用直接线性系统求解器，例如利用<span class="math-inline">B</span>的LU分解。详见第&nbsp;<a href="node385.html#sec:directsolvers">10.3</a>节关于稠密或稀疏LU分解的讨论。
@@ -146,11 +149,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5113" href="node285.html">Split-and-invert .</a>
+<b>下一节：</b><a name="tex2html5113" href="node285.html">对<span class="math-inline">B</span>分解取逆</a>
 <b>上一级：</b><a name="tex2html5107" href="node283.html">转换为标准问题</a>
 <b>上一节：</b><a name="tex2html5101" href="node283.html">转换为标准问题</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

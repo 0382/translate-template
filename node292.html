@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,10 +73,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5230" href="node293.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b>上一节：</b><a name="tex2html5218" href="node291.html">Restart.</a>
-  
-  
+<b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html5218" href="node291.html">重启</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001743000000000000000"></a><a name="ss:JD7-template"></a>
@@ -84,96 +88,122 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <span class="math-inline">((\alpha,\beta),q)</span>，其中比值<span class="math-inline">\beta/\alpha</span>在复平面上最接近指定的目标值<span class="math-inline">\tau</span>。
 算法包含重启机制以限制搜索空间的维度，并通过已经收敛的左右Schur向量进行收缩。
 
+<pre class="algorithm" id="alg:jdqzhar">
+算法 8.1：用于 GNHEP 中接近 <span class="math-inline">\tau</span> 的 <span class="math-inline">k_{\max}</span> 内部特征值的 Jacobi-Davidson QZ 方法
+(1) <span class="math-inline">t=v_{0}, k=0, \nu_{0}=1/\sqrt{1+\|\tau\|^{2}}, \mu_{0}=-\tau \nu_{0}, m=0;</span>
+(2) <span class="math-inline">2=[], Z=[], S=[], T=[]</span>
+(3) 当 <span class="math-inline">k</span>
+(4) 对于 <span class="math-inline">i=1,\ldots, m</span>
+(5) <span class="math-inline">t=t-\left(v_{i}^{*} t\right) v_{i}</span>
+(6) <span class="math-inline">2=[], Z=[], S=[], T=[]</span> <span class="math-inline">m=m+1, v_m=t/\|t\|_2, v_m^A=A v_m, v_m^B=B v_m, w=\nu_0 v_m^A+\mu_0 v_m^B</span>
+(7) 对于 <span class="math-inline">i=1,\ldots, k</span>
+(8) <span class="math-inline">w=w-\left(z_{i}^{*} w\right) z_{i}</span>
+(9) 对于 <span class="math-inline">i=1,\ldots, m-1</span>
+(10) <span class="math-inline">w_{m}=w/\|w\|_{2}</span>
+(11) 对于 <span class="math-inline">i=1,\ldots, m-1</span>
+(12) <span class="math-inline">M_{i, m}^{A}=w_{i}^{*} v_{m}^{A}, M_{m, i}^{A}=w_{m}^{*} v_{i}^{A}, M_{i, m}^{B}=w_{i}^{*} v_{m}^{B}, M_{m, i}^{B}=w_{m}^{*} v_{i}^{B}</span>
+(13) <span class="math-inline">M_{m, m}^{A}=w_{m}^{*} v_{m}^{A}, M_{m, m}^{B}=w_{m}^{*} v_{m}^{B}</span>
+(14) 计算 QZ 分解：<span class="math-inline">M^{A} S^{R}=S^{L} T^{A}, M^{B} S^{R}=S^{L} T^{B}</span> 使得：<span class="math-inline">\left\|T_{i, i}^{A}/ T_{i, i}^{B}-\tau\right\|\leq\left\|T_{i+1, i+1}^{A}/ T_{i+1, i+1}^{B}-\tau\right\|</span>
+(15) <span class="math-inline">u=V s_1^R, p=W s_1^L, u^A=V^A s_1^R, u^B=V^B s_1^R,\zeta=T_{1,1}^A,\eta=T_{1,1}^B</span>
+(16) <span class="math-inline">r=\eta u^{A}-\zeta u^{B},\tilde{a}=Z^{*} u^{A},\tilde{b}=Z^{*} u^{B},\tilde{r}=r-Z(\eta\tilde{a}-\zeta\tilde{b})</span>
+(17) 当 <span class="math-inline">\|\tilde{r}\|_{2}\leq\epsilon</span>
+(18) <span class="math-inline">R^{A}=\left[\begin{array}{cc}R^{A}&\widetilde{a}\\ 0&\zeta\end{array}\right],\quad R^{B}=\left[\begin{array}{cc}R^{B}&\widetilde{b}\\ 0&\eta\end{array}\right]</span>
+(19) <span class="math-inline">Q=[Q, u], Z=[Z, p], k=k+1</span>
+(20) 如果 <span class="math-inline">k=k_{\max}</span> 则停止
+(21) <span class="math-inline">m=m-1</span>
+(22) 对于 <span class="math-inline">i=1,\ldots, m</span>
+(23) <span class="math-inline"></span> v_i=V s_{i+1}^R, v_i^A=V^A s_{i+1}^R, v_i^B=V^B s_{i+1}^R,<span class="math-inline"></span>
+(24) <span class="math-inline">w_{i}=W s_{i+1}^{L}, s_{i}^{R}=s_{i}^{L}=e_{i}</span>
+(25) <span class="math-inline">M^{A}, M^{B}</span> 是 <span class="math-inline">T^{A}, T^{B}</span> 的下 m 阶 m 阶块，分别。
+(26) <span class="math-inline">u=v_{1}, p=w_{1}, u^{A}=v_{1}^{A}, u^{B}=v_{1}^{B},\zeta=T_{1,1}^{A},\eta=T_{1,1}^{B}</span>
+(27) <span class="math-inline">r=\eta u^{A}-\zeta u^{B},\widetilde{a}=Z^{*} u^{A},\widetilde{b}=Z^{*} u^{B},\widetilde{r}=r-Z(\eta\widetilde{s}-\zeta\widetilde{t})</span>
+(28) 结束当
+(29) 如果 <span class="math-inline">m\geq m_{\max}</span> 则
+(30) 对于 <span class="math-inline">i=2,\ldots, m_{\min}</span>
+(31) <span class="math-inline">v_{i}=V s_{i}^{R}, v_{i}^{A}=V^{A} s_{i}^{R}, v_{i}^{B}=V^{B} s_{i}^{R}, w_{i}=W s_{i}^{L}</span>
+(32) <span class="math-inline">M^{A}, M^{B}</span> 是 <span class="math-inline">T^{A}, T^{B}</span> 的前 <span class="math-inline">m_{\min}</span> 阶 <span class="math-inline">m_{\min}</span> 阶块，分别。
+(33) <span class="math-inline">v_1=u, v_1^A=u^A, v_1^B=u^B, w_1=p, m=m_{\min}</span>
+(34) 结束如果
+(35) <span class="math-inline">\widetilde{Q}=[Q, u],\widetilde{Z}=[Z, p]</span>
+(36) 解 <span class="math-inline">t(\perp\widetilde{Q})</span>  (大致) 来自
+(37) <span class="math-inline">\left(I-\widetilde{Z}\widetilde{Z}^{*}\right)(\eta A-\zeta B)\left(I-\widetilde{Q}\widetilde{Q}^{*}\right) t=-\widetilde{r}</span>
+(38) 结束当
+</pre>
+
 <p>
-
-<p></p>
-<div align="CENTER">
-
-<p><a name="alg:jdqzhar"></a></p><img
- width="598" height="871" border="0"
- src="img2762.png"
- alt="\begin{figure}\begin{algorithm}{Jacobi--Davidson QZ Method for <span class="math-inline">k_{\max}</span>\ Inter...
-...}<span class="math-inline">\ \\
-{\rm (38)}\&gt; {\bf end while}
-\end{tabbing}}
-\end{algorithm}\end{figure}">
-</div>
-<p></p>
+应用此算法时，我们需要指定一个初始向量<span class="math-inline">v_0</span>，一个容差<span class="math-inline">\epsilon</span>，一个目标值<span class="math-inline">\tau</span>，以及一个数字<span class="math-inline">k_{\max}</span>，它指定应计算多少个接近<span class="math-inline">\tau</span>的本征对。<span class="math-inline">{m}_{\max}</span>的值指定了搜索子空间的最大维度。如果超过此值，则以维度为<span class="math-inline">{m}_{\min}</span>的子空间进行重启。
 
 <p>
-应用此算法时，我们需要指定一个初始向量</span>v_0<span class="math-inline">，一个容差</span>\epsilon<span class="math-inline">，一个目标值</span>\tau<span class="math-inline">，以及一个数字</span>k_{\max}<span class="math-inline">，它指定应计算多少个接近</span>\tau<span class="math-inline">的本征对。</span>{m}_{\max}<span class="math-inline">的值指定了搜索子空间的最大维度。如果超过此值，则以维度为</span>{m}_{\min}<span class="math-inline">的子空间进行重启。
+完成后，将交付<span class="math-inline">k_{\max}</span>个接近<span class="math-inline">\tau</span>的广义特征值，以及相应的缩减Schur形式<span class="math-inline">AQ=ZR^A</span>，<span class="math-inline">BQ={Z}R^B</span>，其中<span class="math-inline">Q</span>和<span class="math-inline">Z</span>是<span class="math-inline">n</span>乘<span class="math-inline">k_{\max}</span>的正交矩阵，<span class="math-inline">R^A</span>和<span class="math-inline">R^B</span>是<span class="math-inline">k_{\max}</span>乘<span class="math-inline">k_{\max}</span>的上三角矩阵。广义特征值是<span class="math-inline">R^A</span>和<span class="math-inline">R^B</span>的对角线元素。计算形式满足
+<span class="math-inline">\Vert A q_{j}- {Z} R^Ae_{j}\Vert _2=O(\epsilon)</span>，
+
+<span class="math-inline">\Vert B q_{j}- {Z} R^Be_{j}\Vert _2=O(\epsilon)</span>，
+其中<span class="math-inline">q_j</span>是<span class="math-inline">Q</span>的第<span class="math-inline">j</span>列。
 
 <p>
-完成后，将交付</span>k_{\max}<span class="math-inline">个接近</span>\tau<span class="math-inline">的广义特征值，以及相应的缩减Schur形式</span>AQ=ZR^A<span class="math-inline">，</span>BQ={Z}R^B<span class="math-inline">，其中</span>Q<span class="math-inline">和</span>Z<span class="math-inline">是</span>n<span class="math-inline">乘</span>k_{\max}<span class="math-inline">的正交矩阵，</span>R^A<span class="math-inline">和</span>R^B<span class="math-inline">是</span>k_{\max}<span class="math-inline">乘</span>k_{\max}<span class="math-inline">的上三角矩阵。广义特征值是</span>R^A<span class="math-inline">和</span>R^B<span class="math-inline">的对角线元素。计算形式满足
-</span>\Vert A q_{j}- {Z} R^Ae_{j}\Vert _2=O(\epsilon)<span class="math-inline">，
+计算的缩减Schur形式的精度取决于目标值<span class="math-inline">\tau</span>与特征值
 
-</span>\Vert B q_{j}- {Z} R^Be_{j}\Vert _2=O(\epsilon)<span class="math-inline">，
-其中</span>q_j<span class="math-inline">是</span>Q<span class="math-inline">的第</span>j<span class="math-inline">列。
-
-<p>
-计算的缩减Schur形式的精度取决于目标值</span>\tau<span class="math-inline">与特征值
-
-</span>(\alpha_j,\beta_j)\equiv(R^A_{j,j},R^B_{j,j})<span class="math-inline">之间的距离。
-如果我们忽略机器精度和</span>\epsilon^2<span class="math-inline">阶的项，那么我们有
-</span>\Vert A q_j- {Z} R^Ae_j\Vert _2\leq j\gamma_A \epsilon<span class="math-inline">，
+<span class="math-inline">(\alpha_j,\beta_j)\equiv(R^A_{j,j},R^B_{j,j})</span>之间的距离。
+如果我们忽略机器精度和<span class="math-inline">\epsilon^2</span>阶的项，那么我们有
+<span class="math-inline">\Vert A q_j- {Z} R^Ae_j\Vert _2\leq j\gamma_A \epsilon</span>，
        
-</span>\Vert B q_j- {Z} R^Be_j\Vert _2\leq j\gamma_B \epsilon<span class="math-inline">，
+<span class="math-inline">\Vert B q_j- {Z} R^Be_j\Vert _2\leq j\gamma_B \epsilon</span>，
 其中常数
-</span>\gamma_A<span class="math-inline">和</span>\gamma_B<span class="math-inline">由
+<span class="math-inline">\gamma_A</span>和<span class="math-inline">\gamma_B</span>由
 
-<div class="math-display">\gamma_A\equiv\frac{\vert\mu_0\vert}{\vert\nu_0\alpha_j+\mu_0......frac{\vert\nu_0\vert}{\vert\nu_0\alpha_j+\mu_0\beta_j\vert}.</div>
+<div class="math-display">\gamma_A\equiv\frac{\vert\mu_0\vert}{\vert\nu_0\alpha_j+\mu_0\beta_j} \quad\text{和}\quad \gamma_B = \frac{\vert\nu_0\vert}{\vert\nu_0\alpha_j+\mu_0\beta_j\vert}.</div>
 
 如果
-</span>\mu_0/\nu_0=-\tau<span class="math-inline">，如算法步骤(1)中所示，那么
+<span class="math-inline">\mu_0/\nu_0=-\tau</span>，如算法步骤(1)中所示，那么
        
-</span>\gamma_A=\vert\tau\vert/\vert\alpha_j-\tau\beta_j\vert<span class="math-inline">，
+<span class="math-inline">\gamma_A=\vert\tau\vert/\vert\alpha_j-\tau\beta_j\vert</span>，
        
-</span>\gamma_B=1/\vert\alpha_j-\tau\beta_j\vert<span class="math-inline">。这些值可能很大
+<span class="math-inline">\gamma_B=1/\vert\alpha_j-\tau\beta_j\vert</span>。这些值可能很大
 如果
-</span>\tau\approx \alpha_j/\beta_j<span class="math-inline">。实际上，如果</span>\tau<span class="math-inline">接近检测到的特征值，也能达到</span>\epsilon<span class="math-inline">阶的精度。当使用值
-</span>(\mu_0,\nu_0)=(1,\bar\tau)<span class="math-inline">进行额外的细化步骤时，可以保证</span>\epsilon<span class="math-inline">阶的精度。
+<span class="math-inline">\tau\approx \alpha_j/\beta_j</span>。实际上，如果<span class="math-inline">\tau</span>接近检测到的特征值，也能达到<span class="math-inline">\epsilon</span>阶的精度。当使用值
+<span class="math-inline">(\mu_0,\nu_0)=(1,\bar\tau)</span>进行额外的细化步骤时，可以保证<span class="math-inline">\epsilon</span>阶的精度。
 
 <p>
 现在我们将解释算法的主要连续阶段。
 <dl>
 <dt><strong>(1)</strong></dt>
 <dd>初始化阶段。
-标量</span>\nu_0<span class="math-inline">和</span>\mu_0<span class="math-inline">的选择特别有效
-如果</span>\tau<span class="math-inline">在谱的内部。
-如果</span>\tau<span class="math-inline">是特征值（可以轻松测试），此选择会导致分解失败。
+标量<span class="math-inline">\nu_0</span>和<span class="math-inline">\mu_0</span>的选择特别有效
+如果<span class="math-inline">\tau</span>在谱的内部。
+如果<span class="math-inline">\tau</span>是特征值（可以轻松测试），此选择会导致分解失败。
 
 <p>
 </dd>
 <dt><strong>(4)-(5)</strong></dt>
-<dd>新向量</span>t<span class="math-inline">通过修改的Gram-Schmidt方法相对于当前搜索子空间</span>V<span class="math-inline">进行正交化。
+<dd>新向量<span class="math-inline">t</span>通过修改的Gram-Schmidt方法相对于当前搜索子空间<span class="math-inline">V</span>进行正交化。
 同样，向量
-</span>w=(\nu_0A+\mu_0B)t<span class="math-inline">相对于当前测试子空间</span>W<span class="math-inline">进行正交化。这两个正交化过程可以通过算法<a href="node138.html#alg:rgs">4.14</a>（第<a href="node138.html#alg:rgs"><button class="crossref"></button></a>页）中的模板替换，以提高数值稳定性。
+<span class="math-inline">w=(\nu_0A+\mu_0B)t</span>相对于当前测试子空间<span class="math-inline">W</span>进行正交化。这两个正交化过程可以通过算法<a href="node138.html#alg:rgs">4.14</a>（第<a href="node138.html#alg:rgs"><button class="crossref"></button></a>页）中的模板替换，以提高数值稳定性。
 
 <p>
-我们扩展子空间</span>V<span class="math-inline">，</span>V^A\equiv AV<span class="math-inline">，</span>V^B\equiv BV<span class="math-inline">，以及</span>W<span class="math-inline">。
-</span>V<span class="math-inline">表示包含当前搜索子空间基向量</span>v_i<span class="math-inline">作为列的矩阵。其他矩阵以类似明显的方式定义。
+我们扩展子空间<span class="math-inline">V</span>，<span class="math-inline">V^A\equiv AV</span>，<span class="math-inline">V^B\equiv BV</span>，以及<span class="math-inline">W</span>。
+<span class="math-inline">V</span>表示包含当前搜索子空间基向量<span class="math-inline">v_i</span>作为列的矩阵。其他矩阵以类似明显的方式定义。
 
 <p>
 </dd>
 <dt><strong>(12)-(13)</strong></dt>
 <dd>计算矩阵
-</span>M^A\equiv W^\ast A V<span class="math-inline">
+<span class="math-inline">M^A\equiv W^\ast A V</span>
 和
-</span>M^B\equiv W^\ast B V<span class="math-inline">的第</span>{m}<span class="math-inline">行和列。
+<span class="math-inline">M^B\equiv W^\ast B V</span>的第<span class="math-inline">{m}</span>行和列。
 
 <p>
-注意，标量</span>M_{i,{m}}^B<span class="math-inline">也可以从标量</span>M_{i,{m}}^A<span class="math-inline">以及步骤(10)中</span>w_i^\ast w<span class="math-inline">的正交化常数计算得出。
+注意，标量<span class="math-inline">M_{i,{m}}^B</span>也可以从标量<span class="math-inline">M_{i,{m}}^A</span>以及步骤(10)中<span class="math-inline">w_i^\ast w</span>的正交化常数计算得出。
 
 <p>
 </dd>
 <dt><strong>(15)</strong></dt>
 <dd><p>
-可以通过LAPACK中适用于密集矩阵束的合适例程计算</span>{m}<span class="math-inline">乘</span>{m}<span class="math-inline">矩阵对</span>(M^A, M^B)<span class="math-inline">的QZ分解。
+可以通过LAPACK中适用于密集矩阵束的合适例程计算<span class="math-inline">{m}</span>乘<span class="math-inline">{m}</span>矩阵对<span class="math-inline">(M^A, M^B)</span>的QZ分解。
 
 <p>
-我们选择计算广义Petrov对，这使得算法适合于计算</span>k_{\max}<span class="math-inline">个内部广义特征值
+我们选择计算广义Petrov对，这使得算法适合于计算<span class="math-inline">k_{\max}</span>个内部广义特征值
 
-</span>\beta A-\alpha B<span class="math-inline">，其中</span>\alpha/\beta<span class="math-inline">接近指定的</span>\tau<span class="math-inline">。
+<span class="math-inline">\beta A-\alpha B</span>，其中<span class="math-inline">\alpha/\beta</span>接近指定的<span class="math-inline">\tau</span>。
 
 <p>
 有关重新排序广义Schur形式的算法，请参见[<a
@@ -184,7 +214,7 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <p>
 </dd>
 <dt><strong>(18)</strong></dt>
-<dd>停止准则是在归一化右Schur向量近似残差的范数低于</span>\epsilon<span class="math-inline">时接受广义本征对近似。这意味着我们在计算的广义特征值中接受</span>\epsilon<span class="math-inline">阶的不精确性，以及Schur向量中</span>O({\epsilon})<span class="math-inline">（角度）的不精确性（前提是所关心的特征值是简单的且与其他特征值充分分离）。
+<dd>停止准则是在归一化右Schur向量近似残差的范数低于<span class="math-inline">\epsilon</span>时接受广义本征对近似。这意味着我们在计算的广义特征值中接受<span class="math-inline">\epsilon</span>阶的不精确性，以及Schur向量中<span class="math-inline">O({\epsilon})</span>（角度）的不精确性（前提是所关心的特征值是简单的且与其他特征值充分分离）。
 
 <p>
 无法保证检测到所有所需特征值；请参见算法<a href="node144.html#alg:jdqr">4.17</a>（第<a href="node144.html#alg:jdqr"><button class="crossref"></button></a>页）的注释(13)。
@@ -197,57 +227,63 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <p>
 </dd>
 <dt><strong>(30)</strong></dt>
-<dd>当当前特征向量的搜索空间的维度超过</span>{m}_{\max}<span class="math-inline">时，我们进行重启。重启过程以</span>{m}_{\min}<span class="math-inline">个左右Ritz向量为基础，这些Ritz向量对应于最接近目标值</span>\tau<span class="math-inline">的广义Ritz对。
+<dd>当当前特征向量的搜索空间的维度超过<span class="math-inline">{m}_{\max}</span>时，我们进行重启。重启过程以<span class="math-inline">{m}_{\min}</span>个左右Ritz向量为基础，这些Ritz向量对应于最接近目标值<span class="math-inline">\tau</span>的广义Ritz对。
 
 <p>
 </dd>
 <dt><strong>(36)</strong></dt>
-<dd>我们将已锁定的（计算的）右Schur向量收集在</span>{Q}<span class="math-inline">中，矩阵</span>\tilde{Q}<span class="math-inline">是</span>{Q}<span class="math-inline">扩展了当前右Schur特征向量近似</span>{u}<span class="math-inline">。同样，收敛的左Schur向量已被收集在</span>{Z}<span class="math-inline">中，该矩阵扩展了</span>{p}<span class="math-inline">。这样做是为了获得更紧凑的表述；算法<a href="node292.html#alg:jdqzhar">8.1</a>步骤(37)中的修正方程等价于方程(<a href="node288.html#eq:JD7-CE">8.13</a>)中关于收缩对(<a href="node290.html#eq:JD7-defl">8.15</a>)的修正方程。新修正</span>{t}<span class="math-inline">必须与</span>{Q}<span class="math-inline">的列以及</span>{u}<span class="math-inline">正交。
+<dd>我们将已锁定的（计算的）右Schur向量收集在<span class="math-inline">{Q}</span>中，矩阵<span class="math-inline">\tilde{Q}</span>是<span class="math-inline">{Q}</span>扩展了当前右Schur特征向量近似<span class="math-inline">{u}</span>。同样，收敛的左Schur向量已被收集在<span class="math-inline">{Z}</span>中，该矩阵扩展了<span class="math-inline">{p}</span>。这样做是为了获得更紧凑的表述；算法<a href="node292.html#alg:jdqzhar">8.1</a>步骤(37)中的修正方程等价于方程(<a href="node288.html#eq:JD7-CE">8.13</a>)中关于收缩对(<a href="node290.html#eq:JD7-defl">8.15</a>)的修正方程。新修正<span class="math-inline">{t}</span>必须与<span class="math-inline">{Q}</span>的列以及<span class="math-inline">{u}</span>正交。
 
 <p>
 当然，修正方程可以通过任何合适的进程求解，例如，设计用于求解非对称系统的预处理Krylov子空间方法。然而，由于不同的投影，我们总是需要一个预处理器（如果没有任何其他可用，则可能是恒等算子），该预处理器通过相同的斜投影进行收缩，以便我们在
 
-</span>\widetilde{Q}^\perp<span class="math-inline">和自身之间获得映射。
-由于</span>\widetilde{Q}<span class="math-inline">和</span>\widetilde{Z}<span class="math-inline">的出现，必须谨慎使用矩阵
+<span class="math-inline">\widetilde{Q}^\perp</span>和自身之间获得映射。
+由于<span class="math-inline">\widetilde{Q}</span>和<span class="math-inline">\widetilde{Z}</span>的出现，必须谨慎使用矩阵
 
-</span>\eta A -\zeta B<span class="math-inline">的预处理器。
-预处理器的包含可以按照算法<a href="node292.html#alg:corritgen">8.2</a>进行。确保迭代求解器的初始向量</span>t_0<span class="math-inline">满足正交约束
+<span class="math-inline">\eta A -\zeta B</span>的预处理器。
+预处理器的包含可以按照算法<a href="node292.html#alg:corritgen">8.2</a>进行。确保迭代求解器的初始向量<span class="math-inline">t_0</span>满足正交约束
 
-</span>\widetilde Q^\ast t_0=0<span class="math-inline">。请注意，如果在几次Jacobi-Davidson迭代中保持</span>{K}<span class="math-inline">不变，算法<a href="node292.html#alg:corritgen">8.2</a>每步可以节省显著的计算量。在这种情况下，可以从先前步骤中保存</span>\widehat{Z}<span class="math-inline">的列。同样，矩阵</span>{\mathcal M}<span class="math-inline">及其
+<span class="math-inline">\widetilde Q^\ast t_0=0</span>。请注意，如果在几次Jacobi-Davidson迭代中保持<span class="math-inline">{K}</span>不变，算法<a href="node292.html#alg:corritgen">8.2</a>每步可以节省显著的计算量。在这种情况下，可以从先前步骤中保存<span class="math-inline">\widehat{Z}</span>的列。同样，矩阵<span class="math-inline">{\mathcal M}</span>及其
 
-</span>{\mathcal L}{\mathcal U}<span class="math-inline">分解也可以从先前步骤更新。
+<span class="math-inline">{\mathcal L}{\mathcal U}</span>分解也可以从先前步骤更新。
 
 <p>
 没有必要非常精确地求解修正方程。一种常用于不精确牛顿方法[<a
  href="node421.html#dees83">113</a>]的策略在这里也工作得很好：
-随着Jacobi-Davidson迭代步骤增加精度，例如，在第</span>\ell<span class="math-inline">次Jacobi-Davidson迭代中以</span>2^{-\ell}<span class="math-inline">的残差减少求解修正方程（当检测到Schur向量时，</span>\ell<span class="math-inline">重置为0）。
+随着Jacobi-Davidson迭代步骤增加精度，例如，在第<span class="math-inline">\ell</span>次Jacobi-Davidson迭代中以<span class="math-inline">2^{-\ell}</span>的残差减少求解修正方程（当检测到Schur向量时，<span class="math-inline">\ell</span>重置为0）。
 
 <p>
-特别是在最初的几个初始步骤中，近似特征值</span>\theta<span class="math-inline">可能非常不准确，此时精确求解修正方程没有意义。在这个阶段，暂时将</span>\theta<span class="math-inline">替换为</span>\tau<span class="math-inline">或取</span>{t}=-r<span class="math-inline">以扩展搜索子空间可能更有效[<a
+特别是在最初的几个初始步骤中，近似特征值<span class="math-inline">\theta</span>可能非常不准确，此时精确求解修正方程没有意义。在这个阶段，暂时将<span class="math-inline">\theta</span>替换为<span class="math-inline">\tau</span>或取<span class="math-inline">{t}=-r</span>以扩展搜索子空间可能更有效[<a
  href="node421.html#mosc86">335</a>,<a
  href="node421.html#fosv98">172</a>]。
 </dd>
 </dl>
 
 <p>
-有关此方法的完整理论背景以及Schur向量的收缩技术细节，请参见[<a
- href="node421.html#fosv98">172</a>]。
+有关此方法的完整理论背景以及Schur向量的收缩技术细节，请参见[<a href="node421.html#fosv98">172</a>]。
 
-<p>
+<pre class="algorithm" id="alg:corritgen">
+算法 8.2：Deflated Jacobi-Davidson GNHEP修正方程的近似解
 
-<p></p>
-<div align="CENTER">
+使用左预处理器 <span class="math-inline">\tilde{K}\equiv\left(I-\tilde{Z}\tilde{Z}^{*}\right) K\left(I-\tilde{Q}\tilde{Q}^{*}\right)</span> 来求解 <span class="math-inline">\tilde{A}\equiv\left(I-\widetilde{Z}\tilde{Z}^{*}\right)(\eta A-\zeta B)\left(I-\widetilde{Q}\tilde{Q}^{*}\right)</span> ：
 
-<p><a name="alg:corritgen"></a></p><img
- width="598" height="470" border="0"
- src="img2798.png"
- alt="\begin{figure}\begin{algorithm}{Approximate Solution of the
-Deflated Jacobi--Dav...
-...{Z}\vec{\alpha}</span>\end{tabbing}}
-\end{algorithm}\vspace*{-9pt}%% help
-\end{figure}">
-</div>
-<p></p>
+(1) 求解 <span class="math-inline">\widehat{Z}</span> 使得 <span class="math-inline">K\widehat{Z}=\widetilde{Z}</span>，
+(2) 计算 <span class="math-inline">\mathcal{M}=\widetilde{Q}^{*}\widehat{Z}</span>，
+(3) 分解 <span class="math-inline">\mathcal{M}=\mathcal{L}\mathcal{U}</span>，
+(4) 计算 <span class="math-inline">\tilde{r}\equiv\tilde{K}^{-1} r</span> 如下：
+(5) <span class="math-inline">\quad\left(b^{\prime}\right)</span> 求解 <span class="math-inline">\widehat{r}</span> 使得 <span class="math-inline">K\widehat{r}=r</span>，
+(6) <span class="math-inline">\left(c^{\prime}\right)\vec{\gamma}=\widetilde{Q}^{*}\vec{r}</span>
+(7) 求解 <span class="math-inline">\vec{\beta}</span> 使得 <span class="math-inline">\mathcal{L}\vec{\beta}=\vec{\gamma}</span>
+(8) 求解 <span class="math-inline">\vec{\alpha}</span> 使得 <span class="math-inline">\mathcal{U}\vec{\alpha}=\vec{\beta}</span>，
+(9) (d') <span class="math-inline">\tilde{r}=\widehat{r}-\widehat{Z}\vec{\alpha}</span>
+应用 Krylov 子空间方法，初始值 <span class="math-inline">t_{0}=0</span>，操作符 <span class="math-inline">\widetilde{K}^{-1}\widetilde{A}</span>，右侧为 <span class="math-inline">-\tilde{r}</span>，给定的 <span class="math-inline">v</span> 计算 <span class="math-inline">z=\widetilde{K}^{-1}\widetilde{A} v</span> 如下：
+(a) <span class="math-inline">y=(\eta A-\zeta B) v</span>，
+(b) 求解 <span class="math-inline">\widehat{y}</span> 使得 <span class="math-inline">K\widehat{y}=y</span>，
+(c) <span class="math-inline">\vec{\gamma}=\widetilde{Q}^{*}\widehat{y}</span>
+求解 <span class="math-inline">\vec{\beta}</span> 使得 <span class="math-inline">\mathcal{L}\vec{\beta}=\vec{\gamma}</span>，
+求解 <span class="math-inline">\vec{\alpha}</span> 使得 <span class="math-inline">\mathcal{U}\vec{\alpha}=\vec{\beta}</span>，
+(d) <span class="math-inline">z=\widehat{y}-\widehat{Z}\vec{\alpha}</span>。
+</pre>
 
 <p>
 <hr><!--Navigation Panel-->
@@ -268,10 +304,8 @@ Deflated Jacobi--Dav...
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5230" href="node293.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson Method &nbsp;G.&nbsp;Sleijpen and</a>
-<b>上一节：</b><a name="tex2html5218" href="node291.html">Restart.</a>
-  
-  
+<b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson 方法</a>
+<b>上一节：</b><a name="tex2html5218" href="node291.html">重启</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

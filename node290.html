@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Deflation.</title>
+<title>收缩</title>
 <meta charset="utf-8">
-<meta name="description" content="Deflation.">
+<meta name="description" content="收缩">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,27 +66,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5204" href="node291.html">Restart.</a>
+<b>下一节：</b><a name="tex2html5204" href="node291.html">重启</a>
 <b>上一级：</b><a name="tex2html5198" href="node289.html">收缩与重启</a>
 <b>上一节：</b><a name="tex2html5192" href="node289.html">收缩与重启</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION001742010000000000000">
-缩减</a>
+<!--End of Navigation Panel--><h4><a name="SECTION001742010000000000000"></a>
+收缩
 </h4>
+
 部分广义Schur形式可以通过多个连续步骤获得。假设我们已经有了部分广义Schur形式
 
 <span class="math-inline">AQ_{k-1}={Z}_{k-1}R^A_{k-1}</span> 和
 
 <span class="math-inline">BQ_{k-1}={Z}_{k-1}R^B_{k-1}</span>。我们希望用新的右Schur向量 <span class="math-inline">{q}</span> 和左Schur向量 <span class="math-inline">{z}</span> 来扩展这个部分广义Schur形式，得到
 
-<div class="math-display">A\onebytwo{Q_{k-1}}{{q}}=\onebytwo{{Z}_{k-1}}{{z}}\left[\b......{@{\,}cc@{\,}}R^A_{k-1}& {a}\\0& \alpha\end{array}\right]</div>
+<div class="math-display">A\begin{bmatrix}Q_{k-1} & q\end{bmatrix} = \begin{bmatrix}Z_{k-1} & z\end{bmatrix}\begin{bmatrix}R^A_{k-1} & a \\ 0 & \alpha\end{bmatrix}</div>
 
 以及
 
-<div class="math-display">B\onebytwo{Q_{k-1}}{q}=\onebytwo{{Z}_{k-1}}{{z}}\left[\be......@{\,}cc@{\,}}R^B_{k-1}& {b}\\0& \beta \end{array}\right].</div>
+<div class="math-display">B\begin{bmatrix}Q_{k-1} & q\end{bmatrix} = \begin{bmatrix}Z_{k-1} & z\end{bmatrix}\begin{bmatrix}R^B_{k-1} & b \\ 0 & \beta\end{bmatrix}.</div>
 
 新的广义Schur对 <span class="math-inline">((\alpha,\beta), {q})</span> 满足
 
@@ -96,7 +95,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">\beta {a} - \alpha {b}={Z}^\ast_{k-1}(\beta A-\alpha B)q</span>,
 
-<div class="math-display">Q^\ast_{k-1}q=0\quad\mathrm{并且}\quad\left(I-{Z}_{k-1}{Z}_{k-......ight)(\beta A-\alpha B)\left(I-Q_{k-1}Q_{k-1}^\ast\right)q=0.</div>
+<div class="math-display">Q^\ast_{k-1}q=0\quad\mathrm{并且}\quad\left(I-{Z}_{k-1}{Z}^*_{k-1}\right)(\beta A-\alpha B)\left(I-Q_{k-1}Q_{k-1}^\ast\right)q=0.</div>
 
 向量 <span class="math-inline">{a}</span> 和 <span class="math-inline">{b}</span> 可以从以下公式计算得到
 
@@ -104,11 +103,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 因此，广义Schur对 <span class="math-inline">((\alpha,\beta),q)</span> 是缩减矩阵对的一个特征对
 
-<div class="math-display" id="eq:JD7-defl">\begin{array}{l}\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\rig......ight)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)\right).\end{array} \tag{228}</div>
+<div class="math-display" id="eq:JD7-defl">
+\begin{aligned}
+\left(\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right)A\left(I-Q_{k-1}Q^\ast_{k-1}\right), \\
+\left(I-Z_{k-1}Z^\ast_{k-1}\right)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)
+\right).
+\end{aligned}\tag{8.15}</div>
 
 这个特征问题可以再次用我们在第&#167;<a href="node288.html#ss:JD7-intro">8.4.1</a>节中概述的Jacobi-Davidson过程来解决。在这个过程中，我们构造了与<span class="math-inline">Q_{k-1}</span>正交的向量<span class="math-inline">v_i</span>和与<span class="math-inline">{Z}_{k-1}</span>正交的向量<span class="math-inline">w_i</span>。这简化了与缩减算子相关的交互矩阵<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>的计算：
 
-<div class="math-display" id="eq:JD7-deflIM">\left\{\begin{array}{l}M^A\equiv W^\ast\left(I-{Z}_{k-1}{......\ast\right) V=W^\ast B V,\rule{0pt}{3.5ex}\end{array}\right. \tag{229}</div>
+<div class="math-display" id="eq:JD7-deflIM">
+\begin{aligned}
+M^A&\equiv W^\ast\left(I-{Z}_{k-1}{Z}_{k-1}^\ast\right)A\left(I-Q_{k-1}Q^\ast_{k-1}\right)V = W^\ast A V,\\
+M^B&\equiv W^\ast\left(I-Z_{k-1}Z^\ast_{k-1}\right)B\left(I-Q_{k-1}Q_{k-1}^\ast\right)V = W^\ast B V,
+\end{aligned}\tag{8.16}</div>
 
 并且<span class="math-inline">M^A</span>和<span class="math-inline">M^B</span>可以简单地计算为<span class="math-inline">W^\ast A V</span>和<span class="math-inline">W^\ast B V</span>。
 
@@ -132,7 +140,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5204" href="node291.html">Restart.</a>
+<b>下一节：</b><a name="tex2html5204" href="node291.html">重启</a>
 <b>上一级：</b><a name="tex2html5198" href="node289.html">收缩与重启</a>
 <b>上一节：</b><a name="tex2html5192" href="node289.html">收缩与重启</a>
   

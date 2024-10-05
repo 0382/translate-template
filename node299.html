@@ -66,15 +66,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5336" href="node300.html">Singular</a>
-<b>上一级：</b><a name="tex2html5330" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>下一节：</b><a name="tex2html5336" href="node300.html">奇异的 <span class="math-inline">B</span></a>
+<b>上一级：</b><a name="tex2html5330" href="node296.html">对称不定Lanczos方法</a>
 <b>上一节：</b><a name="tex2html5324" href="node298.html">算法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001763000000000000000"></a> <a name="subsec:accuracy"></a>
-<br>
 停止准则与精度评估
 </h2>
 
@@ -93,19 +90,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display">\Vert E^{(j)}_i\Vert _2 = \max \left\{\frac{\Vert r^{(j)}_i\Vert _2}{\Vert{x}^{(j)}_i\Vert _2}, \frac{\Vert s^{(j)}_i\Vert _2}{\Vert{y}^{(j)}_i\Vert _2}\right\}.</div>
 
 事实上，<span class="math-inline">\Vert E^{(j)}_i\Vert _2</span> 是最优的后向误差。根据标准的一阶扰动展开或第&#167;<a href="node275.html#sec:errbds_nsym">7.13</a>节中提出的误差界限，存在 <span class="math-inline">H^{-1} B</span> 的一个特征值 <span class="math-inline">\mu</span>，使得
-<p></p>
-<div align="CENTER">
 
-<a name="directerrest"></a><img
- width="512" height="147" border="0"
- src="img2957.png"
- alt="\begin{eqnarray*}
-\vert \mu - \theta^{(j)}_i \vert &amp; \lapproxeq &amp;
-\frac{\Vert{x}^{(j)}_i\Vert _2 \Vert Bq_{j+1}\Vert _2}{\vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert},
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display" id="directerrest">
+\begin{aligned}
+\vert \mu - \theta^{(j)}_i \vert & \lesssim & \frac{\Vert{x}^{(j)}_i\Vert _2 \Vert Bq_{j+1}\Vert _2}{\vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert},
+\end{aligned}
+</div>
+
 我们利用了方程 (<a href="node298.html#normRk">8.24</a>)、(<a href="node298.html#normSk">8.25</a>) 以及等式
 
 <div class="math-display">({y}^{(j)}_i)^{\ast} {x}^{(j)}_i =(u^{(j)}_i)^T Q^T_j B Q_j u^{(j)}_i = (u^{(j)}_i)^T \Omega_j u^{(j)}_i.</div>
@@ -124,11 +115,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 可以在每次 Lanczos 迭代中更新。因此，误差 <span class="math-inline">\vert \mu - \theta^{(j)}_i \vert</span> 也可以被界限为
 
-<div class="math-display">\vert \mu - \theta^{(j)}_i \vert \lapproxeq\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\},</div>
+<div class="math-display">\vert \mu - \theta^{(j)}_i \vert \lesssim \frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert}\cdot\vert\gamma_i^{(j)}\vert \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\},</div>
 
 这并不显式使用 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。综上所述，可以在算法 <a href="node298.html#alg:jsymlan">8.4</a> 的内循环中（即步骤 (19)）使用
 
-<div class="math-display" id="eq:proverrest">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert} \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\} \tag{239}</div>
+<div class="math-display" id="eq:proverrest">\frac{1}{ \vert (u^{(j)}_i)^T \Omega_j u^{(j)}_i \vert}\cdot \vert\gamma_i^{(j)}\vert \cdot \max \left\{ \Vert BQ_j\Vert _F, \sqrt{j} \Vert Bq_{j+1}\Vert _2 \right\} \tag{8.26}</div>
 
 作为临时误差估计。只有在所需数量的 Ritz 值 <span class="math-inline">\theta^{(j)}_i</span> 通过此测试后，才可以计算 Ritz 向量 <span class="math-inline">{x}^{(j)}_i</span>。此时，可以以形成 <span class="math-inline">B{x}_i^{(j)}</span> 的额外成本计算更精确的因子，
 
@@ -138,7 +129,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 Ritz 值 <span class="math-inline">\theta_i^{(j)}</span> 近似于 <span class="math-inline">H^{-1} B</span> 的特征值，而量 <span class="math-inline">\sigma+1/\theta_i^{(j)}</span> 近似于原问题 (<a href="node296.html#eq:gsymep">8.21</a>) 的特征值 <span class="math-inline">\lambda</span>。我们可以使用上述界限估计
 
-<div class="math-display">\left\vert\lambda-\left(\sigma+\frac{1}{\theta_i^{(j)}} \right)\right\vert \lapproxeq\frac{\vert\mu - \theta_i^{(j)}\vert}{\vert\theta_i^{(j)}\vert^2}.</div>
+<div class="math-display">\left\vert\lambda-\left(\sigma+\frac{1}{\theta_i^{(j)}} \right)\right\vert \approx \frac{\vert\mu - \theta_i^{(j)}\vert}{\vert\theta_i^{(j)}\vert^2}.</div>
 
 
 <p>
@@ -159,8 +150,8 @@ Ritz 值 <span class="math-inline">\theta_i^{(j)}</span> 近似于 <span class="
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5336" href="node300.html">Singular</a>
-<b>上一级：</b><a name="tex2html5330" href="node296.html">Symmetric Indefinite Lanczos Method</a>
+<b>下一节：</b><a name="tex2html5336" href="node300.html">奇异的 <span class="math-inline">B</span></a>
+<b>上一级：</b><a name="tex2html5330" href="node296.html">对称不定Lanczos方法</a>
 <b>上一节：</b><a name="tex2html5324" href="node298.html">算法</a>
   
   

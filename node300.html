@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Singular </title>
+<title>奇异的B矩阵</title>
 <meta charset="utf-8">
-<meta name="description" content="Singular ">
+<meta name="description" content="奇异的B矩阵">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -67,14 +67,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5350" href="node301.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html5344" href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b>上一节：</b><a name="tex2html5338" href="node299.html">Stopping Criteria and Accuracy</a>
-  
-  
+<b>上一级：</b><a name="tex2html5344" href="node296.html">对称不定Lanczos方法</a>
+<b>上一节：</b><a name="tex2html5338" href="node299.html">停止准则与精度评估</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001764000000000000000"></a> <a name="sec:singularb"></a>
-<br>
 奇异<span class="math-inline">B</span>矩阵
 </h2> 
 
@@ -92,7 +89,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 其中<span class="math-inline">\delta = (\alpha-\sigma)\gamma-\beta^2</span>。<span class="math-inline">H^{-1} B</span>的感兴趣特征值为<span class="math-inline">\gamma/\delta</span>，相应的特征向量为
 
-<span class="math-inline">\onebytwo{\gamma}{-\beta}^T</span>（零特征值对应于原问题的无穷大特征值）。
+<span class="math-inline">[{\gamma} \;\; {-\beta}]^T</span>（零特征值对应于原问题的无穷大特征值）。
 
 <p>
 注意，特征向量在<span class="math-inline">B</span>的零空间中有一个分量（例如示例中的<span class="math-inline">-\beta</span>），并且<span class="math-inline">H^{-1} B</span>的值域空间与<span class="math-inline">\sigma</span>无关。重要的是，兰索斯起始向量<span class="math-inline">q</span>必须位于此值域空间内，因为空间外的分量可能在兰索斯迭代过程中增长并污染里兹向量。
@@ -112,7 +109,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">(1/\theta_i^{(j)})H^{-1}B{x}_i^{(j)},</span>
 
-<div class="math-display" id="ercorrection">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}. \tag{240}</div>
+<div class="math-display" id="ercorrection">x_i^{(j)} := {x}_i^{(j)} +\frac{\gamma_i^{(j)}}{\theta_i^{(j)}}q_{j+1}. \tag{8.27}</div>
 
 这一技术最初在[<a href="node421.html#erru80">162</a>]中提出，旨在提高里兹向量的质量，后来在[<a href="node421.html#npej87">340</a>]中证明具有所需的净化效果。数值经验表明，更新后的向量几乎完全位于<span class="math-inline">H^{-1} B</span>的值域内，通常能提供更好的特征向量近似。该方案也推荐用于不定情况。
 
@@ -135,10 +132,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5350" href="node301.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html5344" href="node296.html">Symmetric Indefinite Lanczos Method</a>
-<b>上一节：</b><a name="tex2html5338" href="node299.html">Stopping Criteria and Accuracy</a>
-  
-  
+<b>上一级：</b><a name="tex2html5344" href="node296.html">对称不定Lanczos方法</a>
+<b>上一节：</b><a name="tex2html5338" href="node299.html">停止准则与精度评估</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

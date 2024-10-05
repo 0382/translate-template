@@ -66,54 +66,51 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5096" href="node284.html">Invert .</a>
+<b>下一节：</b><a name="tex2html5096" href="node284.html">对<span class="math-inline">B</span> 取逆</a>
 <b>上一级：</b><a name="tex2html5090" href="node280.html">广义非厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html5084" href="node282.html">直接方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
-
 <h1><a name="SECTION001730000000000000000"></a> <a name="sec:rtsf"></a><a name="35662"></a>
-<br>
-Transformation to Standard Problems
-</h1> 
-A common approach for the numerical solution of the large sparse generalized
-eigenvalue problem&nbsp;(<a href="node281.html#eq:gnsym">8.1</a>) is to transform the problem first
-to an equivalent standard eigenvalue problem and then to apply an appropriate
-iterative method as described in Chapter&nbsp;<a href="node203.html#chap:nep">7</a>.
-In this section, we will 
-discuss three approaches for the transformation to a standard eigenproblem.
-The first approach (invert <span class="math-inline">B</span>) is recommended 
-only if the matrix <span class="math-inline">B</span> has
-a very simple structure and when linear
-systems of equations with matrices <span class="math-inline">B</span> and <span class="math-inline">B^{\ast}</span> can be solved
-efficiently.
-The second approach (split-invert <span class="math-inline">B</span>) 
-is suitable when the matrix <span class="math-inline">B</span> is Hermitian
-positive definite and when the Cholesky decomposition of <span class="math-inline">B</span> can be
-computed efficiently a priori. For numerical stability,
-these two approaches require that the matrix <span class="math-inline">B</span>
-be well-conditioned.
-The third approach is the
-shift-and-invert spectral transformation (SI), and this is the most common
-approach. We recommend using it whenever possible.
+转换为标准问题
+</h1>
+
+对于大型稀疏广义特征值问题(<a href="node281.html#eq:gnsym">8.1</a>)的数值求解，一种常见的方法是首先将其转换为等价的标准特征值问题，然后应用第<a href="node203.html#chap:nep">7</a>章所述的适当迭代方法。本节将讨论三种将问题转换为标准特征值问题的方法。第一种方法（对<span class="math-inline">B</span>取逆）仅在矩阵<span class="math-inline">B</span>结构非常简单，且能够高效求解以<span class="math-inline">B</span>和<span class="math-inline">B^{\ast}</span>为系数的线性方程组时推荐使用。第二种方法（对<span class="math-inline">B</span>分解取逆）适用于矩阵<span class="math-inline">B</span>为厄米正定矩阵，并且可以高效预先计算<span class="math-inline">B</span>的乔列斯基分解的情况。为保证数值稳定性，这两种方法要求矩阵<span class="math-inline">B</span>为良态。第三种方法是移位-逆谱变换（SI），这是最常用的方法。我们建议在可能的情况下使用这种方法。
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
-<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><ul>
-<li><ul>
-<li><a name="tex2html5097" href="node284.html">Invert <span class="math-inline">B</span>.</a>
-<li><a name="tex2html5098" href="node285.html">Split-and-invert <span class="math-inline">B</span>.</a>
-<li><a name="tex2html5099" href="node286.html">Shift-and-Invert.</a>
-</ul></ul></ul>
+<li><a name="tex2html5097" href="node284.html">对<span class="math-inline">B</span> 取逆</a>
+<li><a name="tex2html5098" href="node285.html">对<span class="math-inline">B</span>分解取逆</a>
+<li><a name="tex2html5099" href="node286.html">位移-逆变换</a>
+</ul>
 <!--End of Table of Child-Links-->
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5095"
+  href="node284.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5089"
+  href="node280.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5083"
+  href="node282.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5091"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5093"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5096" href="node284.html">对<span class="math-inline">B</span> 取逆</a>
+<b>上一级：</b><a name="tex2html5090" href="node280.html">广义非厄米特征值问题</a>
+<b>上一节：</b><a name="tex2html5084" href="node282.html">直接方法</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20
