@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>A Singular Pencil in GUPTRI Form.</title>
+<title>一个奇异矩阵束在GUPTRI形式中的表示</title>
 <meta charset="utf-8">
-<meta name="description" content="A Singular Pencil in GUPTRI Form.">
+<meta name="description" content="一个奇异矩阵束在GUPTRI形式中的表示">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,15 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5564" href="node315.html">Criterion for Determining the</a>
+<b>下一节：</b><a name="tex2html5564" href="node315.html">确定数值秩的准则</a>
 <b>上一级：</b><a name="tex2html5558" href="node313.html">GUPTRI算法</a>
 <b>上一节：</b><a name="tex2html5552" href="node313.html">GUPTRI算法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001776010000000000000">
-一个<span class="math-inline">24 \times 21</span>的奇异线性束在GUPTRI形式中的表示。</a>
+一个<span class="math-inline">24 \times 21</span>的奇异矩阵束在GUPTRI形式中的表示。</a>
 </h4>
 
 <p>
@@ -84,86 +82,95 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 因此，这个<span class="math-inline">24 \times 21</span>线性束的GUPTRI形式包含了所有类型的对角块，如(<a href="node312.html#eq.guptri1">8.34</a>)和(<a href="node312.html#eq.guptri_reg">8.35</a>)所示。由于<span class="math-inline">A - \lambda B</span>和<span class="math-inline">6\times 8</span>的例子具有相同的右奇异结构和零特征值的Jordan结构，它们也具有相同的<span class="math-inline">A_r - \lambda B_r</span>和<span class="math-inline">A_z - \lambda B_z</span>（见上文）。无穷特征值的Jordan结构（<span class="math-inline">A_i - \lambda B_i</span>）和左奇异结构（<span class="math-inline">A_l - \lambda B_l</span>）的GUPTRI形式如下：
 
-<p>
+<div class="math-display">
+A_{i} - \lambda B_{i} = \left[\begin{array}{c|c|cc}
+{\bf z} & y & x & x \\
+\hline
+0 & {\bf y} & x & x \\
+\hline
+0 & 0 & {\bf x} & {\bf x} \\
+0 & 0 & 0 & {\bf x} \\
+\end{array}\right]
+- \lambda \left[\begin{array}{c|c|cc}
+0 & {\bf y} & x & x \\
+\hline
+0 & 0 & {\bf x} & {\bf x} \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{array}\right],
+</div>
 
-<div class="math-display">A_{i} - \lambda B_{i} =\bmat{c\vert c\vert cc}{\bf z}& y ...... x}& {\bf x}\\ \hline0 & 0 & 0 & 0 \\0 & 0 & 0 & 0\end{bmatrix},</div>
-
-
-<p>
-
-<div class="math-display">A_{l} - \lambda B_{l} =\bmat{c\vert cc\vert ccc}z & y & y......0 & 0 & 0 & 0 & 0 & 0 \\0 & 0 & 0 & 0 & 0 & 0 \\\end{bmatrix}.</div>
-
+<div class="math-display">
+A_{l} - \lambda B_{l} = \left[\begin{array}{c|cc|ccc}
+z & y & y & x & x & x \\
+\hline
+{\bf z} & y & y & x & x & x \\
+\text{0} & y & y & x & x & x \\
+\hline
+0 & {\bf y} & {\bf y} & x & x & x \\
+0 & 0 & {\bf y} & x & x & x \\
+0 & 0 & 0 & x & x & x \\
+\hline
+0 & 0 & 0 & {\bf x} & {\bf x} & {\bf x} \\
+0 & 0 & 0 & 0 & {\bf x} & {\bf x} \\
+0 & 0 & 0 & 0 & 0 & {\bf x} \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}\right] - \lambda \left[\begin{array}{c|cc|ccc}
+{\bf z} & y & y & x & x & x \\
+\hline
+0 & {\bf y} & {\bf y} & x & x & x \\
+0 & {\bf y} & {\bf y} & x & x & x \\
+\hline
+0 & 0 & 0 & {\bf x} & {\bf x} & {\bf x} \\
+0 & 0 & 0 & {\bf x} & {\bf x} & {\bf x} \\
+0 & 0 & 0 & {\bf x} & {\bf x} & {\bf x} \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}\right].
+</div>
 
 <p>
 由于这些形式是使用<span class="math-inline">LI</span>-阶梯化简计算的，块指标<span class="math-inline">n_i</span>和<span class="math-inline">r_i</span>从东南角开始计数。现在，<span class="math-inline">B_i</span>和<span class="math-inline">B_l</span>的超对角块具有满行秩，而<span class="math-inline">A_i</span>和<span class="math-inline">A_l</span>的对角块具有满列秩。下表总结了<span class="math-inline">LI</span>-、<span class="math-inline">L</span>-和<span class="math-inline">I</span>-阶梯形式的结构指标。
-<div align="CENTER">
-<table CELLPADDING=3>
-<tr><td align="CENTER"><table CELLPADDING=3 border="1">
-<tr><td align="LEFT"><span class="math-inline">i</span></td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">4</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">n_i</span></td>
-<td align="RIGHT">7</td>
-<td align="RIGHT">4</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">1</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">r_i</span></td>
-<td align="RIGHT">5</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">0</td>
-</tr>
-</table></td>
-<td align="CENTER"><table CELLPADDING=3 border="1">
-<tr><td align="LEFT"><span class="math-inline">i</span></td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">4</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">n_i</span></td>
-<td align="RIGHT">5</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">1</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">r_i</span></td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">0</td>
-</tr>
-</table></td>
-<td align="CENTER"><table CELLPADDING=3 border="1">
-<tr><td align="LEFT"><span class="math-inline">i</span></td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">4</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">n_i</span></td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">0</td>
-</tr>
-<tr><td align="LEFT"><span class="math-inline">r_i</span></td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">0</td>
-</tr>
-</table></td>
-</tr>
+
+<div style="text-align: center;">
+<table style="border-collapse: collapse; margin: 0 auto;">
+  <tr>
+      <td>
+        <table style="border: 1px solid black; padding: 3px;">
+          <tr><td><span class="math-inline">i</span></td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><td><span class="math-inline">n_i</span></td><td>7</td><td>4</td><td>3</td><td>1</td></tr>
+          <tr><td><span class="math-inline">r_i</span></td><td>5</td><td>3</td><td>2</td><td>0</td></tr>
+        </table>
+      </td>
+      <td>
+        <table style="border: 1px solid black; padding: 3px;">
+          <tr><td><span class="math-inline">i</span></td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><td><span class="math-inline">n_i</span></td><td>5</td><td>3</td><td>2</td><td>1</td></tr>
+          <tr><td><span class="math-inline">r_i</span></td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+        </table>
+      </td>
+      <td>
+        <table style="border: 1px solid black; padding: 3px;">
+          <tr><td><span class="math-inline">i</span></td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><td><span class="math-inline">n_i</span></td><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td><span class="math-inline">r_i</span></td><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+        </table>
+      </td>
+  </tr>
 </table>
 </div>
+
 最后，对应于有限非零特征值<span class="math-inline">\alpha, \beta</span>和<span class="math-inline">\gamma</span>的GUPTRI形式中的块具有以下外观：
 
-<div class="math-display">A_{f} - \lambda B_{f} =\begin{bmatrix}{\bf x}& x & x \\0 & ......{\bf x}& x & x \\0 & {\bf x}& x \\0 & 0 & {\bf x}\end{bmatrix}.</div>
+<div class="math-display">
+A_{f} - \lambda B_{f} = \begin{bmatrix}{\bf x}& x & x \\ 0 & {\bf x} & x \\ 0 & 0 & {\bf x} \end{bmatrix} - \lambda\begin{bmatrix}{\bf x}& x & x \\0 & {\bf x}& x \\0 & 0 & {\bf x}\end{bmatrix}.
+</div>
 
 <span class="math-inline">A_f</span>和<span class="math-inline">B_f</span>中的对角元素是特征值对，其比率为<span class="math-inline">\alpha, \beta</span>和<span class="math-inline">\gamma</span>（顺序任意）。
 
@@ -191,11 +198,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5564" href="node315.html">Criterion for Determining the</a>
+<b>下一节：</b><a name="tex2html5564" href="node315.html">确定数值秩的准则</a>
 <b>上一级：</b><a name="tex2html5558" href="node313.html">GUPTRI算法</a>
 <b>上一节：</b><a name="tex2html5552" href="node313.html">GUPTRI算法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

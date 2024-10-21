@@ -66,16 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5547" href="node314.html">A Singular Pencil in</a>
-<b>上一级：</b><a name="tex2html5541" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>下一节：</b><a name="tex2html5547" href="node314.html">一个奇异矩阵束在GUPTRI形式中的表示</a>
+<b>上一级：</b><a name="tex2html5541" href="node307.html">奇异矩阵束</a>
 <b>上一节：</b><a name="tex2html5535" href="node312.html">广义Schur-阶梯形式</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001776000000000000000"></a>
 <a name="guptri_algorithm"></a>
-<br>
 GUPTRI算法
 </h2>
 
@@ -84,22 +81,44 @@ GUPTRI算法
 
 <p>
 <span class="math-inline">RZ</span>-算法使用有限次数的酉等价变换，其中在第<span class="math-inline">k~(= 1, 2, \ldots)</span>步，<span class="math-inline">n_k =</span> <span class="math-inline">A^{(k)}</span>的列零空间维数，<span class="math-inline">n_k - r_k =</span> <span class="math-inline">A^{(k)}</span>和<span class="math-inline">B^{(k)}</span>的交集列零空间维数。这里，<span class="math-inline">A^{(1)} = A</span>和<span class="math-inline">B^{(1)} = B</span>，对于<span class="math-inline">k > 1</span>，<span class="math-inline">\{A^{(k)}, B^{(k)}\}</span>对应于第<span class="math-inline">k-1</span>步等价变换后的降阶矩阵对。结构指标（<span class="math-inline">RZ</span>-指标）显示Kronecker结构如下：
-<p></p>
-<div align="CENTER">
 
-<img width="284" height="52" border="0" src="img3149.png" alt="\begin{eqnarray*} n_k - r_k &amp;=&amp;{\rm ~ number~of~} L_{k-1} {\rm ~blocks}, \\ r_k - n_{k+1} &amp;=&amp;{\rm ~ number~of~} J_{k}(0) {\rm ~blocks}. \end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+n_k - r_k &= \text{ number of } L_{k-1} \text{ blocks}, \\
+r_k - n_{k+1} &= \text{ number of } J_{k}(0) \text{ blocks}.
+\end{aligned}
+</div>
+
 在我们陈述一般情况之前，我们考虑一个<span class="math-inline">6\times 8</span>的矩阵束在<span class="math-inline">RZ</span>-阶梯形式中：
 
-<p></p>
-<div align="CENTER">
-
-<img width="584" height="196" border="0" src="img3151.png" alt="\begin{eqnarray*} A_{rz} - \lambda B_{rz} \!\! &amp;\!\! = \!\! &amp; \!\! \left[ \begi... ... y}&amp; y &amp; y \\ \hline 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp;{\bf z} \emat . \end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+A_{rz} - \lambda B_{rz} &= \begin{bmatrix}
+ -\lambda B_{11} & A_{12} - \lambda B_{12} & A{13} - \lambda B_{13}  \\
+  0 & - \lambda B_{22} & A_{23} - \lambda B_{23}  \\
+  0 & 0 & - \lambda B_{33}  \\
+\end{bmatrix} \\
+&= \left[\begin{array}{cccc|cc|cc}
+0 & 0 & 0 & 0 & {\bf x} & {\bf x} & x & x \\
+0 & 0 & 0 & 0 & {\bf x} & {\bf x} & x & x \\
+0 & 0 & 0 & 0 & {\bf x} & {\bf x} & x & x \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & {\bf y} & {\bf y} \\
+0 & 0 & 0 & 0 & 0 & 0 & {\bf y} & {\bf y} \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{array}\right] - \lambda \left[\begin{array}{cccc|cc|cc}
+0 & {\bf x} & {\bf x} & {\bf x} & x & x & x & x \\
+0 & 0 & {\bf x} & {\bf x} & x & x & x & x \\
+0 & 0 & 0 & {\bf x} & x & x & x & x \\
+\hline
+0 & 0 & 0 & 0 & {\bf y} & {\bf y} & y & y \\
+0 & 0 & 0 & 0 & 0 & {\bf y} & y & y \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & z \\
+\end{array}\right].
+\end{aligned}
+</div>
 
 <p>
 每次降阶后的非零元素用唯一字母标记（第一步用x，第二步用y，以此类推），并以粗体或斜体显示。<span class="math-inline">A_{rz}</span>的超对角块具有满列秩，<span class="math-inline">B_{rz}</span>的对角块具有满行秩。满秩块的非零元素用粗体标记。我们在后续例子中也使用这种表示法。
@@ -107,30 +126,52 @@ GUPTRI算法
 <br>
 <p>
 <span class="math-inline">A_{rz} - \lambda B_{rz}</span>中的对角块（定义“楼梯”）的大小为<span class="math-inline">r_i \times n_i</span>，并显示以下信息：
-<p></p>
-<div align="CENTER">
 
-<img width="420" height="127" border="0" src="img3156.png" alt="\begin{eqnarray*} &amp;&amp;\!\!\! n_1 = 4 = {\rm dim}~{\cal N}(A^{(1)}), \quad r_1 = 3 ... ...{(3)}), \\ [2mm] &amp;&amp;\!\!\! n_4 = 0 = {\rm dim}~{\cal N}(A^{(4)}). \end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+n_1 = 4 &= \text{dim}~{\cal N}(A^{(1)}), \quad r_1 = 3 = n_1 - \text{dim}~{\cal N}(A^{(1)}\cap B^{(1)}), \\
+n_2 = 2 &= \text{dim}~{\cal N}(A^{(2)}), \quad r_2 = 2 = n_2 - \text{dim}~{\cal N}(A^{(2)}\cap B^{(2)}), \\
+n_3 = 2 &= \text{dim}~{\cal N}(A^{(3)}), \quad r_3 = 1 = n_3 - \text{dim}~{\cal N}(A^{(3)}\cap B^{(3)}), \\
+n_4 = 0 &= \text{dim}~{\cal N}(A^{(4)}).
+\end{aligned}
+</div>
+
 现在，我们可以得出<span class="math-inline">A_{rz} - \lambda B_{rz}</span>的KCF是<span class="math-inline">{\rm diag}(L_0, L_2, J_1(0), J_3(0))</span>。
 
 <p>
 一般来说，设<span class="math-inline">A</span>和<span class="math-inline">B</span>是复数<span class="math-inline">m \times n</span>矩阵。那么可以证明存在酉矩阵<span class="math-inline">U \: \in {\mathcal C}^{m \times m}</span>和<span class="math-inline">V \: \in {\mathcal C}^{n \times n}</span>，使得矩阵束<span class="math-inline">A - \lambda B</span>被变换为所谓的<em>RZ-阶梯形式</em>[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：
-<a name="eq.RZform1"></a>U^*(A - B)V = 
-[ <br>
-<img width="75" height="35" align="BOTTOM" border="0" src="img3160.png" alt="\begin{array}{cc} A_{rz} &amp; A_{12} \\ 0 &amp; A_{rest} \end{array}">
-<br> ] - 
-[ <br>
-<img width="75" height="34" align="BOTTOM" border="0" src="img3161.png" alt="\begin{array}{cc} B_{rz} &amp; B_{12} \\ 0 &amp; B_{rest} \end{array}">
-<br> ],
+
+<div class="math-display" id="eq.RZform1">
+U^*(A - B)V = \begin{bmatrix}
+A_{rz} & A_{12} \\
+0 & A_{rest}
+\end{bmatrix} - \begin{bmatrix}
+B_{rz} & B_{12} \\
+0 & B_{rest}
+\end{bmatrix}, \tag{8.37}
+</div>
 
 其中<span class="math-inline">A_{rz}</span>和<span class="math-inline">B_{rz}</span>的阶梯块结构揭示了右奇异结构和零特征值的Jordan结构：
-<a name="eq.RZform2"></a>
-<br>
-<img width="371" height="246" align="BOTTOM" border="0" src="img3162.png" alt="\begin{array}{c} A_{rz}= \left[ \begin{array}{cccccc} 0 &amp; A_{12} &amp; * &amp; * &amp; * &amp; ... ...0 &amp; \cdots &amp; 0 &amp; 0 &amp; B_{j-1,j-1} &amp; B_{j-1,j} \\ \end{array}\right]. \end{array}">
-<br>
+
+<div class="math-display" id="eq.RZform2">
+\begin{aligned}
+A_{rz} &= \begin{bmatrix}
+0 & A_{12} & * & * & * & *\\
+0 & 0 & A_{23} & * & * & * \\
+0 & 0 & 0 & \ddots & * & * \\
+\vdots & \vdots & \vdots & \ddots & A_{j-2,j-1} & * \\
+0 & 0 & 0 & \ldots & 0 & A_{j-1,j}
+\end{bmatrix}, \\
+B_{rz} &= \begin{bmatrix}
+B_{11} & B_{12} & * & * & * & *\\
+0 & B_{22} & B_{23} & * & * & * \\
+0 & 0 & B_{33} & \ddots & * & * \\
+\vdots & \vdots & \vdots & \ddots & B_{j-2,j-1} & * \\
+0 & 0 & 0 & \ldots & B_{j-1,j-1} & B_{j-1,j}
+\end{bmatrix}.
+\end{aligned}
+</div>
+
 (<a href="node313.html#eq.RZform1">8.37</a>)和(<a href="node313.html#eq.RZform2">8.38</a>)中的子块具有以下性质：
 
 <ul>
@@ -163,11 +204,30 @@ GUPTRI算法
 <p>
 我们回到<span class="math-inline">6\times 8</span>的例子，展示分离的<span class="math-inline">R</span>-阶梯和<span class="math-inline">Z</span>-阶梯形式：
 
-<div class="math-display">A_{r} - \lambda B_{r} =\bmat{cc\vert c\vert c}0 & 0 & {\b...... c}0 &{\bf x}& x & x \\ \hline0 & 0 &{\bf y}&{\bf z}\end{bmatrix}</div>
-
+<div class="math-display">A_{r} - \lambda B_{r}
+= \left[\begin{array}{cc|c|c} 0 & 0 & {\bf x} &  x \\ 
+\hline 0 & 0 & 0 &{\bf y} \end{array} \right] - \lambda \left[\begin{array}{cc|c|c} 0 & {\bf x} & x & x \\
+\hline 0 & 0 & {\bf y} & {\bf z} \end{array} \right] .</div>
+</div>
+  
 和
 
-<div class="math-display">A_{z} - \lambda B_{z} =\bmat{cc\vert c\vert c}0 & 0 & {\b......ine0 & 0 & {\bf y}& y \\ \hline0 & 0 & 0 & {\bf z}\end{bmatrix} .</div>
+<div class="math-display">A_{z} - \lambda B_{z}
+= \left[\begin{array}{cc|c|c}
+0 & 0 & {\bf x} & x \\
+0 & 0 & {\bf x} & x \\
+\hline
+0 & 0 & 0 & {\bf y} \\
+\hline
+0 & 0 & 0 & 0
+\end{array} \right] - \lambda \left[\begin{array}{cc|c|c}
+{\bf x} & {\bf x} & x & x \\
+0 & {\bf x} & x & x \\
+\hline
+0 & 0 & {\bf y} & y \\
+\hline
+0 & 0 & 0 & {\bf z}
+\end{array} \right] .</div>
 
 至于<span class="math-inline">A_{rz} - \lambda B_{rz}</span>，<span class="math-inline">A_r</span>和<span class="math-inline">A_z</span>的超对角块具有满列秩，<span class="math-inline">B_r</span>和<span class="math-inline">B_z</span>的对角块具有满行秩。下表总结了<span class="math-inline">6\times 8</span>例子的<span class="math-inline">RZ</span>-、<span class="math-inline">R</span>-和<span class="math-inline">Z</span>-阶梯形式的结构指标。我们看到<span class="math-inline">RZ</span>-阶梯指标分别是<span class="math-inline">R</span>-和<span class="math-inline">Z</span>-阶梯指标的和。
 
@@ -247,11 +307,10 @@ GUPTRI算法
 <a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
-<li><ul>
-<li><a name="tex2html5548" href="node314.html">一个<span class="math-inline">24 \times 21</span>的奇异矩阵束在GUPTRI形式中。</a>
-<li><a name="tex2html5549" href="node315.html">确定数值秩的准则。</a>
-<li><a name="tex2html5550" href="node316.html">正则化问题的GUPTRI形式。</a>
-</ul></ul>
+<li><a name="tex2html5548" href="node314.html">一个<span class="math-inline">24 \times 21</span>奇异矩阵束在GUPTRI形式中的表示</a>
+<li><a name="tex2html5549" href="node315.html">确定数值秩的准则</a>
+<li><a name="tex2html5550" href="node316.html">正则化问题的GUPTRI形式</a>
+</ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
 <a name="tex2html5546"
@@ -270,11 +329,9 @@ GUPTRI算法
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5547" href="node314.html">A Singular Pencil in</a>
-<b>上一级：</b><a name="tex2html5541" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>下一节：</b><a name="tex2html5547" href="node314.html">一个奇异矩阵束在GUPTRI形式中的表示</a>
+<b>上一级：</b><a name="tex2html5541" href="node307.html">奇异矩阵束</a>
 <b>上一节：</b><a name="tex2html5535" href="node312.html">广义Schur-阶梯形式</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

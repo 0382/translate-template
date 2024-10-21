@@ -66,9 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5688" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一级：</b><a name="tex2html5682" href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b>上一节：</b><a name="tex2html5678" href="node322.html">Example in MATLAB.</a>
+<b>下一节：</b><a name="tex2html5688" href="node324.html">稳定性与准确性评估</a>
+<b>上一级：</b><a name="tex2html5682" href="node307.html">奇异矩阵束</a>
+<b>上一节：</b><a name="tex2html5678" href="node322.html">MATLAB中的示例</a>
   
   
 <br>
@@ -85,7 +85,13 @@ Kublanovskaya于1966年[<a href="node421.html#Kublanovskaya66">278</a>]引入了
 Van Dooren [<a href="node421.html#vandooren79">446</a>,<a href="node421.html#vandooren83a">451</a>]将Kublanovskaya的阶梯算法[<a href="node421.html#Kublanovskaya66">278</a>]推广至奇异束，使用酉等价变换。1977年，Kublanovskaya引入了<span class="math-inline">AB</span>算法，用于计算奇异束的右奇异结构和零特征值的Jordan结构（例如参见[<a href="node421.html#kublanovskaya83">279</a>,<a href="node421.html#kublanovskaya84">280</a>]）。Kågström [<a href="node421.html#kagstrom86">251</a>]提出了RGSVD/RGQZD算法，为后续软件工作提供了基础。Beelen和Van Dooren提出了一种更快但可靠性较低的算法，对于<span class="math-inline">m \times n</span>束需要<span class="math-inline">O(m^2n)</span>次操作。Demmel和Kågström [<a href="node421.html#demmelkagstrom87">119</a>]给出了诸如化简子空间和特征值等计算量的误差界限，并在他们的软件[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]中实现了这些界限。
 
 <p>
-近期，多篇论文利用矩阵和矩阵束空间的<!--Navigation Panel-->
+近期，多篇论文利用矩阵和矩阵束空间的**几何**来理解**Jordan**和**Kronecker**结构问题及其算法。Demmel和Edelman[<a href="node421.html#demmeledelman95">116</a>]使用**阶梯算法**计算具有给定标准形的矩阵和束的维度。Elmroth和Kågström[<a href="node421.html#elmrothkagstrom96">160</a>]对$2 \times 3$束集合进行了全面研究，这是最小的非平凡矩形情况。Edelman和Ma对阶梯算法失败给出了几何解释[<a href="node421.html#EdelmanMa99">154</a>]。Edelman、Elmroth和Kågström[<a href="node421.html#edelmanelmrothkagstrom97">152</a>,<a href="node421.html#edelmanelmrothkagstrom99">153</a>]研究了多功能性和分层结构。他们讨论并完善了矩阵（Arnold[<a href="node421.html#arnold71">18</a>]）和束（Pokrzywa[<a href="node421.html#pokrzywa86">367</a>], De Hoyos[<a href="node421.html#dehoyos90">106</a>]）的轨道和束的数学理论，并提出了解闭关系知识可能应用于阶梯算法[<a href="node421.html#edelmanelmrothkagstrom99">153</a>]。
+
+<p>
+**StratiGraph**是一个基于Java的工具，用于计算和展示显示Jordan和Kronecker结构闭包层次的图[<a href="node421.html#johansson99a">248</a>,<a href="node421.html#ElmrothJohanssonKagstrom99">159</a>]。给定问题的维度和标准结构，用户可以轻松获取闭包层次中邻近的Jordan和Kronecker结构信息。最近，包括Hinrichsen和O'Halloran[<a href="node421.html#HinrichsenOHalloran92">231</a>]、Boley[<a href="node421.html#boley98">55</a>]和Garcia-Planas[<a href="node421.html#GarciaPlanas98">188</a>]在内的几位作者研究了与控制理论问题相关的束轨道的分层结构。对于控制应用，感兴趣的束通常没有行指标或没有列指标，这可以看作是通用 <span class="math-inline">A-\lambda B</span> 问题的特例。
+<p>
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html5687"
   href="node324.html">
 <button class="navigate">下一节</button></a> 
@@ -102,11 +108,9 @@ Van Dooren [<a href="node421.html#vandooren79">446</a>,<a href="node421.html#van
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5688" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一级：</b><a name="tex2html5682" href="node307.html">Singular Matrix Pencils &nbsp;</a>
-<b>上一节：</b><a name="tex2html5678" href="node322.html">Example in MATLAB.</a>
-  
-  
+<b>下一节：</b><a name="tex2html5688" href="node324.html">稳定性与准确性评估</a>
+<b>上一级：</b><a name="tex2html5682" href="node307.html">奇异矩阵束</a>
+<b>上一节：</b><a name="tex2html5678" href="node322.html">MATLAB中的示例</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

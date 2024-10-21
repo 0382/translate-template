@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5533" href="node313.html">GUPTRI算法</a>
-<b>上一级：</b><a name="tex2html5527" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一级：</b><a name="tex2html5527" href="node307.html">奇异矩阵束</a>
 <b>上一节：</b><a name="tex2html5521" href="node311.html">病态条件</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001775000000000000000"></a>
 <a name="37342"></a>
-<br>
 广义Schur阶梯形式
 </h2>
 
@@ -84,27 +81,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 在大多数应用中，将<span class="math-inline">A - \lambda B</span>简化为广义Schur阶梯形式就足够了，例如，简化为GUPTRI形式[<a href="node421.html#demmelkagstrom93a">121</a>,<a href="node421.html#demmelkagstrom93b">122</a>]：
-<a name="eq.guptri1"></a> 
-P^ (A- B) Q =
-ccc A_r - B_r &amp; * &amp; * 
-<br>
-0 &amp; A_reg - B_reg &amp; * 
-<br>
-0 &amp; 0 &amp; A_l - B_l ,
+
+<div class="math-display" id="eq.guptri1">
+P^ (A- B) Q = \begin{bmatrix}
+A_r - B_r & * & * \\
+0 & A_{reg} - B_{reg} & * \\
+0 & 0 & A_l - B_l ,
+\end{bmatrix}, \tag{8.34}
+</div>
 
 其中<span class="math-inline">P</span> (<span class="math-inline"> m \times m </span>) 和 <span class="math-inline">Q</span> (<span class="math-inline">n \times n</span>) 是酉矩阵。这里的方形上三角块<span class="math-inline"> A_{reg} - \lambda B_{reg}</span>是正则的，并且具有与<span class="math-inline">A - \lambda B</span>相同的正则结构（即包含<span class="math-inline">A - \lambda B</span>的所有有限和无限特征值）。矩形块<span class="math-inline">A_r - \lambda B_r</span>在其KCF中仅包含右最小指标，实际上与<span class="math-inline">A - \lambda B</span>具有相同的<span class="math-inline">L_j</span>块。类似地，<span class="math-inline">A_l - \lambda B_l</span>在其KCF中仅包含左最小指标，与<span class="math-inline">A - \lambda B</span>具有相同的<span class="math-inline">L_j^T</span>块。如果<span class="math-inline">A - \lambda B</span>是奇异的，至少<span class="math-inline">A_r - \lambda B_r</span>和<span class="math-inline">A_l - \lambda B_l</span>中的一个会出现在(<a href="node312.html#eq.guptri1">8.34</a>)中。如果<span class="math-inline">A - \lambda B</span>是正则的，<span class="math-inline">A_r - \lambda B_r</span>和<span class="math-inline">A_l - \lambda B_l</span>不会出现在(<a href="node312.html#eq.guptri1">8.34</a>)中，GUPTRI形式简化为<span class="math-inline"> A_{reg} - \lambda B_{reg}</span>。揭示零特征值和无穷特征值的Jordan结构的阶梯形式包含在<span class="math-inline"> A_{reg} - \lambda B_{reg}</span>中：
-<a name="eq.guptri_reg"></a>A_reg = ccc
-A_z &amp; * &amp; *  
-<br>
-0 &amp; A_f &amp; * 
-<br>
-0 &amp; 0 &amp; A_i , &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-B_reg = ccc
-B_z &amp; * &amp; *  
-<br>
-0 &amp; B_f &amp; * 
-<br>
-0 &amp; 0 &amp; B_i .
+
+<div class="math-display" id="eq.guptri2">
+A_{reg} = \begin{bmatrix}
+A_z & * & * \\
+0 & A_f & * \\
+0 & 0 & A_i , \end{bmatrix} \quad \text{and} \quad
+B_{reg} = \begin{bmatrix}
+B_z & * & * \\
+0 & B_f & * \\
+0 & 0 & B_i .
+\end{bmatrix}. \tag{8.35}
+</div>
 
 <p>
 总之，<span class="math-inline">A - \lambda B</span>的GUPTRI形式的对角块描述了Kronecker结构如下：
@@ -119,11 +117,8 @@ iAAAAAAA 		 <span class="math-inline">A_r - \lambda B_r</span>包含所有右奇
 
 <p>
 给定<span class="math-inline">A - \lambda B</span>的GUPTRI形式，我们还知道不同的<em>约化子空间</em>[<a href="node421.html#vandooren83a">451</a>,<a href="node421.html#demmelkagstrom93a">121</a>]。假设<span class="math-inline"> A_{reg} - \lambda B_{reg}</span>的对角特征值被排序，使得前<span class="math-inline">k</span>个特征值位于<span class="math-inline">\Lambda_1</span>（频谱的一个子集）中，其余特征值在<span class="math-inline">\Lambda_1</span>之外。那么GUPTRI形式也可以表示为
-<a name="eq.guptri3"></a> 
-P^ (A - B) Q =
-cc A_11 - B_11 &amp; A_12 - B_12
-<br>
-0 &amp; A_22 - B_22,
+
+<div class="math-display">(A - \lambda B) Q = P \begin{bmatrix} A_{11} - \lambda B_{11} & A_{12} - \lambda B_{12} \\ 0 & A_{22} - \lambda B_{22} \end{bmatrix}, \tag{8.36}</div>
 
 其中<span class="math-inline">A_{11} - \lambda B_{11}</span>包含<span class="math-inline">A_r - \lambda B_r</span>和对应于<span class="math-inline">\Lambda_1</span>的正则部分，而<span class="math-inline">A_{22} - \lambda B_{22}</span>包含剩余的正则部分和<span class="math-inline">A_l - \lambda B_l</span>。如果<span class="math-inline">A_r - \lambda B_r</span>是<span class="math-inline">m_r \times n_r</span>，那么对应于<span class="math-inline">\Lambda_1</span>的左和右约化子空间分别由<span class="math-inline">P</span>（记为<span class="math-inline">P_1</span>）的前<span class="math-inline">m_r + k</span>列和<span class="math-inline">Q</span>（记为<span class="math-inline">Q_1</span>）的前<span class="math-inline">n_r + k</span>列张成，使得
 
@@ -150,10 +145,8 @@ cc A_11 - B_11 &amp; A_12 - B_12
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5533" href="node313.html">GUPTRI算法</a>
-<b>上一级：</b><a name="tex2html5527" href="node307.html">Singular Matrix Pencils &nbsp;</a>
+<b>上一级：</b><a name="tex2html5527" href="node307.html">奇异矩阵束</a>
 <b>上一节：</b><a name="tex2html5521" href="node311.html">病态条件</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

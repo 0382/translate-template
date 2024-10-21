@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Example in MATLAB.</title>
+<title>MATLAB中的示例</title>
 <meta charset="utf-8">
-<meta name="description" content="Example in MATLAB.">
+<meta name="description" content="MATLAB中的示例">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -67,18 +67,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5676" href="node323.html">注释与参考文献</a>
-<b>上一级：</b><a name="tex2html5670" href="node318.html">More on GUPTRI and</a>
-<b>上一节：</b><a name="tex2html5666" href="node321.html">MATLAB Interface to GUPTRI.</a>
-  
-  
+<b>上一级：</b><a name="tex2html5670" href="node318.html">更多关于GUPTRI及数值示例</a>
+<b>上一节：</b><a name="tex2html5666" href="node321.html">GUPTRI的MATLAB接口</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001778040000000000000">
 MATLAB示例</a>
 </h4>
+
 让我们考虑以下具有整数项的<span class="math-inline">5 \times 5</span>奇异矩阵束<span class="math-inline">A - \lambda B</span>：
 
-<div class="math-display">A = \left[\begin{array}{ccccc}22 & 34 & 31 & 31 & 17 \\...... & 14 & 23 \\24 & 35 & 18 & 21 & 22 \\\end{array}\right].</div>
+<div class="math-display">
+A = \begin{bmatrix}
+{22}&{34}&{31}&{31}&{17}\\ {45}&{45}&{42}&{19}&{29}\\ {39}&{47}&{49}&{26}&{34}\\ {27}&{31}&{26}&{21}&{15}\\ {38}&{44}&{44}&{24}&{30}
+\end{bmatrix}, \quad B = \begin{bmatrix}
+{13}&{26}&{25}&{17}&{24}\\ {31}&{46}&{40}&{26}&{37}\\ {26}&{40}&{19}&{25}&{25}\\ {16}&{25}&{27}&{14}&{23}\\ {24}&{35}&{18}&{21}&{22}
+\end{bmatrix}.
+</div>
 
 通过构造，此示例的KCF（Kronecker Canonical Form，克罗内克标准型）为
 
@@ -89,6 +94,7 @@ MATLAB示例</a>
 
 即，我们使用EPSU、GAP和ZERO的默认值。此次调用的输出如下所示：
 
+<pre>
   S =
            0         0  -31.2179   69.7186 -142.6727
            0         0         0   15.8532  -42.1039
@@ -121,7 +127,7 @@ MATLAB示例</a>
 
        2     1     0    -1     2     0    -1     1    -1
        1     1     0    -1     1     0    -1     1    -1
-
+</pre>
 
 <p>
 kstr的第一部分（第一个-1左侧的所有列）应解释如下：
@@ -175,8 +181,8 @@ GUPTRI形式中剩余的Kronecker结构包含在
 <span class="math-inline">B' = PTQ^{\ast}</span>。
 对于此示例，<span class="math-inline">\delta</span>的大小为
 
-<span class="math-inline">O( {\eps}\Vert(A, B) \Vert _F )</span>，
-其中<span class="math-inline">{\eps}</span>是机器精度。
+<span class="math-inline">O( {\epsilon_M}\Vert(A, B) \Vert _F )</span>，
+其中<span class="math-inline">{\epsilon_M}</span>是机器精度。
 
 <p>
 通过设置
@@ -186,6 +192,7 @@ GUPTRI形式中剩余的Kronecker结构包含在
 
 我们对<span class="math-inline">A - \lambda B</span>执行真正的等价变换：
 
+<pre>
 S =
 
   -2.9227e-15            0   3.1218e+01   6.9719e+01  -1.4267e+02
@@ -201,6 +208,7 @@ T =
    1.7764e-15            0            0  -7.7820e+00   9.2041e+00
   -5.5511e-16            0            0            0  -7.5221e-15
             0            0            0            0   3.1465e-15
+</pre>
 
 <span class="math-inline">S</span>和<span class="math-inline">T</span>的下三角部分中的微小非零元素对应于在GUPTRI算法的秩确定过程中被解释为数值零的奇异值。
 使用ZERO默认值的结果对应于具有计算的<span class="math-inline">S</span>和<span class="math-inline">T</span>作为其精确GUPTRI形式并具有kstr中报告的Kronecker结构的正则化矩阵束。
@@ -209,13 +217,13 @@ T =
 我们通过将看似无害的<span class="math-inline">5 \times 5</span>示例暴露给MATLAB函数eig来结束讨论。
 调用[V,D] = eig(A,B)应该计算一个对角特征值矩阵<span class="math-inline">D</span>和一个全矩阵<span class="math-inline">V</span>，其列是对应的特征向量，使得<span class="math-inline">A V = B V D</span>。
 MATLAB计算的<span class="math-inline">D</span>具有对角线项
-
+<pre>
         -1.8351e+16  
          2.0000e+00 
          7.2695e-01 - 4.1359e-25i             
         -6.2535e-16 + 2.4399e-08i
         -5.9077e-16 - 2.4399e-08i
-
+</pre>
 和一个条件数为
 
 <span class="math-inline">\Vert V \Vert \cdot \Vert V^{-1} \Vert = 8.8817e+08</span>的特征向量矩阵<span class="math-inline">V</span>。
@@ -247,10 +255,8 @@ MATLAB计算的<span class="math-inline">D</span>具有对角线项
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5676" href="node323.html">注释与参考文献</a>
-<b>上一级：</b><a name="tex2html5670" href="node318.html">More on GUPTRI and</a>
-<b>上一节：</b><a name="tex2html5666" href="node321.html">MATLAB Interface to GUPTRI.</a>
-  
-  
+<b>上一级：</b><a name="tex2html5670" href="node318.html">更多关于GUPTRI及数值示例</a>
+<b>上一节：</b><a name="tex2html5666" href="node321.html">GUPTRI的MATLAB接口</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

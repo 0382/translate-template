@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Residual Vectors.</title>
+<title>残差向量</title>
 <meta charset="utf-8">
-<meta name="description" content="Residual Vectors.">
+<meta name="description" content="残差向量">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5718" href="node326.html">Transfer Residual Errors to</a>
-<b>上一级：</b><a name="tex2html5712" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html5706" href="node324.html">Stability and Accuracy Assessments</a>
-  
-  
+<b>下一节：</b><a name="tex2html5718" href="node326.html">将残差误差转化为后向误差</a>
+<b>上一级：</b><a name="tex2html5712" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5706" href="node324.html">稳定性与准确性评估</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -78,37 +76,54 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <h4><a name="SECTION001780010000000000000"></a> 
 <a name="37842"></a>
 <br>
-Residual Vectors.
+残差向量
 </h4>
-Let 
-<span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> denote a computed eigenvalue, and  let
-<span class="math-inline">\widetilde x</span> be its corresponding computed eigenvector, i.e.,
+让我们用
+<span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 表示一个计算得到的特征值，并用
+<span class="math-inline">\widetilde x</span> 表示其对应的计算特征向量，即
 
 <div class="math-display">\widetilde\beta A \widetilde x\approx \widetilde\alpha B\widetilde x.</div>
 
-Sometimes, its corresponding left computed eigenvector
-<span class="math-inline">\widetilde y</span> is also available:
+有时，其对应的左计算特征向量
+<span class="math-inline">\widetilde y</span> 也可获得：
 
 <div class="math-display">\widetilde\beta \widetilde y^{\ast} A\approx \widetilde\alpha\widetilde y^{\ast} B.</div>
 
-The residual vectors corresponding to the computed
-eigenvalue 
-<span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> are defined
-as 
+计算得到的特征值
+<span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 对应的残差向量定义为
 
-<div class="math-display">r = \widetilde\beta A \widetilde x - \widetilde\alpha B\widetilde x \quad \mathrm{and}......ast} = \widetilde\beta \widetilde y^{\ast} A - \widetilde\alpha\widetilde y^{\ast} B,</div>
+<div class="math-display">r = \widetilde\beta A \widetilde x - \widetilde\alpha B\widetilde x \quad \mathrm{和}\quad s^{\ast} = \widetilde\beta \widetilde y^{\ast} A - \widetilde\alpha\widetilde y^{\ast} B,</div>
 
-respectively. 
-For the simplicity, we normalize the
-approximate eigenvectors so that 
-<span class="math-inline">\Vert\widetilde x\Vert _2 = 1</span> and 
-<span class="math-inline">\Vert\widetilde y\Vert _2 = 1</span>
-and normalize the approximate eigenvalue so that
+分别。
+为了简化，我们将近似特征向量归一化，使得
+<span class="math-inline">\Vert\widetilde x\Vert _2 = 1</span> 和
+<span class="math-inline">\Vert\widetilde y\Vert _2 = 1</span>，并将近似特征值归一化，使得
 
-<span class="math-inline">\vert\widetilde\alpha\vert^2+\vert\widetilde\beta\vert^2=1</span>.
+<span class="math-inline">\vert\widetilde\alpha\vert^2+\vert\widetilde\beta\vert^2=1</span>。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5717"
+  href="node326.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5711"
+  href="node324.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5705"
+  href="node324.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5713"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5715"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5718" href="node326.html">将残差误差转化为后向误差</a>
+<b>上一级：</b><a name="tex2html5712" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5706" href="node324.html">稳定性与准确性评估</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

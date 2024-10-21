@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Error Bound for Computed Eigenvalues.</title>
+<title>计算所得特征值的误差界限</title>
 <meta charset="utf-8">
-<meta name="description" content="Error Bound for Computed Eigenvalues.">
+<meta name="description" content="计算所得特征值的误差界限">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5746" href="node328.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html5740" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html5734" href="node326.html">Transfer Residual Errors to</a>
-  
-  
+<b>下一节：</b><a name="tex2html5746" href="node328.html">计算所得特征向量的误差界限</a>
+<b>上一级：</b><a name="tex2html5740" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5734" href="node326.html">将残差误差转化为后向误差</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -78,30 +76,42 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <h4><a name="SECTION001780030000000000000"></a> 
 <a name="37880"></a>
 <br>
-Error Bound for Computed Eigenvalues.
+计算所得特征值的误差界限
 </h4> 
-It can be proved&nbsp;[<a
- href="node421.html#stsu90">425</a>] that
-up to the first order of <span class="math-inline">\Vert(E,F)\Vert _2</span>,
-there is an eigenvalue 
-<span class="math-inline">(\alpha,\beta)</span> of <span class="math-inline">A</span> and <span class="math-inline">B</span>
-satisfying
 
-<div class="math-display" id="eq:G-regular">\chi((\alpha, \beta),(\widetilde\alpha,\widetilde\beta))\simle c_{(\alpha,\beta)} \cdot \Vert(E_2,F_2)\Vert _2, \tag{244}</div>
+可以证明[<a href="node421.html#stsu90">425</a>]，在<span class="math-inline">\Vert(E,F)\Vert _2</span>的一阶近似范围内，存在一个特征值<span class="math-inline">(\alpha,\beta)</span>，满足以下条件：
 
-where 
+<div class="math-display" id="eq:G-regular">\chi((\alpha, \beta),(\widetilde\alpha,\widetilde\beta))\lesssim c_{(\alpha,\beta)} \cdot \Vert(E_2,F_2)\Vert _2, \tag{8.43}</div>
 
-<div class="math-display">c_{(\alpha,\beta)}\equiv\frac {\Vert x\Vert _2\Vert y\Vert......\sqrt {\vert y^{\ast} Ax\vert^2 + \vert y^{\ast} Bx\vert^2}}.</div>
+其中
 
-It is called the <em>individual condition number</em> 
-<a name="37891"></a>
-of 
-<span class="math-inline">(\alpha,\beta)</span>,  
-which in actual computations will be estimated with the exact eigenvectors
-<span class="math-inline">x</span> and <span class="math-inline">y</span> replaced by their approximations <span class="math-inline">\widetilde x</span> and <span class="math-inline">\widetilde y</span>.
+<div class="math-display">c_{(\alpha,\beta)}\equiv\frac {\Vert x\Vert _2\Vert y\Vert_2}{\sqrt {\vert y^{\ast} Ax\vert^2 + \vert y^{\ast} Bx\vert^2}}.</div>
+
+这被称为<em>个体条件数</em><a name="37891"></a>，在实际计算中，会用精确特征向量<span class="math-inline">x</span>和<span class="math-inline">y</span>的近似值<span class="math-inline">\widetilde x</span>和<span class="math-inline">\widetilde y</span>来估计。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5745"
+  href="node328.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5739"
+  href="node324.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5733"
+  href="node326.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5741"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5743"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5746" href="node328.html">计算所得特征向量的误差界限</a>
+<b>上一级：</b><a name="tex2html5740" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5734" href="node326.html">将残差误差转化为后向误差</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

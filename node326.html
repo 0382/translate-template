@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Transfer Residual Errors to Backward Errors.</title>
+<title>将残差误差转化为后向误差</title>
 <meta charset="utf-8">
-<meta name="description" content="Transfer Residual Errors to Backward Errors.">
+<meta name="description" content="将残差误差转化为后向误差">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,16 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5732" href="node327.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html5726" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html5720" href="node325.html">Residual Vectors.</a>
-  
-  
+<b>下一节：</b><a name="tex2html5732" href="node327.html">计算所得特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html5726" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5720" href="node325.html">残差向量</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h4><a name="SECTION001780000000000000000"></a>
 <a name="37850"></a>
-<br>
 将残差误差转化为后向误差
 </h4>
 可以证明，计算出的特征值和特征向量是某个邻近矩阵对的确切特征值和特征向量，即：
@@ -91,18 +88,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <ol>
 <li>仅 <span class="math-inline">\widetilde x</span> 可用而 <span class="math-inline">\widetilde y</span> 不可用。那么，对于 <span class="math-inline">(A+E,B+F)</span> 对，使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span> 和 <span class="math-inline">\widetilde x</span> 是其精确特征值及其对应特征向量的最优误差矩阵 <span class="math-inline">(E,F)</span>（在 2-范数和 Frobenius 范数中）满足
       
-<div class="math-display" id="eq:G-Rx-b2">\Vert(E,F)\Vert _2=\Vert(E,F)\Vert _{F}= \Vert r\Vert _2. \tag{241}</div>
+<div class="math-display" id="eq:G-Rx-b2">\Vert(E,F)\Vert _2=\Vert(E,F)\Vert _{F}= \Vert r\Vert _2. \tag{8.40}</div>
 
 
 <p>
 </li>
 <li><span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 均可用。那么，对于 <span class="math-inline">(A+E,B+F)</span> 对，使得 <span class="math-inline">(\widetilde\alpha,\widetilde\beta)</span>、<span class="math-inline">\widetilde x</span> 和 <span class="math-inline">\widetilde y</span> 是其精确特征值及其对应特征向量的最优误差矩阵 <span class="math-inline">(E_2,F_2)</span>（在 2-范数中）和 <span class="math-inline">(E_{F},F_{F})</span>（在 Frobenius 范数中）满足
       
-<div class="math-display" id="eq:G_R-b2">\Vert(E_2,F_2)\Vert _2= %%\frac{1}{\sqrt{\vert\widetilde\alpha\ve......eta\vert^2}}\max\{\Vert r\Vert _2,\Vert s^{\ast}\Vert _2\} \tag{242}</div>
+<div class="math-display" id="eq:G_R-b2">\Vert(E_2,F_2)\Vert_2=\max\{\Vert r\Vert_2, \Vert s^\ast\Vert_2\} \tag{8.41}</div>
 
 以及
       
-<div class="math-display" id="eq:G_R-b22">\Vert(E_{F},F_{F})\Vert _{F}= %%\frac{1}{\sqrt{\vert\widetilde\......eta\widetilde y^{\ast} A\widetilde x-\widetilde\alpha\widetilde y^{\ast} B\widetilde x)^2}. \tag{243}</div>
+<div class="math-display" id="eq:G_R-b22">\Vert(E_{F},F_{F})\Vert_{F}= \sqrt{\Vert r\Vert_2^2+\Vert s^\ast\Vert_2^2-(\widetilde\beta\widetilde y^\ast A\widetilde x-\widetilde\alpha\widetilde{y}^\ast B\widetilde{x})^2}. \tag{8.42}</div>
 
 </li>
 </ol>
@@ -134,11 +131,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5732" href="node327.html">Error Bound for Computed</a>
-<b>上一级：</b><a name="tex2html5726" href="node324.html">Stability and Accuracy Assessments</a>
-<b>上一节：</b><a name="tex2html5720" href="node325.html">Residual Vectors.</a>
-  
-  
+<b>下一节：</b><a name="tex2html5732" href="node327.html">计算所得特征值的误差界限</a>
+<b>上一级：</b><a name="tex2html5726" href="node324.html">稳定性与准确性评估</a>
+<b>上一节：</b><a name="tex2html5720" href="node325.html">残差向量</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
