@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6379" href="node367.html">Inner Products, Gradients, and</a>
-<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术细节</a>
+<b>下一节：</b><a name="tex2html6379" href="node367.html">内积、梯度与微分</a>
+<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术</a>
 <b>上一节：</b><a name="tex2html6367" href="node365.html">流形</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846200000000000000">
@@ -104,12 +102,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 虽然切线是<span class="math-inline">n \times k</span>矩阵，因此有相关的微分算子，但<em>微分</em>是另一回事。给定一个<span class="math-inline">C^\infty</span>函数<span class="math-inline">f</span>和一个点<span class="math-inline">Y</span>，可以考虑<span class="math-inline">H \in {\mathcal R}^{n \times k}</span>（<span class="math-inline">H</span>不一定是切线）的方程<span class="math-inline">D_H f</span>。这个表达式在<span class="math-inline">H</span>中线性，并取某个实数值。因此，可以将其表示为向量空间<span class="math-inline">{\mathcal R}^{n \times k}</span>上的线性函数，
 
-<div class="math-display">D_H f = \tr( H^* Z),</div>
+<div class="math-display">D_H f = \mathrm{tr}( H^* Z),</div>
 
 对于某个适当的<span class="math-inline">n \times k</span>矩阵<span class="math-inline">Z</span>，其值取决于<span class="math-inline">f</span>在<span class="math-inline">Y</span>附近的一阶行为。我们将这个<span class="math-inline">Z</span>矩阵识别为<span class="math-inline">f</span>在<span class="math-inline">Y</span>点的微分<span class="math-inline">df</span>。这与样本问题中<code>dF</code>函数计算的微分相同。
 
 <p>
-对于任何约束流形，光滑函数<span class="math-inline">f</span>的微分可以在不需了解流形本身的情况下计算。可以直接使用环境空间（在我们情况下是无约束的<span class="math-inline">{\mathcal R}^{n \times k}</span>导数）中的微分。如果将微分算子限制为仅在切线方向上，那么仍然可以使用无约束的<span class="math-inline">df</span>在<span class="math-inline">\tr ( H^* df )</span>中计算<span class="math-inline">D_H f</span>，其中<span class="math-inline">H \in T_Y(\mathrm{Stief}(n,k))</span>。这就是为什么生成<code>dF</code>函数不需要几何知识的原因。
+对于任何约束流形，光滑函数<span class="math-inline">f</span>的微分可以在不需了解流形本身的情况下计算。可以直接使用环境空间（在我们情况下是无约束的<span class="math-inline">{\mathcal R}^{n \times k}</span>导数）中的微分。如果将微分算子限制为仅在切线方向上，那么仍然可以使用无约束的<span class="math-inline">df</span>在<span class="math-inline">\mathrm{tr} ( H^* df )</span>中计算<span class="math-inline">D_H f</span>，其中<span class="math-inline">H \in T_Y(\mathrm{Stief}(n,k))</span>。这就是为什么生成<code>dF</code>函数不需要几何知识的原因。
 
 <p>
 <hr><!--Navigation Panel-->
@@ -129,11 +127,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6379" href="node367.html">Inner Products, Gradients, and</a>
-<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术细节</a>
+<b>下一节：</b><a name="tex2html6379" href="node367.html">内积、梯度与微分</a>
+<b>上一级：</b><a name="tex2html6373" href="node364.html">几何技术</a>
 <b>上一节：</b><a name="tex2html6367" href="node365.html">流形</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

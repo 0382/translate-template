@@ -66,17 +66,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6421" href="node370.html">Inverting the Covariant Hessian</a>
+<b>下一节：</b><a name="tex2html6421" href="node370.html">反转协变Hessian矩阵</a>
 <b>上一级：</b><a name="tex2html6415" href="node364.html">几何技术细节</a>
-<b>上一节：</b><a name="tex2html6409" href="node368.html">Getting Around</a>
-  
-  
+<b>上一节：</b><a name="tex2html6409" href="node368.html">绕过<span class="math-inline">\mathrm{Stief}(n,k)</span></a>
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846500000000000000"></a>
 <a name="43839"></a>
 <a name="43840"></a>
-<br>
 协变微分
 </h3>
 
@@ -87,38 +84,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 特别是，人们可能想知道，如果从<span class="math-inline">Y</span>移动到<span class="math-inline">Y+\epsilon H</span>，梯度会变化多少。在流形上，这实际上可能是一个难以回答的问题。从技术上讲，<span class="math-inline">Y</span>处的梯度是<span class="math-inline">T_Y(\mathrm{Stief}(n,k))</span>的一个成员，而<span class="math-inline">Y+\epsilon H</span>处的梯度是<span class="math-inline">T_{Y+\epsilon H}(\mathrm{Stief}(n,k))</span>的一个成员。虽然在平坦空间中取它们的差值没有问题（见图<a href="node369.html#flathessianfig">9.8</a>），但如果这在弯曲空间中进行，可能会得到一个不属于任一点切空间的向量（见图<a href="node369.html#curvedhessianfig">9.9</a>）。
 
 <p>
+<div style="text-align: center;">
+<a name="flathessianfig"></a><a name="43850"></a>
+<img src="icon/fig9.8.png" alt="图9.8：在平坦空间中，比较相邻点的向量没有问题，因为所有向量都位于同一个切空间中。"/>
+<figcaption>图9.8：在平坦空间中，比较相邻点的向量没有问题，因为所有向量都位于同一个切空间中。</figcaption>
+</div>
 
-<p></p>
-<div align="CENTER"><a name="flathessianfig"></a><a name="43850"></a>
-<table>
-<caption align="BOTTOM"><strong>图9.8：</strong>
-在平坦空间中，比较相邻点的向量没有问题，因为所有向量都位于同一个切空间中。</caption>
-<tr><td><img
- width="460" height="162" border="0"
- src="img3536.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =4.0 in
-\epsfbox{flathessian.eps}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
-
-<p>
-
-<p></p>
-<div align="CENTER"><a name="curvedhessianfig"></a><a name="43857"></a>
-<table>
-<caption align="BOTTOM"><strong>图9.9：</strong>
-在弯曲流形中，比较相邻点的向量可能导致向量不在切空间中。</caption>
-<tr><td><img
- width="460" height="230" border="0"
- src="img3537.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =4.0 in
-\epsfbox{curvedhessian.eps}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="curvedhessianfig"></a><a name="43857"></a>
+<img src="icon/fig9.9.png" alt="图9.9：在弯曲流形中，比较相邻点的向量可能导致向量不在切空间中。"/>
+<figcaption>图9.9：在弯曲流形中，比较相邻点的向量可能导致向量不在切空间中。</figcaption>
+</div>
 
 <p>
 一种更复杂的方法是首先以某种方式将<span class="math-inline">Y+\epsilon H</span>处的梯度移动到<span class="math-inline">Y</span>，使其以平行方式从<span class="math-inline">Y+\epsilon H</span>翻译到<span class="math-inline">Y</span>，然后在相同的切空间中比较这两个梯度。可以检查，对于<span class="math-inline">V \in T_{Y+\epsilon H}(\mathrm{Stief}(n,k))</span>，规则
@@ -160,9 +136,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6421" href="node370.html">Inverting the Covariant Hessian</a>
+<b>下一节：</b><a name="tex2html6421" href="node370.html">反转协变Hessian矩阵</a>
 <b>上一级：</b><a name="tex2html6415" href="node364.html">几何技术细节</a>
-<b>上一节：</b><a name="tex2html6409" href="node368.html">Getting Around</a>
+<b>上一节：</b><a name="tex2html6409" href="node368.html">绕过<span class="math-inline">\mathrm{Stief}(n,k)</span></a>
   
   
 <!--End of Navigation Panel-->

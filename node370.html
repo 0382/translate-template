@@ -69,33 +69,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html6433" href="node371.html">常见问题</a>
 <b>上一级：</b><a name="tex2html6427" href="node364.html">几何技术细节</a>
 <b>上一节：</b><a name="tex2html6423" href="node369.html">协变微分法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001846600000000000000">
-逆变海森矩阵的求逆（技术考量）</a>
+协变海森矩阵的求逆（技术考量）</a>
 </h3>
 
 <p>
-由于<span class="math-inline">\mathrm{Stief}(n,k)</span>的切空间是<span class="math-inline">{\mathcal R}^{n \times k}</span>的一个子空间，因此必须在该子空间上稳定地求逆变海森矩阵。这要求设计来求解<span class="math-inline">D_H G = V</span>以得到<span class="math-inline">H</span>的任何算法，实际上在最小二乘或其他某种意义上必须是伪逆变换器。
+由于<span class="math-inline">\mathrm{Stief}(n,k)</span>的切空间是<span class="math-inline">{\mathcal R}^{n \times k}</span>的一个子空间，因此必须在该子空间上稳定地求协变海森矩阵。这要求设计来求解<span class="math-inline">D_H G = V</span>以得到<span class="math-inline">H</span>的任何算法，实际上在最小二乘或其他某种意义上必须是伪协变换器。
 
 <p>
 第二个考虑因素是，许多有用的函数<span class="math-inline">f(Y)</span>具有以下性质：对于所有块对角正交矩阵<span class="math-inline">Q</span>，<span class="math-inline">f(YQ) = f(Y)</span>（即，
-<div class="math-display">Q =\left[\begin{array}{cccc}Q_1 & 0 & \cdots & 0 \cr0 & ......dotfill & \dotfill \cr0 & 0 & \cdots & Q_p\end{array}\right],</div>
+
+<div class="math-display">Q =\left[\begin{array}{cccc}
+Q_1 & 0 & \cdots & 0 \\
+0 & Q_2 & \cdots & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & \cdots & Q_p
+\end{array}\right],</div>
 
 其中<span class="math-inline">Q_i</span>是正交矩阵）。在这种情况下，所有形式如下的切向量
 
-<div class="math-display">H = Y\left[\begin{array}{cccc}H_1 & 0 & \cdots & 0 \cr0 &......dotfill & \dotfill \cr0 & 0 & \cdots & H_p\end{array}\right],</div>
+<div class="math-display">V =\left[\begin{array}{cccc}
+H_1 & 0 & \cdots & 0 \\
+0 & H_2 & \cdots & 0 \\
+\cdots & \cdots & \cdots & \cdots \\
+0 & 0 & \cdots & H_p
+\end{array}\right],</div>
 
 其中<span class="math-inline">H_i</span>是反对称的，具有性质<span class="math-inline">D_H f = 0</span>。这些额外的对称向量随后成为线性系统<span class="math-inline">D_H G = V</span>的零向量。由于这些零方向，切空间的有效维度降低了零空间的维度（这是由<code>dimension</code>函数返回的维度）。
 
 <p>
-因此，我们看到为了求逆变海森矩阵，我们必须小心使用一个稳定的求逆方案，该方案将投影出不符合无穷小约束方程的<span class="math-inline">H</span>分量以及那些在<span class="math-inline">f</span>的附加对称性方向上的分量。<code>invdgrad</code>函数通过共轭梯度程序执行逆变海森矩阵的稳定求逆，其中<code>dgrad</code>函数调用<code>nosym</code>函数来投影出任何额外的对称性分量。
+因此，我们看到为了求协变海森矩阵，我们必须小心使用一个稳定的求逆方案，该方案将投影出不符合无穷小约束方程的<span class="math-inline">H</span>分量以及那些在<span class="math-inline">f</span>的附加对称性方向上的分量。<code>invdgrad</code>函数通过共轭梯度程序执行协变海森矩阵的稳定求逆，其中<code>dgrad</code>函数调用<code>nosym</code>函数来投影出任何额外的对称性分量。
 
-<p>
-
-<p>
 
 <p>
 <hr><!--Navigation Panel-->
@@ -118,8 +124,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html6433" href="node371.html">常见问题</a>
 <b>上一级：</b><a name="tex2html6427" href="node364.html">几何技术细节</a>
 <b>上一节：</b><a name="tex2html6423" href="node369.html">协变微分法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

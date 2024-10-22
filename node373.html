@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6505" href="node374.html">压缩列存储</a>
-<b>上一级：</b><a name="tex2html6499" href="node372.html">Sparse Matrix Storage Formats</a>
-<b>上一节：</b><a name="tex2html6493" href="node372.html">Sparse Matrix Storage Formats</a>
-  
-  
+<b>上一级：</b><a name="tex2html6499" href="node372.html">稀疏矩阵存储格式</a>
+<b>上一节：</b><a name="tex2html6493" href="node372.html">稀疏矩阵存储格式</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001911000000000000000"></a>
 <a name="sec:data-structures:crs"></a><a name="45989"></a>
-<br>
 压缩行存储
 </h2>
 
@@ -83,12 +80,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 压缩行和列（下一节介绍）存储格式是最通用的：它们对矩阵的稀疏结构不做任何假设，也不存储任何不必要的元素。另一方面，它们的效率并不高，在矩阵-向量乘积或预处理求解中，每一步标量操作都需要进行间接寻址。
 
 <p>
-压缩行存储（CRS）格式将矩阵行的后续非零元素存储在连续的内存位置中。假设我们有一个非对称的稀疏矩阵 \( A \)，我们创建三个向量：一个用于浮点数（val），另外两个用于整数（col_ind, row_ptr）。val 向量存储矩阵 \( A \) 的非零元素的值，这些元素按行遍历。col_ind 向量存储 val 向量中元素的列索引。也就是说，如果 \({\tt val(k)}=a_{i,j}\)，那么 \({\tt col\_ind(k)}=j\)。row_ptr 向量存储 val 向量中每一行的起始位置；也就是说，如果 \({\tt val(k)}=a_{i,j}\)，那么 \({\tt row\_ptr(i)}\leq k<{\tt row\_ptr(i+1)}\)。按照惯例，我们定义 \({\tt row\_ptr(n+1)} = nnz+1\)，其中 \(nnz\) 是矩阵 \( A \) 中非零元素的数量。这种存储方式节省了大量空间。我们不再需要存储 \(n^2\) 个元素，而只需要 \(2nnz+n+1\) 个存储位置。
+压缩行存储（CRS）格式将矩阵行的后续非零元素存储在连续的内存位置中。假设我们有一个非对称的稀疏矩阵 <span class="math-inline"> A </span>，我们创建三个向量：一个用于浮点数（val），另外两个用于整数（col_ind, row_ptr）。val 向量存储矩阵 <span class="math-inline"> A </span> 的非零元素的值，这些元素按行遍历。col_ind 向量存储 val 向量中元素的列索引。也就是说，如果 <span class="math-inline">{\tt val(k)}=a_{i,j}</span>，那么 <span class="math-inline">{\tt col\_ind(k)}=j</span>。row_ptr 向量存储 val 向量中每一行的起始位置；也就是说，如果 <span class="math-inline">{\tt val(k)}=a_{i,j}</span>，那么 <span class="math-inline">{\tt row\_ptr(i)}\leq k<{\tt row\_ptr(i+1)}</span>。按照惯例，我们定义 <span class="math-inline">{\tt row\_ptr(n+1)} = nnz+1</span>，其中 <span class="math-inline">nnz</span> 是矩阵 <span class="math-inline"> A </span> 中非零元素的数量。这种存储方式节省了大量空间。我们不再需要存储 <span class="math-inline">n^2</span> 个元素，而只需要 <span class="math-inline">2nnz+n+1</span> 个存储位置。
 
 <p>
-举个例子，考虑由以下定义的非对称矩阵 \( A \)：
+举个例子，考虑由以下定义的非对称矩阵 <span class="math-inline"> A </span>：
 
-<div class="math-display" id="sparseA">A =\left[\begin{array}{rrrrrr}10 & 0 & 0 & 0 & -2 & 0 \\...... 9 & 9 & 13 \\0 & 4 & 0 & 0 & 2 & -1\end{array}\right] ~. \tag{269}</div>
+<div class="math-display" id="sparseA">A =\left[\begin{array}{rrrrrr}
+10 & 0 & 0 & 0 & -2 & 0 \\
+3 & 9 & 0 & 0 & 0 & 0 \\
+0 & 7 & 8 & 7 & 0 & 0 \\
+3 & 0 & 8 & 7 & 5 & 0 \\
+0 & 8 & 0 & 9 & 9 & 13 \\
+0 & 4 & 0 & 0 & 2 & -1
+\end{array}\right].\tag{10.1}
+</div>
 
 
 <p>
@@ -109,8 +114,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <td align="RIGHT">4</td>
 <td align="RIGHT">2</td>
 <td align="RIGHT">-1</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
 </tr>
 <tr><td align="RIGHT">col_ind</td>
 <td align="RIGHT">1</td>
@@ -126,8 +129,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <td align="RIGHT">2</td>
 <td align="RIGHT">5</td>
 <td align="RIGHT">6</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
 </tr>
 </table> 
 <br>
@@ -145,7 +146,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </table>
 </div>
 <br>
-如果矩阵 \( A \) 是对称的，我们只需要存储矩阵的上三角（或下三角）部分。这样做的权衡是算法更复杂，数据访问模式也有所不同。
+如果矩阵 <span class="math-inline"> A </span> 是对称的，我们只需要存储矩阵的上三角（或下三角）部分。这样做的权衡是算法更复杂，数据访问模式也有所不同。
 <a name="46028"></a>
 
 <p>
@@ -167,10 +168,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6505" href="node374.html">压缩列存储</a>
-<b>上一级：</b><a name="tex2html6499" href="node372.html">Sparse Matrix Storage Formats</a>
-<b>上一节：</b><a name="tex2html6493" href="node372.html">Sparse Matrix Storage Formats</a>
-  
-  
+<b>上一级：</b><a name="tex2html6499" href="node372.html">稀疏矩阵存储格式</a>
+<b>上一节：</b><a name="tex2html6493" href="node372.html">稀疏矩阵存储格式</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
