@@ -66,33 +66,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6236" href="node357.html">A Sample LDA Toy</a>
+<b>下一节：</b><a name="tex2html6236" href="node357.html">LDA问题示例</a>
 <b>上一级：</b><a name="tex2html6230" href="node353.html">数值示例</a>
-<b>上一节：</b><a name="tex2html6224" href="node355.html">A Sample Jordan Block</a>
-  
-  
+<b>上一节：</b><a name="tex2html6224" href="node355.html">约当块问题示例</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h3><a name="SECTION001844300000000000000"></a>
 <a name="43566"></a>
-<br>
-A Sample Trace Minimization Problem
+迹最小化问题示例
 </h3>
 
 <p>
-In this problem we minimize
+在这个问题中，我们最小化
 
-<span class="math-inline">\mathrm{trace}(Y^*AY)</span>, where <span class="math-inline">A</span> is a <span class="math-inline">12 \times 12</span> 
-second difference operator in one dimension
-and <span class="math-inline">Y</span> is <span class="math-inline">12 \times 4</span>.
+<span class="math-inline">\mathrm{trace}(Y^*AY)</span>，其中 <span class="math-inline">A</span> 是一个 <span class="math-inline">12 \times 12</span> 
+的一维二阶差分算子，而 <span class="math-inline">Y</span> 是 <span class="math-inline">12 \times 4</span> 的矩阵。
 
 <p>
-Note: we do not recommend that this problem be solved this way, since,
-for constant <span class="math-inline">A</span>, it can be done faster with conventional eigenvalue
-solvers.
+注意：我们不建议用这种方式解决这个问题，因为对于常数 <span class="math-inline">A</span>，使用传统的特征值求解器可以更快地完成。
 
+<pre>
 &gt;&gt; !cp examples/tracemin/*.m .
 &gt;&gt; randn('state',0);
 &gt;&gt; A = Kinetic(12);
@@ -127,29 +122,16 @@ iter    grad            F(Y)              flops
 23      9.679096e-07    8.270267e-01      3119232
 24      3.168742e-07    8.270267e-01      3287067
 25      2.062080e-07    8.270267e-01      3472366
-
-
-<p>
-Figure&nbsp;<a href="node356.html#sgminfig3">9.3</a> shows the convergence curve for this run.
+</pre>
 
 <p>
+图 <a href="node356.html#sgminfig3">9.3</a> 展示了本次运行的收敛曲线。
 
-<p></p>
-<div align="CENTER"><a name="sgminfig3"></a><a name="43576"></a>
-<table>
-<caption align="BOTTOM"><strong>Figure 9.3:</strong>
-Trace minimization problem</caption>
-<tr><td><img
- width="346" height="230" border="0"
- src="img3476.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =3.0 in
-\epsfysize =2.0 in
-\epsfbox{notes3.eps}\end{center}\vspace*{-12pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="sgminfig3"></a><a name="43576"></a>
+<img src="icon/fig9.3.png" alt="图9.3: 迹最小化问题"/>
+<figcaption>图9.3: 迹最小化问题</figcaption>
+</div>
 
 <p>
 <br><hr>

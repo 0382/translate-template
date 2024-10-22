@@ -67,40 +67,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5879" href="node334.html">谱变换在二次特征值问题中的应用</a>
-<b>上一级：</b><a name="tex2html5873" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b>上一级：</b><a name="tex2html5873" href="node331.html">二次特征值问题</a>
 <b>上一节：</b><a name="tex2html5867" href="node332.html">引言</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001822000000000000000"></a><a name="sec-qred"></a><a name="42826"></a>
-<br>
-线性形式的转换
+转换为线性形式
 </h2>
-不难看出，方程(<a href="node332.html#qep">9.1</a>)中的二次特征值问题等价于以下广义的“线性”特征值问题：<a name="tex2html51"
-  href="footnode.html#foot42828"><sup><button class="footnote"></button></sup></a>
+不难看出，方程(<a href="node332.html#qep">9.1</a>)中的二次特征值问题等价于以下广义的“线性”特征值问题：<sup><a href="#footnote-linear">[1]</a></sup>
 
-<div class="math-display" id="gep1">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B , \tag{248}</div>
+<div class="math-display" id="gep1">A z = \lambda B z \quad  \mathrm{and} \quad w^{\ast} A = \lambda w^{\ast} B , \tag{9.4}</div>
 
 其中
 
-<div class="math-display" id="matrixpencil1">A = \twobytwo{0}{I}{-K}{-C}, \quadB = \twobytwo{I}{0}{0}{M} \tag{249}</div>
+<div class="math-display" id="matrixpencil1">A = \begin{bmatrix}{0} & {I} \\ {-K} & {-C}\end{bmatrix}, \quad B = \begin{bmatrix}{I} & {0} \\ {0} & {M}\end{bmatrix} \tag{9.5}</div>
 
 以及
 
-<div class="math-display" id="matrixpencil11">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{(\lambda M + C)^{\ast} y }{y}. \tag{250}</div>
+<div class="math-display" id="matrixpencil11">z = \begin{bmatrix}{x} \\ {\lambda x} \end{bmatrix}, \quad w = \begin{bmatrix}{(\lambda M + C)^{\ast} y } \\ {y} \end{bmatrix}. \tag{9.6}</div>
 
 广义特征值问题(<a href="node333.html#gep1">9.4</a>)通常被称为二次特征值问题(<a href="node332.html#qep">9.1</a>)的线性化。可以证明，对于上述形式的任意矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>，右特征向量<span class="math-inline">z</span>和左特征向量<span class="math-inline">w</span>具有(<a href="node333.html#matrixpencil11">9.6</a>)中所描述的结构。
 
 <p>
-注意，从因式分解
+注意，从矩阵分解
 
-<div class="math-display" id="eq:4a">A - \lambda B = \twobytwo{0}{I}{-I}{-\lambda M - C}\twobyt...... M + \lambda C + K}{0}{0}{I}\twobytwo{I}{0}{-\lambda I }{I}, \tag{251}</div>
+<div class="math-display" id="eq:4a">A - \lambda B = \begin{bmatrix}{0} & {I} \\ {-I} & {-\lambda M - C}\end{bmatrix}\begin{bmatrix}{M + \lambda C + K} & {0} \\ {0} & {I}\end{bmatrix}\begin{bmatrix}{I} & {0} \\ {-\lambda I } & {I}\end{bmatrix}, \tag{9.7}</div>
 
-我们可以得出结论，矩阵束<span class="math-inline">A - \lambda B</span>与矩阵(<a href="node333.html#exmatrixpol">9.8</a>)是<em>等价</em>的<a name="tex2html52"
-  href="footnode.html#foot42872"><sup><button class="footnote"></button></sup></a>，
+我们可以得出结论，矩阵束<span class="math-inline">A - \lambda B</span>与矩阵(<a href="node333.html#exmatrixpol">9.8</a>)是<em>等价</em>的，<sup><a href="#footnote-equivalent">[2]</a></sup>
 
-<div class="math-display" id="exmatrixpol">\twobytwo{\lambda^2 M + \lambda C + K }{0}{0}{I} \tag{252}</div>
+<div class="math-display" id="exmatrixpol">\begin{bmatrix}{\lambda^2 M + \lambda C + K } & {0} \\ {0} & {I}\end{bmatrix} \tag{9.8}</div>
 
 并且
 
@@ -121,7 +116,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 实际上，(<a href="node333.html#gep1">9.4</a>)中的矩阵对<span class="math-inline">(A,B)</span>可以选择更一般的形式
 
-<div class="math-display">A = \twobytwo{0}{W}{- K}{ - C}, \quadB = \twobytwo{W}{0}{0}{ M},</div>
+<div class="math-display">A = \begin{bmatrix}{0} & {W} \\ {- K} & { - C}\end{bmatrix}, \quad B = \begin{bmatrix}{W} & {0} \\ {0} & { M}\end{bmatrix},</div>
 
 其中<span class="math-inline">W</span>可以是任意非奇异矩阵。注意，现在矩阵束<span class="math-inline">A - \lambda B</span>与矩阵多项式(<a href="node333.html#exmatrixpol">9.8</a>)等价当且仅当<span class="math-inline">W</span>是非奇异的，并且由于(<a href="node333.html#eq:4a">9.7</a>)，
 
@@ -129,20 +124,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 例如，如果矩阵<span class="math-inline">M</span>、<span class="math-inline">K</span>和<span class="math-inline">C</span>都是对称的，如特殊情况(<a href="node332.html#scase">9.2</a>)，且<span class="math-inline">K</span>是非奇异的，那么我们可以选择<span class="math-inline">W = - K</span>，从而得到以下对称广义“线性”特征值问题
 
-<div class="math-display" id="gep1K">A z = \lambda B z \quad \mathrm{and} \quadw^{\ast} A = \lambda w^{\ast} B , \tag{253}</div>
+<div class="math-display" id="gep1K">A z = \lambda B z \quad  \mathrm{and} \quad w^{\ast} A = \lambda w^{\ast} B , \tag{9.9}</div>
 
 其中
 
-<div class="math-display" id="matrixpencil2">A = \twobytwo{0}{-K}{-K}{ -C}, \quadB = \twobytwo{-K}{0}{0}{M}, \quad \tag{254}</div>
+<div class="math-display" id="matrixpencil2">A = \begin{bmatrix}{0} & {-K} \\ {-K} & { -C}\end{bmatrix}, \quad B = \begin{bmatrix}{-K} & {0} \\ {0} & {M}\end{bmatrix}, \quad  \tag{9.10}</div>
 
 以及
 
-<div class="math-display" id="matrixpencil22">z = \twobyone{x}{\lambda x}, \quadw = \twobyone{y}{\bar\lambda y}. \tag{255}</div>
+<div class="math-display" id="matrixpencil22">z = \begin{bmatrix}{x} \\ {\lambda x} \end{bmatrix}, \quad w = \begin{bmatrix}{y} \\ {\bar\lambda y} \end{bmatrix}. \tag{9.11}</div>
 
 <span class="math-inline">A</span>和<span class="math-inline">B</span>都是对称的，但可能是非定的。
 
 <p>
-<hr><!--Navigation Panel-->
+<hr>
+<ol>
+<li id="footnote-linear">“线性”一词之所以加引号，是因为 <span class="math-inline">\lambda</span> 也出现在特征向量中。</li>
+<li id="footnote-equivalent">两个大小为<span class="math-inline">n \times n</span>的矩阵多项式<span class="math-inline">M_1(\lambda)</span>和<span class="math-inline">M_2(\lambda)</span>被称为等价，如果存在一些<span class="math-inline">n \times n</span>的矩阵多项式<span class="math-inline">E(\lambda)</span>和<span class="math-inline">F(\lambda)</span>，其常数非零行列式（幺模），使得<span class="math-inline">M_1(\lambda) = E(\lambda)M_2(\lambda)F(\lambda)</span>。</li>
+</ol>
+<hr>
+<!--Navigation Panel-->
 <a name="tex2html5878"
   href="node334.html">
 <button class="navigate">下一节</button></a> 
@@ -160,10 +161,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5879" href="node334.html">谱变换在二次特征值问题中的应用</a>
-<b>上一级：</b><a name="tex2html5873" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
+<b>上一级：</b><a name="tex2html5873" href="node331.html">二次特征值问题</a>
 <b>上一节：</b><a name="tex2html5867" href="node332.html">引言</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

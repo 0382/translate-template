@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Shifted QEP.</title>
+<title>位移QEP</title>
 <meta charset="utf-8">
-<meta name="description" content="Shifted QEP.">
+<meta name="description" content="位移QEP">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,45 +66,63 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5925" href="node337.html">Shift-and-Invert QEP.</a>
+<b>下一节：</b><a name="tex2html5925" href="node337.html">位移-逆QEP</a>
 <b>上一级：</b><a name="tex2html5919" href="node334.html">谱变换在二次特征值问题中的应用</a>
-<b>上一节：</b><a name="tex2html5913" href="node335.html">Invert QEP.</a>
-  
-  
+<b>上一节：</b><a name="tex2html5913" href="node335.html">逆QEP</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001823020000000000000">
-Shifted QEP.</a>
+位移QEP</a>
 </h4>
-With a shift 
-<span class="math-inline">\lambda=\mu+\sigma</span>,
-the <em>shifted QEP</em> is
 
-<div class="math-display" id="shiftqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{260}</div>
+通过一个位移
+<span class="math-inline">\lambda=\mu+\sigma</span>，
+我们可以得到<em>位移后的二次特征值问题(QEP)</em>：
 
-where <span class="math-inline">\widehat{M}=M</span>, 
-<span class="math-inline">\widehat{C} = C + 2\sigma M</span>,
-and 
-<span class="math-inline">\widehat{K} = K + \sigma C + \sigma^2 M</span>.
-The shift transforms eigenvalues <span class="math-inline">\lambda</span> of (<a href="node332.html#qep">9.1</a>) close to
-<span class="math-inline">\sigma</span> into eigenvalues <span class="math-inline">\mu</span> close to <span class="math-inline">0</span>.
+<div class="math-display" id="shiftqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{9.16}</div>
+
+其中<span class="math-inline">\widehat{M}=M</span>，
+<span class="math-inline">\widehat{C} = C + 2\sigma M</span>，
+以及
+<span class="math-inline">\widehat{K} = K + \sigma C + \sigma^2 M</span>。
+这个位移将原问题(<a href="node332.html#qep">9.1</a>)中接近<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda</span>转换为接近<span class="math-inline">0</span>的特征值<span class="math-inline">\mu</span>。
 
 <p>
-The corresponding generalized ``linear'' eigenvalue problem is (again
-in terms of <span class="math-inline">\lambda</span>, rather than <span class="math-inline">\mu</span>)
+相应的广义“线性”特征值问题（再次使用<span class="math-inline">\lambda</span>而非<span class="math-inline">\mu</span>表示）为：
 
-<div class="math-display">\twobytwo{0}{I}{-\widehat{K}}{-\widehat{C}}\twobyone{x}{(\l......twobytwo{I}{0}{0}{\widehat{M}} \twobyone{x}{(\lambda-\sigma)x}</div>
+<div class="math-display">\begin{bmatrix}{0} & {I} \\ {-\widehat{K}} & {-\widehat{C}}\end{bmatrix}\begin{bmatrix}{x} \\ {(\lambda-\sigma)x}\end{bmatrix} = (\lambda-\sigma)\begin{bmatrix}{I} & {0} \\ {0} & {\widehat{M}}\end{bmatrix} \begin{bmatrix}{x} \\ {(\lambda-\sigma)x}\end{bmatrix}</div>
 
-or
+或者
 
-<div class="math-display">\twobytwo{0}{\widehat{K}}{\widehat{K}}{\widehat{C}}\twobyon......dehat{K}}{0}{0}{-\widehat{M}} \twobyone{x}{(\lambda-\sigma)x},</div>
+<div class="math-display">\begin{bmatrix}{0} & {\widehat{K}} \\ {\widehat{K}} & {\widehat{C}}\end{bmatrix}\begin{bmatrix}{x} \\ {(\lambda-\sigma)x}\end{bmatrix} = (\lambda-\sigma)\begin{bmatrix}{\widehat{K}} & {0} \\ {0} & {-\widehat{M}}\end{bmatrix} \begin{bmatrix}{x} \\ {(\lambda-\sigma)x}\end{bmatrix},</div>
 
-if the Hermitian of the matrix triplet <span class="math-inline">\{M,K,C\}</span> wants to be preserved.
+如果希望保持矩阵三元组<span class="math-inline">\{M,K,C\}</span>的厄米性质。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5924"
+  href="node337.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5918"
+  href="node334.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5912"
+  href="node335.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5920"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5922"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5925" href="node337.html">位移-逆QEP</a>
+<b>上一级：</b><a name="tex2html5919" href="node334.html">谱变换在二次特征值问题中的应用</a>
+<b>上一节：</b><a name="tex2html5913" href="node335.html">逆QEP</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

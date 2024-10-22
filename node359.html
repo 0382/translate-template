@@ -68,23 +68,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <b>下一节：</b><a name="tex2html6276" href="node360.html">修改模板</a>
 <b>上一级：</b><a name="tex2html6270" href="node353.html">数值示例</a>
-<b>上一节：</b><a name="tex2html6266" href="node358.html">A Sample Simultaneous Schur</a>
-  
-  
+<b>上一节：</b><a name="tex2html6266" href="node358.html">同时Schur分解问题示例</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h3><a name="SECTION001844600000000000000">
-A Sample Diagonalization Problem</a>
+<h3><a name="SECTION001844600000000000000"></a>
+一个对角化问题的示例
 </h3>
 
 <p>
-We attempt to simultaneously diagonalize two noisy (random
-noise) versions
-of <code>diag(1:10)</code> and <code>diag(1:10)^2</code>.  Our initial
-point is a small random perturbation of the identity.
+我们尝试同时对两个带有噪声（随机噪声）的版本进行对角化处理，这两个版本分别是<code>diag(1:10)</code>和<code>diag(1:10)^2</code>。我们的初始点是单位矩阵的一个小随机扰动。
 
+<pre>
 &gt;&gt; !cp examples/simdiag/*.m .
 &gt;&gt; randn('state',0);
 &gt;&gt; [A,B] = noisy;
@@ -118,32 +114,40 @@ iter    grad            F(Y)              flops
 179     8.003997e-07    4.010660e-07     71395085
 180     3.164977e-07    4.010660e-07     71721113
 181     3.701357e-07    4.010660e-07     72030590
- 
+</pre>
 
 <p>
-Figure&nbsp;<a href="node359.html#sgminfig6">9.6</a> shows the convergence curve for this run.
+图&nbsp;<a href="node359.html#sgminfig6">9.6</a>展示了本次运行的收敛曲线。
 
-<p>
-
-<p></p>
-<div align="CENTER"><a name="sgminfig6"></a><a name="43616"></a>
-<table>
-<caption align="BOTTOM"><strong>Figure 9.6:</strong>
-Simultaneous diagonalization problem</caption>
-<tr><td><img
- width="346" height="230" border="0"
- src="img3479.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =3.0 in
-\epsfysize =2.0 in
-\epsfbox{notes6.eps}\end{center}\vspace*{-12pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="sgminfig6"></a><a name="43616"></a>
+<img src="icon/fig9.6.png" alt="图9.6：同时对角化问题">
+<figcaption>图9.6：同时对角化问题</figcaption>
+</div>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6275"
+  href="node360.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6269"
+  href="node353.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6265"
+  href="node358.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6271"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6273"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6276" href="node360.html">修改模板</a>
+<b>上一级：</b><a name="tex2html6270" href="node353.html">数值示例</a>
+<b>上一节：</b><a name="tex2html6266" href="node358.html">同时Schur分解问题示例</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

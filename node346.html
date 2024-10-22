@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6086" href="node347.html">Procrustes问题</a>
-<b>上一级：</b><a name="tex2html6080" href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b>上一级：</b><a name="tex2html6080" href="node343.html">正交性约束下的非线性特征值问题</a>
 <b>上一节：</b><a name="tex2html6074" href="node345.html">MATLAB模板</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001843000000000000000"></a>
 <a name="objectivefunctions"></a>
-<br>
 示例问题及其微分
 </h2>
 
@@ -83,19 +80,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 本节作为处理具有正交列的矩阵目标函数的示例指南。我们发现了一些值得强调的常见技巧。
 
 <p>
-一旦有了目标函数 <span class="math-inline">F(Y)</span> 的公式，我们就通过 <span class="math-inline">\tr(V^*dF(Y)) =\frac{d}{dt} F(Y(t)) \vert _{t=0}</span> 隐式定义 <span class="math-inline">dF(Y)</span> 的公式，其中 <span class="math-inline">Y(t) = Y+tV</span>（或任何满足 <span class="math-inline">\dot{Y}(0)=V</span> 的曲线 <span class="math-inline">Y(t)</span>）。读者可能记得 <span class="math-inline">\tr(A^* B)= \sum_{i,j} A_{ij} B_{ij}</span>，因此它就像向量的实内积一样<a name="tex2html55" href="footnode.html#foot43372"><sup><button class="footnote"></button></sup></a>，<span class="math-inline">dF(Y)</span> 的隐式定义实际上是无约束函数在欧几里得空间中梯度方向导数的解释。
+一旦有了目标函数 <span class="math-inline">F(Y)</span> 的公式，我们就通过 <span class="math-inline">\mathrm{tr}(V^*dF(Y)) =\frac{d}{dt} F(Y(t)) \vert _{t=0}</span> 隐式定义 <span class="math-inline">dF(Y)</span> 的公式，其中 <span class="math-inline">Y(t) = Y+tV</span>（或任何满足 <span class="math-inline">\dot{Y}(0)=V</span> 的曲线 <span class="math-inline">Y(t)</span>）。读者可能记得 <span class="math-inline">\mathrm{tr}(A^* B)= \sum_{i,j} A_{ij} B_{ij}</span>，因此它就像向量的实内积一样，<sup><a href="#footnote-inner-product">[1]</a></sup><span class="math-inline">dF(Y)</span> 的隐式定义实际上是无约束函数在欧几里得空间中梯度方向导数的解释。
 
 <p>
 对于我们在示例中使用的大多数函数，获取 <span class="math-inline">dF</span> 公式的最简单方法是实际使用隐式定义。
 
 <p>
-例如，如果 <span class="math-inline">F(Y) = \tr(A Y^* B Y)</span>，则有
+例如，如果 <span class="math-inline">F(Y) = \mathrm{tr}(A Y^* B Y)</span>，则有
 
-<div class="math-display">\tr(V^*dF(Y))= \tr (AV^*BY + AY^*BV).</div>
+<div class="math-display">\mathrm{tr}(V^*dF(Y))= \mathrm{tr} (AV^*BY + AY^*BV).</div>
 
 由于迹的值在循环排列和转置下不变，我们可以将此方程重写为
 
-<div class="math-display">\tr(V^*dF(Y)) = \tr (V^*BYA + V^*B^*YA^*),</div>
+<div class="math-display">\mathrm{tr}(V^*dF(Y)) = \mathrm{tr} (V^*BYA + V^*B^*YA^*),</div>
 
 并且，由于 <span class="math-inline">V</span> 不受限制，这意味着 <span class="math-inline">dF(Y) = BYA+B^*Y^*A^*</span>。
 
@@ -140,7 +137,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ul>
 <!--End of Table of Child-Links-->
 <hr>
-
+<ol>
+<li id="footnote-inner-product">在复数域中，我们总是取<span class="math-inline">\mathrm{tr}(A^H B)</span>的实部。</li>
+</ol>
+<hr>
 <!--Navigation Panel-->
 <a name="tex2html6085"
   href="node347.html">
@@ -159,7 +159,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6086" href="node347.html">Procrustes问题</a>
-<b>上一级：</b><a name="tex2html6080" href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b>上一级：</b><a name="tex2html6080" href="node343.html">正交性约束下的非线性特征值问题</a>
 <b>上一节：</b><a name="tex2html6074" href="node345.html">MATLAB模板</a>
   
   

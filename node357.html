@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>A Sample LDA Toy Problem (Trace Minimization with Nonlinear Term)</title>
+<title>LDA问题示例（含非线性项的迹最小化）</title>
 <meta charset="utf-8">
-<meta name="description" content="A Sample LDA Toy Problem (Trace Minimization with Nonlinear Term)">
+<meta name="description" content="LDA问题示例（含非线性项的迹最小化）">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,28 +66,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6250" href="node358.html">A Sample Simultaneous Schur</a>
+<b>下一节：</b><a name="tex2html6250" href="node358.html">同时Schur分解问题示例</a>
 <b>上一级：</b><a name="tex2html6244" href="node353.html">数值示例</a>
-<b>上一节：</b><a name="tex2html6238" href="node356.html">A Sample Trace Minimization</a>
-  
-  
+<b>上一节：</b><a name="tex2html6238" href="node356.html">迹最小化问题示例</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h3><a name="SECTION001844400000000000000">
-A Sample LDA Toy Problem 
-(Trace Minimization with Nonlinear Term)</a>
+<h3><a name="SECTION001844400000000000000"></a>
+LDA问题示例（含非线性项的迹最小化）
 </h3>
 
 <p>
-We attempt to solve a toy LDA problem
-described in &#167;<a href="node350.html#ldasec">9.4.3.4</a>
-for four electrons on a one-dimensional grid with 12 
-points and
-a coupling constant of 20.  In this case, we use the first four
-eigenvectors of the linear problem as a starting point.
+我们尝试解决一个简单的LDA问题，该问题在&#167;<a href="node350.html#ldasec">9.4.3.4</a>中描述，涉及四个电子在一维网格上的分布，网格包含12个点，耦合常数为20。在这种情况下，我们使用线性问题的最初四个特征向量作为起点。
 
+<pre>
 &gt;&gt; !cp examples/ldatoy/*.m .
 &gt;&gt; K = Kinetic(12);
 &gt;&gt; parameters(K,20);
@@ -101,32 +94,40 @@ iter    grad            F(Y)              flops         step type
 3       3.363736e-04    7.531232e+00      1284452       Newton step
 4       1.809273e-07    7.531232e+00      1976096       Newton step
 5       1.843536e-07    7.531232e+00      2778377       Newton step
-
-
-<p>
-Figure&nbsp;<a href="node357.html#sgminfig4">9.4</a> shows the convergence curve for this run.
+</pre>
 
 <p>
+图&nbsp;<a href="node357.html#sgminfig4">9.4</a>展示了此次运行的收敛曲线。
 
-<p></p>
-<div align="CENTER"><a name="sgminfig4"></a><a name="43589"></a>
-<table>
-<caption align="BOTTOM"><strong>Figure 9.4:</strong>
-LDA toy problem</caption>
-<tr><td><img
- width="346" height="230" border="0"
- src="img3477.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =3.0 in
-\epsfysize =2.0 in
-\epsfbox{notes4.eps}\end{center}\vspace*{-12pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="sgminfig4"></a><a name="43589"></a>
+<img src="icon/fig9.4.png" alt="图9.4: LDA问题"/>
+<figcaption>图9.4: LDA问题</figcaption>
+</div>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6249"
+  href="node358.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6243"
+  href="node353.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6237"
+  href="node356.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6245"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6247"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6250" href="node358.html">同时Schur分解问题示例</a>
+<b>上一级：</b><a name="tex2html6244" href="node353.html">数值示例</a>
+<b>上一节：</b><a name="tex2html6238" href="node356.html">迹最小化问题示例</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

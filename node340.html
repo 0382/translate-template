@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,15 +73,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5979" href="node341.html">注释与参考文献</a>
-<b>上一级：</b><a name="tex2html5973" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
-<b>上一节：</b><a name="tex2html5967" href="node339.html">Numerical Methods for Solving</a>
-  
-  
+<b>上一级：</b><a name="tex2html5973" href="node331.html">二次特征值问题</a>
+<b>上一节：</b><a name="tex2html5967" href="node339.html">线性化问题求解的数值方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001825000000000000000"></a><a name="sec:9jdpol"></a><a name="43114"></a>
-<br>
-雅可比-戴维森方法
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001825000000000000000"></a><a name="sec:9jdpol"></a><a name="43114"></a>
+Jacobi-Davidson方法
 </h2>
 
 <p>
@@ -84,18 +88,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 正如我们将在下文看到的，该方法也可以直接应用于多项式特征值问题
 
-<div class="math-display" id="eq:JD8-pol">(\lambda^\ell C_\ell+\cdots +\lambda C_1 +C_0 ) x=0, \tag{263}</div>
+<div class="math-display" id="eq:JD8-pol">(\lambda^\ell C_\ell+\cdots +\lambda C_1 +C_0 ) x=0, \tag{9.19}</div>
 
 并且无需转化为广义“线性”特征值问题，其中<span class="math-inline">C_i</span>（<span class="math-inline">i = 0, 1, \ldots, \ell</span>）是给定的<span class="math-inline">n \times n</span>矩阵。为简单起见，我们仅介绍<span class="math-inline">\ell = 2</span>的情况。
 
 <p>
 在雅可比-戴维森迭代步骤的第一部分，用于求解多项式特征值问题
 
-<div class="math-display" id="eq:JD8-POL">\Psi(\lambda)x =0 \tag{264}</div>
+<div class="math-display" id="eq:JD8-POL">\Psi(\lambda)x =0 \tag{9.20}</div>
 
 其中
 
-<div class="math-display" id="eq:JD8-ppol">(\theta^2 V^\ast C_2 V +\theta V^\ast C_1 V + V^\ast C_0V){s}=0 \tag{266}</div>
+<div class="math-display" id="eq:JD8-ppol">(\theta^2 V^\ast C_2 V +\theta V^\ast C_1 V + V^\ast C_0V){s}=0 \tag{9.21}</div>
 
 矩阵<span class="math-inline">V</span>的列<span class="math-inline">{v}_i</span>构成了搜索子空间的基。为了稳定性考虑，这些列被构造为正交归一的。投影问题与原问题具有相同的阶数，但维度要小得多，通常<span class="math-inline">{m}\lln</span>。我们假设解向量<span class="math-inline">{s}</span>是归一化的，<span class="math-inline">\Vert{s}\Vert _2 = 1</span>。首先，选择具有所需特性的Ritz值<span class="math-inline">\theta</span>，例如实部最大或最接近某个目标<span class="math-inline">\tau</span>，并计算相关的特征向量<span class="math-inline">{s}</span>。然后计算Ritz向量<span class="math-inline">{u}\equiv V {s}</span>和残差<span class="math-inline">r\equiv \Psi(\theta){u}</span>。为了扩展搜索空间，计算向量<span class="math-inline">{p}</span>，
 
@@ -109,27 +113,35 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 在雅可比-戴维森迭代步骤的第二部分，搜索子空间<span class="math-inline">\mathrm{span}({V})</span>通过一个与<span class="math-inline">{u}</span>正交的向量<span class="math-inline">{t}</span>进行扩展，该向量近似地满足校正方程
 
-<div class="math-display" id="eq:JD8-ce">\left(I-\frac{{p}\, {u}^\ast}{{u}^\ast {p}}\right)\Psi(\theta) \left(I-{u}\, {u}^\ast\right){t}=-r. \tag{267}</div>
+<div class="math-display" id="eq:JD8-ce">\left(I-\frac{{p}\, {u}^\ast}{{u}^\ast {p}}\right)\Psi(\theta) \left(I-{u}\, {u}^\ast\right){t}=-r. \tag{9.22}</div>
 
 下一列<span class="math-inline">{V}</span>通过对近似解与先前计算的列<span class="math-inline">{v}_1, \ldots, {v}_{m}</span>进行正交归一化获得。
 
 <p>
 此过程重复进行，直到检测到特征对<span class="math-inline">(\lambda,x)</span>，即直到残差向量<span class="math-inline">r</span>足够小。算法的基本形式在算法<a href="node340.html#JD8-1">9.1</a>中呈现。我们参考[<a href="node421.html#slvg96">413</a>]中的例子，一个来自声学问题的二次特征值问题，通过这种简化技术求解，<span class="math-inline">n</span>高达250,000。
 
-<p>
-<br>
-<a name="JD8-1"></a><img
- width="598" height="412" align="BOTTOM" border="0"
- src="img3382.png"
- alt="\begin{algorithm}{雅可比--戴维森方法用于QEP
-}
-{
-\begin{tabbing}
-(nr)ss\=ij...
-...for} \\
-{\rm (16)}\&gt; \&gt; \&gt; 扩展<span class="math-inline">{V}=[{V},{v}]</span> \end{tabbing}}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="JD8-1">
+算法 9.1：用于二次特征值问题的雅可比-戴维森方法
+
+(1)  选择一个 <span class="math-inline">n \times m</span> 正交归一矩阵 <span class="math-inline">V</span>
+(2)  对于 <span class="math-inline">i=0,1,2</span>
+(3)      计算 <span class="math-inline">W_{i} = C_{i} V</span> 和 <span class="math-inline">M_{i} = V^{} W_{i}</span>
+(4)  结束循环
+(5)  迭代直到收敛
+(6)      计算特征值问题 <span class="math-inline">(\theta^{2} M_{2} + \theta M_{1} + M_{0}) s = 0</span> 的特征对 <span class="math-inline">(\theta, s)</span>
+(7)      选择满足 <span class="math-inline">|s|{2} = 1</span> 的所需特征对 <span class="math-inline">(\theta, s)</span>
+(8)      计算 <span class="math-inline">u = V s</span>，<span class="math-inline">p = \Psi^{\prime}(\theta) u</span>，<span class="math-inline">r = \Psi(\theta) u</span>
+(9)      如果 <span class="math-inline">|r|{2} < \epsilon</span>，则 <span class="math-inline">\lambda = \theta</span>，<span class="math-inline">x = u</span>，停止
+(10)     在 <span class="math-inline">u</span> 的正交补空间中近似求解 <span class="math-inline">\left(I - \frac{p u^*}{u^* p}\right) \Psi(\theta) \left(I - u u^*\right) t = -r</span>
+(11)     将 <span class="math-inline">t</span> 对 <span class="math-inline">V</span> 进行正交化，<span class="math-inline">v = t / |t|{2}</span>
+(12)     对于 <span class="math-inline">i = 0,1,2</span>
+(13)         计算 <span class="math-inline">w{i} = C_{i} v</span>
+(12)         <span class="math-inline">M_{i} = V^{} w_{i}</span>，<span class="math-inline">M_{i} = \begin{bmatrix} M_{i} & V^{} w_{i} \\ v^{} W_{i} & v^{*} w_{i} \end{bmatrix}</span>，<span class="math-inline">W_{i} = \left[ W_{i}, w_{i} \right]</span>
+(15)     结束循环
+(16)     扩展 <span class="math-inline">V = [V, v]</span>
+</pre>
+
+
 
 <p>
 如果搜索子空间的维度变得过大，例如，当<span class="math-inline">V</span>的列数达到<span class="math-inline">{m}={m}_{\max}</span>时，可以继续使用维度较小的搜索子空间。选择由上一步中最佳的<span class="math-inline">{m}_{\min}</span>个Ritz对所张成的空间作为新的搜索子空间；即，取<span class="math-inline">V=[u_1,\ldots,u_{{m}_{\min}}]</span>，其中<span class="math-inline">u_1,\ldots, u_{{m}_{\min}}</span>是与最佳的<span class="math-inline">{m}_{\min}</span>个Ritz值<span class="math-inline">\theta_1,\ldots,\theta_{{m}_{\min}}</span>相关的Ritz向量。然后对<span class="math-inline">V</span>应用修正的Gram-Schmidt正交归一化，并以此矩阵重新开始。注意，新的搜索矩阵<span class="math-inline">V=V_{{m}_{\min}}</span>可以用旧的搜索矩阵<span class="math-inline">V=V_{{m}_{\max}}</span>表示为<span class="math-inline">V_{{m}_{\min}}=V_{{m}_{\max}} T</span>，其中<span class="math-inline">T</span>是一个<span class="math-inline">{m}_{\max}\times {m}_{\min}</span>的矩阵。变换矩阵<span class="math-inline">T</span>可以显式计算，并用于更新辅助矩阵<span class="math-inline">W_i</span>（<span class="math-inline">=W_i T</span>）和<span class="math-inline">M_i</span>（<span class="math-inline">=T^\ast M_i T</span>）。
@@ -159,10 +171,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html5979" href="node341.html">注释与参考文献</a>
-<b>上一级：</b><a name="tex2html5973" href="node331.html">Quadratic Eigenvalue Problems Z.&nbsp;Bai,</a>
-<b>上一节：</b><a name="tex2html5967" href="node339.html">Numerical Methods for Solving</a>
-  
-  
+<b>上一级：</b><a name="tex2html5973" href="node331.html">二次特征值问题</a>
+<b>上一节：</b><a name="tex2html5967" href="node339.html">线性化问题求解的数值方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

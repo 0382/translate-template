@@ -66,11 +66,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6222" href="node356.html">A Sample Trace Minimization</a>
+<b>下一节：</b><a name="tex2html6222" href="node356.html">迹最小化问题示例</a>
 <b>上一级：</b><a name="tex2html6216" href="node353.html">数值示例</a>
 <b>上一节：</b><a name="tex2html6210" href="node354.html">一个Procrustes问题的示例</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -78,17 +76,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <h3><a name="SECTION001844200000000000000"></a>
 <a name="43551"></a>
 <a name="43552"></a>
-<br>
-A Sample Jordan Block Problem
+约当块问题示例
 </h3>
 
 <p>
-We now look for a nearby matrix with a Jordan 
-structure 
-<span class="math-inline">J_4(\alpha) \oplus J_2(\beta) \oplus \mathrm{(anything)}</span>
-to the <span class="math-inline">12 \times 12</span> Frank matrix, a matrix whose Jordan structure
-is known to be very difficult.
+我们现在寻找一个与<span class="math-inline">12 \times 12</span> Frank矩阵（一个以其Jordan结构著称的困难矩阵）接近的矩阵，该矩阵具有Jordan结构
+<span class="math-inline">J_4(\alpha) \oplus J_2(\beta) \oplus \mathrm{(anything)}</span>。
 
+<pre>
 &gt;&gt; !cp examples/jordan/*.m .
 &gt;&gt; A = frank(12);
 &gt;&gt; evs = sort(eig(A)); eigvs = [mean(evs(1:4)) mean(evs(5:6))];
@@ -117,32 +112,41 @@ iter    grad            F(Y)              flops         step type
 9       2.093780e-09    2.924238e-09     38384200       good dog
 10      2.479121e-09    2.924238e-09     39163025       good dog
 11      1.713240e-09    2.924238e-09     39921924       bad dog
- 
+</pre>
 
 <p>
-Figure&nbsp;<a href="node355.html#sgminfig2">9.2</a> shows the convergence curve for this run.
+图&nbsp;<a href="node355.html#sgminfig2">9.2</a>展示了此次运行的收敛曲线。
 
 <p>
-
-<p></p>
-<div align="CENTER"><a name="sgminfig2"></a><a name="43560"></a>
-<table>
-<caption align="BOTTOM"><strong>Figure 9.2:</strong>
-Jordan problem</caption>
-<tr><td><img
- width="346" height="230" border="0"
- src="img3473.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =3.0 in
-\epsfysize =2.0 in
-\epsfbox{notes2.eps}\end{center}\vspace*{-12pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="sgminfig2"></a><a name="43560"></a>
+<img src="icon/fig9.2.png" alt="图9.2: Jordan问题"/>
+<figcaption>图9.2: Jordan问题</figcaption>
+</div>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6221"
+  href="node356.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6215"
+  href="node353.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6209"
+  href="node354.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6217"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6219"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6222" href="node356.html">迹最小化问题示例</a>
+<b>上一级：</b><a name="tex2html6216" href="node353.html">数值示例</a>
+<b>上一节：</b><a name="tex2html6210" href="node354.html">一个Procrustes问题的示例</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

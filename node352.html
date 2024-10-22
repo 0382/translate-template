@@ -67,49 +67,58 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6174" href="node353.html">数值示例</a>
-<b>上一级：</b><a name="tex2html6168" href="node346.html">Sample Problems and Their</a>
+<b>上一级：</b><a name="tex2html6168" href="node346.html">示例问题及其微分</a>
 <b>上一节：</b><a name="tex2html6164" href="node351.html">同时舒尔分解问题</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
-<h3><a name="SECTION001843600000000000000">
-Simultaneous Diagonalization</a>
+<h3><a name="SECTION001843600000000000000"></a>
+同时对角化
 </h3>
 
 <p>
-Another problem like the simultaneous Schur problem, involving sets of
-matrices with similar structures, is the problem of finding the best
-set of eigenvectors for a set of symmetric matrices given that the
-matrices are known to be simultaneously diagonalizable, but may have
-significant errors in their entries from noise or measurement error.
-Instances of this problem arise in the psychometric literature, where
-it is called an INDSCAL problem [<a
- href="node421.html#DeleeuwHeiser.collection:82">107</a>].
+另一个类似同时Schur问题的问题涉及具有相似结构的一组矩阵，即在已知矩阵可同时对角化的情况下，寻找一组对称矩阵的最佳特征向量集，但这些矩阵的元素可能因噪声或测量误差而存在显著误差。此类问题在心理计量学文献中出现，被称为INDSCAL问题[<a href="node421.html#DeleeuwHeiser.collection:82">107</a>]。
 
 <p>
-Phrased in terms of a minimization, one has a set of symmetric
-matrices <span class="math-inline">A_i</span> and wishes to find 
-<span class="math-inline">Y \in {\mathcal O}(n)</span> that minimizes
+用最小化问题来表述，我们有一组对称矩阵<span class="math-inline">A_i</span>，并希望找到<span class="math-inline">Y \in {\mathcal O}(n)</span>，使得
 
-<span class="math-inline">F(Y) = \frac{1}{2} \sum_i \vert\vert [Y,A_i] \vert\vert _F^2= \frac{1}{2} \sum_i \vert\vert Y A_i - A_i Y \vert\vert _F^2</span>.
+<span class="math-inline">F(Y) = \frac{1}{2} \sum_i \vert\vert [Y,A_i] \vert\vert _F^2= \frac{1}{2} \sum_i \vert\vert Y A_i - A_i Y \vert\vert _F^2</span>最小化。
 
 <p>
-We then have
+由此我们得到
 
 <div class="math-display">dF(Y) = \sum_i [[Y, A_i],A_i^*]</div>
 
-and
+以及
 
 <div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} = \sum_i [[H, A_i],A_i^*],</div>
 
-where 
-<span class="math-inline">\dot{Y}(0) = H</span>.
+其中<span class="math-inline">\dot{Y}(0) = H</span>。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6173"
+  href="node353.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6167"
+  href="node346.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6163"
+  href="node351.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6169"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6171"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6174" href="node353.html">数值示例</a>
+<b>上一级：</b><a name="tex2html6168" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6164" href="node351.html">同时舒尔分解问题</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

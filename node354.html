@@ -66,26 +66,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6208" href="node355.html">A Sample Jordan Block</a>
+<b>下一节：</b><a name="tex2html6208" href="node355.html">约当块问题示例</a>
 <b>上一级：</b><a name="tex2html6202" href="node353.html">数值示例</a>
 <b>上一节：</b><a name="tex2html6196" href="node353.html">数值示例</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h3><a name="SECTION001844100000000000000"></a>
 <a name="43538"></a>
-<br>
-A Sample Procrustes Problem
+一个Procrustes问题的示例
 </h3>
 
 <p>
-In this example, we attempt to find a <span class="math-inline">Y</span> which minimizes
-<span class="math-inline">\vert\vert AY-YB\vert\vert _F</span> for a pair of randomly selected <span class="math-inline">A</span> (<span class="math-inline">12 \times 12</span>)
-and <span class="math-inline">B</span> (<span class="math-inline">4 \times 4</span>).
+在这个例子中，我们尝试找到一个<span class="math-inline">Y</span>，使得对于一对随机选择的<span class="math-inline">A</span>（<span class="math-inline">12 \times 12</span>）和<span class="math-inline">B</span>（<span class="math-inline">4 \times 4</span>），<span class="math-inline">\vert\vert AY-YB\vert\vert _F</span>最小化。
 
+<pre>
 &gt;&gt; !cp examples/procrustes/*.m .
 &gt;&gt; randn('state',0);
 &gt;&gt; [A,B] = randprob;
@@ -114,32 +110,42 @@ iter    grad            F(Y)              flops         step type
 10      6.411668e-04    2.505253e-01      3873582       Newton step
 11      1.965463e-06    2.505253e-01      4430245       Newton step
 12      1.620267e-06    2.505253e-01      5022629       Newton step
- 
+</pre>
 
 <p>
-Figure&nbsp;<a href="node354.html#sgminfig1">9.1</a> shows the convergence curve for this run.
+图<a href="node354.html#sgminfig1">9.1</a>展示了此次运行的收敛曲线。
 
 <p>
 
-<p></p>
-<div align="CENTER"><a name="sgminfig1"></a><a name="43545"></a>
-<table>
-<caption align="BOTTOM"><strong>Figure 9.1:</strong>
-Procrustes problem</caption>
-<tr><td><img
- width="346" height="230" border="0"
- src="img3471.png"
- alt="\begin{figure}\begin{center}
-\leavevmode
-\epsfxsize =3.0 in
-\epsfysize =2.0 in
-\epsfbox{notes1.eps}\end{center}\vspace*{-12pt}%% help
-\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="sgminfig1"></a><a name="43545"></a>
+<img src="icon/fig9.1.png" alt="Procrustes问题"/>
+<figcaption>图9.1：Procrustes问题</figcaption>
+</div>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6207"
+  href="node355.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6201"
+  href="node353.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6195"
+  href="node353.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6203"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6205"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6208" href="node355.html">约当块问题示例</a>
+<b>上一级：</b><a name="tex2html6202" href="node353.html">数值示例</a>
+<b>上一节：</b><a name="tex2html6196" href="node353.html">数值示例</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

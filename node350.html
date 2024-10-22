@@ -67,62 +67,61 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6148" href="node351.html">同时舒尔分解问题</a>
-<b>上一级：</b><a name="tex2html6142" href="node346.html">Sample Problems and Their</a>
+<b>上一级：</b><a name="tex2html6142" href="node346.html">示例问题及其微分</a>
 <b>上一节：</b><a name="tex2html6136" href="node349.html">迹最小化</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h3><a name="SECTION001843400000000000000"></a>
 <a name="ldasec"></a>
-<br>
-Trace Minimization with a Nonlinear Term
+带非线性项的迹最小化
 </h3>
 
 <p>
-We consider a nonlinear eigenvalue problem related
-to the trace minimization of 
-&#167;<a href="node349.html#traceminsec">9.4.3.3</a>:
-minimize 
-<span class="math-inline">F(Y) =\frac{1}{2}(\tr(Y^*AY) + g(Y)),</span> where <span class="math-inline">g(Y)</span> is some nonlinear term.
+我们考虑一个与<a href="node349.html#traceminsec">9.4.3.3</a>节中迹最小化相关的非线性特征值问题：
+最小化<span class="math-inline">F(Y) =\frac{1}{2}(\tr(Y^*AY) + g(Y)),</span>，其中<span class="math-inline">g(Y)</span>是某个非线性项。
 
 <p>
-This sort of minimization occurs in electronic structures computations
-such as local density approximations (LDAs), where the columns of <span class="math-inline">Y</span>
-represent electron wave functions, <span class="math-inline">A</span> is a fixed Hamiltonian, and
-<span class="math-inline">g(Y)</span> represents the energy of the electron-electron interactions 
-(see, for example, [<a
- href="node421.html#edas99">151</a>,<a
- href="node421.html#stich89a">428</a>]).
-In this case, the optimal <span class="math-inline">Y</span> represents the state of lowest energy of the
-system.
+这种最小化问题出现在电子结构计算中，例如局域密度近似（LDAs），其中<span class="math-inline">Y</span>的列代表电子波函数，<span class="math-inline">A</span>是一个固定的哈密顿量，而<span class="math-inline">g(Y)</span>表示电子间相互作用的能量（参见，例如，[<a href="node421.html#edas99">151</a>,<a href="node421.html#stich89a">428</a>]）。在这种情况下，最优的<span class="math-inline">Y</span>代表系统的最低能量状态。
 
 <p>
-The only additions to the differentials of the trace minimization are
-terms from <span class="math-inline">g(Y)</span> which vary from problem to problem.  For our
-example, we have taken 
-<span class="math-inline">g(Y) = \frac{K}{4} \sum_i \rho_i^2</span> for some
-coupling constant <span class="math-inline">K</span>, where 
-<span class="math-inline">\rho_i = \sum_j \vert Y_{ij}\vert^2</span>
-(the charge density).
+迹最小化的微分中唯一的附加项来自<span class="math-inline">g(Y)</span>，这些项因问题而异。在我们的例子中，我们取<span class="math-inline">g(Y) = \frac{K}{4} \sum_i \rho_i^2</span>，其中<span class="math-inline">K</span>是某个耦合常数，<span class="math-inline">\rho_i = \sum_j \vert Y_{ij}\vert^2</span>（电荷密度）。
 
 <p>
-In this case
+在这种情况下
 
-<div class="math-display">dF(Y) = dF_{\mathrm{tracemin}} + K \diag(\rho) Y,</div>
+<div class="math-display">dF(Y) = dF_{\mathrm{tracemin}} + K \mathrm{diag}(\rho) Y,</div>
 
-and
+并且
 
-<div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} =\frac{d}{dt} dF_{\mathrm{t......} +K \diag(\rho) H + K \diag\left(\frac{d}{dt} \rho\right) Y,</div>
+<div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} =\frac{d}{dt} dF_{\mathrm{tracemin}}(Y(t))\vert_{t=0} +K \mathrm{diag}(\rho) H + K \mathrm{diag}\left(\frac{d}{dt} \rho\right) Y,</div>
 
-where 
-<span class="math-inline">\dot{Y}(0) = H</span> and 
-<span class="math-inline">\frac{d}{dt} \rho_i \vert _{t=0} = \sum_j Y_{ij} H_{ij}.</span>
+其中<span class="math-inline">\dot{Y}(0) = H</span>，<span class="math-inline">\frac{d}{dt} \rho_i \vert _{t=0} = \sum_j Y_{ij} H_{ij}.</span>
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6147"
+  href="node351.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6141"
+  href="node346.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6135"
+  href="node349.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6143"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6145"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6148" href="node351.html">同时舒尔分解问题</a>
+<b>上一级：</b><a name="tex2html6142" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6136" href="node349.html">迹最小化</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

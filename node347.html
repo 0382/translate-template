@@ -67,10 +67,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6106" href="node348.html">最近-约当结构</a>
-<b>上一级：</b><a name="tex2html6100" href="node346.html">Sample Problems and Their</a>
-<b>上一节：</b><a name="tex2html6094" href="node346.html">Sample Problems and Their</a>
-  
-  
+<b>上一级：</b><a name="tex2html6100" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6094" href="node346.html">示例问题及其微分</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
@@ -79,55 +77,61 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <a name="43384"></a>
 <a name="43385"></a>
 <a name="43386"></a>
-<br>
-The Procrustes Problem
+Procrustes问题
 </h3>
 
 <p>
-The Procrustes problem (see [<a
- href="node421.html#elden77">158</a>]) is the minimization of
-<span class="math-inline">\vert\vert AY-YB\vert\vert _F</span> for constant <span class="math-inline">A</span> and <span class="math-inline">B</span> over the manifold <span class="math-inline">Y^*Y=I</span>.
-This minimization determines the nearest matrix <span class="math-inline">\hat{A}</span> to <span class="math-inline">A</span> for
-which
+普罗克拉斯提斯问题（参见[<a href="node421.html#elden77">158</a>]）是指在流形<span class="math-inline">Y^*Y=I</span>上，对于常数矩阵<span class="math-inline">A</span>和<span class="math-inline">B</span>，最小化<span class="math-inline">\vert\vert AY-YB\vert\vert _F</span>。这一最小化过程确定了一个最接近<span class="math-inline">A</span>的矩阵<span class="math-inline">\hat{A}</span>，使得
 
 <div class="math-display">Q^* \hat{A} Q = \left[\begin{array}{cc} B & * \cr 0 & * \end{array}\right];</div>
 
-i.e. the columns of <span class="math-inline">B</span> span an invariant subspace of <span class="math-inline">\hat{A}</span>.
+即<span class="math-inline">B</span>的列向量张成了<span class="math-inline">\hat{A}</span>的一个不变子空间。
 
 <p>
-The differential of 
-<span class="math-inline">F(Y) = \frac{1}{2}\vert\vert AY - YB\vert\vert _F^2 =\frac{1}{2} \tr(AY-YB)^*(AY-YB)</span> is given by
+函数<span class="math-inline">F(Y) = \frac{1}{2}\vert\vert AY - YB\vert\vert _F^2 =\frac{1}{2} \mathrm{tr}(AY-YB)^*(AY-YB)</span>的微分为
 
 <div class="math-display">dF(Y) = A^*(AY-YB)-(AY-YB)B^*.</div>
 
-This can be derived following the process outlined above.
-Observe that
-<p></p>
-<div align="CENTER">
+这一结果可以通过上述过程推导得出。观察到
 
-<img
- width="540" height="85" border="0"
- src="img3433.png"
- alt="\begin{eqnarray*}
-\frac{d}{dt} F(Y(t)) \vert _{t=0}&amp;=&amp;\frac{1}{2}\tr((AV-VB)^*(A...
-...tr((AV-VB)^*(AY-YB)) \\
-&amp;=&amp; \tr(V^*(A^*(AY-YB))-V^*(AY-YB)B^*).
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+\frac{d}{dt}F(Y(t))\vert_{t=0} &= \frac{1}{2}\mathrm{tr}((AV-VB)^*(AY-YB)+(AY-YB)^*(AV-VB))\\
+&= \mathrm{tr}((AV-VB)^*(AY-YB))\\
+&= \mathrm{tr}(V^*(A^*(AY-YB))-V^*(AY-YB)B^*).
+\end{aligned}
+</div>
 
 <p>
-The second derivative of <span class="math-inline">F(Y)</span> is given by the equation
+函数<span class="math-inline">F(Y)</span>的二阶导数由以下方程给出
 
 <div class="math-display">\frac{d}{dt} dF(Y(t))\vert _{t=0} = A^*(AH-HB)-(AH-HB)B^*,</div>
 
-where 
-<span class="math-inline">\dot{Y}(0) = H</span>,
-which can be obtained by varying the expression for <span class="math-inline">dF</span>.
+其中<span class="math-inline">\dot{Y}(0) = H</span>，这一结果可以通过对<span class="math-inline">dF</span>的表达式进行变分得到。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6105"
+  href="node348.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6099"
+  href="node346.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6093"
+  href="node346.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6101"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6103"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6106" href="node348.html">最近-约当结构</a>
+<b>上一级：</b><a name="tex2html6100" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6094" href="node346.html">示例问题及其微分</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

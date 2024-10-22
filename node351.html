@@ -67,17 +67,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6162" href="node352.html">同时对角化</a>
-<b>上一级：</b><a name="tex2html6156" href="node346.html">Sample Problems and Their</a>
-<b>上一节：</b><a name="tex2html6150" href="node350.html">Trace Minimization with a</a>
-  
-  
+<b>上一级：</b><a name="tex2html6156" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6150" href="node350.html">带非线性项的迹最小化</a>
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001843500000000000000"></a>
 <a name="43480"></a>
 <a name="43481"></a>
 <a name="43482"></a>
-<br>
 同时舒尔分解问题
 </h3>
 
@@ -91,33 +88,33 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 对于这个问题，微分有些棘手，但其推导过程富有启发性：
- <p></p>
-<div align="CENTER">
 
-<img width="408" height="212" border="0" src="img3460.png" alt="\begin{eqnarray*}
-\tr(V^* dF(Y)) &amp;=&amp; \tr( \mbox{low}(Y^*AY)^*\mbox{low}(Y^*AV + ...
-... \\
-[1.5pt]
-&amp;&amp; + BY\mbox{low}(Y^*BY)^*+B^*Y\mbox{low}(Y^*BY),
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
-其中，第二等式源于观察到 <span class="math-inline">\tr(\mathrm{low}(M)^*\mathrm{low}(N)) = \tr(\mathrm{low}(M)^*N)</span>，第三等式则基于迹的性质。
+<div class="math-display">
+\begin{aligned}
+\mathrm{tr}(V^*d F(Y)) =& \mathrm{tr}(\mathrm{low}(Y^*A Y)^*\mathrm{low}(Y^*A V+V^*A Y)\\ 
+ &\mathrm{+low}(Y^*B Y)^*\mathrm{low}(Y^*B V+V^*B Y)), \\
+\mathrm{tr}(V^*d F(Y)) =& \mathrm{tr}(\mathrm{low}(Y^*A Y)^*\mathrm{low}(Y^*AV+V^*AY)\\ 
+ &\mathrm{+low}(Y^*B Y)^*\mathrm{low}(Y^*BV+V^*BY)), \\
+\mathrm{tr}(V^*d F(Y)) =& \mathrm{tr}(V^*(AY\mathrm{low}(Y^*A Y)^* + A^*Y\mathrm{low}(Y^*A Y)\\ 
+ &+BY\mathrm{low}(Y^*B Y)^* + B^*Y\mathrm{low}(Y^*B Y))), \\
+dF(Y) = & AY\mathrm{low}(Y^*A Y)^* + A^*Y\mathrm{low}(Y^*A Y)\\ 
+ &+BY\mathrm{low}(Y^*B Y)^* + B^*Y\mathrm{low}(Y^*B Y).
+\end{aligned}
+</div>
+
+其中，第二等式源于观察到 <span class="math-inline">\mathrm{tr}(\mathrm{low}(M)^*\mathrm{low}(N)) = \mathrm{tr}(\mathrm{low}(M)^*N)</span>，第三等式则基于迹的性质。
 
 <p>
 二阶导数由以下公式给出：
- <p></p>
-<div align="CENTER">
 
-<img width="568" height="136" border="0" src="img3462.png" alt="\begin{eqnarray*}
-\frac{d}{dt} dF(Y(t))\vert _{t=0} &amp;=&amp;
-AH\mbox{low}(Y^*AY)^*+A...
-...Y)}{dt}\right)^*+B^*Y\mbox{low}\left(\frac{d(Y^*BY)}{dt}\right),
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+\frac{d}{dt}dF(Y(t))\vert_{t=0} = & AH\mathrm{low}(Y^*AY)^* + A^*H\mathrm{low}(Y^*AY) + AY\mathrm{low}\left(\frac{d(Y^*AY)^*}{dt}\right) \\
+& + A^*Y \mathrm{low}\left(\frac{d(Y^*AY)}{dt}\right) + BH\mathrm{low}(Y^*BY)^* + B^*H\mathrm{low}(Y^*BY) \\
+&+ BY\mathrm{low}\left(\frac{d(Y^*BY)^*}{dt}\right) + B^*Y\mathrm{low}\left(\frac{d(Y^*BY)}{dt}\right).
+\end{aligned}
+</div>
+
 其中 <span class="math-inline">\dot{Y}(0) = H</span>，<span class="math-inline">\frac{d(Y^*AY)}{dt} \vert _{t=0} = H^*AY + Y^*AH</span> 以及 <span class="math-inline">\frac{d(Y^*BY)}{dt} \vert _{t=0} = H^*BY + Y^*BH</span>。
 
 <p>
@@ -139,10 +136,8 @@ AH\mbox{low}(Y^*AY)^*+A...
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6162" href="node352.html">同时对角化</a>
-<b>上一级：</b><a name="tex2html6156" href="node346.html">Sample Problems and Their</a>
-<b>上一节：</b><a name="tex2html6150" href="node350.html">Trace Minimization with a</a>
-  
-  
+<b>上一级：</b><a name="tex2html6156" href="node346.html">示例问题及其微分</a>
+<b>上一节：</b><a name="tex2html6150" href="node350.html">带非线性项的迹最小化</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

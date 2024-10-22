@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Shift-and-Invert QEP.</title>
+<title>位移-逆QEP</title>
 <meta charset="utf-8">
-<meta name="description" content="Shift-and-Invert QEP.">
+<meta name="description" content="位移-逆QEP">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,55 +66,73 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5939" href="node338.html">QEP with Cayley Transform.</a>
+<b>下一节：</b><a name="tex2html5939" href="node338.html">QEP的Cayley变换</a>
 <b>上一级：</b><a name="tex2html5933" href="node334.html">谱变换在二次特征值问题中的应用</a>
-<b>上一节：</b><a name="tex2html5927" href="node336.html">Shifted QEP.</a>
-  
-  
+<b>上一节：</b><a name="tex2html5927" href="node336.html">位移QEP</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001823030000000000000"></a>
 <a name="43030"></a>
-<br>
-Shift-and-Invert QEP.
+位移-逆QEP
 </h4>
-Combining the above shift-and-invert spectral transformations (SI),
-the so-called <em>shift-and-invert QEP</em> becomes
 
-<div class="math-display" id="eq:shinvqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{261}</div>
+结合上述的移位-逆变换谱变换（SI），所谓的<em>移位-逆QEP</em>变为
 
-where
+<div class="math-display" id="eq:shinvqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{9.17}</div>
+
+其中
 
 <div class="math-display">\mu=\frac{1}{\lambda-\sigma},\quad</div>
 
-and
+以及
 
 <span class="math-inline">\widehat M= \sigma^2 M + \sigma C + K</span>,
 
-<span class="math-inline">\widehat{C} = C + 2\sigma M</span>, and
+<span class="math-inline">\widehat{C} = C + 2\sigma M</span>, 和
 
 <span class="math-inline">\widehat{K} = M</span>.
-The exterior eigenvalues <span class="math-inline">\mu</span> of the QEP (<a href="node337.html#eq:shinvqep">9.17</a>)
-approximate the eigenvalues <span class="math-inline">\lambda</span> of the original QEP&nbsp;(<a href="node332.html#qep">9.1</a>)
-closest to the shift <span class="math-inline">\sigma</span>. These eigenvalues <span class="math-inline">\lambda</span> are given by
+QEP的外部特征值<span class="math-inline">\mu</span>（<a href="node337.html#eq:shinvqep">9.17</a>）
+近似于原始QEP（<a href="node332.html#qep">9.1</a>）
+最接近移位<span class="math-inline">\sigma</span>的特征值<span class="math-inline">\lambda</span>。这些特征值<span class="math-inline">\lambda</span>由以下公式给出
 
 <div class="math-display">\sigma + \frac{1}{\mu}.</div>
 
-Again, the corresponding generalized ``linear'' eigenvalue problem
-in terms of <span class="math-inline">\lambda</span>, rather than <span class="math-inline">\mu</span>,  is
+同样，对应的广义“线性”特征值问题
+在<span class="math-inline">\lambda</span>而不是<span class="math-inline">\mu</span>的表示下，是
 
-<div class="math-display">\twobytwo{-\widehat{C}}{-\widehat{K}}{I}{0}\twobyone{x}{(\l......twobytwo{\widehat{M}}{0}{0}{I} \twobyone{x}{(\lambda-\sigma)x}</div>
+<div class="math-display">\begin{bmatrix}-\widehat{C} & -\widehat{K} \\ I & 0\end{bmatrix}\begin{bmatrix}x \\ (\lambda-\sigma)x\end{bmatrix} = \frac{1}{\lambda-\sigma}\begin{bmatrix}\widehat{M} & 0 \\ 0 & I\end{bmatrix} \begin{bmatrix}x \\ (\lambda-\sigma)x\end{bmatrix}</div>
 
-or
+或者
 
-<div class="math-display">\twobytwo{\widehat{C}}{\widehat{K}}{\widehat{K}}{0}\twobyon......idehat{M}}{0}{0}{\widehat{K}} \twobyone{x}{(\lambda-\sigma)x},</div>
+<div class="math-display">\begin{bmatrix}\widehat{C} & \widehat{K} \\ \widehat{K} & 0\end{bmatrix}\begin{bmatrix}x \\ (\lambda-\sigma)x\end{bmatrix} = \frac{1}{\lambda-\sigma}\begin{bmatrix}\widehat{M} & 0 \\ 0 & \widehat{K}\end{bmatrix} \begin{bmatrix}x \\ (\lambda-\sigma)x\end{bmatrix},</div>
 
-if the Hermitian of the matrix triplet <span class="math-inline">\{M,K,C\}</span> wants to be preserved.
+如果希望保留矩阵三元组<span class="math-inline">\{M,K,C\}</span>的厄米性。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5938"
+  href="node338.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5932"
+  href="node334.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5926"
+  href="node336.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5934"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5936"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5939" href="node338.html">QEP的Cayley变换</a>
+<b>上一级：</b><a name="tex2html5933" href="node334.html">谱变换在二次特征值问题中的应用</a>
+<b>上一节：</b><a name="tex2html5927" href="node336.html">位移QEP</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

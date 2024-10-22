@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6188" href="node354.html">一个Procrustes问题的示例</a>
-<b>上一级：</b><a name="tex2html6182" href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b>上一级：</b><a name="tex2html6182" href="node343.html">正交性约束下的非线性特征值问题</a>
 <b>上一节：</b><a name="tex2html6176" href="node352.html">同时对角化</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001844000000000000000"></a>
 <a name="sampleruns"></a>
-<br>
 数值示例
 </h2>
 
@@ -84,30 +81,34 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们展示这些示例及其详细输出结果。我们包含这些输出，以便读者可以检查其软件包副本是否正常执行。用户应在以下目录中运行 MATLAB（版本5或兼容版本）：
-
+<pre>
 &gt;&gt; !ls
 Fline.m       dgrad.m      grad.m             move.m       sg_min.m
 README        dimension.m  gradline.m         nosym.m      sg_newton.m
 clamp.m       dtangent.m   invdgrad_CG.m      partition.m  sg_prcg.m
 connection.m  examples     invdgrad_MINRES.m  sg_dog.m     tangent.m
 dFline.m      finitediff   ip.m               sg_frcg.m
-
+</pre>
 （注意，可能还存在额外的子目录<code>docs/</code>或<code>@cell/</code>。）
 
 <p>
 每个示例问题在<code>examples</code>子目录中都有相应的子目录。
 
+<pre>
 &gt;&gt; !ls examples
 jordan      ldatoy      procrustes  simdiag     simschur    tracemin
+</pre>
 
 这些子目录中的每一个都包含<span class="math-inline">F(Y)</span>（<span class="math-inline">dF(Y)</span>和<span class="math-inline">ddF(Y,H)</span>）的实现，设置<span class="math-inline">F(Y)</span>的全局参数（此函数必须在其他任何函数之前调用），一个用于生成初始猜测的<code>guess</code>函数，以及可能用于计算<span class="math-inline">F(Y)</span>、相关量或特定问题实例的一些辅助函数。
 
+<pre>
 &gt;&gt; !ls examples/ldatoy
 F.m           dF.m          guess.m
 Kinetic.m     ddF.m         parameters.m
 &gt;&gt; !ls examples/jordan
 Block.m       dBlock.m      ddF.m         guess.m       post.m
 F.m           dF.m          frank.m       parameters.m
+</pre>
 
 <p>
 我们在支持的优化模式（'newton'、'dog'、'frcg'和'prcg'）和'euclidean'度量下执行了这些示例。对于相同问题的不同实例，不同的模式可能表现最佳，因此读者不应认为某种特定模式在所有实例中都会表现出优越性能。
@@ -144,10 +145,8 @@ F.m           dF.m          frank.m       parameters.m
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6188" href="node354.html">一个Procrustes问题的示例</a>
-<b>上一级：</b><a name="tex2html6182" href="node343.html">Nonlinear Eigenvalue Problems with</a>
+<b>上一级：</b><a name="tex2html6182" href="node343.html">正交性约束下的非线性特征值问题</a>
 <b>上一节：</b><a name="tex2html6176" href="node352.html">同时对角化</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

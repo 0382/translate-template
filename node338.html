@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>QEP with Cayley Transform.</title>
+<title>QEP的Cayley变换</title>
 <meta charset="utf-8">
-<meta name="description" content="QEP with Cayley Transform.">
+<meta name="description" content="QEP的Cayley变换">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,52 +66,69 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html5951" href="node339.html">Numerical Methods for Solving</a>
+<b>下一节：</b><a name="tex2html5951" href="node339.html">线性化问题求解的数值方法</a>
 <b>上一级：</b><a name="tex2html5945" href="node334.html">谱变换在二次特征值问题中的应用</a>
-<b>上一节：</b><a name="tex2html5941" href="node337.html">Shift-and-Invert QEP.</a>
-  
-  
+<b>上一节：</b><a name="tex2html5941" href="node337.html">位移-逆QEP</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001823040000000000000"></a>
 <a name="43075"></a>
-<br>
-QEP with Cayley Transform.
+QEP的Cayley变换
 </h4>
-With the so-called Cayley transform,
+
+通过所谓的凯莱变换，
 
 <div class="math-display">\mu=\frac{\alpha\lambda-\beta}{\lambda-\tau},</div>
 
-where the parameters <span class="math-inline">\alpha</span>, <span class="math-inline">\beta</span>, and <span class="math-inline">\tau </span> are chosen such that
+其中参数<span class="math-inline">\alpha</span>、<span class="math-inline">\beta</span>和<span class="math-inline">\tau </span>的选择需满足
 
-<span class="math-inline">\alpha\tau-\beta\neq 1</span>, the original QEP&nbsp;(<a href="node332.html#qep">9.1</a>) becomes
+<span class="math-inline">\alpha\tau-\beta\neq 1</span>，原始的QEP（<a href="node332.html#qep">9.1</a>）变为
 
-<div class="math-display" id="eq:cayleyqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{262}</div>
+<div class="math-display" id="eq:cayleyqep">\left(\mu^2 \widehat{M} + \mu \widehat{C} + \widehat{K} \right) x = 0, \tag{9.18}</div>
 
-where
+其中
 
-<span class="math-inline">\widehat{M}=\tau^2 M+\tau C +K</span>,
+<span class="math-inline">\widehat{M}=\tau^2 M+\tau C +K</span>，
 
-<span class="math-inline">\widehat{C}=-2\tau\beta M -(\alpha\tau+\beta)C-2\alpha K</span>, and
+<span class="math-inline">\widehat{C}=-2\tau\beta M -(\alpha\tau+\beta)C-2\alpha K</span>，以及
 
-<span class="math-inline">\widehat{K}=\beta^2 M +\alpha\beta C +\alpha^2 K</span>.
-Eigenvalues <span class="math-inline">\lambda</span> of the original QEP&nbsp;(<a href="node332.html#qep">9.1</a>)
-close to the <em>antishift</em> <span class="math-inline">\tau </span> are
-transformed into large (in modulus) eigenvalues <span class="math-inline">\mu</span> of the QEP
-(<a href="node338.html#eq:cayleyqep">9.18</a>). Eigenvalues <span class="math-inline">\lambda</span> close to the <em>shift</em>
-<span class="math-inline">\beta/\alpha</span>
-correspond to eigenvalues <span class="math-inline">\mu</span> of (<a href="node337.html#eq:shinvqep">9.17</a>) close to <span class="math-inline">0</span>.
+<span class="math-inline">\widehat{K}=\beta^2 M +\alpha\beta C +\alpha^2 K</span>。
+原始QEP（<a href="node332.html#qep">9.1</a>）的特征值<span class="math-inline">\lambda</span>
+接近于<em>反移</em> <span class="math-inline">\tau </span> 的，
+被转化为QEP（<a href="node338.html#eq:cayleyqep">9.18</a>）的大（模数上）特征值<span class="math-inline">\mu</span>。
+接近于<em>移位</em>
+<span class="math-inline">\beta/\alpha</span>的特征值<span class="math-inline">\lambda</span>
+对应于（<a href="node337.html#eq:shinvqep">9.17</a>）中接近<span class="math-inline">0</span>的特征值<span class="math-inline">\mu</span>。
 
 <p>
-Note that the triple 
-<span class="math-inline">\{\widehat M,\widehat C,\widehat K\}</span> is symmetric
-if that is the case for the real triple <span class="math-inline">\{ M,C,K \}</span> and if <span class="math-inline">\alpha</span>, <span class="math-inline">\beta</span>,
-and <span class="math-inline">\tau </span> are real.
+需要注意的是，如果实三元组<span class="math-inline">\{ M,C,K \}</span>是对称的，并且<span class="math-inline">\alpha</span>、<span class="math-inline">\beta</span>和<span class="math-inline">\tau </span>是实数，
+那么三元组<span class="math-inline">\{\widehat M,\widehat C,\widehat K\}</span>也是对称的。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html5950"
+  href="node339.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html5944"
+  href="node334.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html5940"
+  href="node337.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html5946"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html5948"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html5951" href="node339.html">线性化问题求解的数值方法</a>
+<b>上一级：</b><a name="tex2html5945" href="node334.html">谱变换在二次特征值问题中的应用</a>
+<b>上一节：</b><a name="tex2html5941" href="node337.html">位移-逆QEP</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20
