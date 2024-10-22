@@ -66,16 +66,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6660" href="node385.html">A Brief Survey of</a>
-<b>上一级：</b><a name="tex2html6654" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>下一节：</b><a name="tex2html6660" href="node385.html">直接线性求解器简述</a>
+<b>上一级：</b><a name="tex2html6654" href="node379.html">矩阵向量与矩阵矩阵乘法</a>
 <b>上一节：</b><a name="tex2html6650" href="node383.html">CDS矩阵-向量乘积</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001923000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001923000000000000000"></a>
 <a name="sec:structure-matvec"></a>
-<br>
 结构化矩阵的快速矩阵-向量乘法
 </h2>
 
@@ -86,14 +84,28 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 范德蒙矩阵：
 
-<div class="math-display">V = \begin{bmatrix}1 & 1 & \ldots & 1 \\x_1 & x_2 & \ldots......ddots & \\x_1^{n-1} & x_2^{n-1} & \ldots & x_n^{n-1} \end{bmatrix},</div>
+<div class="math-display">
+V = \begin{bmatrix}
+1 & 1 & \ldots & 1 \\
+x_1 & x_2 & \ldots & x_n \\
+x_1^2 & x_2^2 & \ldots & x_n^2 \\
+\vdots & \vdots & \ddots & \vdots \\
+x_1^{n-1} & x_2^{n-1} & \ldots & x_n^{n-1}
+\end{bmatrix},</div>
 
 
 <p>
 托普利茨矩阵：
 
-<div class="math-display">T = \begin{bmatrix}t_0 & t_{-1} & \ldots &t_{2-n}& t_{1-n} \...... & t_{-1} \\t_{n-1 } & t_{n-2 } & \ldots & t_1 & t_0 \end{bmatrix},</div>
-
+<div class="math-display">
+T = \begin{bmatrix}
+t_0 & t_{-1} & \ldots & t_{2-n} & t_{1-n} \\
+t_1 & t_0 & t_{-1} & \ldots & t_{2-n} \\
+\vdots & t_1 & t_0 & \ddots & \vdots \\
+t_{n-2} & \vdots & \ddots & \ddots & t_{-1} \\
+t_{n-1} & t_{n-2} & \ldots & t_1 & t_0
+\end{bmatrix},
+</div>
 
 <p>
 汉克尔矩阵： 
@@ -135,11 +147,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 循环矩阵是一种特殊的托普利茨矩阵，形式为
 
-<div class="math-display">C_n = \begin{bmatrix}a_0 & a_{-1} & \ldots &a_{2-n}& a_{1-n}......& a_{-1} \\a_{n-1 } & a_{n-2 } & \ldots & a_1 & a_0 \end{bmatrix},</div>
+<div class="math-display">
+C_n = \begin{bmatrix}
+a_0 & a_{-1} & \ldots &a_{2-n}& a_{1-n} \\
+a_1 & a_0 & a_{-1} & \ldots & a_{2-n} \\
+\vdots & a_1 & a_0 & \ddots & \vdots \\
+a_{n-2} & \vdots & \ddots & \ddots & a_{-1} \\
+a_{n-1} & a_{n-2} & \ldots & a_1 & a_0
+\end{bmatrix},</div>
 
 其性质为<span class="math-inline">a_{-k}=a_{n-k}</span>，对于<span class="math-inline">1\le k \le n-1</span>。循环矩阵通过FFT对角化，即
 
-<div class="math-display">C_n=F_n^* \cdot \diag(F_n a) \cdot F_n,</div>
+<div class="math-display">C_n=F_n^* \cdot \mathrm{diag}(F_n a) \cdot F_n,</div>
 
 其中<span class="math-inline">a=[a_0,a_1,\ldots,a_n]</span>，<span class="math-inline">F_n</span>是傅里叶矩阵
 
@@ -148,24 +167,39 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 
-		 		 (1) 		 		  <span class="math-inline">f =F_nx</span>,  
-<br>(2) 		 		 <span class="math-inline">g =F_na</span>,  
-<br>(3) 		 		 <span class="math-inline">z^T=[f_1g_1,f_2g_2,\ldots,f_n g_n]</span>, 
-<br>(4) 		 		 <span class="math-inline">y=F_n^*z</span>. 
+		(1) <span class="math-inline">f =F_nx</span>,  
+<br>(2) <span class="math-inline">g =F_na</span>,  
+<br>(3) <span class="math-inline">z^T=[f_1g_1,f_2g_2,\ldots,f_n g_n]</span>, 
+<br>(4) <span class="math-inline">y=F_n^*z</span>. 
 
 
 <p>
 现在，如果<span class="math-inline">T_n</span>是一个托普利茨矩阵
 
-<div class="math-display">T_n = \begin{bmatrix}t_0 & t_{-1} & \ldots &t_{2-n}& t_{1-n}...... & t_{-1} \\t_{n-1 } & t_{n-2 } & \ldots & t_1 & t_0 \end{bmatrix},</div>
+<div class="math-display">
+T = \begin{bmatrix}
+t_0 & t_{-1} & \ldots & t_{2-n} & t_{1-n} \\
+t_1 & t_0 & t_{-1} & \ldots & t_{2-n} \\
+\vdots & t_1 & t_0 & \ddots & \vdots \\
+t_{n-2} & \vdots & \ddots & \ddots & t_{-1} \\
+t_{n-1} & t_{n-2} & \ldots & t_1 & t_0
+\end{bmatrix},
+</div>
 
 那么乘积<span class="math-inline">T_nx</span>可以通过首先将<span class="math-inline">T_n</span>嵌入到一个<span class="math-inline">2n\times 2n</span>循环矩阵<span class="math-inline">C_{2n}</span>中，在<span class="math-inline">O(n\log n)</span>时间内计算，因为
 
-<div class="math-display">C_{2n} \cdot\begin{bmatrix}y\\ 0\end{bmatrix}\equiv\begin{bmatrix}T_......\cdot\begin{bmatrix}y\\ 0\end{bmatrix}= \begin{bmatrix}T_ny\\ B_n y\end{bmatrix}</div>
+<div class="math-display">
+C_{2n} \cdot\begin{bmatrix}y\\ 0\end{bmatrix}\equiv
+\begin{bmatrix}T_n & B_n \\ B_n & T_n\end{bmatrix}\cdot\begin{bmatrix}y\\ 0\end{bmatrix}= \begin{bmatrix}T_ny\\ B_n y\end{bmatrix}</div>
 
 并且
 
-<div class="math-display">B_n = \begin{bmatrix}0 & t_{n-1} & \ldots & t_2 & t_1 \\t......ts & t_{n-1} \\t_{-1} & t_{-2} & \ldots & t_{1-n}& 0 \end{bmatrix}.</div>
+<div class="math-display">B_n = \begin{bmatrix}0 & t_{n-1} & \ldots & t_2 & t_1 \\
+t_{1-n} & 0 & t_{n-1} & \ldots & t_2 \\
+\vdots & t_{1-n} & 0 & \ddots & \vdots \\
+t_{-2} & \vdots & \ddots & \ddots & t_{n-1} \\
+t_{-1} & t_{-2} & \ldots & t_{1-n} & 0
+\end{bmatrix}.</div>
  
 
 <p>
@@ -188,11 +222,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6660" href="node385.html">A Brief Survey of</a>
-<b>上一级：</b><a name="tex2html6654" href="node379.html">Matrix-Vector and Matrix-Matrix Multiplications</a>
+<b>下一节：</b><a name="tex2html6660" href="node385.html">直接线性求解器简述</a>
+<b>上一级：</b><a name="tex2html6654" href="node379.html">矩阵向量与矩阵矩阵乘法</a>
 <b>上一节：</b><a name="tex2html6650" href="node383.html">CDS矩阵-向量乘积</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

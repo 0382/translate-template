@@ -69,13 +69,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html6636" href="node383.html">CDS矩阵-向量乘积</a>
 <b>上一级：</b><a name="tex2html6630" href="node381.html">稀疏BLAS</a>
 <b>上一节：</b><a name="tex2html6624" href="node381.html">稀疏BLAS</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h3><a name="SECTION001922100000000000000"></a>
+<!--End of Navigation Panel-->
+<h3><a name="SECTION001922100000000000000"></a>
 <a name="sec:sparse_blas:rcsmvp"></a>
-<br>
 CRS格式矩阵-向量乘积
 </h3>
 
@@ -85,17 +83,16 @@ CRS格式矩阵-向量乘积
 <div class="math-display">y_i=\sum_j a_{i,j}x_j,</div>
 
 因为这会遍历矩阵 <span class="math-inline">A</span> 的行。对于一个 <span class="math-inline">n \times n</span> 的矩阵 <span class="math-inline">A</span>，矩阵-向量乘法由以下公式给出：
-<div align="CENTER">
-</div>
+
+<pre>
    for i = 1, n 
        y(i)  = 0 
        for j = row_ptr(i), row_ptr(i+1) - 1
            y(i) = y(i) + val(j) * x(col_ind(j))
        end;
    end;
+</pre>
 
-<div align="CENTER">
-</div>
 由于这种方法仅乘以非零矩阵元素，运算次数是 <span class="math-inline">A</span> 中非零元素数量的两倍，与密集运算所需的 <span class="math-inline">2n^2</span> 相比，这是一个显著的节省。
 
 <p>
@@ -109,6 +106,7 @@ CRS格式矩阵-向量乘积
 
 涉及 <span class="math-inline">A^T</span> 的矩阵-向量乘法随后由以下公式给出：
 
+<pre>
    for i = 1, n
        y(i) =  0
    end;
@@ -117,7 +115,7 @@ CRS格式矩阵-向量乘积
            y(col_ind(i)) = y(col_ind(i)) + val(i) * x(j)
        end;
    end;
-
+</pre>
 
 <p>
 上述两种矩阵-向量乘积在结构上大致相同，并且都使用间接寻址。因此，它们在任何给定计算机上的向量化特性是相同的。然而，第一个乘积 (<span class="math-inline">y=Ax</span>) 在内存访问模式上更为有利，因为它（每次外循环迭代）读取两个数据向量（矩阵 <span class="math-inline">A</span> 的一行和输入向量 <span class="math-inline">x</span>）并写入一个标量。转置乘积 (<span class="math-inline">y=A^Tx</span>) 则相反，读取输入向量的一个元素和矩阵 <span class="math-inline">A</span> 的一行，并且同时读取和写入结果向量 <span class="math-inline">y</span>。除非实现这些方法的机器具有三条独立的内存路径（例如，Cray的向量计算机），否则内存流量将限制性能。这对于基于RISC的架构是一个重要的考虑因素。
@@ -143,8 +141,6 @@ CRS格式矩阵-向量乘积
 <b>下一节：</b><a name="tex2html6636" href="node383.html">CDS矩阵-向量乘积</a>
 <b>上一级：</b><a name="tex2html6630" href="node381.html">稀疏BLAS</a>
 <b>上一节：</b><a name="tex2html6624" href="node381.html">稀疏BLAS</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -67,15 +67,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6547" href="node377.html">锯齿对角存储</a>
-<b>上一级：</b><a name="tex2html6541" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一级：</b><a name="tex2html6541" href="node372.html">稀疏矩阵存储格式</a>
 <b>上一节：</b><a name="tex2html6535" href="node375.html">块压缩行存储</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION001914000000000000000"></a>
 <a name="sec:data-structures:cds"></a><a name="46066"></a>
-<br>
 压缩对角存储
 </h2>
 
@@ -88,11 +85,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 通常，带状格式涉及存储一些零。CDS 格式甚至可能包含一些根本不对应于矩阵元素的数组元素。考虑由以下定义的非对称矩阵 <span class="math-inline">A</span>：
 
-<div class="math-display" id="sparseA2">A =\left[\begin{array}{rrrrrr}10 & -3 & 0 & 0 & 0 & 0 \\ ...... 9 & 9 & 13 \\0 & 0 & 0 & 0 & 2 & -1\end{array}\right] ~. \tag{270}</div>
+<div class="math-display" id="sparseA2">A =\left[\begin{array}{rrrrrr} 10 & -3 & 0 & 0 & 0 & 0 \\  3 & 9 & 6 & 0 & 0 & 0 \\  0 & 7 & 8 & 7 & 0 & 0 \\  0 & 0 & 8 & 7 & 5 & 0\\
+  0 & 0 & 0 & 9 & 9 & 13 \\  0 & 0 & 0 & 0 & 2 & -1 \end{array}\right]. \tag{10.2}</div>
 
 使用 CDS 格式，我们将矩阵 <span class="math-inline">A</span> 存储在一个维度为 (6,-1:1) 的数组中，使用以下映射：
 
-<div class="math-display" id="eqn:diag-conversion">{\tt val(i,j)}=a_{i,i+j}.  \tag{271}</div>
+<div class="math-display" id="eqn:diag-conversion">{\tt val(i,j)}=a_{i,i+j}.  \tag{10.3}</div>
 
 因此，val(:,:) 数组的行是：
 <div align="CENTER">
@@ -104,10 +102,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <td align="RIGHT">8</td>
 <td align="RIGHT">9</td>
 <td align="RIGHT">2</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
 </tr>
 <tr><td align="RIGHT">val(:, 0)</td>
 <td align="RIGHT">10</td>
@@ -116,10 +110,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <td align="RIGHT">7</td>
 <td align="RIGHT">9</td>
 <td align="RIGHT">-1</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
 </tr>
 <tr><td align="RIGHT">val(:,+1)</td>
 <td align="RIGHT">-3</td>
@@ -128,10 +118,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <td align="RIGHT">5</td>
 <td align="RIGHT">13</td>
 <td align="RIGHT">0</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
 </tr>
 </table>
 </div>
@@ -156,10 +142,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6547" href="node377.html">锯齿对角存储</a>
-<b>上一级：</b><a name="tex2html6541" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一级：</b><a name="tex2html6541" href="node372.html">稀疏矩阵存储格式</a>
 <b>上一节：</b><a name="tex2html6535" href="node375.html">块压缩行存储</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -66,16 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6648" href="node384.html">Fast Matrix-Vector Multiplication for</a>
+<b>下一节：</b><a name="tex2html6648" href="node384.html">快速矩阵-向量乘法在结构化矩阵中的应用</a>
 <b>上一级：</b><a name="tex2html6642" href="node381.html">稀疏BLAS</a>
 <b>上一节：</b><a name="tex2html6638" href="node382.html">CRS矩阵-向量乘积</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h3><a name="SECTION001922200000000000000"></a>
 <a name="sec:sparse_blas:cdsmvp"></a><a name="46224"></a>
-<br>
 CDS 矩阵-向量乘积
 </h3>
 
@@ -91,10 +88,11 @@ CDS 矩阵-向量乘积
 <p>
 该算法现在将包含一个双重嵌套循环，外层循环枚举对角线 diag=-p,q，其中 <span class="math-inline">p</span> 和 <span class="math-inline">q</span> 分别是主对角线左侧和右侧的（非负）对角线数量。内层循环的边界由以下要求决定：
 
-<div class="math-display">1\leq {\tt i},{\tt i+j}\leq n.\pagebreak</div>
+<div class="math-display">1\leq {\tt i},{\tt i+j}\leq n.</div>
 
 算法变为
 
+<pre>
    for i = 1, n
        y(i) = 0
    end;
@@ -103,25 +101,21 @@ CDS 矩阵-向量乘积
            y(loc) = y(loc) + val(loc,diag) * x(loc+diag)
        end;
    end;
-
+</pre>
 
 <p>
 转置矩阵-向量乘积 <span class="math-inline">y=A^Tx</span> 是上述算法的一个微小变体。使用更新公式
-<p></p>
-<div align="CENTER">
 
-<img
- width="190" height="52" border="0"
- src="img3591.png"
- alt="\begin{eqnarray*}
-y_i&amp;\leftarrow&amp;y_i+a_{i+j,i}x_j \\
-&amp;=&amp;y_i+a_{i+j,i+j-j}x_{i+j}
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+y_i&\leftarrow y_i+a_{j,i}x_j \\
+&=y_i+a_{j,i+j-j}x_{i+j}
+\end{aligned}
+</div>
+
 我们得到
 
+<pre>
    for i = 1, n
        y(i) = 0
    end;
@@ -130,6 +124,7 @@ y_i&amp;\leftarrow&amp;y_i+a_{i+j,i}x_j \\
            y(loc) = y(loc) + val(loc+diag, -diag) * x(loc+diag)
        end;
    end;
+</pre>
 
 基于 CDS 的矩阵-向量乘积 <span class="math-inline">y=Ax</span>（或 <span class="math-inline">y=A^Tx</span>）的内存访问在内层迭代中涉及三个向量。另一方面，不存在间接寻址，并且该算法可通过向量长度实质上为矩阵阶数 <span class="math-inline">n</span> 的向量化实现。由于数据访问的规律性，大多数机器可以通过保持三个基址寄存器并使用简单的偏移寻址来高效执行此算法。
 
@@ -151,11 +146,9 @@ y_i&amp;\leftarrow&amp;y_i+a_{i+j,i}x_j \\
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6648" href="node384.html">Fast Matrix-Vector Multiplication for</a>
+<b>下一节：</b><a name="tex2html6648" href="node384.html">快速矩阵-向量乘法在结构化矩阵中的应用</a>
 <b>上一级：</b><a name="tex2html6642" href="node381.html">稀疏BLAS</a>
 <b>上一节：</b><a name="tex2html6638" href="node382.html">CRS矩阵-向量乘积</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

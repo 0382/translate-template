@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Inner Products.</title>
+<title>内积</title>
 <meta charset="utf-8">
-<meta name="description" content="Inner Products.">
+<meta name="description" content="内积">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,42 +66,48 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6776" href="node393.html">Vector Updates.</a>
-<b>上一级：</b><a name="tex2html6770" href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
-<b>上一节：</b><a name="tex2html6764" href="node391.html">Parallelism &nbsp; J.&nbsp;Dongarra and</a>
-  
-  
+<b>下一节：</b><a name="tex2html6776" href="node393.html">向量更新</a>
+<b>上一级：</b><a name="tex2html6770" href="node391.html">并行性</a>
+<b>上一节：</b><a name="tex2html6764" href="node391.html">并行性</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION001950010000000000000"></a>
 <a name="46532"></a>
-<br>
-Inner Products.
+内积
 </h4>
 
 <p>
-The computation of an inner product of two vectors
-can be easily parallelized; each processor computes the
-inner product of corresponding segments of each vector
-(local inner products (LIPs)).
-On distributed memory machines the LIPs then
-have to be sent to other processors
-to be combined for the global inner product. This can be done either
-with an all-to-all send where every processor performs the summation
-of the LIPs, or by a global accumulation in one processor, followed by
-a broadcast of the final result.
-Clearly, this step requires communication.
+计算两个向量的内积可以轻松并行化；每个处理器计算每个向量相应部分的内积（局部内积(LIPs)）。
+在分布式内存机器上，这些局部内积随后需要发送给其他处理器，以组合成全局内积。这可以通过所有处理器进行的全局求和来实现，或者由一个处理器进行全局累加，然后广播最终结果。显然，这一步需要通信。
 
 <p>
-For shared memory machines, the accumulation of LIPs can be
-implemented as a critical section where all processors add their local
-result in turn to the global result, or as a piece of serial
-code, where one processor performs the summations.
+对于共享内存机器，局部内积的累加可以实现为临界区，所有处理器依次将其局部结果添加到全局结果中，或者作为一段串行代码，由一个处理器执行求和操作。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6775"
+  href="node393.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6769"
+  href="node391.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6763"
+  href="node391.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6771"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6773"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6776" href="node393.html">向量更新</a>
+<b>上一级：</b><a name="tex2html6770" href="node391.html">并行性</a>
+<b>上一节：</b><a name="tex2html6764" href="node391.html">并行性</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

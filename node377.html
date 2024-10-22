@@ -67,15 +67,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6561" href="node378.html">天际线存储</a>
-<b>上一级：</b><a name="tex2html6555" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一级：</b><a name="tex2html6555" href="node372.html">稀疏矩阵存储格式</a>
 <b>上一节：</b><a name="tex2html6549" href="node376.html">压缩对角存储</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION001915000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION001915000000000000000"></a>
 <a name="sec:data-structures:jds"></a><a name="46099"></a>
-<br>
 锯齿对角存储格式
 </h2>
 
@@ -86,16 +84,107 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 一种简化的JDS形式，称为ITPACK存储或普渡存储，可以描述如下。对于以下非对称矩阵，所有元素都向左移动：
 
-<div class="math-display">\left[\begin{array}{rrrrrr}10 & -3 & 0 & 1 & 0 & 0 \\0 ......\\6 & 7 & 5 & 4 \\9 & 13 \\5 & -1\end{array}\right]</div>
+<div class="math-display">
+\left[\begin{array}{rrrrrr}
+10 & -3 & 0 & 1 & 0 & 0 \\
+0 & 9 & 6 & 0 & -2 & 0 \\
+3 & 0 & 8 & 7 & 0 & 0 \\
+0 & 6 & 0 & 7 & 5 & 4 \\
+0 & 0 & 0 & 0 & 9 & 13 \\
+0 & 0 & 0 & 0 & 5 & -1 
+\end{array}\right] \rightarrow \left[\begin{array}{rrrr}
+10 & -3 & 1 &  \\
+9 & 6 & -2 &  \\
+3 & 8 & 7 &  \\
+6 & 7 & 5 & 4 \\
+9 & 13 \\
+5 & -1
+\end{array}\right]</div>
 
 之后，列被连续存储。所有行都在右侧用零填充，以使它们具有相同的长度。对应于矩阵元素数组val(:,:)，还存储了一个列索引数组col_ind(:,:)：
 
 <p>
+<div align="center">
+<table CELLPADDING=3 border="1">
+<tr>
+<td align="right">val(:, 1)</td>
+<td align="right">10</td>
+<td align="right">9</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="right">val(:, 2)</td>
+<td align="right">-3</td>
+<td align="right">6</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">13</td>
+<td align="right">-1</td>
+</tr>
+<tr>
+<td align="right">val(:, 3)</td>
+<td align="right">1</td>
+<td align="right">-2</td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">val(:, 4)</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</table>
+</div>
 
-<div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\vert......{\tt val}(:,4) & 0 & 0 & 0 & 4 & 0 & 0 \\ \hline\end{array},</div>
-
-
-<div class="math-display">\begin{array}{\vert r\vert r\vert r\vert r\vert r\vert r\vert...... col\_ind}(:,4) & 0 & 0 & 0 & 6 & 0 & 0 \\ \hline\end{array}.</div>
+<div align="center">
+<table CELLPADDING=3 border="1">
+<tr>
+<td align="right">col_ind(:, 1)</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="right">col_ind(:, 2)</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">col_ind(:, 3)</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="right">col_ind(:, 4)</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</table>
+</div>
 
 
 <p>
@@ -111,63 +200,59 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 上述矩阵<span class="math-inline">A</span>在使用线性数组{perm, jdiag, col_ind, jd_ptr}的JDS格式如下（锯齿对角线用分号分隔）：
 
 <p>
-<div align="CENTER">
+<div align="center">
 <table CELLPADDING=3 border="1">
-<tr><td align="RIGHT">jdiag</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">7</td>
-<td align="RIGHT">8</td>
-<td align="RIGHT">10</td>
-<td align="RIGHT">2;</td>
-<td align="RIGHT">9</td>
-<td align="RIGHT">9</td>
-<td align="RIGHT">8 <span class="math-inline">\cdots</span> -1;</td>
-<td align="RIGHT">9</td>
-<td align="RIGHT">6</td>
-<td align="RIGHT">7</td>
-<td align="RIGHT">5;</td>
-<td align="RIGHT">13</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
+<tr><td align="right">jdiag</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">2;</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">8 <span class="math-inline">\cdots</span> -1;</td>
+<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">5;</td>
+<td align="right">13</td>
 </tr>
-<tr><td align="RIGHT">col_ind</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">5;</td>
-<td align="RIGHT">4</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3 <span class="math-inline">\cdots</span> 6;</td>
-<td align="RIGHT">5</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">4</td>
-<td align="RIGHT">5;</td>
-<td align="RIGHT">6</td>
-<td align="RIGHT">&nbsp;</td>
-<td align="RIGHT">&nbsp;</td>
+<tr><td align="right">col_ind</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">5;</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">3 <span class="math-inline">\cdots</span> 6;</td>
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">5;</td>
+<td align="right">6</td>
 </tr>
 </table> 
 <br>
 <br>
 <table CELLPADDING=3 border="1">
-<tr><td align="RIGHT">perm</td>
-<td align="RIGHT">5</td>
-<td align="RIGHT">2</td>
-<td align="RIGHT">3</td>
-<td align="RIGHT">4</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">6</td>
+<tr><td align="right">perm</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">6</td>
 </tr>
 </table> 
 <table CELLPADDING=3 border="1">
-<tr><td align="RIGHT">jd_ptr</td>
-<td align="RIGHT">1</td>
-<td align="RIGHT">7</td>
-<td align="RIGHT">13</td>
-<td align="RIGHT">17</td>
+<tr><td align="right">jd_ptr</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">13</td>
+<td align="right">17</td>
 </tr>
 </table> &nbsp;.
 
@@ -194,10 +279,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6561" href="node378.html">天际线存储</a>
-<b>上一级：</b><a name="tex2html6555" href="node372.html">Sparse Matrix Storage Formats</a>
+<b>上一级：</b><a name="tex2html6555" href="node372.html">稀疏矩阵存储格式</a>
 <b>上一节：</b><a name="tex2html6549" href="node376.html">压缩对角存储</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
