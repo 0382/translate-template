@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html3526"
-  href="node185.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html3520"
-  href="node177.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html3516"
-  href="node183.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html3522"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html3524"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html3526" href="node185.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html3520" href="node177.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html3516" href="node183.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html3522" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html3524" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html3527" href="node185.html">残差向量</a>
 <b>上一级：</b><a name="tex2html3521" href="node177.html">稳定性与准确性评估</a>
@@ -75,8 +70,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 某些<span class="math-inline">A</span>和<span class="math-inline">B</span>的组合是正定矩阵</a>
 </h2>
 
-这是关于确定矩阵对的一般情况，现在<span class="math-inline">B</span>可能是奇异的。为了能够处理无穷大的特征值，通常的做法[<a
- href="node421.html#stsu90">425</a>]是引入一个齐次表示法
+这是关于确定矩阵对的一般情况，现在<span class="math-inline">B</span>可能是奇异的。为了能够处理无穷大的特征值，通常的做法[<a href="node421.html#stsu90">425</a>]是引入一个齐次表示法
 通过一对非零数<span class="math-inline">(\alpha,\beta)</span>来表示特征值<span class="math-inline">\lambda</span>：
 
 <div class="math-display">\lambda\equiv\alpha/\beta, \quad\quad \vert\alpha\vert^2+\vert\beta\vert^2 \gt 0.</div>
@@ -97,16 +91,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <div class="math-display">\gamma(A,B)\equiv\min_{\Vert x\Vert _2=1}\sqrt{ (x^*Ax)^2+(x^*Bx)^2 } \gt 0.</div>
 
-可以证明[<a
- href="node421.html#stsu90">425</a>]，如果<span class="math-inline">\{A,B\}</span>是一个确定对，那么
+可以证明[<a href="node421.html#stsu90">425</a>]，如果<span class="math-inline">\{A,B\}</span>是一个确定对，那么
 <ul>
 <li>存在一个<span class="math-inline">\phi\in[0,2\pi)</span>使得<span class="math-inline">B_{\phi}</span>是<em>正定</em>的，并且<span class="math-inline">\gamma(A,B)=\lambda_{\min}(B_{\phi})</span>，即<span class="math-inline">B_{\phi}</span>的最小特征值，其中
 
 <div class="math-display" id="eq:AB-phi">A_{\phi}= A\cos\phi-B\sin\phi, \quad B_{\phi}= A\sin\phi+B\cos\phi. \tag{5.36}</div>
 
-读者可以参考[<a
- href="node421.html#craw:86">86</a>,<a
- href="node421.html#crmo:83">87</a>]了解实现这种<span class="math-inline">B_{\phi}</span>的算法，这反过来又产生了估计误差界限所需的<span class="math-inline">\gamma(A,B)</span>的下界。
+读者可以参考[<a href="node421.html#craw:86">86</a>,<a href="node421.html#crmo:83">87</a>]了解实现这种<span class="math-inline">B_{\phi}</span>的算法，这反过来又产生了估计误差界限所需的<span class="math-inline">\gamma(A,B)</span>的下界。
 </li>
 <li>存在一个<span class="math-inline">n \times n</span>的可逆矩阵<span class="math-inline">X</span>使得
 
@@ -122,8 +113,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 分解(<a href="node184.html#eq:eigd-pdp">5.37</a>)和(<a href="node184.html#eq:Lambda-AB">5.38</a>)
 给出了关于底层特征值问题的完整图景。实际上，所有特征值都由对<span class="math-inline">(\alpha_i,\beta_i)</span>给出，对应的特征向量是<span class="math-inline">Xe_i</span>。如果，此外，
 在(<a href="node184.html#eq:eigd-pdp">5.37</a>)和(<a href="node184.html#eq:Lambda-AB">5.38</a>)中
-对于所有<span class="math-inline">i</span>，<span class="math-inline">\vert\alpha_i\vert^2 + \vert\beta_i\vert^2=1</span>，那么[<a
- href="node421.html#stew:79a">423</a>]
+对于所有<span class="math-inline">i</span>，<span class="math-inline">\vert\alpha_i\vert^2 + \vert\beta_i\vert^2=1</span>，那么[<a href="node421.html#stew:79a">423</a>]
 
 <div class="math-display" id="eq:eigd-pdp-X">\Vert X\Vert _2\le\frac 1{\sqrt{\gamma(A,B)}},\quad\Vert X^{-1}\Vert _2\le\frac {\Vert(A,B)\Vert _2}{\sqrt{\gamma(A,B)}}. \tag{5.39}</div>
 
@@ -140,21 +130,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ul>
 <!--End of Table of Child-Links-->
 <hr><!--Navigation Panel-->
-<a name="tex2html3526"
-  href="node185.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html3520"
-  href="node177.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html3516"
-  href="node183.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html3522"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html3524"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html3526" href="node185.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html3520" href="node177.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html3516" href="node183.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html3522" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html3524" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html3527" href="node185.html">残差向量</a>
 <b>上一级：</b><a name="tex2html3521" href="node177.html">稳定性与准确性评估</a>

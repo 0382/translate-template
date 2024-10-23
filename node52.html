@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html1481"
-  href="node53.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html1475"
-  href="node48.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html1469"
-  href="node51.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html1477"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html1479"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html1481" href="node53.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html1475" href="node48.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html1469" href="node51.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html1477" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html1479" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html1482" href="node53.html">条件数</a>
 <b>上一级：</b><a name="tex2html1476" href="node48.html">非厄米特征问题</a>
@@ -82,21 +77,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们将讨论四种特征分解，或者说四种与矩阵<span class="math-inline">A</span>相似的矩阵，它们在解决特征问题时更为简便。第一种是<em>对角形式</em>，仅在存在<span class="math-inline">n</span>个独立特征向量时才存在。第二种是<em>约当形式</em>，它将对角形式推广到所有矩阵。它可能非常病态（实际上，它可能会不连续变化），因此对于数值计算，我们通常使用第三种，即<em>舒尔形式</em>，它在计算上更经济且更稳定。我们简要提及第四种，我们称之为<em>约当-舒尔形式</em><sup><a href="#footnote-Jordan-Schur">1</a></sup>，它与舒尔形式一样稳定，但计算了约当形式提供的关于不变子空间的一些详细信息。
 
 <p>
-定义 
+定义
 <span class="math-inline">\Lambda = {\rm diag}(\lambda_1 ,\ldots, \lambda_n)</span>。
-如果存在<span class="math-inline">n</span>个独立的右特征向量 
+如果存在<span class="math-inline">n</span>个独立的右特征向量
 <span class="math-inline">x_1,\ldots,x_n</span>，
 我们定义 <span class="math-inline">X = [x_1,\ldots,x_n]</span>。
 <span class="math-inline">X</span>被称为<span class="math-inline">A</span>的<em>特征向量矩阵</em>。
-<span class="math-inline">n</span>个等式 
+<span class="math-inline">n</span>个等式
 <span class="math-inline">A x_i = \lambda_i x_i</span> 对于 <span class="math-inline">i=1,\ldots,n</span> 也可以写成
 
-<span class="math-inline">AX = X \Lambda</span> 或 
+<span class="math-inline">AX = X \Lambda</span> 或
 <span class="math-inline">A = X \Lambda X^{-1}</span>。如下分解
 
 <div class="math-display">A = X \Lambda X^{-1}</div>
 
-被称为<span class="math-inline">A</span>的<em>对角形式</em>。注意 
+被称为<span class="math-inline">A</span>的<em>对角形式</em>。注意
 <span class="math-inline">X^{-1}A = \Lambda X^{-1}</span>。
 令 <span class="math-inline">y_i^*</span> 表示 <span class="math-inline">X^{-1}</span> 的第<span class="math-inline">i</span>行，
 我们可以看到 <span class="math-inline">y_i^*A = \lambda y_i^*</span>。换句话说，
@@ -104,16 +99,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 因此，如果<span class="math-inline">A</span>有<span class="math-inline">n</span>个独立的特征向量，那么它与对角矩阵<span class="math-inline">\Lambda</span>相似。在这种情况下，我们称<span class="math-inline">A</span>是<em>可对角化的</em>。
 
 <p>
-如果我们取<span class="math-inline">X</span>的<span class="math-inline">k</span>列（例如 
-<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> = 
+如果我们取<span class="math-inline">X</span>的<span class="math-inline">k</span>列（例如
+<span class="math-inline">\hat{X}= X(:,[2,3,5])</span> =
 第2、3和5列），这些列张成了<span class="math-inline">A</span>的一个不变子空间。
 如果我们取相应的子矩阵 <span class="math-inline">\hat{\Lambda}= {\rm diag}(\lambda_2 , \lambda_3 , \lambda_5)</span>
 从<span class="math-inline">\Lambda</span>中，以及<span class="math-inline">X^{-1}</span>的相应三行（例如 <span class="math-inline">\hat{Y}^* = X^{-1}([2,3,5],:)</span>），
-我们可以写出相应的<em>部分对角形式</em>为 
+我们可以写出相应的<em>部分对角形式</em>为
 <span class="math-inline">A \hat{X}= \hat{X}\hat{\Lambda}</span> 或
 
 <span class="math-inline">\hat{Y}^* A \hat{X}= \hat{\Lambda}</span>。如果<span class="math-inline">\hat{X}</span>中的列被张成同一不变子空间的<span class="math-inline">k</span>个不同向量替换，我们得到
-一个不同的部分特征分解 
+一个不同的部分特征分解
 <span class="math-inline">A \check{X}= \check{X}\check{A}</span>，
 其中<span class="math-inline">\check{A}</span>是一个<span class="math-inline">k</span>乘<span class="math-inline">k</span>矩阵，其特征值与<span class="math-inline">\hat{\Lambda}</span>相同，尽管
 <span class="math-inline">\check{A}</span>可能不是对角的。下面讨论的其他特征分解也可以通过类似的过程产生部分特征分解。
@@ -135,30 +130,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在主对角线上，第一上对角线上为1。
 <span class="math-inline">J_i</span>有且只有一个独立的右和左特征向量。
 <span class="math-inline">A(0)</span>是一个2乘2的约当块，其单个特征值为0，
-并且 
+并且
 <span class="math-inline">A(0) + \lambda_i I</span> 是一个2乘2的约当块，其单个特征值为<span class="math-inline">\lambda_i</span>。
 可以证明，约当形式明确描述了<span class="math-inline">A</span>的所有可能不变子空间，这些子空间由<span class="math-inline">X</span>的某些列子集张成[<a href="node421.html#gant59">187</a>]。
 
 <p>
 不幸的是，约当形式通常不适用于数值计算。以下是两个原因。首先，它可能随着<span class="math-inline">A</span>的变化而不连续变化。例如，矩阵<span class="math-inline">J</span>对于<span class="math-inline">A(\epsilon)</span>，
 
-<span class="math-inline">\epsilon \neq 0</span> 是 
+<span class="math-inline">\epsilon \neq 0</span> 是
 <span class="math-inline">{\rm diag}(+ \epsilon , - \epsilon)</span>，但对于<span class="math-inline">A(0)</span>，<span class="math-inline">J=A(0)</span>本身。其次，特征向量矩阵<span class="math-inline">X</span>
 可能非常病态，即难以准确求逆。
 在<span class="math-inline">A(\epsilon)</span>的情况下，<span class="math-inline">X</span>的条件数增长为<span class="math-inline">1/\epsilon</span>。
 
 <p>
-因此，我们更常用形式为 
+因此，我们更常用形式为
 
 <div class="math-display">A = QTQ^*,</div>
 
 的特征分解，其中<span class="math-inline">Q</span>是酉（或正交）相似变换，<span class="math-inline">T</span>是三角形（或准三角形）。这被称为<span class="math-inline">A</span>的<em>舒尔形式</em>。
-<a name="1585"></a> 
+<a name="1585"></a>
 当<span class="math-inline">A</span>是复数，或实数且所有特征值都是实数时，
 <span class="math-inline">T</span>是三角形的，其对角线上有<span class="math-inline">A</span>的特征值。
 当<span class="math-inline">A</span>是实数且有复数特征值，<span class="math-inline">Q</span>是实数且正交时，
 <span class="math-inline">T</span>不可能是实数和三角形的。不过，我们可以允许对角线上出现特征值为复数的2乘2块，其我们称之为<em>准三角形形式</em>。
-为了简化陈述，我们仅考虑复数情况，此时<span class="math-inline">T</span>是三角形的。令 
+为了简化陈述，我们仅考虑复数情况，此时<span class="math-inline">T</span>是三角形的。令
 <span class="math-inline">\lambda_1 = T_{11},\ldots,\lambda_n = T_{nn}</span> 为对角线上出现的特征值顺序；每种顺序都对应不同的舒尔形式。
 <span class="math-inline">Q</span>的列被称为<em>舒尔向量</em>。舒尔形式不像对角形式和约当形式那样明确给出特征向量和所有不变子空间的基，但它可以相当稳定地计算。
 <span class="math-inline">Q</span>的前<span class="math-inline">k</span>列张成了特征值<span class="math-inline">\lambda_1</span>到<span class="math-inline">\lambda_k</span>的不变子空间，但所有其他特征空间需要另外计算。例如，特征向量可以通过从<span class="math-inline">T</span>中解一个三角形方程组并乘以<span class="math-inline">Q</span>来计算[<a href="node421.html#demmelbook">114</a>]。
@@ -179,21 +174,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ol>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html1481"
-  href="node53.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html1475"
-  href="node48.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html1469"
-  href="node51.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html1477"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html1479"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html1481" href="node53.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html1475" href="node48.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html1469" href="node51.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html1477" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html1479" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html1482" href="node53.html">条件数</a>
 <b>上一级：</b><a name="tex2html1476" href="node48.html">非厄米特征问题</a>

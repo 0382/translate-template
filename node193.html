@@ -48,30 +48,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html3666"
-  href="node194.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html3660"
-  href="node190.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html3654"
-  href="node192.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html3662"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html3664"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html3666" href="node194.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html3660" href="node190.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html3654" href="node192.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html3662" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html3664" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html3667" href="node194.html">迭代算法</a>
 <b>上一级：</b><a name="tex2html3661" href="node190.html">奇异值分解</a>
 <b>上一节：</b><a name="tex2html3655" href="node192.html">可用的算法概述</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001520000000000000000"></a> <a name="sec:svdtm"></a> 
+<!--End of Navigation Panel--><h1><a name="SECTION001520000000000000000"></a> <a name="sec:svdtm"></a>
 <a name="20832"></a>
 <a name="20833"></a>
 <a name="20834"></a>
@@ -96,7 +91,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li>找到一个<span class="math-inline">n</span>阶酉矩阵<span class="math-inline">V_1</span>和一个<span class="math-inline">m</span>行<span class="math-inline">n</span>列、列正交的矩阵<span class="math-inline">U_1</span>，使得
 
 <span class="math-inline">U_1^*A V_1 = B</span>是一个<span class="math-inline">n</span>阶双对角矩阵，即仅在主对角线和第一上对角线上非零。
-<a name="20842"></a> 
+<a name="20842"></a>
 </li>
 <li>计算<span class="math-inline">B</span>的SVD：
 <span class="math-inline">B = U_2 \Sigma V_2^*</span>。
@@ -124,8 +119,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dd><a name="20852"></a>
 该算法找到所有奇异值，并可选地找到所有左和/或右奇异向量。
 仅奇异值的成本为<span class="math-inline">O(n^2)</span>，奇异向量的成本为<span class="math-inline">O(n^3)</span>。
-它可以实现，使得所有奇异值几乎都计算出正确的有效数字，即使是极小的奇异值（只要不发生下溢）[<a
- href="node421.html#deka:90">123</a>]。
+它可以实现，使得所有奇异值几乎都计算出正确的有效数字，即使是极小的奇异值（只要不发生下溢）[<a href="node421.html#deka:90">123</a>]。
 QR用于在LAPACK的计算例程xBDSQR中计算奇异向量，该例程被驱动例程xGESVD用于计算稠密矩阵的SVD，但已被下面描述的更快方法取代。
 xBDSQR也被ScaLAPACK驱动例程PxGESVD使用。
 
@@ -133,19 +127,14 @@ xBDSQR也被ScaLAPACK驱动例程PxGESVD使用。
 </dd>
 <dt><strong><i>DQDS算法：</i></strong></dt>
 <dd><a name="20858"></a>
-该算法仅在<span class="math-inline">O(n^2)</span>时间内找到双对角矩阵的奇异值，但比QR更准确和更高效[<a
- href="node421.html#fepa:94">168</a>,<a
- href="node421.html#parlett95a">355</a>,<a
- href="node421.html#pama:99">360</a>]。
+该算法仅在<span class="math-inline">O(n^2)</span>时间内找到双对角矩阵的奇异值，但比QR更准确和更高效[<a href="node421.html#fepa:94">168</a>,<a href="node421.html#parlett95a">355</a>,<a href="node421.html#pama:99">360</a>]。
 它是计算奇异值的首选串行算法，在LAPACK中实现为xLASQ1，并被所有LAPACK驱动例程使用。
 
 <p>
 </dd>
 <dt><strong><i>分治法：</i></strong></dt>
 <dd><a name="20861"></a>
-这是目前LAPACK中用于找到大于约25乘25的双对角矩阵的所有奇异值和向量的最快方法[<a
- href="node421.html#gudemmeldhillon94">208</a>,<a
- href="node421.html#lapack">12</a>]。
+这是目前LAPACK中用于找到大于约25乘25的双对角矩阵的所有奇异值和向量的最快方法[<a href="node421.html#gudemmeldhillon94">208</a>,<a href="node421.html#lapack">12</a>]。
 它将矩阵分成两半，计算每一半的SVD，并通过求解一个特殊的有理方程将解粘合在一起。对于一个大的双对角矩阵，这会递归重复，直到部分小于25，这时调用QR算法。<sup><a href="footnote-qr">[2]</a></sup>它可能比DQDS或QR稍不准确，因为最小奇异值的误差可能达到机器ε乘以<span class="math-inline">\sigma_1</span>，但这几乎总是足够好。
 
 <p>
@@ -159,16 +148,11 @@ xGESDD是目前LAPACK中稠密矩阵SVD的首选算法。
 <a name="20868"></a>
 二分法和逆迭代可用于仅找到感兴趣的奇异值和向量。
 当前算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，除非奇异值在一个<span class="math-inline">k</span>个相邻奇异值的簇中，在这种情况下，如果使用正交化以尝试保证正交奇异向量，成本可能上升到<span class="math-inline">O(nk^2)</span>。如果许多奇异值紧密聚集，这可能高达<span class="math-inline">O(n^3)</span>。
-尽管如此，有时仍可能无法保证正交性[<a
- href="node421.html#dhillon98">129</a>]。
+尽管如此，有时仍可能无法保证正交性[<a href="node421.html#dhillon98">129</a>]。
 LAPACK、ScaLAPACK或MATLAB目前不包含基于二分法和逆迭代的SVD例程。
 
 <p>
-最近在[<a
- href="node421.html#fepa:94">168</a>,<a
- href="node421.html#dhil97">128</a>,<a
- href="node421.html#parldhi97">358</a>,<a
- href="node421.html#parl96">356</a>]中的进展承诺了一种算法，该算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，同时保证正交性，但尚未完成。完成后，LAPACK和ScaLAPACK都将提供这种算法，它应该是所有情况下的最快算法。
+最近在[<a href="node421.html#fepa:94">168</a>,<a href="node421.html#dhil97">128</a>,<a href="node421.html#parldhi97">358</a>,<a href="node421.html#parl96">356</a>]中的进展承诺了一种算法，该算法每个奇异三元组的工作时间为<span class="math-inline">O(n)</span>，同时保证正交性，但尚未完成。完成后，LAPACK和ScaLAPACK都将提供这种算法，它应该是所有情况下的最快算法。
 
 <p>
 </dd>
@@ -178,14 +162,9 @@ LAPACK、ScaLAPACK或MATLAB目前不包含基于二分法和逆迭代的SVD例�
 如果<span class="math-inline">A</span>是带状的，第一阶段可以通过LAPACK计算例程xGBBRD更便宜地执行，但没有可用的LAPACK驱动例程。
 
 <p>
-最后，我们提到用于SVD的<em>雅可比方法</em>[<a
- href="node421.html#demmelbook">114</a>,<a
- href="node421.html#golo96">198</a>]。
+最后，我们提到用于SVD的<em>雅可比方法</em>[<a href="node421.html#demmelbook">114</a>,<a href="node421.html#golo96">198</a>]。
 <a name="20875"></a>
-这种变换方法反复将<span class="math-inline">A</span>右乘以基本正交矩阵（雅可比旋转），直到<span class="math-inline">A</span>收敛到<span class="math-inline">U \Sigma</span>；雅可比旋转的乘积是<span class="math-inline">V</span>。雅可比比上述任何变换方法都慢（它可以做到运行时间大约是QR的两倍[<a
- href="node421.html#drmac98">136</a>]），但有一个有用的特性，即对于某些<span class="math-inline">A</span>，它可以比上述任何方法更准确地提供极小的奇异值及其奇异向量，前提是它得到了适当的实现[<a
- href="node421.html#dgesvd:99">118</a>,<a
- href="node421.html#demm:00">115</a>]。
+这种变换方法反复将<span class="math-inline">A</span>右乘以基本正交矩阵（雅可比旋转），直到<span class="math-inline">A</span>收敛到<span class="math-inline">U \Sigma</span>；雅可比旋转的乘积是<span class="math-inline">V</span>。雅可比比上述任何变换方法都慢（它可以做到运行时间大约是QR的两倍[<a href="node421.html#drmac98">136</a>]），但有一个有用的特性，即对于某些<span class="math-inline">A</span>，它可以比上述任何方法更准确地提供极小的奇异值及其奇异向量，前提是它得到了适当的实现[<a href="node421.html#dgesvd:99">118</a>,<a href="node421.html#demm:00">115</a>]。
 
 <hr>
 <ol>
@@ -194,21 +173,16 @@ LAPACK、ScaLAPACK或MATLAB目前不包含基于二分法和逆迭代的SVD例�
 </ol>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html3666"
-  href="node194.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html3660"
-  href="node190.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html3654"
-  href="node192.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html3662"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html3664"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html3666" href="node194.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html3660" href="node190.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html3654" href="node192.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html3662" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html3664" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html3667" href="node194.html">迭代算法</a>
 <b>上一级：</b><a name="tex2html3661" href="node190.html">奇异值分解</a>

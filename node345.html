@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html6071"
-  href="node346.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6065"
-  href="node343.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6059"
-  href="node344.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6067"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6069"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6071" href="node346.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6065" href="node343.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6059" href="node344.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6067" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6069" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6072" href="node346.html">示例问题及其微分</a>
 <b>上一级：</b><a name="tex2html6066" href="node343.html">正交性约束下的非线性特征值问题</a>
@@ -77,8 +72,7 @@ MATLAB模板
 </h2>
 
 <p>
-这些模板即开即用，或作为通用化的起点，<a name="tex2html53"
-  href="footnode.html#foot43325"><sup><button class="footnote"></button></sup></a>
+这些模板即开即用，或作为通用化的起点，<a name="tex2html53" href="footnode.html#foot43325"><sup><button class="footnote"></button></sup></a>
 例如处理多变量且带有正交约束的问题，或是代码优化。
 在最简单的模式下，用户只需提供一个函数来最小化<span class="math-inline">F(Y)</span>（以及可选的第一和第二导数）在<code>F.m</code>（在<code>dF.m</code>和<code>ddF.m</code>中）和一个初始猜测<code>Y0</code>。调用序列则是一个单一的调用<code>sg_min</code>（以Stiefel和Grassmann命名）：
 
@@ -129,19 +123,19 @@ iter    grad            F(Y)              flops         step type
 5       5.526359e-02    1.000009e+01      1049594       Newton step
 6       5.072118e-05    1.000000e+01      1337540       Newton step
 7       1.276025e-06    1.000000e+01      1762455       Newton step
- 
+
 fmin =
    10.0000
 </pre>
 
 <p>
 <code>sg_min</code>的完整调用序列是
- 
+
 <pre>
   [fopt, yopt]=sg_min(Y0,rc,mode,metric,motion,verbose,...
                       gradtol,ftol,partition),
 </pre>
- 
+
 其中<code>Y0</code>是必需的，可选参数包括（见表<a href="node345.html#argumentstable">9.1</a>）：
 
 <p>
@@ -247,21 +241,16 @@ sg_min可选参数的简短列表</caption>
 <p>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html6071"
-  href="node346.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6065"
-  href="node343.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6059"
-  href="node344.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6067"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6069"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6071" href="node346.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6065" href="node343.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6059" href="node344.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6067" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6069" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6072" href="node346.html">示例问题及其微分</a>
 <b>上一级：</b><a name="tex2html6066" href="node343.html">正交性约束下的非线性特征值问题</a>

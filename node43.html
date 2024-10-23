@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html1349"
-  href="node44.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html1343"
-  href="node39.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html1337"
-  href="node42.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html1345"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html1347"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html1349" href="node44.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html1343" href="node39.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html1337" href="node42.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html1345" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html1347" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html1350" href="node44.html">条件数</a>
 <b>上一级：</b><a name="tex2html1344" href="node39.html">奇异值分解</a>
@@ -81,9 +76,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 定义 <span class="math-inline">\Sigma</span> 为一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵，其前 <span class="math-inline">n</span> 行包含
 
 <span class="math-inline">{\rm diag}(\sigma_1 ,\ldots, \sigma_n )</span>，而其底部 <span class="math-inline">m-n</span> 行均为零。
-定义 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的矩阵 
-<span class="math-inline">U = [u_1,\ldots,u_m]</span> 以及 
-<span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的矩阵 
+定义 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的矩阵
+<span class="math-inline">U = [u_1,\ldots,u_m]</span> 以及
+<span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的矩阵
 <span class="math-inline">V = [v_1,\ldots,v_n]</span>。
 <span class="math-inline">U</span> 被称为 <span class="math-inline">A</span> 的<em>左奇异向量矩阵</em>，
 <span class="math-inline">V</span> 被称为 <span class="math-inline">A</span> 的<em>右奇异向量矩阵</em>。
@@ -91,13 +86,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <span class="math-inline">U</span> 是一个<em>酉矩阵</em>。如果 <span class="math-inline">A</span> 是实数矩阵，那么 <span class="math-inline">u_i</span> 也是实向量，
 此时 <span class="math-inline">U^TU = I</span>，我们也可以说 <span class="math-inline">U</span> 是一个<em>正交矩阵</em>。
 同样的讨论适用于 <span class="math-inline">V</span>。
-<span class="math-inline">n+m</span> 个等式 
-<span class="math-inline">Av_i = \sigma_i u_i</span> 和 
+<span class="math-inline">n+m</span> 个等式
+<span class="math-inline">Av_i = \sigma_i u_i</span> 和
 <span class="math-inline">A^* u_i = \sigma_i v_i</span>
-对于 <span class="math-inline">i=1,\ldots,n</span> 以及 <span class="math-inline">A^*u_i = 0</span> 对于 
+对于 <span class="math-inline">i=1,\ldots,n</span> 以及 <span class="math-inline">A^*u_i = 0</span> 对于
 <span class="math-inline">i=n+1,\ldots,m</span> 也可以写成
-<span class="math-inline">AV = U \Sigma</span> 和 
-<span class="math-inline">A^* U= V \Sigma^*</span>，或 
+<span class="math-inline">AV = U \Sigma</span> 和
+<span class="math-inline">A^* U= V \Sigma^*</span>，或
 <span class="math-inline">A = U \Sigma V^*</span>。
 
 如下分解
@@ -109,7 +104,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 有几种“较小”的 SVD 版本经常被计算。
-设 
+设
 <span class="math-inline">U_t = [u_1,\ldots,u_t]</span> 为一个 <span class="math-inline">m</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个左奇异向量，
 
 <span class="math-inline">V_t = [v_1,\ldots,v_t]</span> 为一个 <span class="math-inline">n</span> 行 <span class="math-inline">t</span> 列的矩阵，包含前 <span class="math-inline">t</span> 个右奇异向量，
@@ -147,7 +142,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 瘦 SVD
-也可以写成 
+也可以写成
 <span class="math-inline">A = \sum_{i=1}^n \sigma_i u_i v_i^*</span>。
 每一组
 <span class="math-inline">(\sigma_i, u_i, v_i)</span> 被称为一个<em>奇异三元组</em>。
@@ -156,24 +151,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 如果 <span class="math-inline">A</span> 是一个 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的矩阵且 <span class="math-inline">m < n </span>，
-那么它的 SVD 是 
+那么它的 SVD 是
 <span class="math-inline">A = U \Sigma V^*</span>，其中
 <span class="math-inline">U</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">m</span> 列的，<span class="math-inline">\Sigma</span> 是 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的，
 其前 <span class="math-inline">m</span> 列包含
 <span class="math-inline">{\rm diag}(\sigma_1 ,\ldots, \sigma_m)</span>，而其余列均为零，<span class="math-inline">V</span> 是 <span class="math-inline">n</span> 行 <span class="math-inline">n</span> 列的。
-它的瘦 SVD 是 
+它的瘦 SVD 是
 <span class="math-inline">A= U_m \Sigma_m V_m^*</span>，紧凑 SVD 和
 截断 SVD 如上所述。
 
 <p>
-更一般地，如果我们取 <span class="math-inline">U</span> 和 <span class="math-inline">V</span> 的 <span class="math-inline">k</span> 列子集 <br>（例如 
-<span class="math-inline">\hat{U}= U(:,[2,3,5])</span> = 
-第 2、3 和 5 列，以及 
+更一般地，如果我们取 <span class="math-inline">U</span> 和 <span class="math-inline">V</span> 的 <span class="math-inline">k</span> 列子集 <br>（例如
+<span class="math-inline">\hat{U}= U(:,[2,3,5])</span> =
+第 2、3 和 5 列，以及
 <span class="math-inline">\hat{V}= V(:,[2,3,5])</span>），
 那么这些列张成 <span class="math-inline">A</span> 的一对奇异子空间。
-如果我们取对应的 <span class="math-inline">\Sigma</span> 的子矩阵 
+如果我们取对应的 <span class="math-inline">\Sigma</span> 的子矩阵
 <span class="math-inline">\hat{\Sigma}= {\rm diag}(\sigma_2 , \sigma_3 , \sigma_5 )</span>
-，那么我们可以写出对应的 
+，那么我们可以写出对应的
 <em>部分 SVD</em> ：
 <span class="math-inline">\hat{U}^* A \hat{V}= \hat{\Sigma}</span>。如果 <span class="math-inline">\hat{U}</span> 和 <span class="math-inline">\hat{V}</span> 的列
 被替换为张成相同不变子空间的 <span class="math-inline">k</span> 个不同的正交向量，
@@ -185,21 +180,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html1349"
-  href="node44.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html1343"
-  href="node39.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html1337"
-  href="node42.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html1345"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html1347"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html1349" href="node44.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html1343" href="node39.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html1337" href="node42.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html1345" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html1347" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html1350" href="node44.html">条件数</a>
 <b>上一级：</b><a name="tex2html1344" href="node39.html">奇异值分解</a>

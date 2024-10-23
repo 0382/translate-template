@@ -54,23 +54,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html4375"
-  href="node237.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4369"
-  href="node235.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4363"
-  href="node235.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4371"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4373"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4375" href="node237.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4369" href="node235.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4363" href="node235.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4371" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4373" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4376" href="node237.html">实用算法</a>
 <b>上一级：</b><a name="tex2html4370" href="node235.html">块Arnoldi方法</a>
@@ -89,26 +84,25 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">V_{[m]}^\ast AV_{[m]}=H_{[m]}</span> 是一个阶数为 <span class="math-inline">m\cdot b</span> 的带状上Hessenberg矩阵，
 
-<span class="math-inline">V_{[m]}^\ast V_{[m]}= I_{m b}</span>，且 
+<span class="math-inline">V_{[m]}^\ast V_{[m]}= I_{m b}</span>，且
 <span class="math-inline">V_{[m]}^\ast F_m=0</span>。
 对于我们来说，带状上Hessenberg矩阵是一个具有 <span class="math-inline">b</span> 条次对角线的上三角矩阵。
 <span class="math-inline">V_{[m]} = [V_1,V_2,\ldots,V_m]</span> 的列构成了块Krylov子空间
 
 <div class="math-display">{\mathcal K}^m(A,V_1) \equiv \mathrm{span}\{V_1, A V_1,\ldots, A^{m-1} V_1 \}.</div>
 
-如果 
-<span class="math-inline"> m > \bar{m} \equiv \mathrm{ceiling}(n/b)</span>，那么 <span class="math-inline">F_m = {0}</span> 且 
+如果
+<span class="math-inline"> m > \bar{m} \equiv \mathrm{ceiling}(n/b)</span>，那么 <span class="math-inline">F_m = {0}</span> 且
 <span class="math-inline">H_{[m]}</span> 是 <span class="math-inline">A</span> 到带状上Hessenberg形式的正交约化。
 我们暂时假设 <span class="math-inline">F_m</span> 是满秩的，并且进一步假设 <span class="math-inline">H_{m+1,m}</span> 对角线上的元素是正的。
-因此，隐式Q定理的直接扩展&nbsp;[<a
- href="node421.html#golo96">198</a>, pp.&nbsp;367-368]
+因此，隐式Q定理的直接扩展&nbsp;[<a href="node421.html#golo96">198</a>, pp.&nbsp;367-368]
 给出了 <span class="math-inline">F_m</span> 由初始块 <span class="math-inline">V_1</span> 唯一指定。
 注意，如果 <span class="math-inline">A=A^\ast</span>，那么 <span class="math-inline">H_{[m]}</span> 是一个块三对角矩阵。
 算法&nbsp;<a href="node236.html#blk_arn_red_alg">7.11</a> 列出了计算块Arnoldi约化的算法。
 
 <pre class="algorithm" id="blk_arn_red_alg">
 算法 7.11：扩展块Arnoldi约化
-(1) 使用迭代CGS方法计算QR分解 <span class="math-inline">V_{m+1} H_{m+1, m} = F_m</span> 
+(1) 使用迭代CGS方法计算QR分解 <span class="math-inline">V_{m+1} H_{m+1, m} = F_m</span>
 (2) <span class="math-inline">V_{[m+1]} = \left[\begin{array}{ll}V_{[m]} & V_{m+1}\end{array}\right]</span>
 (3) <span class="math-inline">W = AV_{m+1}</span>
 (4) <span class="math-inline">H_{m+1, m+1} = V_{m+1}^* W</span>
@@ -124,11 +118,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dl>
 <dt><strong>(1)</strong></dt>
 <dd>这里通过迭代CGS算法并使用可能的校正步骤来计算QR分解。
-详见&nbsp;[<a
- href="node421.html#dgks76">96</a>]，以及用于确定是否需要校正步骤的简单测试。
+详见&nbsp;[<a href="node421.html#dgks76">96</a>]，以及用于确定是否需要校正步骤的简单测试。
 这种方案的一个好处是它允许使用Level 2
-BLAS&nbsp;[<a
- href="node421.html#blas2">133</a>] 矩阵-向量乘法子程序 xGEMV（另见&#167;<a href="node379.html#sec:blas">10.2</a>）。
+BLAS&nbsp;[<a href="node421.html#blas2">133</a>] 矩阵-向量乘法子程序 xGEMV（另见&#167;<a href="node379.html#sec:blas">10.2</a>）。
 此外，这种方案还提供了一种简单的方法来填充秩不足的 <span class="math-inline">F_m</span>。例如，
 如果在生成 <span class="math-inline">V_{m+1}</span> 的第 <span class="math-inline">j</span> 列时需要第三次正交化步骤，那么 <span class="math-inline">F_m</span> 的相应列在线性上依赖于 <span class="math-inline">V_{m+1}</span> 的前 <span class="math-inline">j-1</span> 列。
 <span class="math-inline">H_{m+1,m}</span> 的第 <span class="math-inline">j</span> 个对角元素设置为零，并且一个随机单位向量相对于 <span class="math-inline">V_{[m]}</span> 和 <span class="math-inline">V_{m+1}</span> 的前 <span class="math-inline">j-1</span> 列进行正交化。
@@ -141,50 +133,39 @@ BLAS&nbsp;[<a
 <p>
 </dd>
 <dt><strong>(4)</strong></dt>
-<dd>这允许使用Level 3 BLAS&nbsp;[<a
- href="node421.html#blas3">134</a>] 
+<dd>这允许使用Level 3 BLAS&nbsp;[<a href="node421.html#blas3">134</a>]
 矩阵-矩阵乘法子程序 xGEMM 来计算 <span class="math-inline">V_m^\ast W</span>。
 
 <p>
 </dd>
 <dt><strong>(6)</strong></dt>
 <dd>这是块经典Gram-Schmidt（bCGR）的一步。
-Level 3 BLAS&nbsp;[<a
- href="node421.html#blas3">134</a>] 
+Level 3 BLAS&nbsp;[<a href="node421.html#blas3">134</a>]
 矩阵-矩阵乘法子程序 xGEMM
 用于计算所需的秩-<span class="math-inline">b</span> 更新，以便计算 <span class="math-inline">F_{m+1}</span>。
-为了确保 <span class="math-inline">F_{m+1}</span> 与 <span class="math-inline">V_{m+1}</span> 的正交性，除了 <span class="math-inline">b=1</span> 的情况外，执行第二步 bCGR。在后一种情况下，使用DGKS&nbsp;[<a
- href="node421.html#dgks76">96</a>] 中的简单测试来确定是否需要第二正交化步骤。详见&nbsp;[<a
- href="node421.html#lesy98">295</a>]。
+为了确保 <span class="math-inline">F_{m+1}</span> 与 <span class="math-inline">V_{m+1}</span> 的正交性，除了 <span class="math-inline">b=1</span> 的情况外，执行第二步 bCGR。在后一种情况下，使用DGKS&nbsp;[<a href="node421.html#dgks76">96</a>] 中的简单测试来确定是否需要第二正交化步骤。详见&nbsp;[<a href="node421.html#lesy98">295</a>]。
 </dd>
-</dl> 
+</dl>
 
 <p>
 计算 <span class="math-inline">V_{[m+1]}</span> 的方案等同于Ruhe
 [<a href="node421.html#ruhe79">375</a>]（对于对称矩阵）提出的方案，并且是由隐式重启块Lanczos代码&nbsp;[<a href="node421.html#bcrr98">24</a>] 使用的方案。
 
-尽管&nbsp;[<a
- href="node421.html#bcrr98">24</a>] 中的方法干净地处理了秩不足的 <span class="math-inline">F_m</span> 问题，但实现并没有利用如（3）中那样应用 <span class="math-inline">A</span> 的能力。相反，如&nbsp;[<a
- href="node421.html#ruhe79">375</a>] 所提议的，<span class="math-inline">A</span> 应用于 <span class="math-inline">F_m</span> 的每一列，然后计算相应的 <span class="math-inline">V_{m+1}</span> 和 <span class="math-inline">H_{[m+1]}</span> 列。我们的实现进一步重组了Ruhe的方法，使得系数矩阵 <span class="math-inline">V_{[m]}^\ast W</span> 的计算与 <span class="math-inline">F_m</span> 的QR分解分开。这样做的好处是步骤（3）-（5）通过块大小减少了I/O成本，并增加了每次内存引用的浮点运算量。
+尽管&nbsp;[<a href="node421.html#bcrr98">24</a>] 中的方法干净地处理了秩不足的 <span class="math-inline">F_m</span> 问题，但实现并没有利用如（3）中那样应用 <span class="math-inline">A</span> 的能力。相反，如&nbsp;[<a href="node421.html#ruhe79">375</a>] 所提议的，<span class="math-inline">A</span> 应用于 <span class="math-inline">F_m</span> 的每一列，然后计算相应的 <span class="math-inline">V_{m+1}</span> 和 <span class="math-inline">H_{[m+1]}</span> 列。我们的实现进一步重组了Ruhe的方法，使得系数矩阵 <span class="math-inline">V_{[m]}^\ast W</span> 的计算与 <span class="math-inline">F_m</span> 的QR分解分开。这样做的好处是步骤（3）-（5）通过块大小减少了I/O成本，并增加了每次内存引用的浮点运算量。
 
 <p>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html4375"
-  href="node237.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4369"
-  href="node235.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4363"
-  href="node235.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4371"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4373"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4375" href="node237.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4369" href="node235.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4363" href="node235.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4371" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4373" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4376" href="node237.html">实用算法</a>
 <b>上一级：</b><a name="tex2html4370" href="node235.html">块Arnoldi方法</a>

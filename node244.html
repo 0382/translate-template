@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html4487"
-  href="node245.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4481"
-  href="node203.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4475"
-  href="node243.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4483"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4485"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4487" href="node245.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4481" href="node203.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4475" href="node243.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4483" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4485" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
 <b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>
@@ -72,11 +67,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <br>
 <!--End of Navigation Panel-->
-<h1><a name="SECTION001680000000000000000"></a> <a name="sec:nsymlanczos"></a> 
+<h1><a name="SECTION001680000000000000000"></a> <a name="sec:nsymlanczos"></a>
 <a name="23974"></a>
 Lanczos方法
 <br>&nbsp; <em>Z. Bai 和 D. Day</em></a>
-</h1> 
+</h1>
 
 <p>
 非厄米Lanczos方法是一种斜投影方法(参见第<a href="node79.html#sec:algbasics">3.2</a>节)，用于求解非厄米特征值问题，
@@ -87,7 +82,7 @@ Lanczos方法
 
 <p>
 通过两个初始向量<span class="math-inline">q_1</span>和<span class="math-inline">p_1</span>，Lanczos方法构建了一对双正交基，用于Krylov子空间<span class="math-inline">{\mathcal K}^j(A,q_1)</span>和<span class="math-inline">{\mathcal K}^j(A^{\ast},p_1)</span>，前提是对于任意向量<span class="math-inline">z</span>，矩阵向量乘法<span class="math-inline">Az</span>和<span class="math-inline">A^{\ast} z</span>是可行的。内部循环使用两个三项递归。这些递归使用的内存和内存引用比第<a href="node215.html#sec:arnodimethod">7.5</a>节讨论的Arnoldi方法中的相应递归要少。Lanczos方法提供了右特征向量和左特征向量的近似。在估计计算的特征对的误差和条件数时，左右特征向量的可用性至关重要。然而，由于该方法不使用正交变换，存在中断和数值不稳定的风险。本节定义了基本的Lanczos方法及其主要性质，并介绍了提高方法数值稳定性和准确性的算法技术。
-<a name="23989"></a> 
+<a name="23989"></a>
 
 <p>
 <br><hr>
@@ -106,21 +101,16 @@ Lanczos方法
 <!--End of Table of Child-Links-->
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html4487"
-  href="node245.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4481"
-  href="node203.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4475"
-  href="node243.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4483"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4485"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4487" href="node245.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4481" href="node203.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4475" href="node243.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4483" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4485" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4488" href="node245.html">算法</a>
 <b>上一级：</b><a name="tex2html4482" href="node203.html">非厄米特特征值问题</a>

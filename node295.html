@@ -54,44 +54,36 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html5269"
-  href="node296.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html5263"
-  href="node280.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html5257"
-  href="node294.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html5265"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html5267"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html5269" href="node296.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html5263" href="node280.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html5257" href="node294.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html5265" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html5267" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html5270" href="node296.html">对称不定Lanczos方法</a>
 <b>上一级：</b><a name="tex2html5264" href="node280.html">广义非厄米特征值问题</a>
 <b>上一节：</b><a name="tex2html5258" href="node294.html">数值示例</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h1><a name="SECTION001750000000000000000"></a> <a name="sec:rks"></a><a name="36451"></a> 
+<!--End of Navigation Panel--><h1><a name="SECTION001750000000000000000"></a> <a name="sec:rks"></a><a name="36451"></a>
 <a name="36452"></a>
 分数Krylov子空间方法
 <br>&nbsp;<em>A.&nbsp;Ruhe</em>
-</h1> 
+</h1>
 
 <p>
 分数Krylov子空间方法用于计算正则束的特征值和特征向量，
 
 <div class="math-display" id="albx">(A-\lambda B)x=0.\tag{8.17}</div>
 
-它是位移-反演Arnoldi算法的推广，在一次运行中使用多个不同位移的因子分解。这样，我们可以很好地近似于所有选定位移周围区域的特征值；参见[<a
- href="node421.html#MR1618804">378</a>]。一个典型的应用是线性动态系统的模型降阶，其中希望在预定频率范围内获得响应；例如，参见[<a
- href="node421.html#ruhsko98">379</a>]或[<a
- href="node421.html#galgrivd96">184</a>]。
+它是位移-反演Arnoldi算法的推广，在一次运行中使用多个不同位移的因子分解。这样，我们可以很好地近似于所有选定位移周围区域的特征值；参见[<a href="node421.html#MR1618804">378</a>]。一个典型的应用是线性动态系统的模型降阶，其中希望在预定频率范围内获得响应；例如，参见[<a href="node421.html#ruhsko98">379</a>]或[<a href="node421.html#galgrivd96">184</a>]。
 
 <p>
 分数Krylov开始时是一个带有位移<span class="math-inline">\sigma_1</span>和初始向量<span class="math-inline">v_1</span>的位移和反演Arnoldi迭代。它使用基本递归计算正交基<span class="math-inline">V_j</span>，
@@ -138,8 +130,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <div class="math-display">L_{j+1,j}=Q_{j+1,j+1}^{\ast}H_{j+1,j}R_{j,j}^{-1},</div>
 
-我们可以通过从底部向上应用Householder算法将这个<span class="math-inline">L_{j+1,j}</span>转换为梯形（上部海森堡）形式（参见[<a
- href="node421.html#ru98e">377</a>]），
+我们可以通过从底部向上应用Householder算法将这个<span class="math-inline">L_{j+1,j}</span>转换为梯形（上部海森堡）形式（参见[<a href="node421.html#ru98e">377</a>]），
 
 <div class="math-display">L_{j+1,j}= \left[\begin{array}{cc}P_j & 0 \\ 0&1\end{array}\right]\tilde{H}_{j+1,j}P_j^{\ast}\;.</div>
 
@@ -148,7 +139,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display">(A-\sigma_2B)^{-1}BV_{j+1}Q_{j+1,j}P_j=V_{j+1}Q_{j+1}\left[\begin{array}{cc}P_j & 0 \\ 0& 1\end{array}\right]\tilde{H}_{j+1,j}</div>
 
 或
- 
+
 <div class="math-display">(A-\sigma_2B)^{-1}BW_{j}=W_{j+1}\tilde{H}_{j+1,j},</div>
 
 一个带有新位移<span class="math-inline">\sigma_2</span>的Arnoldi递归(<a href="node295.html#SI-Arnoldi">8.18</a>)，新的正交基，
@@ -180,39 +171,30 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </pre>
 
 <p>
-注意在步骤(3)中，我们只对位移和反演矩阵进行<span class="math-inline">m-j</span>次操作，前<span class="math-inline">j</span>个基向量是从前一个位移<span class="math-inline">\sigma_{i-1}</span>保存的。步骤(4)中的锁定、清除和分解操作与隐式重启Arnoldi中描述的操作非常相似，如§<a href="node220.html#sec:nsymiram">7.6</a>所述；我们实际上使用了非厄米版本的厚重启[<a
- href="node421.html#wusi99">463</a>]。在步骤(5)中，我们选择新的位移<span class="math-inline">\sigma_{i+1}</span>作为复平面上我们感兴趣的值，以研究矩阵束(<a href="node295.html#albx">8.17</a>)的行为。然而，太接近特征值的选择会导致矩阵<span class="math-inline">A-\sigma_{i+1} B</span>接近奇异。此外，新的位移接近已收敛的Ritz值将使步骤(6)中的上三角因子<span class="math-inline">R_{j,j}</span>接近奇异。
+注意在步骤(3)中，我们只对位移和反演矩阵进行<span class="math-inline">m-j</span>次操作，前<span class="math-inline">j</span>个基向量是从前一个位移<span class="math-inline">\sigma_{i-1}</span>保存的。步骤(4)中的锁定、清除和分解操作与隐式重启Arnoldi中描述的操作非常相似，如§<a href="node220.html#sec:nsymiram">7.6</a>所述；我们实际上使用了非厄米版本的厚重启[<a href="node421.html#wusi99">463</a>]。在步骤(5)中，我们选择新的位移<span class="math-inline">\sigma_{i+1}</span>作为复平面上我们感兴趣的值，以研究矩阵束(<a href="node295.html#albx">8.17</a>)的行为。然而，太接近特征值的选择会导致矩阵<span class="math-inline">A-\sigma_{i+1} B</span>接近奇异。此外，新的位移接近已收敛的Ritz值将使步骤(6)中的上三角因子<span class="math-inline">R_{j,j}</span>接近奇异。
 
 <p>
-当原始束(<a href="node295.html#albx">8.17</a>)中的第二个矩阵<span class="math-inline">B</span>是正定的，我们可以选择使基<span class="math-inline">V_j</span>对<span class="math-inline">B</span>正交。如果<span class="math-inline">A</span>也是厄米的，那么<span class="math-inline">H_{j,j}</span>也是厄米的，我们可以使用三对角矩阵；参见[<a
- href="node421.html#meer99">322</a>]。
+当原始束(<a href="node295.html#albx">8.17</a>)中的第二个矩阵<span class="math-inline">B</span>是正定的，我们可以选择使基<span class="math-inline">V_j</span>对<span class="math-inline">B</span>正交。如果<span class="math-inline">A</span>也是厄米的，那么<span class="math-inline">H_{j,j}</span>也是厄米的，我们可以使用三对角矩阵；参见[<a href="node421.html#meer99">322</a>]。
 
 <p>
-这种分数Krylov的表述与早期[<a
- href="node421.html#MR1618804">378</a>]使用的不同，在那里整个过程中使用相同的基向量集 <span class="math-inline">V_j</span>，并且束(<a href="node295.html#albx">8.17</a>)被转换为两个海森堡矩阵。我们发现，这种新的表述提供了一种更自然的方式来继续使用新的位移，并在我们面临因线性依赖而失去精度的风险时发出信号。
+这种分数Krylov的表述与早期[<a href="node421.html#MR1618804">378</a>]使用的不同，在那里整个过程中使用相同的基向量集 <span class="math-inline">V_j</span>，并且束(<a href="node295.html#albx">8.17</a>)被转换为两个海森堡矩阵。我们发现，这种新的表述提供了一种更自然的方式来继续使用新的位移，并在我们面临因线性依赖而失去精度的风险时发出信号。
 
 <p>
-参见报告[<a
- href="node421.html#ruhsko98">379</a>]中的模型降阶的数值示例。
+参见报告[<a href="node421.html#ruhsko98">379</a>]中的模型降阶的数值示例。
 
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html5269"
-  href="node296.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html5263"
-  href="node280.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html5257"
-  href="node294.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html5265"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html5267"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html5269" href="node296.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html5263" href="node280.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html5257" href="node294.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html5265" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html5267" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html5270" href="node296.html">对称不定Lanczos方法</a>
 <b>上一级：</b><a name="tex2html5264" href="node280.html">广义非厄米特征值问题</a>

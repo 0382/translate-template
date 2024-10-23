@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html6635"
-  href="node383.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6629"
-  href="node381.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6623"
-  href="node381.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6631"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6633"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6635" href="node383.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6629" href="node381.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6623" href="node381.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6631" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6633" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6636" href="node383.html">CDS矩阵-向量乘积</a>
 <b>上一级：</b><a name="tex2html6630" href="node381.html">稀疏BLAS</a>
@@ -85,8 +80,8 @@ CRS格式矩阵-向量乘积
 因为这会遍历矩阵 <span class="math-inline">A</span> 的行。对于一个 <span class="math-inline">n \times n</span> 的矩阵 <span class="math-inline">A</span>，矩阵-向量乘法由以下公式给出：
 
 <pre>
-   for i = 1, n 
-       y(i)  = 0 
+   for i = 1, n
+       y(i)  = 0
        for j = row_ptr(i), row_ptr(i+1) - 1
            y(i) = y(i) + val(j) * x(col_ind(j))
        end;
@@ -101,7 +96,7 @@ CRS格式矩阵-向量乘积
 <div class="math-display">y_i=\sum_j (A^T)_{i,j}x_j=\sum_j a_{j,i}x_j,</div>
 
 因为这暗示着遍历矩阵的列，对于以CRS格式存储的矩阵来说，这是一个极其低效的操作。因此，我们切换索引为
-        
+
 <div class="math-display">\hbox{对于所有 <span class="math-inline">j</span>，执行对于所有 <span class="math-inline">i</span>：}\qquad y_i\leftarrow y_i + a_{j,i}x_j. </div>
 
 涉及 <span class="math-inline">A^T</span> 的矩阵-向量乘法随后由以下公式给出：
@@ -122,21 +117,16 @@ CRS格式矩阵-向量乘积
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html6635"
-  href="node383.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6629"
-  href="node381.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6623"
-  href="node381.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6631"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6633"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6635" href="node383.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6629" href="node381.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6623" href="node381.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6631" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6633" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6636" href="node383.html">CDS矩阵-向量乘积</a>
 <b>上一级：</b><a name="tex2html6630" href="node381.html">稀疏BLAS</a>

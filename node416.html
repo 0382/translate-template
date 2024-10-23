@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html7149"
-  href="node417.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html7143"
-  href="node410.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html7137"
-  href="node415.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html7145"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html7147"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html7149" href="node417.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html7143" href="node410.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html7137" href="node415.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html7145" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html7147" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html7150" href="node417.html">带有预处理内迭代的方法</a>
 <b>上一级：</b><a name="tex2html7144" href="node410.html">预条件特征值求解器</a>
@@ -80,12 +75,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 在戴维森方法中，尝试通过在每次内迭代步骤中改变瑞利商来加速预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>的收敛。
 
 <p>
-为简单起见，我们这里仅描述戴维森方法的最原始版本，不涉及重启，针对矩阵束 <span class="math-inline">B - \mu A</span>（参见 [<a
- href="node421.html#davi75">99</a>,<a
- href="node421.html#dav83">100</a>,<a
- href="node421.html#mosc86">335</a>,<a
- href="node421.html#m90">329</a>,<a
- href="node421.html#saad92">387</a>]）：
+为简单起见，我们这里仅描述戴维森方法的最原始版本，不涉及重启，针对矩阵束 <span class="math-inline">B - \mu A</span>（参见 [<a href="node421.html#davi75">99</a>,<a href="node421.html#dav83">100</a>,<a href="node421.html#mosc86">335</a>,<a href="node421.html#m90">329</a>,<a href="node421.html#saad92">387</a>]）：
 
 <div class="math-display" id="prec_dm">
 \begin{gather}
@@ -96,33 +86,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 由于子空间 <span class="math-inline">{\mathcal D}_i</span> 的维度随着每一步增长，并且所有基向量都需要存储，因此通常需要像预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>中那样进行重启。一个简单的重启过程是在一定数量的内迭代步骤后停止方法，然后使用最后一个迭代向量作为下一步（外迭代）的初始近似重新开始。
 
 <p>
-该方法在理论研究上相当复杂；参见 [<a
- href="node421.html#crps94">88</a>,<a
- href="node421.html#sadk93-ad">390</a>]。通常使用具有不定预处理器的戴维森方法（通常是 <span class="math-inline">B-\mu^{(0)}A</span> 的对角线），这进一步增加了理论分析的复杂性。
+该方法在理论研究上相当复杂；参见 [<a href="node421.html#crps94">88</a>,<a href="node421.html#sadk93-ad">390</a>]。通常使用具有不定预处理器的戴维森方法（通常是 <span class="math-inline">B-\mu^{(0)}A</span> 的对角线），这进一步增加了理论分析的复杂性。
 
 <p>
-戴维森方法特别受化学界的欢迎（参见 [<a
- href="node421.html#hn82">232</a>,<a
- href="node421.html#ko84">275</a>]），其中涉及的矩阵通常是对角占优的。对于这类问题，即使使用简单的对角预处理，该方法也常常能快速收敛。
+戴维森方法特别受化学界的欢迎（参见 [<a href="node421.html#hn82">232</a>,<a href="node421.html#ko84">275</a>]），其中涉及的矩阵通常是对角占优的。对于这类问题，即使使用简单的对角预处理，该方法也常常能快速收敛。
 
 <p>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html7149"
-  href="node417.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html7143"
-  href="node410.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html7137"
-  href="node415.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html7145"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html7147"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html7149" href="node417.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html7143" href="node410.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html7137" href="node415.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html7145" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html7147" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html7150" href="node417.html">带有预处理内迭代的方法</a>
 <b>上一级：</b><a name="tex2html7144" href="node410.html">预条件特征值求解器</a>

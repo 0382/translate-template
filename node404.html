@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html6976"
-  href="node405.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6970"
-  href="node402.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6966"
-  href="node403.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6972"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6974"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6976" href="node405.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6970" href="node402.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6966" href="node403.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6972" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6974" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6977" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>
@@ -141,7 +136,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </tr>
 </table>
 </div>
-<br> 
+<br>
 
 <p>
 对于例11.2.2中的稀疏矩阵，除了迭代次数外，还需考虑每步迭代成本。Lanczos算法每步可能远比Davidson方法经济。这促使发展了利用预处理的Lanczos方法，既利用预处理优势，又保持Lanczos的高效性。此内容将在§<a href="node406.html#sec:inexact-Lanczos">11.2.6</a>讨论。效率问题也与Jacobi-Davidson方法有关。减少Davidson方法迭代次数、降低Rayleigh-Ritz过程开销的一种方法是开发极佳的预处理。可在算法<a href="node402.html#alg:gdavidson">11.2</a>的第(3)步，用迭代法近似求解<span class="math-inline">(A-\theta B)w_j = r</span>得到新向量<span class="math-inline">w_j</span>，并可精确至所需程度。对称情况下，可使用预处理的共轭梯度法。与预处理Lanczos类似，这形成了一个计算高效的内部循环，且存储需求也高效。但过度精确的预处理有风险，精确解<span class="math-inline">(A-\theta B)w_j = r</span>会得到已在子空间中的近似特征向量<span class="math-inline">w_j=y</span>。可通过求解<span class="math-inline">(A-\mu B)w = r</span>（<span class="math-inline">\mu \ne \theta</span>）处理，如同不完全Cayley变换。但在Jacobi-Davidson方法中，采用从<span class="math-inline">(A-\theta B)w_j = r</span>解中降维近似特征向量的方法。Jacobi-Davidson方法的联系将在下一小节继续讨论。
@@ -152,21 +147,16 @@ Davidson方法在初始向量或子空间不准确时可能遇到困难。文献
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html6976"
-  href="node405.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6970"
-  href="node402.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6966"
-  href="node403.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6972"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6974"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6976" href="node405.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6970" href="node402.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6966" href="node403.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6972" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6974" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6977" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>

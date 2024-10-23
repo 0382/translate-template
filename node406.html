@@ -54,23 +54,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html7004"
-  href="node407.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6998"
-  href="node398.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6992"
-  href="node405.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html7000"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html7002"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html7004" href="node407.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6998" href="node398.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6992" href="node405.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html7000" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html7002" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
 <b>上一级：</b><a name="tex2html6999" href="node398.html">不精确方法</a>
@@ -79,10 +74,10 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <br>
 <!--End of Navigation Panel-->
 <h2><a name="SECTION002026000000000000000"></a>
-<a name="sec:inexact-Lanczos"></a><a name="48201"></a> 
+<a name="sec:inexact-Lanczos"></a><a name="48201"></a>
 <a name="48202"></a>
 预处理Lanczos方法
-</h2> 
+</h2>
 
 <p>
 假设<span class="math-inline">A</span>和<span class="math-inline">B</span>是对称的，并且我们有一个正定的预处理器<span class="math-inline">M</span>用于<span class="math-inline">A - \mu B</span>，即<span class="math-inline">M \approx A - \mu B</span>。我们可以对<span class="math-inline">M^{-1} (A-\nu B)</span>应用Arnoldi方法来计算接近<span class="math-inline">\mu</span>的特征值。（再次使用Ritz值<span class="math-inline">\theta</span>作为零。）这导致递推关系
@@ -140,27 +135,21 @@ Morgan和Scott[<a href="node421.html#mosc93">336</a>]证明了以下算法的收
 <p>
 注意，如果<span class="math-inline">\mu=\nu</span>，那么预处理器不能太好地近似<span class="math-inline">A - \mu B</span>；否则<span class="math-inline">T_{\mathrm{IC}} \approx I</span>。<span class="math-inline">k</span>的值可能对每个<span class="math-inline">l</span>都不同。Morgan和Scott建议停止测试
 
-<span class="math-inline">-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert</span>，这在Lanczos方法中计算成本较低。在[<a
- href="node421.html#mosc93">336</a>]中显示，如果<span class="math-inline">M_l</span>和<span class="math-inline">M_l^{-1}</span>在范数上一致有界，<span class="math-inline">\theta_l</span>收敛到 <span class="math-inline">A</span> 的一个特征值。此外，渐近收敛是二次的。
+<span class="math-inline">-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert</span>，这在Lanczos方法中计算成本较低。在[<a href="node421.html#mosc93">336</a>]中显示，如果<span class="math-inline">M_l</span>和<span class="math-inline">M_l^{-1}</span>在范数上一致有界，<span class="math-inline">\theta_l</span>收敛到 <span class="math-inline">A</span> 的一个特征值。此外，渐近收敛是二次的。
 
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html7004"
-  href="node407.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6998"
-  href="node398.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6992"
-  href="node405.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html7000"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html7002"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html7004" href="node407.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6998" href="node398.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6992" href="node405.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html7000" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html7002" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
 <b>上一级：</b><a name="tex2html6999" href="node398.html">不精确方法</a>

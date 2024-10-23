@@ -54,23 +54,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html5229"
-  href="node293.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html5223"
-  href="node287.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html5217"
-  href="node291.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html5225"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html5227"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html5229" href="node293.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html5223" href="node287.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html5217" href="node291.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html5225" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html5227" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html5230" href="node293.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson 方法</a>
@@ -146,7 +141,7 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <span class="math-inline">(\alpha_j,\beta_j)\equiv(R^A_{j,j},R^B_{j,j})</span>之间的距离。
 如果我们忽略机器精度和<span class="math-inline">\epsilon^2</span>阶的项，那么我们有
 <span class="math-inline">\Vert A q_j- {Z} R^Ae_j\Vert _2\leq j\gamma_A \epsilon</span>，
-       
+
 <span class="math-inline">\Vert B q_j- {Z} R^Be_j\Vert _2\leq j\gamma_B \epsilon</span>，
 其中常数
 <span class="math-inline">\gamma_A</span>和<span class="math-inline">\gamma_B</span>由
@@ -155,9 +150,9 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 
 如果
 <span class="math-inline">\mu_0/\nu_0=-\tau</span>，如算法步骤(1)中所示，那么
-       
+
 <span class="math-inline">\gamma_A=\vert\tau\vert/\vert\alpha_j-\tau\beta_j\vert</span>，
-       
+
 <span class="math-inline">\gamma_B=1/\vert\alpha_j-\tau\beta_j\vert</span>。这些值可能很大
 如果
 <span class="math-inline">\tau\approx \alpha_j/\beta_j</span>。实际上，如果<span class="math-inline">\tau</span>接近检测到的特征值，也能达到<span class="math-inline">\epsilon</span>阶的精度。当使用值
@@ -206,10 +201,7 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <span class="math-inline">\beta A-\alpha B</span>，其中<span class="math-inline">\alpha/\beta</span>接近指定的<span class="math-inline">\tau</span>。
 
 <p>
-有关重新排序广义Schur形式的算法，请参见[<a
- href="node421.html#vand81">448</a>,<a
- href="node421.html#vand82">449</a>,<a
- href="node421.html#fokk96">171</a>]。
+有关重新排序广义Schur形式的算法，请参见[<a href="node421.html#vand81">448</a>,<a href="node421.html#vand82">449</a>,<a href="node421.html#fokk96">171</a>]。
 
 <p>
 </dd>
@@ -248,14 +240,11 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 <span class="math-inline">{\mathcal L}{\mathcal U}</span>分解也可以从先前步骤更新。
 
 <p>
-没有必要非常精确地求解修正方程。一种常用于不精确牛顿方法[<a
- href="node421.html#dees83">113</a>]的策略在这里也工作得很好：
+没有必要非常精确地求解修正方程。一种常用于不精确牛顿方法[<a href="node421.html#dees83">113</a>]的策略在这里也工作得很好：
 随着Jacobi-Davidson迭代步骤增加精度，例如，在第<span class="math-inline">\ell</span>次Jacobi-Davidson迭代中以<span class="math-inline">2^{-\ell}</span>的残差减少求解修正方程（当检测到Schur向量时，<span class="math-inline">\ell</span>重置为0）。
 
 <p>
-特别是在最初的几个初始步骤中，近似特征值<span class="math-inline">\theta</span>可能非常不准确，此时精确求解修正方程没有意义。在这个阶段，暂时将<span class="math-inline">\theta</span>替换为<span class="math-inline">\tau</span>或取<span class="math-inline">{t}=-r</span>以扩展搜索子空间可能更有效[<a
- href="node421.html#mosc86">335</a>,<a
- href="node421.html#fosv98">172</a>]。
+特别是在最初的几个初始步骤中，近似特征值<span class="math-inline">\theta</span>可能非常不准确，此时精确求解修正方程没有意义。在这个阶段，暂时将<span class="math-inline">\theta</span>替换为<span class="math-inline">\tau</span>或取<span class="math-inline">{t}=-r</span>以扩展搜索子空间可能更有效[<a href="node421.html#mosc86">335</a>,<a href="node421.html#fosv98">172</a>]。
 </dd>
 </dl>
 
@@ -287,21 +276,16 @@ Jacobi-Davidson算法在算法<a href="node292.html#alg:jdqzhar">8.1</a>中给�
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html5229"
-  href="node293.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html5223"
-  href="node287.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html5217"
-  href="node291.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html5225"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html5227"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html5229" href="node293.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html5223" href="node287.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html5217" href="node291.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html5225" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html5227" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html5230" href="node293.html">可用的软件</a>
 <b>上一级：</b><a name="tex2html5224" href="node287.html">Jacobi-Davidson 方法</a>

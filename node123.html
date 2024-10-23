@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html2604"
-  href="node124.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2598"
-  href="node117.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2592"
-  href="node122.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2600"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2602"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2604" href="node124.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2598" href="node117.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2592" href="node122.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2600" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2602" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2605" href="node124.html">正交收缩变换</a>
 <b>上一级：</b><a name="tex2html2599" href="node117.html">隐式重启Lanczos</a>
@@ -92,34 +87,29 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <dl>
 <dt><strong><i>锁定：</i></strong></dt>
 <dd>如果一个Ritz值<span class="math-inline">\theta</span>已经收敛（意味着<span class="math-inline">\Vert Ax - x\theta\Vert < \epsilon_D</span>）并且被认为是所需特征值集合的成员，我们希望宣布它收敛，解耦特征对<span class="math-inline">(x, \theta)</span>，并继续计算剩余的特征值，不再对<span class="math-inline">x</span>或<span class="math-inline">\theta</span>进行任何更改。这个过程称为锁定。
-<a name="8121"></a> 
+<a name="8121"></a>
 
 <p>
 </dd>
 <dt><strong><i>清除：</i></strong></dt>
 <dd>如果一个Ritz值<span class="math-inline">\theta</span>已经收敛但不是所需集合的成员，我们希望解耦并从由Lanczos向量张成的当前Krylov子空间中移除特征对<span class="math-inline">(x, \theta)</span>。这个过程称为清除。
-<a name="8122"></a> 
+<a name="8122"></a>
 </dd>
-</dl> 
+</dl>
 这种收缩技术最初在[<a href="node421.html#leho95">289</a>,<a href="node421.html#leso96">294</a>]中开发。我们在这里介绍的方案基于[<a href="node421.html#sore98">420</a>]中开发的改进。该方案允许稳定且高效地收缩（或锁定）已经以指定相对精度<span class="math-inline">\epsilon_D</span>收敛的Ritz值，该精度可能远大于机器精度<span class="math-inline">\epsilon_M</span>。在没有SI加速收敛的情况下，这一点尤为重要。在这种设置中，矩阵-向量乘积的数量通常会很大，因此以低容差锁定收敛的Ritz值将非常可取。这将避免为了达到允许正常QR类型收缩的精度而需要进行的矩阵-向量乘积的开销。此外，能够清除已收敛但不想要的Ritz值也很重要。正如[<a href="node421.html#leho95">289</a>]中所指出的，Parlett和Le在[<a href="node421.html#pale93">359</a>]中发现的QR波峰追逐过程的前向不稳定性将阻止隐式重启用于清除已收敛的不想要Ritz值。
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html2604"
-  href="node124.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2598"
-  href="node117.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2592"
-  href="node122.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2600"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2602"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2604" href="node124.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2598" href="node117.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2592" href="node122.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2600" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2602" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2605" href="node124.html">正交收缩变换</a>
 <b>上一级：</b><a name="tex2html2599" href="node117.html">隐式重启Lanczos</a>

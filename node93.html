@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html2152"
-  href="node94.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2146"
-  href="node85.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2140"
-  href="node92.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2148"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2150"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2152" href="node94.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2146" href="node85.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2140" href="node92.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2148" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2150" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2153" href="node94.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html2147" href="node85.html">厄米特征值问题</a>
@@ -74,7 +69,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <!--End of Navigation Panel-->
 <h1>
 <a name="SECTION001320000000000000000"></a>
-<a name="sec:dense"></a> 
+<a name="sec:dense"></a>
 直接方法
 </h1>
 
@@ -95,7 +90,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </li>
 <li>计算三对角矩阵<span class="math-inline">T</span>的特征分解。
 </li>
-</ol> 
+</ol>
 
 <p>
 初始化简到三对角形式是通过一系列 <span class="math-inline">n-2</span> 个正交Householder反射实现的，需要<span class="math-inline">\frac{4}{3}n^3</span>次浮点运算，或者如果还需要计算特征向量，则需要<span class="math-inline">\frac{8}{3}n^3</span>次浮点运算。LAPACK的对称或厄米矩阵例程简单来说，实数情况是 <code>xSYTRD</code> 例程，复数情况是 <code>xHETRD</code> 例程（在ScaLAPACK中为 <code>PxSYTRD</code> 和 <code>PxHETRD</code>）。还有针对压缩和带状存储的实现。
@@ -134,7 +129,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 </dd>
 <dt><strong><i>相对稳健表示算法：</i></strong></dt>
-<dd><a name="7387"></a> 
+<dd><a name="7387"></a>
 该算法使用LDL<span class="math-inline">^T</span>分解对多个平移<span class="math-inline">T-s I</span>进行分解，其中<span class="math-inline">s</span>是每个特征值簇附近的位移。对于每个平移，该算法计算非常精确的小特征值的特征对。它在LAPACK中作为 <code>xSTEGR</code> 实现。<code>xSTEGR</code> 比所有例程都快，除了少数情况，并且使用最少的内存空间。参见[<a href="node421.html#parldhi97">358</a>,<a href="node421.html#dhil97">128</a>,<a href="node421.html#pama:99">360</a>]。
 
 </dd>
@@ -162,21 +157,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </ol>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html2152"
-  href="node94.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2146"
-  href="node85.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2140"
-  href="node92.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2148"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2150"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2152" href="node94.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2146" href="node85.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2140" href="node92.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2148" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2150" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2153" href="node94.html">单向量与多向量迭代</a>
 <b>上一级：</b><a name="tex2html2147" href="node85.html">厄米特征值问题</a>

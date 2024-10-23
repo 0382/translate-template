@@ -54,23 +54,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html4881"
-  href="node272.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4875"
-  href="node269.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4869"
-  href="node270.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4877"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4879"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4881" href="node272.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4875" href="node269.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4869" href="node270.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4877" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4879" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4882" href="node272.html">计算内部特征值</a>
 <b>上一级：</b><a name="tex2html4876" href="node269.html">Jacobi-Davidson 方法</a>
@@ -83,7 +78,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-如果我们希望结合重启和缩减技术，情况会变得更加复杂，因为非厄米矩阵通常不具备正交的特征系统。由于我们倾向于至少在测试子空间中使用正交基，因此我们计算缩减矩阵的舒尔形式。我们不是计算矩阵 <span class="math-inline">A</span> 的特征向量，而是计算其部分舒尔形式 
+如果我们希望结合重启和缩减技术，情况会变得更加复杂，因为非厄米矩阵通常不具备正交的特征系统。由于我们倾向于至少在测试子空间中使用正交基，因此我们计算缩减矩阵的舒尔形式。我们不是计算矩阵 <span class="math-inline">A</span> 的特征向量，而是计算其部分舒尔形式
 <span class="math-inline">A{Q}_{k}={Q}_{k}{R}_{k}</span>，其中 <span class="math-inline">{Q}_{k}</span> 是一个 <span class="math-inline">n</span> 乘 <span class="math-inline">{k}</span> 的正交矩阵，而 <span class="math-inline">{R}_{k}</span> 是一个 <span class="math-inline">{k}</span> 乘 <span class="math-inline">{k}</span> 的上三对角矩阵。一个适应舒尔形式的方案在算法&nbsp;<a href="node271.html#alg:jdqrasym">7.18</a> 中给出。该方案包括当当前子空间的维度超过 <span class="math-inline">{m}_{\max}</span> 时进行重启的可能性。
 
 <p>
@@ -126,7 +121,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 要应用此算法，我们需要指定一个初始向量 <span class="math-inline">{v}_0</span>，一个容差 <span class="math-inline">\epsilon</span>，一个目标值 <span class="math-inline">\tau </span>，以及一个指定应计算多少个接近 <span class="math-inline">\tau </span> 的特征对的数字 <span class="math-inline">{k}_{\max}</span>。<span class="math-inline">{m}_{\max}</span> 的值表示搜索子空间的最大维度。如果超过此值，则以指定维度 <span class="math-inline">{m}_{\min}</span> 的子空间进行重启。
 
 <p>
-完成后，将提供接近 <span class="math-inline">\tau </span> 的 <span class="math-inline">{k}_{\max}</span> 个特征值，以及相应的缩减舒尔形式 <span class="math-inline">AQ=QR</span>，其中 <span class="math-inline">Q</span> 是 <span class="math-inline">n</span> 乘 <span class="math-inline">k_{\max}</span> 的正交矩阵，<span class="math-inline">R</span> 是 <span class="math-inline">k_{\max}</span> 乘 <span class="math-inline">k_{\max}</span> 的上三角矩阵。特征值位于 <span class="math-inline">R</span> 的对角线上。计算的舒尔形式满足 
+完成后，将提供接近 <span class="math-inline">\tau </span> 的 <span class="math-inline">{k}_{\max}</span> 个特征值，以及相应的缩减舒尔形式 <span class="math-inline">AQ=QR</span>，其中 <span class="math-inline">Q</span> 是 <span class="math-inline">n</span> 乘 <span class="math-inline">k_{\max}</span> 的正交矩阵，<span class="math-inline">R</span> 是 <span class="math-inline">k_{\max}</span> 乘 <span class="math-inline">k_{\max}</span> 的上三角矩阵。特征值位于 <span class="math-inline">R</span> 的对角线上。计算的舒尔形式满足
 <span class="math-inline">\Vert A q_{j}- {Q} R e_{j}\Vert _2\leq j \epsilon</span>，其中 <span class="math-inline">q_j</span> 是 <span class="math-inline">Q</span> 的第 <span class="math-inline">j</span> 列。
 
 <p>
@@ -225,21 +220,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html4881"
-  href="node272.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html4875"
-  href="node269.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html4869"
-  href="node270.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html4877"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html4879"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html4881" href="node272.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html4875" href="node269.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html4869" href="node270.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html4877" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html4879" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html4882" href="node272.html">计算内部特征值</a>
 <b>上一级：</b><a name="tex2html4876" href="node269.html">Jacobi-Davidson 方法</a>

@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html6647"
-  href="node384.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6641"
-  href="node381.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6637"
-  href="node382.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6643"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6645"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6647" href="node384.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6641" href="node381.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6637" href="node382.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6643" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6645" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6648" href="node384.html">快速矩阵-向量乘法在结构化矩阵中的应用</a>
 <b>上一级：</b><a name="tex2html6642" href="node381.html">稀疏BLAS</a>
@@ -80,7 +75,7 @@ CDS 矩阵-向量乘积
 如果 <span class="math-inline">n \times n</span> 矩阵 <span class="math-inline">A</span> 以 CDS 格式存储，仍然可以通过按行或按列的方式执行矩阵-向量乘积 <span class="math-inline">y=Ax</span>，但这并没有充分利用 CDS 格式的优势。其思路是在双重嵌套循环中进行坐标变换。通过替换
 
 <span class="math-inline">j\rightarrow i+j</span>，我们得到
-        
+
 <div class="math-display">y_i\leftarrow y_i+a_{i,j}x_j\quad\Rightarrow\quad y_i\leftarrow y_i+a_{i,i+j}x_{i+j} ~.</div>
 
 在内层循环中使用索引 <span class="math-inline">i</span>，我们可以看到表达式 <span class="math-inline">a_{i,i+j}</span> 访问了矩阵的第 <span class="math-inline">j</span> 条对角线（其中主对角线的编号为 0）。
@@ -130,21 +125,16 @@ y_i&\leftarrow y_i+a_{j,i}x_j \\
 
 <p>
 <hr><!--Navigation Panel-->
-<a name="tex2html6647"
-  href="node384.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html6641"
-  href="node381.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html6637"
-  href="node382.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html6643"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html6645"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html6647" href="node384.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html6641" href="node381.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html6637" href="node382.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html6643" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html6645" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html6648" href="node384.html">快速矩阵-向量乘法在结构化矩阵中的应用</a>
 <b>上一级：</b><a name="tex2html6642" href="node381.html">稀疏BLAS</a>

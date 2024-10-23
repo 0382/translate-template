@@ -48,23 +48,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </style>
 </head>
 
-<body >
+<body>
 <!--Navigation Panel-->
-<a name="tex2html2216"
-  href="node98.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2210"
-  href="node94.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2204"
-  href="node96.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2212"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2214"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2216" href="node98.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2210" href="node94.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2204" href="node96.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2212" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2214" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
 <b>上一级：</b><a name="tex2html2211" href="node94.html">单向量和多向量迭代</a>
@@ -75,11 +70,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <h2>
 <a name="SECTION001333000000000000000"></a>
 瑞利商迭代法
-</h2> 
+</h2>
 
 <p>
 逆迭代的自然延伸是在每一步改变移位值。事实证明，从特征向量近似值 <span class="math-inline">x \not =0</span> 中可以得出的最佳移位值是 <span class="math-inline">x</span> 的<em>瑞利商</em>，即 <span class="math-inline">\rho(x)\equiv x^{\ast} \, A \, x / x^{\ast} \, x </span>。
-<a name="7469"></a> 
+<a name="7469"></a>
 
 <p>
 一般来说，瑞利商迭代（RQI）比使用固定移位的逆迭代需要更少的迭代次数来找到一个特征值；它最终具有三次收敛性，而逆迭代是线性收敛的。然而，如何选择初始向量 <span class="math-inline">y</span> 以使 RQI 收敛到特定的特征值/特征向量对并不明显。例如，RQI 可能收敛到一个特征值，该特征值并不是最接近初始瑞利商 <span class="math-inline">\rho(y)</span> 的，或者收敛到一个特征向量，该特征向量并不是最接近初始向量 <span class="math-inline">y</span> 的。此外，还存在一个微小但令人讨厌的可能性，即它可能根本不收敛到任何特征值/特征向量对。RQI 比逆迭代更昂贵，因为它在每次迭代中都需要对 <span class="math-inline">A - \rho_k I</span> 进行分解，而当 <span class="math-inline">\rho_k</span> 达到某个特征值时，这个矩阵将变为奇异矩阵。因此，只有当每次迭代中都能廉价地获得这种分解时，RQI 才是实用的。更多细节请参见 Parlett [<a href="node421.html#parl80">353</a>]。
@@ -93,7 +88,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 (5)    <span class="math-inline">\theta = \Vert y \Vert_2</span>,
 (6)    <span class="math-inline">\rho_{k+1} = \rho_k + y^\ast v / \theta^2</span>,
 (7)    <span class="math-inline">v = y / \theta</span>,
-(8)    若 <span class="math-inline">\theta \ge \epsilon_M^{-1/2}</span>, 结束 
+(8)    若 <span class="math-inline">\theta \ge \epsilon_M^{-1/2}</span>, 结束
 (9)  end for
 (10) 结果： <span class="math-inline">\lambda = \rho_k, \; x = v</span>
 </pre>
@@ -101,21 +96,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 <hr>
 <!--Navigation Panel-->
-<a name="tex2html2216"
-  href="node98.html">
-<button class="navigate">下一节</button></a> 
-<a name="tex2html2210"
-  href="node94.html">
-<button class="navigate">上一级</button></a> 
-<a name="tex2html2204"
-  href="node96.html">
-<button class="navigate">上一节</button></a> 
-<a name="tex2html2212"
-  href="node5.html">
-<button class="navigate">目录</button></a> 
-<a name="tex2html2214"
-  href="node422.html">
-<button class="navigate">索引</button></a> 
+<a name="tex2html2216" href="node98.html">
+<button class="navigate">下一节</button></a>
+<a name="tex2html2210" href="node94.html">
+<button class="navigate">上一级</button></a>
+<a name="tex2html2204" href="node96.html">
+<button class="navigate">上一节</button></a>
+<a name="tex2html2212" href="node5.html">
+<button class="navigate">目录</button></a>
+<a name="tex2html2214" href="node422.html">
+<button class="navigate">索引</button></a>
 <br>
 <b>下一节：</b><a name="tex2html2217" href="node98.html">子空间迭代法</a>
 <b>上一级：</b><a name="tex2html2211" href="node94.html">单向量和多向量迭代</a>
