@@ -66,16 +66,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html7150" href="node417.html">Methods with Preconditioned Inner</a>
-<b>上一级：</b><a name="tex2html7144" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>下一节：</b><a name="tex2html7150" href="node417.html">带有预处理内迭代的方法</a>
+<b>上一级：</b><a name="tex2html7144" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7138" href="node415.html">预处理Lanczos方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002036000000000000000"></a>
 <a name="sec:prec_Dav"></a>
-<br>
 戴维森方法
 </h2>
 
@@ -90,7 +87,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
  href="node421.html#m90">329</a>,<a
  href="node421.html#saad92">387</a>]）：
 
-<div class="math-display" id="prec_dm">\begin{tabular}{c}<span class="math-inline">\mu (x^{(i+1)}) = {\rm max}_{ x \in {\ca......u^{(i)} A)x^{(i)} \}</span>.\end{tabular}\vspace{\belowdisplayskip} \tag{286}</div>
+<div class="math-display" id="prec_dm">
+\begin{gather}
+\mu (x^{(i+1)}) = {\rm max}_{ x \in {\mathcal{D}_i}} \mu(x), \\
+\mathcal{D}_i = \mathrm{span}\{x^{(0)}, T(B-\mu^{(0)}A)x^{(0)}, T(B-\mu^{(1)}A)x^{(1)}, T(B-\mu^{(i)}A)x^{(i)}\}
+\end{gather}\tag{11.16}</div>
 
 由于子空间 <span class="math-inline">{\mathcal D}_i</span> 的维度随着每一步增长，并且所有基向量都需要存储，因此通常需要像预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>中那样进行重启。一个简单的重启过程是在一定数量的内迭代步骤后停止方法，然后使用最后一个迭代向量作为下一步（外迭代）的初始近似重新开始。
 
@@ -106,8 +107,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 <hr>
-
-以上内容已按照要求进行翻译，保留了原文格式和信息，同时遵循了指定的专业词汇使用。<!--Navigation Panel-->
+<!--Navigation Panel-->
 <a name="tex2html7149"
   href="node417.html">
 <button class="navigate">下一节</button></a> 
@@ -124,11 +124,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html7150" href="node417.html">Methods with Preconditioned Inner</a>
-<b>上一级：</b><a name="tex2html7144" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>下一节：</b><a name="tex2html7150" href="node417.html">带有预处理内迭代的方法</a>
+<b>上一级：</b><a name="tex2html7144" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7138" href="node415.html">预处理Lanczos方法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

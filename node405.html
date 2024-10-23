@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Jacobi-Davidson方法与Cayley变换</title>
+<title>带Cayley变换的Jacobi-Davidson方法</title>
 <meta charset="utf-8">
-<meta name="description" content="Jacobi-Davidson方法与Cayley变换">
+<meta name="description" content="带Cayley变换的Jacobi-Davidson方法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -67,22 +67,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6991" href="node406.html">预处理Lanczos方法</a>
-<b>上一级：</b><a name="tex2html6985" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6979" href="node404.html">Example 11.2.2.</a>
-  
-  
+<b>上一级：</b><a name="tex2html6985" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6979" href="node404.html">例11.2.2.</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002025000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002025000000000000000"></a>
 <a name="sec:jd-cayley"></a><a name="48172"></a>
-<br>
-带凯莱变换的雅可比-戴维森方法
+带Cayley变换的Jacobi-Davidson方法
 </h2>
 
 <p>
 雅可比-戴维森方法在第&#167;<a href="node269.html#sec:jacdnonh">7.12</a>节中进行了讨论。与戴维森方法不同的是，雅可比-戴维森方法将待解的线性系统投影到与当前里兹向量正交的空间上。这导致了解决校正方程的问题
 
-<div class="math-display" id="eq:correction">\left( I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)......_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j, \tag{276}</div>
+<div class="math-display" id="eq:correction">
+\left(I - \frac{B x_j x_j^{\ast}}{x_j^{\ast} B x_j} \right)(A-\theta_jB)\left(I- \frac{x_jx_j^{\ast}}{x_j^{\ast} x_j} \right) w_j = (A - \theta_jB) x_j, \tag{11.5}
+</div>
 
 其中
 <span class="math-inline">(\theta_j,x_j)</span> 是第 <span class="math-inline">j</span> 次迭代的里兹对。（注意通常在右侧残差前放置一个减号。）假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，即
@@ -93,20 +93,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display">s_j = (A - \theta_j B) x_j- \left( I - \frac{B x_j x_j^{\ast} }{x_j^{\ast} B x_j}\right)(A - \theta_j B) w_j \ .</div>
 
 注意，由于假设 <span class="math-inline">w_j</span> 与 <span class="math-inline">x_j</span> 正交，投影在 <span class="math-inline">w_j</span> 之前的部分被省略了。我们可以将其改写为
-<p></p>
-<div align="CENTER">
 
-<img
- width="324" height="52" border="0"
- src="img3768.png"
- alt="\begin{eqnarray*}
-(A- \theta_j B) w_j &amp; = &amp; -\epsilon_j B x_j + (A - \theta_j B) x_j -
+<div class="math-display">
+\begin{aligned}
+(A- \theta_j B) w_j & = -\epsilon_j B x_j + (A - \theta_j B) x_j -
 s_j \\
-&amp; = &amp; ( A - (\theta_j + \epsilon_j) B ) x_j - s_j,
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+& = ( A - (\theta_j + \epsilon_j) B ) x_j - s_j,
+\end{aligned}
+</div>
+
 其中
 <span class="math-inline">\epsilon_j = -(x_j^{\ast} (A -\theta_j B) w_j) / ( x_j^{\ast} B x_j)</span>。
 
@@ -149,10 +144,8 @@ s_j \\
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6991" href="node406.html">预处理Lanczos方法</a>
-<b>上一级：</b><a name="tex2html6985" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6979" href="node404.html">Example 11.2.2.</a>
-  
-  
+<b>上一级：</b><a name="tex2html6985" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6979" href="node404.html">例11.2.2.</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

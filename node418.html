@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,14 +73,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7178" href="node419.html">预处理同时迭代法</a>
-<b>上一级：</b><a name="tex2html7172" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b>上一节：</b><a name="tex2html7166" href="node417.html">Methods with Preconditioned Inner</a>
-  
-  
+<b>上一级：</b><a name="tex2html7172" href="node410.html">预条件特征值求解器</a>
+<b>上一节：</b><a name="tex2html7166" href="node417.html">带有预处理内迭代的方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002038000000000000000"></a> <a name="sec:prec_pcg"></a>
-<br>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002038000000000000000"></a> <a name="sec:prec_pcg"></a>
 预处理共轭梯度法
 </h2>
 在这一小节中，我们将介绍我们最偏爱的方法，从实际效率的角度来看：即<em>局部最优PCG方法</em> [<a href="node421.html#k90">266</a>]。它结合了算法的鲁棒性和简洁性，如算法<a href="node414.html#fig:prec_steepBA">11.6</a>所示，预处理Lanczos算法的三个项递归关系，如算法<a href="node415.html#fig:prec_scottBA">11.7</a>所示，以及可能的预处理投影算法<a href="node415.html#fig:prec_projBA">11.8</a>和Davidson方法的快速收敛性。
@@ -82,23 +86,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 一个简单的PCG方法变体，针对矩阵束<span class="math-inline">B - \mu A</span>，可以写成如下形式：
 
-<div class="math-display" id="prec_cgmBA">\begin{array}{l}x^{(i+1)} = w^{(i)} + \tau^{(i)} x^{(i)} + ......mu^{(i)} A x^{(i)}), \\\mu^{(i)} = \mu (x^{(i)}),\end{array} \tag{287}</div>
+<div class="math-display" id="prec_cgmBA">
+\begin{aligned}
+x^{(i+1)} &= w^{(i)} + \tau^{(i)} x^{(i)} + \gamma^{(i)}x^{(i-1)}, \\
+w^{(i)} &= T(Bx^{(i)}-\mu^{(i)} A x^{(i)}), \\
+\mu^{(i)} &= \mu (x^{(i)}),
+\end{aligned} \tag{11.17}</div>
 
 其中，适当选择的标量迭代参数<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>。参数选择最简单且最有效的方式基于<em>局部最优</em>的思想[<a href="node421.html#k90">266</a>]；即，选择<span class="math-inline">\tau^{(i)}</span>和<span class="math-inline">\gamma^{(i)}</span>，通过Rayleigh-Ritz方法最大化Rayleigh商<span class="math-inline">\mu(x^{(i+1)})</span>；参见算法<a href="node418.html#fig:prec_cgmBA">11.10</a>。
 
-<p>
-<br>
-<a name="fig:prec_cgmBA"></a><img
- width="598" height="224" align="BOTTOM" border="0"
- src="img3972.png"
- alt="\begin{algorithm}
-{PCG Method for GHEP
-\index{conjugate gradient method!precondi...
-...z vector corresponding to
-the maximal Ritz value
-\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="fig:prec_cgmBA">
+算法 11.10：用于广义特征值问题的PCG方法
+
+(1) 选择一个初始向量 <span class="math-inline">x^{(0)}</span>。
+(2) 对于 i=0,..., 直到收敛执行：
+(3) <span class="math-inline">\mu^{(i)}:=\left(x^{(i)}, B x^{(i)}\right)/\left(x^{(i)}, A x^{(i)}\right)</span>
+(4) <span class="math-inline">r:=Bx^{(i)}-\mu^{(i)}Ax^{(i)}</span>
+(5) <span class="math-inline">w:=Tr</span>
+(6) 在 <span class="math-inline">\operatorname{span}\left\{w,x^{(i)},x^{(i-1)}\right\}</span> 上对 <span class="math-inline">B-\mu A</span> 应用Rayleigh-Ritz方法
+(7) <span class="math-inline">x^{(i+1)}:=</span> 对应最大Ritz值的Ritz向量
+</pre>
 
 <p>
 对于局部最优版本的PCG方法，我们可以直接应用收敛速率估计（<a href="node413.html#prec_est_power">11.13</a>），因为该方法在最大化Rayleigh商方面不慢于预处理的陡峭上升法。
@@ -175,10 +182,8 @@ the maximal Ritz value
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7178" href="node419.html">预处理同时迭代法</a>
-<b>上一级：</b><a name="tex2html7172" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b>上一节：</b><a name="tex2html7166" href="node417.html">Methods with Preconditioned Inner</a>
-  
-  
+<b>上一级：</b><a name="tex2html7172" href="node410.html">预条件特征值求解器</a>
+<b>上一节：</b><a name="tex2html7166" href="node417.html">带有预处理内迭代的方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

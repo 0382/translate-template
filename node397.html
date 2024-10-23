@@ -66,15 +66,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6868" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html6868" href="node398.html">不精确方法</a>
 <b>上一级：</b><a name="tex2html6862" href="node396.html">预处理技术</a>
 <b>上一节：</b><a name="tex2html6856" href="node396.html">预处理技术</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION002010000000000000000"></a> <a name="sec:introduction"></a>
-<br>
 引言
 </h1>
 
@@ -95,7 +92,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 我们再看一个特征值预处理方法之间的相似之处。为便于阐述，我们假设存在一个标准的对称特征值问题。似乎所有方法的共同点是算子
-<div class="math-display" id="eq:keyop">M^{-1}(A-\nu I), \tag{272}</div>
+<div class="math-display" id="eq:keyop">M^{-1}(A-\nu I), \tag{11.1}</div>
 
 其中<span class="math-inline">\nu</span>是近似特征值，<span class="math-inline">M</span>是<span class="math-inline">A-\nu I</span>的（可能变化的）近似。我们将探讨一些不同方法如何使用此算子的例子；有关一般讨论，请参见§<a href="node412.html#sec:prec_preconditioning">11.3.2</a>。讨论的四种方法包括预处理的幂法、Rayleigh商迭代（RQI）、Davidson方法和Jacobi-Davidson方法。预处理的幂法是§<a href="node410.html#sec:prec">11.3</a>中的算法<a href="node413.html#fig:prec_powerBA">11.5</a>。当<span class="math-inline">B=I</span>时，该算法的步骤4和5执行
 <div class="math-display">w =T(x^{(i)}-\mu^{(i)}Ax^{(i)}) =-\mu^{(i)} T(A - {1/\mu^{(i)}} I) x^{(i)}. </div>
@@ -138,11 +135,9 @@ Davidson方法或许是预处理方法中最纯粹的一种，因为每次应用
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6868" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html6868" href="node398.html">不精确方法</a>
 <b>上一级：</b><a name="tex2html6862" href="node396.html">预处理技术</a>
 <b>上一节：</b><a name="tex2html6856" href="node396.html">预处理技术</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

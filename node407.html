@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>非精确有理Krylov方法</title>
+<title>不精确有理Krylov方法</title>
 <meta charset="utf-8">
-<meta name="description" content="非精确有理Krylov方法">
+<meta name="description" content="不精确有理Krylov方法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,17 +72,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html7019" href="node408.html">Example 11.2.3.</a>
-<b>上一级：</b><a name="tex2html7013" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html7019" href="node408.html">例11.2.3.</a>
+<b>上一级：</b><a name="tex2html7013" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html7007" href="node406.html">预处理Lanczos方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h2><a name="SECTION002027000000000000000"></a>
 <a name="sec:inexact-RKS"></a>
-<br>
-非精确有理Krylov方法
+不精确有理Krylov方法
 </h2>
 
 <p>
@@ -85,59 +88,68 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 我们现在详细讨论这种方法，使用下面给出的针对非精确Cayley变换设计的有理Krylov方法算法。
 
-<p>
-<br>
-<a name="alg:I-rks"></a><img
- width="598" height="414" align="BOTTOM" border="0"
- src="img3801.png"
- alt="\begin{algorithm}{Inexact Rational Krylov Method for GNHEP
-\index{inexact method...
-... B x_j<span class="math-inline">\ \\
-{\rm (8)} \&gt; \&gt; \&gt; convergence check
-\end{tabbing}}
-\end{algorithm}">
-<br>
-让我们逐步分析这个算法。线性系统的解导致关系式（<a href="node400.html#eq:system">11.2</a>），其中</span>y_j = x_{j-1}<span class="math-inline">是一个Ritz向量，</span>\nu_j<span class="math-inline">是前一次迭代中的相关Ritz值</span>\theta_{j-1}<span class="math-inline">，使得右端是残差
+<pre class="algorithm" id="alg:I-rks">
+算法 11.4：用于广义非线性特征值问题的近似有理Krylov方法
 
-</span>r_{j-1} = A x_{j-1} - \theta_{j-1} B x_{j-1}<span class="math-inline">。
+(1) 给定 <span class="math-inline">v_{1}</span>，满足 <span class="math-inline">\left\|v_{1}\right\|=1</span>，和一个零值 <span class="math-inline">\theta_{0}</span>。令残差为 <span class="math-inline">r_{0}=A v_{1}-\theta_{0} B v_{1}</span>。
+(2) 对于 <span class="math-inline">j=1,2,\ldots</span> 执行
+(3)     选择一个极点 <span class="math-inline">\mu_{j}</span>，令 <span class="math-inline">\nu_{j}=\theta_{j-1}</span>，并解 <span class="math-inline">w_{j}</span>：
+          <span class="math-inline">\left(A-\mu_j B\right) w_j=r_{j-1}</span>
+(4)     将 <span class="math-inline">w_j</span> 相对于 <span class="math-inline">v_1,\ldots, v_j</span> 正交化，得到 <span class="math-inline">v_{j+1}</span>。在Hessenberg矩阵 <span class="math-inline">H_{j+1, j}</span> 的第j列中保留Gram-Schmidt系数 <span class="math-inline">h_{j}</span>。
+(5)     构建 <span class="math-inline">L_{j+1, j}</span> 和 <span class="math-inline">K_{j+1, j}</span> 的第j列：
+          <span class="math-inline">\left(h_j-\left[\begin{array}{c} t_j\\ 0\end{array}\right]\right),\left(h_j\mu_j-\left[\begin{array}{c} t_j\\ 0\end{array}\right]\nu_j\right)</span>
+        其中 <span class="math-inline">t_1=1</span>，对于 <span class="math-inline">j>1</span>，<span class="math-inline">t_j=L_{j, j-1} z_{j-1}</span>。
+(6)    解第j个 <span class="math-inline">j \times j</span> 特征值问题 
+          <span class="math-inline">L_{j+1, j}^{\dagger} K_{j+1, j} z_{j}=\theta_{j} z_{j}</span>
+          并计算Ritz对 <span class="math-inline">\left(\theta_{j}, x_{j}=V_{j+1} L_{j+1, j} z_{j}\right)</span>。
+(7)     计算残差 <span class="math-inline">r_{j}=A x_{j}-\theta_{j} B x_{j}</span>。收敛性检查。
+</pre>
+
+<br>
+让我们逐步分析这个算法。线性系统的解导致关系式（<a href="node400.html#eq:system">11.2</a>），其中<span class="math-inline">y_j = x_{j-1}</span>是一个Ritz向量，<span class="math-inline">\nu_j</span>是前一次迭代中的相关Ritz值<span class="math-inline">\theta_{j-1}</span>，使得右端是残差
+
+<span class="math-inline">r_{j-1} = A x_{j-1} - \theta_{j-1} B x_{j-1}</span>。
 由于
-</span>x_{j-1} = V_j L_{j,j-1} z_{j-1}<span class="math-inline">，我们也可以写成
-</span>x_{j-1}=V_jt_j<span class="math-inline">，其中
-</span>t_j<span class="math-inline">被称为延续向量。经过Gram-Schmidt正交化后，我们有
+<span class="math-inline">x_{j-1} = V_j L_{j,j-1} z_{j-1}</span>，我们也可以写成
+<span class="math-inline">x_{j-1}=V_jt_j</span>，其中
+<span class="math-inline">t_j</span>被称为延续向量。经过Gram-Schmidt正交化后，我们有
 
-</span>w_j = V_{j+1} h_j<span class="math-inline">，因此我们可以将（<a href="node400.html#eq:system">11.2</a>）重写为
+<span class="math-inline">w_j = V_{j+1} h_j</span>，因此我们可以将（<a href="node400.html#eq:system">11.2</a>）重写为
 
 <div class="math-display">A V_{j+1}\left( h_j - \left[\begin{array}{c} t_j \\ 0 \end{array}\right] \nu_j \right)- s_j.</div>
 
-将所有方程收集起来，对于</span>j=1,\ldots,k<span class="math-inline">，我们有
+将所有方程收集起来，对于<span class="math-inline">j=1,\ldots,k</span>，我们有
 
-<div class="math-display" id="eq:rks-Sk">A V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k} - S_k \ , \tag{277}</div>
+<div class="math-display" id="eq:rks-Sk">A V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k} - S_k \ , \tag{11.6}</div>
 
-这是另一种写法（<a href="node400.html#eq:system-Sk">11.3</a>）。注意，当从该方程中省略</span>S_k<span class="math-inline">时，我们得到通常的有理Krylov子空间（RKS）递推关系。同样在这种情况下，</span>L_{k+1,k}<span class="math-inline">和</span>K_{k+1,k}<span class="math-inline">是上部海森堡矩阵，并且</span>L_{k+1,k}<span class="math-inline">具有满秩。令
-</span>L_{k+1,k}^{\dagger}<span class="math-inline">表示</span>L_{k+1,k}<span class="math-inline">的广义Moore-Penrose逆。利用
-</span>E_k = S_k L_{k+1,k}^{\dagger} V_{k+1}^{\ast}<span class="math-inline">，我们也可以写成
+这是另一种写法（<a href="node400.html#eq:system-Sk">11.3</a>）。注意，当从该方程中省略<span class="math-inline">S_k</span>时，我们得到通常的有理Krylov子空间（RKS）递推关系。同样在这种情况下，<span class="math-inline">L_{k+1,k}</span>和<span class="math-inline">K_{k+1,k}</span>是上部海森堡矩阵，并且<span class="math-inline">L_{k+1,k}</span>具有满秩。令
+<span class="math-inline">L_{k+1,k}^{\dagger}</span>表示<span class="math-inline">L_{k+1,k}</span>的广义Moore-Penrose逆。利用
+<span class="math-inline">E_k = S_k L_{k+1,k}^{\dagger} V_{k+1}^{\ast}</span>，我们也可以写成
 
-<div class="math-display" id="eq:rks-Ek">(A + E_k) V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k}, \tag{278}</div>
+<div class="math-display" id="eq:rks-Ek">(A + E_k) V_{k+1} L_{k+1,k} = B V_{k+1} K_{k+1,k}, \tag{11.7}</div>
 
-这对应于（<a href="node400.html#eq:system-Ek">11.4</a>）。换句话说，RKS系数矩阵</span>L_{k+1,k}<span class="math-inline">和</span>K_{k+1,k}<span class="math-inline">以及向量</span>V_{k+1}<span class="math-inline">可以被视为通过对扰动问题应用精确有理Krylov方法计算得到的结果
+这对应于（<a href="node400.html#eq:system-Ek">11.4</a>）。换句话说，RKS系数矩阵<span class="math-inline">L_{k+1,k}</span>和<span class="math-inline">K_{k+1,k}</span>以及向量<span class="math-inline">V_{k+1}</span>可以被视为通过对扰动问题应用精确有理Krylov方法计算得到的结果
 
-</span>(A + E_k) u = \eta B u<span class="math-inline">。类似于“非精确”Cayley变换的术语，我们谈论“非精确”有理Krylov方法。
+<span class="math-inline">(A + E_k) u = \eta B u</span>。类似于“非精确”Cayley变换的术语，我们谈论“非精确”有理Krylov方法。
+
 
 <p>
-在我们继续之前，必须给出精确有理Krylov方法的一些性质。以下引理解释了如何在有理Krylov方法中计算Ritz值。<br>
-<a name="le:rks-ritz"></a><img
- width="556" height="134" align="BOTTOM" border="0"
- src="img3819.png"
- alt="\begin{lemma}
-Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-inline">, and </span>K_{k+1,k}<span class="math-inline">\ be such that </span>V_{k+1}...
-...f_k = B V_{k+1} (K_{k+1,k} - \theta L_{k+1,k}) z \ .\end{displaymath}\end{lemma}">
-<br>
+在我们继续之前，必须给出精确有理Krylov方法的一些性质。以下引理解释了如何在有理Krylov方法中计算Ritz值。
+
+<p>
+<b>引理 11.1</b> 设 <span class="math-inline">V_{k+1}, L_{k+1, k}</span> 和 <span class="math-inline">K_{k+1, k}</span> 使得 <span class="math-inline">V_{k+1}</span> 和 <span class="math-inline">L_{k+1, k}</span> 具有满秩。设 <span class="math-inline">A V_{k+1} L_{k+1, k}=B V_{k+1} K_{k+1, k}</span> 成立。假设 B 可逆。则 <span class="math-inline">(\theta, x)</span> 是 <span class="math-inline">B^{-1} A x=\lambda x</span> 相对于范围 <span class="math-inline">\left(V_{k+1} L_{k+1, k}\right)</span> 的Ritz对，当且仅当 <span class="math-inline">x_{k}=V_{k+1} L_{k+1, k} z_{k}</span> 且
+
+<div class="math-display">L_{k+1, k}^{\dagger} K_{k+1, k} z=\theta z.</div>
+
+此外，残差是 <span class="math-inline">A x-\theta B x=f_{k}</span> 其中
+
+<div class="math-display">f_{k}=B V_{k+1}\left(K_{k+1, k}-\theta L_{k+1, k}\right) z.</div>
 
 <p>
 与(Jacobi) Davidson方法一样，RKS方法对向量应用非精确Cayley变换。区别在于计算Ritz对的方式。在(Jacobi) Davidson方法中，Ritz对来自于<span class="math-inline">Ax = \lambda Bx</span>在子空间上的Galerkin投影。在RKS方法中，Ritz对是利用引理<a href="node407.html#le:rks-ritz">11.1</a>从递推关系中计算出来的，假设<span class="math-inline">E_k=0</span>。
 
 <p>
-通过非精确Cayley变换，变换可能对精确Cayley变换造成较大扰动，但只要<span class="math-inline">\nu</span>选择得当，仍可用于计算一个特征对。这里的情况也是如此。非精确有理Krylov方法提供的<span class="math-inline">S_k</span>（或<span class="math-inline">E_k</span>）不是随机的，而是在所需特征对的方向上很小，只要各种参数设置得当。
+通过非精确Cayley变换，变换可能对精确Cayley变换造成较大扰动，但只要<span class="math-inline">\nu</span>选择得当，仍可用于计算一个特征对。这里的情况也是如此。不精确有理Krylov方法提供的<span class="math-inline">S_k</span>（或<span class="math-inline">E_k</span>）不是随机的，而是在所需特征对的方向上很小，只要各种参数设置得当。
 
 <p>
 由算法<a href="node407.html#alg:I-rks">11.4</a>计算的Ritz对<span class="math-inline">(\theta,x)</span>产生的残差
@@ -152,7 +164,7 @@ Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-
 
 <div class="math-display">A x - \theta B x = f_k -S_k z \ .</div>
 
-为了使残差变小，<span class="math-inline">E_k x = S_k z</span>必须趋向于零。关于非精确有理Krylov方法收敛性的数学论证已由Lehoucq和Meerbergen[<a href="node421.html#leme98">291</a>]以及De Samblanx[<a href="node421.html#dsam98">109</a>]给出。我们仅概述理论和一些数值结果。在[<a href="node421.html#leme98">291</a>]和[<a href="node421.html#dsam98">109</a>]中，给出了数学和启发式论证，即
+为了使残差变小，<span class="math-inline">E_k x = S_k z</span>必须趋向于零。关于不精确有理Krylov方法收敛性的数学论证已由Lehoucq和Meerbergen[<a href="node421.html#leme98">291</a>]以及De Samblanx[<a href="node421.html#dsam98">109</a>]给出。我们仅概述理论和一些数值结果。在[<a href="node421.html#leme98">291</a>]和[<a href="node421.html#dsam98">109</a>]中，给出了数学和启发式论证，即
 <span class="math-inline">S_j z_j \approx s_j</span>，使得
 
 <span class="math-inline">\Vert s_j\Vert \leq \tau \Vert r_{j-1}\Vert</span>（见第<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>节），
@@ -194,9 +206,8 @@ Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-
 <a name="CHILD_LINKS"><strong>子章节</strong></a>
 
 <ul>
-<li><ul>
 <li><a name="tex2html7020" href="node408.html">示例 11.2.3.</a>
-</ul></ul>
+</ul>
 <!--End of Table of Child-Links-->
 <hr>
 
@@ -217,11 +228,9 @@ Let </span>V_{k+1}<span class="math-inline">, </span>L_{k+1,k}<span class="math-
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html7019" href="node408.html">Example 11.2.3.</a>
-<b>上一级：</b><a name="tex2html7013" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html7019" href="node408.html">例11.2.3.</a>
+<b>上一级：</b><a name="tex2html7013" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html7007" href="node406.html">预处理Lanczos方法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

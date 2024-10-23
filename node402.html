@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -66,16 +72,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6949" href="node403.html">Example 11.2.1.</a>
-<b>上一级：</b><a name="tex2html6943" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6937" href="node401.html">Arnoldi Method with Inexact</a>
-  
-  
+<b>下一节：</b><a name="tex2html6949" href="node403.html">例11.2.1.</a>
+<b>上一级：</b><a name="tex2html6943" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6937" href="node401.html">带非精确Cayley变换的Arnoldi方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002024000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002024000000000000000"></a>
 <a name="sec:davidson"></a>
-<br>
 Davidson方法
 </h2>
 
@@ -85,22 +89,14 @@ Davidson方法
 <p>
 Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学问题而开发的，其中矩阵的对角元素既大且在幅度上变化。它最初是作为微扰方法推导出来的。给定一个近似特征向量，发展出一个修正。在[<a href="node421.html#mosc86">335</a>]中，Davidson方法被视为一种对角预处理方法，并被推广到其他预处理方法。我们现在给出一个算法。向量<span class="math-inline">w_j</span>是对近似特征向量<span class="math-inline">y</span>的修正。预处理器的具体形式未指定，但对于Davidson的原始方法，选择是<span class="math-inline">M=(D-\theta I)^{-1}</span>。
 
-<p>
+<pre class="algorithm" id="alg:gdavidson">
+算法 11.2：用于广义非线性特征值问题的广义Davidson方法
 
-<p></p>
-<div align="CENTER">
-
-<p><a name="alg:gdavidson"></a></p><img
- width="598" height="202" border="0"
- src="img3744.png"
- alt="\begin{figure}\begin{algorithm}{Generalized Davidson Method for GNHEP\index{Davi...
-... go to <span class="math-inline">(2)</span>.
-\end{tabbing}}
-\end{algorithm}
-\vspace*{-12pt}%% help
-\end{figure}">
-</div>
-<p></p>
+(1) 选择一个预处理器 <span class="math-inline">M</span>，它可以是固定的或变化的。从 <span class="math-inline">k</span> 个正交归一基向量 <span class="math-inline">v_{1}, v_{2},\ldots, v_{k}</span> 开始，并设置 <span class="math-inline">j=k</span>。
+(2) 利用Rayleigh-Ritz过程，从张成空间 <span class="math-inline">\{v_1, v_2,..., v_j\}</span> 中计算 <span class="math-inline">(y,\theta)</span>，即对感兴趣特征对的最佳近似。
+(3) 为 <span class="math-inline">y</span> 找到残差向量 <span class="math-inline">r=(A-\theta B)y</span>。如果 <span class="math-inline">\|r\| \leq \text{TOL}</span>，则接受该特征对，否则继续。
+(4) 计算 <span class="math-inline">w_j = M^{-1}r</span>。将 <span class="math-inline">w_j</span> 相对于 <span class="math-inline">v_1,...,v_j</span> 进行正交化以形成 <span class="math-inline">v_{j+1}</span>。设置 <span class="math-inline">j=j+1</span> 并返回步骤 (2)。
+</pre>
 
 <p>
 接下来我们讨论Davidson方法的渐近收敛性。注意到，如果<span class="math-inline">\theta</span>和<span class="math-inline">M</span>固定，Davidson方法将发展出一个由算子<span class="math-inline">M^{-1}(A-\theta B)</span>生成的Krylov子空间。因此，一旦一个Ritz对开始收敛到一个特征对，比如说<span class="math-inline">(\lambda,x)</span>，那么从那时起生成的子空间大约与由<span class="math-inline">T_{\mathrm{IC}} \equiv M^{-1}(A-\lambda B)</span>生成的Krylov子空间相同。
@@ -116,10 +112,9 @@ Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学�
 <a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
-<li><ul>
-<li><a name="tex2html6950" href="node403.html"><b>示例11.2.1.</b></a>
+<li><a name="tex2html6950" href="node403.html">示例11.2.1.</a>
 <li><a name="tex2html6951" href="node404.html">示例11.2.2.</a>
-</ul></ul>
+</ul>
 <!--End of Table of Child-Links-->
 <hr>
 
@@ -140,11 +135,9 @@ Davidson方法[<a href="node421.html#davi75">99</a>]是为了解决量子化学�
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6949" href="node403.html">Example 11.2.1.</a>
-<b>上一级：</b><a name="tex2html6943" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6937" href="node401.html">Arnoldi Method with Inexact</a>
-  
-  
+<b>下一节：</b><a name="tex2html6949" href="node403.html">例11.2.1.</a>
+<b>上一级：</b><a name="tex2html6943" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6937" href="node401.html">带非精确Cayley变换的Arnoldi方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

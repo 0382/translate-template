@@ -66,17 +66,15 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6921" href="node401.html">Arnoldi Method with Inexact</a>
-<b>上一级：</b><a name="tex2html6915" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html6921" href="node401.html">带非精确Cayley变换的Arnoldi方法</a>
+<b>上一级：</b><a name="tex2html6915" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html6909" href="node399.html">矩阵变换</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002022000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002022000000000000000"></a>
 <a name="sec:inexactmatrixtransformations"></a>
-<br>
-非精确矩阵变换
+不精确矩阵变换
 </h2>
 
 <p>
@@ -89,11 +87,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 对于<span class="math-inline">j=1,\ldots,k</span>，其中<span class="math-inline">s_j</span>是残差，<span class="math-inline">v_j</span>是最后一个Krylov基向量。结果<span class="math-inline">w_j</span>相对于<span class="math-inline">v_1,\ldots,v_j</span>进行正交化，得到<span class="math-inline">v_{j+1}</span>。也可以将Cayley变换应用于Krylov空间中的另一个向量，而不是<span class="math-inline">v_j</span>。在这种情况下，我们解线性系统
 
-<div class="math-display" id="eq:system">(A - \mu B) w_j = (A - \nu B) y_j - s_j, \tag{273}</div>
+<div class="math-display" id="eq:system">(A - \mu B) w_j = (A - \nu B) y_j - s_j, \tag{11.2}</div>
 
 其中<span class="math-inline">y_j</span>选择如下：它可以是一个Ritz向量(Jacobi-Davidson)或最后一个基向量(Arnoldi)或连续向量(有理Krylov)。残差范数<span class="math-inline">\Vert s_j\Vert</span>是后向误差的度量，因为我们可以将(<a href="node400.html#eq:system">11.2</a>)重写为
 
-<div class="math-display">(A - \mu B + s_j w_j^{\ast} / \Vert w_j\Vert^2 ) w_j= (A - \nu B) y_j \ .</div>
+<div class="math-display">(A - \mu B + s_j w_j^{\ast} / \Vert w_j\Vert^2 ) w_j= (A - \nu B) y_j .</div>
 
 当使用直接方法时，通常会发生
 
@@ -106,17 +104,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">S_{k-1}=[s_{1},\ldots,s_{k-1}]</span>，<span class="math-inline">w_j</span>在<span class="math-inline">W_{k-1}</span>中，<span class="math-inline">y_j</span>在<span class="math-inline">Y_{k-1}</span>中，我们得到
 
-<div class="math-display" id="eq:system-Sk">(A - \mu B)W_{k-1} = (A -\nu B) Y_{k-1} - S_{k-1} \ . \tag{274}</div>
+<div class="math-display" id="eq:system-Sk">(A - \mu B)W_{k-1} = (A -\nu B) Y_{k-1} - S_{k-1} . \tag{11.3}</div>
 
 令<span class="math-inline">W_{k-1}^{\dagger}</span>为<span class="math-inline">W_{k-1}</span>的广义Moore-Penrose逆，即<span class="math-inline">W_{k-1}^{\dagger} W_{k-1} = I</span>，并定义
 
 <span class="math-inline">E_{k-1} = S_{k-1} W_{k-1}^{\dagger}</span>。我们可以将关系重写为
 
-<div class="math-display" id="eq:system-Ek">(A - \mu B + E_{k-1}) W_{k-1} = (A - \nu B) Y_{k-1} \ . \tag{275}</div>
+<div class="math-display" id="eq:system-Ek">(A - \mu B + E_{k-1}) W_{k-1} = (A - \nu B) Y_{k-1} . \tag{11.4}</div>
 
 这是我们在<span class="math-inline">{k-1}</span>步后应得到的“非精确”Cayley变换的关系
 
-<div class="math-display">T_{\mathrm{IC}} = (A - \mu B + E_{k-1})^{-1} (A - \nu B)\ .</div>
+<div class="math-display">T_{\mathrm{IC}} = (A - \mu B + E_{k-1})^{-1} (A - \nu B).</div>
 
 
 <p>
@@ -134,15 +132,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 
 <span class="math-inline">{\rm Span}(v_1,\ldots,v_k)</span>包含与<span class="math-inline">T_{\mathrm{IC}}</span>的分离极值特征值相关的特征向量。这是一个扰动的<span class="math-inline">T_{\mathrm{C}}</span>，因此与<span class="math-inline">Ax = \lambda Bx</span>的关系部分丧失，准确计算<span class="math-inline">Ax = \lambda Bx</span>的特征对可能很困难。为了了解哪些参数在扰动中起作用，从[<a href="node421.html#mero97">323</a>]中的定理4.3和4.4可以证明，如果<span class="math-inline">T_{\mathrm{IC}}</span>有不同的特征值，那么对于<span class="math-inline">T_{\mathrm{C}}</span>的每个特征对<span class="math-inline">(\zeta,x)</span>，存在<span class="math-inline">T_{\mathrm{IC}}</span>的特征对<span class="math-inline">(\eta,u)</span>，使得
-<p></p>
-<div align="CENTER">
-<img width="271" height="52" border="0" src="img3729.png" alt="\begin{eqnarray*}
-\vert\zeta - \eta\vert &amp; \leq &amp; \kappa_1 \vert\zeta\vert \Vert...
-...x\Vert &amp; \leq &amp; \kappa_2 \vert\zeta\vert \Vert E_{k-1}\Vert \, ,
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+
+<div class="math-display">
+\begin{aligned}
+\vert\zeta - \eta\vert \leq \kappa_1 \vert\zeta\vert \Vert E_{k-1}\Vert, \\
+\Vert(I-uu^*/(u^*u)) x\Vert \leq \kappa_2 \vert\zeta\vert \Vert E_{k-1}\Vert \, ,
+\end{aligned}
+</div>
+
 其中<span class="math-inline">\kappa_1,\kappa_2 > 0</span>。这些不等式表明，如果<span class="math-inline">\Vert E_{k-1}\Vert</span>和/或<span class="math-inline">\zeta</span>很小，<span class="math-inline">(\zeta,x)</span>和<span class="math-inline">(\eta,u)</span>对应得非常好。在这种情况下，<span class="math-inline">(\zeta,x)</span>可以通过<span class="math-inline">T_{\mathrm{IC}}</span>的特征对计算。由于<span class="math-inline">\zeta = (\lambda-\mu)^{-1}(\lambda-\nu)</span>，<span class="math-inline">\zeta\approx 0</span>，简化为<span class="math-inline">\lambda \approx \nu</span>。
 
 <p>
@@ -185,11 +182,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6921" href="node401.html">Arnoldi Method with Inexact</a>
-<b>上一级：</b><a name="tex2html6915" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>下一节：</b><a name="tex2html6921" href="node401.html">带非精确Cayley变换的Arnoldi方法</a>
+<b>上一级：</b><a name="tex2html6915" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html6909" href="node399.html">矩阵变换</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

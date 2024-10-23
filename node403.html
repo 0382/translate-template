@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Example 11.2.1.</title>
+<title>例11.2.1.</title>
 <meta charset="utf-8">
-<meta name="description" content="Example 11.2.1.">
+<meta name="description" content="例11.2.1.">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,43 +66,46 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6965" href="node404.html">Example 11.2.2.</a>
+<b>下一节：</b><a name="tex2html6965" href="node404.html">例11.2.2.</a>
 <b>上一级：</b><a name="tex2html6959" href="node402.html">Davidson方法</a>
 <b>上一节：</b><a name="tex2html6953" href="node402.html">Davidson方法</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h4><a name="SECTION002024010000000000000">
-<b>Example 11.2.1.</b></a>
-</h4>  
-Here <span class="math-inline">A</span> is symmetric and roughly models matrices from quantum
-chemistry. <span class="math-inline">B</span> is the identity matrix.  The main diagonal of <span class="math-inline">A</span> has
-elements 
-<span class="math-inline">1, 2, 3, \ldots, 100</span> and the off-diagonal elements of the
-upper
-triangular portion are selected randomly from the interval <span class="math-inline">(-1,1)</span>. We consider computing the smallest eigenvalue of <span class="math-inline">A</span> using the diagonal
-preconditioning of the original Davidson method.  The eigenvalues
-of <span class="math-inline">A</span> are <span class="math-inline">-0.323</span>, 0.721, 1.73, 2.77, <span class="math-inline">\ldots</span>, 101.58.  So we let 
-<span class="math-inline">\lambda_1 = -0.323</span>.  The eigenvalues of 
-<span class="math-inline">T_{\mathrm{IC}} = (D-\lambda_1 I)^{-1}(A-\lambda_1 I)</span> are 0.0, 0.263, 0.387, 0.500, <span class="math-inline">\ldots</span>, 2.01. The eigenvalue <span class="math-inline">0</span>
-of 
-<span class="math-inline">T_{\mathrm{IC}}</span> is much better separated relative to the entire spectrum than is
-<span class="math-inline">\lambda_1</span> of <span class="math-inline">A</span>.  In fact, the gap ratio of <span class="math-inline">\lambda_1</span> for <span class="math-inline">A</span> is
+例11.2.1.</a>
+</h4>
 
-<span class="math-inline">{{\lambda_2 - \lambda_1} \over {\lambda_n-\lambda_2}} = 0.0094</span>, while
-the gap ratio for the eigenvalue <span class="math-inline">0.0</span> of 
-<span class="math-inline">T_{\mathrm{IC}}</span> is <span class="math-inline">0.151</span>.  With gap ratio
-16 times larger, asymptotic convergence is very roughly four times
-faster.  
-The next example looks at a matrix that is tougher to precondition.  Some
-results can be given similar to those for preconditioning linear
-equations.
+这里，<span class="math-inline">A</span> 是对称的，大致模拟了量子化学中的矩阵。<span class="math-inline">B</span> 是单位矩阵。<span class="math-inline">A</span> 的主对角线元素为 <span class="math-inline">1, 2, 3, \ldots, 100</span>，而上三角部分的非对角线元素则从区间 <span class="math-inline">(-1,1)</span> 中随机选取。我们考虑使用原始Davidson方法的对角预处理来计算 <span class="math-inline">A</span> 的最小特征值。<span class="math-inline">A</span> 的特征值为 <span class="math-inline">-0.323</span>, 0.721, 1.73, 2.77, <span class="math-inline">\ldots</span>, 101.58。因此我们设 <span class="math-inline">\lambda_1 = -0.323</span>。<span class="math-inline">T_{\mathrm{IC}} = (D-\lambda_1 I)^{-1}(A-\lambda_1 I)</span> 的特征值为 0.0, 0.263, 0.387, 0.500, <span class="math-inline">\ldots</span>, 2.01。<span class="math-inline">T_{\mathrm{IC}}</span> 的特征值 <span class="math-inline">0</span> 相对于整个谱来说比 <span class="math-inline">A</span> 的 <span class="math-inline">\lambda_1</span> 分离得更好。实际上，<span class="math-inline">A</span> 的 <span class="math-inline">\lambda_1</span> 的间隙比为
+
+<span class="math-inline">{{\lambda_2 - \lambda_1} \over {\lambda_n-\lambda_2}} = 0.0094</span>，而
+<span class="math-inline">T_{\mathrm{IC}}</span> 的特征值 <span class="math-inline">0.0</span> 的间隙比为 <span class="math-inline">0.151</span>。由于间隙比大了16倍，渐进收敛速度大约快了四倍。
+下一个例子考察了一个更难预处理的矩阵。一些结果可以与预处理线性方程的结果相似。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html6964"
+  href="node404.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html6958"
+  href="node402.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html6952"
+  href="node402.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html6960"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html6962"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html6965" href="node404.html">例11.2.2.</a>
+<b>上一级：</b><a name="tex2html6959" href="node402.html">Davidson方法</a>
+<b>上一节：</b><a name="tex2html6953" href="node402.html">Davidson方法</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

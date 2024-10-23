@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,16 +73,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
-<b>上一级：</b><a name="tex2html6999" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6993" href="node405.html">Jacobi-Davidson Method with Cayley</a>
-  
-  
+<b>上一级：</b><a name="tex2html6999" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6993" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002026000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002026000000000000000"></a>
 <a name="sec:inexact-Lanczos"></a><a name="48201"></a> 
 <a name="48202"></a>
-<br>
 预处理Lanczos方法
 </h2> 
 
@@ -92,21 +96,17 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 设<span class="math-inline">(\zeta,z)</span>满足<span class="math-inline">H_k z = \zeta z</span>，并定义Ritz向量<span class="math-inline">x = V_k z</span>。这个向量是从Lanczos（Arnoldi）递推关系中获得的，而不是从Galerkin投影中获得的。另一方面，Ritz值可以通过Rayleigh商计算，即
-<p></p>
-<div align="CENTER">
 
-<img
- width="253" height="123" border="0"
- src="img3788.png"
- alt="\begin{eqnarray*}
-\theta &amp; = &amp; x^{\ast} A x / x^{\ast} B x \\
-&amp; = &amp; \nu + x^{\...
-...ast} H_k z / x^{\ast} B x \\
-&amp; = &amp; \nu + \zeta / x^{\ast} B x,
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+\theta & = x^{\ast} A x / x^{\ast} B x \\
+& = \nu + x^{\ast} (A - \nu B) x / x^{\ast} B x \\
+& = \nu + z^{\ast} V^{\ast}_k (A - \nu B) V_k z / x^{\ast} B x \\
+& = \nu + z^{\ast} H_k z / x^{\ast} B x \\
+& = \nu + \zeta / x^{\ast} B x,
+\end{aligned}
+</div>
+
 这在<span class="math-inline">B</span>是对角矩阵时计算成本较低。
 
 <p>
@@ -123,26 +123,26 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们知道对于一个Ritz对<span class="math-inline">(x, \theta)</span>，当<span class="math-inline">\theta \approx \nu</span>时，<span class="math-inline">(T_{\mathrm{C}} - T_{\mathrm{IC}}) x</span>可能很小。因此，如果<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{IC}}</span>的特征向量，并且<span class="math-inline">\theta</span>接近<span class="math-inline">\nu</span>，那么<span class="math-inline">x</span>接近<span class="math-inline">T_{\mathrm{C}}</span>的特征向量，因此Ritz值<span class="math-inline">\theta</span>接近<span class="math-inline">Ax = \lambda Bx</span>的特征值。
 
 <p>
-Morgan和Scott[<a
- href="node421.html#mosc93">336</a>]证明了以下算法的收敛性，用于计算<span class="math-inline">Ax = \lambda x</span>的特征值，即<span class="math-inline">B=I</span>。
-<br>
-<img
- width="598" height="224" align="BOTTOM" border="0"
- src="img3794.png"
- alt="\begin{algorithm}{Preconditioned Lanczos Method for GHEP}
-{
-\begin{tabbing}
-(nr)...
-...heta_l B x_l \Vert \leq \mathrm{TOL}<span class="math-inline">, {\bf stop}
-\end{tabbing}}
-\end{algorithm}">
-<br> 
+Morgan和Scott[<a href="node421.html#mosc93">336</a>]证明了以下算法的收敛性，用于计算<span class="math-inline">Ax = \lambda x</span>的特征值，即<span class="math-inline">B=I</span>。
+
+<pre class="algorithm">
+算法 11.3：预处理Lanczos方法用于广义特征值问题
+
+(1) 给定 <span class="math-inline">v_{1},\left\|v_{1}\right\|=1</span> 和 <span class="math-inline">\nu_{1}=v_{1}^{*} A v_{1}/ v_{1}^{*} B v_{1}</span>
+(2) 对于 <span class="math-inline">l=1,2,\ldots</span> 执行
+(3) 为 <span class="math-inline">A-\mu_{l} B</span> 选择一个预处理器 <span class="math-inline">M_{l}</span>。
+(4) 在 <span class="math-inline">T_{IC}^{(l)}=M_{l}^{-1}\left(A-\nu_{l} B\right)</span> 上运行k步Lanczos方法，并应用 <span class="math-inline">M_{l}</span> 正交化。
+(5) 计算Ritz向量 <span class="math-inline">x_{l}=V_{k} z_{l}</span>，其中 <span class="math-inline">H_{k} z_{l}=\zeta_{l} z_{l}</span>，且 <span class="math-inline">\zeta_{l}</span> 是 <span class="math-inline">H_{k}</span> 的最小Ritz值。
+(6) 计算 <span class="math-inline">\nu_{l+1}=\theta_{l}=\nu_{l}+\zeta_{l}/ x_{l}^{*} B x_{l}</span>。
+(7) 如果 <span class="math-inline">\left\|A x_{l}-\theta_{l} B x_{l}\right\|\leq</span> TOL，则停止。
+</pre>
 
 <p>
-注意，如果</span>\mu=\nu<span class="math-inline">，那么预处理器不能太好地近似</span>A - \mu B<span class="math-inline">；否则</span>T_{\mathrm{IC}} \approx I<span class="math-inline">。</span>k<span class="math-inline">的值可能对每个</span>l<span class="math-inline">都不同。Morgan和Scott建议停止测试
+注意，如果<span class="math-inline">\mu=\nu</span>，那么预处理器不能太好地近似<span class="math-inline">A - \mu B</span>；否则<span class="math-inline">T_{\mathrm{IC}} \approx I</span>。<span class="math-inline">k</span>的值可能对每个<span class="math-inline">l</span>都不同。Morgan和Scott建议停止测试
 
-</span>-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert<span class="math-inline">，这在Lanczos方法中计算成本较低。在[<a
- href="node421.html#mosc93">336</a>]中显示，如果</span>M_l<span class="math-inline">和</span>M_l^{-1}<span class="math-inline">在范数上一致有界，</span>\theta_l<span class="math-inline">收敛到</span>A$的一个特征值。此外，渐近收敛是二次的。
+<span class="math-inline">-\zeta_l > \Vert T_{\mathrm{IC}}^{(l)} x_l - \zeta_l x_l\Vert</span>，这在Lanczos方法中计算成本较低。在[<a
+ href="node421.html#mosc93">336</a>]中显示，如果<span class="math-inline">M_l</span>和<span class="math-inline">M_l^{-1}</span>在范数上一致有界，<span class="math-inline">\theta_l</span>收敛到 <span class="math-inline">A</span> 的一个特征值。此外，渐近收敛是二次的。
+
 
 <p>
 <hr><!--Navigation Panel-->
@@ -163,10 +163,8 @@ Morgan和Scott[<a
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7005" href="node407.html">非精确有理Krylov方法</a>
-<b>上一级：</b><a name="tex2html6999" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html6993" href="node405.html">Jacobi-Davidson Method with Cayley</a>
-  
-  
+<b>上一级：</b><a name="tex2html6999" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html6993" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>预条件转移幂法</title>
+<title>预处理位移幂法</title>
 <meta charset="utf-8">
-<meta name="description" content="预条件转移幂法">
+<meta name="description" content="预处理位移幂法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,14 +73,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7108" href="node414.html">预处理最速上升/下降法</a>
-<b>上一级：</b><a name="tex2html7102" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一级：</b><a name="tex2html7102" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7096" href="node412.html">预处理的一般框架</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002033000000000000000">
-预处理位移幂法</a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002033000000000000000"></a>
+预处理位移幂法
 </h2>
 <em>带位移的预处理幂法</em>是最简单的预处理迭代方法。它只能找到最小的（或最大的，对于不同的位移）特征值及其对应的特征向量。
 
@@ -84,22 +89,22 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 需要注意的是，位移<span class="math-inline">\tau</span>需要知道<span class="math-inline">\mu_{\min}</span>或其从下的估计值。如果<span class="math-inline">B</span>是非负定矩阵，那么<span class="math-inline">\mu_{\min}</span>可以简单地替换为<span class="math-inline">0</span>。
 
-<p>
-<br>
-<a name="fig:prec_powerBA"></a><img
- width="598" height="224" align="BOTTOM" border="0"
- src="img3939.png"
- alt="\begin{algorithm}
-{预处理幂法求解广义厄米特征值问题
-\index{preconditioned!po...
-... (7)} \&gt; \&gt; \&gt; <span class="math-inline">x\sup{i+1} = x / \Vert x\Vert _A </span>\end{tabbing}}
-\end{algorithm}">
-<br>
+<pre class="algorithm" id="fig:prec_powerBA">
+算法 11.5：预处理幂方法用于广义特征值问题
+
+(1) 选择一个初始向量 <span class="math-inline">x^{(0)}</span>。
+(2) 对于 <span class="math-inline">i=0,\ldots</span>，直到收敛执行：
+(3) <span class="math-inline">\mu^{(i)}:=\left(x^{(i)}, B x^{(i)}\right)/\left(x^{(i)}, A x^{(i)}\right)</span>
+(4) <span class="math-inline">r:= B x^{(i)}-\mu^{(i)} A x^{(i)}</span>
+(5) <span class="math-inline">w:=\operatorname{Tr}</span>
+(6) <span class="math-inline">x:=w+\tau x</span>，其中平移 <span class="math-inline">\tau=\delta_{1}\left(\mu^{(i)}-\mu_{\min}\right)</span>
+(7) <span class="math-inline">x^{(i+1)}=x/\|x\|_{A}</span>
+</pre>
 
 <p>
 基于<span class="math-inline">A^{-1}B</span>的特征分解的标准论证，对于矩阵束<span class="math-inline">B - \mu A</span>，并不能证明幂法收敛，因为特征分解中的特征向量不一定是迭代算子的特征向量。这使得收敛理论相当复杂。D'yakonov及其同事[<a href="node421.html#do80">150</a>,<a href="node421.html#d83">146</a>,<a href="node421.html#d">147</a>]利用假设(<a href="node412.html#prec_equiv">11.9</a>)，对迭代算法<a href="node413.html#fig:prec_powerBA">11.5</a>得到了线性收敛的显式估计。简而言之（参见[<a href="node421.html#k">264</a>,<a href="node421.html#ks">265</a>,<a href="node421.html#k98">268</a>]），算法<a href="node421.html#fig:prec_powerBA">11.5</a>的收敛速率估计可以写为
 
-<div class="math-display" id="prec_est_power">\frac{\mu_1 - \mu^{(n)}}{\mu^{(n)} - \mu_2} \leq (1 - \xi )^......{\delta_0}{\delta_1}\frac{\mu_1 - \mu_2}{\mu_1 - \mu_{\min}}, \tag{283}</div>
+<div class="math-display" id="prec_est_power">\frac{\mu_1 - \mu^{(n)}}{\mu^{(n)} - \mu_2} \leq (1 - \xi )^n \frac{\mu_1-\mu^{(0)}}{\mu^{(0)}-\mu_2}, \quad \xi = \frac{\delta_0}{\delta_1}\frac{\mu_1 - \mu_2}{\mu_1 - \mu_{\min}}, \tag{11.13}</div>
 
 在假设<span class="math-inline">\mu^{(0)} &gt; \mu_2</span>下。
 <a name="48710"></a>
@@ -180,10 +185,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7108" href="node414.html">预处理最速上升/下降法</a>
-<b>上一级：</b><a name="tex2html7102" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一级：</b><a name="tex2html7102" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7096" href="node412.html">预处理的一般框架</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,16 +73,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7192" href="node420.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html7186" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一级：</b><a name="tex2html7186" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7180" href="node418.html">预处理共轭梯度法</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002039000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002039000000000000000"></a>
 <a name="sec:prec_block"></a><a name="49026"></a> 
 <a name="49027"></a>
-<br>
 预处理同时迭代法
 </h2>
 
@@ -86,10 +90,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 块算法是单向量方法的直接推广，通常与Rayleigh-Ritz过程结合使用。对于前面讨论的每个预处理特征求解器，可以很容易地提出几种同时迭代法的变体；例如，参见带有移位的预处理幂法的块版本[<a href="node421.html#k90">266</a>,<a href="node421.html#dk92">149</a>,<a href="node421.html#bkp96">63</a>,<a href="node421.html#d99">130</a>]。为了简洁起见，我们这里只描述一种方法——局部最优PCG方法的同时版本，建议在[<a href="node421.html#k98">268</a>]中——并且仅针对铅笔<span class="math-inline">B - \mu A</span>。
 
-<p>
-<br>
-<a name="fig:prec_bcgmBA"></a><img width="598" height="237" align="BOTTOM" border="0" src="img3975.png" alt="\begin{algorithm}{Simultaneous PCG Method for GHEP}{\begin{tabbing}(nr)ss\=...\&gt; \&gt; from the top Ritz value for <span class="math-inline"> j=1, \ldots, m</span>\end{tabbing}}\end{algorithm}">
-<br>
+<pre class="algorithm" id="fig:prec_bcgmBA">
+算法 11.11：用于广义特征值问题的同步PCG方法
+
+(1) 选择一组初始向量 <span class="math-inline">x_{j}^{(0)}, j=1,\ldots, m</span>
+(2) 对于 <span class="math-inline">i=0,\ldots</span>，直到收敛执行：
+(3) 对于 <span class="math-inline">j=1,\ldots, m</span>，计算 <span class="math-inline">\mu_{j}^{(i)}:=\left(x_{j}^{(i)}, B x_{j}^{(i)}\right)/\left(x_{j}^{(i)}, A x_{j}^{(i)}\right)</span>
+(4) 对于 <span class="math-inline">j=1,\ldots, m</span>，计算 <span class="math-inline">r_{j}:=B x_{j}^{(i)}-\mu_{j}^{(i)} A x_{j}^{(i)}</span>
+(5) 对于 <span class="math-inline">j=1,\ldots, m</span>，计算 <span class="math-inline">w_{j}:=\operatorname{Tr}_{j}</span>
+(6) 对 <span class="math-inline">B-\mu A</span> 使用Rayleigh-Ritz方法在 
+<div class="math-display">\operatorname{span}\left\{w_{1},\ldots, w_{m}, x_{1}^{(i)},\ldots, x_{m}^{(i)}, x_{1}^{(i-1)},\ldots, x_{m}^{(i-1)}\right\},</div>
+(7) 对于 <span class="math-inline">j=1,\ldots, m</span>，计算 <span class="math-inline">x_{j}^{(i+1)}:=</span> 对应于从顶部数第j个Ritz值的第j个Ritz向量
+</pre>
+
 
 <p>
 与单向量算法一样，需要采取特殊措施来克服算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>中试验子空间中几乎线性相关基的问题。
@@ -97,7 +110,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 目前还没有理论可以准确预测算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速度。然而，通过类比已知的PCG系统求解器的收敛理论，我们预计<span class="math-inline">\mu^{(i)}_j</span>向<span class="math-inline">\mu_j</span>的收敛是线性的，其比率为<a name="49065"></a>
 
-<div class="math-display" id="prec_linear">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2, ......lta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}. \tag{288}</div>
+<div class="math-display" id="prec_linear">\left( \frac{1 - \sqrt{\xi_j} }{1+\sqrt{\xi_j}} \right)^2,\quad \xi_j = \frac {\delta_0}{\delta_1}\frac{\mu_j - \mu_{m+1}}{\mu_j - \mu_{\min}}. \tag{11.18}</div>
 
 
 <p>
@@ -117,32 +130,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 我们可以看到，<span class="math-inline">A</span>的巨大条件数、问题的大小、特征值在不需要部分的分布以及预处理器<span class="math-inline">T</span>的特定选择都不会显著影响算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛，因为在所有图中，收敛历史线的元素彼此非常接近。此外，我们的理论预测（<a href="node419.html#prec_linear">11.18</a>）算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>的收敛速率相对准确，尽管有些悲观。<span class="math-inline">\delta_1 / \delta_0</span>的10倍增加导致迭代次数增加——块SA方法为10倍，而算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>仅为约3倍——正如我们所预期的那样。我们观察到，深色中的第一个特征值的收敛通常比浅色和虚线的第二个特征值快。最后，我们还观察到当迭代次数接近解决问题大小的一半时，超线性加速。然而，迭代次数和问题大小之间的这种大比率在实践中是不典型的，因此我们通过增加问题的大小来避免它；例如，在图<a href="node419.html#fig100">11.3</a>中，前两次运行是在大小为200的问题上进行的；注意到超线性收敛后，我们立即将大小增加到1000。
 
-<p>
-<p></p>
-<div align="CENTER"><a name="fig10"></a><a name="49095"></a>
-<table>
-<caption align="BOTTOM"><strong>图11.2：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=10</span></caption>
-<tr><td><img width="516" height="387" border="0" src="img3983.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig10.eps}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig10"></a><a name="49095"></a>
+<img src="icon/fig11.2.png" alt="图11.2：共轭梯度与最速上升，$\delta _1 / \delta _0=10$"/>
+<figcaption>图11.2：共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=10</span></figcaption>
+</div>
 
-<p>
-<p></p>
-<div align="CENTER"><a name="fig100"></a><a name="49102"></a>
-<table>
-<caption align="BOTTOM"><strong>图11.3：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=100</span></caption>
-<tr><td><img width="516" height="387" border="0" src="img3984.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig100.eps}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig100"></a><a name="49102"></a>
+<img src="icon/fig11.3.png" alt="图11.3：共轭梯度与最速上升，$\delta _1 / \delta _0=100"/>
+<figcaption>图11.3：共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=100</span></figcaption>
+</div>
 
-<p>
-<p></p>
-<div align="CENTER"><a name="fig1000"></a><a name="49109"></a>
-<table>
-<caption align="BOTTOM"><strong>图11.4：</strong>共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=1000</span></caption>
-<tr><td><img width="516" height="387" border="0" src="img3985.png" alt="\begin{figure}\begin{center}\epsfxsize =27pc \leavevmode \centering\epsfbox{myfig1000.eps}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig1000"></a><a name="49109"></a>
+<img src="icon/fig11.4.png" alt="图11.4：共轭梯度与最速上升，$\delta _1 / \delta _0=1000"/>
+<figcaption>图11.4：共轭梯度与最速上升，<span class="math-inline">\delta _1 / \delta _0=1000</span></figcaption>
+</div>
 
 <p>
 图<a href="node419.html#fig10">11.2</a>到<a href="node419.html#fig1000">11.4</a>清楚地说明了在§<a href="node397.html#sec:introduction">11.1</a>中提出的两个陈述。首先，<i>预处理求解器的性能在很大程度上取决于所使用的预处理器的质量</i>。一个好的预处理器导致图<a href="node419.html#fig10">11.2</a>上的快速收敛。一个糟糕的预处理器显著减慢了图<a href="node419.html#fig1000">11.4</a>上的收敛速度。我们注意到问题的大小并不真正影响收敛速度。其次，<i>即使使用相同的预处理器，每种方法的具体实现也会产生很大的差异</i>。这在质量较差的预处理器上尤为明显，例如在图<a href="node419.html#fig1000">11.4</a>上。算法<a href="node419.html#fig:prec_bcgmBA">11.11</a>，局部最优PCG方法，比算法<a href="node414.html#fig:prec_steepBA">11.6</a>收敛大约<i>快一百倍</i>，尽管这两种算法使用相同的预处理器并且每次迭代的成本相似。
@@ -170,7 +174,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <p>
 作为一个例子，让我们考虑我们最简单的预处理特征求解器，算法<a href="node413.html#fig:prec_powerBA">11.5</a>，带有由正交投影器<span class="math-inline">P^\perp</span>定义的附加正交化，该投影器位于已经计算的特征向量所张成的子空间的正交补上，可以写成
-<div class="math-display" id="prec_orth">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquadw^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}). \tag{289}</div>
+<div class="math-display" id="prec_orth">x^{(i+1)} = P^\perp w^{(i)} + \tau^{(i)} x^{(i)}, \qquad w^{(i)} = T (B x^{(i)} - \mu^{(i)} A x^{(i)}). \tag{11.19}</div>
 
 我们需要弄清楚在我们的正交投影器<span class="math-inline">P^\perp</span>中要使用哪些标量积。
 
@@ -211,10 +215,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7192" href="node420.html">可用的软件</a>
-<b>上一级：</b><a name="tex2html7186" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
+<b>上一级：</b><a name="tex2html7186" href="node410.html">预条件特征值求解器</a>
 <b>上一节：</b><a name="tex2html7180" href="node418.html">预处理共轭梯度法</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

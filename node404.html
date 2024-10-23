@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Example 11.2.2.</title>
+<title>例11.2.2.</title>
 <meta charset="utf-8">
-<meta name="description" content="Example 11.2.2.">
+<meta name="description" content="例11.2.2.">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -66,16 +66,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6977" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b>下一节：</b><a name="tex2html6977" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>
-<b>上一节：</b><a name="tex2html6967" href="node403.html">Example 11.2.1.</a>
-  
-  
+<b>上一节：</b><a name="tex2html6967" href="node403.html">例11.2.1.</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION002024020000000000000">
+<!--End of Navigation Panel-->
+<h4><a name="SECTION002024020000000000000">
 例11.2.2.</a>
-</h4>  
+</h4>
+
 考虑单位正方形上泊松方程的有限差分离散化模型问题。主对角线是常数（均为4），因此对角预处理无效。它仅改变特征值的相对间隔，而不改变其分布。然而，不完全分解技术[<a href="node421.html#mevo77">326</a>]已被证明对预处理相应线性方程有效，并有一些理论结果支持。无预处理时，共轭梯度法需<span class="math-inline">O(n^{1/2})</span>次迭代收敛。采用不完全分解IC(0)预处理，收敛速度加快，但仍约为<span class="math-inline">O(n^{1/2})</span>。而使用改进不完全分解MIC(0)[<a href="node421.html#gust78">212</a>]，收敛速度达到<span class="math-inline">O(n^{1/4})</span>。文献[<a href="node421.html#morg90">330</a>]表明，计算最小特征值时情况相同。改进不完全分解针对的是矩阵<span class="math-inline">A</span>，而非<span class="math-inline">A-\theta I</span>。理论结果可通过计算验证。
 
 表<a href="node404.html#tab:iemethods:model-problem">11.1</a>列出了随着问题规模增大，不同预处理方法下的迭代次数。使用了Lanczos算法（对应无预处理和仅对角预处理）、IC(0)和MIC(0)预处理。初始向量在区间(-1,1)内随机取值，收敛标准为残差范数小于<span class="math-inline">10^{-8}</span>。未采用重启策略。对于大规模问题，MIC(0)预处理效果显著更优。在双对数图中，Lanczos和IC(0)的斜率分别约为0.56和0.43，均接近预期的0.5，IC(0)略优。MIC(0)预处理的斜率约0.23，接近<span class="math-inline">O(n^{1/4})</span>预测的0.25。
@@ -83,12 +83,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 计算多个特征值时，MIC效果不佳。以计算<span class="math-inline">n=1600</span>时的最小五个特征值为例，预处理基于<span class="math-inline">A</span>的不完全分解，未针对特定特征值调整。此次重启Davidson方法，最大子空间维度为20，但不重启Lanczos（若需特征向量，Lanczos也可能需重启）。相对而言，Lanczos在计算多个特征值时表现更好，因Davidson方法每次仅针对一个特征值。IC(0)需159次迭代，MIC(0)需158次，Lanczos需172次。但需注意，Lanczos未识别出其中一个小的特征值为双重的，而Davidson方法则正确计算出两个特征值。
 
-<p>
-<br>
 <div align="CENTER">
 <a name="tab:iemethods:model-problem"></a></div>
-<p>
-<br>
 <div align="CENTER"><a name="48156"></a>
 <table CELLPADDING=3 border="1" align="CENTER">
 <caption><strong>表11.1：</strong>
@@ -172,11 +168,9 @@ Davidson方法在初始向量或子空间不准确时可能遇到困难。文献
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html6977" href="node405.html">Jacobi-Davidson Method with Cayley</a>
+<b>下一节：</b><a name="tex2html6977" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <b>上一级：</b><a name="tex2html6971" href="node402.html">Davidson方法</a>
-<b>上一节：</b><a name="tex2html6967" href="node403.html">Example 11.2.1.</a>
-  
-  
+<b>上一节：</b><a name="tex2html6967" href="node403.html">例11.2.1.</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,13 +73,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7122" href="node415.html">预处理Lanczos方法</a>
-<b>上一级：</b><a name="tex2html7116" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b>上一节：</b><a name="tex2html7110" href="node413.html">预条件转移幂法</a>
-  
-  
+<b>上一级：</b><a name="tex2html7116" href="node410.html">预条件特征值求解器</a>
+<b>上一节：</b><a name="tex2html7110" href="node413.html">预处理位移幂法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002034000000000000000">
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002034000000000000000">
 预处理最速上升/下降法</a>
 </h2>
 
@@ -83,24 +88,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <p>
 在此，我们介绍针对矩阵束<span class="math-inline">B - \mu A</span>的单向量预处理最速上升法，见算法<a href="node414.html#fig:prec_steepBA">11.6</a>。对于<span class="math-inline">B=I</span>，<span class="math-inline">\lambda = 1 / \mu</span>，该方法变为<span class="math-inline">A - \lambda I</span>的最速下降法。
 
-<p>
+<pre class="algorithm" id="fig:prec_steepBA">
+算法 11.6：预处理最陡上升法用于广义特征值问题
 
-<p></p>
-<div align="CENTER">
-
-<p><a name="fig:prec_steepBA"></a></p><img
- width="598" height="185" border="0"
- src="img3944.png"
- alt="\begin{figure}\begin{algorithm}
-{Preconditioned Steepest Ascent Method for GHEP\...
-...ert x\Vert _A <span class="math-inline">\end{tabbing}}
-\vspace*{-12pt}%% help
-\end{algorithm}\end{figure}">
-</div>
-<p></p>
+(1) 选择一个初始向量 <span class="math-inline">x^{(0)}</span>。
+(2) 对于 <span class="math-inline">i=0,\ldots</span>，直到收敛执行：
+(3) <span class="math-inline">\mu^{(i)}:=\left(x^{(i)}, B x^{(i)}\right)/\left(x^{(i)}, A x^{(i)}\right)</span>
+(4) <span class="math-inline">r:=B x^{(i)}-\mu^{(i)} A x^{(i)}</span>
+(5) <span class="math-inline">w:=\operatorname{Tr}</span>
+(6) <span class="math-inline">x:=w+\tau x^{(i)}</span>，选择 <span class="math-inline">\tau</span> 以最大化 <span class="math-inline">\mu(x)</span>
+(7) <span class="math-inline">x^{(i+1)}=x/\|x\|_{A}</span>
+</pre>
 
 <p>
-我们注意到，可以通过对矩阵束</span>B - \mu A<span class="math-inline">在试验子空间</span>{\rm span}\{ x^{(i)}, w \}<span class="math-inline">上应用Rayleigh-Ritz方法来确定位移。由于试验空间是二维的，投影问题可以作为二次方程求解，从而可以推导出</span>\tau<span class="math-inline">作为二次多项式根的显式公式。
+我们注意到，可以通过对矩阵束<span class="math-inline">B - \mu A</span>在试验子空间<span class="math-inline">{\rm span}\{ x^{(i)}, w \}</span>上应用Rayleigh-Ritz方法来确定位移。由于试验空间是二维的，投影问题可以作为二次方程求解，从而可以推导出<span class="math-inline">\tau</span>作为二次多项式根的显式公式。
 
 <p>
 通过构造，最速上升（下降）方法在每次迭代中提供Rayleigh商的最大化（最小化），与相应的迭代算法<a href="node413.html#fig:prec_powerBA">11.5</a>相比。因此，前一节的收敛结果可以不加改变地应用，并可做出类似的观察。
@@ -109,43 +110,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 我们已收集了算法<a href="node414.html#fig:prec_steepBA">11.6</a>每次迭代的主要成本，包括存储和浮点运算，分别列于以下两个表格中：
 
 <p>
-<div align="CENTER">
+<div align="center">
 <table CELLPADDING=3 border="1">
-<tr><td align="LEFT">项目</td>
-<td align="LEFT">存储</td>
+<tr><td align="left">项目</td>
+<td align="left">存储</td>
 </tr>
-<tr><td align="LEFT">残差</td>
-<td align="LEFT"></span>1<span class="math-inline">个</span>n<span class="math-inline">维向量</td>
+<tr><td align="left">残差</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
 </tr>
-<tr><td align="LEFT">近似特征向量</td>
-<td align="LEFT"></span>1<span class="math-inline">个</span>n<span class="math-inline">维向量</td>
+<tr><td align="left">近似特征向量</td>
+<td align="left"><span class="math-inline">1</span>个<span class="math-inline">n</span>维向量</td>
 </tr>
-<tr><td align="LEFT">临时向量</td>
-<td align="LEFT">3-5个</span>n<span class="math-inline">维向量</td>
+<tr><td align="left">临时向量</td>
+<td align="left">3-5个<span class="math-inline">n</span>维向量</td>
 </tr>
 </table>
 </div>
 
 <p>
-<div align="CENTER">
+<div align="center">
 <table CELLPADDING=3 border="1">
-<tr><td align="LEFT">操作</td>
-<td align="LEFT">主要成本</td>
+<tr><td align="left">操作</td>
+<td align="left">主要成本</td>
 </tr>
-<tr><td align="LEFT">Rayleigh-Ritz方法</td>
-<td align="LEFT"></span>6<span class="math-inline">次点积和</span>2<span class="math-inline">次矩阵-向量乘积</td>
+<tr><td align="left">Rayleigh-Ritz方法</td>
+<td align="left"><span class="math-inline">6</span>次点积和<span class="math-inline">2</span>次矩阵-向量乘积</td>
 </tr>
-<tr><td align="LEFT">残差 </span>r<span class="math-inline"></td>
-<td align="LEFT"></span>2<span class="math-inline">次矩阵-向量乘积，</span>1<span class="math-inline">次更新</td>
+<tr><td align="left">残差 <span class="math-inline">r</span></td>
+<td align="left"><span class="math-inline">2</span>次矩阵-向量乘积，<span class="math-inline">1</span>次更新</td>
 </tr>
-<tr><td align="LEFT">预处理残差 </span>w <span class="math-inline"></td>
-<td align="LEFT">取决于预处理矩阵 </span>T<span class="math-inline"></td>
+<tr><td align="left">预处理残差 <span class="math-inline">w </span></td>
+<td align="left">取决于预处理矩阵 <span class="math-inline">T</span></td>
 </tr>
-<tr><td align="LEFT">近似特征向量</td>
-<td align="LEFT"></span>1$次更新</td>
+<tr><td align="left">近似特征向量</td>
+<td align="left"> <span class="math-inline">1</span> 次更新</td>
 </tr>
 </table>
 </div>
+
 
 <p>
 预处理最速下降/上升法的主要优点是相对简单和每次迭代成本较低，与其他预处理特征求解器相比。使用Rayleigh-Ritz方法而不是先验选择的位移，无需任何边界知识。另一方面，每次迭代的成本可能是算法<a href="node413.html#fig:prec_powerBA">11.5</a>的两倍左右。尽管收敛性通常优于算法<a href="node413.html#fig:prec_powerBA">11.5</a>，但仍不如我们下面考虑的其他预处理特征求解器的线性收敛。
@@ -169,10 +171,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7122" href="node415.html">预处理Lanczos方法</a>
-<b>上一级：</b><a name="tex2html7116" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b>上一节：</b><a name="tex2html7110" href="node413.html">预条件转移幂法</a>
-  
-  
+<b>上一级：</b><a name="tex2html7116" href="node410.html">预条件特征值求解器</a>
+<b>上一节：</b><a name="tex2html7110" href="node413.html">预处理位移幂法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Example 11.2.3.</title>
+<title>例11.2.3.</title>
 <meta charset="utf-8">
-<meta name="description" content="Example 11.2.3.">
+<meta name="description" content="例11.2.3.">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -67,34 +67,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7032" href="node409.html">不精确位移反演法</a>
-<b>上一级：</b><a name="tex2html7026" href="node407.html">非精确有理Krylov方法</a>
-<b>上一节：</b><a name="tex2html7022" href="node407.html">非精确有理Krylov方法</a>
-  
-  
+<b>上一级：</b><a name="tex2html7026" href="node407.html">不精确有理Krylov方法</a>
+<b>上一节：</b><a name="tex2html7022" href="node407.html">不精确有理Krylov方法</a>
 <br>
 <br>
-<!--End of Navigation Panel--><h4><a name="SECTION002027010000000000000">
+<!--End of Navigation Panel-->
+<h4><a name="SECTION002027010000000000000">
 例11.2.3.</a>
 </h4>
+
 以下数值示例将对此进行说明。
 奥尔姆斯特德模型[<a
  href="node421.html#odrk86">343</a>]描述了从下方加热的粘弹性流体层的流动。
 其方程为
-<p></p>
-<div align="CENTER">
 
-<img
- width="313" height="80" border="0"
- src="img3841.png"
- alt="\begin{eqnarray*}
-\displaystyle
-\frac{\partial u}{\partial t} &amp; = &amp; (1-C)\frac{\...
-...artial X^2}+Ru-u^3,\\
-B\frac{\partial v}{\partial t} &amp; = &amp; u-v,
-\end{eqnarray*}">
-<br clear="ALL"></div><p></p>
-<br clear="ALL"><p></p>
-<br clear="ALL"><p></p>
+<div class="math-display">
+\begin{aligned}
+\frac{\partial u}{\partial t} & = (1-C)\frac{\partial^2 v}{\partial X^2} + C\frac{\partial^2 u}{\partial X^2}+Ru-u^3,\\
+B\frac{\partial v}{\partial t} & = u-v,
+\end{aligned}
+</div>
+
 其中，<span class="math-inline">u</span>表示流体速度，<span class="math-inline">v</span>与粘弹性力相关。
 边界条件为<span class="math-inline">u(0)=u(1)=0</span>和<span class="math-inline">v(0)=v(1)=0</span>。
 采用中心差分法离散化，网格尺寸为<span class="math-inline">h=1/(n/2)</span>，
@@ -103,17 +96,13 @@ B\frac{\partial v}{\partial t} &amp; = &amp; u-v,
 <span class="math-inline">x=[u_1,v_1,u_2,v_2,\ldots,u_{n/2},v_{n/2}]^*</span>。我们考虑雅可比矩阵
 <span class="math-inline">A=\partial f/\partial x</span>，当<span class="math-inline">n=1000</span>时，参数值为<span class="math-inline">B=2</span>，<span class="math-inline">C=0.1</span>，<span class="math-inline">R=4.7</span>，在平凡稳态解中求值。
 
-<p>
-<br><p></p>
 <div align="CENTER">
- <a name="tab:irks"></a>
-<p>
-<br>
+<a name="tab:irks"></a>
 <div align="CENTER">
 <a name="48414"></a>
 <table CELLPADDING=3 border="1">
 <caption><strong>表11.2：</strong>
-奥尔姆斯特德问题中非精确有理Krylov方法的残差范数</caption>
+奥尔姆斯特德问题中不精确有理Krylov方法的残差范数</caption>
 <tr><td align="RIGHT">&nbsp;</td>
 <td align="CENTER" COLSPAN=2>情况1</td>
 <td align="CENTER" COLSPAN=2>情况2</td>
@@ -217,50 +206,38 @@ B\frac{\partial v}{\partial t} &amp; = &amp; u-v,
 </div>
 <br>
 
-<p>
-
-<p></p>
-<div align="CENTER"><a name="fig:irks"></a><a name="48517"></a>
-<table>
-<caption align="BOTTOM"><strong>图：</strong>
-奥尔姆斯特德问题中非精确有理Krylov方法残差范数的对数图。圆圈表示<span class="math-inline">\Vert f_j\Vert</span>，实心点表示<span class="math-inline">\Vert r_j\Vert</span>。</caption>
-<tr><td><img
- width="551" height="209" border="0"
- src="img3875.png"
- alt="\begin{figure}\vspace*{-6pt}%% help
-\begin{center}
-\begin{tabular}{ccccc}
-&amp; &amp; Ca...
-...rc<span class="math-inline">} \put(12,-19.68){</span>\circ<span class="math-inline">}
-\end{picture}\end{tabular}\end{center}\end{figure}"></td></tr>
-</table>
-</div><p></p>
+<div style="text-align: center;">
+<a name="fig:irks"></a><a name="48517"></a>
+<img src="icon/fig11.1.png" alt="图 11.1 奥尔姆斯特德问题中不精确有理Krylov方法残差范数的对数图。圆圈表示$\Vert f_j\Vert$，实心点表示$\Vert r_j\Vert$。">
+<figcaption>图 11.1 奥尔姆斯特德问题中不精确有理Krylov方法残差范数的对数图。圆圈表示<span class="math-inline">\Vert f_j\Vert</span>，实心点表示<span class="math-inline">\Vert r_j\Vert</span>。</figcaption>
+</div>
 
 <p>
 我们通过GMRES方法求解线性系统，使用30个迭代向量。
 该方法通过摩根的隐式重启GMRES[<a
  href="node421.html#morg97">334</a>]重新启动，
 保持基中的15个最小Ritz对，直到残差范数满足
-</span>\Vert s_j\Vert \leq \tau \Vert r_{j-1}\Vert<span class="math-inline">，其中
-</span>\tau=1\times 10^{-3}<span class="math-inline">。
+<span class="math-inline">\Vert s_j\Vert \leq \tau \Vert r_{j-1}\Vert</span>，其中
+<span class="math-inline">\tau=1\times 10^{-3}</span>。
 我们使用算法<a href="node407.html#alg:I-rks">11.4</a>计算最接近
-</span>5<span class="math-inline">的特征值。
+<span class="math-inline">5</span>的特征值。
 我们考虑两种情况。
-对于情况1，我们使用固定的</span>\mu=5<span class="math-inline">。
-对于情况2，我们使用两个步骤</span>\mu=5<span class="math-inline">，其余步骤求解校正方程(<a href="node405.html#eq:correction">11.5</a>)。从表<a href="node408.html#tab:irks">11.2</a>和图<a href="node408.html#fig:irks">11.1</a>的结果中，
-我们可以看到情况1的线性收敛。由于线性系统更准确地求解(</span>\tau=10^{-3}<span class="math-inline">)
-比特征值求解器的速度快，</span>f_j<span class="math-inline">和</span>r_j<span class="math-inline">以相同的速度收敛到零。
-对于情况2，前两步的收敛是线性的，因为</span>\mu_j<span class="math-inline">是
-恒定的。从第三次迭代开始，</span>f_j<span class="math-inline">以二次方式收敛到零。
-</span>\Vert r_j\Vert<span class="math-inline">在前两步中线性收敛，然后在第三和第四步中以二次方式收敛，然后再次以线性收敛，收敛比率为</span>\tau=10^{-3}<span class="math-inline">。
+对于情况1，我们使用固定的<span class="math-inline">\mu=5</span>。
+对于情况2，我们使用两个步骤<span class="math-inline">\mu=5</span>，其余步骤求解校正方程(<a href="node405.html#eq:correction">11.5</a>)。从表<a href="node408.html#tab:irks">11.2</a>和图<a href="node408.html#fig:irks">11.1</a>的结果中，
+我们可以看到情况1的线性收敛。由于线性系统更准确地求解(<span class="math-inline">\tau=10^{-3}</span>)
+比特征值求解器的速度快，<span class="math-inline">f_j</span>和<span class="math-inline">r_j</span>以相同的速度收敛到零。
+对于情况2，前两步的收敛是线性的，因为<span class="math-inline">\mu_j</span>是
+恒定的。从第三次迭代开始，<span class="math-inline">f_j</span>以二次方式收敛到零。
+<span class="math-inline">\Vert r_j\Vert</span>在前两步中线性收敛，然后在第三和第四步中以二次方式收敛，然后再次以线性收敛，收敛比率为<span class="math-inline">\tau=10^{-3}</span>。
 
 <p>
-残差范数</span>r_j<span class="math-inline">有两个项。
-当</span>\mu<span class="math-inline">接近特征值时，第一项下降非常快。
+残差范数<span class="math-inline">r_j</span>有两个项。
+当<span class="math-inline">\mu</span>接近特征值时，第一项下降非常快。
 当极点靠近谱时，第二项（线性系统求解器的残差）的下降通常要困难得多。
-在实践中，我们可能需要通过选择最优的</span>\mu$来平衡外部迭代次数
+在实践中，我们可能需要通过选择最优的 <span class="math-inline">\mu</span> 来平衡外部迭代次数
 （特征值求解器）和内部迭代次数（线性系统求解器）。
 这一评论也与第<a href="node401.html#sec:inexact-Arnoldi">11.2.3</a>节的末尾相关。
+
 
 <p>
 <hr><!--Navigation Panel-->
@@ -281,10 +258,8 @@ B\frac{\partial v}{\partial t} &amp; = &amp; u-v,
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html7032" href="node409.html">不精确位移反演法</a>
-<b>上一级：</b><a name="tex2html7026" href="node407.html">非精确有理Krylov方法</a>
-<b>上一节：</b><a name="tex2html7022" href="node407.html">非精确有理Krylov方法</a>
-  
-  
+<b>上一级：</b><a name="tex2html7026" href="node407.html">不精确有理Krylov方法</a>
+<b>上一节：</b><a name="tex2html7022" href="node407.html">不精确有理Krylov方法</a>
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

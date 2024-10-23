@@ -66,58 +66,67 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   href="node422.html">
 <button class="navigate">索引</button></a> 
 <br>
-<b>下一节：</b><a name="tex2html7044" href="node410.html">Preconditioned Eigensolvers &nbsp; A.&nbsp;Knyazev</a>
-<b>上一级：</b><a name="tex2html7038" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
-<b>上一节：</b><a name="tex2html7034" href="node408.html">Example 11.2.3.</a>
-  
-  
+<b>下一节：</b><a name="tex2html7044" href="node410.html">预条件特征值求解器</a>
+<b>上一级：</b><a name="tex2html7038" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html7034" href="node408.html">例11.2.3.</a>
 <br>
 <br>
 <!--End of Navigation Panel-->
 
 <h2><a name="SECTION002028000000000000000"></a>
 <a name="48531"></a>
-<br>
-Inexact Shift-and-Invert
+不精确位移反演法
 </h2>
-Recall from &#167;<a href="node399.html#sec:matrixtransformations">11.2.1</a> that with exact arithmetic and
-exact linear system solvers, the SI and the
-Cayley
-transform produce the same Krylov spaces and the same Ritz pairs.
-We have shown in the previous sections by theoretical arguments and
-numerical
-examples that the Cayley transform is a good choice when the linear
-systems
-are solved with a relative error tolerance <span class="math-inline">\tau </span> smaller than&nbsp;1.
+
+回顾&#167;<a href="node399.html#sec:matrixtransformations">11.2.1</a>，在精确算术和精确线性系统求解器的情况下，SI和Cayley变换产生相同的Krylov空间和相同的Ritz对。我们在前几节中通过理论论证和数值示例表明，当线性系统以小于1的相对误差容限<span class="math-inline">\tau </span>求解时，Cayley变换是一个不错的选择。
 
 <p>
-When the Cayley transform is used, the linear system
+当使用Cayley变换时，线性系统
 
 <div class="math-display">(A -\mu B) w = (A - \theta B) x - s</div>
 
-is solved, where 
-<span class="math-inline">\Vert s\Vert \leq \tau \Vert(A - \theta B) x\Vert</span>.
-This linear system can be written as
+被求解，其中
+<span class="math-inline">\Vert s\Vert \leq \tau \Vert(A - \theta B) x\Vert</span>。
+这个线性系统可以写成
 
 <div class="math-display">(A -\mu B) (w - x) = (\mu - \theta) B x - s \ .</div>
 
-So, with 
-<span class="math-inline">z = (w- x)/(\mu-\theta)</span> and 
-<span class="math-inline">t = s/(\mu-\theta)</span>, we
-obtain the
-shift-and-invert linear system
+因此，设
+<span class="math-inline">z = (w- x)/(\mu-\theta)</span> 和
+<span class="math-inline">t = s/(\mu-\theta)</span>，我们得到
+位移-反演线性系统
 
 <div class="math-display">(A -\mu B) z = B x - t,</div>
 
-where 
-<span class="math-inline">\Vert t\Vert \leq \tau \Vert(A - \theta B) x\Vert/ (\mu-\theta)</span>. 
-In other words, we can use the SI, but instead of
-a relative residual tolerance, we should use a tolerance that is proportional
-to the norm of the Ritz residual, 
-<span class="math-inline">\Vert(A - \theta B) x\Vert</span>.
+其中
+<span class="math-inline">\Vert t\Vert \leq \tau \Vert(A - \theta B) x\Vert/ (\mu-\theta)</span>。
+换句话说，我们可以使用SI，但不是使用相对残差容限，而是应该使用与Ritz残差范数
+<span class="math-inline">\Vert(A - \theta B) x\Vert</span>
+成比例的容限。
 
 <p>
 <br><hr>
+<!--Navigation Panel-->
+<a name="tex2html7043"
+  href="node410.html">
+<button class="navigate">下一节</button></a> 
+<a name="tex2html7037"
+  href="node398.html">
+<button class="navigate">上一级</button></a> 
+<a name="tex2html7033"
+  href="node408.html">
+<button class="navigate">上一节</button></a> 
+<a name="tex2html7039"
+  href="node5.html">
+<button class="navigate">目录</button></a> 
+<a name="tex2html7041"
+  href="node422.html">
+<button class="navigate">索引</button></a> 
+<br>
+<b>下一节：</b><a name="tex2html7044" href="node410.html">预条件特征值求解器</a>
+<b>上一级：</b><a name="tex2html7038" href="node398.html">不精确方法</a>
+<b>上一节：</b><a name="tex2html7034" href="node408.html">例11.2.3.</a>
+<!--End of Navigation Panel-->
 <address>
 Susan Blackford
 2000-11-20

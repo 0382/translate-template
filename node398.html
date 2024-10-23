@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Inexact Methods &nbsp; K.&nbsp;Meerbergen and R.&nbsp;Morgan </title>
+<title>不精确方法</title>
 <meta charset="utf-8">
-<meta name="description" content="Inexact Methods &nbsp; K.&nbsp;Meerbergen and R.&nbsp;Morgan ">
+<meta name="description" content="不精确方法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -69,26 +69,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html6882" href="node399.html">矩阵变换</a>
 <b>上一级：</b><a name="tex2html6876" href="node396.html">预处理技术</a>
 <b>上一节：</b><a name="tex2html6870" href="node397.html">引言</a>
-  
-  
 <br>
 <br>
 <!--End of Navigation Panel--><h1><a name="SECTION002020000000000000000"></a> <a name="sec:iemethods"></a>
-<br>
-非精确方法
-<br>&nbsp; <em>凯·梅尔伯根(K. Meerbergen) 和 罗杰·摩根(R. Morgan)</em>
+不精确方法
+<br>&nbsp; <em>K.&nbsp;Meerbergen and R.&nbsp;Morgan</em>
 </h1>
 
 <p>
 针对厄米特征值问题(HEP)的谱变换Lanczos方法和针对非厄米特征值问题(NHEP)的移位-逆变换Arnoldi方法都需要求解线性系统。通常，人们采用直接方法，因为可以利用一次分解进行多次回代变换。然而，当直接求解器的使用变得不可行时，必须采用迭代求解方法。直接方法通常能得到较小的残差范数，而迭代方法的残差范数则取决于一个容差。迭代方法在采用较低残差容差时成本更高。因此，在使用迭代线性系统求解器时，不精确求解线性系统是有利的。基于这个原因，我们将在使用直接方法时的谱变换特征值求解器称为精确方法，而在使用迭代方法时称为非精确方法。本节旨在研究在谱变换中使用非精确线性系统求解器的情况。
 
 <p>
-我们从移位-逆变换Arnoldi方法开始，逐渐过渡到(Jacobi)Davidson方法和非精确有理Krylov方法。首先，在§<a href="node399.html#sec:matrixtransformations">11.2.1</a>中，我们回顾了所使用的(精确)矩阵变换及其主要性质。在§<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>中，我们引入了非精确变换[<a href="node421.html#mero97">323</a>]的概念，并解释了其重要性。在§<a href="node401.html#sec:inexact-Arnoldi">11.2.3</a>和§<a href="node402.html#sec:davidson">11.2.4</a>中，我们给出了一些关于非精确变换的Rayleigh-Ritz过程的结果。这包括非对称问题(Arnoldi[<a href="node421.html#mero97">323</a>]、Davidson[<a href="node421.html#morg92">332</a>])和对称问题(Lanczos[<a href="node421.html#mosc93">336</a>]、Davidson[<a href="node421.html#mosc86">335</a>,<a href="node421.html#crps94">88</a>])以及Jacobi-Davidson方法的结果。我们还可以利用有理Krylov方法的矩阵递推关系[<a href="node421.html#leme98">291</a>]来计算特征值，即使线性系统求解不精确。这在§<a href="node407.html#sec:inexact-RKS">11.2.7</a>中进行了研究。
+我们从移位-逆变换Arnoldi方法开始，逐渐过渡到(Jacobi)Davidson方法和不精确有理Krylov方法。首先，在§<a href="node399.html#sec:matrixtransformations">11.2.1</a>中，我们回顾了所使用的(精确)矩阵变换及其主要性质。在§<a href="node400.html#sec:inexactmatrixtransformations">11.2.2</a>中，我们引入了非精确变换[<a href="node421.html#mero97">323</a>]的概念，并解释了其重要性。在§<a href="node401.html#sec:inexact-Arnoldi">11.2.3</a>和§<a href="node402.html#sec:davidson">11.2.4</a>中，我们给出了一些关于非精确变换的Rayleigh-Ritz过程的结果。这包括非对称问题(Arnoldi[<a href="node421.html#mero97">323</a>]、Davidson[<a href="node421.html#morg92">332</a>])和对称问题(Lanczos[<a href="node421.html#mosc93">336</a>]、Davidson[<a href="node421.html#mosc86">335</a>,<a href="node421.html#crps94">88</a>])以及Jacobi-Davidson方法的结果。我们还可以利用有理Krylov方法的矩阵递推关系[<a href="node421.html#leme98">291</a>]来计算特征值，即使线性系统求解不精确。这在§<a href="node407.html#sec:inexact-RKS">11.2.7</a>中进行了研究。
 
 <p>
 <br><hr>
 <!--子节列表-->
-<a name="CHILD_LINKS"><strong>子节</strong></a>
+<a name="CHILD_LINKS"><strong>小节</strong></a>
 
 <ul>
 <li><a name="tex2html6883" href="node399.html">矩阵变换</a>
@@ -96,16 +93,16 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <li><a name="tex2html6885" href="node401.html">带非精确Cayley变换的Arnoldi方法</a>
 <li><a name="tex2html6886" href="node402.html">Davidson方法</a>
 <ul>
-<li><a name="tex2html6887" href="node403.html"><b>例11.2.1.</b></a>
+<li><a name="tex2html6887" href="node403.html">例11.2.1.</a>
 <li><a name="tex2html6888" href="node404.html">例11.2.2.</a>
 </ul>
 <li><a name="tex2html6889" href="node405.html">带Cayley变换的Jacobi-Davidson方法</a>
 <li><a name="tex2html6890" href="node406.html">预处理Lanczos方法</a>
-<li><a name="tex2html6891" href="node407.html">非精确有理Krylov方法</a>
+<li><a name="tex2html6891" href="node407.html">不精确有理Krylov方法</a>
 <ul>
 <li><a name="tex2html6892" href="node408.html">例11.2.3.</a>
 </ul>
-<li><a name="tex2html6893" href="node409.html">非精确移位-逆变换</a>
+<li><a name="tex2html6893" href="node409.html">不精确位移反演法</a>
 </ul>
 <!--子节列表结束-->
 <hr><!--Navigation Panel-->
@@ -128,8 +125,6 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <b>下一节：</b><a name="tex2html6882" href="node399.html">矩阵变换</a>
 <b>上一级：</b><a name="tex2html6876" href="node396.html">预处理技术</a>
 <b>上一节：</b><a name="tex2html6870" href="node397.html">引言</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford

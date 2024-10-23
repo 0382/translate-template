@@ -7,9 +7,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <html>
 <head>
-<title>Arnoldi方法与不完全Cayley变换</title>
+<title>带非精确Cayley变换的Arnoldi方法</title>
 <meta charset="utf-8">
-<meta name="description" content="Arnoldi方法与不完全Cayley变换">
+<meta name="description" content="带非精确Cayley变换的Arnoldi方法">
 <meta name="keywords" content="book, math, eigenvalue, eigenvector, linear algebra, sparse matrix">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
@@ -45,6 +45,12 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
         border: 1px solid black;
         padding: 0;
     }
+    .algorithm {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
 </style>
 </head>
 
@@ -67,16 +73,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6935" href="node402.html">Davidson方法</a>
-<b>上一级：</b><a name="tex2html6929" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一级：</b><a name="tex2html6929" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html6923" href="node400.html">不精确矩阵变换</a>
-  
-  
 <br>
 <br>
-<!--End of Navigation Panel--><h2><a name="SECTION002023000000000000000"></a>
+<!--End of Navigation Panel-->
+<h2><a name="SECTION002023000000000000000"></a>
 <a name="sec:inexact-Arnoldi"></a>
-<br>
-不完全凯莱变换下的阿诺尔迪方法
+带非精确Cayley变换的Arnoldi方法
 </h2>
 
 <p>
@@ -86,16 +90,18 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <span class="math-inline">T_{\mathrm{IC}} \equiv M^{-1}(A-\theta B)</span> 的 Krylov 空间。
 
-<p>
-<br>
-<a name="alg:Inexact-Cayley-Arnoldi"></a><img
- width="598" height="259" align="BOTTOM" border="0"
- src="img3741.png"
- alt="\begin{algorithm}{不完全凯莱变换下的阿诺尔迪方法用于GNHEP
-\index...
-...<span class="math-inline">v_1 = x</span>, <span class="math-inline">\nu=\theta</span> 并在步骤 <span class="math-inline">(2)</span> 重新启动\end{tabbing}}
-\end{algorithm}">
-<br> 
+<pre class="algorithm" id="alg:Inexact-Cayley-Arnoldi">
+算法 11.1：用于广义非线性特征值问题的近似Cayley变换Arnoldi方法
+
+(1)  给定 <span class="math-inline">v_1</span>，<span class="math-inline">\|v_1\| = 1</span> 并选择 <span class="math-inline">v \neq \mu</span>。
+(2)  对于 <span class="math-inline">j=1,...,k-1</span> 执行以下步骤：
+(3)      解 <span class="math-inline">Mw_j = (A - vB)v_j</span>。
+(4)      对 <span class="math-inline">w</span> 进行正交化处理；使其相对于 <span class="math-inline">v_1,...,v_j</span> 正交，得到 <span class="math-inline">v_{j+1}</span>。
+(5) 计算投影特征对 <span class="math-inline">V^*AV_kz = \theta V^*BV_kz</span>。
+(6) 选择一个Ritz对 <span class="math-inline">(0, x = V_kz)</span>。
+(7) 收敛性检查：如果 <span class="math-inline">\|Ax - \theta Bx\| \leq \text{TOL}</span>，则停止。
+(8) 选择 <span class="math-inline">v_1 = x</span>，<span class="math-inline">v = \theta</span> 并从步骤 (2) 重新开始。
+</pre>
 
 <p>
 该方法的缺点是，更新 <span class="math-inline">\theta</span> 需要完全重新启动阿诺尔迪过程。
@@ -129,10 +135,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <button class="navigate">索引</button></a> 
 <br>
 <b>下一节：</b><a name="tex2html6935" href="node402.html">Davidson方法</a>
-<b>上一级：</b><a name="tex2html6929" href="node398.html">Inexact Methods &nbsp; K.&nbsp;Meerbergen</a>
+<b>上一级：</b><a name="tex2html6929" href="node398.html">不精确方法</a>
 <b>上一节：</b><a name="tex2html6923" href="node400.html">不精确矩阵变换</a>
-  
-  
 <!--End of Navigation Panel-->
 <address>
 Susan Blackford
