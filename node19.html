@@ -79,11 +79,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <div class="math-display" name="#eqn_introchap2_1">Ax = \lambda x. \tag{2.1}</div>
 
 那么 <span class="math-inline">\lambda</span> 被称为 <span class="math-inline">A</span> 的<em>特征值</em>，<span class="math-inline">x</span> 被称为 <span class="math-inline">A</span> 的<em>（右）特征向量</em>。有时我们将 <span class="math-inline">(\lambda, x)</span> 称为一个<em>特征对</em>。
-我们建议读者查阅第 <a href="node6.html#notation"><button class="crossref"></button></a> 页的符号和缩略词表；我们将在全文自由使用那里列出的符号。
+我们建议读者查阅第 <a href="node6.html#notation"><button class="crossref"></button></a> 页的符号和缩略词表；我们将在全文不加解释地直接使用那里列出的符号。
 
 <p>
 在本章中，我们将介绍并分类本书中讨论的所有特征值问题，描述它们的基本数学性质及其相互关系。特征值问题可以由单个方阵 <span class="math-inline">A</span> 定义，如（<a href="node19.html#eqn_introchap2_1">2.1</a>）所示，也可以由非方阵 <span class="math-inline">A</span>、两个或更多方阵或矩形矩阵，甚至是 <span class="math-inline">\lambda</span> 的矩阵函数定义。
-我们使用“特征值问题”一词来涵盖计算特征值、特征向量、舒尔分解、特征值的条件数、奇异值和奇异向量，以及其他将在下文定义的术语。阅读本章后，读者应能识别许多特征值问题的数学类型，这对于选择最有效的算法至关重要。如果不识别特征值问题的正确数学类型，可能会导致使用根本不适用或可能比专门算法消耗的时间和空间多几个数量级的算法。
+我们使用“特征值问题”一词来涵盖计算特征值、特征向量、舒尔分解、特征值的条件数、奇异值和奇异向量，以及其他将在下文定义的术语。阅读本章后，读者应能辨识许多特征值问题的数学类型，这对于选择最有效的算法至关重要。如果不辨识特征值问题的正确数学类型，可能会导致使用根本不适用或可能比专门算法消耗的时间和空间多几个数量级的算法。
 
 <p>
 为了说明这些特征值问题的来源及其相互关系，我们对每个问题都提供了一组相关示例。本章的各节安排与本书接下来的六章相对应：
@@ -108,19 +108,19 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </dd>
 <dt><strong>第 <a href="node48.html#sec_chap2_nHep">2.5</a> 节：</strong></dt>
 <dd>非厄米特征值问题（NHEP）（<a href="node203.html#chap:nep">第 7 章</a>）。
-这对应于 <span class="math-inline">Ax = \lambda x</span>，如（<a href="node19.html#eqn_introchap2_1">2.1</a>）所示，其中 <span class="math-inline">A</span> 是方阵，但其他性质是一般的。
+这对应于 <span class="math-inline">Ax = \lambda x</span>，如（<a href="node19.html#eqn_introchap2_1">2.1</a>）所示，其中 <span class="math-inline">A</span> 除了是方阵外，但其他性质是一般的。
 
 <p>
 </dd>
 <dt><strong>第 <a href="node57.html#sec_chap2_GnHep">2.6</a> 节：</strong></dt>
 <dd>广义非厄米特征值问题（GNHEP）（<a href="node280.html#chap:gnsym">第 8 章</a>）。
-这对应于 <span class="math-inline">Ax = \lambda Bx</span>。我们将首先处理最常见的<em>正则</em>广义特征值问题，即当 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是方阵且存在某些标量 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>，使得<span class="math-inline">\alpha A - \beta B</span> 是非奇异的。我们也会讨论<em>奇异情况</em>。
+这对应于 <span class="math-inline">Ax = \lambda Bx</span>。我们将首先处理最常见的<em>正则</em>广义特征值问题，即当 <span class="math-inline">A</span> 和 <span class="math-inline">B</span> 是方阵且存在标量 <span class="math-inline">\alpha</span> 和 <span class="math-inline">\beta</span>，使得<span class="math-inline">\alpha A - \beta B</span> 是非奇异的。我们也会讨论<em>奇异情况</em>。
 
 <p>
 </dd>
 <dt><strong>第 <a href="node76.html#sec_chap2_NLep">2.7</a> 节：</strong></dt>
 <dd>非线性特征值问题（<a href="node329.html#chap:nlep">第 9 章</a>）。
-最简单的例子是<em>二次特征值问题</em> <span class="math-inline">L(\lambda)x = (\lambda^2 M + \lambda D + K)x = 0</span>，并包括更高次多项式。我们还讨论了在 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的正交矩阵空间上最大化实函数 <span class="math-inline">F(Y)</span>；这包括以特征值问题为特例一些更复杂的问题，例如同时尽可能将两个或多个对称矩阵简化为对角形式，方法是使用相同的近似特征向量集。
+最简单的例子是<em>二次特征值问题</em> <span class="math-inline">L(\lambda)x = (\lambda^2 M + \lambda D + K)x = 0</span>，也包括更高次多项式。我们还讨论了在 <span class="math-inline">m</span> 行 <span class="math-inline">n</span> 列的正交矩阵空间上最大化实函数 <span class="math-inline">F(Y)</span>；这包括以特征值问题为特例一些更复杂的问题，例如同时尽可能将两个或多个对称矩阵简化为对角形式，方法是使用相同的近似特征向量集。
 
 <p>
 Bai的注释：这一节不是必要的，我们没有太多可以（需要）说的。
@@ -135,10 +135,10 @@ Bai的注释：这一节不是必要的，我们没有太多可以（需要）�
 </dl>
 
 <p>
-上述所有特征值问题在自然科学和工程应用中自然出现。在每一节中，我们还展示了如何识别和解决密切相关的特征值问题（例如，GHEP 中当 <span class="math-inline">\alpha A + \beta B</span> 是正定的而不是 <span class="math-inline">B</span> 的情况）。各章节按大致增加的通用性和复杂性顺序排列。例如，HEP <span class="math-inline">Ax = \lambda x</span> 显然是 GHEP <span class="math-inline">Ax = \lambda Bx</span> 的一个特例，因为我们可以设 <span class="math-inline">B=I</span>。它也是 NHEP 的一个特例，因为我们可以忽略 <span class="math-inline">A</span> 的厄米对称性，将其视为一般矩阵。
+上述所有特征值问题在自然科学和工程应用中自然出现。在每一节中，我们还展示了如何辨识和解决相关的特征值问题（例如，GHEP 中当 <span class="math-inline">\alpha A + \beta B</span> 是正定的而 <span class="math-inline">B</span> 不是的情况）。各章节按大致增加的通用性和复杂性顺序排列。例如，HEP <span class="math-inline">Ax = \lambda x</span> 显然是 GHEP <span class="math-inline">Ax = \lambda Bx</span> 的一个特例，因为我们可以设 <span class="math-inline">B=I</span>。它也是 NHEP 的一个特例，因为我们可以忽略 <span class="math-inline">A</span> 的厄米对称性，将其视为一般矩阵。
 
 <p>
-通常，特征值问题越大或越困难，使用尽可能利用其数学结构（如对称性或稀疏性）的算法就越重要。例如，可以使用非厄米问题的算法来处理厄米问题，但代价是时间、存储和可能的精度大幅增加。
+通常，特征值问题越大或越困难，算法中尽可能利用其数学结构（如对称性或稀疏性）就越重要。例如，可以使用非厄米问题的算法来处理厄米问题，但代价是时间、存储大幅增加，以及可能更低的精度。
 
 <p>
 从<a href="node21.html#sec_chap2_Hep">2.2</a>节到<a href="node57.html#sec_chap2_GnHep">2.6</a>节的每一部分都按如下结构组织：
@@ -165,15 +165,15 @@ Bai的注释：这一节不是必要的，我们没有太多可以（需要）�
 <li>讨论<em>条件数</em>。<a name="1041"></a> 条件数衡量特征值和特征空间对 <span class="math-inline">A</span> 中微小变化的敏感程度。这些微小变化可能来自舍入误差或其他算法中不可避免的近似，或者是 <span class="math-inline">A</span> 的元素的不确定性。通过将条件数乘以 <span class="math-inline">A</span> 变化的界限，可以得到计算的特征值和特征空间的误差界限。有关如何使用条件数获得误差界限的更多细节，请参见第<a href="node20.html#sec:StabilityConditioning">2.1.1</a>节。
 
 <p>
-如果特征值或特征空间的误差界限对用户来说足够小（这显然取决于用户），则称为<em>良态</em>，如果误差界限大得多，则称为<em>病态</em>。条件数的重要性不仅在于解释算法的计算结果，还在于选择要计算的信息。例如，同一特征空间的不同表示可能具有非常不同的条件数，通常计算条件数较小的表示更好。条件数在每个章节中都有更详细的讨论，但在这里给出一般结果总结。
+如果特征值或特征空间的误差界限对用户来说足够小（这显然取决于用户），则称为<em>良态</em>，如果误差界限大得多，则称为<em>病态</em>。条件数不仅对于解释算法的计算结果很重要，对于选择要计算的信息也很重要。例如，同一特征空间的不同表示可能具有非常不同的条件数，通常计算条件数较小的表示更好。条件数在每个章节中都有更详细的讨论，但在本章会给出一个通用的总结。
 
 <p>
 </li>
-<li>列出了指定特征问题的不同方式。最昂贵的特征值问题是计算 <span class="math-inline">A</span> 的所有特征值和特征向量。由于这通常在时间和空间上过于昂贵，用户通常只必需较少的信息，例如最大的10个特征值及其特征向量。（注意，如果 <span class="math-inline">A</span> 是稀疏的，特征向量通常是稠密的，因此存储所有特征向量可能比存储 <span class="math-inline">A</span> 占用更多的内存。）此外，对于同一矩阵 <span class="math-inline">A</span> 的某些特征问题可能比其他问题条件更好，这些可能是首选的计算对象。
+<li>列出了指定特征问题的不同方式。最昂贵的特征值问题是计算 <span class="math-inline">A</span> 的所有特征值和特征向量。很多时候这在时间和空间上代价过大，用户可能只需要较少的信息，例如最大的10个特征值及其特征向量。（注意，如果 <span class="math-inline">A</span> 是稀疏的，而特征向量通常是稠密的，因此存储所有特征向量可能比存储 <span class="math-inline">A</span> 占用更多的内存。）此外，对于同一矩阵 <span class="math-inline">A</span> 的某些特征问题可能比其他问题条件更好，这些可能是首选的计算对象。
 
 <p>
 </li>
-<li>讨论了相关的特征问题。例如，如果有可能将一个特征问题转化为更简单和更便宜的特殊情况，这一点将得到展示。
+<li>讨论了相关的特征问题。例如，如果有可能将一个特征问题转化为更简单和更便宜的特殊情况，我们会指出。
 
 <p>
 </li>
@@ -207,10 +207,10 @@ k_1 + k_2 & -k_2 & & & \\
 \end{bmatrix}.
 </div>
 
-我们假设所有的质量 <span class="math-inline">m_i</span> 都是正的。<span class="math-inline">M</span> 称为<em>质量矩阵</em>，<span class="math-inline">B</span> 是<em>阻尼矩阵</em>，<span class="math-inline">K</span> 是<em>刚度矩阵</em>。所有三个矩阵都是对称的。当 <span class="math-inline">m_i</span>、<span class="math-inline">b_i</span> 和 <span class="math-inline">k_i</span> 分别为正时，它们也是正定的（所有特征值均为正）。通过寻求形式为 <span class="math-inline">x(t) = e^{\lambda t} x</span> 的解，其中 <span class="math-inline">\lambda</span> 是常数标量，<span class="math-inline">x</span> 是常数向量，这两个量都通过求解适当的特征问题来确定，这个微分方程变成了一个特征值问题。
+我们假设所有的质量 <span class="math-inline">m_i</span> 都是正的。<span class="math-inline">M</span> 称为<em>质量矩阵</em>，<span class="math-inline">B</span> 是<em>阻尼矩阵</em>，<span class="math-inline">K</span> 是<em>刚度矩阵</em>。所有三个矩阵都是对称的。当 <span class="math-inline">m_i</span>、<span class="math-inline">b_i</span> 和 <span class="math-inline">k_i</span> 分别为正时，它们也是正定的（所有特征值均为正）。将形式解 <span class="math-inline">x(t) = e^{\lambda t} x</span> 代入该方程，这个微分方程变成了一个特征值问题，其中 <span class="math-inline">\lambda</span> 是标量常数，<span class="math-inline">x</span> 是向量常数，这两个量都通过求解特征问题来确定。
 
 <p>
-电气工程师通过应用基尔霍夫定律及相关定律来分析线性电路，得出类似的方程。在这种情况下，<span class="math-inline">x</span> 表示支路电流，<span class="math-inline">M</span> 表示电感，<span class="math-inline">B</span> 表示电阻，<span class="math-inline">K</span> 表示导纳（电容的倒数）。
+电气工程师通过应用基尔霍夫定律及相关定律来分析线性电路，也会得出类似的方程。在这种情况下，<span class="math-inline">x</span> 表示支路电流，<span class="math-inline">M</span> 表示电感，<span class="math-inline">B</span> 表示电阻，<span class="math-inline">K</span> 表示导纳（电容的倒数）。
 
 <p>
 </li>
@@ -221,14 +221,13 @@ k_1 + k_2 & -k_2 & & & \\
 </p>
 
 <p>
-最后，<a href="node371.html#chap:commonissues">第 10 章</a>和<a href="node396.html#chap:precond">第 11 章</a>处理了许多或所有上述特征问题共同的问题。<a href="node371.html#chap:commonissues">第 10 章</a>讨论了稀疏矩阵的数据结构、算法和软件，特别是稀疏线性求解器，它们通常是特征值算法中最耗时的部分。<a href="node396.html#chap:precond">第 11 章</a>讨论了预处理技术或方法，用于将特征问题转化为更简单的问题。一些预处理技术已经很成熟；其他技术是当前研究的主题。
+最后，<a href="node371.html#chap:commonissues">第 10 章</a>和<a href="node396.html#chap:precond">第 11 章</a>处理了许多或所有上述特征问题共同的问题。<a href="node371.html#chap:commonissues">第 10 章</a>讨论了稀疏矩阵的数据结构、算法和软件，特别是稀疏线性求解器，它们通常是特征值算法中最耗时的部分。<a href="node396.html#chap:precond">第 11 章</a>讨论了预处理技术或方法，用于将特征问题转化为更简单的问题。一些预处理技术已经很成熟；其他技术是当前研究的课题。
 </p>
 
 <p>
 <br><hr>
 <!--Table of Child-Links-->
 <a name="CHILD_LINKS"><strong>小节</strong></a>
-
 <ul>
 <li><a name="tex2html996" href="node20.html">数值稳定性和条件数</a>
 </ul>

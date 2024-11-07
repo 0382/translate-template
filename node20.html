@@ -74,11 +74,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </h2>
 
 <p>
-这里我们将详细阐述如何利用条件数来获得误差界限。为简化讨论，假设我们仅尝试计算一个标量函数 <span class="math-inline"> f(x) </span>，使用算法 <span class="math-inline"> alg(x) </span>，并希望限定误差 <span class="math-inline"> alg(x) - f(x) </span>。进一步假设我们可以证明 <span class="math-inline"> alg(x) = f(x+e) </span> 对于某个“小”的 <span class="math-inline"> e </span>。如果算法具有这一特性，即对于略微扰动的参数 <span class="math-inline"> x+e </span> 能准确得到 <span class="math-inline"> f(x+e) </span>，那么该算法被称为<em>数值稳定</em>，或简称为<em>稳定</em>。在这种情况下，我们可以如下估计误差：
+这里我们将详细阐述如何利用条件数来获得误差界限。为简化讨论，假设我们仅尝试计算一个标量函数 <span class="math-inline"> f(x) </span>，使用算法 <span class="math-inline"> alg(x) </span>，并希望限定误差 <span class="math-inline"> alg(x) - f(x) </span>。进一步假设存在某个“小”的 <span class="math-inline"> e </span> 使得 <span class="math-inline"> alg(x) = f(x+e) </span>。如果算法具有特性：对于略微扰动的参数 <span class="math-inline"> x+e </span> 能准确得到 <span class="math-inline"> f(x+e) </span>，那么该算法被称为<em>数值稳定</em>，或简称为<em>稳定</em>。在这种情况下，我们可以如下估计误差：
 
 <div class="math-display">{\rm error} = alg(x) - f(x) = f(x+e) - f(x) \approx f'(x) \cdot e,</div>
 
-这里我们假设 <span class="math-inline"> f(x) </span> 是可微的。在这种简单情况下，我们可以限定 <span class="math-inline"> \vert{\rm error}\vert \leq \vert f'(x)\vert \cdot \vert e\vert </span>，其中 <span class="math-inline"> \vert f'(x)\vert </span> 是<em>条件数</em> <a name="1083"></a>，而 <span class="math-inline"> e </span> 是所谓的<em>后向误差</em>。<a name="1085"></a> 注意 <span class="math-inline"> f'(x) </span> 仅依赖于函数 <span class="math-inline"> f() </span> 及其参数 <span class="math-inline"> x </span>，而 <span class="math-inline"> e </span> 还依赖于算法本身。
+这里我们假设 <span class="math-inline"> f(x) </span> 是可微的。在这种简单情况下，我们得到误差界限 <span class="math-inline"> \vert{\rm error}\vert \leq \vert f'(x)\vert \cdot \vert e\vert </span>，其中 <span class="math-inline"> \vert f'(x)\vert </span> 是<em>条件数</em> <a name="1083"></a>，而 <span class="math-inline"> e </span> 是所谓的<em>后向误差</em>。<a name="1085"></a> 注意 <span class="math-inline"> f'(x) </span> 仅依赖于函数 <span class="math-inline"> f() </span> 及其参数 <span class="math-inline"> x </span>，而 <span class="math-inline"> e </span> 还依赖于算法本身。
 
 <p>
 同样的思路也适用于求解特征值问题的误差界限。在这种情况下，<span class="math-inline"> x </span> 是一个矩阵，<span class="math-inline"> x+e </span> 是扰动后的矩阵，而 <span class="math-inline"> f(x+e) </span> 可能是一个特征值、一组特征值、一组特征值/特征向量对或其他量。此外，<span class="math-inline"> \vert e\vert </span> 将被矩阵 <span class="math-inline"> e </span> 的范数所替代。
